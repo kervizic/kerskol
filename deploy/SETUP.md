@@ -313,3 +313,74 @@ puis `./deploy/deploy.sh`.
       parent connecté (les policies sont posées par la migration 0001).
 - [ ] `.env` en **chmod 600**, jamais committé, jamais affiché.
 - [ ] Sauvegardes testées (restauration `gunzip -c ... | psql`).
+
+---
+
+## 14. Versionning et mise à jour fiable entre versions
+
+Objectif : à chaque déploiement, tous les navigateurs passent proprement à la
+nouvelle version, sans jamais servir un mélange ancien/nouveau, et sans couper
+une séance d'enfant en cours.
+
+### Génération de version
+
+`deploy.sh` calcule à chaque déploiement :
+
+```
+APP_VERSION = <hash court du commit>-<horodatage UTC>   # ex. fa9d33a-20260926T140512Z
+```
+
+Cette version est écrite :
+
+- dans `frontend/dist/version.json` (servi en `Cache-Control: no-store`) ;
+- dans `<meta name="app-version" content="...">` de `index.html` (injectée par
+  `build-front.sh` en remplaçant le marqueur `__APP_VERSION__`).
+
+### Empreinte des assets (cache)
+
+`deploy/build-front.sh` construit `frontend/dist` avec des **noms empreintés par
+hash de contenu** :
+
+| Fichier source | Servi sous | Cache |
+|---|---|---|
+| `theme/tokens.css` | `theme/tokens.<hash>.css` | `immutable`, 1 an |
+| `theme/app-version.js` | `theme/app-version.<hash>.js` | `immutable`, 1 an |
+| `theme/fonts/Andika-*.woff2` | `theme/fonts/Andika-*.<hash>.woff2` | `immutable`, 1 an |
+| `placeholder/index.html` | `index.html` | `no-cache, no-store` |
+| (généré) | `version.json` | `no-store` |
+
+Le nom changeant avec le contenu, le cache long `immutable` ne peut jamais
+servir un ancien asset. Règle vhost (`deploy/nginx/kerskol.fr.conf`) :
+`location ^~ /theme/` → immutable ; `location = /version.json` et
+`location = /index.html` → no-store/no-cache.
+
+### Client (`frontend/theme/app-version.js`)
+
+Chargé par la page (`<script defer src="/theme/app-version.js">`), expose
+`window.Kerskol.version` :
+
+- vérifie `/version.json` toutes les 5 min, au `visibilitychange` (retour au
+  premier plan) et à l'événement `online` ;
+- `setBusy(true|false)` : pendant une séance, la mise à jour est **reportée**
+  jusqu'à `setBusy(false)` ;
+- `onBeforeUpdate(fn)` : tâches exécutées avant rechargement (attente ≤ 5 s) ;
+- séquence : `onBeforeUpdate` → vidage `Cache Storage` → désenregistrement des
+  service workers → `location.reload()` ; anti-boucle via `sessionStorage`.
+
+Exemple d'intégration côté application (future) :
+
+```js
+// Début d'une séance : ne pas interrompre l'enfant.
+window.Kerskol.version.setBusy(true);
+// Avant tout rechargement : pousser les réponses en attente.
+window.Kerskol.version.onBeforeUpdate(async () => { await flushPendingAnswers(); });
+// Fin de séance : autorise l'application d'une éventuelle mise à jour.
+window.Kerskol.version.setBusy(false);
+```
+
+### Compatibilité build Vite (futur)
+
+Vite produit déjà des noms empreintés dans `/assets/`. Le futur build devra en
+plus : émettre `version.json` (fait par `deploy.sh` dans les deux branches),
+injecter `<meta name="app-version">` et inclure `app-version.js`. Les
+conventions de cache ci-dessus restent valables.

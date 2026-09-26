@@ -100,22 +100,30 @@ fi
 
 echo "==> 5/6 front : build via Docker (jamais de npm sur l'hote) ou page d'attente"
 DIST_DIR="${FRONTEND_DIR}/dist"
+# Version d'application = hash court du commit + horodatage UTC. Sert au
+# rechargement fiable cote client (voir frontend/theme/app-version.js).
+GIT_SHORT="$(git -C "$KERSKOL_DIR" rev-parse --short HEAD)"
+BUILD_UTC="$(date -u +%Y%m%dT%H%M%SZ)"
+APP_VERSION="${GIT_SHORT}-${BUILD_UTC}"
+echo "    version applicative : ${APP_VERSION}"
 if [ -f "${FRONTEND_DIR}/package.json" ]; then
   echo "    build via docker run node:22-alpine (aucun npm sur l'hote)"
   docker run --rm \
     -v "${FRONTEND_DIR}:/app" \
     -w /app \
+    -e APP_VERSION="${APP_VERSION}" \
     node:22-alpine \
     sh -c "npm ci && npm run build"
+  # Le build Vite doit produire des noms empreintes (hash de contenu) et
+  # inclure <meta name="app-version"> + le script app-version.js. On garantit
+  # au minimum la presence de version.json (no-store) pour le client.
+  COMMIT="${APP_VERSION%%-*}"
+  printf '{"version":"%s","commit":"%s","builtAt":"%s"}\n' \
+    "$APP_VERSION" "$COMMIT" "${APP_VERSION#*-}" > "${DIST_DIR}/version.json"
   echo "    build front OK (servi depuis ${DIST_DIR})"
 else
-  echo "    pas de frontend/package.json : installation de la page d'attente"
-  mkdir -p "$DIST_DIR"
-  cp "${FRONTEND_DIR}/placeholder/index.html" "${DIST_DIR}/index.html"
-  # Theme de base (tokens.css + police Andika auto-hebergee) servi sous /theme/.
-  rm -rf "${DIST_DIR}/theme"
-  cp -r "${FRONTEND_DIR}/theme" "${DIST_DIR}/theme"
-  echo "    page d'attente + theme copies dans ${DIST_DIR}/"
+  echo "    pas de frontend/package.json : construction de la page d'attente (assets empreintes)"
+  bash "${DEPLOY_DIR}/build-front.sh" "${FRONTEND_DIR}" "${APP_VERSION}"
 fi
 
 echo "==> 6/6 nginx : test puis reload"

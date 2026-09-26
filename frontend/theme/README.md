@@ -53,18 +53,41 @@ ressource externe (CSP `default-src 'self'`, `font-src 'self'`).
 - **Sombre** : `#FB923C` passe AA meme en petit (>= 4,5 sur fond et surface),
   donc utilisable pour titres, boutons et liens.
 
-## Retours pedagogiques (succes / erreur)
+## Retours pedagogiques (succes / erreur) — bandeaux pastel
 
-Familles chaudes/douces, contraste AA verifie en clair **et** sombre. Cote UI,
-**toujours accompagner d'une icone** (ex. check pour succes, triangle/`!` pour
-erreur) et non de la couleur seule (accessibilite daltonisme).
+Ce ne sont **pas** des aplats vifs avec texte blanc, mais des **bandeaux
+pastel** : fond doux + texte fonce de la meme famille. Tokens :
+`--kk-success-bg` / `--kk-success-text`, `--kk-danger-bg` / `--kk-danger-text`.
+(Les anciens `--kk-success` / `--kk-on-success` / `--kk-danger` /
+`--kk-on-danger` ont ete **remplaces** ; ne plus les utiliser.)
 
 | Role | Clair | Sombre |
 |---|---|---|
-| Succes (couleur) | `#15803D` | `#4ADE80` |
-| Texte sur bouton succes | `#FFFFFF` | `#1C1917` |
-| Erreur (couleur) | `#B42318` | `#FCA5A5` |
-| Texte sur bouton erreur | `#FFFFFF` | `#1C1917` |
+| Succes — fond bandeau | `#DCF5E7` | `#1F3A2E` |
+| Succes — texte/icone | `#1E6B45` | `#A7E8C4` |
+| Erreur — fond bandeau | `#FCE3DE` | `#3F2826` |
+| Erreur — texte/icone | `#A8322A` | `#F7BDB4` |
+
+Exemple d'usage :
+
+```css
+.feedback--success { background: var(--kk-success-bg); color: var(--kk-success-text);
+  border: 1px solid var(--kk-success-text); border-radius: var(--kk-radius-sm); }
+.feedback--error   { background: var(--kk-danger-bg);  color: var(--kk-danger-text);
+  border: 1px solid var(--kk-danger-text);  border-radius: var(--kk-radius-sm); }
+```
+
+### Regles UX (obligatoires)
+
+- **Toujours une icone**, jamais la couleur seule (daltonisme). Pour une erreur
+  de reponse, utiliser une **icone « reessayer » (fleche circulaire ↻)**, pas
+  une croix — l'enfant doit comprendre qu'il peut recommencer, pas qu'il a
+  echoue.
+- **Formulations bienveillantes** : « Presque, on reessaie ? », « Bravo ! »,
+  « Encore un essai ? ». **Jamais « Faux »**, « Erreur », « Incorrect ».
+- Le bandeau se delimite par sa **bordure + son icone** (le contraste
+  fond-pastel / page est volontairement faible) : ne jamais compter sur la
+  seule couleur de fond pour signaler le bandeau.
 
 ## Ratios de contraste WCAG (verifies)
 
@@ -82,12 +105,8 @@ Seuils : texte normal AA >= 4,5 ; grand texte / composants UI AA >= 3,0.
 | accent-text #BD5500 sur surface | 4,31 | 4,5 | a eviter (voir regle) |
 | accent #E06A00 sur fond (gros/gras) | 3,37 | 3,0 | OK (grand texte) |
 | on-accent #FFFFFF sur bouton #E06A00 | 3,37 | 3,0 | OK (bouton gros+gras) |
-| succes #15803D sur fond | 5,02 | 4,5 | OK |
-| succes #15803D sur surface | 4,60 | 4,5 | OK |
-| on-success #FFFFFF sur bouton #15803D | 5,02 | 4,5 | OK |
-| danger #B42318 sur fond | 6,57 | 4,5 | OK |
-| danger #B42318 sur surface | 6,03 | 4,5 | OK |
-| on-danger #FFFFFF sur bouton #B42318 | 6,57 | 4,5 | OK |
+| succes texte #1E6B45 sur bandeau #DCF5E7 | 5,63 | 4,5 | OK |
+| erreur texte #A8322A sur bandeau #FCE3DE | 5,45 | 4,5 | OK |
 
 ### Mode sombre (fond #1C1917, surface #292524)
 
@@ -100,12 +119,8 @@ Seuils : texte normal AA >= 4,5 ; grand texte / composants UI AA >= 3,0.
 | accent #FB923C sur fond | 7,73 | 4,5 | OK |
 | accent #FB923C sur surface | 6,70 | 3,0 | OK |
 | on-accent #1C1917 sur bouton #FB923C | 7,73 | 4,5 | OK |
-| succes #4ADE80 sur fond | 10,04 | 4,5 | OK |
-| succes #4ADE80 sur surface | 8,71 | 4,5 | OK |
-| on-success #1C1917 sur bouton #4ADE80 | 10,04 | 4,5 | OK |
-| danger #FCA5A5 sur fond | 9,21 | 4,5 | OK |
-| danger #FCA5A5 sur surface | 7,99 | 4,5 | OK |
-| on-danger #1C1917 sur bouton #FCA5A5 | 9,21 | 4,5 | OK |
+| succes texte #A7E8C4 sur bandeau #1F3A2E | 8,80 | 4,5 | OK |
+| erreur texte #F7BDB4 sur bandeau #3F2826 | 8,36 | 4,5 | OK |
 
 ## Themes enfants (mecanisme, non fourni)
 
@@ -128,3 +143,37 @@ licence ni marque tierce.
 Andika 7.000 (SIL Global), WOFF2 Regular + Bold, licence OFL 1.1 (`fonts/OFL.txt`).
 Chargee avec `font-display: swap` et une pile de repli `system-ui, sans-serif`.
 Source officielle : <https://software.sil.org/andika/>.
+
+**Sous-ensemble latin.** Les WOFF2 sont sous-ensembles au latin utile
+(fonttools/pyftsubset dans un conteneur jetable `python:3.12-slim` sur le VPS) :
+
+- Plages Unicode conservees : `U+0000-00FF` (latin de base + Latin-1 :
+  accents FR, `« »`, NBSP, `× ÷`, `¼ ½ ¾`), `U+0100-017F` (Latin etendu A :
+  `œ Œ`, `Ÿ`, ...), `U+2000-206F` (ponctuation typographique : espaces
+  insecables/fines, `' ' " "`, `– —`, `…`), `U+20AC` (€), `U+2212` (`−`),
+  `U+2122` (™), `U+FEFF`, `U+FFFD`.
+- Features OpenType gardees : `kern, liga, calt, ccmp, mark, mkmk, locl`.
+- Tailles : Regular **295 740 -> 24 568 o**, Bold **299 540 -> 24 864 o**
+  (~92 % de reduction).
+
+## Versionning et mise a jour fiable (voir aussi deploy/SETUP.md)
+
+- `deploy.sh` genere une **version** = hash court du commit + horodatage UTC,
+  ecrite dans `/version.json` (Cache-Control `no-store`) et dans
+  `<meta name="app-version">` de `index.html`.
+- **Assets empreintes** : `build-front.sh` renomme par hash de contenu
+  (`tokens.<hash>.css`, `app-version.<hash>.js`, `Andika-*.<hash>.woff2`) ->
+  cache long `immutable` sans risque. `index.html` et `version.json` ne sont
+  jamais mis en cache.
+- **`app-version.js`** (charge par la page) expose `window.Kerskol.version` :
+  - verifie `/version.json` toutes les 5 min, au retour au premier plan
+    (`visibilitychange`) et au retour reseau (`online`) ;
+  - `setBusy(true|false)` : pendant une seance d'enfant, toute mise a jour est
+    **reportee** jusqu'a `setBusy(false)` ;
+  - `onBeforeUpdate(fn)` : taches a executer avant rechargement (ex. envoyer les
+    reponses en attente), attente plafonnee a 5 s ;
+  - sequence : `onBeforeUpdate` -> vidage Cache Storage -> desenregistrement des
+    service workers -> `location.reload()` ; garde-fou anti-boucle via
+    `sessionStorage`.
+- Compatible avec un futur build Vite (memes conventions d'empreinte +
+  `version.json` + `<meta app-version>` + inclusion de `app-version.js`).
