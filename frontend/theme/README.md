@@ -79,12 +79,16 @@ Exemple d'usage :
 
 ### Regles UX (obligatoires)
 
-- **Toujours une icone**, jamais la couleur seule (daltonisme). Pour une erreur
-  de reponse, utiliser une **icone « reessayer » (fleche circulaire ↻)**, pas
-  une croix — l'enfant doit comprendre qu'il peut recommencer, pas qu'il a
-  echoue.
-- **Formulations bienveillantes** : « Presque, on reessaie ? », « Bravo ! »,
-  « Encore un essai ? ». **Jamais « Faux »**, « Erreur », « Incorrect ».
+- **Toujours une icone**, jamais la couleur seule (daltonisme). Le bandeau de
+  succes porte une **coche** ; le bandeau d'erreur porte une **icone d'erreur
+  douce** (pas une croix agressive).
+- Une **erreur compte comme fausse** (pas de « on reessaie » sur le meme
+  exercice). Le bandeau d'erreur annonce clairement **« Ce n'est pas ca »**,
+  puis affiche la **correction expliquee** — bonne reponse et chemin pour la
+  trouver (voir [`docs/pedagogie.md`](../../docs/pedagogie.md)).
+- **Ton bienveillant mais clair** : on nomme l'erreur sans la dramatiser
+  (« Ce n'est pas ca, voici comment trouver »), on ne l'euphemise pas non plus
+  (pas de « Presque »).
 - Le bandeau se delimite par sa **bordure + son icone** (le contraste
   fond-pastel / page est volontairement faible) : ne jamais compter sur la
   seule couleur de fond pour signaler le bandeau.
