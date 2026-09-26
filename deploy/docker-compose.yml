@@ -35,7 +35,11 @@ services:
       KERSKOL_MAILER_PASSWORD: ${KERSKOL_MAILER_PASSWORD:?KERSKOL_MAILER_PASSWORD manquant}
     volumes:
       - kerskol-db-data:/var/lib/postgresql/data
-      - ./initdb:/docker-entrypoint-initdb.d:ro
+      # IMPORTANT : ne PAS monter tout le dossier sur /docker-entrypoint-initdb.d
+      # (cela masquerait les scripts d'init de l'image supabase : creation du
+      # role postgres, migrations auth/realtime, etc.). On monte uniquement notre
+      # script, nomme "zzz-" pour qu'il s'execute APRES ceux de l'image.
+      - ./initdb/01-roles.sh:/docker-entrypoint-initdb.d/zzz-kerskol-roles.sh:ro
     networks:
       - kerskol_net
     healthcheck:

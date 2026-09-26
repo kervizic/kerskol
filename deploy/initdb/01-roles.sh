@@ -6,6 +6,11 @@
 # de POSTGRES_PASSWORD (fournie par /opt/kerskol/.env). Aucun secret n'est ecrit
 # ici : les valeurs viennent de l'environnement au runtime.
 #
+# Ce script est monte sous le nom zzz-kerskol-roles.sh : il s'execute APRES les
+# scripts d'init de l'image supabase (qui creent le role postgres, le role
+# supabase_admin et appliquent les migrations auth/realtime). On se contente donc
+# d'ajustements idempotents par-dessus une base deja correctement initialisee.
+#
 # Le role applicatif kerskol_mailer n'est PAS traite ici : il est cree par la
 # migration 0001, puis active (LOGIN + mot de passe) par deploy.sh.
 set -eu
@@ -47,6 +52,11 @@ ALTER ROLE supabase_auth_admin WITH LOGIN PASSWORD :'pw';
 -- GoTrue gere son propre schema auth (cree si absent avant ses migrations).
 CREATE SCHEMA IF NOT EXISTS auth AUTHORIZATION supabase_auth_admin;
 GRANT ALL ON SCHEMA auth TO supabase_auth_admin;
+
+-- GoTrue cree ses tables (et sa table schema_migrations) dans le schema auth :
+-- on force le search_path du role pour eviter qu'il ne vise "public" (ou il n'a
+-- pas le droit CREATE).
+ALTER ROLE supabase_auth_admin SET search_path = auth;
 SQL
 
 echo "[initdb] roles Supabase alignes."
