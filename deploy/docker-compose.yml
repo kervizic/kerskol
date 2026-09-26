@@ -161,11 +161,15 @@ services:
       kerskol-db:
         condition: service_healthy
     environment:
+      # NB : compose interpole ces variables meme quand le profil "mail" est
+      # inactif. On utilise donc des valeurs tolerantes (:-) : le demarrage reel
+      # du mailer reste gate par le profil "mail" et par deploy.sh (qui ne le
+      # lance que si GMAIL_CLIENT_ID est renseigne).
       DATABASE_URL: postgres://kerskol_mailer:${KERSKOL_MAILER_PASSWORD}@kerskol-db:5432/postgres
-      GMAIL_CLIENT_ID: ${GMAIL_CLIENT_ID:?GMAIL_CLIENT_ID manquant}
-      GMAIL_CLIENT_SECRET: ${GMAIL_CLIENT_SECRET:?GMAIL_CLIENT_SECRET manquant}
-      GMAIL_REFRESH_TOKEN: ${GMAIL_REFRESH_TOKEN:?GMAIL_REFRESH_TOKEN manquant}
-      MAIL_FROM: ${MAIL_FROM:?MAIL_FROM manquant}
+      GMAIL_CLIENT_ID: ${GMAIL_CLIENT_ID:-}
+      GMAIL_CLIENT_SECRET: ${GMAIL_CLIENT_SECRET:-}
+      GMAIL_REFRESH_TOKEN: ${GMAIL_REFRESH_TOKEN:-}
+      MAIL_FROM: ${MAIL_FROM:-}
       MAIL_FROM_NAME: ${MAIL_FROM_NAME:-Kerskol}
       POLL_INTERVAL_MS: ${MAILER_POLL_INTERVAL_MS:-60000}
       MAX_ATTEMPTS: ${MAILER_MAX_ATTEMPTS:-5}

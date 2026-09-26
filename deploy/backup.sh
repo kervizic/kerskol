@@ -27,7 +27,7 @@ OUT="${BACKUP_DIR}/kerskol-${TS}.sql.gz"
 cd "$KERSKOL_DIR/deploy"
 
 # pg_dump execute DANS le conteneur, sortie compressee cote hote.
-docker compose -p "$PROJECT" exec -T \
+docker compose -p "$PROJECT" --env-file "$ENV_FILE" exec -T \
   -e PGPASSWORD="$POSTGRES_PASSWORD" \
   "$DB_SERVICE" \
   pg_dump -U postgres -d postgres --no-owner --clean --if-exists \

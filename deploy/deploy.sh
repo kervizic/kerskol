@@ -32,11 +32,11 @@ git pull --ff-only
 echo "==> 2/6 docker compose up -d (db, auth, rest ; mailer via profil 'mail')"
 cd "$DEPLOY_DIR"
 # Sans --profile mail, le service kerskol-mailer (profils: ["mail"]) reste eteint.
-docker compose -p "$PROJECT" up -d --build
+docker compose -p "$PROJECT" --env-file "$ENV_FILE" up -d --build
 
 echo "    attente de la base (health)..."
 for i in $(seq 1 30); do
-  if docker compose -p "$PROJECT" exec -T -e PGPASSWORD="$POSTGRES_PASSWORD" "$DB_SERVICE" \
+  if docker compose -p "$PROJECT" --env-file "$ENV_FILE" exec -T -e PGPASSWORD="$POSTGRES_PASSWORD" "$DB_SERVICE" \
        pg_isready -U postgres -d postgres >/dev/null 2>&1; then
     break
   fi
@@ -46,7 +46,7 @@ done
 
 # Helper psql (dans le conteneur, superuser postgres).
 psql_db() {
-  docker compose -p "$PROJECT" exec -T -e PGPASSWORD="$POSTGRES_PASSWORD" "$DB_SERVICE" \
+  docker compose -p "$PROJECT" --env-file "$ENV_FILE" exec -T -e PGPASSWORD="$POSTGRES_PASSWORD" "$DB_SERVICE" \
     psql -v ON_ERROR_STOP=1 -U postgres -d postgres "$@"
 }
 
@@ -93,7 +93,7 @@ SQL
 GMAIL_CLIENT_ID="$(grep -E '^GMAIL_CLIENT_ID=' "$ENV_FILE" | head -n1 | cut -d= -f2-)"
 if [ -n "${GMAIL_CLIENT_ID:-}" ]; then
   echo "    identifiants Gmail presents : demarrage/redemarrage du mailer"
-  docker compose -p "$PROJECT" --profile mail up -d --build kerskol-mailer
+  docker compose -p "$PROJECT" --env-file "$ENV_FILE" --profile mail up -d --build kerskol-mailer
 else
   echo "    identifiants Gmail absents : mailer non demarre (profil 'mail' inactif)"
 fi
