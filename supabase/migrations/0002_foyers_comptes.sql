@@ -37,6 +37,10 @@ RETURNS jsonb LANGUAGE sql STABLE AS $$
     )::jsonb
 $$;
 
+-- USAGE sur le schema auth : indispensable pour que authenticated/anon puissent
+-- appeler auth.uid()/auth.jwt() depuis les policies RLS (non garanti en
+-- Supabase auto-heberge).
+GRANT USAGE ON SCHEMA auth TO authenticated, anon;
 GRANT EXECUTE ON FUNCTION auth.uid() TO authenticated, anon;
 GRANT EXECUTE ON FUNCTION auth.jwt() TO authenticated, anon;
 
