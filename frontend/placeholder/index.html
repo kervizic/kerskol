@@ -6,109 +6,108 @@
   <title>Kerskol - bientot en ligne</title>
   <meta name="description" content="Kerskol, la petite ecole a la maison. Le site arrive tres bientot.">
   <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#1f6f5c">
+  <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1C1917" media="(prefers-color-scheme: dark)">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8F%A1%3C/text%3E%3C/svg%3E">
+  <link rel="preload" href="/theme/fonts/Andika-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/theme/tokens.css">
   <style>
-    :root {
-      --bg: #f4f1ea;
-      --ink: #22312c;
-      --accent: #1f6f5c;
-      --accent-soft: #e3efe9;
-      --muted: #5c6b64;
-    }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { height: 100%; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      color: var(--ink);
-      background:
-        radial-gradient(1200px 600px at 50% -10%, var(--accent-soft), transparent 60%),
-        var(--bg);
+      font-family: var(--kk-font);
+      color: var(--kk-text);
+      background: var(--kk-bg);
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 24px;
-      line-height: 1.5;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
     }
     main {
-      max-width: 640px;
+      width: 100%;
+      max-width: 560px;
       text-align: center;
+    }
+    .card {
+      background: var(--kk-surface);
+      border: 1px solid var(--kk-border);
+      border-radius: var(--kk-radius);
+      padding: clamp(28px, 6vw, 48px);
+    }
+    .logo {
+      font-size: clamp(2.75rem, 9vw, 3.5rem);
+      line-height: 1;
+      margin-bottom: 18px;
     }
     .badge {
       display: inline-block;
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--accent);
-      background: var(--accent-soft);
+      font-weight: 700;
+      color: var(--kk-accent-text);
+      border: 1px solid var(--kk-border);
       border-radius: 999px;
       padding: 6px 16px;
-      margin-bottom: 28px;
-      font-weight: 600;
-    }
-    .logo {
-      font-size: 4rem;
-      line-height: 1;
-      margin-bottom: 20px;
-    }
-    h1 {
-      font-size: clamp(2rem, 6vw, 3rem);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 8px;
-    }
-    .tagline {
-      font-size: clamp(1.1rem, 3vw, 1.35rem);
-      color: var(--accent);
-      font-weight: 600;
       margin-bottom: 24px;
     }
-    p.lead {
-      font-size: 1.05rem;
-      color: var(--muted);
-      max-width: 46ch;
-      margin: 0 auto 32px;
+    h1 {
+      font-size: clamp(2.25rem, 8vw, 3.25rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--kk-accent);
+      margin-bottom: 10px;
+    }
+    .tagline {
+      font-size: clamp(1.1rem, 3.5vw, 1.35rem);
+      font-weight: 700;
+      color: var(--kk-text);
+      margin-bottom: 22px;
     }
     .divider {
       width: 56px;
       height: 3px;
-      background: var(--accent);
+      background: var(--kk-accent);
       border-radius: 3px;
-      margin: 0 auto 32px;
-      opacity: 0.5;
+      margin: 0 auto 22px;
+      opacity: 0.55;
+    }
+    p.lead {
+      font-size: 1.05rem;
+      color: var(--kk-text-2);
+      max-width: 44ch;
+      margin: 0 auto;
     }
     footer {
-      font-size: 0.85rem;
-      color: var(--muted);
+      margin-top: 26px;
+      font-size: 0.9rem;
+      color: var(--kk-text-2);
     }
     footer a {
-      color: var(--accent);
+      color: var(--kk-accent-text);
+      font-weight: 700;
       text-decoration: none;
     }
-    footer a:hover { text-decoration: underline; }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #10201b;
-        --ink: #eef4f1;
-        --accent: #6cc4ac;
-        --accent-soft: #1a352c;
-        --muted: #9fb2aa;
-      }
-    }
+    footer a:hover,
+    footer a:focus-visible { text-decoration: underline; }
   </style>
 </head>
 <body>
   <main>
-    <div class="logo" aria-hidden="true">🏡</div>
-    <span class="badge">Bientot en ligne</span>
-    <h1>Kerskol</h1>
-    <p class="tagline">La petite ecole a la maison</p>
-    <div class="divider"></div>
-    <p class="lead">
-      Notre site est en cours de preparation. Nous mettons la derniere main a
-      un espace simple et chaleureux pour accompagner l'instruction en famille.
-      Revenez tres vite&nbsp;!
-    </p>
+    <div class="card">
+      <div class="logo" aria-hidden="true">🏡</div>
+      <span class="badge">Bientot en ligne</span>
+      <h1>Kerskol</h1>
+      <p class="tagline">La petite ecole a la maison</p>
+      <div class="divider" aria-hidden="true"></div>
+      <p class="lead">
+        Notre site est en cours de preparation. Nous mettons la derniere main a
+        un espace simple et chaleureux pour accompagner l'instruction en famille.
+        Revenez tres vite&nbsp;!
+      </p>
+    </div>
     <footer>
       Une question&nbsp;? Ecrivez-nous a
       <a href="mailto:contact@kerskol.fr">contact@kerskol.fr</a>

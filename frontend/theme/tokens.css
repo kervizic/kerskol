@@ -1,0 +1,107 @@
+/*
+ * Kerskol - theme de base (tokens semantiques)
+ * ------------------------------------------------------------------
+ * Palette validee. Ne pas modifier les valeurs sans accord.
+ *
+ * Modes :
+ *   - Clair  : valeurs par defaut sur :root.
+ *   - Sombre : applique automatiquement via prefers-color-scheme
+ *              (sauf si l'utilisateur force le clair avec data-theme="light"),
+ *              ou explicitement via :root[data-theme="dark"].
+ *
+ * Themes enfants (mecanisme prevu, aucun thème enfant fourni ici) :
+ *   Un futur univers visuel se declare avec un attribut sur <html> :
+ *       <html data-theme="<nom>">
+ *   et un bloc CSS qui NE REDEFINIT QUE des variables --kk-* :
+ *       :root[data-theme="foret"] { --kk-accent: #2F855A; ... }
+ *   Aucune regle de mise en page dans un thème enfant : uniquement des
+ *   variables. Aucun personnage sous licence, aucune marque tierce.
+ *   Prevoir au besoin une variante sombre du thème enfant via
+ *   @media (prefers-color-scheme: dark) :root[data-theme="foret"] { ... }.
+ */
+
+/* ------------------------- Police auto-hebergee ------------------------- */
+/* Andika (SIL, licence OFL - voir fonts/OFL.txt). Aucune ressource externe. */
+@font-face {
+  font-family: "Andika";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/Andika-Regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Andika";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("fonts/Andika-Bold.woff2") format("woff2");
+}
+
+/* ------------------------------ Mode clair ------------------------------ */
+:root {
+  /* Surfaces */
+  --kk-bg: #FFFFFF;        /* fond de page */
+  --kk-surface: #F5F5F4;   /* cartes, panneaux */
+  --kk-border: #E7E5E4;    /* bordures, separateurs */
+
+  /* Texte */
+  --kk-text: #292524;      /* texte principal */
+  --kk-text-2: #57534E;    /* texte secondaire */
+
+  /* Accent (chaud, orange Kerskol) */
+  --kk-accent: #E06A00;      /* boutons/titres GROS et GRAS uniquement (>= 24px ou >= 18.66px gras) */
+  --kk-on-accent: #FFFFFF;   /* texte sur bouton accent (gros + gras) */
+  --kk-accent-text: #BD5500; /* petits liens/textes accent, a poser sur --kk-bg */
+
+  /* Retours pedagogiques (toujours accompagnes d'une icone cote UI) */
+  --kk-success: #15803D;     /* vert - texte ou fond de bouton */
+  --kk-on-success: #FFFFFF;  /* texte sur bouton succes */
+  --kk-danger: #B42318;      /* rouge doux - texte ou fond de bouton */
+  --kk-on-danger: #FFFFFF;   /* texte sur bouton danger */
+
+  /* Forme & typographie */
+  --kk-radius: 14px;
+  --kk-radius-sm: 8px;
+  --kk-font: "Andika", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* ------------------------------ Mode sombre ----------------------------- */
+/* Auto : suit la preference systeme, sauf clair force explicitement. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --kk-bg: #1C1917;
+    --kk-surface: #292524;
+    --kk-border: #44403C;
+
+    --kk-text: #E7E5E4;
+    --kk-text-2: #A8A29E;
+
+    --kk-accent: #FB923C;      /* boutons + titres + liens (contraste large OK) */
+    --kk-on-accent: #1C1917;   /* texte sur bouton accent */
+    --kk-accent-text: #FB923C; /* liens accent (AA meme en petit sur fond sombre) */
+
+    --kk-success: #4ADE80;
+    --kk-on-success: #1C1917;
+    --kk-danger: #FCA5A5;
+    --kk-on-danger: #1C1917;
+  }
+}
+
+/* Sombre force explicitement (independamment de la preference systeme). */
+:root[data-theme="dark"] {
+  --kk-bg: #1C1917;
+  --kk-surface: #292524;
+  --kk-border: #44403C;
+
+  --kk-text: #E7E5E4;
+  --kk-text-2: #A8A29E;
+
+  --kk-accent: #FB923C;
+  --kk-on-accent: #1C1917;
+  --kk-accent-text: #FB923C;
+
+  --kk-success: #4ADE80;
+  --kk-on-success: #1C1917;
+  --kk-danger: #FCA5A5;
+  --kk-on-danger: #1C1917;
+}

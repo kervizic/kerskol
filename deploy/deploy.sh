@@ -112,7 +112,10 @@ else
   echo "    pas de frontend/package.json : installation de la page d'attente"
   mkdir -p "$DIST_DIR"
   cp "${FRONTEND_DIR}/placeholder/index.html" "${DIST_DIR}/index.html"
-  echo "    page d'attente copiee dans ${DIST_DIR}/index.html"
+  # Theme de base (tokens.css + police Andika auto-hebergee) servi sous /theme/.
+  rm -rf "${DIST_DIR}/theme"
+  cp -r "${FRONTEND_DIR}/theme" "${DIST_DIR}/theme"
+  echo "    page d'attente + theme copies dans ${DIST_DIR}/"
 fi
 
 echo "==> 6/6 nginx : test puis reload"
