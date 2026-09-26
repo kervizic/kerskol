@@ -1,0 +1,33 @@
+# Secrets et environnement
+.env
+.env.*
+!.env.example
+
+# Clés et certificats
+*.pem
+*.key
+*.p12
+*.crt
+
+# Secrets divers
+secrets/
+
+# Dépendances et builds
+node_modules/
+dist/
+build/
+
+# Système
+.DS_Store
+*.log
+
+# Données et volumes runtime
+volumes/
+data/
+*.sqlite
+*.dump
+*.sql.gz
+
+# Éditeurs
+.vscode/
+.idea/
