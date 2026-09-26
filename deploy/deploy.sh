@@ -29,8 +29,9 @@ echo "==> 1/6 git pull"
 cd "$KERSKOL_DIR"
 git pull --ff-only
 
-echo "==> 2/6 docker compose up -d"
+echo "==> 2/6 docker compose up -d (db, auth, rest ; mailer via profil 'mail')"
 cd "$DEPLOY_DIR"
+# Sans --profile mail, le service kerskol-mailer (profils: ["mail"]) reste eteint.
 docker compose -p "$PROJECT" up -d --build
 
 echo "    attente de la base (health)..."
@@ -87,17 +88,31 @@ END
 $$;
 ALTER ROLE kerskol_mailer WITH LOGIN PASSWORD :'pw';
 SQL
-# Redemarre le mailer pour qu'il reprenne la connexion avec le role actif.
-docker compose -p "$PROJECT" up -d kerskol-mailer
-
-echo "==> 5/6 build du front (si present)"
-if [ -f "${FRONTEND_DIR}/package.json" ]; then
-  cd "$FRONTEND_DIR"
-  npm ci
-  npm run build
-  echo "    build front OK (servi depuis ${FRONTEND_DIR}/dist)"
+# Le mailer ne demarre que si les identifiants Gmail sont presents (profil "mail").
+# Tant que GMAIL_CLIENT_ID est vide, on laisse le service eteint.
+GMAIL_CLIENT_ID="$(grep -E '^GMAIL_CLIENT_ID=' "$ENV_FILE" | head -n1 | cut -d= -f2-)"
+if [ -n "${GMAIL_CLIENT_ID:-}" ]; then
+  echo "    identifiants Gmail presents : demarrage/redemarrage du mailer"
+  docker compose -p "$PROJECT" --profile mail up -d --build kerskol-mailer
 else
-  echo "    pas de front a construire (frontend/package.json absent) - ignore"
+  echo "    identifiants Gmail absents : mailer non demarre (profil 'mail' inactif)"
+fi
+
+echo "==> 5/6 front : build via Docker (jamais de npm sur l'hote) ou page d'attente"
+DIST_DIR="${FRONTEND_DIR}/dist"
+if [ -f "${FRONTEND_DIR}/package.json" ]; then
+  echo "    build via docker run node:22-alpine (aucun npm sur l'hote)"
+  docker run --rm \
+    -v "${FRONTEND_DIR}:/app" \
+    -w /app \
+    node:22-alpine \
+    sh -c "npm ci && npm run build"
+  echo "    build front OK (servi depuis ${DIST_DIR})"
+else
+  echo "    pas de frontend/package.json : installation de la page d'attente"
+  mkdir -p "$DIST_DIR"
+  cp "${FRONTEND_DIR}/placeholder/index.html" "${DIST_DIR}/index.html"
+  echo "    page d'attente copiee dans ${DIST_DIR}/index.html"
 fi
 
 echo "==> 6/6 nginx : test puis reload"

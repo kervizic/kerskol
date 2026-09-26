@@ -88,10 +88,12 @@ services:
       GOTRUE_EXTERNAL_PHONE_ENABLED: "false"
       GOTRUE_EXTERNAL_ANONYMOUS_USERS_ENABLED: "false"
 
-      # OAuth Google (parent)
-      GOTRUE_EXTERNAL_GOOGLE_ENABLED: "true"
-      GOTRUE_EXTERNAL_GOOGLE_CLIENT_ID: ${GOTRUE_EXTERNAL_GOOGLE_CLIENT_ID:?client id Google manquant}
-      GOTRUE_EXTERNAL_GOOGLE_SECRET: ${GOTRUE_EXTERNAL_GOOGLE_SECRET:?secret Google manquant}
+      # OAuth Google (parent). Desactive par defaut : tant que les identifiants
+      # ne sont pas renseignes dans .env, GOTRUE_EXTERNAL_GOOGLE_ENABLED reste
+      # "false" et GoTrue ignore client_id/secret (vides tolerees).
+      GOTRUE_EXTERNAL_GOOGLE_ENABLED: ${GOTRUE_EXTERNAL_GOOGLE_ENABLED:-false}
+      GOTRUE_EXTERNAL_GOOGLE_CLIENT_ID: ${GOTRUE_EXTERNAL_GOOGLE_CLIENT_ID:-}
+      GOTRUE_EXTERNAL_GOOGLE_SECRET: ${GOTRUE_EXTERNAL_GOOGLE_SECRET:-}
       GOTRUE_EXTERNAL_GOOGLE_REDIRECT_URI: ${API_EXTERNAL_URL}/auth/v1/callback
     networks:
       - kerskol_net
@@ -144,6 +146,10 @@ services:
   # Mailer : worker outbox -> Gmail (OAuth2). Aucun port, aucun endpoint HTTP.
   # ---------------------------------------------------------------------------
   kerskol-mailer:
+    # Profil "mail" : le mailer ne demarre QUE si l'on active explicitement ce
+    # profil (docker compose --profile mail ...). Tant que les identifiants
+    # Gmail sont absents, la pile de base (db/auth/rest) tourne sans lui.
+    profiles: ["mail"]
     build:
       context: ../mailer
       dockerfile: Dockerfile

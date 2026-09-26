@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kerskol - bientot en ligne</title>
+  <meta name="description" content="Kerskol, la petite ecole a la maison. Le site arrive tres bientot.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#1f6f5c">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8F%A1%3C/text%3E%3C/svg%3E">
+  <style>
+    :root {
+      --bg: #f4f1ea;
+      --ink: #22312c;
+      --accent: #1f6f5c;
+      --accent-soft: #e3efe9;
+      --muted: #5c6b64;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(1200px 600px at 50% -10%, var(--accent-soft), transparent 60%),
+        var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      line-height: 1.5;
+    }
+    main {
+      max-width: 640px;
+      text-align: center;
+    }
+    .badge {
+      display: inline-block;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border-radius: 999px;
+      padding: 6px 16px;
+      margin-bottom: 28px;
+      font-weight: 600;
+    }
+    .logo {
+      font-size: 4rem;
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-size: clamp(2rem, 6vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+    .tagline {
+      font-size: clamp(1.1rem, 3vw, 1.35rem);
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+    p.lead {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 46ch;
+      margin: 0 auto 32px;
+    }
+    .divider {
+      width: 56px;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 3px;
+      margin: 0 auto 32px;
+      opacity: 0.5;
+    }
+    footer {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    footer a:hover { text-decoration: underline; }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #10201b;
+        --ink: #eef4f1;
+        --accent: #6cc4ac;
+        --accent-soft: #1a352c;
+        --muted: #9fb2aa;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="logo" aria-hidden="true">🏡</div>
+    <span class="badge">Bientot en ligne</span>
+    <h1>Kerskol</h1>
+    <p class="tagline">La petite ecole a la maison</p>
+    <div class="divider"></div>
+    <p class="lead">
+      Notre site est en cours de preparation. Nous mettons la derniere main a
+      un espace simple et chaleureux pour accompagner l'instruction en famille.
+      Revenez tres vite&nbsp;!
+    </p>
+    <footer>
+      Une question&nbsp;? Ecrivez-nous a
+      <a href="mailto:contact@kerskol.fr">contact@kerskol.fr</a>
+    </footer>
+  </main>
+</body>
+</html>

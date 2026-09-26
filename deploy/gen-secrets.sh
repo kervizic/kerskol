@@ -82,6 +82,9 @@ SITE_URL=https://kerskol.fr
 API_EXTERNAL_URL=https://kerskol.fr
 
 # --- Authentification Google (parent) : A COMPLETER a la main ---
+# Laisser "false" tant que CLIENT_ID/SECRET sont vides. Passer a "true" une fois
+# les deux valeurs renseignees, puis relancer deploy.sh.
+GOTRUE_EXTERNAL_GOOGLE_ENABLED=false
 GOTRUE_EXTERNAL_GOOGLE_CLIENT_ID=
 GOTRUE_EXTERNAL_GOOGLE_SECRET=
 
