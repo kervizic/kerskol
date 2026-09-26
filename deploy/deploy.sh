@@ -1,0 +1,112 @@
+#!/usr/bin/env bash
+# deploy.sh - deploiement / mise a jour de kerskol sur le VPS.
+#
+# Etapes :
+#   1. git pull
+#   2. docker compose -p kerskol up -d (build mailer si besoin)
+#   3. applique les migrations SQL en attente (table schema_migrations)
+#   4. active le role kerskol_mailer (LOGIN + mot de passe depuis .env)
+#   5. (optionnel) build du front Vite
+#   6. nginx -t puis reload (JAMAIS restart) ; arret si nginx -t echoue
+set -euo pipefail
+
+KERSKOL_DIR="${KERSKOL_DIR:-/opt/kerskol}"
+ENV_FILE="${KERSKOL_DIR}/.env"
+DEPLOY_DIR="${KERSKOL_DIR}/deploy"
+MIGRATIONS_DIR="${KERSKOL_DIR}/supabase/migrations"
+FRONTEND_DIR="${KERSKOL_DIR}/frontend"
+PROJECT="kerskol"
+DB_SERVICE="kerskol-db"
+
+[ -f "$ENV_FILE" ] || { echo "Erreur : ${ENV_FILE} introuvable. Lancez gen-secrets.sh." >&2; exit 1; }
+
+POSTGRES_PASSWORD="$(grep -E '^POSTGRES_PASSWORD=' "$ENV_FILE" | head -n1 | cut -d= -f2-)"
+KERSKOL_MAILER_PASSWORD="$(grep -E '^KERSKOL_MAILER_PASSWORD=' "$ENV_FILE" | head -n1 | cut -d= -f2-)"
+[ -n "$POSTGRES_PASSWORD" ] || { echo "Erreur : POSTGRES_PASSWORD absent." >&2; exit 1; }
+[ -n "$KERSKOL_MAILER_PASSWORD" ] || { echo "Erreur : KERSKOL_MAILER_PASSWORD absent." >&2; exit 1; }
+
+echo "==> 1/6 git pull"
+cd "$KERSKOL_DIR"
+git pull --ff-only
+
+echo "==> 2/6 docker compose up -d"
+cd "$DEPLOY_DIR"
+docker compose -p "$PROJECT" up -d --build
+
+echo "    attente de la base (health)..."
+for i in $(seq 1 30); do
+  if docker compose -p "$PROJECT" exec -T -e PGPASSWORD="$POSTGRES_PASSWORD" "$DB_SERVICE" \
+       pg_isready -U postgres -d postgres >/dev/null 2>&1; then
+    break
+  fi
+  sleep 2
+  [ "$i" -eq 30 ] && { echo "Erreur : base non disponible." >&2; exit 1; }
+done
+
+# Helper psql (dans le conteneur, superuser postgres).
+psql_db() {
+  docker compose -p "$PROJECT" exec -T -e PGPASSWORD="$POSTGRES_PASSWORD" "$DB_SERVICE" \
+    psql -v ON_ERROR_STOP=1 -U postgres -d postgres "$@"
+}
+
+echo "    attente de la table auth.users (creee par GoTrue)..."
+# La migration 0001 a une FK vers auth.users : on attend que GoTrue ait fini
+# ses propres migrations avant d'appliquer les notres (evite une course au
+# premier deploiement).
+for i in $(seq 1 30); do
+  if [ "$(psql_db -tAc "SELECT to_regclass('auth.users') IS NOT NULL")" = "t" ]; then
+    break
+  fi
+  sleep 2
+  [ "$i" -eq 30 ] && { echo "Erreur : auth.users absente (GoTrue non pret)." >&2; exit 1; }
+done
+
+echo "==> 3/6 migrations en attente"
+# Liste des versions deja appliquees (vide si la table n'existe pas encore).
+APPLIED="$(psql_db -tAc \
+  "SELECT version FROM public.schema_migrations" 2>/dev/null || true)"
+
+for file in $(ls -1 "$MIGRATIONS_DIR"/*.sql | sort); do
+  version="$(basename "$file" .sql)"
+  if printf '%s\n' "$APPLIED" | grep -qx "$version"; then
+    echo "    - ${version} : deja appliquee"
+    continue
+  fi
+  echo "    - ${version} : application"
+  psql_db < "$file"
+done
+
+echo "==> 4/6 activation du role kerskol_mailer"
+psql_db -v pw="$KERSKOL_MAILER_PASSWORD" <<'SQL'
+DO $$
+BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'kerskol_mailer') THEN
+    RAISE EXCEPTION 'role kerskol_mailer absent : migration 0001 non appliquee ?';
+  END IF;
+END
+$$;
+ALTER ROLE kerskol_mailer WITH LOGIN PASSWORD :'pw';
+SQL
+# Redemarre le mailer pour qu'il reprenne la connexion avec le role actif.
+docker compose -p "$PROJECT" up -d kerskol-mailer
+
+echo "==> 5/6 build du front (si present)"
+if [ -f "${FRONTEND_DIR}/package.json" ]; then
+  cd "$FRONTEND_DIR"
+  npm ci
+  npm run build
+  echo "    build front OK (servi depuis ${FRONTEND_DIR}/dist)"
+else
+  echo "    pas de front a construire (frontend/package.json absent) - ignore"
+fi
+
+echo "==> 6/6 nginx : test puis reload"
+if sudo nginx -t; then
+  sudo systemctl reload nginx
+  echo "    nginx recharge."
+else
+  echo "Erreur : 'nginx -t' a echoue. Nginx N'A PAS ete recharge." >&2
+  exit 1
+fi
+
+echo "Deploiement termine."

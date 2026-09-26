@@ -1,0 +1,178 @@
+# Kerskol - stack Supabase allegee (3 conteneurs) + mailer.
+# Projet compose dedie "kerskol", reseau propre, isole de kertec.
+#
+#   docker compose -p kerskol up -d
+#
+# Toutes les valeurs sensibles proviennent de /opt/kerskol/.env (jamais versionne).
+# Seuls auth et rest publient un port, uniquement sur 127.0.0.1 (acces via nginx).
+# Images epinglees, pas de :latest. Aucun docker.sock monte, aucun privileged.
+
+name: kerskol
+
+networks:
+  kerskol_net:
+    name: kerskol_net
+    driver: bridge
+
+volumes:
+  kerskol-db-data:
+    name: kerskol-db-data
+
+services:
+  # ---------------------------------------------------------------------------
+  # PostgreSQL (image Supabase : fournit les roles anon / authenticated /
+  # authenticator / supabase_auth_admin). Aucun port publie.
+  # ---------------------------------------------------------------------------
+  kerskol-db:
+    image: supabase/postgres:17.6.1.136
+    container_name: kerskol-db
+    restart: unless-stopped
+    stop_grace_period: 30s
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD manquant}
+      POSTGRES_DB: postgres
+      # Utilises par le script d'init 01-roles.sh (premier demarrage uniquement)
+      KERSKOL_MAILER_PASSWORD: ${KERSKOL_MAILER_PASSWORD:?KERSKOL_MAILER_PASSWORD manquant}
+    volumes:
+      - kerskol-db-data:/var/lib/postgresql/data
+      - ./initdb:/docker-entrypoint-initdb.d:ro
+    networks:
+      - kerskol_net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 1g
+    cpus: 1.5
+    pids_limit: 512
+
+  # ---------------------------------------------------------------------------
+  # GoTrue (authentification). Google parent uniquement, signup email desactive.
+  # ---------------------------------------------------------------------------
+  kerskol-auth:
+    image: supabase/gotrue:v2.196.0
+    container_name: kerskol-auth
+    restart: unless-stopped
+    depends_on:
+      kerskol-db:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:9997:9999"
+    environment:
+      GOTRUE_API_HOST: 0.0.0.0
+      GOTRUE_API_PORT: 9999
+      API_EXTERNAL_URL: ${API_EXTERNAL_URL:?API_EXTERNAL_URL manquant}
+
+      GOTRUE_DB_DRIVER: postgres
+      GOTRUE_DB_DATABASE_URL: postgres://supabase_auth_admin:${POSTGRES_PASSWORD}@kerskol-db:5432/postgres
+
+      GOTRUE_SITE_URL: ${SITE_URL:?SITE_URL manquant}
+      GOTRUE_URI_ALLOW_LIST: ${SITE_URL}
+
+      # JWT
+      GOTRUE_JWT_SECRET: ${JWT_SECRET:?JWT_SECRET manquant}
+      GOTRUE_JWT_EXP: 3600
+      GOTRUE_JWT_AUD: authenticated
+      GOTRUE_JWT_DEFAULT_GROUP_NAME: authenticated
+      GOTRUE_JWT_ADMIN_ROLES: service_role
+      GOTRUE_JWT_ISSUER: ${API_EXTERNAL_URL}/auth/v1
+
+      # Inscription email/mot de passe DESACTIVEE : seul Google (parent) est autorise.
+      GOTRUE_DISABLE_SIGNUP: "true"
+      GOTRUE_EXTERNAL_EMAIL_ENABLED: "false"
+      GOTRUE_MAILER_AUTOCONFIRM: "true"
+      GOTRUE_EXTERNAL_PHONE_ENABLED: "false"
+      GOTRUE_EXTERNAL_ANONYMOUS_USERS_ENABLED: "false"
+
+      # OAuth Google (parent)
+      GOTRUE_EXTERNAL_GOOGLE_ENABLED: "true"
+      GOTRUE_EXTERNAL_GOOGLE_CLIENT_ID: ${GOTRUE_EXTERNAL_GOOGLE_CLIENT_ID:?client id Google manquant}
+      GOTRUE_EXTERNAL_GOOGLE_SECRET: ${GOTRUE_EXTERNAL_GOOGLE_SECRET:?secret Google manquant}
+      GOTRUE_EXTERNAL_GOOGLE_REDIRECT_URI: ${API_EXTERNAL_URL}/auth/v1/callback
+    networks:
+      - kerskol_net
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:9999/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    mem_limit: 256m
+    cpus: 0.5
+    pids_limit: 256
+
+  # ---------------------------------------------------------------------------
+  # PostgREST (API REST generee depuis le schema public).
+  # ---------------------------------------------------------------------------
+  kerskol-rest:
+    image: postgrest/postgrest:v14.17
+    container_name: kerskol-rest
+    restart: unless-stopped
+    depends_on:
+      kerskol-db:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:3001:3000"
+    environment:
+      PGRST_DB_URI: postgres://authenticator:${POSTGRES_PASSWORD}@kerskol-db:5432/postgres
+      PGRST_DB_SCHEMAS: public
+      PGRST_DB_ANON_ROLE: anon
+      PGRST_JWT_SECRET: ${JWT_SECRET}
+      PGRST_DB_USE_LEGACY_GUCS: "false"
+      PGRST_DB_MAX_ROWS: 1000
+      PGRST_SERVER_HOST: "0.0.0.0"
+      PGRST_SERVER_PORT: 3000
+    networks:
+      - kerskol_net
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    mem_limit: 256m
+    cpus: 0.5
+    pids_limit: 256
+
+  # ---------------------------------------------------------------------------
+  # Mailer : worker outbox -> Gmail (OAuth2). Aucun port, aucun endpoint HTTP.
+  # ---------------------------------------------------------------------------
+  kerskol-mailer:
+    build:
+      context: ../mailer
+      dockerfile: Dockerfile
+    image: kerskol-mailer:local
+    container_name: kerskol-mailer
+    restart: unless-stopped
+    init: true
+    depends_on:
+      kerskol-db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://kerskol_mailer:${KERSKOL_MAILER_PASSWORD}@kerskol-db:5432/postgres
+      GMAIL_CLIENT_ID: ${GMAIL_CLIENT_ID:?GMAIL_CLIENT_ID manquant}
+      GMAIL_CLIENT_SECRET: ${GMAIL_CLIENT_SECRET:?GMAIL_CLIENT_SECRET manquant}
+      GMAIL_REFRESH_TOKEN: ${GMAIL_REFRESH_TOKEN:?GMAIL_REFRESH_TOKEN manquant}
+      MAIL_FROM: ${MAIL_FROM:?MAIL_FROM manquant}
+      MAIL_FROM_NAME: ${MAIL_FROM_NAME:-Kerskol}
+      POLL_INTERVAL_MS: ${MAILER_POLL_INTERVAL_MS:-60000}
+      MAX_ATTEMPTS: ${MAILER_MAX_ATTEMPTS:-5}
+      NODE_ENV: production
+    networks:
+      - kerskol_net
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    mem_limit: 256m
+    cpus: 0.5
+    pids_limit: 256
