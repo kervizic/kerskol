@@ -97,13 +97,41 @@ Console Google Cloud (https://console.cloud.google.com) :
    `/opt/kerskol/.env` :
 
 ```dotenv
+GOTRUE_EXTERNAL_GOOGLE_ENABLED=true
 GOTRUE_EXTERNAL_GOOGLE_CLIENT_ID=<client id>
 GOTRUE_EXTERNAL_GOOGLE_SECRET=<client secret>
 ```
 
+> `GOTRUE_EXTERNAL_GOOGLE_ENABLED` **doit** valoir `true` : le compose le laisse
+> a `false` par defaut tant que les identifiants ne sont pas renseignes.
+> `GOTRUE_EXTERNAL_GOOGLE_REDIRECT_URI` est derive automatiquement de
+> `API_EXTERNAL_URL` (→ `https://kerskol.fr/auth/v1/callback`), a declarer cote
+> Google Cloud comme URI de redirection autorisee.
+
+Puis recreer uniquement le conteneur d'auth :
+
+```bash
+cd /opt/kerskol/deploy
+docker compose -p kerskol --env-file /opt/kerskol/.env up -d kerskol-auth
+```
+
+Verifications :
+
+```bash
+curl -s -H "apikey: <ANON_KEY>" https://kerskol.fr/auth/v1/settings   # external.google=true, external.email=false
+curl -s -o /dev/null -w "%{http_code} %{redirect_url}\n" \
+  "https://kerskol.fr/auth/v1/authorize?provider=google&redirect_to=https://kerskol.fr"  # 302 vers accounts.google.com
+```
+
 > L'inscription email/mot de passe est **désactivée** dans GoTrue
-> (`GOTRUE_DISABLE_SIGNUP=true`, `GOTRUE_EXTERNAL_EMAIL_ENABLED=false`) : seul
-> le bouton « Se connecter avec Google » du parent fonctionne.
+> (`GOTRUE_DISABLE_SIGNUP=true`, `GOTRUE_EXTERNAL_EMAIL_ENABLED=false`).
+>
+> ⚠️ **Attention** : `GOTRUE_DISABLE_SIGNUP=true` bloque **toute** création de
+> compte, y compris via Google. Un parent dont l'e-mail n'existe pas encore en
+> base sera refusé (« Signups not allowed for this instance »). Pour autoriser
+> la première connexion Google des parents tout en gardant l'e-mail/mot de passe
+> désactivé, il faut `GOTRUE_DISABLE_SIGNUP=false` **et**
+> `GOTRUE_EXTERNAL_EMAIL_ENABLED=false` (à arbitrer selon la politique d'accès).
 
 ---
 
