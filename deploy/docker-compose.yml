@@ -85,8 +85,12 @@ services:
       GOTRUE_JWT_ADMIN_ROLES: service_role
       GOTRUE_JWT_ISSUER: ${API_EXTERNAL_URL}/auth/v1
 
-      # Inscription email/mot de passe DESACTIVEE : seul Google (parent) est autorise.
-      GOTRUE_DISABLE_SIGNUP: "true"
+      # Creation de compte parent : UNIQUEMENT via Google (option A).
+      # GOTRUE_DISABLE_SIGNUP=false autorise la premiere connexion Google a
+      # creer le compte ; email/mot de passe reste desactive via EMAIL_ENABLED,
+      # phone et anonymous sont desactives ci-dessous. Configurable par .env,
+      # defaut "false".
+      GOTRUE_DISABLE_SIGNUP: ${GOTRUE_DISABLE_SIGNUP:-false}
       GOTRUE_EXTERNAL_EMAIL_ENABLED: "false"
       GOTRUE_MAILER_AUTOCONFIRM: "true"
       GOTRUE_EXTERNAL_PHONE_ENABLED: "false"

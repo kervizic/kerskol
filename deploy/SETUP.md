@@ -123,15 +123,21 @@ curl -s -o /dev/null -w "%{http_code} %{redirect_url}\n" \
   "https://kerskol.fr/auth/v1/authorize?provider=google&redirect_to=https://kerskol.fr"  # 302 vers accounts.google.com
 ```
 
-> L'inscription email/mot de passe est **désactivée** dans GoTrue
-> (`GOTRUE_DISABLE_SIGNUP=true`, `GOTRUE_EXTERNAL_EMAIL_ENABLED=false`).
+> **Création de compte parent : uniquement via Google.**
+> `GOTRUE_DISABLE_SIGNUP=false` (défaut) autorise la **première** connexion
+> Google à créer le compte parent, tandis que l'e-mail/mot de passe reste
+> désactivé (`GOTRUE_EXTERNAL_EMAIL_ENABLED=false`) et que phone et anonymous
+> sont désactivés (`GOTRUE_EXTERNAL_PHONE_ENABLED=false`,
+> `GOTRUE_EXTERNAL_ANONYMOUS_USERS_ENABLED=false`). Seul Google peut donc créer
+> ou ouvrir un compte.
 >
-> ⚠️ **Attention** : `GOTRUE_DISABLE_SIGNUP=true` bloque **toute** création de
-> compte, y compris via Google. Un parent dont l'e-mail n'existe pas encore en
-> base sera refusé (« Signups not allowed for this instance »). Pour autoriser
-> la première connexion Google des parents tout en gardant l'e-mail/mot de passe
-> désactivé, il faut `GOTRUE_DISABLE_SIGNUP=false` **et**
-> `GOTRUE_EXTERNAL_EMAIL_ENABLED=false` (à arbitrer selon la politique d'accès).
+> **Confidentialité — nom et photo Google non conservés.** La migration
+> `0008_strip_google_identity.sql` installe un trigger `BEFORE INSERT OR UPDATE`
+> sur `auth.users` (`raw_user_meta_data`) et `auth.identities`
+> (`identity_data`) qui retire systématiquement `name`, `full_name`,
+> `given_name`, `family_name`, `avatar_url` et `picture`. Seuls l'e-mail et
+> l'identifiant technique sont conservés. Test :
+> `supabase/tests/strip_google_identity_test.sql` (joué par `deploy/test-db.sh`).
 
 ---
 
@@ -326,24 +332,33 @@ puis `./deploy/deploy.sh`.
 
 ## 12bis. Accès d'administration au VPS
 
-L'administration du VPS (déploiement, migrations, logs, fail2ban...) se fait
-**exclusivement via le réseau Tailscale**, jamais par l'IP publique directe :
+L'administration du VPS (déploiement, migrations, logs, fail2ban...) peut se
+faire par l'un ou l'autre de ces deux accès, tous deux valables (même clé
+`~/.ssh/dict_project`) :
 
-- Machine Tailscale : `dict-vps`, IP `100.118.107.122`.
-- Commande type :
+- **Accès recommandé — Tailscale** : machine `dict-vps`, IP `100.118.107.122`.
   ```bash
   ssh -o IdentitiesOnly=yes -o BatchMode=yes -o ConnectTimeout=10 \
       -i ~/.ssh/dict_project ubuntu@100.118.107.122
   ```
-- **Règle anti-ban** : une seule tentative de connexion par cible. En cas
-  d'échec, s'arrêter et diagnostiquer (ne jamais enchaîner plusieurs essais :
-  fail2ban bannit après quelques échecs, y compris l'IP publique en sortie).
+- **Accès alternatif — SSH public** : IP `51.38.178.151` (aussi valable, aucune
+  obligation d'utiliser Tailscale).
+  ```bash
+  ssh -o IdentitiesOnly=yes -o BatchMode=yes -o ConnectTimeout=10 \
+      -i ~/.ssh/dict_project ubuntu@51.38.178.151
+  ```
+- **Règle anti-ban (dans les deux cas)** : une seule tentative de connexion par
+  cible. En cas d'échec, s'arrêter et diagnostiquer (ne jamais enchaîner
+  plusieurs essais : fail2ban bannit après quelques échecs, y compris l'IP
+  publique en sortie).
 - L'IP publique de la box de l'opérateur **n'est volontairement pas** mise en
   liste blanche fail2ban (IP potentiellement partagée/dynamique, et tout
   appareil du réseau local pourrait tenter des connexions sans limite). Seul
   le réseau Tailscale (`100.64.0.0/10`) est considéré de confiance, avec le
   loopback (`127.0.0.1/8 ::1`) — voir `ignoreip` dans
-  `/etc/fail2ban/jail.local` (non versionné, propre au VPS).
+  `/etc/fail2ban/jail.local` (non versionné, propre au VPS). La config fail2ban
+  n'est pas modifiée : l'accès SSH public reste soumis au bannissement, d'où la
+  règle « une seule tentative ».
 - Aucune clé ni secret n'est jamais committé dans ce dépôt.
 
 ---

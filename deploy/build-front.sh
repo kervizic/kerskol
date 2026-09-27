@@ -69,6 +69,23 @@ REG_REF="/theme/fonts/${FONTMAP[Andika-Regular.woff2]}"
 sed -i "s#/theme/fonts/Andika-Regular.woff2#${REG_REF}#g" "$DIST/index.html"
 sed -i "s#__APP_VERSION__#${VERSION}#g" "$DIST/index.html"
 
+# --- Pages statiques additionnelles (pages legales) --------------------------
+# Sources dans frontend/public/*.html : copiees telles quelles (survivent aussi
+# a un futur build Vite qui copie public/ verbatim), avec les memes reecritures
+# de references de theme que index.html (tokens empreinte + police preload).
+PUBLIC_DIR="${FRONTEND_DIR}/public"
+if [ -d "$PUBLIC_DIR" ]; then
+  for pg in "$PUBLIC_DIR"/*.html; do
+    [ -e "$pg" ] || continue
+    name="$(basename "$pg")"
+    cp "$pg" "$DIST/$name"
+    sed -i "s#/theme/tokens.css#${TOKENS_REF}#g" "$DIST/$name"
+    sed -i "s#/theme/fonts/Andika-Regular.woff2#${REG_REF}#g" "$DIST/$name"
+    sed -i "s#__APP_VERSION__#${VERSION}#g" "$DIST/$name"
+    echo "      page: /${name%.html} (${name})"
+  done
+fi
+
 # --- version.json (no-store).
 COMMIT="${VERSION%%-*}"
 printf '{"version":"%s","commit":"%s","builtAt":"%s"}\n' \
