@@ -14,12 +14,18 @@ export interface Avatar {
   couleur: string; // hex
 }
 
+export type Classe = "CP" | "CE1" | "CE2" | "CM1" | "CM2";
+export const CLASSES: Classe[] = ["CP", "CE1", "CE2", "CM1", "CM2"];
+// Seul le programme de CE2 est disponible pour l'instant (contenu de calcul).
+export const CLASSE_DISPONIBLE: Classe = "CE2";
+
 export interface Profil {
   id: string;
   foyer_id: string;
   surnom: string;
   avatar: Avatar | Record<string, never>;
   univers: UniversId;
+  classe: Classe;
   matieres_actives: string[];
   limite_jour_min: number | null;
   limite_semaine_min: number | null;

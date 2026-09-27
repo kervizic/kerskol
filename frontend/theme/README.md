@@ -181,3 +181,25 @@ Source officielle : <https://software.sil.org/andika/>.
     `sessionStorage`.
 - Compatible avec un futur build Vite (memes conventions d'empreinte +
   `version.json` + `<meta app-version>` + inclusion de `app-version.js`).
+
+## Couleur de l'enfant → accent de l'interface enfant
+
+La couleur choisie par l'enfant (« Ta couleur », 8 teintes, stockée dans
+`profils.avatar.couleur`) devient l'accent des **écrans enfant** (village,
+« C'est parti », future séance, compteur, retour) : `--kk-accent`,
+`--kk-on-accent`, `--kk-accent-text` sont redéfinis dynamiquement sur un
+conteneur (`src/components/ChildTheme.tsx`). Les écrans **public** et **parent**
+gardent l'orange Kerskol. Les bandeaux succès (menthe) / erreur (saumon) sont
+inchangés.
+
+Les paires sont **calculées** (`src/theme/childColors.ts`) et **vérifiées** par
+`childColors.test.ts` (ratios WCAG), en clair ET en sombre :
+
+- **Bouton plein** : la teinte est assombrie au besoin pour que le **texte
+  blanc** tienne **≥ 3:1** (gros texte gras / composant UI).
+- **Texte accent** (`--kk-accent-text`) : assombri sur fond clair (`#FFFFFF`),
+  éclairci sur fond sombre (`#1C1917`), jusqu'à **≥ 4,5:1** contre le fond.
+
+Les 8 teintes de base : `#E06A00 #2F855A #3182CE #805AD5 #D53F8C #00838F
+#B7791F #5A67D8`. Sur « Qui joue ? », chaque tuile reprend la couleur de
+l'enfant (bordure + nom).

@@ -21,6 +21,7 @@ import type {
   Profil,
   Progression,
   UniversId,
+  Classe,
 } from "./types";
 
 export interface AuthUser {
@@ -79,7 +80,7 @@ export async function listProfils(foyerId: string): Promise<Profil[]> {
   const { data, error } = await supabase()
     .from("profils")
     .select(
-      "id, foyer_id, surnom, avatar, univers, matieres_actives, limite_jour_min, limite_semaine_min, monnaie"
+      "id, foyer_id, surnom, avatar, univers, classe, matieres_actives, limite_jour_min, limite_semaine_min, monnaie"
     )
     .eq("foyer_id", foyerId)
     .order("cree_le", { ascending: true });
@@ -92,6 +93,7 @@ export interface CreateProfilInput {
   surnom: string;
   avatar: Avatar;
   univers: UniversId;
+  classe: Classe;
   matieres_actives: string[];
   limite_jour_min: number | null;
   limite_semaine_min: number | null;
@@ -107,7 +109,7 @@ export async function createProfil(input: CreateProfilInput): Promise<Profil> {
     .from("profils")
     .insert(input)
     .select(
-      "id, foyer_id, surnom, avatar, univers, matieres_actives, limite_jour_min, limite_semaine_min, monnaie"
+      "id, foyer_id, surnom, avatar, univers, classe, matieres_actives, limite_jour_min, limite_semaine_min, monnaie"
     )
     .single();
   if (error) throw error;
@@ -122,6 +124,7 @@ export async function updateProfil(
       | "surnom"
       | "avatar"
       | "univers"
+      | "classe"
       | "matieres_actives"
       | "limite_jour_min"
       | "limite_semaine_min"

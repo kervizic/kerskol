@@ -4,16 +4,22 @@ import { UNIVERS_LIST } from "../domain/univers";
 import { Feedback } from "../components/ui";
 import { createProfil } from "../lib/api";
 import { clearDraft, loadDraft, saveDraft } from "../lib/session";
-import type { Matiere, Profil, UniversId } from "../lib/types";
+import { CLASSES, CLASSE_DISPONIBLE, type Classe, type Matiere, type Profil, type UniversId } from "../lib/types";
 
 type Step = "parent" | "handover" | "child";
 
 // Seule la matiere « Calcul » (MA) est active pour l'instant.
 const MATIERE_ACTIVE = "MA";
 
+export function messageClasse(classe: Classe): string | null {
+  if (classe === CLASSE_DISPONIBLE) return null;
+  return `Programme de ${classe} bientôt disponible : en attendant, ton enfant s’entraîne sur le calcul de ${CLASSE_DISPONIBLE}.`;
+}
+
 interface Draft {
   step: Step;
   surnom: string;
+  classe: Classe;
   jourOn: boolean;
   jour: string;
   semaineOn: boolean;
@@ -42,6 +48,7 @@ export function CreateProfile({
   const d = loadDraft<Draft>();
   const [step, setStep] = useState<Step>(d?.step ?? "parent");
   const [surnom, setSurnom] = useState(d?.surnom ?? "");
+  const [classe, setClasse] = useState<Classe>(d?.classe ?? "CE2");
   // Par defaut : AUCUNE limite (null). L'interrupteur revele le champ minutes.
   const [jourOn, setJourOn] = useState(d?.jourOn ?? false);
   const [jour, setJour] = useState(d?.jour ?? "20");
@@ -57,8 +64,8 @@ export function CreateProfile({
 
   // Sauvegarde du brouillon a chaque changement (restaure apres rechargement).
   useEffect(() => {
-    saveDraft({ step, surnom, jourOn, jour, semaineOn, semaine, forme, couleur, univers } satisfies Draft);
-  }, [step, surnom, jourOn, jour, semaineOn, semaine, forme, couleur, univers]);
+    saveDraft({ step, surnom, classe, jourOn, jour, semaineOn, semaine, forme, couleur, univers } satisfies Draft);
+  }, [step, surnom, classe, jourOn, jour, semaineOn, semaine, forme, couleur, univers]);
 
   async function finish() {
     setSaving(true);
@@ -69,6 +76,7 @@ export function CreateProfile({
         surnom: surnom.trim(),
         avatar: { forme, couleur },
         univers,
+        classe,
         matieres_actives: [MATIERE_ACTIVE],
         limite_jour_min: jourOn ? posInt(jour) : null,
         limite_semaine_min: semaineOn ? posInt(semaine) : null,
@@ -123,6 +131,20 @@ export function CreateProfile({
                   ))}
               </div>
             </div>
+
+            <label className="kk-field">
+              <span>Classe</span>
+              <select className="kk-select" value={classe} onChange={(e) => setClasse(e.target.value as Classe)}>
+                {CLASSES.map((c) => (
+                  <option key={c} value={c}>{c}</option>
+                ))}
+              </select>
+              {messageClasse(classe) && (
+                <p className="kk-muted" style={{ fontSize: "0.85rem", marginTop: 6 }}>
+                  {messageClasse(classe)}
+                </p>
+              )}
+            </label>
 
             <div className="kk-field">
               <span>Temps d’écran</span>

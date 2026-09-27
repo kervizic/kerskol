@@ -8,7 +8,8 @@ import {
   ReauthRequiseError,
   updateProfil,
 } from "../lib/api";
-import type { Avatar, JournalReglage, Matiere, Profil } from "../lib/types";
+import { messageClasse } from "./CreateProfile";
+import { CLASSES, type Avatar, type Classe, type JournalReglage, type Matiere, type Profil } from "../lib/types";
 
 const RETRY_KEY = "kerskol_retry_suppr_foyer";
 const MATIERE_ACTIVE = "MA";
@@ -48,6 +49,7 @@ function ProfilEditor({
   matieres: Matiere[];
   onSaved: (p: Profil) => void;
 }) {
+  const [classe, setClasse] = useState<Classe>(profil.classe);
   const [jourOn, setJourOn] = useState(profil.limite_jour_min != null);
   const [jour, setJour] = useState(profil.limite_jour_min?.toString() ?? "20");
   const [semaineOn, setSemaineOn] = useState(profil.limite_semaine_min != null);
@@ -59,13 +61,15 @@ function ProfilEditor({
   const nextJour = jourOn ? num(jour) : null;
   const nextSemaine = semaineOn ? num(semaine) : null;
   const dirty =
-    nextJour !== profil.limite_jour_min || nextSemaine !== profil.limite_semaine_min;
+    classe !== profil.classe ||
+    nextJour !== profil.limite_jour_min ||
+    nextSemaine !== profil.limite_semaine_min;
 
   async function save() {
     setState("saving");
     try {
-      // null <-> valeur : le trigger journalise le changement dans les deux sens.
-      const patch = { limite_jour_min: nextJour, limite_semaine_min: nextSemaine };
+      // null <-> valeur et changement de classe : journalises par le trigger.
+      const patch = { classe, limite_jour_min: nextJour, limite_semaine_min: nextSemaine };
       await updateProfil(profil.id, patch);
       onSaved({ ...profil, ...patch });
       setState("ok");
@@ -96,6 +100,18 @@ function ProfilEditor({
             ))}
         </div>
       </div>
+
+      <label className="kk-field">
+        <span>Classe</span>
+        <select className="kk-select" value={classe} onChange={(e) => setClasse(e.target.value as Classe)}>
+          {CLASSES.map((c) => (
+            <option key={c} value={c}>{c}</option>
+          ))}
+        </select>
+        {messageClasse(classe) && (
+          <p className="kk-muted" style={{ fontSize: "0.85rem", marginTop: 6 }}>{messageClasse(classe)}</p>
+        )}
+      </label>
 
       <div className="kk-field">
         <span>Temps d’écran</span>

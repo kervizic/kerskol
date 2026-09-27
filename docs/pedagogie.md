@@ -184,3 +184,24 @@ vend bien.
 - van Hiele, P. M. *The van Hiele model of geometric thought*. <https://en.wikipedia.org/wiki/Van_Hiele_model>
 - TIMSS 2023, résultats mathématiques CM1 (grade 4). <https://timss2023.org/results/grade-4-math-achievement/>
 - PIRLS 2021, résultats en lecture. <https://pirls2021.org/results/>
+
+## Classe et passage en classe supérieure (règle validée, à implémenter avec le moteur de séance)
+
+Chaque profil a une **classe** (CP à CM2, `profils.classe`, défaut CE2). Pour
+l'instant, seul le **programme de CE2** (calcul) existe : une classe différente
+affiche côté parent « Programme de <classe> bientôt disponible : en attendant,
+ton enfant s'entraîne sur le calcul de CE2 », sans bloquer.
+
+Règle de progression (future, non implémentée ici) :
+
+- Quand l'enfant atteint **« acquis »** (niveau 4, confirmé par une révision
+  espacée) sur **TOUTES les compétences de TOUS les modules** de sa classe,
+  l'espace parent propose le **passage à la classe suivante** en **un clic**,
+  **journalisé** (`journal_reglages`, clé `classe`). Le passage se fait pour la
+  **classe entière**, jamais module par module.
+- À la **rentrée (septembre)**, l'espace parent propose aussi le passage en
+  classe supérieure.
+- Les notions déjà **acquises restent en révision espacée** après le passage
+  (elles ne sont pas ré-apprises, seulement entretenues).
+
+Le changement de classe est horodaté (`profils.classe_maj_le`) et journalisé.

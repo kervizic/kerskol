@@ -6,6 +6,7 @@ import { WhoPlays } from "./screens/WhoPlays";
 import { Village } from "./screens/Village";
 import { ParentSpace } from "./screens/ParentSpace";
 import { SessionSoon } from "./screens/SessionSoon";
+import { ChildTheme } from "./components/ChildTheme";
 import {
   ensureFoyer,
   getReferentiel,
@@ -18,7 +19,7 @@ import {
 import { isDemo } from "./lib/demo";
 import { authAction } from "./lib/authReset";
 import { getDernierProfil, setDernierProfil } from "./lib/session";
-import type { Profil } from "./lib/types";
+import type { Avatar, Profil } from "./lib/types";
 
 type Phase =
   | "loading"
@@ -190,17 +191,23 @@ export function App() {
         return (
           current &&
           referentiel && (
-            <Village
-              profil={current}
-              referentiel={referentiel}
-              onExit={() => setPhase("who")}
-              onStart={() => setPhase("session")}
-              onProfilChange={upsertProfil}
-            />
+            <ChildTheme couleur={(current.avatar as Avatar)?.couleur || "#E06A00"}>
+              <Village
+                profil={current}
+                referentiel={referentiel}
+                onExit={() => setPhase("who")}
+                onStart={() => setPhase("session")}
+                onProfilChange={upsertProfil}
+              />
+            </ChildTheme>
           )
         );
       case "session":
-        return <SessionSoon surnom={current?.surnom ?? ""} onBack={() => setPhase("village")} />;
+        return (
+          <ChildTheme couleur={(current?.avatar as Avatar)?.couleur || "#E06A00"}>
+            <SessionSoon surnom={current?.surnom ?? ""} onBack={() => setPhase("village")} />
+          </ChildTheme>
+        );
       case "parent":
         return (
           foyerId && referentiel && (
