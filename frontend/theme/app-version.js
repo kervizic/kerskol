@@ -135,7 +135,9 @@
   } else {
     check();
   }
-  setInterval(check, CHECK_INTERVAL_MS);
+  // Plus de minuterie periodique (decision produit) : on verifie au chargement,
+  // au retour au premier plan, au retour reseau, et a chaque changement d'ecran
+  // (declenche par l'app via window.Kerskol.version.check()).
   document.addEventListener("visibilitychange", function () {
     if (document.visibilityState === "visible") check();
   });

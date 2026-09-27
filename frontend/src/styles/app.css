@@ -171,29 +171,49 @@ p.kk-lead { color: var(--kk-text-2); max-width: 52ch; }
 .kk-tile__hint { font-size: 0.8rem; color: var(--kk-accent-text); font-weight: 700; }
 
 /* ------------------------------- Village ------------------------------- */
-.kk-village { position: relative; min-height: 100vh; display: flex; flex-direction: column; }
-.kk-village__scene { position: absolute; inset: 0; z-index: 0; }
-.kk-village__inner { position: relative; z-index: 1; display: flex; flex-direction: column; min-height: 100vh; }
-.kk-village__top { display: flex; align-items: center; justify-content: space-between; padding: 16px; gap: 12px; }
+/* Fond = theme (clair/sombre). L'univers s'exprime par les batiments, pas par
+   un aplat plein ecran. Les batiments sont l'element principal. */
+.kk-village {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--kk-bg);
+  color: var(--kk-text);
+}
+.kk-village__top {
+  display: flex; align-items: center; gap: 10px;
+  padding: clamp(10px, 2.5vw, 16px);
+}
 .kk-avatar-corner {
-  border: none; background: rgba(255,255,255,0.85); border-radius: 50%; padding: 6px; cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2); display: inline-flex;
+  border: 1px solid var(--kk-border); background: var(--kk-surface); border-radius: 50%;
+  padding: 5px; cursor: pointer; display: inline-flex;
 }
 .kk-money {
   display: inline-flex; align-items: center; gap: 8px;
-  background: rgba(255,255,255,0.9); color: #222; font-weight: 700; font-size: 1.3rem;
-  padding: 8px 16px; border-radius: 999px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  background: var(--kk-surface); color: var(--kk-text); border: 1px solid var(--kk-border);
+  font-weight: 700; font-size: 1.2rem; padding: 6px 14px; border-radius: 999px;
 }
-.kk-port {
-  margin-top: auto; background: rgba(255,255,255,0.82); border-top-left-radius: 24px; border-top-right-radius: 24px;
-  padding: 18px clamp(14px, 4vw, 28px) 26px; color: #222;
+.kk-icon-btn {
+  border: 1px solid var(--kk-border); background: var(--kk-surface); color: var(--kk-text);
+  border-radius: 50%; width: 44px; height: 44px; display: inline-flex; align-items: center;
+  justify-content: center; cursor: pointer; flex: none;
 }
-.kk-port h2 { color: #1b3a4b; }
-.kk-plots { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 14px; margin: 14px 0 20px; }
-.kk-plot { background: rgba(255,255,255,0.9); border: 1px solid rgba(0,0,0,0.08); border-radius: 14px; padding: 12px; text-align: center; }
-.kk-plot__name { font-size: 0.85rem; font-weight: 700; margin-top: 6px; color: #333; }
-.kk-plot__state { font-size: 0.75rem; color: #666; }
-.kk-plot--vide { opacity: 0.7; border-style: dashed; }
+.kk-icon-btn:hover, .kk-icon-btn:focus-visible { border-color: var(--kk-accent); outline: none; }
+.kk-panel { margin: 0 clamp(10px, 2.5vw, 16px) 8px; }
+.kk-village__main {
+  flex: 1; width: 100%; max-width: 960px; margin: 0 auto;
+  padding: 4px clamp(14px, 4vw, 28px) 16px;
+}
+.kk-village__main h1 { font-size: clamp(1.4rem, 5vw, 2rem); margin-bottom: 12px; }
+.kk-village__cta {
+  position: sticky; bottom: 0; padding: 12px clamp(14px, 4vw, 28px) calc(12px + env(safe-area-inset-bottom));
+  background: linear-gradient(to top, var(--kk-bg) 70%, transparent);
+}
+.kk-plots { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 14px; }
+.kk-plot { background: var(--kk-surface); border: 1px solid var(--kk-border); border-radius: 14px; padding: 14px 12px; text-align: center; }
+.kk-plot__name { font-size: 0.9rem; font-weight: 700; margin-top: 8px; color: var(--kk-text); }
+.kk-plot__state { font-size: 0.78rem; color: var(--kk-text-2); }
+.kk-plot--vide { opacity: 0.75; border-style: dashed; }
 
 /* ------------------------------ Divers --------------------------------- */
 .kk-row { display: flex; gap: 12px; flex-wrap: wrap; }
@@ -204,6 +224,7 @@ p.kk-lead { color: var(--kk-text-2); max-width: 52ch; }
 @keyframes kk-spin { to { transform: rotate(360deg); } }
 .kk-google-g { width: 22px; height: 22px; background: #fff; border-radius: 3px; padding: 1px; }
 .kk-demo-banner { background: var(--kk-accent); color: var(--kk-on-accent); text-align: center; font-weight: 700; padding: 6px; font-size: 0.85rem; }
+.kk-toolbar { position: fixed; top: 12px; right: 12px; z-index: 5; }
 .kk-list { list-style: none; }
 .kk-list li { padding: 12px 0; border-bottom: 1px solid var(--kk-border); }
 .kk-badge-soon { font-size: 0.7rem; background: var(--kk-border); color: var(--kk-text-2); border-radius: 999px; padding: 2px 8px; margin-left: 6px; }

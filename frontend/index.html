@@ -12,6 +12,9 @@
   <link rel="icon" href="/icons/icon.svg">
   <link rel="apple-touch-icon" href="/icons/icon.svg">
   <link rel="manifest" href="/manifest.webmanifest">
+  <!-- Pose data-theme (clair/sombre/auto) AVANT le rendu, pour eviter un flash.
+       Script bloquant, fichier self (compatible CSP script-src 'self'). -->
+  <script src="/theme/theme-init.js"></script>
   <!-- Mise a jour fiable entre versions (voir frontend/theme/README.md). Servi
        depuis public/theme (copie par scripts/prepare-public.mjs). -->
   <script defer src="/theme/app-version.js"></script>

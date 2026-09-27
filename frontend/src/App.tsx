@@ -131,6 +131,9 @@ export function App() {
       path === "/reglages" ||
       /^\/enfant\/[^/]+\/seance$/.test(path);
     window.Kerskol?.version?.setBusy?.(busy);
+    // A chaque changement d'ecran : on verifie /version.json. Si non occupe et
+    // qu'une nouvelle version existe, app-version.js l'applique (transition).
+    if (!busy) window.Kerskol?.version?.check?.();
   }, [path]);
 
   const upsertProfil = useCallback((p: Profil) => {

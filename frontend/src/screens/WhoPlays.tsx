@@ -3,6 +3,7 @@ import { universDef } from "../domain/univers";
 import { buildAccent } from "../theme/childColors";
 import { usePrefersDark } from "../components/ChildTheme";
 import { getDernierProfil } from "../lib/session";
+import { ThemeToggle } from "../components/ThemeToggle";
 import type { Avatar, Profil } from "../lib/types";
 
 // Roue crantee (SVG maison, couleurs du theme) pour l'acces reglages.
@@ -36,6 +37,7 @@ export function WhoPlays({
   const lastProfilId = getDernierProfil();
   return (
     <div className="kk-page kk-center">
+      <div className="kk-toolbar"><ThemeToggle /></div>
       <div className="kk-who">
         {profils.map((p) => {
           const av = p.avatar as Avatar;
