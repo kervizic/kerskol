@@ -115,7 +115,12 @@ if [ -f "${FRONTEND_DIR}/package.json" ]; then
   API_EXTERNAL_URL="$(grep -E '^API_EXTERNAL_URL=' "$ENV_FILE" | head -n1 | cut -d= -f2-)"
   [ -n "$ANON_KEY" ] || { echo "Erreur : ANON_KEY absent de ${ENV_FILE}." >&2; exit 1; }
   VITE_SUPABASE_URL="${API_EXTERNAL_URL:-https://kerskol.fr}"
+  # --user : build sous l'UID/GID de l'hote pour que dist/ et node_modules/
+  # appartiennent a l'utilisateur de deploiement (ecriture de version.json
+  # ensuite, nettoyages ulterieurs). HOME=/tmp : cache npm inscriptible.
   docker run --rm \
+    --user "$(id -u):$(id -g)" \
+    -e HOME=/tmp \
     -v "${FRONTEND_DIR}:/app" \
     -w /app \
     -e APP_VERSION="${APP_VERSION}" \
