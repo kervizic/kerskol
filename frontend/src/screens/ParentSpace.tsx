@@ -25,7 +25,7 @@ function journalLabel(cle: string): string {
     case "limite_semaine_min":
       return "Limite par semaine (min)";
     case "matieres_actives":
-      return "Matieres actives";
+      return "Matières actives";
     case "mails_actives":
       return "Mails de suivi";
     default:
@@ -63,7 +63,8 @@ function ProfilEditor({
       await updateProfil(profil.id, patch);
       onSaved({ ...profil, ...patch });
       setState("ok");
-    } catch {
+    } catch (e) {
+      console.error("updateProfil a echoue", e);
       setState("err");
     }
   }
@@ -76,7 +77,7 @@ function ProfilEditor({
       </div>
 
       <div className="kk-field">
-        <span>Matieres</span>
+        <span>Matières</span>
         <div className="kk-chips">
           <button className="kk-chip" aria-pressed="true" disabled>Calcul</button>
           {matieres
@@ -84,7 +85,7 @@ function ProfilEditor({
             .map((m) => (
               <button key={m.code} className="kk-chip" disabled>
                 {m.libelle.replace(/^.*- /, "")}
-                <small>bientot</small>
+                <small>bientôt</small>
               </button>
             ))}
         </div>
@@ -101,8 +102,8 @@ function ProfilEditor({
         </label>
       </div>
 
-      {state === "ok" && <Feedback kind="success">Reglages enregistres. Le changement est journalise.</Feedback>}
-      {state === "err" && <Feedback kind="error">Echec de l'enregistrement. Reessaie.</Feedback>}
+      {state === "ok" && <Feedback kind="success">Réglages enregistrés. Le changement est journalisé.</Feedback>}
+      {state === "err" && <Feedback kind="error">Échec de l’enregistrement. Réessaie.</Feedback>}
 
       <button className="kk-btn kk-btn--accent" disabled={!dirty || state === "saving"} onClick={() => void save()}>
         {state === "saving" ? "..." : "Enregistrer"}
@@ -170,7 +171,8 @@ export function ParentSpace({
       if (e instanceof ReauthRequiseError) {
         setReauthNeeded(true);
       } else {
-        alert("La suppression a echoue. Reessaie plus tard.");
+        console.error("supprimer_foyer a echoue", e);
+        alert("La suppression a échoué. Réessaie plus tard.");
       }
     }
   }
@@ -192,7 +194,7 @@ export function ParentSpace({
       <div className="kk-container">
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 8 }}>
           <h1>Espace parent</h1>
-          <button className="kk-link" onClick={onExit}>← Qui joue&nbsp;?</button>
+          <button className="kk-link" onClick={onExit}>← Qui joue ?</button>
         </div>
 
         {profils.map((p) => (
@@ -204,11 +206,11 @@ export function ParentSpace({
         </button>
 
         <div className="kk-card kk-stack" style={{ marginTop: 24 }}>
-          <h2>Journal des reglages</h2>
+          <h2>Journal des réglages</h2>
           {journal === null ? (
             <Spinner />
           ) : journal.length === 0 ? (
-            <p className="kk-muted">Aucun changement de reglage pour l'instant.</p>
+            <p className="kk-muted">Aucun changement de réglage pour l’instant.</p>
           ) : (
             <ul className="kk-list">
               {journal.map((j) => (
@@ -227,12 +229,12 @@ export function ParentSpace({
         <div className="kk-card kk-stack" style={{ marginTop: 24 }}>
           <h2>Zone sensible</h2>
           <p className="kk-muted">
-            La suppression du foyer efface definitivement tous les profils, leur
-            progression et leur monnaie. Action irreversible.
+            La suppression du foyer efface définitivement tous les profils, leur
+            progression et leur monnaie. Action irréversible.
           </p>
           {reauthNeeded && (
             <Feedback kind="error">
-              Pour ta securite, reconnecte-toi pour confirmer la suppression.
+              Pour ta sécurité, reconnecte-toi pour confirmer la suppression.
             </Feedback>
           )}
           {!confirming ? (

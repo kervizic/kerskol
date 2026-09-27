@@ -79,7 +79,7 @@ export function computePort(
 }
 
 export const BUILDING_LABEL: Record<BuildingState, string> = {
-  vide: "Terrain a batir",
+  vide: "Terrain à bâtir",
   chantier: "Chantier",
   cabane: "Cabane",
   maison: "Maison",

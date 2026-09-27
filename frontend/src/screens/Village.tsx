@@ -72,8 +72,8 @@ export function Village({
           <button
             className="kk-avatar-corner"
             onClick={onExit}
-            aria-label="Changer de joueur (retour a Qui joue)"
-            title="Retour a Qui joue ?"
+            aria-label="Changer de joueur (retour à Qui joue)"
+            title="Retour à Qui joue ?"
           >
             <AvatarView forme={av?.forme} couleur={av?.couleur || "#E06A00"} size={48} />
           </button>
@@ -87,7 +87,7 @@ export function Village({
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 8 }}>
             <h2>Le port des maths</h2>
             <button className="kk-link" onClick={() => setPickUnivers((v) => !v)}>
-              Changer d'univers
+              Changer d’univers
             </button>
           </div>
 
@@ -114,8 +114,8 @@ export function Village({
             </div>
           ) : port.length === 0 ? (
             <p className="kk-muted" style={{ margin: "12px 0" }}>
-              Ton village est encore vierge. Lance une seance pour poser la
-              premiere pierre&nbsp;!
+              Ton village est encore vierge. Lance une séance pour poser la
+              première pierre !
             </p>
           ) : (
             <div className="kk-plots">
@@ -134,7 +134,7 @@ export function Village({
           )}
 
           <button className="kk-btn kk-btn--accent kk-btn--big kk-btn--block" onClick={onStart}>
-            C'est parti&nbsp;!
+            C’est parti !
           </button>
         </div>
       </div>

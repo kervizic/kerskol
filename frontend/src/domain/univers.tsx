@@ -92,8 +92,8 @@ export const UNIVERS: Record<UniversId, UniversDef> = {
   },
   ile_tropicale: {
     id: "ile_tropicale",
-    label: "Ile tropicale",
-    monnaie: "pieces d'or",
+    label: "Île tropicale",
+    monnaie: "pièces d’or",
     couleur: "#00838F",
     fond: "linear-gradient(160deg, #B3E5FC 0%, #4FC3F7 55%, #FFE082 100%)",
     MonnaieIcon: Coin,
@@ -123,8 +123,8 @@ export const UNIVERS: Record<UniversId, UniversDef> = {
   },
   royaume_enchante: {
     id: "royaume_enchante",
-    label: "Royaume enchante",
-    monnaie: "etoiles",
+    label: "Royaume enchanté",
+    monnaie: "étoiles",
     couleur: "#AD1457",
     fond: "linear-gradient(160deg, #F8BBD0 0%, #CE93D8 55%, #B39DDB 100%)",
     MonnaieIcon: Star,
@@ -140,8 +140,8 @@ export const UNIVERS: Record<UniversId, UniversDef> = {
   },
   vallee_dinosaures: {
     id: "vallee_dinosaures",
-    label: "Vallee des dinosaures",
-    monnaie: "oeufs de dino",
+    label: "Vallée des dinosaures",
+    monnaie: "œufs de dino",
     couleur: "#2E7D32",
     fond: "linear-gradient(160deg, #DCEDC8 0%, #AED581 50%, #C5E1A5 100%)",
     MonnaieIcon: DinoEgg,

@@ -27,18 +27,18 @@ const FOYER_ID = "demo-foyer";
 
 export const DEMO_MATIERES: Matiere[] = [
   { code: "MA", libelle: "Maths - calcul" },
-  { code: "GE", libelle: "Geometrie" },
-  { code: "PB", libelle: "Problemes" },
-  { code: "FR", libelle: "Francais" },
+  { code: "GE", libelle: "Géométrie" },
+  { code: "PB", libelle: "Problèmes" },
+  { code: "FR", libelle: "Français" },
   { code: "EN", libelle: "Anglais" },
 ];
 
 export const DEMO_COMPETENCES: Competence[] = [
-  ["MA.CM.ADDITION", "Tables d'addition", 10],
+  ["MA.CM.ADDITION", "Tables d’addition", 10],
   ["MA.CM.DOUBLES", "Doubles", 20],
-  ["MA.CM.MOITIES", "Moities", 30],
-  ["MA.CM.COMPL_SUP", "Complement a la dizaine superieure", 40],
-  ["MA.CM.SOMMES_DIFF", "Sommes et differences", 60],
+  ["MA.CM.MOITIES", "Moitiés", 30],
+  ["MA.CM.COMPL_SUP", "Complément à la dizaine supérieure", 40],
+  ["MA.CM.SOMMES_DIFF", "Sommes et différences", 60],
   ["MA.CM.X10_X100", "Multiplier par 10, 100", 70],
   ["MA.TABLES.2", "Table de 2", 100],
   ["MA.TABLES.5", "Table de 5", 110],

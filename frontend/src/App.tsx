@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Loading, Feedback } from "./components/ui";
 import { PublicHome } from "./screens/PublicHome";
 import { CreateProfile } from "./screens/CreateProfile";
@@ -37,7 +37,15 @@ export function App() {
   const [referentiel, setReferentiel] = useState<Referentiel | null>(null);
   const [current, setCurrent] = useState<Profil | null>(null);
 
+  // Garde anti-concurrence : au retour de l'OAuth, le montage ET l'evenement
+  // onAuthChange peuvent declencher bootstrap simultanement. On serialise pour
+  // eviter un double appel a creer_foyer (le verrou SQL est la 2e ligne de
+  // defense contre les doublons de foyer).
+  const running = useRef(false);
+
   const bootstrap = useCallback(async () => {
+    if (running.current) return;
+    running.current = true;
     setPhase("loading");
     try {
       const user = await getUser();
@@ -51,8 +59,11 @@ export function App() {
       setProfils(list);
       setReferentiel(ref);
       setPhase(list.length === 0 ? "onboarding" : "who");
-    } catch {
+    } catch (e) {
+      console.error("bootstrap a echoue", e);
       setPhase("error");
+    } finally {
+      running.current = false;
     }
   }, []);
 
@@ -103,7 +114,7 @@ export function App() {
                 Une erreur est survenue au chargement.
               </Feedback>
               <button className="kk-btn kk-btn--accent kk-btn--block" onClick={() => void bootstrap()}>
-                Reessayer
+                Réessayer
               </button>
             </div>
           </div>

@@ -17,7 +17,7 @@ export function WhoPlays({
   return (
     <div className="kk-page">
       <div className="kk-container">
-        <h1 style={{ textAlign: "center", marginBottom: 24 }}>Qui joue&nbsp;?</h1>
+        <h1 style={{ textAlign: "center", marginBottom: 24 }}>Qui joue ?</h1>
         <div className="kk-tiles">
           {profils.map((p) => {
             const av = p.avatar as Avatar;

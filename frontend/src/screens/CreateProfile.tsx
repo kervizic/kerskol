@@ -53,7 +53,10 @@ export function CreateProfile({
       });
       onDone(p);
     } catch (e) {
-      setError("La creation a echoue. Reessaie dans un instant.");
+      // Erreur reelle (code/message PostgREST) pour diagnostic ; sans donnee
+      // personnelle (l'objet ne contient ni e-mail ni jeton).
+      console.error("createProfil a echoue", e);
+      setError("La création a échoué. Réessaie dans un instant.");
       setSaving(false);
     }
   }
@@ -63,10 +66,10 @@ export function CreateProfile({
       <div className="kk-page">
         <div className="kk-container">
           <h1>Nouveau profil</h1>
-          <p className="kk-lead">Cote parent : les reglages de suivi.</p>
+          <p className="kk-lead">Côté parent : les réglages de suivi.</p>
           <div className="kk-card kk-stack" style={{ marginTop: 20 }}>
             <label className="kk-field">
-              <span>Surnom de l'enfant</span>
+              <span>Surnom de l’enfant</span>
               <input
                 className="kk-input"
                 value={surnom}
@@ -79,7 +82,7 @@ export function CreateProfile({
             </label>
 
             <div className="kk-field">
-              <span>Matieres</span>
+              <span>Matières</span>
               <div className="kk-chips">
                 <button className="kk-chip" aria-pressed="true" disabled>
                   Calcul
@@ -89,7 +92,7 @@ export function CreateProfile({
                   .map((m) => (
                     <button key={m.code} className="kk-chip" disabled>
                       {m.libelle.replace(/^.*- /, "")}
-                      <small>bientot</small>
+                      <small>bientôt</small>
                     </button>
                   ))}
               </div>
@@ -122,8 +125,8 @@ export function CreateProfile({
               </label>
             </div>
             <p className="kk-muted" style={{ fontSize: "0.85rem" }}>
-              Laisse vide pour ne pas fixer de limite. Modifiable a tout moment
-              dans l'espace parent.
+              Laisse vide pour ne pas fixer de limite. Modifiable à tout moment
+              dans l’espace parent.
             </p>
 
             <div className="kk-row">
@@ -152,15 +155,15 @@ export function CreateProfile({
         <div className="kk-container" style={{ textAlign: "center", maxWidth: 520 }}>
           <div className="kk-card kk-stack">
             <div style={{ fontSize: "3rem" }} aria-hidden="true">🤝</div>
-            <h1>Tends la tablette a ton enfant</h1>
+            <h1>Tends la tablette à ton enfant</h1>
             <p className="kk-lead" style={{ margin: "0 auto" }}>
-              A toi de jouer&nbsp;! Choisis ton personnage et ton univers.
+              À toi de jouer ! Choisis ton personnage et ton univers.
             </p>
             <button
               className="kk-btn kk-btn--accent kk-btn--big kk-btn--block"
               onClick={() => setStep("child")}
             >
-              C'est moi&nbsp;!
+              C’est moi !
             </button>
           </div>
         </div>
@@ -244,7 +247,7 @@ export function CreateProfile({
             disabled={saving}
             onClick={() => void finish()}
           >
-            {saving ? "..." : "C'est parti !"}
+            {saving ? "..." : "C’est parti !"}
           </button>
         </div>
       </div>

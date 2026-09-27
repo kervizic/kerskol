@@ -15,17 +15,17 @@ export function PublicHome() {
           </div>
           <h1>Kerskol</h1>
           <p className="kk-lead" style={{ margin: "0 auto", fontWeight: 700, fontSize: "1.15rem" }}>
-            La petite ecole a la maison
+            La petite école à la maison
           </p>
           <p className="kk-lead" style={{ margin: "0 auto" }}>
-            Un espace simple et chaleureux pour s'entrainer au calcul, a son
-            rythme. Le parent cree le foyer et le profil de chaque enfant, puis
-            tend la tablette. On recompense l'effort, jamais on ne punit.
+            Un espace simple et chaleureux pour s’entraîner au calcul, à son
+            rythme. Le parent crée le foyer et le profil de chaque enfant, puis
+            tend la tablette. On récompense l’effort, jamais on ne punit.
           </p>
           <div style={{ marginTop: 8 }}>
             <GoogleButton onClick={() => void signInGoogle()} label="Se connecter avec Google" />
             <p className="kk-muted" style={{ fontSize: "0.85rem", marginTop: 10 }}>
-              Reserve aux parents. La connexion cree votre foyer a la premiere visite.
+              Réservé aux parents. La connexion crée votre foyer à la première visite.
             </p>
           </div>
         </div>

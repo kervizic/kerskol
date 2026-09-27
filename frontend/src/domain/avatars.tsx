@@ -22,7 +22,7 @@ export const AVATAR_COLORS = [
 export const AVATAR_SHAPES: AvatarShape[] = [
   {
     id: "goeland",
-    label: "Goeland",
+    label: "Goéland",
     render: (c) => (
       <g>
         <circle cx="32" cy="34" r="18" fill={c} />
@@ -37,7 +37,7 @@ export const AVATAR_SHAPES: AvatarShape[] = [
   },
   {
     id: "herisson",
-    label: "Herisson",
+    label: "Hérisson",
     render: (c) => (
       <g>
         <path d="M14 44c0-14 8-22 18-22s18 8 18 22z" fill={c} />
@@ -50,7 +50,7 @@ export const AVATAR_SHAPES: AvatarShape[] = [
   },
   {
     id: "etoile",
-    label: "Etoile rieuse",
+    label: "Étoile rieuse",
     render: (c) => (
       <g>
         <path d="M32 8l6.2 13.4 14.6 1.5-10.9 9.8 3 14.4L32 34.9 19.1 42.5l3-14.4L11.2 22.9l14.6-1.5z" fill={c} />
