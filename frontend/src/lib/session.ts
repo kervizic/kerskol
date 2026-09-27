@@ -28,3 +28,32 @@ export function clearDernierProfil(): void {
     /* ignore */
   }
 }
+
+// --- Brouillon de creation de profil (sessionStorage, protege par try/catch) --
+// Permet de restaurer la saisie apres un rechargement pendant la creation.
+const DRAFT_KEY = "kerskol_brouillon_profil";
+
+export function loadDraft<T>(): T | null {
+  try {
+    const raw = window.sessionStorage.getItem(DRAFT_KEY);
+    return raw ? (JSON.parse(raw) as T) : null;
+  } catch {
+    return null;
+  }
+}
+
+export function saveDraft(value: unknown): void {
+  try {
+    window.sessionStorage.setItem(DRAFT_KEY, JSON.stringify(value));
+  } catch {
+    /* ignore */
+  }
+}
+
+export function clearDraft(): void {
+  try {
+    window.sessionStorage.removeItem(DRAFT_KEY);
+  } catch {
+    /* ignore */
+  }
+}

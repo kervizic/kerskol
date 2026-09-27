@@ -48,18 +48,24 @@ function ProfilEditor({
   matieres: Matiere[];
   onSaved: (p: Profil) => void;
 }) {
-  const [jour, setJour] = useState(profil.limite_jour_min?.toString() ?? "");
-  const [semaine, setSemaine] = useState(profil.limite_semaine_min?.toString() ?? "");
+  const [jourOn, setJourOn] = useState(profil.limite_jour_min != null);
+  const [jour, setJour] = useState(profil.limite_jour_min?.toString() ?? "20");
+  const [semaineOn, setSemaineOn] = useState(profil.limite_semaine_min != null);
+  const [semaine, setSemaine] = useState(profil.limite_semaine_min?.toString() ?? "90");
   const [state, setState] = useState<"idle" | "saving" | "ok" | "err">("idle");
   const av = profil.avatar as Avatar;
 
+  // Valeur effective : null si l'interrupteur est off (retrait de la limite).
+  const nextJour = jourOn ? num(jour) : null;
+  const nextSemaine = semaineOn ? num(semaine) : null;
   const dirty =
-    num(jour) !== profil.limite_jour_min || num(semaine) !== profil.limite_semaine_min;
+    nextJour !== profil.limite_jour_min || nextSemaine !== profil.limite_semaine_min;
 
   async function save() {
     setState("saving");
     try {
-      const patch = { limite_jour_min: num(jour), limite_semaine_min: num(semaine) };
+      // null <-> valeur : le trigger journalise le changement dans les deux sens.
+      const patch = { limite_jour_min: nextJour, limite_semaine_min: nextSemaine };
       await updateProfil(profil.id, patch);
       onSaved({ ...profil, ...patch });
       setState("ok");
@@ -91,15 +97,26 @@ function ProfilEditor({
         </div>
       </div>
 
-      <div className="kk-row">
-        <label className="kk-field" style={{ flex: 1, minWidth: 150 }}>
-          <span>Limite / jour (min)</span>
-          <input className="kk-input" type="number" min={0} inputMode="numeric" value={jour} onChange={(e) => setJour(e.target.value)} placeholder="aucune" />
+      <div className="kk-field">
+        <span>Temps d’écran</span>
+        <label className="kk-switch-row">
+          <input type="checkbox" checked={jourOn} onChange={(e) => setJourOn(e.target.checked)} />
+          <span>Limiter le temps par jour</span>
         </label>
-        <label className="kk-field" style={{ flex: 1, minWidth: 150 }}>
-          <span>Limite / semaine (min)</span>
-          <input className="kk-input" type="number" min={0} inputMode="numeric" value={semaine} onChange={(e) => setSemaine(e.target.value)} placeholder="aucune" />
+        {jourOn && (
+          <input className="kk-input" type="number" min={1} inputMode="numeric" value={jour}
+            onChange={(e) => setJour(e.target.value)} aria-label="Minutes par jour"
+            placeholder="minutes par jour" style={{ marginTop: 8 }} />
+        )}
+        <label className="kk-switch-row" style={{ marginTop: 12 }}>
+          <input type="checkbox" checked={semaineOn} onChange={(e) => setSemaineOn(e.target.checked)} />
+          <span>Limiter le temps par semaine</span>
         </label>
+        {semaineOn && (
+          <input className="kk-input" type="number" min={1} inputMode="numeric" value={semaine}
+            onChange={(e) => setSemaine(e.target.value)} aria-label="Minutes par semaine"
+            placeholder="minutes par semaine" style={{ marginTop: 8 }} />
+        )}
       </div>
 
       {state === "ok" && <Feedback kind="success">Réglages enregistrés. Le changement est journalisé.</Feedback>}

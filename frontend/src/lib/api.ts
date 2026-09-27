@@ -36,9 +36,15 @@ export async function getUser(): Promise<AuthUser | null> {
   return data.user ? { id: data.user.id, email: data.user.email ?? null } : null;
 }
 
-export function onAuthChange(cb: () => void): () => void {
+// Transmet l'evenement et l'id utilisateur (ou null) : l'appelant decide via
+// authAction() s'il faut (re)bootstrap, se deconnecter, ou ignorer (meme user).
+export function onAuthChange(
+  cb: (event: string, userId: string | null) => void
+): () => void {
   if (isDemo()) return () => {};
-  const { data } = supabase().auth.onAuthStateChange(() => cb());
+  const { data } = supabase().auth.onAuthStateChange((event, session) => {
+    cb(event, session?.user?.id ?? null);
+  });
   return () => data.subscription.unsubscribe();
 }
 

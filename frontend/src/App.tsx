@@ -16,6 +16,7 @@ import {
   type Referentiel,
 } from "./lib/api";
 import { isDemo } from "./lib/demo";
+import { authAction } from "./lib/authReset";
 import { getDernierProfil, setDernierProfil } from "./lib/session";
 import type { Profil } from "./lib/types";
 
@@ -42,6 +43,10 @@ export function App() {
   // eviter un double appel a creer_foyer (le verrou SQL est la 2e ligne de
   // defense contre les doublons de foyer).
   const running = useRef(false);
+  // Utilisateur pour lequel l'etat a ete charge : sert a ignorer les evenements
+  // d'auth du MEME utilisateur (TOKEN_REFRESHED, focus, INITIAL_SESSION) qui,
+  // sinon, reinitialisaient la navigation et faisaient perdre la saisie.
+  const currentUserId = useRef<string | null>(null);
 
   const bootstrap = useCallback(async () => {
     if (running.current) return;
@@ -49,6 +54,7 @@ export function App() {
     setPhase("loading");
     try {
       const user = await getUser();
+      currentUserId.current = user?.id ?? null;
       if (!user) {
         setPhase("public");
         return;
@@ -69,9 +75,34 @@ export function App() {
 
   useEffect(() => {
     void bootstrap();
-    const off = onAuthChange(() => void bootstrap());
+    const off = onAuthChange((event, userId) => {
+      const action = authAction(currentUserId.current, event, userId);
+      if (action === "signed_out") {
+        currentUserId.current = null;
+        setFoyerId(null);
+        setProfils([]);
+        setCurrent(null);
+        setPhase("public");
+      } else if (action === "user_changed") {
+        void bootstrap();
+      }
+      // action === "ignore" (meme utilisateur) : on ne touche a rien.
+    });
     return off;
   }, [bootstrap]);
+
+  // Report des mises a jour de version (app-version.js) hors des moments surs :
+  // pendant un formulaire de creation, l'espace parent (edition de champs) ou
+  // une seance, on marque "busy" -> toute maj est differee jusqu'a un retour
+  // sur un ecran sur (public / Qui joue ? / village).
+  useEffect(() => {
+    const busy =
+      phase === "onboarding" ||
+      phase === "add_child" ||
+      phase === "parent" ||
+      phase === "session";
+    window.Kerskol?.version?.setBusy?.(busy);
+  }, [phase]);
 
   const upsertProfil = useCallback((p: Profil) => {
     setProfils((prev) => {

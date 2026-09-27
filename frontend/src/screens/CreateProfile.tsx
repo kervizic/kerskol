@@ -1,16 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AVATAR_COLORS, AVATAR_SHAPES, AvatarView } from "../domain/avatars";
 import { UNIVERS_LIST } from "../domain/univers";
 import { Feedback } from "../components/ui";
 import { createProfil } from "../lib/api";
+import { clearDraft, loadDraft, saveDraft } from "../lib/session";
 import type { Matiere, Profil, UniversId } from "../lib/types";
 
 type Step = "parent" | "handover" | "child";
 
-// Seule la matiere "Calcul" (MA) est active pour l'instant.
+// Seule la matiere « Calcul » (MA) est active pour l'instant.
 const MATIERE_ACTIVE = "MA";
 
-function toMinutes(v: string): number | null {
+interface Draft {
+  step: Step;
+  surnom: string;
+  jourOn: boolean;
+  jour: string;
+  semaineOn: boolean;
+  semaine: string;
+  forme: string;
+  couleur: string;
+  univers: UniversId;
+}
+
+function posInt(v: string): number | null {
   const n = parseInt(v, 10);
   return Number.isFinite(n) && n > 0 ? n : null;
 }
@@ -26,17 +39,26 @@ export function CreateProfile({
   onDone: (p: Profil) => void;
   onCancel?: () => void;
 }) {
-  const [step, setStep] = useState<Step>("parent");
-  const [surnom, setSurnom] = useState("");
-  const [jour, setJour] = useState("20");
-  const [semaine, setSemaine] = useState("");
-  const [forme, setForme] = useState(AVATAR_SHAPES[0].id);
-  const [couleur, setCouleur] = useState(AVATAR_COLORS[0]);
-  const [univers, setUnivers] = useState<UniversId>("village_breton");
+  const d = loadDraft<Draft>();
+  const [step, setStep] = useState<Step>(d?.step ?? "parent");
+  const [surnom, setSurnom] = useState(d?.surnom ?? "");
+  // Par defaut : AUCUNE limite (null). L'interrupteur revele le champ minutes.
+  const [jourOn, setJourOn] = useState(d?.jourOn ?? false);
+  const [jour, setJour] = useState(d?.jour ?? "20");
+  const [semaineOn, setSemaineOn] = useState(d?.semaineOn ?? false);
+  const [semaine, setSemaine] = useState(d?.semaine ?? "90");
+  const [forme, setForme] = useState(d?.forme ?? AVATAR_SHAPES[0].id);
+  const [couleur, setCouleur] = useState(d?.couleur ?? AVATAR_COLORS[0]);
+  const [univers, setUnivers] = useState<UniversId>(d?.univers ?? "village_breton");
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const surnomOk = surnom.trim().length >= 1 && surnom.trim().length <= 30;
+
+  // Sauvegarde du brouillon a chaque changement (restaure apres rechargement).
+  useEffect(() => {
+    saveDraft<Draft>({ step, surnom, jourOn, jour, semaineOn, semaine, forme, couleur, univers });
+  }, [step, surnom, jourOn, jour, semaineOn, semaine, forme, couleur, univers]);
 
   async function finish() {
     setSaving(true);
@@ -48,17 +70,21 @@ export function CreateProfile({
         avatar: { forme, couleur },
         univers,
         matieres_actives: [MATIERE_ACTIVE],
-        limite_jour_min: toMinutes(jour),
-        limite_semaine_min: toMinutes(semaine),
+        limite_jour_min: jourOn ? posInt(jour) : null,
+        limite_semaine_min: semaineOn ? posInt(semaine) : null,
       });
+      clearDraft(); // succes : le brouillon n'a plus lieu d'etre
       onDone(p);
     } catch (e) {
-      // Erreur reelle (code/message PostgREST) pour diagnostic ; sans donnee
-      // personnelle (l'objet ne contient ni e-mail ni jeton).
       console.error("createProfil a echoue", e);
       setError("La création a échoué. Réessaie dans un instant.");
       setSaving(false);
     }
+  }
+
+  function cancel() {
+    clearDraft();
+    onCancel?.();
   }
 
   if (step === "parent") {
@@ -66,7 +92,7 @@ export function CreateProfile({
       <div className="kk-page">
         <div className="kk-container">
           <h1>Nouveau profil</h1>
-          <p className="kk-lead">Côté parent : les réglages de suivi.</p>
+          <p className="kk-lead">Côté parent : les réglages de suivi.</p>
           <div className="kk-card kk-stack" style={{ marginTop: 20 }}>
             <label className="kk-field">
               <span>Surnom de l’enfant</span>
@@ -98,36 +124,47 @@ export function CreateProfile({
               </div>
             </div>
 
-            <div className="kk-row">
-              <label className="kk-field" style={{ flex: 1, minWidth: 160 }}>
-                <span>Limite par jour (min)</span>
+            <div className="kk-field">
+              <span>Temps d’écran</span>
+              <p className="kk-muted" style={{ fontSize: "0.85rem", marginBottom: 8 }}>
+                Par défaut, aucune limite. Tu peux en fixer une (modifiable à tout
+                moment dans l’espace parent).
+              </p>
+              <label className="kk-switch-row">
+                <input type="checkbox" checked={jourOn} onChange={(e) => setJourOn(e.target.checked)} />
+                <span>Limiter le temps par jour</span>
+              </label>
+              {jourOn && (
                 <input
                   className="kk-input"
                   type="number"
-                  min={0}
+                  min={1}
                   inputMode="numeric"
                   value={jour}
                   onChange={(e) => setJour(e.target.value)}
-                  placeholder="ex. 20"
+                  aria-label="Minutes par jour"
+                  placeholder="minutes par jour"
+                  style={{ marginTop: 8 }}
                 />
+              )}
+              <label className="kk-switch-row" style={{ marginTop: 12 }}>
+                <input type="checkbox" checked={semaineOn} onChange={(e) => setSemaineOn(e.target.checked)} />
+                <span>Limiter le temps par semaine</span>
               </label>
-              <label className="kk-field" style={{ flex: 1, minWidth: 160 }}>
-                <span>Limite par semaine (min)</span>
+              {semaineOn && (
                 <input
                   className="kk-input"
                   type="number"
-                  min={0}
+                  min={1}
                   inputMode="numeric"
                   value={semaine}
                   onChange={(e) => setSemaine(e.target.value)}
-                  placeholder="optionnel"
+                  aria-label="Minutes par semaine"
+                  placeholder="minutes par semaine"
+                  style={{ marginTop: 8 }}
                 />
-              </label>
+              )}
             </div>
-            <p className="kk-muted" style={{ fontSize: "0.85rem" }}>
-              Laisse vide pour ne pas fixer de limite. Modifiable à tout moment
-              dans l’espace parent.
-            </p>
 
             <div className="kk-row">
               <button
@@ -138,7 +175,7 @@ export function CreateProfile({
                 Continuer
               </button>
               {onCancel && (
-                <button className="kk-btn kk-btn--ghost" onClick={onCancel}>
+                <button className="kk-btn kk-btn--ghost" onClick={cancel}>
                   Annuler
                 </button>
               )}
@@ -157,13 +194,16 @@ export function CreateProfile({
             <div style={{ fontSize: "3rem" }} aria-hidden="true">🤝</div>
             <h1>Tends la tablette à ton enfant</h1>
             <p className="kk-lead" style={{ margin: "0 auto" }}>
-              À toi de jouer ! Choisis ton personnage et ton univers.
+              À toi de jouer ! Choisis ton personnage et ton univers.
             </p>
             <button
               className="kk-btn kk-btn--accent kk-btn--big kk-btn--block"
               onClick={() => setStep("child")}
             >
-              C’est moi !
+              C’est moi !
+            </button>
+            <button className="kk-btn kk-btn--ghost" onClick={() => setStep("parent")}>
+              Revenir aux réglages
             </button>
           </div>
         </div>
@@ -247,7 +287,7 @@ export function CreateProfile({
             disabled={saving}
             onClick={() => void finish()}
           >
-            {saving ? "..." : "C’est parti !"}
+            {saving ? "..." : "C’est parti !"}
           </button>
         </div>
       </div>

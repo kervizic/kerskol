@@ -195,3 +195,5 @@ p.kk-lead { color: var(--kk-text-2); max-width: 52ch; }
 .kk-list { list-style: none; }
 .kk-list li { padding: 12px 0; border-bottom: 1px solid var(--kk-border); }
 .kk-badge-soon { font-size: 0.7rem; background: var(--kk-border); color: var(--kk-text-2); border-radius: 999px; padding: 2px 8px; margin-left: 6px; }
+.kk-switch-row { display: flex; align-items: center; gap: 10px; font-weight: 700; cursor: pointer; min-height: 44px; }
+.kk-switch-row input { width: 22px; height: 22px; accent-color: var(--kk-accent); cursor: pointer; }
