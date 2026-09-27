@@ -296,6 +296,30 @@ puis `./deploy/deploy.sh`.
 
 ---
 
+## 12bis. Accès d'administration au VPS
+
+L'administration du VPS (déploiement, migrations, logs, fail2ban...) se fait
+**exclusivement via le réseau Tailscale**, jamais par l'IP publique directe :
+
+- Machine Tailscale : `dict-vps`, IP `100.118.107.122`.
+- Commande type :
+  ```bash
+  ssh -o IdentitiesOnly=yes -o BatchMode=yes -o ConnectTimeout=10 \
+      -i ~/.ssh/dict_project ubuntu@100.118.107.122
+  ```
+- **Règle anti-ban** : une seule tentative de connexion par cible. En cas
+  d'échec, s'arrêter et diagnostiquer (ne jamais enchaîner plusieurs essais :
+  fail2ban bannit après quelques échecs, y compris l'IP publique en sortie).
+- L'IP publique de la box de l'opérateur **n'est volontairement pas** mise en
+  liste blanche fail2ban (IP potentiellement partagée/dynamique, et tout
+  appareil du réseau local pourrait tenter des connexions sans limite). Seul
+  le réseau Tailscale (`100.64.0.0/10`) est considéré de confiance, avec le
+  loopback (`127.0.0.1/8 ::1`) — voir `ignoreip` dans
+  `/etc/fail2ban/jail.local` (non versionné, propre au VPS).
+- Aucune clé ni secret n'est jamais committé dans ce dépôt.
+
+---
+
 ## 13. Checklist sécurité VPS
 
 - [ ] **Pare-feu UFW** : n'ouvrir que 22, 80, 443.
