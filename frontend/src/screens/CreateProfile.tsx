@@ -57,7 +57,7 @@ export function CreateProfile({
 
   // Sauvegarde du brouillon a chaque changement (restaure apres rechargement).
   useEffect(() => {
-    saveDraft<Draft>({ step, surnom, jourOn, jour, semaineOn, semaine, forme, couleur, univers });
+    saveDraft({ step, surnom, jourOn, jour, semaineOn, semaine, forme, couleur, univers } satisfies Draft);
   }, [step, surnom, jourOn, jour, semaineOn, semaine, forme, couleur, univers]);
 
   async function finish() {
