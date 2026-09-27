@@ -115,25 +115,26 @@ if [ -f "${FRONTEND_DIR}/package.json" ]; then
   API_EXTERNAL_URL="$(grep -E '^API_EXTERNAL_URL=' "$ENV_FILE" | head -n1 | cut -d= -f2-)"
   [ -n "$ANON_KEY" ] || { echo "Erreur : ANON_KEY absent de ${ENV_FILE}." >&2; exit 1; }
   VITE_SUPABASE_URL="${API_EXTERNAL_URL:-https://kerskol.fr}"
-  # --user : build sous l'UID/GID de l'hote pour que dist/ et node_modules/
-  # appartiennent a l'utilisateur de deploiement (ecriture de version.json
-  # ensuite, nettoyages ulterieurs). HOME=/tmp : cache npm inscriptible.
+  COMMIT="${APP_VERSION%%-*}"
+  BUILT="${APP_VERSION#*-}"
+  # Le build tourne en root dans le conteneur : dist/ est ecrit en 644/755,
+  # parfaitement lisible par nginx (c'est deja le mode servi). node_modules/,
+  # dist/ et public/theme/ sont jetables (gitignore) et reconstruits a neuf ;
+  # on les purge d'abord dans un conteneur pour eviter tout residu d'ownership.
+  # version.json (no-store) est ecrit DANS le conteneur -> aucun souci de droits
+  # cote hote. Le build Vite produit des noms empreintes + <meta app-version>
+  # + inclut /theme/app-version.js.
+  docker run --rm -v "${FRONTEND_DIR}:/app" alpine rm -rf /app/dist /app/node_modules /app/public/theme
   docker run --rm \
-    --user "$(id -u):$(id -g)" \
-    -e HOME=/tmp \
     -v "${FRONTEND_DIR}:/app" \
     -w /app \
     -e APP_VERSION="${APP_VERSION}" \
+    -e KK_COMMIT="${COMMIT}" \
+    -e KK_BUILT="${BUILT}" \
     -e VITE_SUPABASE_URL="${VITE_SUPABASE_URL}" \
     -e VITE_SUPABASE_ANON_KEY="${ANON_KEY}" \
     node:22-alpine \
-    sh -c "if [ -f package-lock.json ]; then npm ci; else npm install --no-audit --no-fund; fi && npm run build"
-  # Le build Vite doit produire des noms empreintes (hash de contenu) et
-  # inclure <meta name="app-version"> + le script app-version.js. On garantit
-  # au minimum la presence de version.json (no-store) pour le client.
-  COMMIT="${APP_VERSION%%-*}"
-  printf '{"version":"%s","commit":"%s","builtAt":"%s"}\n' \
-    "$APP_VERSION" "$COMMIT" "${APP_VERSION#*-}" > "${DIST_DIR}/version.json"
+    sh -c 'if [ -f package-lock.json ]; then npm ci; else npm install --no-audit --no-fund; fi && npm run build && printf "{\"version\":\"%s\",\"commit\":\"%s\",\"builtAt\":\"%s\"}\n" "$APP_VERSION" "$KK_COMMIT" "$KK_BUILT" > dist/version.json'
   echo "    build front OK (servi depuis ${DIST_DIR})"
 else
   echo "    pas de frontend/package.json : construction de la page d'attente (assets empreintes)"
