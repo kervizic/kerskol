@@ -1,0 +1,6 @@
+# Genere par scripts/prepare-public.mjs (copie de ../theme pour les pages legales).
+public/theme/
+
+# Build et deps
+dist/
+node_modules/

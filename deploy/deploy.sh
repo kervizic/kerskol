@@ -108,12 +108,21 @@ APP_VERSION="${GIT_SHORT}-${BUILD_UTC}"
 echo "    version applicative : ${APP_VERSION}"
 if [ -f "${FRONTEND_DIR}/package.json" ]; then
   echo "    build via docker run node:22-alpine (aucun npm sur l'hote)"
+  # Variables VITE_ injectees au build (lues depuis .env). L'ANON_KEY est
+  # publique par nature (JWT du role anon) : elle est destinee au client.
+  # L'URL publique de l'API = API_EXTERNAL_URL (defaut https://kerskol.fr).
+  ANON_KEY="$(grep -E '^ANON_KEY=' "$ENV_FILE" | head -n1 | cut -d= -f2-)"
+  API_EXTERNAL_URL="$(grep -E '^API_EXTERNAL_URL=' "$ENV_FILE" | head -n1 | cut -d= -f2-)"
+  [ -n "$ANON_KEY" ] || { echo "Erreur : ANON_KEY absent de ${ENV_FILE}." >&2; exit 1; }
+  VITE_SUPABASE_URL="${API_EXTERNAL_URL:-https://kerskol.fr}"
   docker run --rm \
     -v "${FRONTEND_DIR}:/app" \
     -w /app \
     -e APP_VERSION="${APP_VERSION}" \
+    -e VITE_SUPABASE_URL="${VITE_SUPABASE_URL}" \
+    -e VITE_SUPABASE_ANON_KEY="${ANON_KEY}" \
     node:22-alpine \
-    sh -c "npm ci && npm run build"
+    sh -c "if [ -f package-lock.json ]; then npm ci; else npm install --no-audit --no-fund; fi && npm run build"
   # Le build Vite doit produire des noms empreintes (hash de contenu) et
   # inclure <meta name="app-version"> + le script app-version.js. On garantit
   # au minimum la presence de version.json (no-store) pour le client.

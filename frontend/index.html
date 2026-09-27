@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Kerskol</title>
+  <meta name="description" content="Kerskol, la petite ecole a la maison : entrainement au calcul, en famille.">
+  <!-- Version injectee au build par deploy.sh (hash commit + horodatage UTC). -->
+  <meta name="app-version" content="%APP_VERSION%">
+  <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1C1917" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="/icons/icon.svg">
+  <link rel="apple-touch-icon" href="/icons/icon.svg">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <!-- Mise a jour fiable entre versions (voir frontend/theme/README.md). Servi
+       depuis public/theme (copie par scripts/prepare-public.mjs). -->
+  <script defer src="/theme/app-version.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+</html>

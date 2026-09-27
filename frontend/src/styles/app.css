@@ -1,0 +1,197 @@
+/* Styles de l'application Kerskol. S'appuie sur les tokens --kk-* (theme). */
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body, #root { height: 100%; }
+body {
+  font-family: var(--kk-font);
+  color: var(--kk-text);
+  background: var(--kk-bg);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.kk-page {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.kk-container {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: clamp(16px, 4vw, 32px);
+}
+.kk-center {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ------------------------------- Titres -------------------------------- */
+h1 { font-size: clamp(1.8rem, 6vw, 2.6rem); font-weight: 700; letter-spacing: -0.02em; color: var(--kk-accent); }
+h2 { font-size: clamp(1.3rem, 4vw, 1.7rem); font-weight: 700; margin-bottom: 8px; }
+p.kk-lead { color: var(--kk-text-2); max-width: 52ch; }
+.kk-muted { color: var(--kk-text-2); }
+
+/* -------------------------------- Cartes ------------------------------- */
+.kk-card {
+  background: var(--kk-surface);
+  border: 1px solid var(--kk-border);
+  border-radius: var(--kk-radius);
+  padding: clamp(20px, 4vw, 32px);
+}
+
+/* ------------------------------- Boutons ------------------------------- */
+.kk-btn {
+  font-family: inherit;
+  font-size: 1.05rem;
+  font-weight: 700;
+  border: 1px solid var(--kk-border);
+  background: var(--kk-surface);
+  color: var(--kk-text);
+  border-radius: var(--kk-radius);
+  padding: 14px 22px;
+  min-height: 52px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: transform 0.06s ease, filter 0.12s ease;
+}
+.kk-btn:active { transform: translateY(1px); }
+.kk-btn:focus-visible { outline: 3px solid var(--kk-accent); outline-offset: 2px; }
+.kk-btn[disabled] { opacity: 0.55; cursor: not-allowed; }
+
+.kk-btn--accent {
+  background: var(--kk-accent);
+  color: var(--kk-on-accent);
+  border-color: transparent;
+  font-size: 1.2rem;
+}
+.kk-btn--accent:hover { filter: brightness(1.05); }
+.kk-btn--big { font-size: 1.4rem; padding: 20px 34px; min-height: 68px; }
+.kk-btn--block { width: 100%; }
+.kk-btn--ghost { background: transparent; }
+.kk-btn--danger { color: var(--kk-danger-text); border-color: var(--kk-danger-text); background: var(--kk-danger-bg); }
+
+.kk-link {
+  color: var(--kk-accent-text);
+  font-weight: 700;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+}
+.kk-link:hover, .kk-link:focus-visible { text-decoration: underline; }
+
+/* --------------------------- Champs de saisie -------------------------- */
+.kk-field { display: block; margin-bottom: 18px; }
+.kk-field > span { display: block; font-weight: 700; margin-bottom: 6px; }
+.kk-input, .kk-select {
+  width: 100%;
+  font-family: inherit;
+  font-size: 1.05rem;
+  padding: 12px 14px;
+  min-height: 50px;
+  border: 1px solid var(--kk-border);
+  border-radius: var(--kk-radius-sm);
+  background: var(--kk-bg);
+  color: var(--kk-text);
+}
+.kk-input:focus-visible, .kk-select:focus-visible { outline: 3px solid var(--kk-accent); outline-offset: 1px; }
+
+/* ------------------------------ Bandeaux ------------------------------- */
+.kk-feedback { display: flex; gap: 10px; align-items: flex-start; padding: 12px 16px; border-radius: var(--kk-radius-sm); margin: 12px 0; }
+.kk-feedback--error { background: var(--kk-danger-bg); color: var(--kk-danger-text); border: 1px solid var(--kk-danger-text); }
+.kk-feedback--success { background: var(--kk-success-bg); color: var(--kk-success-text); border: 1px solid var(--kk-success-text); }
+.kk-feedback svg { flex: none; }
+
+/* ------------------------ Chips matieres / choix ----------------------- */
+.kk-chips { display: flex; flex-wrap: wrap; gap: 10px; }
+.kk-chip {
+  border: 2px solid var(--kk-border);
+  background: var(--kk-bg);
+  color: var(--kk-text);
+  border-radius: 999px;
+  padding: 10px 18px;
+  min-height: 46px;
+  font-weight: 700;
+  font-family: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.kk-chip[aria-pressed="true"] { border-color: var(--kk-accent); background: var(--kk-accent); color: var(--kk-on-accent); }
+.kk-chip[disabled] { opacity: 0.5; cursor: not-allowed; }
+.kk-chip small { font-weight: 400; opacity: 0.8; }
+
+/* ------------------------- "Qui joue ?" (tuiles) ----------------------- */
+.kk-tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: clamp(14px, 3vw, 24px); }
+.kk-tile {
+  border: none;
+  background: var(--kk-surface);
+  border-radius: var(--kk-radius);
+  padding: 18px 12px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  font-family: inherit;
+  color: var(--kk-text);
+  transition: transform 0.1s ease, box-shadow 0.12s ease;
+  border: 2px solid transparent;
+}
+.kk-tile:hover, .kk-tile:focus-visible { transform: translateY(-4px); outline: none; box-shadow: 0 10px 24px rgba(0,0,0,0.18); }
+.kk-tile__badge { position: relative; }
+.kk-tile__vignette { position: absolute; right: -6px; bottom: -6px; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.25); }
+.kk-tile__name { font-weight: 700; font-size: 1.2rem; }
+.kk-tile__avatar { border-radius: 50%; background: var(--kk-bg); border: 1px solid var(--kk-border); }
+.kk-tile--parents { justify-content: center; }
+.kk-tile--last { border-color: var(--kk-accent); }
+.kk-tile__hint { font-size: 0.8rem; color: var(--kk-accent-text); font-weight: 700; }
+
+/* ------------------------------- Village ------------------------------- */
+.kk-village { position: relative; min-height: 100vh; display: flex; flex-direction: column; }
+.kk-village__scene { position: absolute; inset: 0; z-index: 0; }
+.kk-village__inner { position: relative; z-index: 1; display: flex; flex-direction: column; min-height: 100vh; }
+.kk-village__top { display: flex; align-items: center; justify-content: space-between; padding: 16px; gap: 12px; }
+.kk-avatar-corner {
+  border: none; background: rgba(255,255,255,0.85); border-radius: 50%; padding: 6px; cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2); display: inline-flex;
+}
+.kk-money {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.9); color: #222; font-weight: 700; font-size: 1.3rem;
+  padding: 8px 16px; border-radius: 999px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+.kk-port {
+  margin-top: auto; background: rgba(255,255,255,0.82); border-top-left-radius: 24px; border-top-right-radius: 24px;
+  padding: 18px clamp(14px, 4vw, 28px) 26px; color: #222;
+}
+.kk-port h2 { color: #1b3a4b; }
+.kk-plots { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 14px; margin: 14px 0 20px; }
+.kk-plot { background: rgba(255,255,255,0.9); border: 1px solid rgba(0,0,0,0.08); border-radius: 14px; padding: 12px; text-align: center; }
+.kk-plot__name { font-size: 0.85rem; font-weight: 700; margin-top: 6px; color: #333; }
+.kk-plot__state { font-size: 0.75rem; color: #666; }
+.kk-plot--vide { opacity: 0.7; border-style: dashed; }
+
+/* ------------------------------ Divers --------------------------------- */
+.kk-row { display: flex; gap: 12px; flex-wrap: wrap; }
+.kk-stack > * + * { margin-top: 14px; }
+.kk-legal { margin-top: 20px; font-size: 0.85rem; color: var(--kk-text-2); text-align: center; }
+.kk-legal a { color: var(--kk-text-2); margin: 0 6px; }
+.kk-spinner { width: 42px; height: 42px; border: 4px solid var(--kk-border); border-top-color: var(--kk-accent); border-radius: 50%; animation: kk-spin 0.8s linear infinite; }
+@keyframes kk-spin { to { transform: rotate(360deg); } }
+.kk-google-g { width: 22px; height: 22px; background: #fff; border-radius: 3px; padding: 1px; }
+.kk-demo-banner { background: var(--kk-accent); color: var(--kk-on-accent); text-align: center; font-weight: 700; padding: 6px; font-size: 0.85rem; }
+.kk-list { list-style: none; }
+.kk-list li { padding: 12px 0; border-bottom: 1px solid var(--kk-border); }
+.kk-badge-soon { font-size: 0.7rem; background: var(--kk-border); color: var(--kk-text-2); border-radius: 999px; padding: 2px 8px; margin-left: 6px; }

@@ -1,0 +1,20 @@
+{
+  "name": "Kerskol",
+  "short_name": "Kerskol",
+  "description": "La petite ecole a la maison : entrainement au calcul, en famille.",
+  "lang": "fr",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#FFFFFF",
+  "theme_color": "#E06A00",
+  "icons": [
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
