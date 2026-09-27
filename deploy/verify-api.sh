@@ -48,7 +48,7 @@ JWT="${H}.${P}.${SIG}"
 curl_code() { # $1 = token
   curl -s -o /tmp/verify_body -w '%{http_code}' \
     -H "apikey: $1" -H "Authorization: Bearer $1" \
-    "${REST_BASE}/rest/v1/competences?select=code"
+    "${REST_BASE}/competences?select=code"
 }
 
 status=0
