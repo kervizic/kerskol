@@ -278,11 +278,8 @@ CREATE TRIGGER reponses_monnaie
 -- 7. RLS
 -- =========================================================================
 ALTER TABLE public.seances     ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.seances     FORCE  ROW LEVEL SECURITY;
 ALTER TABLE public.reponses    ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.reponses    FORCE  ROW LEVEL SECURITY;
 ALTER TABLE public.progression ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.progression FORCE  ROW LEVEL SECURITY;
 
 -- seances : insert + select si acces au profil.
 DROP POLICY IF EXISTS seances_select ON public.seances;

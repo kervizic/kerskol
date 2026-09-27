@@ -14,35 +14,25 @@
 --   * Migration idempotente : rejouable sans erreur.
 
 -- =========================================================================
--- 0. Filet de securite : helpers auth.uid() / auth.jwt() (definitions
---    standard Supabase). GoTrue cree le schema auth et ses tables mais pas
---    forcement ces fonctions ; on les cree si absentes (CREATE OR REPLACE,
---    idempotent). Executees par superuser postgres pendant la migration.
+-- 0. Notes d'environnement (Supabase auto-heberge)
+--    * auth.uid() / auth.jwt() et l'USAGE sur le schema auth pour
+--      authenticated/anon sont deja fournis par l'image Supabase : on ne les
+--      (re)cree pas ici (le role postgres n'est PAS superuser et ne peut de
+--      toute facon pas ecrire dans le schema auth, proprietaire supabase_admin).
+--    * RLS : on utilise ENABLE ROW LEVEL SECURITY SANS FORCE. Raison : postgres
+--      n'est pas superuser sur cette image ; c'est le contournement RLS du
+--      PROPRIETAIRE de table (postgres) qui permet aux fonctions/triggers
+--      SECURITY DEFINER d'ecrire les donnees calculees par le serveur
+--      (progression, monnaie, journal, outbox). FORCE soumettrait le
+--      proprietaire a RLS et casserait ces ecritures. La securite de l'API est
+--      identique : PostgREST se connecte uniquement via authenticator ->
+--      authenticated/anon, qui NE SONT PAS proprietaires et restent donc
+--      pleinement soumis a RLS.
 -- =========================================================================
-CREATE SCHEMA IF NOT EXISTS auth;
-
-CREATE OR REPLACE FUNCTION auth.uid()
-RETURNS uuid LANGUAGE sql STABLE AS $$
-    SELECT coalesce(
-        nullif(current_setting('request.jwt.claim.sub', true), ''),
-        (nullif(current_setting('request.jwt.claims', true), '')::jsonb ->> 'sub')
-    )::uuid
-$$;
-
-CREATE OR REPLACE FUNCTION auth.jwt()
-RETURNS jsonb LANGUAGE sql STABLE AS $$
-    SELECT coalesce(
-        nullif(current_setting('request.jwt.claim',  true), ''),
-        nullif(current_setting('request.jwt.claims', true), '')
-    )::jsonb
-$$;
-
--- USAGE sur le schema auth : indispensable pour que authenticated/anon puissent
--- appeler auth.uid()/auth.jwt() depuis les policies RLS (non garanti en
--- Supabase auto-heberge).
-GRANT USAGE ON SCHEMA auth TO authenticated, anon;
-GRANT EXECUTE ON FUNCTION auth.uid() TO authenticated, anon;
-GRANT EXECUTE ON FUNCTION auth.jwt() TO authenticated, anon;
+-- L'outbox (0001) etait en FORCE : on retire FORCE pour que l'enfilement par
+-- fonctions SECURITY DEFINER (proprietaire postgres) fonctionne. Elle reste
+-- fermee a l'API (aucune policy pour authenticated/anon, qui sont non-proprietaires).
+ALTER TABLE public.mail_outbox NO FORCE ROW LEVEL SECURITY;
 
 -- =========================================================================
 -- 1. Tables
@@ -166,13 +156,9 @@ $$;
 -- 3. RLS
 -- =========================================================================
 ALTER TABLE public.foyers        ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.foyers        FORCE  ROW LEVEL SECURITY;
 ALTER TABLE public.membres_foyer ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.membres_foyer FORCE  ROW LEVEL SECURITY;
 ALTER TABLE public.invitations   ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.invitations   FORCE  ROW LEVEL SECURITY;
 ALTER TABLE public.profils       ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.profils       FORCE  ROW LEVEL SECURITY;
 
 -- foyers : un membre voit son foyer (lecture seule ; creation via RPC).
 DROP POLICY IF EXISTS foyers_select_membre ON public.foyers;

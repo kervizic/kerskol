@@ -135,7 +135,6 @@ BEGIN
         'matieres','competences','competence_prerequis','methodes','exercices','ex_calcul'
     ] LOOP
         EXECUTE format('ALTER TABLE public.%I ENABLE ROW LEVEL SECURITY;', t);
-        EXECUTE format('ALTER TABLE public.%I FORCE  ROW LEVEL SECURITY;', t);
         EXECUTE format('DROP POLICY IF EXISTS %I_select_auth ON public.%I;', t, t);
         EXECUTE format(
             'CREATE POLICY %I_select_auth ON public.%I FOR SELECT TO authenticated USING (true);',

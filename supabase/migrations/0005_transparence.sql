@@ -132,9 +132,7 @@ CREATE TRIGGER prefs_journal
 -- 6. RLS
 -- =========================================================================
 ALTER TABLE public.journal_reglages ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.journal_reglages FORCE  ROW LEVEL SECURITY;
 ALTER TABLE public.bravos           ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.bravos           FORCE  ROW LEVEL SECURITY;
 
 -- journal_reglages : lecture pour les parents du foyer. Aucune ecriture cote
 -- API (insertion via triggers en definer). Append-only garanti par l'absence
