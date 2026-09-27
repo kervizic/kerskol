@@ -18,46 +18,59 @@ import {
 } from "./lib/api";
 import { isDemo } from "./lib/demo";
 import { authAction } from "./lib/authReset";
-import { getDernierProfil, setDernierProfil } from "./lib/session";
+import { setDernierProfil } from "./lib/session";
 import type { Avatar, Profil } from "./lib/types";
 
-type Phase =
-  | "loading"
-  | "public"
-  | "onboarding"
-  | "who"
-  | "village"
-  | "session"
-  | "parent"
-  | "add_child"
-  | "error";
+// --- Petit routeur (history API), sans dependance ------------------------
+// Routes : / (accueil public ou selection), /creer-profil, /reglages,
+// /enfant/<uuid>/village, /enfant/<uuid>/seance. On utilise l'UUID du profil
+// (jamais le surnom : donnee personnelle). index.html est servi en fallback SPA
+// par nginx : ces routes profondes repondent donc 200.
+function currentPath(): string {
+  try {
+    return window.location.pathname;
+  } catch {
+    return "/";
+  }
+}
+const CHILD_RE = /^\/enfant\/([^/]+)\/(village|seance)$/;
 
 export function App() {
-  const [phase, setPhase] = useState<Phase>("loading");
+  const [ready, setReady] = useState(false);
+  const [authed, setAuthed] = useState(false);
   const [foyerId, setFoyerId] = useState<string | null>(null);
   const [profils, setProfils] = useState<Profil[]>([]);
   const [referentiel, setReferentiel] = useState<Referentiel | null>(null);
-  const [current, setCurrent] = useState<Profil | null>(null);
+  const [error, setError] = useState(false);
+  const [path, setPath] = useState(currentPath);
 
-  // Garde anti-concurrence : au retour de l'OAuth, le montage ET l'evenement
-  // onAuthChange peuvent declencher bootstrap simultanement. On serialise pour
-  // eviter un double appel a creer_foyer (le verrou SQL est la 2e ligne de
-  // defense contre les doublons de foyer).
   const running = useRef(false);
-  // Utilisateur pour lequel l'etat a ete charge : sert a ignorer les evenements
-  // d'auth du MEME utilisateur (TOKEN_REFRESHED, focus, INITIAL_SESSION) qui,
-  // sinon, reinitialisaient la navigation et faisaient perdre la saisie.
   const currentUserId = useRef<string | null>(null);
+
+  const navigate = useCallback((to: string, replace = false) => {
+    try {
+      if (to !== window.location.pathname) {
+        if (replace) window.history.replaceState(null, "", to);
+        else window.history.pushState(null, "", to);
+      }
+    } catch {
+      /* ignore */
+    }
+    setPath(to);
+  }, []);
 
   const bootstrap = useCallback(async () => {
     if (running.current) return;
     running.current = true;
-    setPhase("loading");
+    setError(false);
     try {
       const user = await getUser();
       currentUserId.current = user?.id ?? null;
       if (!user) {
-        setPhase("public");
+        setAuthed(false);
+        setProfils([]);
+        setFoyerId(null);
+        setReady(true);
         return;
       }
       const fid = await ensureFoyer();
@@ -65,10 +78,12 @@ export function App() {
       setFoyerId(fid);
       setProfils(list);
       setReferentiel(ref);
-      setPhase(list.length === 0 ? "onboarding" : "who");
+      setAuthed(true);
+      setReady(true);
     } catch (e) {
       console.error("bootstrap a echoue", e);
-      setPhase("error");
+      setError(true);
+      setReady(true);
     } finally {
       running.current = false;
     }
@@ -80,30 +95,43 @@ export function App() {
       const action = authAction(currentUserId.current, event, userId);
       if (action === "signed_out") {
         currentUserId.current = null;
-        setFoyerId(null);
+        setAuthed(false);
         setProfils([]);
-        setCurrent(null);
-        setPhase("public");
+        setFoyerId(null);
+        navigate("/");
       } else if (action === "user_changed") {
         void bootstrap();
       }
-      // action === "ignore" (meme utilisateur) : on ne touche a rien.
+      // "ignore" (meme utilisateur : TOKEN_REFRESHED, focus...) : rien.
     });
-    return off;
-  }, [bootstrap]);
+    const onPop = () => setPath(currentPath());
+    window.addEventListener("popstate", onPop);
+    return () => {
+      off();
+      window.removeEventListener("popstate", onPop);
+    };
+  }, [bootstrap, navigate]);
 
-  // Report des mises a jour de version (app-version.js) hors des moments surs :
-  // pendant un formulaire de creation, l'espace parent (edition de champs) ou
-  // une seance, on marque "busy" -> toute maj est differee jusqu'a un retour
-  // sur un ecran sur (public / Qui joue ? / village).
+  // Redirections coherentes (apres chargement) : profil obligatoire, et acces a
+  // un profil hors du foyer -> retour a la selection.
+  useEffect(() => {
+    if (!ready || !authed) return;
+    if (profils.length === 0) {
+      if (path !== "/creer-profil") navigate("/creer-profil", true);
+      return;
+    }
+    const m = path.match(CHILD_RE);
+    if (m && !profils.some((p) => p.id === m[1])) navigate("/", true);
+  }, [ready, authed, profils, path, navigate]);
+
+  // Report des maj de version (app-version.js) hors des ecrans a saisie/seance.
   useEffect(() => {
     const busy =
-      phase === "onboarding" ||
-      phase === "add_child" ||
-      phase === "parent" ||
-      phase === "session";
+      path === "/creer-profil" ||
+      path === "/reglages" ||
+      /^\/enfant\/[^/]+\/seance$/.test(path);
     window.Kerskol?.version?.setBusy?.(busy);
-  }, [phase]);
+  }, [path]);
 
   const upsertProfil = useCallback((p: Profil) => {
     setProfils((prev) => {
@@ -113,118 +141,100 @@ export function App() {
       copy[i] = p;
       return copy;
     });
-    setCurrent((c) => (c && c.id === p.id ? p : c));
   }, []);
 
   function pickChild(p: Profil) {
     setDernierProfil(p.id);
-    setCurrent(p);
-    setPhase("village");
+    navigate(`/enfant/${p.id}/village`);
   }
 
   async function handleFoyerDeleted() {
     if (!isDemo()) await signOut();
+    setAuthed(false);
     setFoyerId(null);
     setProfils([]);
-    setCurrent(null);
-    setPhase("public");
+    navigate("/");
   }
 
-  const banner = isDemo() ? <div className="kk-demo-banner">Mode demo local — donnees fictives</div> : null;
+  const banner = isDemo() ? (
+    <div className="kk-demo-banner">Mode demo local — donnees fictives</div>
+  ) : null;
 
   function content() {
-    switch (phase) {
-      case "loading":
-        return <Loading />;
-      case "public":
-        return <PublicHome />;
-      case "error":
-        return (
-          <div className="kk-page kk-center">
-            <div className="kk-container" style={{ maxWidth: 480 }}>
-              <Feedback kind="error">
-                Une erreur est survenue au chargement.
-              </Feedback>
-              <button className="kk-btn kk-btn--accent kk-btn--block" onClick={() => void bootstrap()}>
-                Réessayer
-              </button>
-            </div>
+    if (!ready) return <Loading />;
+    if (error) {
+      return (
+        <div className="kk-page kk-center">
+          <div className="kk-container" style={{ maxWidth: 480 }}>
+            <Feedback kind="error">Une erreur est survenue au chargement.</Feedback>
+            <button className="kk-btn kk-btn--accent kk-btn--block" onClick={() => void bootstrap()}>
+              Réessayer
+            </button>
           </div>
-        );
-      case "onboarding":
+        </div>
+      );
+    }
+    if (!authed) return <PublicHome />;
+    if (!foyerId || !referentiel) return <Loading />;
+
+    if (path === "/creer-profil") {
+      const first = profils.length === 0;
+      return (
+        <CreateProfile
+          foyerId={foyerId}
+          matieres={referentiel.matieres}
+          onCancel={first ? undefined : () => navigate("/reglages")}
+          onDone={(p) => {
+            upsertProfil(p);
+            navigate(first ? "/" : "/reglages");
+          }}
+        />
+      );
+    }
+
+    if (path === "/reglages") {
+      return (
+        <ParentSpace
+          foyerId={foyerId}
+          profils={profils}
+          matieres={referentiel.matieres}
+          onProfilChange={upsertProfil}
+          onAddChild={() => navigate("/creer-profil")}
+          onExit={() => navigate("/")}
+          onFoyerDeleted={() => void handleFoyerDeleted()}
+        />
+      );
+    }
+
+    const m = path.match(CHILD_RE);
+    if (m) {
+      const prof = profils.find((p) => p.id === m[1]);
+      if (!prof) return <Loading />; // l'effet de redirection renvoie a "/"
+      const couleur = (prof.avatar as Avatar)?.couleur || "#E06A00";
+      if (m[2] === "village") {
         return (
-          foyerId && referentiel && (
-            <CreateProfile
-              foyerId={foyerId}
-              matieres={referentiel.matieres}
-              onDone={(p) => {
-                upsertProfil(p);
-                setPhase("who");
-              }}
+          <ChildTheme couleur={couleur}>
+            <Village
+              profil={prof}
+              referentiel={referentiel}
+              onExit={() => navigate("/")}
+              onStart={() => navigate(`/enfant/${prof.id}/seance`)}
+              onProfilChange={upsertProfil}
             />
-          )
-        );
-      case "add_child":
-        return (
-          foyerId && referentiel && (
-            <CreateProfile
-              foyerId={foyerId}
-              matieres={referentiel.matieres}
-              onCancel={() => setPhase("parent")}
-              onDone={(p) => {
-                upsertProfil(p);
-                setPhase("parent");
-              }}
-            />
-          )
-        );
-      case "who":
-        return (
-          <WhoPlays
-            profils={profils}
-            lastProfilId={getDernierProfil()}
-            onPickChild={pickChild}
-            onParents={() => setPhase("parent")}
-          />
-        );
-      case "village":
-        return (
-          current &&
-          referentiel && (
-            <ChildTheme couleur={(current.avatar as Avatar)?.couleur || "#E06A00"}>
-              <Village
-                profil={current}
-                referentiel={referentiel}
-                onExit={() => setPhase("who")}
-                onStart={() => setPhase("session")}
-                onProfilChange={upsertProfil}
-              />
-            </ChildTheme>
-          )
-        );
-      case "session":
-        return (
-          <ChildTheme couleur={(current?.avatar as Avatar)?.couleur || "#E06A00"}>
-            <SessionSoon surnom={current?.surnom ?? ""} onBack={() => setPhase("village")} />
           </ChildTheme>
         );
-      case "parent":
-        return (
-          foyerId && referentiel && (
-            <ParentSpace
-              foyerId={foyerId}
-              profils={profils}
-              matieres={referentiel.matieres}
-              onProfilChange={upsertProfil}
-              onAddChild={() => setPhase("add_child")}
-              onExit={() => setPhase("who")}
-              onFoyerDeleted={() => void handleFoyerDeleted()}
-            />
-          )
-        );
-      default:
-        return <Loading />;
+      }
+      return (
+        <ChildTheme couleur={couleur}>
+          <SessionSoon surnom={prof.surnom} onBack={() => navigate(`/enfant/${prof.id}/village`)} />
+        </ChildTheme>
+      );
     }
+
+    // "/" ou route inconnue -> selection de profil.
+    return (
+      <WhoPlays profils={profils} onPickChild={pickChild} onReglages={() => navigate("/reglages")} />
+    );
   }
 
   return (

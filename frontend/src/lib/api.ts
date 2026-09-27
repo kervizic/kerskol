@@ -33,8 +33,12 @@ const REDIRECT_TO = "https://kerskol.fr";
 
 export async function getUser(): Promise<AuthUser | null> {
   if (isDemo()) return { id: "demo-parent", email: "parent@demo.kerskol" };
-  const { data } = await supabase().auth.getUser();
-  return data.user ? { id: data.user.id, email: data.user.email ?? null } : null;
+  // getSession() lit la session PERSISTEE (localStorage) et attend l'hydratation,
+  // SANS appel reseau : fiable au rechargement (F5). getUser() ferait un aller
+  // /auth/v1/user qui, au demarrage, peut devancer la restauration -> null a tort.
+  const { data } = await supabase().auth.getSession();
+  const u = data.session?.user;
+  return u ? { id: u.id, email: u.email ?? null } : null;
 }
 
 // Transmet l'evenement et l'id utilisateur (ou null) : l'appelant decide via

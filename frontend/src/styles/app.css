@@ -154,6 +154,18 @@ p.kk-lead { color: var(--kk-text-2); max-width: 52ch; }
 .kk-tile__vignette { position: absolute; right: -6px; bottom: -6px; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.25); }
 .kk-tile__name { font-weight: 700; font-size: 1.2rem; }
 .kk-tile__avatar { border-radius: 50%; background: var(--kk-bg); border: 1px solid var(--kk-border); }
+.kk-who {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: clamp(16px, 4vw, 32px);
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(14px, 3vw, 24px);
+  align-items: center;
+  justify-content: center;
+}
+.kk-who .kk-tile { width: clamp(140px, 40vw, 180px); }
 .kk-tile--parents { justify-content: center; }
 .kk-tile--last { border-color: var(--kk-accent); }
 .kk-tile__hint { font-size: 0.8rem; color: var(--kk-accent-text); font-weight: 700; }
