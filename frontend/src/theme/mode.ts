@@ -37,7 +37,9 @@ export function setMode(m: ThemeMode): void {
   listeners.forEach((f) => f());
 }
 
-const ORDER: ThemeMode[] = ["auto", "light", "dark"];
+// Sequence de rotation demandee : clair -> sombre -> auto -> clair. L'etat
+// initial est "auto" (rien en storage) ; depuis auto, le prochain est "clair".
+const ORDER: ThemeMode[] = ["light", "dark", "auto"];
 export function cycleMode(): ThemeMode {
   const next = ORDER[(ORDER.indexOf(getMode()) + 1) % ORDER.length];
   setMode(next);
