@@ -166,7 +166,6 @@ p.kk-lead { color: var(--kk-text-2); max-width: 52ch; }
   justify-content: center;
 }
 .kk-who .kk-tile { width: clamp(140px, 40vw, 180px); }
-.kk-tile--parents { justify-content: center; }
 .kk-tile--last { border-color: var(--kk-accent); }
 .kk-tile__hint { font-size: 0.8rem; color: var(--kk-accent-text); font-weight: 700; }
 
@@ -224,7 +223,7 @@ p.kk-lead { color: var(--kk-text-2); max-width: 52ch; }
 @keyframes kk-spin { to { transform: rotate(360deg); } }
 .kk-google-g { width: 22px; height: 22px; background: #fff; border-radius: 3px; padding: 1px; }
 .kk-demo-banner { background: var(--kk-accent); color: var(--kk-on-accent); text-align: center; font-weight: 700; padding: 6px; font-size: 0.85rem; }
-.kk-toolbar { position: fixed; top: 12px; right: 12px; z-index: 5; }
+.kk-toolbar { position: fixed; top: 12px; right: 12px; z-index: 5; display: flex; align-items: center; gap: 10px; }
 .kk-list { list-style: none; }
 .kk-list li { padding: 12px 0; border-bottom: 1px solid var(--kk-border); }
 .kk-badge-soon { font-size: 0.7rem; background: var(--kk-border); color: var(--kk-text-2); border-radius: 999px; padding: 2px 8px; margin-left: 6px; }

@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { Check, Info } from "lucide-react";
 
 export function Spinner() {
   return <div className="kk-spinner" role="status" aria-label="Chargement" />;
@@ -15,22 +16,6 @@ export function Loading({ label = "Un instant..." }: { label?: string }) {
   );
 }
 
-function IconCheck() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M20 6L9 17l-5-5" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-function IconInfo() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
-      <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="2" />
-      <path d="M12 11v5M12 7.5v.5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
-    </svg>
-  );
-}
-
 export function Feedback({
   kind,
   children,
@@ -40,7 +25,7 @@ export function Feedback({
 }) {
   return (
     <div className={`kk-feedback kk-feedback--${kind}`} role={kind === "error" ? "alert" : "status"}>
-      {kind === "success" ? <IconCheck /> : <IconInfo />}
+      {kind === "success" ? <Check size={20} aria-hidden="true" /> : <Info size={20} aria-hidden="true" />}
       <div>{children}</div>
     </div>
   );

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Settings } from "lucide-react";
 import { AvatarView } from "../domain/avatars";
 import { UNIVERS_LIST, universDef } from "../domain/univers";
 import { BUILDING_LABEL, computePort, type BuildingState } from "../domain/buildings";
@@ -17,15 +18,6 @@ function Building({ state }: { state: BuildingState }) {
     monument: "🏛️",
   };
   return <span style={{ fontSize: "2.4rem" }} aria-hidden="true">{map[state]}</span>;
-}
-
-function GearIcon() {
-  return (
-    <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round">
-      <path d="M12 3l1.2 2.4 2.7-.4.8 2.6 2.4 1.2-.4 2.7 1.6 2.2-1.6 2.2.4 2.7-2.4 1.2-.8 2.6-2.7-.4L12 21l-1.2-2.4-2.7.4-.8-2.6L4.9 15l.4-2.7L3.7 10l1.6-2.2-.4-2.7 2.4-1.2.8-2.6 2.7.4z" />
-      <circle cx="12" cy="12" r="3.2" />
-    </svg>
-  );
 }
 
 export function Village({
@@ -96,7 +88,7 @@ export function Village({
           aria-expanded={panel}
           onClick={() => setPanel((v) => !v)}
         >
-          <GearIcon />
+          <Settings size={26} aria-hidden="true" />
         </button>
       </div>
 
