@@ -5,7 +5,7 @@ import { CreateProfile } from "./screens/CreateProfile";
 import { WhoPlays } from "./screens/WhoPlays";
 import { Village } from "./screens/Village";
 import { ParentSpace } from "./screens/ParentSpace";
-import { SessionSoon } from "./screens/SessionSoon";
+import { Session } from "./screens/Session";
 import { ChildTheme } from "./components/ChildTheme";
 import {
   ensureFoyer,
@@ -229,7 +229,12 @@ export function App() {
       }
       return (
         <ChildTheme couleur={couleur}>
-          <SessionSoon surnom={prof.surnom} onBack={() => navigate(`/enfant/${prof.id}/village`)} />
+          <Session
+            profil={prof}
+            referentiel={referentiel}
+            onExit={() => navigate(`/enfant/${prof.id}/village`)}
+            onProfilChange={upsertProfil}
+          />
         </ChildTheme>
       );
     }

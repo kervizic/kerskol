@@ -57,6 +57,17 @@ export interface Progression {
   placement_termine: boolean;
 }
 
+// Progression detaillee (session : composition + repartition des exercices).
+export interface ProgressionDetail {
+  competence: string;
+  niveau: number;
+  niveau_max_atteint: number;
+  placement_termine: boolean;
+  ema_courte: number;
+  derniere_reponse: string | null;
+  prochaine_revision: string | null;
+}
+
 export interface Matiere {
   code: string;
   libelle: string;

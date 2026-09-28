@@ -1,0 +1,108 @@
+// Copie cliente des parametres du referentiel de calcul (miroir de
+// supabase/migrations/0006_seed_referentiel_calcul.sql). Sert :
+//   * de jeu de donnees en mode demo (aucun backend) ;
+//   * de repli si la lecture ex_calcul echoue ;
+//   * de fixture pour les tests du generateur.
+// La BASE reste la source de verite en production (getExercicesCalcul).
+
+import type { ExCalcul, Forme, Support } from "./generator";
+
+type Row = [
+  competence: string,
+  niveau: number,
+  operation: string,
+  forme: Forme,
+  methode: string,
+  support: Support,
+  strategie: string,
+  params: Record<string, unknown>
+];
+
+const CM: Row[] = [
+  ["MA.CM.ADDITION", 1, "add", "resultat", "cpa_barres", "droite", "compter_a_partir_du_plus_grand", { a: { min: 1, max: 8 }, b: { min: 1, max: 8 }, contrainte: "somme_inf_10" }],
+  ["MA.CM.ADDITION", 2, "add", "decomposition", "exemples_estompes", "aucun", "doubles_et_presque_doubles", { type: "doubles_presque_doubles", a: { min: 1, max: 10 } }],
+  ["MA.CM.ADDITION", 3, "add", "decomposition", "variation", "droite", "passage_par_la_dizaine", { type: "passage_par_10", a: { min: 6, max: 9 }, b: { min: 3, max: 9 } }],
+  ["MA.CM.ADDITION", 4, "add", "terme_manquant", "probleme_dabord", "aucun", "completer_a_la_somme", { type: "terme_manquant", somme: { min: 11, max: 18 }, terme_connu: { min: 2, max: 9 } }],
+
+  ["MA.CM.DOUBLES", 1, "double", "resultat", "cpa_barres", "rectangle", "double_par_paquets", { n: { min: 1, max: 10 } }],
+  ["MA.CM.DOUBLES", 2, "double", "resultat", "exemples_estompes", "aucun", "double_decompose", { n: { min: 11, max: 20 } }],
+  ["MA.CM.DOUBLES", 3, "double", "resultat", "variation", "aucun", "double_nombres_ronds", { nombres: [25, 30, 40, 50, 60, 100] }],
+  ["MA.CM.DOUBLES", 4, "double", "resultat", "probleme_dabord", "aucun", "double_melange", { melange: true, n: { min: 1, max: 20 }, nombres: [25, 30, 40, 50, 60, 100] }],
+
+  ["MA.CM.MOITIES", 1, "moitie", "resultat", "cpa_barres", "rectangle", "partage_en_deux", { pairs: { min: 2, max: 20 } }],
+  ["MA.CM.MOITIES", 2, "moitie", "resultat", "exemples_estompes", "aucun", "moitie_decomposee", { pairs: { min: 22, max: 40 } }],
+  ["MA.CM.MOITIES", 3, "moitie", "resultat", "variation", "aucun", "moitie_nombres_ronds", { nombres: [50, 60, 100] }],
+  ["MA.CM.MOITIES", 4, "moitie", "resultat", "probleme_dabord", "aucun", "moitie_melange", { melange: true, pairs: { min: 2, max: 40 }, nombres: [50, 60, 100] }],
+
+  ["MA.CM.COMPL_SUP", 1, "complement", "terme_manquant", "cpa_barres", "droite", "complement_a_10", { cible: 10, a: { min: 1, max: 9 } }],
+  ["MA.CM.COMPL_SUP", 2, "complement", "resultat", "exemples_estompes", "droite", "vers_dizaine_superieure", { vers: "dizaine_sup", n: { min: 41, max: 98 } }],
+  ["MA.CM.COMPL_SUP", 3, "complement", "resultat", "variation", "aucun", "vers_centaine_superieure", { vers: "centaine_sup", n: { min: 410, max: 990 } }],
+  ["MA.CM.COMPL_SUP", 4, "complement", "resultat", "probleme_dabord", "aucun", "vers_millier_superieur", { vers: "millier_sup", n: { min: 4100, max: 9900 } }],
+
+  ["MA.CM.COMPL_100_1000", 1, "complement", "terme_manquant", "cpa_barres", "droite", "dizaines_a_100", { cible: 100, nombres: [10, 20, 30, 40, 50, 60, 70, 80, 90] }],
+  ["MA.CM.COMPL_100_1000", 2, "complement", "terme_manquant", "exemples_estompes", "aucun", "tout_nombre_a_100", { cible: 100, n: { min: 1, max: 99 } }],
+  ["MA.CM.COMPL_100_1000", 3, "complement", "terme_manquant", "variation", "aucun", "centaines_a_1000", { cible: 1000, nombres: [100, 200, 300, 400, 500, 600, 700, 800, 900] }],
+  ["MA.CM.COMPL_100_1000", 4, "complement", "terme_manquant", "probleme_dabord", "aucun", "dizaines_a_1000", { cible: 1000, n: { min: 10, max: 990, multiple_de: 10 } }],
+
+  ["MA.CM.SOMMES_DIFF", 1, "add", "resultat", "cpa_barres", "aucun", "dizaines_sans_retenue", { type: "dizaines_sans_retenue", a: { min: 20, max: 89 }, b: { multiple_de: 10, min: 10, max: 40 }, ops: ["add", "sub"] }],
+  ["MA.CM.SOMMES_DIFF", 2, "add", "decomposition", "variation", "aucun", "ajout_proche_dizaine", { type: "ajout_proche_dizaine", a: { min: 10, max: 89 }, ajouts: [9, 19, -9] }],
+  ["MA.CM.SOMMES_DIFF", 3, "add", "resultat", "exemples_estompes", "aucun", "addition_avec_retenue", { type: "deux_chiffres_avec_retenue", a: { min: 13, max: 89 }, b: { min: 13, max: 89 } }],
+  ["MA.CM.SOMMES_DIFF", 4, "add", "ordre_grandeur", "probleme_dabord", "aucun", "estimer_puis_calculer", { a: { min: 100, max: 999 }, b: { min: 11, max: 99 }, ops: ["add", "sub"] }],
+
+  ["MA.CM.X10_X100", 1, "mul", "resultat", "cpa_barres", "droite", "decaler_les_chiffres", { a: { min: 2, max: 9 }, facteur: 10 }],
+  ["MA.CM.X10_X100", 2, "mul", "resultat", "exemples_estompes", "aucun", "decaler_les_chiffres", { a: { min: 10, max: 99 }, facteur: 10 }],
+  ["MA.CM.X10_X100", 3, "mul", "resultat", "variation", "aucun", "deux_zeros", { a: { min: 2, max: 99 }, facteur: 100 }],
+  ["MA.CM.X10_X100", 4, "mul", "resultat", "probleme_dabord", "aucun", "x10_puis_double_ou_moitie", { a: { min: 2, max: 50 }, facteurs: [20, 50] }],
+
+  ["MA.CM.DIV_RESTE", 1, "div", "resultat", "cpa_barres", "rectangle", "division_exacte_par_les_tables", { type: "exacte", tables: [2, 3, 4, 5], quotient: { min: 1, max: 10 } }],
+  ["MA.CM.DIV_RESTE", 2, "div", "reste", "exemples_estompes", "aucun", "plus_grand_multiple_inferieur", { type: "avec_reste", diviseur: { min: 2, max: 9 }, dividende: { min: 10, max: 89 } }],
+  ["MA.CM.DIV_RESTE", 3, "div", "reste", "variation", "aucun", "division_par_nombres_ronds", { type: "avec_reste", diviseurs: [10, 25, 50, 100], dividende: { min: 30, max: 990 } }],
+  ["MA.CM.DIV_RESTE", 4, "div", "reste", "probleme_dabord", "aucun", "division_en_contexte", { type: "melange", tables: [2, 3, 4, 5, 6, 7, 8, 9], diviseurs: [10, 25, 50, 100], contexte: true }],
+];
+
+const TABLE_STRATS: Record<number, string> = {
+  2: "double",
+  3: "double_plus_une_fois",
+  4: "double_du_double",
+  5: "moitie_de_x10",
+  6: "double_de_x3",
+  7: "cinq_fois_plus_deux_fois",
+  8: "double_de_x4",
+  9: "dix_fois_moins_une_fois",
+};
+
+function tableRows(): Row[] {
+  const rows: Row[] = [];
+  for (const n of [2, 5, 3, 4, 6, 9, 8, 7]) {
+    const strat = TABLE_STRATS[n];
+    const code = `MA.TABLES.${n}`;
+    rows.push([code, 1, "mul", "resultat", "cpa_barres", "rectangle", strat, { table: n, facteur: { min: 1, max: 10 }, ordre: "croissant" }]);
+    rows.push([code, 2, "mul", "resultat", "exemples_estompes", "aucun", strat, { table: n, facteur: { min: 1, max: 10 }, ordre: "aleatoire", saisie: true }]);
+    rows.push([code, 3, "mul", "terme_manquant", "variation", "aucun", strat, { table: n, facteur: { min: 1, max: 10 }, variantes: ["terme_manquant", "commutativite", "combien_de_fois"] }]);
+    rows.push([code, 4, "mul", "resultat", "probleme_dabord", "aucun", strat, { table: n, tables_debloquees: true, derives: ["70x8", "7x80"] }]);
+  }
+  return rows;
+}
+
+function exerciceId(competence: string, niveau: number): string {
+  // Miroir de md5(competence:niveau:calcul) cote SQL, mais un id lisible suffit
+  // cote client (jamais renvoye a la base : la base fournit ses propres ids).
+  return `${competence}:${niveau}`;
+}
+
+function toSource(r: Row): ExCalcul {
+  const [competence, niveau, operation, forme, methode, support, strategie, params] = r;
+  return {
+    exerciceId: exerciceId(competence, niveau),
+    competence,
+    niveau,
+    methode,
+    operation,
+    forme,
+    params,
+    support,
+    correctionStrategie: strategie,
+  };
+}
+
+export const SEED_SOURCES: ExCalcul[] = [...CM, ...tableRows()].map(toSource);

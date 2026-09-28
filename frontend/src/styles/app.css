@@ -214,6 +214,38 @@ p.kk-lead { color: var(--kk-text-2); max-width: 52ch; }
 .kk-plot__state { font-size: 0.78rem; color: var(--kk-text-2); }
 .kk-plot--vide { opacity: 0.75; border-style: dashed; }
 
+/* ------------------------------ Seance --------------------------------- */
+.kk-seance { min-height: 100vh; display: flex; flex-direction: column; background: var(--kk-bg); color: var(--kk-text); }
+.kk-seance__top { display: flex; align-items: center; gap: 12px; padding: clamp(10px, 2.5vw, 16px); }
+.kk-progress { flex: 1; height: 14px; border-radius: 999px; background: var(--kk-border); overflow: hidden; }
+.kk-progress__fill { height: 100%; background: var(--kk-accent); border-radius: 999px; transition: width 0.3s ease; }
+.kk-seance__main { flex: 1; width: 100%; max-width: 620px; margin: 0 auto; padding: 8px clamp(14px, 4vw, 28px); display: flex; flex-direction: column; gap: 16px; }
+.kk-enonce { font-size: clamp(2.2rem, 9vw, 3.4rem); font-weight: 700; text-align: center; letter-spacing: 0.01em; color: var(--kk-text); margin: 8px 0; }
+.kk-answer { display: flex; gap: 12px; justify-content: center; align-items: center; }
+.kk-answer__box {
+  min-width: 96px; min-height: 72px; padding: 8px 18px; font-size: 2.4rem; font-weight: 700;
+  text-align: center; border: 3px solid var(--kk-border); border-radius: var(--kk-radius);
+  background: var(--kk-surface); color: var(--kk-text); display: inline-flex; align-items: center; justify-content: center;
+}
+.kk-answer__box--active { border-color: var(--kk-accent); }
+.kk-answer__label { font-size: 0.9rem; color: var(--kk-text-2); display: block; text-align: center; }
+.kk-pad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; max-width: 360px; margin: 0 auto; width: 100%; }
+.kk-pad button {
+  font-family: inherit; font-size: 1.8rem; font-weight: 700; min-height: 64px;
+  border: 1px solid var(--kk-border); background: var(--kk-surface); color: var(--kk-text);
+  border-radius: var(--kk-radius); cursor: pointer;
+}
+.kk-pad button:active { transform: translateY(1px); }
+.kk-pad button:focus-visible { outline: 3px solid var(--kk-accent); outline-offset: 2px; }
+.kk-banner { display: flex; flex-direction: column; gap: 10px; padding: 16px; border-radius: var(--kk-radius); }
+.kk-banner--ok { background: var(--kk-success-bg); color: var(--kk-success-text); border: 1px solid var(--kk-success-text); }
+.kk-banner--ko { background: var(--kk-danger-bg); color: var(--kk-danger-text); border: 1px solid var(--kk-danger-text); }
+.kk-banner__title { font-weight: 700; font-size: 1.15rem; display: flex; align-items: center; gap: 8px; }
+.kk-banner__gain { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; }
+.kk-support { display: flex; justify-content: center; margin: 4px 0; }
+.kk-support svg { max-width: 100%; height: auto; }
+.kk-sure { text-align: center; }
+
 /* ------------------------------ Divers --------------------------------- */
 .kk-row { display: flex; gap: 12px; flex-wrap: wrap; }
 .kk-stack > * + * { margin-top: 14px; }
