@@ -87,6 +87,35 @@ describe("engine : adaptation", () => {
     st = step(st, false, false).state;
     expect(st.slots.length).toBe(before);
   });
+
+  it("3 erreurs sur 5 -> bascule vers une competence MAITRISEE (confiance)", () => {
+    const srcB = { ...SEED_SOURCES.find((s) => s.competence === "MA.TABLES.5")!, niveau: 2 };
+    const srcA = { ...SEED_SOURCES.find((s) => s.competence === "MA.CM.ADDITION")!, niveau: 2 };
+    const mk = (src: typeof srcA, seed: number): PlannedItem => ({
+      source: src,
+      category: "lacune" as const,
+      exercise: generateExercise(src, seed),
+    });
+    // B maitrisee (2 reussites), puis A qui echoue 3 fois sur 5.
+    const plan: PlannedItem[] = [
+      mk(srcB, 1),
+      mk(srcB, 2),
+      mk(srcA, 3),
+      mk(srcA, 4),
+      mk(srcA, 5),
+      mk(srcA, 6),
+      mk(srcA, 7),
+    ];
+    let st = createEngine(plan, 1);
+    const before = st.slots.length;
+    for (const c of [true, true, false, true, false]) st = step(st, c).state; // B,B,A,A,A
+    const r = step(st, false); // A -> 3/5 -> drop + bascule
+    st = r.state;
+    expect(r.event.dropped).toBe(true);
+    expect(r.event.switched).toBe("MA.TABLES.5");
+    expect(st.slots.length).toBe(before + 1);
+    expect(currentSlot(st)?.exercise.competence).toBe("MA.TABLES.5");
+  });
 });
 
 describe("engine : deroulement", () => {

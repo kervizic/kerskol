@@ -242,6 +242,11 @@ p.kk-lead { color: var(--kk-text-2); max-width: 52ch; }
 .kk-banner--ko { background: var(--kk-danger-bg); color: var(--kk-danger-text); border: 1px solid var(--kk-danger-text); }
 .kk-banner__title { font-weight: 700; font-size: 1.15rem; display: flex; align-items: center; gap: 8px; }
 .kk-banner__gain { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; }
+.kk-eq { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px; }
+.kk-eq__box {
+  min-width: 64px; min-height: 56px; padding: 4px 14px; font-size: clamp(1.8rem, 7vw, 2.6rem);
+  cursor: pointer; font-family: inherit;
+}
 .kk-support { display: flex; justify-content: center; margin: 4px 0; }
 .kk-support svg { max-width: 100%; height: auto; }
 .kk-sure { text-align: center; }

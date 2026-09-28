@@ -33,9 +33,21 @@ export interface ExCalcul {
   correctionStrategie: string | null;
 }
 
+// Support visuel. INVARIANT : aucune etiquette ne revele la reponse. Sur la
+// droite graduee, on montre le point de DEPART et le(s) BOND(S) (arcs etiquetes
+// « +n »), jamais le point d'arrivee lorsqu'il vaut la reponse. Sur le
+// rectangle, la grille lignes x colonnes sans le total. Regle testee : toute
+// etiquette du support est un nombre deja present dans l'enonce (voir
+// generator.test.ts).
 export type SupportData =
   | { kind: "rectangle"; rows: number; cols: number }
-  | { kind: "droite"; from: number; to: number; steps: number[] };
+  | {
+      kind: "droite";
+      from: number;
+      to: number;
+      points: { v: number; label: string }[]; // reperes etiquetes (valeurs connues)
+      jumps: { from: number; to: number; label: string | null }[]; // bonds (arc)
+    };
 
 export interface GeneratedExercise {
   key: string; // clef React stable
@@ -114,7 +126,28 @@ function correctionTable(table: number, f: number): string {
 }
 
 // ------------------------------- Generateur -------------------------------
+// Place la (les) case(s) de reponse DANS l'operation : « 2 + 5 = [q] »,
+// « 7 × [q] = 56 », « 38 ÷ 5 = [q] reste [r] ». Les enonces qui sont deja des
+// questions (« Combien de fois … ? ») gardent une case separee (pas de jeton).
+function withAnswerBox(prompt: string): string {
+  if (prompt.includes("[q]") || prompt.includes("[r]")) return prompt;
+  if (prompt.includes("…")) {
+    return prompt.replace("… reste …", "[q] reste [r]").replace("…", "[q]");
+  }
+  if (prompt.trimEnd().endsWith("?")) return prompt; // question -> case separee
+  return `${prompt} = [q]`;
+}
+
 export function generateExercise(
+  src: ExCalcul,
+  seed: number,
+  opts: { rattrapage?: boolean } = {}
+): GeneratedExercise {
+  const ex = buildExercise(src, seed, opts);
+  return { ...ex, prompt: withAnswerBox(ex.prompt) };
+}
+
+function buildExercise(
   src: ExCalcul,
   seed: number,
   opts: { rattrapage?: boolean } = {}
@@ -267,8 +300,21 @@ export function generateExercise(
         prompt: `${n} + … = ${cible}`,
         answer,
         correction: complementCorrection(n, cible, answer),
+        // Terme manquant : on montre le depart (n) et la cible, le bond reste
+        // A TROUVER (arc non etiquete) -> la reponse n'est jamais affichee.
         supportData:
-          base.support === "droite" ? { kind: "droite", from: 0, to: cible, steps: [n, cible] } : undefined,
+          base.support === "droite"
+            ? {
+                kind: "droite",
+                from: 0,
+                to: cible,
+                points: [
+                  { v: n, label: String(n) },
+                  { v: cible, label: String(cible) },
+                ],
+                jumps: [{ from: n, to: cible, label: null }],
+              }
+            : undefined,
       };
     }
     // Complement au rang superieur (dizaine/centaine/millier).
@@ -284,7 +330,18 @@ export function generateExercise(
       answer,
       correction: `On vise ${target} (la ${rang} juste au-dessus de ${n}). ${target} − ${n} = ${answer}.`,
       supportData:
-        base.support === "droite" ? { kind: "droite", from: n, to: target, steps: [n, target] } : undefined,
+        base.support === "droite"
+          ? {
+              kind: "droite",
+              from: n,
+              to: target,
+              points: [
+                { v: n, label: String(n) },
+                { v: target, label: String(target) },
+              ],
+              jumps: [{ from: n, to: target, label: null }],
+            }
+          : undefined,
     };
   }
 
@@ -347,8 +404,22 @@ export function generateExercise(
       prompt: `${a} × ${facteur}`,
       answer,
       correction,
+      // Bonds repetes de `facteur` (compter par paquets) ; l'arrivee (le
+      // resultat) n'est pas etiquetee.
       supportData:
-        base.support === "droite" ? { kind: "droite", from: 0, to: answer, steps: [a, answer] } : undefined,
+        base.support === "droite"
+          ? {
+              kind: "droite",
+              from: 0,
+              to: answer,
+              points: [],
+              jumps: Array.from({ length: a }, (_, i) => ({
+                from: i * facteur,
+                to: (i + 1) * facteur,
+                label: `+${facteur}`,
+              })),
+            }
+          : undefined,
     };
   }
 
@@ -492,8 +563,18 @@ export function generateExercise(
       prompt: `${a} + ${b}`,
       answer,
       correction: `Je pars du plus grand (${Math.max(a, b)}) et j'ajoute ${Math.min(a, b)} → ${answer}.`,
+      // Depart au plus grand, un bond « +petit » ; l'arrivee (le resultat)
+      // n'est pas etiquetee.
       supportData:
-        base.support === "droite" ? { kind: "droite", from: 0, to: 10, steps: [Math.max(a, b), answer] } : undefined,
+        base.support === "droite"
+          ? {
+              kind: "droite",
+              from: 0,
+              to: 10,
+              points: [{ v: Math.max(a, b), label: String(Math.max(a, b)) }],
+              jumps: [{ from: Math.max(a, b), to: answer, label: `+${Math.min(a, b)}` }],
+            }
+          : undefined,
     };
   }
 

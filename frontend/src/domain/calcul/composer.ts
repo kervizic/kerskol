@@ -10,8 +10,9 @@
 //   * 1re seance (aucune reponse encore) = competences SANS prerequis.
 
 import { isUnlocked } from "../buildings";
-import type { Competence, Prerequis, ProgressionDetail } from "../../lib/types";
+import type { Classe, Competence, Prerequis, ProgressionDetail } from "../../lib/types";
 import { generateExercise, type ExCalcul, type GeneratedExercise } from "./generator";
+import { classPlan, classUnlocks } from "./classes";
 import { hashSeed, makeRng, pick, type Rng } from "./rng";
 
 export type { ProgressionDetail };
@@ -32,6 +33,7 @@ export interface ComposeInput {
   seed: number;
   now: number; // ms epoch
   count?: number;
+  classe?: Classe; // pilote la 1re seance et les competences presumees debloquees
 }
 
 function progMap(progress: ProgressionDetail[]): Record<string, ProgressionDetail> {
@@ -64,31 +66,67 @@ interface BlockSpec {
   size: number;
 }
 
+// Premiere seance : pilotee par le plan de classe (aucune progression encore).
+function composeFirstSession(
+  classe: Classe,
+  active: Competence[],
+  sources: ExCalcul[],
+  count: number,
+  seed: number,
+  rng: Rng
+): PlannedItem[] {
+  const plan = classPlan(classe);
+  const exists = (code: string) =>
+    active.some((c) => c.code === code) && sources.some((s) => s.competence === code);
+
+  const specs: BlockSpec[] = [];
+
+  // Amorce : au plus 2 exercices de revision faciles (1 item par competence).
+  const revision = Object.entries(plan.revision).filter(([code]) => exists(code));
+  for (const [competence, niveau] of revision.slice(0, 2)) {
+    specs.push({ competence, niveau, category: "revision", size: 1 });
+  }
+
+  // Coeur de la classe : remplit le reste par blocs de 2-3, une competence par
+  // bloc tant que possible.
+  const coeur = Object.entries(plan.coeur).filter(([code]) => exists(code));
+  let remaining = count - specs.length;
+  let ci = 0;
+  while (remaining > 0 && coeur.length > 0 && ci < coeur.length) {
+    const [competence, niveau] = coeur[ci];
+    const size = Math.min(3, remaining);
+    specs.push({ competence, niveau, category: "placement", size });
+    remaining -= size;
+    ci++;
+  }
+
+  return materialize(specs, sources, seed, rng);
+}
+
 export function composeSession(input: ComposeInput): PlannedItem[] {
   const { competences, prerequis, sources, seed, now } = input;
+  const classe: Classe = input.classe ?? "CE2";
   const count = input.count ?? 12;
   const rng = makeRng(seed);
   const byCode = progMap(input.progress);
 
   const active = competences.filter((c) => c.actif !== false);
-  // Une progression sert de reference "deja debloque".
+  // Une progression sert de reference "deja debloque". Une competence est
+  // retenue si ses prerequis sont atteints OU si la classe la presume debloquee
+  // (coeur/revision de la classe, prerequis presumes tant qu'ils ne sont pas
+  // infirmes).
   const progForUnlock: Record<string, { niveau_max_atteint: number }> = {};
   for (const p of input.progress) progForUnlock[p.competence] = { niveau_max_atteint: p.niveau_max_atteint };
-  const unlocked = active.filter((c) =>
-    isUnlocked(c.code, prerequis, progForUnlock as never)
+  const unlocked = active.filter(
+    (c) => isUnlocked(c.code, prerequis, progForUnlock as never) || classUnlocks(classe, c.code)
   );
 
-  // --- 1re seance : aucune reponse -> competences sans prerequis ----------
+  // --- 1re seance : aucune reponse -> plan de la CLASSE -------------------
+  // Impression « a son niveau » : au plus 2 exercices de revision faciles
+  // (classe precedente, niveau eleve) en amorce, puis le coeur de la classe.
   const isFirstSession = input.progress.length === 0;
   if (isFirstSession) {
-    const noPrereq = unlocked.filter(
-      (c) => !prerequis.some((r) => r.competence === c.code)
-    );
-    const specs = buildBlocks(
-      noPrereq.map((c) => ({ competence: c.code, niveau: 1, category: "placement" as Category })),
-      count
-    );
-    return materialize(specs, sources, seed, rng);
+    return composeFirstSession(classe, active, sources, count, seed, rng);
   }
 
   // --- Classement des competences debloquees ------------------------------

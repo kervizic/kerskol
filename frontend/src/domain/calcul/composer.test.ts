@@ -85,25 +85,40 @@ function blockSizes(codes: string[]): number[] {
   return sizes;
 }
 
-describe("composeSession : 1re seance", () => {
-  it("ne contient que des competences sans prerequis, au niveau 1", () => {
-    const plan = composeSession({
-      competences: COMPETENCES,
-      prerequis: PREREQUIS,
-      progress: [],
-      sources: SEED_SOURCES,
-      seed: 42,
-      now: NOW,
-    });
+describe("composeSession : 1re seance CE2 (sensible a la classe)", () => {
+  const plan = composeSession({
+    competences: COMPETENCES,
+    prerequis: PREREQUIS,
+    progress: [],
+    sources: SEED_SOURCES,
+    seed: 42,
+    now: NOW,
+    classe: "CE2",
+  });
+
+  it("au plus 2 exercices de revision faciles en amorce", () => {
     expect(plan.length).toBeGreaterThan(0);
     expect(plan.length).toBeLessThanOrEqual(12);
+    const revision = plan.filter((p) => p.category === "revision");
+    expect(revision.length).toBeLessThanOrEqual(2);
+    // Les revisions demarrent a un niveau eleve (>= 2), pas au niveau 1.
+    for (const p of revision) expect(p.exercise.niveau).toBeGreaterThanOrEqual(2);
+  });
+
+  it("propose des competences coeur de CE2 des la 1re seance", () => {
     const codes = new Set(plan.map((p) => p.exercise.competence));
-    for (const c of codes) {
-      expect(PREREQUIS.some((r) => r.competence === c)).toBe(false);
-    }
-    expect(codes.has("MA.CM.ADDITION")).toBe(true);
-    expect(codes.has("MA.CM.X10_X100")).toBe(true);
-    for (const p of plan) expect(p.exercise.niveau).toBe(1);
+    const coeurCE2 = [
+      "MA.TABLES.2",
+      "MA.TABLES.5",
+      "MA.CM.COMPL_100_1000",
+      "MA.CM.SOMMES_DIFF",
+    ];
+    expect(coeurCE2.some((c) => codes.has(c))).toBe(true);
+  });
+
+  it("la majorite des exercices ne sont PAS de la revision (impression « a son niveau »)", () => {
+    const revision = plan.filter((p) => p.category === "revision").length;
+    expect(revision).toBeLessThan(plan.length - revision);
   });
 });
 

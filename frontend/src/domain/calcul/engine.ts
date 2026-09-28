@@ -35,6 +35,7 @@ export interface EngineState {
   slots: Slot[];
   pos: number;
   comps: Record<string, CompLive>;
+  sourceByComp: Record<string, ExCalcul>; // 1 source par competence (bascule)
   seed: number;
   counter: number;
 }
@@ -43,10 +44,12 @@ export interface AnswerEvent {
   levelChange: { competence: string; from: number; to: number } | null;
   reinserted: boolean;
   dropped: boolean;
+  switched: string | null; // competence maitrisee vers laquelle on a bascule
 }
 
 export function createEngine(plan: PlannedItem[], seed: number): EngineState {
   const comps: Record<string, CompLive> = {};
+  const sourceByComp: Record<string, ExCalcul> = {};
   const slots: Slot[] = plan.map((it) => {
     if (!comps[it.exercise.competence]) {
       comps[it.exercise.competence] = {
@@ -58,6 +61,7 @@ export function createEngine(plan: PlannedItem[], seed: number): EngineState {
         hintNext: false,
       };
     }
+    if (!sourceByComp[it.exercise.competence]) sourceByComp[it.exercise.competence] = it.source;
     return {
       exercise: it.exercise,
       source: it.source,
@@ -66,7 +70,32 @@ export function createEngine(plan: PlannedItem[], seed: number): EngineState {
       correct: null,
     };
   });
-  return { slots, pos: skipDropped(slots, comps, 0), comps, seed, counter: plan.length };
+  return { slots, pos: skipDropped(slots, comps, 0), comps, sourceByComp, seed, counter: plan.length };
+}
+
+// Choisit une competence MAITRISEE (moral eleve) vers laquelle basculer pour
+// redonner confiance : meilleur ratio de reussite dans la fenetre, non
+// abandonnee, differente de `exclude`. A egalite, niveau le plus eleve.
+function pickConfidenceComp(
+  comps: Record<string, CompLive>,
+  exclude: string
+): string | null {
+  let best: string | null = null;
+  let bestScore = -1;
+  let bestNiveau = -1;
+  for (const code of Object.keys(comps)) {
+    if (code === exclude) continue;
+    const c = comps[code];
+    if (c.dropped) continue;
+    const len = c.window.length;
+    const ratio = len > 0 ? c.window.filter((w) => w).length / len : 0.5;
+    if (ratio > bestScore || (ratio === bestScore && c.niveau > bestNiveau)) {
+      best = code;
+      bestScore = ratio;
+      bestNiveau = c.niveau;
+    }
+  }
+  return best;
 }
 
 function skipDropped(
@@ -116,7 +145,7 @@ export function answerCurrent(
   opts: { correctionRead?: boolean } = {}
 ): { state: EngineState; event: AnswerEvent } {
   const s = currentSlot(state);
-  const event: AnswerEvent = { levelChange: null, reinserted: false, dropped: false };
+  const event: AnswerEvent = { levelChange: null, reinserted: false, dropped: false, switched: null };
   if (!s) return { state, event };
 
   const slots = state.slots.slice();
@@ -188,7 +217,34 @@ export function answerCurrent(
     event.reinserted = true;
   }
 
-  const next = { slots, pos: 0, comps, seed: state.seed, counter };
+  // Bascule confiance : quand on abandonne une notion (3/5), on enchaine sur une
+  // competence MAITRISEE pour redonner confiance (au lieu de simplement retirer).
+  if (event.dropped) {
+    const conf = pickConfidenceComp(comps, code);
+    const confSource = conf ? state.sourceByComp[conf] : null;
+    if (conf && confSource) {
+      const eff: ExCalcul = { ...confSource, niveau: comps[conf].niveau };
+      const newSeed = hashSeed(state.seed, conf, comps[conf].niveau, "confiance", counter);
+      slots.splice(state.pos + 1, 0, {
+        exercise: generateExercise(eff, newSeed),
+        source: eff,
+        category: "revision",
+        answered: false,
+        correct: null,
+      });
+      counter += 1;
+      event.switched = conf;
+    }
+  }
+
+  const next = {
+    slots,
+    pos: 0,
+    comps,
+    sourceByComp: state.sourceByComp,
+    seed: state.seed,
+    counter,
+  };
   next.pos = skipDropped(slots, comps, state.pos + 1);
   return { state: next, event };
 }

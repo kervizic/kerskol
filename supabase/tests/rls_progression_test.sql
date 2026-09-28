@@ -39,12 +39,15 @@ INSERT INTO membres_foyer (foyer_id, user_id) VALUES
     ('bbbbbbbb-0000-0000-0000-000000000000', :'uB');
 
 -- Profils foyer A (un par test pour isoler la monnaie) + un profil foyer B.
-INSERT INTO profils (id, foyer_id, surnom) VALUES
-    ('a0000001-0000-0000-0000-000000000000', 'aaaaaaaa-0000-0000-0000-000000000000', 'Placement'),
-    ('a0000002-0000-0000-0000-000000000000', 'aaaaaaaa-0000-0000-0000-000000000000', 'Hysterese'),
-    ('a0000003-0000-0000-0000-000000000000', 'aaaaaaaa-0000-0000-0000-000000000000', 'Monnaie'),
-    ('a0000004-0000-0000-0000-000000000000', 'aaaaaaaa-0000-0000-0000-000000000000', 'Journal'),
-    ('b0000001-0000-0000-0000-000000000000', 'bbbbbbbb-0000-0000-0000-000000000000', 'EnfantB');
+-- classe = 'CM2' : aucune ligne placement_depart -> depart d'escalier au niveau 1
+-- (on teste ici la MECANIQUE du placement/hysterese, independamment de la classe ;
+-- le depart sensible a la classe est couvert par placement_depart_test.sql).
+INSERT INTO profils (id, foyer_id, surnom, classe) VALUES
+    ('a0000001-0000-0000-0000-000000000000', 'aaaaaaaa-0000-0000-0000-000000000000', 'Placement', 'CM2'),
+    ('a0000002-0000-0000-0000-000000000000', 'aaaaaaaa-0000-0000-0000-000000000000', 'Hysterese', 'CM2'),
+    ('a0000003-0000-0000-0000-000000000000', 'aaaaaaaa-0000-0000-0000-000000000000', 'Monnaie', 'CM2'),
+    ('a0000004-0000-0000-0000-000000000000', 'aaaaaaaa-0000-0000-0000-000000000000', 'Journal', 'CM2'),
+    ('b0000001-0000-0000-0000-000000000000', 'bbbbbbbb-0000-0000-0000-000000000000', 'EnfantB', 'CM2');
 
 \set pPlace   'a0000001-0000-0000-0000-000000000000'
 \set pHyst    'a0000002-0000-0000-0000-000000000000'

@@ -97,24 +97,114 @@ function SupportView({ data }: { data: SupportData }) {
       </div>
     );
   }
-  // Droite numerique
+  // Droite graduee : depart + bond(s) etiquetes. Le point d'arrivee (la reponse)
+  // n'est JAMAIS etiquete.
   const from = data.from;
   const to = data.to;
   const span = Math.max(1, to - from);
   const W = 520;
-  const pad = 20;
+  const H = 92;
+  const pad = 24;
+  const axisY = 62;
   const x = (v: number) => pad + ((v - from) / span) * (W - 2 * pad);
+
+  // Graduations regulieres lisibles : vise ~10-16 intervalles avec un pas rond.
+  const rawStep = span / 12;
+  const pow = Math.pow(10, Math.floor(Math.log10(Math.max(1, rawStep))));
+  const niceStep = [1, 2, 5, 10].map((m) => m * pow).find((s) => span / s <= 16) ?? pow * 10;
+  const ticks: number[] = [];
+  for (let v = from; v <= to + 1e-6; v += niceStep) ticks.push(Math.round(v));
+
   return (
     <div className="kk-support">
-      <svg width="100%" height="64" viewBox={`0 0 ${W} 64`} role="img" aria-label="droite numerique">
-        <line x1={pad} y1={32} x2={W - pad} y2={32} stroke="var(--kk-border)" strokeWidth={3} />
-        {data.steps.map((v, i) => (
-          <g key={i}>
-            <circle cx={x(v)} cy={32} r={7} fill="var(--kk-accent)" />
-            <text x={x(v)} y={56} textAnchor="middle" fontSize="16" fill="var(--kk-text)">{v}</text>
+      <svg width="100%" height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label="droite graduee">
+        <line x1={pad} y1={axisY} x2={W - pad} y2={axisY} stroke="var(--kk-border)" strokeWidth={3} />
+        {ticks.map((v, i) => (
+          <line key={`t${i}`} x1={x(v)} y1={axisY - 6} x2={x(v)} y2={axisY + 6} stroke="var(--kk-border)" strokeWidth={2} />
+        ))}
+        {data.jumps.map((j, i) => {
+          const x1 = x(j.from);
+          const x2 = x(j.to);
+          const mx = (x1 + x2) / 2;
+          return (
+            <g key={`j${i}`}>
+              <path
+                d={`M ${x1} ${axisY - 6} Q ${mx} ${axisY - 34} ${x2} ${axisY - 6}`}
+                fill="none"
+                stroke="var(--kk-accent)"
+                strokeWidth={3}
+                markerEnd="url(#kk-arrow)"
+              />
+              {j.label && (
+                <text x={mx} y={axisY - 36} textAnchor="middle" fontSize="17" fontWeight={700} fill="var(--kk-accent)">
+                  {j.label}
+                </text>
+              )}
+            </g>
+          );
+        })}
+        {data.points.map((p, i) => (
+          <g key={`p${i}`}>
+            <circle cx={x(p.v)} cy={axisY} r={7} fill="var(--kk-accent)" />
+            <text x={x(p.v)} y={axisY + 24} textAnchor="middle" fontSize="17" fontWeight={700} fill="var(--kk-text)">
+              {p.label}
+            </text>
           </g>
         ))}
+        <defs>
+          <marker id="kk-arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="var(--kk-accent)" />
+          </marker>
+        </defs>
       </svg>
+    </div>
+  );
+}
+
+// Rend l'operation avec la (les) case(s) de reponse A LEUR PLACE dans l'egalite
+// (« 2 + 5 = [ ] », « 7 × [ ] = 56 », « 38 ÷ 5 = [ ] reste [ ] »). Les enonces
+// sans jeton (questions) restent en texte simple, la case est affichee a part.
+function EquationView({
+  prompt,
+  f1,
+  f2,
+  active,
+  onPick,
+}: {
+  prompt: string;
+  f1: string;
+  f2: string;
+  active: 1 | 2;
+  onPick: (n: 1 | 2) => void;
+}) {
+  if (!prompt.includes("[q]") && !prompt.includes("[r]")) {
+    return (
+      <div className="kk-enonce" aria-live="polite">
+        {prompt}
+      </div>
+    );
+  }
+  const parts = prompt.split(/(\[q\]|\[r\])/).filter((p) => p !== "");
+  return (
+    <div className="kk-enonce kk-eq" aria-live="polite">
+      {parts.map((p, i) => {
+        if (p === "[q]" || p === "[r]") {
+          const slot: 1 | 2 = p === "[r]" ? 2 : 1;
+          const val = slot === 2 ? f2 : f1;
+          return (
+            <button
+              key={i}
+              type="button"
+              className={`kk-answer__box kk-eq__box${active === slot ? " kk-answer__box--active" : ""}`}
+              aria-label={slot === 2 ? "reste" : "reponse"}
+              onClick={() => onPick(slot)}
+            >
+              {val || "?"}
+            </button>
+          );
+        }
+        return <span key={i}>{p}</span>;
+      })}
     </div>
   );
 }
@@ -180,6 +270,7 @@ export function Session({
           sources,
           seed: (Date.now() ^ 0x9e3779b9) >>> 0,
           now: Date.now(),
+          classe: profil.classe,
         });
         placement.current = {};
         for (const p of progress_) placement.current[p.competence] = p.placement_termine;
@@ -443,7 +534,7 @@ export function Session({
       <main className="kk-seance__main">
         {ex.support !== "aucun" && ex.supportData && <SupportView data={ex.supportData} />}
 
-        <div className="kk-enonce" aria-live="polite">{ex.prompt}</div>
+        <EquationView prompt={ex.prompt} f1={f1} f2={f2} active={active} onPick={setActive} />
 
         {hint && phase === "answering" && (
           <p className="kk-muted" style={{ textAlign: "center" }}>
@@ -453,32 +544,34 @@ export function Session({
 
         {phase === "answering" || phase === "sure" ? (
           <>
-            <div className="kk-answer">
-              {ex.fields === 2 ? (
-                <>
-                  <div>
-                    <span className="kk-answer__label">resultat</span>
-                    <button
-                      className={`kk-answer__box${active === 1 ? " kk-answer__box--active" : ""}`}
-                      onClick={() => setActive(1)}
-                    >
-                      {f1 || "?"}
-                    </button>
-                  </div>
-                  <div>
-                    <span className="kk-answer__label">reste</span>
-                    <button
-                      className={`kk-answer__box${active === 2 ? " kk-answer__box--active" : ""}`}
-                      onClick={() => setActive(2)}
-                    >
-                      {f2 || "?"}
-                    </button>
-                  </div>
-                </>
-              ) : (
-                <div className="kk-answer__box kk-answer__box--active">{f1 || "?"}</div>
-              )}
-            </div>
+            {!ex.prompt.includes("[q]") && !ex.prompt.includes("[r]") && (
+              <div className="kk-answer">
+                {ex.fields === 2 ? (
+                  <>
+                    <div>
+                      <span className="kk-answer__label">resultat</span>
+                      <button
+                        className={`kk-answer__box${active === 1 ? " kk-answer__box--active" : ""}`}
+                        onClick={() => setActive(1)}
+                      >
+                        {f1 || "?"}
+                      </button>
+                    </div>
+                    <div>
+                      <span className="kk-answer__label">reste</span>
+                      <button
+                        className={`kk-answer__box${active === 2 ? " kk-answer__box--active" : ""}`}
+                        onClick={() => setActive(2)}
+                      >
+                        {f2 || "?"}
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  <div className="kk-answer__box kk-answer__box--active">{f1 || "?"}</div>
+                )}
+              </div>
+            )}
 
             {phase === "sure" ? (
               <div className="kk-sure kk-stack">

@@ -26,8 +26,29 @@ par le générateur d'exercices côté client. Il complète `docs/pedagogie.md`
 Le niveau par compétence est calculé **par le serveur** (trigger sur
 `reponses`, fonction `calc_progression`). Règles :
 
+- **Niveau de départ sensible à la CLASSE** (migration
+  `0012_placement_depart.sql`, table `placement_depart(classe, competence,
+  niveau_depart)`) : le placement ne démarre plus systématiquement au niveau 1.
+  Pour une élève de **CE2**, les compétences de révision de la classe précédente
+  démarrent haut (elles servent de vérification rapide) :
+
+  | Compétence (CE2) | Rôle | Niveau de départ |
+  |------------------|------|:---:|
+  | `MA.CM.ADDITION` | révision CE1 | 3 |
+  | `MA.CM.DOUBLES` | révision CE1 | 3 |
+  | `MA.CM.MOITIES` | révision CE1 | 2 |
+  | `MA.CM.COMPL_SUP` | révision CE1 | 2 |
+  | `MA.CM.SOMMES_DIFF` | cœur CE2 | 2 |
+  | `MA.CM.COMPL_100_1000`, `MA.CM.X10_X100`, `MA.TABLES.2`, `MA.TABLES.5` | cœur CE2 | 1 (défaut) |
+
+  En l'absence de ligne, le départ reste **1** (comportement historique). Côté
+  composition (1re séance), le plan de classe (`domain/calcul/classes.ts`)
+  propose au plus **1-2 exercices de révision faciles** en amorce puis le cœur de
+  CE2, en **présumant** les prérequis de révision atteints au niveau 2 tant
+  qu'ils ne sont pas infirmés.
 - **Placement en escalier** à la première apparition (tant que
-  `placement_termine = false`) : départ niveau 1, **+1 par bonne réponse**
+  `placement_termine = false`) : départ au niveau de la classe (défaut 1),
+  **+1 par bonne réponse**
   (plafond 3), **−1 par erreur** (plancher 1). Le placement s'arrête à la
   **première erreur survenant après au moins une montée**, ou **après 5
   questions**. Le niveau plafond (3) n'est retenu que s'il a été **confirmé par
