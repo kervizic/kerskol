@@ -1,7 +1,7 @@
 import { AvatarView } from "../domain/avatars";
 import { universDef } from "../domain/univers";
 import { buildAccent } from "../theme/childColors";
-import { usePrefersDark } from "../components/ChildTheme";
+import { useEffectiveDark } from "../components/ChildTheme";
 import { getDernierProfil } from "../lib/session";
 import { ThemeToggle } from "../components/ThemeToggle";
 import type { Avatar, Profil } from "../lib/types";
@@ -33,7 +33,7 @@ export function WhoPlays({
   onPickChild: (p: Profil) => void;
   onReglages: () => void;
 }) {
-  const dark = usePrefersDark();
+  const dark = useEffectiveDark();
   const lastProfilId = getDernierProfil();
   return (
     <div className="kk-page kk-center">
