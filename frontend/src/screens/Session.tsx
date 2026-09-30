@@ -14,7 +14,7 @@ import {
 } from "../lib/inputMode";
 import { AvatarView } from "../domain/avatars";
 import { universDef } from "../domain/univers";
-import type { Avatar, Profil } from "../lib/types";
+import type { Profil } from "../lib/types";
 import type { Referentiel } from "../lib/api";
 import {
   createSeance,
@@ -238,7 +238,6 @@ export function Session({
   onProfilChange: (p: Profil) => void;
 }) {
   const u = universDef(profil.univers);
-  const av = profil.avatar as Avatar;
 
   const [engine, setEngine] = useState<EngineState | null>(null);
   const [phase, setPhase] = useState<Phase>("answering");
@@ -558,7 +557,7 @@ export function Session({
     <div className="kk-seance">
       <div className="kk-seance__top">
         <button className="kk-avatar-corner" onClick={onExit} aria-label="Quitter la seance" title="Retour au village">
-          <AvatarView forme={av?.forme} couleur={av?.couleur || "#E06A00"} size={40} />
+          <AvatarView avatar={profil.avatar} size={40} />
         </button>
         <div className="kk-progress" role="progressbar" aria-valuenow={prog.done} aria-valuemax={prog.total}>
           <div className="kk-progress__fill" style={{ width: `${(prog.done / Math.max(1, prog.total)) * 100}%` }} />

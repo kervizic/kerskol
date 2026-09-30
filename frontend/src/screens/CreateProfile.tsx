@@ -1,5 +1,12 @@
 import { useEffect, useState } from "react";
-import { AVATAR_COLORS, AVATAR_SHAPES, AvatarView } from "../domain/avatars";
+import { AVATAR_COLORS } from "../domain/avatars";
+import {
+  randomOptions,
+  STYLE_KEYS,
+  type AvatarOptions,
+  type StyleKey,
+} from "../domain/avatarConfig";
+import { AvatarEditor } from "../components/AvatarEditor";
 import { UNIVERS_LIST } from "../domain/univers";
 import { Feedback } from "../components/ui";
 import { createProfil } from "../lib/api";
@@ -24,7 +31,8 @@ interface Draft {
   jour: string;
   semaineOn: boolean;
   semaine: string;
-  forme: string;
+  style: StyleKey;
+  options: AvatarOptions;
   couleur: string;
   univers: UniversId;
 }
@@ -54,7 +62,8 @@ export function CreateProfile({
   const [jour, setJour] = useState(d?.jour ?? "20");
   const [semaineOn, setSemaineOn] = useState(d?.semaineOn ?? false);
   const [semaine, setSemaine] = useState(d?.semaine ?? "90");
-  const [forme, setForme] = useState(d?.forme ?? AVATAR_SHAPES[0].id);
+  const [style, setStyle] = useState<StyleKey>(d?.style ?? STYLE_KEYS[0]);
+  const [options, setOptions] = useState<AvatarOptions>(d?.options ?? randomOptions(d?.style ?? STYLE_KEYS[0]));
   const [couleur, setCouleur] = useState(d?.couleur ?? AVATAR_COLORS[0]);
   const [univers, setUnivers] = useState<UniversId>(d?.univers ?? "village_breton");
   const [saving, setSaving] = useState(false);
@@ -64,8 +73,8 @@ export function CreateProfile({
 
   // Sauvegarde du brouillon a chaque changement (restaure apres rechargement).
   useEffect(() => {
-    saveDraft({ step, surnom, classe, jourOn, jour, semaineOn, semaine, forme, couleur, univers } satisfies Draft);
-  }, [step, surnom, classe, jourOn, jour, semaineOn, semaine, forme, couleur, univers]);
+    saveDraft({ step, surnom, classe, jourOn, jour, semaineOn, semaine, style, options, couleur, univers } satisfies Draft);
+  }, [step, surnom, classe, jourOn, jour, semaineOn, semaine, style, options, couleur, univers]);
 
   async function finish() {
     setSaving(true);
@@ -74,7 +83,7 @@ export function CreateProfile({
       const p = await createProfil({
         foyer_id: foyerId,
         surnom: surnom.trim(),
-        avatar: { forme, couleur },
+        avatar: { style, options, couleur },
         univers,
         classe,
         matieres_actives: [MATIERE_ACTIVE],
@@ -241,22 +250,14 @@ export function CreateProfile({
         <div className="kk-card kk-stack">
           <div className="kk-field">
             <span>Ton avatar</span>
-            <div className="kk-chips" role="group" aria-label="Avatar">
-              {AVATAR_SHAPES.map((s) => (
-                <button
-                  key={s.id}
-                  className="kk-tile"
-                  aria-pressed={forme === s.id}
-                  style={{
-                    padding: 10,
-                    borderColor: forme === s.id ? "var(--kk-accent)" : "transparent",
-                  }}
-                  onClick={() => setForme(s.id)}
-                >
-                  <AvatarView forme={s.id} couleur={couleur} size={64} />
-                </button>
-              ))}
-            </div>
+            <AvatarEditor
+              style={style}
+              options={options}
+              onChange={(s, o) => {
+                setStyle(s);
+                setOptions(o);
+              }}
+            />
           </div>
 
           <div className="kk-field">

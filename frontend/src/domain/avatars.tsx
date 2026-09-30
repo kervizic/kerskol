@@ -1,22 +1,28 @@
-// Avatars SVG originaux, simples, neutres en genre (aucun personnage sous
-// licence). Chaque avatar est une forme sympathique coloree par l'enfant.
+// Rendu d'avatar UNIFIE :
+//   - nouveaux avatars DiceBear  -> <img> data-URI (genere localement, CSP-OK)
+//   - anciens avatars SVG maison  -> rendu inchange (retrocompatibilite : le
+//     profil d'Iris continue de s'afficher tant qu'il n'en choisit pas un neuf)
+import { useMemo } from "react";
+import {
+  AVATAR_COLORS,
+  isDicebearAvatar,
+  isLegacyAvatar,
+  renderDicebearDataUri,
+  type AnyAvatar,
+  type DicebearAvatar,
+  type LegacyAvatar,
+} from "./avatarConfig";
+
+// Reexport pour ne pas casser les imports existants (childColors, ecrans).
+export { AVATAR_COLORS };
+
+// ---- Avatars SVG maison (legacy, conserves pour la retrocompatibilite) ------
 
 export interface AvatarShape {
   id: string;
   label: string;
   render: (couleur: string) => JSX.Element;
 }
-
-export const AVATAR_COLORS = [
-  "#E06A00",
-  "#2F855A",
-  "#3182CE",
-  "#805AD5",
-  "#D53F8C",
-  "#00838F",
-  "#B7791F",
-  "#5A67D8",
-];
 
 // Chaque render dessine dans un viewBox 0 0 64 64.
 export const AVATAR_SHAPES: AvatarShape[] = [
@@ -106,25 +112,32 @@ export function avatarShape(id: string | undefined): AvatarShape {
   return AVATAR_SHAPES.find((a) => a.id === id) ?? AVATAR_SHAPES[0];
 }
 
-export function AvatarView({
-  forme,
-  couleur,
-  size = 64,
-}: {
-  forme: string | undefined;
-  couleur: string;
-  size?: number;
-}) {
+function DicebearImg({ avatar, size }: { avatar: DicebearAvatar; size: number }) {
+  const uri = useMemo(
+    () => renderDicebearDataUri(avatar.style, avatar.options, size),
+    [avatar.style, JSON.stringify(avatar.options), size]
+  );
+  return (
+    <img src={uri} width={size} height={size} alt="" role="img" aria-label="Avatar" style={{ display: "block", borderRadius: "16%" }} />
+  );
+}
+
+function LegacySvg({ forme, couleur, size }: { forme: string | undefined; couleur: string; size: number }) {
   const shape = avatarShape(forme);
   return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 64 64"
-      role="img"
-      aria-label={shape.label}
-    >
+    <svg width={size} height={size} viewBox="0 0 64 64" role="img" aria-label={shape.label}>
       {shape.render(couleur)}
     </svg>
   );
+}
+
+// Point d'entree unique. Accepte l'objet avatar (nouveau ou ancien) ; retombe
+// sur une forme maison par defaut si l'avatar est vide.
+export function AvatarView({ avatar, size = 64 }: { avatar: AnyAvatar | undefined; size?: number }) {
+  if (isDicebearAvatar(avatar)) {
+    return <DicebearImg avatar={avatar} size={size} />;
+  }
+  const forme = isLegacyAvatar(avatar) ? avatar.forme : undefined;
+  const couleur = (avatar as LegacyAvatar | undefined)?.couleur || "#E06A00";
+  return <LegacySvg forme={forme} couleur={couleur} size={size} />;
 }

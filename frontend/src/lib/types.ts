@@ -8,11 +8,13 @@ export type UniversId =
   | "vallee_dinosaures"
   | "village_gourmand";
 
-// Avatar stocke en jsonb : forme + couleur (SVG genere cote client).
-export interface Avatar {
-  forme: string; // cle d'un avatar SVG (voir domain/avatars.tsx)
-  couleur: string; // hex
-}
+// Avatar stocke en jsonb :
+//   nouveau : { style, options, couleur }  (DiceBear, genere cote client)
+//   ancien  : { forme, couleur }           (SVG maison, retrocompatibilite)
+// Types definis dans domain/avatarConfig (module pur, sans dependance a lib).
+import type { AnyAvatar } from "../domain/avatarConfig";
+export type { DicebearAvatar, LegacyAvatar, AnyAvatar } from "../domain/avatarConfig";
+export type Avatar = AnyAvatar;
 
 export type Classe = "CP" | "CE1" | "CE2" | "CM1" | "CM2";
 export const CLASSES: Classe[] = ["CP", "CE1", "CE2", "CM1", "CM2"];
@@ -23,7 +25,7 @@ export interface Profil {
   id: string;
   foyer_id: string;
   surnom: string;
-  avatar: Avatar | Record<string, never>;
+  avatar: Avatar;
   univers: UniversId;
   classe: Classe;
   matieres_actives: string[];

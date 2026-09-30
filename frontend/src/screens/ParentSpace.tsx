@@ -9,7 +9,7 @@ import {
   updateProfil,
 } from "../lib/api";
 import { messageClasse } from "./CreateProfile";
-import { CLASSES, type Avatar, type Classe, type JournalReglage, type Matiere, type Profil } from "../lib/types";
+import { CLASSES, type Classe, type JournalReglage, type Matiere, type Profil } from "../lib/types";
 
 const RETRY_KEY = "kerskol_retry_suppr_foyer";
 const MATIERE_ACTIVE = "MA";
@@ -55,7 +55,6 @@ function ProfilEditor({
   const [semaineOn, setSemaineOn] = useState(profil.limite_semaine_min != null);
   const [semaine, setSemaine] = useState(profil.limite_semaine_min?.toString() ?? "90");
   const [state, setState] = useState<"idle" | "saving" | "ok" | "err">("idle");
-  const av = profil.avatar as Avatar;
 
   // Valeur effective : null si l'interrupteur est off (retrait de la limite).
   const nextJour = jourOn ? num(jour) : null;
@@ -82,7 +81,7 @@ function ProfilEditor({
   return (
     <div className="kk-card kk-stack" style={{ marginBottom: 16 }}>
       <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-        <AvatarView forme={av?.forme} couleur={av?.couleur || "#E06A00"} size={48} />
+        <AvatarView avatar={profil.avatar} size={48} />
         <h2 style={{ margin: 0 }}>{profil.surnom}</h2>
       </div>
 

@@ -1,6 +1,16 @@
 import { useEffect, useState } from "react";
 import { Settings } from "lucide-react";
 import { AvatarView } from "../domain/avatars";
+import {
+  AVATAR_COLORS,
+  avatarColor,
+  isDicebearAvatar,
+  randomOptions,
+  STYLE_KEYS,
+  type AvatarOptions,
+  type StyleKey,
+} from "../domain/avatarConfig";
+import { AvatarEditor } from "../components/AvatarEditor";
 import { UNIVERS_LIST, universDef } from "../domain/univers";
 import { BUILDING_LABEL, computePort, type BuildingState } from "../domain/buildings";
 import { Spinner } from "../components/ui";
@@ -36,7 +46,15 @@ export function Village({
   const [progression, setProgression] = useState<Progression[] | null>(null);
   const [panel, setPanel] = useState(false);
   const u = universDef(profil.univers);
-  const av = profil.avatar as Avatar;
+  const couleur = avatarColor(profil.avatar);
+  // Etat de l'editeur : reprend l'avatar DiceBear existant, sinon un avatar
+  // neuf (l'ancien avatar reste affiche tant que l'enfant n'en choisit pas un).
+  const [style, setStyle] = useState<StyleKey>(
+    isDicebearAvatar(profil.avatar) ? profil.avatar.style : STYLE_KEYS[0]
+  );
+  const [options, setOptions] = useState<AvatarOptions>(
+    isDicebearAvatar(profil.avatar) ? profil.avatar.options : randomOptions(STYLE_KEYS[0])
+  );
 
   useEffect(() => {
     let alive = true;
@@ -60,6 +78,31 @@ export function Village({
     }
   }
 
+  // Persiste un avatar (optimiste). L'avatar N'EST PAS journalise (gout de
+  // l'enfant) : updateProfil ecrit directement la colonne, aucun trigger.
+  async function persistAvatar(avatar: Avatar) {
+    const previous = profil;
+    onProfilChange({ ...profil, avatar }); // garde tous les acquis
+    try {
+      await updateProfil(profil.id, { avatar });
+    } catch {
+      onProfilChange(previous);
+    }
+  }
+
+  function changeAvatar(nextStyle: StyleKey, nextOptions: AvatarOptions) {
+    setStyle(nextStyle);
+    setOptions(nextOptions);
+    void persistAvatar({ style: nextStyle, options: nextOptions, couleur });
+  }
+
+  // Change UNIQUEMENT la couleur : conserve l'avatar existant (ancien ou neuf)
+  // pour ne pas ecraser un avatar maison sur un simple choix de couleur.
+  function changeCouleur(next: string) {
+    if (next === couleur) return;
+    void persistAvatar({ ...(profil.avatar as object), couleur: next } as Avatar);
+  }
+
   const port = progression
     ? computePort(referentiel.competences, referentiel.prerequis, progression)
     : [];
@@ -73,7 +116,7 @@ export function Village({
           aria-label="Changer de joueur (retour à la sélection)"
           title="Retour à la sélection"
         >
-          <AvatarView forme={av?.forme} couleur={av?.couleur || "#E06A00"} size={44} />
+          <AvatarView avatar={profil.avatar} size={44} />
         </button>
         <span className="kk-money" title={`${profil.monnaie} ${u.monnaie}`}>
           <u.MonnaieIcon size={22} />
@@ -109,7 +152,29 @@ export function Village({
               </button>
             ))}
           </div>
-          <p className="kk-muted" style={{ fontSize: "0.85rem" }}>Avatar et couleur : bientôt.</p>
+
+          <h2 style={{ margin: "8px 0 0" }}>Mon avatar</h2>
+          <AvatarEditor style={style} options={options} onChange={changeAvatar} />
+
+          <h2 style={{ margin: "8px 0 0" }}>Ma couleur</h2>
+          <div className="kk-chips" role="group" aria-label="Couleur">
+            {AVATAR_COLORS.map((c) => (
+              <button
+                key={c}
+                onClick={() => changeCouleur(c)}
+                aria-label={`Couleur ${c}`}
+                aria-pressed={couleur === c}
+                style={{
+                  width: 44,
+                  height: 44,
+                  borderRadius: "50%",
+                  background: c,
+                  border: couleur === c ? "3px solid var(--kk-text)" : "3px solid transparent",
+                  cursor: "pointer",
+                }}
+              />
+            ))}
+          </div>
         </div>
       )}
 
