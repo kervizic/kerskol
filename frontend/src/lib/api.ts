@@ -16,6 +16,7 @@ import type {
   Avatar,
   Competence,
   JournalReglage,
+  LienEnAttente,
   Matiere,
   Prerequis,
   Profil,
@@ -87,12 +88,102 @@ export async function listProfils(foyerId: string): Promise<Profil[]> {
   const { data, error } = await supabase()
     .from("profils")
     .select(
-      "id, foyer_id, surnom, avatar, univers, classe, matieres_actives, limite_jour_min, limite_semaine_min, monnaie"
+      "id, foyer_id, surnom, avatar, univers, classe, matieres_actives, limite_jour_min, limite_semaine_min, monnaie, user_id"
     )
     .eq("foyer_id", foyerId)
     .order("cree_le", { ascending: true });
   if (error) throw error;
   return (data ?? []) as Profil[];
+}
+
+// Lecture d'un seul profil par id (utilise pour l'entree directe d'un enfant
+// relie : le RLS ne lui laisse voir que son propre profil).
+export async function getProfilById(id: string): Promise<Profil> {
+  if (isDemo()) {
+    const p = DEMO_PROFILS.find((x) => x.id === id);
+    if (!p) throw new Error("profil introuvable");
+    return p;
+  }
+  const { data, error } = await supabase()
+    .from("profils")
+    .select(
+      "id, foyer_id, surnom, avatar, univers, classe, matieres_actives, limite_jour_min, limite_semaine_min, monnaie, user_id"
+    )
+    .eq("id", id)
+    .single();
+  if (error) throw error;
+  return data as Profil;
+}
+
+// rattacher_si_attendu : AU LOGIN, avant tout creer_foyer. Relie le compte a un
+// profil si un lien l'attend (ou s'il est deja relie). Renvoie l'id du profil
+// enfant, sinon null (parcours parent classique).
+export async function rattacherSiAttendu(): Promise<string | null> {
+  if (isDemo()) return null;
+  const { data, error } = await supabase().rpc("rattacher_si_attendu");
+  if (error) throw error;
+  return (data as string | null) ?? null;
+}
+
+// Liens de rattachement en attente pour les profils d'un foyer (vue parent).
+export async function listLiensEnAttente(foyerId: string): Promise<LienEnAttente[]> {
+  if (isDemo()) return [];
+  const { data, error } = await supabase()
+    .from("liens_enfant_en_attente")
+    .select("id, profil_id, email, expire_le, cree_le, profils!inner(foyer_id)")
+    .eq("profils.foyer_id", foyerId);
+  if (error) throw error;
+  return (data ?? []).map((r) => ({
+    id: r.id as string,
+    profil_id: r.profil_id as string,
+    email: r.email as string,
+    expire_le: r.expire_le as string,
+    cree_le: r.cree_le as string,
+  }));
+}
+
+// Messages d'erreur clairs pour le parent (codes remontes par les RPC).
+const LIEN_ERREURS: Record<string, string> = {
+  email_invalide: "Adresse e-mail invalide.",
+  profil_deja_relie: "Ce profil est déjà relié à un compte.",
+  compte_est_parent: "Cette adresse est celle d’un parent du foyer.",
+  compte_deja_relie: "Ce compte Google est déjà relié à un autre profil.",
+  lien_deja_en_attente: "Un lien est déjà en attente pour ce profil.",
+  email_deja_en_attente: "Cette adresse est déjà en attente sur un profil.",
+  non_relie: "Ce profil n’est relié à aucun compte.",
+};
+
+function lienError(e: unknown): Error {
+  const msg = String((e as { message?: string })?.message ?? e ?? "");
+  const code = Object.keys(LIEN_ERREURS).find((k) => msg.includes(k));
+  return new Error(code ? LIEN_ERREURS[code] : "Une erreur est survenue.");
+}
+
+// Cree un lien de rattachement en attente (parent). L'email est normalise en base.
+export async function demanderLienEnfant(profilId: string, email: string): Promise<void> {
+  if (isDemo()) return;
+  const { error } = await supabase().rpc("demander_lien_enfant", {
+    p_profil: profilId,
+    p_email: email,
+  });
+  if (error) throw lienError(error);
+}
+
+// Annule un lien en attente (parent). DELETE protege par RLS (parent du foyer).
+export async function annulerLienEnfant(lienId: string): Promise<void> {
+  if (isDemo()) return;
+  const { error } = await supabase()
+    .from("liens_enfant_en_attente")
+    .delete()
+    .eq("id", lienId);
+  if (error) throw error;
+}
+
+// Delie le compte Google d'un profil (parent) : user_id -> null, journalise.
+export async function delierCompteEnfant(profilId: string): Promise<void> {
+  if (isDemo()) return;
+  const { error } = await supabase().rpc("delier_compte_enfant", { p_profil: profilId });
+  if (error) throw lienError(error);
 }
 
 export interface CreateProfilInput {

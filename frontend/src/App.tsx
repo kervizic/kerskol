@@ -9,13 +9,16 @@ import { Session } from "./screens/Session";
 import { ChildTheme } from "./components/ChildTheme";
 import {
   ensureFoyer,
+  getProfilById,
   getReferentiel,
   getUser,
   listProfils,
   onAuthChange,
+  rattacherSiAttendu,
   signOut,
   type Referentiel,
 } from "./lib/api";
+import { resolveEntry, villageRoute } from "./lib/bootstrap";
 import { isDemo } from "./lib/demo";
 import { authAction } from "./lib/authReset";
 import { setDernierProfil } from "./lib/session";
@@ -39,6 +42,7 @@ export function App() {
   const [ready, setReady] = useState(false);
   const [authed, setAuthed] = useState(false);
   const [foyerId, setFoyerId] = useState<string | null>(null);
+  const [mode, setMode] = useState<"parent" | "child">("parent");
   const [profils, setProfils] = useState<Profil[]>([]);
   const [referentiel, setReferentiel] = useState<Referentiel | null>(null);
   const [error, setError] = useState(false);
@@ -73,13 +77,18 @@ export function App() {
         setReady(true);
         return;
       }
-      const fid = await ensureFoyer();
-      const [list, ref] = await Promise.all([listProfils(fid), getReferentiel()]);
-      setFoyerId(fid);
-      setProfils(list);
+      // AVANT tout creer_foyer : un compte enfant relie va droit dans son village.
+      const [entry, ref] = await Promise.all([
+        resolveEntry({ rattacherSiAttendu, getProfilById, ensureFoyer, listProfils }),
+        getReferentiel(),
+      ]);
+      setFoyerId(entry.foyerId);
+      setMode(entry.mode);
+      setProfils(entry.profils);
       setReferentiel(ref);
       setAuthed(true);
       setReady(true);
+      if (entry.route) navigate(entry.route, true);
     } catch (e) {
       console.error("bootstrap a echoue", e);
       setError(true);
@@ -87,7 +96,7 @@ export function App() {
     } finally {
       running.current = false;
     }
-  }, []);
+  }, [navigate]);
 
   useEffect(() => {
     void bootstrap();
@@ -98,6 +107,7 @@ export function App() {
         setAuthed(false);
         setProfils([]);
         setFoyerId(null);
+        setMode("parent");
         navigate("/");
       } else if (action === "user_changed") {
         void bootstrap();
@@ -116,13 +126,21 @@ export function App() {
   // un profil hors du foyer -> retour a la selection.
   useEffect(() => {
     if (!ready || !authed) return;
+    // Enfant relie : il reste cantonne a SON village (aucun ecran parent).
+    if (mode === "child") {
+      const childId = profils[0]?.id;
+      if (!childId || path === "/reglages") return; // /reglages : message dans content()
+      const m = path.match(CHILD_RE);
+      if (!m || m[1] !== childId) navigate(villageRoute(childId), true);
+      return;
+    }
     if (profils.length === 0) {
       if (path !== "/creer-profil") navigate("/creer-profil", true);
       return;
     }
     const m = path.match(CHILD_RE);
     if (m && !profils.some((p) => p.id === m[1])) navigate("/", true);
-  }, [ready, authed, profils, path, navigate]);
+  }, [ready, authed, mode, profils, path, navigate]);
 
   // Report des maj de version (app-version.js) hors des ecrans a saisie/seance.
   useEffect(() => {
@@ -179,6 +197,32 @@ export function App() {
     }
     if (!authed) return <PublicHome />;
     if (!foyerId || !referentiel) return <Loading />;
+
+    // Enfant relie : acces limite a son village. /reglages -> message simple.
+    if (mode === "child") {
+      const prof = profils[0];
+      if (path === "/reglages") {
+        return (
+          <div className="kk-page kk-center">
+            <div className="kk-container" style={{ maxWidth: 480, textAlign: "center" }}>
+              <h1>Espace parent</h1>
+              <p className="kk-muted">
+                Cet espace est réservé aux parents. Demande à un parent de gérer les réglages.
+              </p>
+              <button
+                className="kk-btn kk-btn--accent kk-btn--block"
+                onClick={() => navigate(prof ? villageRoute(prof.id) : "/")}
+              >
+                Retour à mon village
+              </button>
+            </div>
+          </div>
+        );
+      }
+      const m = path.match(CHILD_RE);
+      if (!prof || !m || m[1] !== prof.id) return <Loading />; // redirection en cours
+      // sinon : le bloc CHILD_RE ci-dessous rend le village / la seance
+    }
 
     if (path === "/creer-profil") {
       const first = profils.length === 0;

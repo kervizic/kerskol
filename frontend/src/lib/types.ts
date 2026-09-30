@@ -32,7 +32,18 @@ export interface Profil {
   limite_jour_min: number | null;
   limite_semaine_min: number | null;
   monnaie: number;
+  // Compte Google relie a ce profil (enfant). null = aucun compte relie.
+  user_id?: string | null;
   cree_le?: string;
+}
+
+// Lien de rattachement EN ATTENTE (parent -> compte enfant), avant login.
+export interface LienEnAttente {
+  id: string;
+  profil_id: string;
+  email: string;
+  expire_le: string;
+  cree_le: string;
 }
 
 export interface Competence {

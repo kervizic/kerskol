@@ -1,15 +1,26 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { AvatarView } from "../domain/avatars";
 import { Feedback, Spinner } from "../components/ui";
 import {
+  annulerLienEnfant,
+  delierCompteEnfant,
   deleteFoyer,
+  demanderLienEnfant,
   getJournal,
+  listLiensEnAttente,
   reauthGoogle,
   ReauthRequiseError,
   updateProfil,
 } from "../lib/api";
 import { messageClasse } from "./CreateProfile";
-import { CLASSES, type Classe, type JournalReglage, type Matiere, type Profil } from "../lib/types";
+import {
+  CLASSES,
+  type Classe,
+  type JournalReglage,
+  type LienEnAttente,
+  type Matiere,
+  type Profil,
+} from "../lib/types";
 
 const RETRY_KEY = "kerskol_retry_suppr_foyer";
 const MATIERE_ACTIVE = "MA";
@@ -29,6 +40,8 @@ function journalLabel(cle: string): string {
       return "Matières actives";
     case "mails_actives":
       return "Mails de suivi";
+    case "compte_enfant":
+      return "Compte Google de l’enfant";
     default:
       return cle;
   }
@@ -79,7 +92,7 @@ function ProfilEditor({
   }
 
   return (
-    <div className="kk-card kk-stack" style={{ marginBottom: 16 }}>
+    <div className="kk-stack">
       <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
         <AvatarView avatar={profil.avatar} size={48} />
         <h2 style={{ margin: 0 }}>{profil.surnom}</h2>
@@ -144,6 +157,110 @@ function ProfilEditor({
   );
 }
 
+// Rattachement du compte Google de l'enfant a son profil (etat + actions).
+function LinkAccount({
+  profil,
+  lien,
+  onProfilChange,
+  onReload,
+}: {
+  profil: Profil;
+  lien: LienEnAttente | undefined;
+  onProfilChange: (p: Profil) => void;
+  onReload: () => Promise<void>;
+}) {
+  const relie = profil.user_id != null;
+  const [email, setEmail] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [msg, setMsg] = useState<{ kind: "error" | "success"; text: string } | null>(null);
+
+  async function relier() {
+    const value = email.trim();
+    if (!value) return;
+    setBusy(true);
+    setMsg(null);
+    try {
+      await demanderLienEnfant(profil.id, value);
+      setEmail("");
+      setMsg({ kind: "success", text: "Lien créé. L’enfant sera relié à sa première connexion." });
+      await onReload();
+    } catch (e) {
+      setMsg({ kind: "error", text: e instanceof Error ? e.message : "Une erreur est survenue." });
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function annuler() {
+    if (!lien) return;
+    setBusy(true);
+    setMsg(null);
+    try {
+      await annulerLienEnfant(lien.id);
+      await onReload();
+    } catch {
+      setMsg({ kind: "error", text: "L’annulation a échoué. Réessaie." });
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function delier() {
+    setBusy(true);
+    setMsg(null);
+    try {
+      await delierCompteEnfant(profil.id);
+      onProfilChange({ ...profil, user_id: null });
+    } catch (e) {
+      setMsg({ kind: "error", text: e instanceof Error ? e.message : "Le déliement a échoué." });
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  return (
+    <div className="kk-field" style={{ marginTop: 4 }}>
+      <span>Compte Google de l’enfant</span>
+      {relie ? (
+        <div className="kk-row" style={{ alignItems: "center", gap: 12 }}>
+          <span className="kk-muted">✅ Compte relié : l’enfant se connecte avec son propre compte.</span>
+          <button className="kk-btn kk-btn--ghost" disabled={busy} onClick={() => void delier()}>
+            {busy ? "..." : "Délier"}
+          </button>
+        </div>
+      ) : lien ? (
+        <div className="kk-row" style={{ alignItems: "center", gap: 12 }}>
+          <span className="kk-muted">
+            ⏳ En attente : <strong>{lien.email}</strong> · expire le{" "}
+            {new Date(lien.expire_le).toLocaleDateString("fr-FR")}
+          </span>
+          <button className="kk-btn kk-btn--ghost" disabled={busy} onClick={() => void annuler()}>
+            {busy ? "..." : "Annuler"}
+          </button>
+        </div>
+      ) : (
+        <div className="kk-row" style={{ gap: 8, flexWrap: "wrap" }}>
+          <input
+            className="kk-input"
+            type="email"
+            inputMode="email"
+            autoComplete="off"
+            placeholder="adresse Google de l’enfant"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            aria-label={`Adresse Google pour ${profil.surnom}`}
+            style={{ flex: 1, minWidth: 200 }}
+          />
+          <button className="kk-btn kk-btn--accent" disabled={busy || !email.trim()} onClick={() => void relier()}>
+            {busy ? "..." : "Relier un compte Google"}
+          </button>
+        </div>
+      )}
+      {msg && <Feedback kind={msg.kind}>{msg.text}</Feedback>}
+    </div>
+  );
+}
+
 export function ParentSpace({
   foyerId,
   profils,
@@ -162,15 +279,25 @@ export function ParentSpace({
   onFoyerDeleted: () => void;
 }) {
   const [journal, setJournal] = useState<JournalReglage[] | null>(null);
+  const [liens, setLiens] = useState<LienEnAttente[]>([]);
   const [confirming, setConfirming] = useState(false);
   const [reauthNeeded, setReauthNeeded] = useState(false);
   const [deleting, setDeleting] = useState(false);
+
+  const reloadLiens = useCallback(
+    () =>
+      listLiensEnAttente(foyerId)
+        .then(setLiens)
+        .catch(() => setLiens([])),
+    [foyerId]
+  );
 
   useEffect(() => {
     getJournal(foyerId)
       .then(setJournal)
       .catch(() => setJournal([]));
-  }, [foyerId]);
+    void reloadLiens();
+  }, [foyerId, reloadLiens]);
 
   // Reprise apres reconnexion Google (le flux supprimer_foyer avait exige une
   // reauthentification recente) : on retente automatiquement une fois.
@@ -230,7 +357,15 @@ export function ParentSpace({
         </div>
 
         {profils.map((p) => (
-          <ProfilEditor key={p.id} profil={p} matieres={matieres} onSaved={onProfilChange} />
+          <div key={p.id} className="kk-card kk-stack" style={{ marginBottom: 16 }}>
+            <ProfilEditor profil={p} matieres={matieres} onSaved={onProfilChange} />
+            <LinkAccount
+              profil={p}
+              lien={liens.find((l) => l.profil_id === p.id)}
+              onProfilChange={onProfilChange}
+              onReload={reloadLiens}
+            />
+          </div>
         ))}
 
         <button className="kk-btn kk-btn--accent kk-btn--block" onClick={onAddChild}>
