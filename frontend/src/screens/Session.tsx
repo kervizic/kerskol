@@ -1,7 +1,17 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Check, Info } from "lucide-react";
+import { Check, Grid3x3, Info, Keyboard } from "lucide-react";
 import { Spinner } from "../components/ui";
 import { ThemeToggle } from "../components/ThemeToggle";
+import {
+  getStoredInputMode,
+  initialInputMode,
+  onAnswerZoneTouch,
+  onPhysicalKey,
+  prefersCoarsePointer,
+  setStoredInputMode,
+  toggleInputMode,
+  type InputMode,
+} from "../lib/inputMode";
 import { AvatarView } from "../domain/avatars";
 import { universDef } from "../domain/univers";
 import type { Avatar, Profil } from "../lib/types";
@@ -169,12 +179,14 @@ function EquationView({
   f1,
   f2,
   active,
+  inputMode,
   onPick,
 }: {
   prompt: string;
   f1: string;
   f2: string;
   active: 1 | 2;
+  inputMode: InputMode;
   onPick: (n: 1 | 2) => void;
 }) {
   if (!prompt.includes("[q]") && !prompt.includes("[r]")) {
@@ -191,11 +203,14 @@ function EquationView({
         if (p === "[q]" || p === "[r]") {
           const slot: 1 | 2 = p === "[r]" ? 2 : 1;
           const val = slot === 2 ? f2 : f1;
+          const isActive = active === slot;
           return (
             <button
               key={i}
               type="button"
-              className={`kk-answer__box kk-eq__box${active === slot ? " kk-answer__box--active" : ""}`}
+              className={`kk-answer__box kk-eq__box${isActive ? " kk-answer__box--active" : ""}${
+                isActive && inputMode === "keyboard" ? " kk-answer__box--caret" : ""
+              }`}
               aria-label={slot === 2 ? "reste" : "reponse"}
               onClick={() => onPick(slot)}
             >
@@ -235,6 +250,9 @@ export function Session({
   const [lastGain, setLastGain] = useState(0);
   const [done, setDone] = useState(false);
   const [tempsJourS, setTempsJourS] = useState(0);
+  const [inputMode, setInputMode] = useState<InputMode>(() =>
+    initialInputMode(prefersCoarsePointer(), getStoredInputMode())
+  );
 
   const seanceId = useRef<string>("");
   const startedAt = useRef<number>(0);
@@ -460,7 +478,13 @@ export function Session({
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key >= "0" && e.key <= "9") typeDigit(e.key);
+      const isDigit = e.key >= "0" && e.key <= "9";
+      const isNav = e.key === "Backspace" || e.key === "Enter" || e.key === "Tab";
+      // Frappe clavier physique : bascule vers la saisie clavier (masque le pave).
+      if ((isDigit || isNav) && !e.ctrlKey && !e.altKey && !e.metaKey) {
+        setInputMode((m) => onPhysicalKey(m));
+      }
+      if (isDigit) typeDigit(e.key);
       else if (e.key === "Backspace") backspace();
       else if (e.key === "Enter") {
         if (phase === "answering") onValiderClick();
@@ -473,6 +497,21 @@ export function Session({
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [typeDigit, backspace, phase, onValiderClick, advance, ex]);
+
+  // Toucher la zone de reponse reaffiche le pave (bascule automatique et
+  // reversible). Utilise aussi bien pour le clic souris que le toucher.
+  const touchAnswerZone = useCallback(() => {
+    setInputMode((m) => onAnswerZoneTouch(m));
+  }, []);
+
+  // Bouton discret : force explicitement l'autre mode, memorise par appareil.
+  const handleToggleInputMode = useCallback(() => {
+    setInputMode((m) => {
+      const next = toggleInputMode(m);
+      setStoredInputMode(next);
+      return next;
+    });
+  }, []);
 
   // ------------------------------- Rendu ---------------------------------
   if (empty) {
@@ -528,13 +567,31 @@ export function Session({
           <u.MonnaieIcon size={20} />
           {monnaie}
         </span>
+        <button
+          className="kk-icon-btn"
+          aria-label={inputMode === "pad" ? "Basculer en saisie clavier" : "Reafficher le pave numerique"}
+          title={inputMode === "pad" ? "Basculer en saisie clavier" : "Reafficher le pave numerique"}
+          onClick={handleToggleInputMode}
+        >
+          {inputMode === "pad" ? <Keyboard size={22} aria-hidden="true" /> : <Grid3x3 size={22} aria-hidden="true" />}
+        </button>
         <ThemeToggle />
       </div>
 
       <main className="kk-seance__main">
         {ex.support !== "aucun" && ex.supportData && <SupportView data={ex.supportData} />}
 
-        <EquationView prompt={ex.prompt} f1={f1} f2={f2} active={active} onPick={setActive} />
+        <EquationView
+          prompt={ex.prompt}
+          f1={f1}
+          f2={f2}
+          active={active}
+          inputMode={inputMode}
+          onPick={(n) => {
+            setActive(n);
+            touchAnswerZone();
+          }}
+        />
 
         {hint && phase === "answering" && (
           <p className="kk-muted" style={{ textAlign: "center" }}>
@@ -551,8 +608,14 @@ export function Session({
                     <div>
                       <span className="kk-answer__label">resultat</span>
                       <button
-                        className={`kk-answer__box${active === 1 ? " kk-answer__box--active" : ""}`}
-                        onClick={() => setActive(1)}
+                        className={`kk-answer__box${active === 1 ? " kk-answer__box--active" : ""}${
+                          active === 1 && inputMode === "keyboard" ? " kk-answer__box--caret" : ""
+                        }`}
+                        aria-label="resultat"
+                        onClick={() => {
+                          setActive(1);
+                          touchAnswerZone();
+                        }}
                       >
                         {f1 || "?"}
                       </button>
@@ -560,15 +623,30 @@ export function Session({
                     <div>
                       <span className="kk-answer__label">reste</span>
                       <button
-                        className={`kk-answer__box${active === 2 ? " kk-answer__box--active" : ""}`}
-                        onClick={() => setActive(2)}
+                        className={`kk-answer__box${active === 2 ? " kk-answer__box--active" : ""}${
+                          active === 2 && inputMode === "keyboard" ? " kk-answer__box--caret" : ""
+                        }`}
+                        aria-label="reste"
+                        onClick={() => {
+                          setActive(2);
+                          touchAnswerZone();
+                        }}
                       >
                         {f2 || "?"}
                       </button>
                     </div>
                   </>
                 ) : (
-                  <div className="kk-answer__box kk-answer__box--active">{f1 || "?"}</div>
+                  <button
+                    type="button"
+                    className={`kk-answer__box kk-answer__box--active${
+                      inputMode === "keyboard" ? " kk-answer__box--caret" : ""
+                    }`}
+                    aria-label="reponse"
+                    onClick={touchAnswerZone}
+                  >
+                    {f1 || "?"}
+                  </button>
                 )}
               </div>
             )}
@@ -581,25 +659,23 @@ export function Session({
                   <button className="kk-btn kk-btn--accent" onClick={doValidate}>Oui, je valide</button>
                 </div>
               </div>
-            ) : (
-              <>
-                <div className="kk-pad">
-                  {["1", "2", "3", "4", "5", "6", "7", "8", "9"].map((d) => (
-                    <button key={d} onClick={() => typeDigit(d)} aria-label={d}>{d}</button>
-                  ))}
-                  <button onClick={backspace} aria-label="Effacer" style={{ fontSize: "1.5rem" }}>⌫</button>
-                  <button onClick={() => typeDigit("0")} aria-label="0">0</button>
-                  <button
-                    onClick={onValiderClick}
-                    disabled={!canValidate}
-                    aria-label="Valider"
-                    style={{ background: "var(--kk-accent)", color: "var(--kk-on-accent)", borderColor: "transparent" }}
-                  >
-                    <Check size={26} aria-hidden="true" />
-                  </button>
-                </div>
-              </>
-            )}
+            ) : inputMode === "pad" ? (
+              <div className="kk-pad">
+                {["1", "2", "3", "4", "5", "6", "7", "8", "9"].map((d) => (
+                  <button key={d} onClick={() => typeDigit(d)} aria-label={d}>{d}</button>
+                ))}
+                <button onClick={backspace} aria-label="Effacer" style={{ fontSize: "1.5rem" }}>⌫</button>
+                <button onClick={() => typeDigit("0")} aria-label="0">0</button>
+                <button
+                  onClick={onValiderClick}
+                  disabled={!canValidate}
+                  aria-label="Valider"
+                  style={{ background: "var(--kk-accent)", color: "var(--kk-on-accent)", borderColor: "transparent" }}
+                >
+                  <Check size={26} aria-hidden="true" />
+                </button>
+              </div>
+            ) : null}
           </>
         ) : phase === "correct" ? (
           <div className="kk-banner kk-banner--ok">

@@ -228,6 +228,24 @@ p.kk-lead { color: var(--kk-text-2); max-width: 52ch; }
   background: var(--kk-surface); color: var(--kk-text); display: inline-flex; align-items: center; justify-content: center;
 }
 .kk-answer__box--active { border-color: var(--kk-accent); }
+.kk-answer__box { font-family: inherit; cursor: pointer; }
+/* Curseur clignotant : saisie clavier active sans clic (mode "keyboard"). */
+.kk-answer__box--caret::after {
+  content: "";
+  display: inline-block;
+  width: 3px;
+  height: 1.6rem;
+  margin-left: 6px;
+  background: var(--kk-accent);
+  vertical-align: middle;
+  animation: kk-caret-blink 1s steps(1, start) infinite;
+}
+@keyframes kk-caret-blink {
+  50% { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .kk-answer__box--caret::after { animation: none; }
+}
 .kk-answer__label { font-size: 0.9rem; color: var(--kk-text-2); display: block; text-align: center; }
 .kk-pad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; max-width: 360px; margin: 0 auto; width: 100%; }
 .kk-pad button {
