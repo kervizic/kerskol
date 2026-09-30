@@ -1,11 +1,12 @@
 import { Settings } from "lucide-react";
 import { AvatarView } from "../domain/avatars";
+import { avatarColor } from "../domain/avatarConfig";
 import { universDef } from "../domain/univers";
 import { buildAccent } from "../theme/childColors";
 import { useEffectiveDark } from "../components/ChildTheme";
 import { getDernierProfil } from "../lib/session";
 import { ThemeToggle } from "../components/ThemeToggle";
-import type { Avatar, Profil } from "../lib/types";
+import type { Profil } from "../lib/types";
 
 // Selection de profil : une tuile par enfant. Tuiles centrees, pas de titre.
 // Couleur de chaque enfant appliquee a sa tuile. L'acces aux reglages est un
@@ -31,10 +32,9 @@ export function WhoPlays({
       </div>
       <div className="kk-who">
         {profils.map((p) => {
-          const av = p.avatar as Avatar;
           const u = universDef(p.univers);
           const isLast = p.id === lastProfilId;
-          const color = av?.couleur || "#E06A00";
+          const color = avatarColor(p.avatar);
           const acc = buildAccent(color)[dark ? "dark" : "light"];
           return (
             <button
@@ -45,7 +45,7 @@ export function WhoPlays({
             >
               <span className="kk-tile__badge">
                 <span className="kk-tile__avatar" style={{ display: "inline-flex", borderColor: acc.accent }}>
-                  <AvatarView forme={av?.forme} couleur={color} size={96} />
+                  <AvatarView avatar={p.avatar} size={96} />
                 </span>
                 <span className="kk-tile__vignette">
                   <u.Vignette size={36} />
