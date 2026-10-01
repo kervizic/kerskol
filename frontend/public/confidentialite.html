@@ -114,12 +114,25 @@
         </li>
         <li>
           Les comptes inactifs depuis 12 mois sont supprimés, après l'envoi d'un
-          mail de préavis.
+          mail de préavis. Un compte créé sans foyer ni profil relié est
+          automatiquement supprimé au bout de 24 heures.
+        </li>
+        <li>
+          Les journaux techniques du serveur web conservent une adresse IP
+          <strong>tronquée</strong> (dernier octet masqué en IPv4, préfixe /64 en
+          IPv6) et sont supprimés au bout de <strong>7 jours</strong>.
         </li>
         <li>
           Les sauvegardes techniques sont conservées 14 jours.
         </li>
       </ul>
+
+      <h2>Inscriptions sur invitation</h2>
+      <p>
+        Pendant la phase de lancement, la création de nouveaux foyers est
+        réservée aux comptes autorisés ou invités. Les autres connexions ne
+        créent aucune donnée durable.
+      </p>
 
       <h2>Vos droits</h2>
       <p>
