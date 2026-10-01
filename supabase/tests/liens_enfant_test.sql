@@ -1,9 +1,9 @@
 -- liens_enfant_test.sql
--- Rattachement du compte Google d'un enfant a son profil (migration 0013).
--- Couvre : creation du lien en attente, normalisation email, unicite, RLS
--- (parent uniquement), rattachement au login, idempotence, expiration,
--- colonnes interdites a l'enfant, isolation de l'enfant (ne voit que son profil,
--- ni journal), delier, et NON-creation de foyer pour l'enfant.
+-- Rattachement enfant PAR CODE (migrations 0013 + 0014).
+-- Couvre : generation + unicite du lien, messages generiques (pas d'enumeration),
+-- statut au login sans divulgation, validation par code (bon/mauvais), 5 essais
+-- puis annulation, "ce n'est pas moi", email non confirme, expiration, colonnes
+-- interdites a l'enfant, isolation, delier, et NON-creation de foyer.
 -- Entierement en transaction ROLLBACK. Execution : deploy/test-db.sh.
 
 BEGIN;
@@ -16,16 +16,19 @@ GRANT EXECUTE ON FUNCTION _rec(text, boolean, text) TO authenticated;
 GRANT INSERT, SELECT ON public._res TO authenticated;
 GRANT USAGE, SELECT ON SEQUENCE _res_id_seq TO authenticated;
 
--- Parent A (foyer A, profils Lou + Zoe), parent B (foyer B), enfants E et F.
+-- Parent A (foyer A, profils Lou + Zoe), parent B (foyer B), enfants E/F/G.
+-- E et F ont un email confirme ; G ne l'a pas.
 \set uA 'aa111111-1111-1111-1111-111111111111'
 \set uB 'bb222222-2222-2222-2222-222222222222'
 \set uE 'ee333333-3333-3333-3333-333333333333'
 \set uF 'ff444444-4444-4444-4444-444444444444'
-INSERT INTO auth.users (id, email, created_at) VALUES
-    (:'uA', 'pa@example.test',     now()),
-    (:'uB', 'pb@example.test',     now()),
-    (:'uE', 'iris@example.test',   now()),
-    (:'uF', 'noe@example.test',    now());
+\set uG '99555555-5555-5555-5555-555555555555'
+INSERT INTO auth.users (id, email, created_at, email_confirmed_at) VALUES
+    (:'uA', 'pa@example.test',   now(), now()),
+    (:'uB', 'pb@example.test',   now(), now()),
+    (:'uE', 'iris@example.test', now(), now()),
+    (:'uF', 'noe@example.test',  now(), now()),
+    (:'uG', 'gael@example.test', now(), NULL);
 
 INSERT INTO foyers (id) VALUES
     ('a1000000-0000-0000-0000-000000000000'),
@@ -45,27 +48,32 @@ INSERT INTO profils (id, foyer_id, surnom, matieres_actives) VALUES
 \set claimsB '{"sub":"bb222222-2222-2222-2222-222222222222","role":"authenticated"}'
 \set claimsE '{"sub":"ee333333-3333-3333-3333-333333333333","role":"authenticated"}'
 \set claimsF '{"sub":"ff444444-4444-4444-4444-444444444444","role":"authenticated"}'
+\set claimsG '{"sub":"99555555-5555-5555-5555-555555555555","role":"authenticated"}'
 
 -- ===========================================================================
--- TEST 1 : parent A cree un lien en attente pour Lou, email normalise minuscules
+-- TEST 1 : parent A cree un lien pour Lou -> renvoie un code a 3 chiffres.
 -- ===========================================================================
 SET ROLE authenticated;
 SET request.jwt.claims = :'claimsA';
-DO $$
-BEGIN
-    PERFORM public.demander_lien_enfant('c1000000-0000-0000-0000-00000000000a', '  Iris@Example.Test ');
-    PERFORM _rec('1_cree_lien_en_attente', true, 'ok');
-EXCEPTION WHEN OTHERS THEN
-    PERFORM _rec('1_cree_lien_en_attente', false, 'refus a tort : ' || SQLERRM);
-END $$;
+SELECT public.demander_lien_enfant(:'lou', '  Iris@Example.Test ') AS code_lou;
+\gset
 RESET ROLE;
 
-SELECT _rec('1b_email_normalise_minuscules',
+SELECT _rec('1a_code_3_chiffres', :'code_lou' ~ '^[0-9]{3}$', 'code = ' || :'code_lou');
+SELECT _rec('1b_email_normalise',
     (SELECT email FROM liens_enfant_en_attente WHERE profil_id = :'lou') = 'iris@example.test',
-    'email stocke = ' || coalesce((SELECT email FROM liens_enfant_en_attente WHERE profil_id = :'lou'), 'NULL'));
+    'email = ' || coalesce((SELECT email FROM liens_enfant_en_attente WHERE profil_id = :'lou'), 'NULL'));
+SELECT _rec('1c_code_hache_non_clair',
+    (SELECT code_hash IS NOT NULL AND code_hash <> :'code_lou'
+       FROM liens_enfant_en_attente WHERE profil_id = :'lou'),
+    'hash present et different du code clair');
+
+-- Code volontairement FAUX (different du vrai code).
+SELECT CASE WHEN :'code_lou' = '000' THEN '111' ELSE '000' END AS wrong_lou;
+\gset
 
 -- ===========================================================================
--- TEST 2 : unicite (meme profil / meme email deja en attente)
+-- TEST 2 : unicite (meme profil / meme email)
 -- ===========================================================================
 SET ROLE authenticated;
 SET request.jwt.claims = :'claimsA';
@@ -102,213 +110,198 @@ SELECT _rec('3b_tiers_ne_voit_pas_lien',
     'liens visibles B = ' || (SELECT count(*) FROM liens_enfant_en_attente));
 RESET ROLE;
 
-SET ROLE authenticated;
-SET request.jwt.claims = :'claimsA';
-SELECT _rec('3c_parent_voit_son_lien',
-    (SELECT count(*) FROM liens_enfant_en_attente) = 1,
-    'liens visibles A = ' || (SELECT count(*) FROM liens_enfant_en_attente));
-RESET ROLE;
-
 -- ===========================================================================
--- TEST 4 : parent-membre ne peut etre relie comme enfant (email d'un parent)
+-- TEST 4 : email d'un parent -> message GENERIQUE (pas d'enumeration)
 -- ===========================================================================
 SET ROLE authenticated;
 SET request.jwt.claims = :'claimsA';
 DO $$
 BEGIN
     PERFORM public.demander_lien_enfant('c2000000-0000-0000-0000-00000000000b', 'pb@example.test');
-    PERFORM _rec('4_parent_pas_enfant', false, 'accepte a tort');
+    PERFORM _rec('4_parent_generique', false, 'accepte a tort');
 EXCEPTION WHEN OTHERS THEN
-    PERFORM _rec('4_parent_pas_enfant', SQLERRM LIKE '%compte_est_parent%', SQLERRM);
+    PERFORM _rec('4_parent_generique', SQLERRM LIKE '%lien_impossible%', SQLERRM);
 END $$;
 RESET ROLE;
 
 -- ===========================================================================
--- TEST 5 : rattachement au login de l'enfant (Iris), sans creer de foyer
+-- TEST 5 : statut au login de l'enfant (en attente), sans divulgation
 -- ===========================================================================
 SET ROLE authenticated;
 SET request.jwt.claims = :'claimsE';
-DO $$
-DECLARE v_p uuid;
-BEGIN
-    v_p := public.rattacher_si_attendu();
-    PERFORM _rec('5a_rattache_renvoie_profil', v_p = 'c1000000-0000-0000-0000-00000000000a',
-        'profil renvoye = ' || coalesce(v_p::text, 'NULL'));
-END $$;
+SELECT (public.statut_lien_enfant() ->> 'etat') AS st_e;
+\gset
+SELECT _rec('5a_statut_en_attente', :'st_e' = 'en_attente', 'etat = ' || :'st_e');
+SELECT _rec('5b_pas_de_profil_divulgue',
+    (public.statut_lien_enfant() ? 'profil_id') = false, 'ne doit pas contenir profil_id');
 RESET ROLE;
 
-SELECT _rec('5b_user_id_pose',
-    (SELECT user_id FROM profils WHERE id = :'lou') = :'uE',
-    'user_id Lou = ' || coalesce((SELECT user_id::text FROM profils WHERE id = :'lou'), 'NULL'));
-SELECT _rec('5c_lien_supprime',
+-- ===========================================================================
+-- TEST 6 : mauvais code -> ok=false, essais_restants, user_id reste NULL
+-- ===========================================================================
+SET ROLE authenticated;
+SET request.jwt.claims = :'claimsE';
+SELECT (public.valider_lien_enfant(:'wrong_lou')) AS r6;
+\gset
+RESET ROLE;
+SELECT _rec('6a_mauvais_code', (:'r6'::jsonb ->> 'ok') = 'false'
+    AND (:'r6'::jsonb ->> 'etat') = 'code_invalide', 'r = ' || :'r6');
+SELECT _rec('6b_essais_restants', (:'r6'::jsonb ->> 'essais_restants') = '4', 'r = ' || :'r6');
+SELECT _rec('6c_user_id_null',
+    (SELECT user_id FROM profils WHERE id = :'lou') IS NULL, 'user_id Lou doit rester NULL');
+
+-- ===========================================================================
+-- TEST 7 : bon code -> rattachement, lien supprime, journalise, pas de foyer
+-- ===========================================================================
+SET ROLE authenticated;
+SET request.jwt.claims = :'claimsE';
+SELECT (public.valider_lien_enfant(:'code_lou')) AS r7;
+\gset
+RESET ROLE;
+SELECT _rec('7a_ok_profil', (:'r7'::jsonb ->> 'ok') = 'true'
+    AND (:'r7'::jsonb ->> 'profil_id') = :'lou', 'r = ' || :'r7');
+SELECT _rec('7b_user_id_pose', (SELECT user_id FROM profils WHERE id = :'lou') = :'uE', 'user_id Lou');
+SELECT _rec('7c_lien_supprime',
     (SELECT count(*) FROM liens_enfant_en_attente WHERE profil_id = :'lou') = 0, 'lien restant ?');
-SELECT _rec('5d_journalise',
+SELECT _rec('7d_journalise',
     (SELECT count(*) FROM journal_reglages WHERE profil_id = :'lou' AND cle = 'compte_enfant') = 1,
-    'entrees journal = ' || (SELECT count(*) FROM journal_reglages WHERE profil_id = :'lou' AND cle = 'compte_enfant'));
-SELECT _rec('5e_aucun_foyer_cree',
-    (SELECT count(*) FROM membres_foyer WHERE user_id = :'uE') = 0,
-    'membres_foyer E = ' || (SELECT count(*) FROM membres_foyer WHERE user_id = :'uE'));
+    'entrees journal');
+SELECT _rec('7e_aucun_foyer_cree',
+    (SELECT count(*) FROM membres_foyer WHERE user_id = :'uE') = 0, 'membres_foyer E');
 
 -- ===========================================================================
--- TEST 6 : idempotence (deja relie -> renvoie le meme profil, sans erreur)
+-- TEST 8 : statut apres rattachement = relie (+ profil_id) ; valider idempotent
 -- ===========================================================================
 SET ROLE authenticated;
 SET request.jwt.claims = :'claimsE';
-DO $$
-DECLARE v_p uuid;
-BEGIN
-    v_p := public.rattacher_si_attendu();
-    PERFORM _rec('6_idempotent', v_p = 'c1000000-0000-0000-0000-00000000000a',
-        'profil = ' || coalesce(v_p::text, 'NULL'));
-END $$;
+SELECT (public.statut_lien_enfant()) AS s8;
+SELECT (public.valider_lien_enfant('000')) AS r8;
+\gset
 RESET ROLE;
+SELECT _rec('8_valider_idempotent', (:'r8'::jsonb ->> 'ok') = 'true'
+    AND (:'r8'::jsonb ->> 'profil_id') = :'lou', 'r = ' || :'r8');
 
 -- ===========================================================================
--- TEST 7 : isolation de l'enfant : ne voit QUE son profil, pas le journal
+-- TEST 9 : 5 essais max puis annulation (Zoe + enfant F)
+-- ===========================================================================
+SET ROLE authenticated;
+SET request.jwt.claims = :'claimsA';
+SELECT public.demander_lien_enfant(:'zoe', 'noe@example.test') AS code_zoe;
+\gset
+RESET ROLE;
+SELECT CASE WHEN :'code_zoe' = '000' THEN '111' ELSE '000' END AS wrong_zoe;
+\gset
+SET ROLE authenticated;
+SET request.jwt.claims = :'claimsF';
+SELECT public.valider_lien_enfant(:'wrong_zoe');  -- essai 1
+SELECT public.valider_lien_enfant(:'wrong_zoe');  -- essai 2
+SELECT public.valider_lien_enfant(:'wrong_zoe');  -- essai 3
+SELECT public.valider_lien_enfant(:'wrong_zoe');  -- essai 4
+SELECT (public.valider_lien_enfant(:'wrong_zoe')) AS r9;  -- essai 5 -> annule
+\gset
+RESET ROLE;
+SELECT _rec('9a_annule_au_5e', (:'r9'::jsonb ->> 'etat') = 'annule', 'r = ' || :'r9');
+SELECT _rec('9b_lien_supprime',
+    (SELECT count(*) FROM liens_enfant_en_attente WHERE profil_id = :'zoe') = 0, 'lien Zoe restant ?');
+SELECT _rec('9c_zoe_non_reliee',
+    (SELECT user_id FROM profils WHERE id = :'zoe') IS NULL, 'user_id Zoe');
+
+-- ===========================================================================
+-- TEST 10 : "Ce n'est pas moi" (refuser) supprime le lien
+-- ===========================================================================
+SET ROLE authenticated;
+SET request.jwt.claims = :'claimsA';
+SELECT public.demander_lien_enfant(:'zoe', 'noe@example.test');
+RESET ROLE;
+SET ROLE authenticated;
+SET request.jwt.claims = :'claimsF';
+SELECT public.refuser_lien_enfant();
+RESET ROLE;
+SELECT _rec('10_refuser_supprime',
+    (SELECT count(*) FROM liens_enfant_en_attente WHERE profil_id = :'zoe') = 0, 'lien restant ?');
+
+-- ===========================================================================
+-- TEST 11 : email non confirme -> statut + valider = email_non_confirme
+-- ===========================================================================
+SET ROLE authenticated;
+SET request.jwt.claims = :'claimsA';
+SELECT public.demander_lien_enfant(:'zoe', 'gael@example.test') AS code_g;
+\gset
+RESET ROLE;
+SET ROLE authenticated;
+SET request.jwt.claims = :'claimsG';
+SELECT (public.statut_lien_enfant() ->> 'etat') AS stg;
+SELECT (public.valider_lien_enfant(:'code_g') ->> 'etat') AS rg;
+\gset
+RESET ROLE;
+SELECT _rec('11a_statut_non_confirme', :'stg' = 'email_non_confirme', 'etat = ' || :'stg');
+SELECT _rec('11b_valider_non_confirme', :'rg' = 'email_non_confirme', 'etat = ' || :'rg');
+SELECT _rec('11c_zoe_non_reliee',
+    (SELECT user_id FROM profils WHERE id = :'zoe') IS NULL, 'user_id Zoe');
+
+-- ===========================================================================
+-- TEST 12 : expiration -> statut = aucun (lien expire ignore)
+-- ===========================================================================
+UPDATE liens_enfant_en_attente SET expire_le = now() - interval '1 day' WHERE profil_id = :'zoe';
+SET ROLE authenticated;
+SET request.jwt.claims = :'claimsG';
+SELECT (public.statut_lien_enfant() ->> 'etat') AS stexp;
+\gset
+RESET ROLE;
+SELECT _rec('12_expire_aucun', :'stexp' = 'aucun', 'etat = ' || :'stexp');
+
+-- ===========================================================================
+-- TEST 13 : isolation de l'enfant relie (ne voit QUE son profil)
 -- ===========================================================================
 SET ROLE authenticated;
 SET request.jwt.claims = :'claimsE';
-SELECT _rec('7a_enfant_ne_voit_que_son_profil',
+SELECT _rec('13a_enfant_ne_voit_que_son_profil',
     (SELECT count(*) FROM profils) = 1 AND (SELECT surnom FROM profils) = 'Lou',
     'profils visibles E = ' || (SELECT count(*) FROM profils));
-SELECT _rec('7b_enfant_ne_voit_pas_journal',
-    (SELECT count(*) FROM journal_reglages) = 0,
-    'journal visible E = ' || (SELECT count(*) FROM journal_reglages));
-SELECT _rec('7c_enfant_ne_voit_pas_liens',
-    (SELECT count(*) FROM liens_enfant_en_attente) = 0, 'liens visibles E');
+SELECT _rec('13b_enfant_ne_voit_pas_journal',
+    (SELECT count(*) FROM journal_reglages) = 0, 'journal visible E');
 RESET ROLE;
 
 -- ===========================================================================
--- TEST 8 : colonnes interdites a l'enfant (base, pas seulement UI)
---   univers + avatar autorises ; classe/surnom/limites/matieres refuses.
+-- TEST 14 : colonnes interdites a l'enfant (univers/avatar ok ; reste refuse)
 -- ===========================================================================
 SET ROLE authenticated;
 SET request.jwt.claims = :'claimsE';
 DO $$
 BEGIN
     UPDATE profils SET univers = 'ile_tropicale' WHERE id = 'c1000000-0000-0000-0000-00000000000a';
-    UPDATE profils SET avatar  = '{"forme":"chaton","couleur":"#123456"}'::jsonb
-     WHERE id = 'c1000000-0000-0000-0000-00000000000a';
-    PERFORM _rec('8a_univers_avatar_ok', true, 'ok');
+    PERFORM _rec('14a_univers_ok', true, 'ok');
 EXCEPTION WHEN OTHERS THEN
-    PERFORM _rec('8a_univers_avatar_ok', false, 'refus a tort : ' || SQLERRM);
-END $$;
-DO $$
-BEGIN
-    UPDATE profils SET classe = 'CM2' WHERE id = 'c1000000-0000-0000-0000-00000000000a';
-    PERFORM _rec('8b_classe_refusee', false, 'accepte a tort');
-EXCEPTION WHEN OTHERS THEN
-    PERFORM _rec('8b_classe_refusee', SQLERRM LIKE '%colonne_interdite_enfant%', SQLERRM);
+    PERFORM _rec('14a_univers_ok', false, 'refus a tort : ' || SQLERRM);
 END $$;
 DO $$
 BEGIN
     UPDATE profils SET surnom = 'Pirate' WHERE id = 'c1000000-0000-0000-0000-00000000000a';
-    PERFORM _rec('8c_surnom_refuse', false, 'accepte a tort');
+    PERFORM _rec('14b_surnom_refuse', false, 'accepte a tort');
 EXCEPTION WHEN OTHERS THEN
-    PERFORM _rec('8c_surnom_refuse', SQLERRM LIKE '%colonne_interdite_enfant%', SQLERRM);
-END $$;
-DO $$
-BEGIN
-    UPDATE profils SET limite_jour_min = 5 WHERE id = 'c1000000-0000-0000-0000-00000000000a';
-    PERFORM _rec('8d_limite_refusee', false, 'accepte a tort');
-EXCEPTION WHEN OTHERS THEN
-    PERFORM _rec('8d_limite_refusee', SQLERRM LIKE '%colonne_interdite_enfant%', SQLERRM);
-END $$;
-DO $$
-BEGIN
-    UPDATE profils SET matieres_actives = '{MA,FR}'::text[] WHERE id = 'c1000000-0000-0000-0000-00000000000a';
-    PERFORM _rec('8e_matieres_refusees', false, 'accepte a tort');
-EXCEPTION WHEN OTHERS THEN
-    PERFORM _rec('8e_matieres_refusees', SQLERRM LIKE '%colonne_interdite_enfant%', SQLERRM);
+    PERFORM _rec('14b_surnom_refuse', SQLERRM LIKE '%colonne_interdite_enfant%', SQLERRM);
 END $$;
 RESET ROLE;
 
 -- ===========================================================================
--- TEST 9 : le credit de monnaie (trigger serveur) reste possible pour l'enfant
--- ===========================================================================
-SET ROLE authenticated;
-SET request.jwt.claims = :'claimsE';
-DO $$
-DECLARE v_comp text; v_avant int; v_apres int;
-BEGIN
-    SELECT code INTO v_comp FROM public.competences WHERE matiere = 'MA' AND actif LIMIT 1;
-    SELECT monnaie INTO v_avant FROM profils WHERE id = 'c1000000-0000-0000-0000-00000000000a';
-    INSERT INTO reponses (id, profil_id, competence, niveau, correct, temps_ms, repondu_le)
-    VALUES (gen_random_uuid(), 'c1000000-0000-0000-0000-00000000000a', v_comp, 1, true, 3000, now());
-    SELECT monnaie INTO v_apres FROM profils WHERE id = 'c1000000-0000-0000-0000-00000000000a';
-    PERFORM _rec('9_monnaie_creditee', v_apres = v_avant + 2,
-        format('avant=%s apres=%s comp=%s', v_avant, v_apres, v_comp));
-EXCEPTION WHEN OTHERS THEN
-    PERFORM _rec('9_monnaie_creditee', false, 'erreur : ' || SQLERRM);
-END $$;
-RESET ROLE;
-
--- ===========================================================================
--- TEST 10 : compte deja relie -> ne peut etre remis en attente sur un autre profil
+-- TEST 15 : delier (parent) -> user_id NULL + journalise
 -- ===========================================================================
 SET ROLE authenticated;
 SET request.jwt.claims = :'claimsA';
-DO $$
-BEGIN
-    PERFORM public.demander_lien_enfant('c2000000-0000-0000-0000-00000000000b', 'iris@example.test');
-    PERFORM _rec('10_compte_deja_relie', false, 'accepte a tort');
-EXCEPTION WHEN OTHERS THEN
-    PERFORM _rec('10_compte_deja_relie', SQLERRM LIKE '%compte_deja_relie%', SQLERRM);
-END $$;
+SELECT public.delier_compte_enfant(:'lou');
 RESET ROLE;
-
--- ===========================================================================
--- TEST 11 : expiration : un lien expire n'est pas rattache au login
--- ===========================================================================
-INSERT INTO liens_enfant_en_attente (profil_id, email, cree_par, expire_le)
-VALUES ('c2000000-0000-0000-0000-00000000000b', 'noe@example.test', :'uA', now() - interval '1 day');
-SET ROLE authenticated;
-SET request.jwt.claims = :'claimsF';
-DO $$
-DECLARE v_p uuid;
-BEGIN
-    v_p := public.rattacher_si_attendu();
-    PERFORM _rec('11_expire_non_rattache', v_p IS NULL, 'profil renvoye = ' || coalesce(v_p::text, 'NULL'));
-END $$;
-RESET ROLE;
-SELECT _rec('11b_zoe_non_reliee',
-    (SELECT user_id FROM profils WHERE id = :'zoe') IS NULL, 'user_id Zoe doit rester NULL');
-
--- ===========================================================================
--- TEST 12 : delier (parent) -> user_id NULL + journalise ; puis login = NULL
--- ===========================================================================
-SET ROLE authenticated;
-SET request.jwt.claims = :'claimsA';
-DO $$
-BEGIN
-    PERFORM public.delier_compte_enfant('c1000000-0000-0000-0000-00000000000a');
-    PERFORM _rec('12a_delier_ok', true, 'ok');
-EXCEPTION WHEN OTHERS THEN
-    PERFORM _rec('12a_delier_ok', false, 'refus a tort : ' || SQLERRM);
-END $$;
-RESET ROLE;
-SELECT _rec('12b_user_id_null',
+SELECT _rec('15a_user_id_null',
     (SELECT user_id FROM profils WHERE id = :'lou') IS NULL, 'user_id Lou apres delier');
-SELECT _rec('12c_delier_journalise',
+SELECT _rec('15b_delier_journalise',
     (SELECT count(*) FROM journal_reglages WHERE profil_id = :'lou' AND cle = 'compte_enfant') = 2,
-    'entrees journal = ' || (SELECT count(*) FROM journal_reglages WHERE profil_id = :'lou' AND cle = 'compte_enfant'));
-
-SET ROLE authenticated;
-SET request.jwt.claims = :'claimsE';
-DO $$
-DECLARE v_p uuid;
-BEGIN
-    v_p := public.rattacher_si_attendu();
-    PERFORM _rec('12d_login_apres_delier', v_p IS NULL, 'profil renvoye = ' || coalesce(v_p::text, 'NULL'));
-END $$;
-RESET ROLE;
+    'entrees journal');
 
 -- ===========================================================================
--- TEST 13 : l'ancien relier_compte_enfant n'existe plus
+-- TEST 16 : l'ancien rattacher_si_attendu n'existe plus
 -- ===========================================================================
-SELECT _rec('13_ancien_rpc_supprime',
-    NOT EXISTS (SELECT 1 FROM pg_proc WHERE proname = 'relier_compte_enfant'),
-    'relier_compte_enfant encore present ?');
+SELECT _rec('16_rattacher_auto_supprime',
+    NOT EXISTS (SELECT 1 FROM pg_proc WHERE proname = 'rattacher_si_attendu'),
+    'rattacher_si_attendu encore present ?');
 
 -- ===========================================================================
 -- Rapport
