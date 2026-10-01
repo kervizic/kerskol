@@ -75,14 +75,14 @@ RESET ROLE;
 --   with_link   : > 24 h mais lien enfant en attente -> conserve
 --   uA/uB/uM encore references (foyer, autorisation) -> conserves
 INSERT INTO auth.users (id, email, created_at, email_confirmed_at) VALUES
-    ('d0000000-0000-0000-0000-00000000dead', 'orphan_old@example.test', now() - interval '25 hours', now()),
-    ('d0000000-0000-0000-0000-00000000new1', 'orphan_new@example.test', now() - interval '1 hour',  now()),
-    ('d0000000-0000-0000-0000-00000000link', 'with_link@example.test',  now() - interval '48 hours', now());
+    ('d0000000-0000-0000-0000-00000000d001', 'orphan_old@example.test', now() - interval '25 hours', now()),
+    ('d0000000-0000-0000-0000-00000000d002', 'orphan_new@example.test', now() - interval '1 hour',  now()),
+    ('d0000000-0000-0000-0000-00000000d003', 'with_link@example.test',  now() - interval '48 hours', now());
 -- un profil non relie pour porter le lien en attente
 INSERT INTO profils (id, foyer_id, surnom, matieres_actives)
-VALUES ('e0000000-0000-0000-0000-0000000prof1', 'f0000000-0000-0000-0000-00000000000f', 'Kid', '{MA}'::text[]);
+VALUES ('e0000000-0000-0000-0000-00000000e001', 'f0000000-0000-0000-0000-00000000000f', 'Kid', '{MA}'::text[]);
 INSERT INTO liens_enfant_en_attente (profil_id, email, cree_par)
-VALUES ('e0000000-0000-0000-0000-0000000prof1', 'with_link@example.test', :'uM');
+VALUES ('e0000000-0000-0000-0000-00000000e001', 'with_link@example.test', :'uM');
 
 DO $$
 DECLARE v_n integer;
@@ -91,11 +91,11 @@ BEGIN
     PERFORM _rec('4a_purge_compte', v_n = 1, 'supprimes = ' || v_n);
 END $$;
 SELECT _rec('4b_orphan_old_supprime',
-    NOT EXISTS (SELECT 1 FROM auth.users WHERE id = 'd0000000-0000-0000-0000-00000000dead'), 'doit etre supprime');
+    NOT EXISTS (SELECT 1 FROM auth.users WHERE id = 'd0000000-0000-0000-0000-00000000d001'), 'doit etre supprime');
 SELECT _rec('4c_orphan_new_conserve',
-    EXISTS (SELECT 1 FROM auth.users WHERE id = 'd0000000-0000-0000-0000-00000000new1'), 'doit rester');
+    EXISTS (SELECT 1 FROM auth.users WHERE id = 'd0000000-0000-0000-0000-00000000d002'), 'doit rester');
 SELECT _rec('4d_with_link_conserve',
-    EXISTS (SELECT 1 FROM auth.users WHERE id = 'd0000000-0000-0000-0000-00000000link'), 'doit rester');
+    EXISTS (SELECT 1 FROM auth.users WHERE id = 'd0000000-0000-0000-0000-00000000d003'), 'doit rester');
 SELECT _rec('4e_autorise_conserve',
     EXISTS (SELECT 1 FROM auth.users WHERE id = :'uB'), 'uB autorise? non mais recent -> rester');
 

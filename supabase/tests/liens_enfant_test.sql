@@ -44,6 +44,10 @@ INSERT INTO profils (id, foyer_id, surnom, matieres_actives) VALUES
 \set lou 'c1000000-0000-0000-0000-00000000000a'
 \set zoe 'c2000000-0000-0000-0000-00000000000b'
 
+-- Isolation : on neutralise tout lien REEL preexistant (ex. lien Iris en prod)
+-- le temps de la transaction. Le ROLLBACK final restaure l'etat reel intact.
+DELETE FROM liens_enfant_en_attente;
+
 \set claimsA '{"sub":"aa111111-1111-1111-1111-111111111111","role":"authenticated"}'
 \set claimsB '{"sub":"bb222222-2222-2222-2222-222222222222","role":"authenticated"}'
 \set claimsE '{"sub":"ee333333-3333-3333-3333-333333333333","role":"authenticated"}'

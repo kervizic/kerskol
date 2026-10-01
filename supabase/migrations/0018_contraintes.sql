@@ -67,8 +67,8 @@ BEGIN
         RAISE EXCEPTION 'matieres_actives_vide';
     END IF;
     IF EXISTS (
-        SELECT 1 FROM unnest(NEW.matieres_actives) AS code
-         WHERE NOT EXISTS (SELECT 1 FROM public.matieres m WHERE m.code = code)
+        SELECT 1 FROM unnest(NEW.matieres_actives) AS mc
+         WHERE NOT EXISTS (SELECT 1 FROM public.matieres m WHERE m.code = mc)
     ) THEN
         RAISE EXCEPTION 'matieres_inconnues'
             USING HINT = 'matieres_actives doit referencer des codes existants.';

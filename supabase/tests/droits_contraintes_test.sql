@@ -42,7 +42,7 @@ RESET ROLE;
 SET ROLE authenticated;
 SET request.jwt.claims = :'claimsP';
 SELECT _rec('2_policy_helper_ok',
-    (SELECT count(*) FROM profils WHERE id = :'lou') = 1, 'parent voit son profil');
+    (SELECT count(*) FROM profils WHERE id = 'cccc0000-0000-0000-0000-00000000cccc') = 1, 'parent voit son profil');
 RESET ROLE;
 
 -- T3 : fonction interne non executable par authenticated
@@ -50,7 +50,7 @@ SET ROLE authenticated;
 SET request.jwt.claims = :'claimsP';
 DO $$
 BEGIN
-    PERFORM public.calc_progression(:'lou'::uuid, 'MA.CM.ADDITION');
+    PERFORM public.calc_progression('cccc0000-0000-0000-0000-00000000cccc'::uuid, 'MA.CM.ADDITION');
     PERFORM _rec('3_interne_bloquee', false, 'executee a tort');
 EXCEPTION WHEN insufficient_privilege THEN
     PERFORM _rec('3_interne_bloquee', true, 'permission denied (ok)');
@@ -83,7 +83,7 @@ SET ROLE authenticated;
 SET request.jwt.claims = :'claimsP';
 DO $$
 BEGIN
-    UPDATE profils SET monnaie = 999 WHERE id = :'lou';
+    UPDATE profils SET monnaie = 999 WHERE id = 'cccc0000-0000-0000-0000-00000000cccc';
     PERFORM _rec('5_monnaie_bloquee', false, 'monnaie modifiee a tort');
 EXCEPTION WHEN OTHERS THEN
     PERFORM _rec('5_monnaie_bloquee', SQLERRM LIKE '%monnaie_non_modifiable%', SQLERRM);
@@ -96,7 +96,7 @@ RESET ROLE;
 DO $$
 BEGIN
     UPDATE profils SET avatar = jsonb_build_object('style','adventurer','couleur','#E06A00',
-        'blob', repeat('x', 5000)) WHERE id = :'lou';
+        'blob', repeat('x', 5000)) WHERE id = 'cccc0000-0000-0000-0000-00000000cccc';
     PERFORM _rec('6_avatar_taille', false, 'accepte a tort');
 EXCEPTION WHEN check_violation THEN
     PERFORM _rec('6_avatar_taille', true, 'rejete');
@@ -105,7 +105,7 @@ END $$;
 -- T7 : avatar style inconnu refuse
 DO $$
 BEGIN
-    UPDATE profils SET avatar = '{"style":"martien","couleur":"#E06A00"}'::jsonb WHERE id = :'lou';
+    UPDATE profils SET avatar = '{"style":"martien","couleur":"#E06A00"}'::jsonb WHERE id = 'cccc0000-0000-0000-0000-00000000cccc';
     PERFORM _rec('7_avatar_style', false, 'accepte a tort');
 EXCEPTION WHEN check_violation THEN
     PERFORM _rec('7_avatar_style', true, 'rejete');
@@ -114,7 +114,7 @@ END $$;
 -- T8 : avatar couleur hors palette refusee
 DO $$
 BEGIN
-    UPDATE profils SET avatar = '{"style":"adventurer","couleur":"#123456"}'::jsonb WHERE id = :'lou';
+    UPDATE profils SET avatar = '{"style":"adventurer","couleur":"#123456"}'::jsonb WHERE id = 'cccc0000-0000-0000-0000-00000000cccc';
     PERFORM _rec('8_avatar_couleur', false, 'accepte a tort');
 EXCEPTION WHEN check_violation THEN
     PERFORM _rec('8_avatar_couleur', true, 'rejete');
@@ -123,7 +123,7 @@ END $$;
 -- T9 : avatar valide (style + couleur palette) accepte
 DO $$
 BEGIN
-    UPDATE profils SET avatar = '{"style":"pixelArt","couleur":"#3182CE"}'::jsonb WHERE id = :'lou';
+    UPDATE profils SET avatar = '{"style":"pixelArt","couleur":"#3182CE"}'::jsonb WHERE id = 'cccc0000-0000-0000-0000-00000000cccc';
     PERFORM _rec('9_avatar_valide', true, 'ok');
 EXCEPTION WHEN OTHERS THEN
     PERFORM _rec('9_avatar_valide', false, 'refus a tort : ' || SQLERRM);
@@ -133,7 +133,7 @@ END $$;
 DO $$
 BEGIN
     INSERT INTO reponses (id, profil_id, competence, niveau, correct, temps_ms, repondu_le)
-    VALUES (gen_random_uuid(), :'lou', 'MA.CM.ADDITION', 9, true, 3000, now());
+    VALUES (gen_random_uuid(), 'cccc0000-0000-0000-0000-00000000cccc', 'MA.CM.ADDITION', 9, true, 3000, now());
     PERFORM _rec('10_reponses_niveau', false, 'accepte a tort');
 EXCEPTION WHEN check_violation THEN
     PERFORM _rec('10_reponses_niveau', true, 'rejete');
@@ -145,7 +145,7 @@ END $$;
 DO $$
 BEGIN
     INSERT INTO reponses (id, profil_id, competence, niveau, correct, temps_ms, repondu_le)
-    VALUES (gen_random_uuid(), :'lou', 'MA.CM.ADDITION', 1, true, 999999, now());
+    VALUES (gen_random_uuid(), 'cccc0000-0000-0000-0000-00000000cccc', 'MA.CM.ADDITION', 1, true, 999999, now());
     PERFORM _rec('11_reponses_temps', false, 'accepte a tort');
 EXCEPTION WHEN check_violation THEN
     PERFORM _rec('11_reponses_temps', true, 'rejete');
@@ -156,14 +156,14 @@ END $$;
 -- T12 : limite_jour_min hors bornes refuse ; valeur valide acceptee
 DO $$
 BEGIN
-    UPDATE profils SET limite_jour_min = 2 WHERE id = :'lou';
+    UPDATE profils SET limite_jour_min = 2 WHERE id = 'cccc0000-0000-0000-0000-00000000cccc';
     PERFORM _rec('12a_limite_jour_min', false, 'accepte a tort');
 EXCEPTION WHEN check_violation THEN
     PERFORM _rec('12a_limite_jour_min', true, 'rejete');
 END $$;
 DO $$
 BEGIN
-    UPDATE profils SET limite_semaine_min = 120 WHERE id = :'lou';
+    UPDATE profils SET limite_semaine_min = 120 WHERE id = 'cccc0000-0000-0000-0000-00000000cccc';
     PERFORM _rec('12b_limite_valide', true, 'ok');
 EXCEPTION WHEN OTHERS THEN
     PERFORM _rec('12b_limite_valide', false, 'refus a tort : ' || SQLERRM);
@@ -172,7 +172,7 @@ END $$;
 -- T13 : matieres_actives avec code inconnu refuse
 DO $$
 BEGIN
-    UPDATE profils SET matieres_actives = '{MA,ZZZ}'::text[] WHERE id = :'lou';
+    UPDATE profils SET matieres_actives = '{MA,ZZZ}'::text[] WHERE id = 'cccc0000-0000-0000-0000-00000000cccc';
     PERFORM _rec('13_matieres_inconnues', false, 'accepte a tort');
 EXCEPTION WHEN OTHERS THEN
     PERFORM _rec('13_matieres_inconnues', SQLERRM LIKE '%matieres_inconnues%', SQLERRM);
