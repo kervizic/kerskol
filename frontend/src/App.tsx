@@ -19,7 +19,7 @@ import {
   signOut,
   type Referentiel,
 } from "./lib/api";
-import { resolveEntry, villageRoute, LINK_ROUTE, type EntryMode } from "./lib/bootstrap";
+import { resolveEntry, villageRoute, type EntryMode } from "./lib/bootstrap";
 import { isDemo } from "./lib/demo";
 import { authAction } from "./lib/authReset";
 import { setDernierProfil } from "./lib/session";
