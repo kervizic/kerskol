@@ -23,8 +23,7 @@ VALUES ('c3c3c3c3-0000-0000-0000-00000000cccc', 'f1f1f1f1-0000-0000-0000-0000000
 -- TEST 1 : inviter_parent -> enfile un mail invitation_parent vers l'invite
 SET ROLE authenticated;
 SET request.jwt.claims = :'claimsP';
-SELECT public.inviter_parent('f1f1f1f1-0000-0000-0000-00000000ffff', 'Invite@Example.Test') AS tok;
-\gset
+SELECT public.inviter_parent('f1f1f1f1-0000-0000-0000-00000000ffff', 'Invite@Example.Test') AS tok \gset
 RESET ROLE;
 
 SELECT _rec('1a_token_renvoye', length(:'tok') = 64, 'len = ' || length(:'tok'));

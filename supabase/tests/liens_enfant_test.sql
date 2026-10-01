@@ -59,8 +59,7 @@ DELETE FROM liens_enfant_en_attente;
 -- ===========================================================================
 SET ROLE authenticated;
 SET request.jwt.claims = :'claimsA';
-SELECT public.demander_lien_enfant(:'lou', '  Iris@Example.Test ') AS code_lou;
-\gset
+SELECT public.demander_lien_enfant(:'lou', '  Iris@Example.Test ') AS code_lou \gset
 RESET ROLE;
 
 SELECT _rec('1a_code_3_chiffres', :'code_lou' ~ '^[0-9]{3}$', 'code = ' || :'code_lou');
@@ -73,8 +72,7 @@ SELECT _rec('1c_code_hache_non_clair',
     'hash present et different du code clair');
 
 -- Code volontairement FAUX (different du vrai code).
-SELECT CASE WHEN :'code_lou' = '000' THEN '111' ELSE '000' END AS wrong_lou;
-\gset
+SELECT CASE WHEN :'code_lou' = '000' THEN '111' ELSE '000' END AS wrong_lou \gset
 
 -- ===========================================================================
 -- TEST 2 : unicite (meme profil / meme email)
@@ -133,8 +131,7 @@ RESET ROLE;
 -- ===========================================================================
 SET ROLE authenticated;
 SET request.jwt.claims = :'claimsE';
-SELECT (public.statut_lien_enfant() ->> 'etat') AS st_e;
-\gset
+SELECT (public.statut_lien_enfant() ->> 'etat') AS st_e \gset
 SELECT _rec('5a_statut_en_attente', :'st_e' = 'en_attente', 'etat = ' || :'st_e');
 SELECT _rec('5b_pas_de_profil_divulgue',
     (public.statut_lien_enfant() ? 'profil_id') = false, 'ne doit pas contenir profil_id');
@@ -145,8 +142,7 @@ RESET ROLE;
 -- ===========================================================================
 SET ROLE authenticated;
 SET request.jwt.claims = :'claimsE';
-SELECT (public.valider_lien_enfant(:'wrong_lou')) AS r6;
-\gset
+SELECT (public.valider_lien_enfant(:'wrong_lou')) AS r6 \gset
 RESET ROLE;
 SELECT _rec('6a_mauvais_code', (:'r6'::jsonb ->> 'ok') = 'false'
     AND (:'r6'::jsonb ->> 'etat') = 'code_invalide', 'r = ' || :'r6');
@@ -159,8 +155,7 @@ SELECT _rec('6c_user_id_null',
 -- ===========================================================================
 SET ROLE authenticated;
 SET request.jwt.claims = :'claimsE';
-SELECT (public.valider_lien_enfant(:'code_lou')) AS r7;
-\gset
+SELECT (public.valider_lien_enfant(:'code_lou')) AS r7 \gset
 RESET ROLE;
 SELECT _rec('7a_ok_profil', (:'r7'::jsonb ->> 'ok') = 'true'
     AND (:'r7'::jsonb ->> 'profil_id') = :'lou', 'r = ' || :'r7');
@@ -179,8 +174,7 @@ SELECT _rec('7e_aucun_foyer_cree',
 SET ROLE authenticated;
 SET request.jwt.claims = :'claimsE';
 SELECT (public.statut_lien_enfant()) AS s8;
-SELECT (public.valider_lien_enfant('000')) AS r8;
-\gset
+SELECT (public.valider_lien_enfant('000')) AS r8 \gset
 RESET ROLE;
 SELECT _rec('8_valider_idempotent', (:'r8'::jsonb ->> 'ok') = 'true'
     AND (:'r8'::jsonb ->> 'profil_id') = :'lou', 'r = ' || :'r8');
@@ -190,19 +184,17 @@ SELECT _rec('8_valider_idempotent', (:'r8'::jsonb ->> 'ok') = 'true'
 -- ===========================================================================
 SET ROLE authenticated;
 SET request.jwt.claims = :'claimsA';
-SELECT public.demander_lien_enfant(:'zoe', 'noe@example.test') AS code_zoe;
-\gset
+SELECT public.demander_lien_enfant(:'zoe', 'noe@example.test') AS code_zoe \gset
 RESET ROLE;
-SELECT CASE WHEN :'code_zoe' = '000' THEN '111' ELSE '000' END AS wrong_zoe;
-\gset
+SELECT CASE WHEN :'code_zoe' = '000' THEN '111' ELSE '000' END AS wrong_zoe \gset
 SET ROLE authenticated;
 SET request.jwt.claims = :'claimsF';
 SELECT public.valider_lien_enfant(:'wrong_zoe');  -- essai 1
 SELECT public.valider_lien_enfant(:'wrong_zoe');  -- essai 2
 SELECT public.valider_lien_enfant(:'wrong_zoe');  -- essai 3
 SELECT public.valider_lien_enfant(:'wrong_zoe');  -- essai 4
-SELECT (public.valider_lien_enfant(:'wrong_zoe')) AS r9;  -- essai 5 -> annule
-\gset
+SELECT (public.valider_lien_enfant(:'wrong_zoe')) AS r9 \gset
+-- (essai 5 -> annule)
 RESET ROLE;
 SELECT _rec('9a_annule_au_5e', (:'r9'::jsonb ->> 'etat') = 'annule', 'r = ' || :'r9');
 SELECT _rec('9b_lien_supprime',
@@ -229,14 +221,12 @@ SELECT _rec('10_refuser_supprime',
 -- ===========================================================================
 SET ROLE authenticated;
 SET request.jwt.claims = :'claimsA';
-SELECT public.demander_lien_enfant(:'zoe', 'gael@example.test') AS code_g;
-\gset
+SELECT public.demander_lien_enfant(:'zoe', 'gael@example.test') AS code_g \gset
 RESET ROLE;
 SET ROLE authenticated;
 SET request.jwt.claims = :'claimsG';
-SELECT (public.statut_lien_enfant() ->> 'etat') AS stg;
-SELECT (public.valider_lien_enfant(:'code_g') ->> 'etat') AS rg;
-\gset
+SELECT (public.statut_lien_enfant() ->> 'etat') AS stg \gset
+SELECT (public.valider_lien_enfant(:'code_g') ->> 'etat') AS rg \gset
 RESET ROLE;
 SELECT _rec('11a_statut_non_confirme', :'stg' = 'email_non_confirme', 'etat = ' || :'stg');
 SELECT _rec('11b_valider_non_confirme', :'rg' = 'email_non_confirme', 'etat = ' || :'rg');
@@ -249,8 +239,7 @@ SELECT _rec('11c_zoe_non_reliee',
 UPDATE liens_enfant_en_attente SET expire_le = now() - interval '1 day' WHERE profil_id = :'zoe';
 SET ROLE authenticated;
 SET request.jwt.claims = :'claimsG';
-SELECT (public.statut_lien_enfant() ->> 'etat') AS stexp;
-\gset
+SELECT (public.statut_lien_enfant() ->> 'etat') AS stexp \gset
 RESET ROLE;
 SELECT _rec('12_expire_aucun', :'stexp' = 'aucun', 'etat = ' || :'stexp');
 
