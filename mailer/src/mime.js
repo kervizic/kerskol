@@ -1,8 +1,21 @@
 // Construction d'un message MIME multipart/alternative (texte + HTML) encode
 // en base64url, tel qu'attendu par gmail.users.messages.send ({ raw }).
 
-function encodeHeaderWord(value) {
+// Neutralise CR/LF et tout caractere de controle dans une valeur d'en-tete
+// (defense anti-injection d'en-tetes SMTP/MIME). Les retours a la ligne et les
+// controles sont remplaces par une espace, puis les espaces multiples reduites.
+function sanitizeHeader(value) {
+  return String(value ?? '')
+    // eslint-disable-next-line no-control-regex
+    .replace(/[\x00-\x1F\x7F]+/g, ' ')
+    .replace(/\s{2,}/g, ' ')
+    .trim();
+}
+
+function encodeHeaderWord(rawValue) {
+  const value = sanitizeHeader(rawValue);
   // RFC 2047 pour les en-tetes non-ASCII (sujet, nom d'expediteur).
+  // eslint-disable-next-line no-control-regex
   if (/^[\x00-\x7F]*$/.test(value)) return value;
   return `=?UTF-8?B?${Buffer.from(value, 'utf-8').toString('base64')}?=`;
 }
@@ -10,12 +23,12 @@ function encodeHeaderWord(value) {
 export function buildRawMessage({ fromName, fromEmail, to, subject, text, html }) {
   const boundary = 'kerskol_boundary_37ac91b2f8';
   const fromHeader = fromName
-    ? `${encodeHeaderWord(fromName)} <${fromEmail}>`
-    : fromEmail;
+    ? `${encodeHeaderWord(fromName)} <${sanitizeHeader(fromEmail)}>`
+    : sanitizeHeader(fromEmail);
 
   const lines = [
     `From: ${fromHeader}`,
-    `To: ${to}`,
+    `To: ${sanitizeHeader(to)}`,
     `Subject: ${encodeHeaderWord(subject)}`,
     'MIME-Version: 1.0',
     `Content-Type: multipart/alternative; boundary="${boundary}"`,

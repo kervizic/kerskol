@@ -17,10 +17,15 @@ function backoffSeconds(attempts) {
   return 60 * 2 ** (attempts - 1);
 }
 
+// Efface les parametres sensibles (jeton d'invitation, email de l'invite) une
+// fois le sort du mail scelle (envoye ou echec definitif). La ligne reste pour
+// la piste d'audit du statut ; le contenu sensible ne persiste plus.
+const SCRUB = "parametres = parametres - 'token' - 'email_invite'";
+
 async function markSent(client, id) {
   await client.query(
     `UPDATE public.mail_outbox
-        SET statut = 'sent', envoye_le = now(), derniere_erreur = NULL
+        SET statut = 'sent', envoye_le = now(), derniere_erreur = NULL, ${SCRUB}
       WHERE id = $1`,
     [id],
   );
@@ -29,7 +34,7 @@ async function markSent(client, id) {
 async function markFailurePermanent(client, id, reason) {
   await client.query(
     `UPDATE public.mail_outbox
-        SET statut = 'failed', derniere_erreur = $2
+        SET statut = 'failed', derniere_erreur = $2, ${SCRUB}
       WHERE id = $1`,
     [id, reason],
   );
@@ -39,7 +44,7 @@ async function markRetryOrFail(client, id, attempts, reason) {
   if (attempts >= config.maxAttempts) {
     await client.query(
       `UPDATE public.mail_outbox
-          SET statut = 'failed', essais = $2, derniere_erreur = $3
+          SET statut = 'failed', essais = $2, derniere_erreur = $3, ${SCRUB}
         WHERE id = $1`,
       [id, attempts, reason],
     );
@@ -55,23 +60,42 @@ async function markRetryOrFail(client, id, attempts, reason) {
   );
 }
 
-async function processOne(client, row) {
-  // Resolution de l'email + verification de l'opt-in au dernier moment.
-  const { rows } = await client.query(
-    `SELECT u.email AS email,
-            COALESCE(pp.mails_actives, false) AS actives
-       FROM auth.users u
-       LEFT JOIN public.parent_preferences pp ON pp.user_id = u.id
-      WHERE u.id = $1`,
-    [row.user_id],
-  );
+const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
-  const dest = rows[0];
-  if (!dest || !dest.email || !dest.actives) {
-    // Rien si les mails ne sont pas actives (ou destinataire introuvable).
-    await markFailurePermanent(client, row.id, 'destinataire sans opt-in actif');
-    logger.info('mail ignore (opt-in inactif)', { id: row.id, user_id: row.user_id });
-    return;
+async function processOne(client, row) {
+  // Deux familles de destinataire :
+  //   * invitation_parent : mail TRANSACTIONNEL vers l'adresse invitee
+  //     (parametres.email_invite), sans opt-in (le parent l'a explicitement
+  //     declenche).
+  //   * autres gabarits : notification vers le parent (auth.users) soumise a
+  //     l'opt-in mails_actives.
+  let recipient;
+  if (row.gabarit === 'invitation_parent') {
+    const invite = String(row.parametres?.email_invite || '').trim();
+    if (!invite || !EMAIL_RE.test(invite)) {
+      await markFailurePermanent(client, row.id, 'email invite absent ou invalide');
+      logger.info('invitation ignoree (email invalide)', { id: row.id });
+      return;
+    }
+    recipient = invite;
+  } else {
+    // Resolution de l'email + verification de l'opt-in au dernier moment.
+    const { rows } = await client.query(
+      `SELECT u.email AS email,
+              COALESCE(pp.mails_actives, false) AS actives
+         FROM auth.users u
+         LEFT JOIN public.parent_preferences pp ON pp.user_id = u.id
+        WHERE u.id = $1`,
+      [row.user_id],
+    );
+    const dest = rows[0];
+    if (!dest || !dest.email || !dest.actives) {
+      // Rien si les mails ne sont pas actives (ou destinataire introuvable).
+      await markFailurePermanent(client, row.id, 'destinataire sans opt-in actif');
+      logger.info('mail ignore (opt-in inactif)', { id: row.id, user_id: row.user_id });
+      return;
+    }
+    recipient = dest.email;
   }
 
   let content;
@@ -86,7 +110,7 @@ async function processOne(client, row) {
   const attempts = row.essais + 1;
   try {
     await sendMail({
-      to: dest.email,
+      to: recipient,
       subject: content.subject,
       text: content.text,
       html: content.html,

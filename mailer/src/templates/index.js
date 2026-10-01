@@ -91,9 +91,41 @@ function messageService(p) {
   return { subject, text, html };
 }
 
+// --- invitation_parent ---------------------------------------------------
+// parametres attendus : { token } (email_invite sert au routage, pas au rendu)
+// Mail transactionnel envoye a l'adresse invitee (pas d'opt-in requis).
+function invitationParent(p) {
+  const base = 'https://kerskol.fr';
+  const token = String(p.token || '');
+  const lien = `${base}/invitation?token=${encodeURIComponent(token)}`;
+  const subject = 'Kerskol - invitation a rejoindre un foyer';
+
+  const text =
+    `Bonjour,\n\n` +
+    `Un parent vous invite a rejoindre son foyer sur Kerskol pour suivre ` +
+    `ensemble la progression des enfants.\n\n` +
+    `Pour accepter, ouvrez ce lien (valable 7 jours) :\n${lien}\n\n` +
+    `Si vous n'etes pas concerne, ignorez simplement cet email.\n\n` +
+    `A bientot,\nL'equipe Kerskol`;
+
+  const html = layout(
+    'Invitation a rejoindre un foyer',
+    `<p style="margin:0 0 12px;">Bonjour,</p>
+     <p style="margin:0 0 12px;">Un parent vous invite a rejoindre son foyer sur
+       <strong>Kerskol</strong> pour suivre ensemble la progression des enfants.</p>
+     <p style="margin:0 0 16px;">
+       <a href="${escapeHtml(lien)}" style="display:inline-block;background:#2f6f4f;color:#ffffff;text-decoration:none;padding:12px 20px;border-radius:8px;">Accepter l'invitation</a>
+     </p>
+     <p style="margin:0 0 8px;font-size:13px;color:#52606d;">Lien valable 7 jours. Si vous n'etes pas concerne, ignorez cet email.</p>`,
+  );
+
+  return { subject, text, html };
+}
+
 const templates = {
   resume_hebdomadaire: resumeHebdomadaire,
   message_service: messageService,
+  invitation_parent: invitationParent,
 };
 
 export function render(gabarit, parametres) {
