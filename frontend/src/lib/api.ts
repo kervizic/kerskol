@@ -2,6 +2,7 @@
 // transparente entre Supabase (prod) et le jeu de donnees demo (local).
 
 import { supabase } from "./supabase";
+import { purgeKerskolStorage } from "./authReset";
 import {
   isDemo,
   DEMO_COMPETENCES,
@@ -71,15 +72,31 @@ export async function reauthGoogle(): Promise<void> {
 }
 
 export async function signOut(): Promise<void> {
+  purgeKerskolStorage();
   if (isDemo()) return;
   await supabase().auth.signOut();
 }
 
+// Levee quand creer_foyer() refuse une inscription (lancement public non ouvert).
+export class InscriptionsFermeesError extends Error {
+  code = "inscriptions_fermees";
+  constructor() {
+    super("inscriptions_fermees");
+    this.name = "InscriptionsFermeesError";
+  }
+}
+
 // creer_foyer() est idempotent : renvoie le foyer existant ou en cree un.
+// Peut lever InscriptionsFermeesError si le compte n'est pas autorise.
 export async function ensureFoyer(): Promise<string> {
   if (isDemo()) return DEMO_FOYER_ID;
   const { data, error } = await supabase().rpc("creer_foyer");
-  if (error) throw error;
+  if (error) {
+    if (String(error.message || "").includes("inscriptions_fermees")) {
+      throw new InscriptionsFermeesError();
+    }
+    throw error;
+  }
   return data as string;
 }
 
@@ -115,14 +132,42 @@ export async function getProfilById(id: string): Promise<Profil> {
   return data as Profil;
 }
 
-// rattacher_si_attendu : AU LOGIN, avant tout creer_foyer. Relie le compte a un
-// profil si un lien l'attend (ou s'il est deja relie). Renvoie l'id du profil
-// enfant, sinon null (parcours parent classique).
-export async function rattacherSiAttendu(): Promise<string | null> {
-  if (isDemo()) return null;
-  const { data, error } = await supabase().rpc("rattacher_si_attendu");
+// Etat du compte au login vis-a-vis d'un lien enfant, SANS divulgation de foyer
+// ni de profil. etat : relie | en_attente | email_non_confirme | aucun.
+export interface StatutLien {
+  etat: "relie" | "en_attente" | "email_non_confirme" | "aucun";
+  profil_id?: string;
+}
+
+export async function statutLienEnfant(): Promise<StatutLien> {
+  if (isDemo()) return { etat: "aucun" };
+  const { data, error } = await supabase().rpc("statut_lien_enfant");
   if (error) throw error;
-  return (data as string | null) ?? null;
+  return (data as StatutLien) ?? { etat: "aucun" };
+}
+
+// Resultat d'une tentative de validation par code.
+export interface ValidationLien {
+  ok: boolean;
+  etat?: "code_invalide" | "annule" | "email_non_confirme" | "aucun";
+  profil_id?: string;
+  essais_restants?: number;
+}
+
+// valider_lien_enfant(code) : relie si le code est bon ; sinon compte l'essai.
+// Ne jette pas pour un mauvais code (resultat structure, compteur persiste).
+export async function validerLienEnfant(code: string): Promise<ValidationLien> {
+  if (isDemo()) return { ok: false, etat: "aucun" };
+  const { data, error } = await supabase().rpc("valider_lien_enfant", { p_code: code });
+  if (error) throw error;
+  return (data as ValidationLien) ?? { ok: false, etat: "aucun" };
+}
+
+// refuser_lien_enfant : "Ce n'est pas moi" -> supprime le lien en attente.
+export async function refuserLienEnfant(): Promise<void> {
+  if (isDemo()) return;
+  const { error } = await supabase().rpc("refuser_lien_enfant");
+  if (error) throw error;
 }
 
 // Liens de rattachement en attente pour les profils d'un foyer (vue parent).

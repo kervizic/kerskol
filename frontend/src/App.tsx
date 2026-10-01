@@ -6,6 +6,7 @@ import { WhoPlays } from "./screens/WhoPlays";
 import { Village } from "./screens/Village";
 import { ParentSpace } from "./screens/ParentSpace";
 import { Session } from "./screens/Session";
+import { LinkCode } from "./screens/LinkCode";
 import { ChildTheme } from "./components/ChildTheme";
 import {
   ensureFoyer,
@@ -14,11 +15,11 @@ import {
   getUser,
   listProfils,
   onAuthChange,
-  rattacherSiAttendu,
+  statutLienEnfant,
   signOut,
   type Referentiel,
 } from "./lib/api";
-import { resolveEntry, villageRoute } from "./lib/bootstrap";
+import { resolveEntry, villageRoute, LINK_ROUTE, type EntryMode } from "./lib/bootstrap";
 import { isDemo } from "./lib/demo";
 import { authAction } from "./lib/authReset";
 import { setDernierProfil } from "./lib/session";
@@ -42,7 +43,7 @@ export function App() {
   const [ready, setReady] = useState(false);
   const [authed, setAuthed] = useState(false);
   const [foyerId, setFoyerId] = useState<string | null>(null);
-  const [mode, setMode] = useState<"parent" | "child">("parent");
+  const [mode, setMode] = useState<EntryMode>("parent");
   const [profils, setProfils] = useState<Profil[]>([]);
   const [referentiel, setReferentiel] = useState<Referentiel | null>(null);
   const [error, setError] = useState(false);
@@ -77,9 +78,9 @@ export function App() {
         setReady(true);
         return;
       }
-      // AVANT tout creer_foyer : un compte enfant relie va droit dans son village.
+      // AVANT tout creer_foyer : on demande l'etat du compte (lien enfant ?).
       const [entry, ref] = await Promise.all([
-        resolveEntry({ rattacherSiAttendu, getProfilById, ensureFoyer, listProfils }),
+        resolveEntry({ statutLienEnfant, getProfilById, ensureFoyer, listProfils }),
         getReferentiel(),
       ]);
       setFoyerId(entry.foyerId);
@@ -126,6 +127,11 @@ export function App() {
   // un profil hors du foyer -> retour a la selection.
   useEffect(() => {
     if (!ready || !authed) return;
+    // Modes sans foyer (lien en attente, inscriptions fermees, email non
+    // confirme) : aucune redirection de profil a appliquer.
+    if (mode === "child_pending" || mode === "inscriptions_fermees" || mode === "email_non_confirme") {
+      return;
+    }
     // Enfant relie : il reste cantonne a SON village (aucun ecran parent).
     if (mode === "child") {
       const childId = profils[0]?.id;
@@ -196,6 +202,57 @@ export function App() {
       );
     }
     if (!authed) return <PublicHome />;
+
+    // Lien enfant en attente : ecran neutre de saisie du code (sans foyer).
+    if (mode === "child_pending") {
+      return (
+        <LinkCode
+          onValidated={() => void bootstrap()}
+          onRefused={() => void handleFoyerDeleted()}
+        />
+      );
+    }
+
+    // Inscriptions fermees jusqu'au lancement public.
+    if (mode === "inscriptions_fermees") {
+      return (
+        <div className="kk-page kk-center">
+          <div className="kk-container" style={{ maxWidth: 480, textAlign: "center" }}>
+            <h1>Les inscriptions ne sont pas encore ouvertes</h1>
+            <p className="kk-muted">
+              Kerskol n'est pas encore ouvert au public. Revenez bientôt&nbsp;!
+            </p>
+            <button
+              className="kk-btn kk-btn--accent kk-btn--block"
+              onClick={() => void handleFoyerDeleted()}
+            >
+              Se déconnecter
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    // Email non confirme : la validation du lien enfant est impossible.
+    if (mode === "email_non_confirme") {
+      return (
+        <div className="kk-page kk-center">
+          <div className="kk-container" style={{ maxWidth: 480, textAlign: "center" }}>
+            <h1>Confirme ton adresse e-mail</h1>
+            <p className="kk-muted">
+              Confirme d'abord ton adresse e-mail, puis reconnecte-toi pour continuer.
+            </p>
+            <button
+              className="kk-btn kk-btn--accent kk-btn--block"
+              onClick={() => void handleFoyerDeleted()}
+            >
+              Se déconnecter
+            </button>
+          </div>
+        </div>
+      );
+    }
+
     if (!foyerId || !referentiel) return <Loading />;
 
     // Enfant relie : acces limite a son village. /reglages -> message simple.
