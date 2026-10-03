@@ -7,6 +7,13 @@
 // pedagogique (doubles, double du double, 5x+2x, 10x-1x, passage par 10,
 // +9 = +10-1, complements, decomposition).
 //
+// Chaque exercice porte aussi un ENONCE NORMALISE `verif: {op, a, b}` : une
+// operation a deux operandes dont le resultat (et le reste pour la division)
+// EST la reponse attendue. C'est ce que le client envoie au serveur, qui
+// RECALCULE la reponse et decide seul « juste/faux » (lot 2 de securite). Un
+// test (generator.test.ts) verifie que computeVerif(ex.verif) reproduit
+// toujours ex.answer / ex.reste.
+//
 // Voir docs/referentiel-calcul.md et supabase/migrations/0006_seed_referentiel_calcul.sql.
 
 import { makeRng, intBetween, pick, type Rng } from "./rng";
@@ -19,6 +26,31 @@ export type Forme =
   | "reste";
 
 export type Support = "rectangle" | "droite" | "aucun" | null;
+
+// Enonce normalise envoye au serveur pour revalidation. L'operation porte sur
+// deux operandes et son resultat est la reponse attendue :
+//   add -> a + b ; sub -> a - b ; mul -> a * b ; div -> quotient (reste = a % b).
+export type VerifOp = "add" | "sub" | "mul" | "div";
+export interface Verif {
+  op: VerifOp;
+  a: number;
+  b: number;
+}
+
+// Recalcule localement la reponse (et le reste) a partir de l'enonce normalise.
+// DOIT rester synchrone avec public.verif_calcul() cote serveur.
+export function computeVerif(v: Verif): { answer: number; reste: number | null } {
+  switch (v.op) {
+    case "add":
+      return { answer: v.a + v.b, reste: null };
+    case "sub":
+      return { answer: v.a - v.b, reste: null };
+    case "mul":
+      return { answer: v.a * v.b, reste: null };
+    case "div":
+      return { answer: Math.floor(v.a / v.b), reste: v.a % v.b };
+  }
+}
 
 // Description d'un exercice cote base (ex_calcul + exercices).
 export interface ExCalcul {
@@ -62,6 +94,7 @@ export interface GeneratedExercise {
   answer: number; // reponse principale
   reste: number | null; // reste (forme reste), sinon null
   fields: 1 | 2; // 1 champ, ou 2 champs (quotient + reste)
+  verif: Verif; // enonce normalise pour revalidation serveur
   correction: string; // correction expliquee
   rattrapage: boolean;
   seed: number;
@@ -182,6 +215,7 @@ function buildExercise(
           ...base,
           prompt: `${a} × ${f}`,
           answer,
+          verif: { op: "mul", a, b: f },
           correction: `${a} × ${f} = ${table} × ${f} × 10 = ${table * f} × 10 = ${answer}.`,
         };
       }
@@ -191,6 +225,7 @@ function buildExercise(
         ...base,
         prompt: `${table} × ${b}`,
         answer,
+        verif: { op: "mul", a: table, b },
         correction: `${table} × ${b} = ${table} × ${f} × 10 = ${table * f} × 10 = ${answer}.`,
       };
     }
@@ -211,6 +246,7 @@ function buildExercise(
           ...base,
           prompt: `Combien de fois ${table} dans ${product} ?`,
           answer: f,
+          verif: { op: "div", a: product, b: table },
           correction: `${table} × ${f} = ${product}, donc il y a ${f} fois ${table} dans ${product}. ${correctionTable(table, f)}`,
         };
       }
@@ -219,6 +255,7 @@ function buildExercise(
           ...base,
           prompt: `${f} × … = ${product}`,
           answer: table,
+          verif: { op: "div", a: product, b: f },
           correction: `${f} × ${table} = ${table} × ${f} = ${product} (l'ordre ne change pas le resultat).`,
         };
       }
@@ -226,6 +263,7 @@ function buildExercise(
         ...base,
         prompt: `${table} × … = ${product}`,
         answer: f,
+        verif: { op: "div", a: product, b: table },
         correction: correctionTable(table, f),
       };
     }
@@ -235,6 +273,7 @@ function buildExercise(
       ...base,
       prompt: `${table} × ${f}`,
       answer: product,
+      verif: { op: "mul", a: table, b: f },
       correction: correctionTable(table, f),
       supportData:
         base.support === "rectangle"
@@ -259,6 +298,7 @@ function buildExercise(
       ...base,
       prompt: `Le double de ${n}`,
       answer,
+      verif: { op: "add", a: n, b: n },
       correction: `Le double de ${n}, c'est ${n} + ${n} = ${answer}.`,
       supportData:
         base.support === "rectangle" ? { kind: "rectangle", rows: 2, cols: n } : undefined,
@@ -281,6 +321,7 @@ function buildExercise(
       ...base,
       prompt: `La moitie de ${n}`,
       answer,
+      verif: { op: "div", a: n, b: 2 },
       correction: `La moitie de ${n}, c'est ${n} partage en deux : ${answer} + ${answer} = ${n}.`,
       supportData:
         base.support === "rectangle" ? { kind: "rectangle", rows: 2, cols: answer } : undefined,
@@ -299,6 +340,7 @@ function buildExercise(
         ...base,
         prompt: `${n} + … = ${cible}`,
         answer,
+        verif: { op: "sub", a: cible, b: n },
         correction: complementCorrection(n, cible, answer),
         // Terme manquant : on montre le depart (n) et la cible, le bond reste
         // A TROUVER (arc non etiquete) -> la reponse n'est jamais affichee.
@@ -328,6 +370,7 @@ function buildExercise(
       ...base,
       prompt: `${n} → combien pour aller a la ${rang} au-dessus ?`,
       answer,
+      verif: { op: "sub", a: target, b: n },
       correction: `On vise ${target} (la ${rang} juste au-dessus de ${n}). ${target} − ${n} = ${answer}.`,
       supportData:
         base.support === "droite"
@@ -357,6 +400,7 @@ function buildExercise(
         ...base,
         prompt: `${dividend} ÷ ${divisor}`,
         answer: quotient,
+        verif: { op: "div", a: dividend, b: divisor },
         correction: `${divisor} × ${quotient} = ${dividend}, donc ${dividend} ÷ ${divisor} = ${quotient}.`,
         supportData:
           base.support === "rectangle"
@@ -383,6 +427,7 @@ function buildExercise(
       answer: quotient,
       reste,
       fields: 2,
+      verif: { op: "div", a: dividend, b: divisor },
       correction: `Le plus grand multiple de ${divisor} sous ${dividend} est ${produit} (${divisor} × ${quotient}). Il reste ${dividend} − ${produit} = ${reste}.`,
     };
   }
@@ -403,6 +448,7 @@ function buildExercise(
       ...base,
       prompt: `${a} × ${facteur}`,
       answer,
+      verif: { op: "mul", a, b: facteur },
       correction,
       // Bonds repetes de `facteur` (compter par paquets) ; l'arrivee (le
       // resultat) n'est pas etiquetee.
@@ -438,6 +484,7 @@ function buildExercise(
         ...base,
         prompt: gauche ? `${connu} + … = ${somme}` : `… + ${connu} = ${somme}`,
         answer,
+        verif: { op: "sub", a: somme, b: connu },
         correction: `On cherche ce qu'il faut ajouter a ${connu} pour faire ${somme} : ${somme} − ${connu} = ${answer}.`,
       };
     }
@@ -457,6 +504,7 @@ function buildExercise(
         ...base,
         prompt: `Ordre de grandeur : ${a} ${signe} ${b} (arrondis a la dizaine)`,
         answer,
+        verif: { op: op === "add" ? "add" : "sub", a: ra, b: rb },
         correction: `${a} ≈ ${ra} et ${b} ≈ ${rb}. ${ra} ${signe} ${rb} = ${answer}.`,
       };
     }
@@ -476,6 +524,7 @@ function buildExercise(
         ...base,
         prompt: `${a} ${signe} ${b}`,
         answer,
+        verif: { op: op === "add" ? "add" : "sub", a, b },
         correction: `${b} est un nombre de dizaines : on ${op === "add" ? "ajoute" : "enleve"} ${b / 10} dizaines a ${a} → ${answer}.`,
       };
     }
@@ -494,6 +543,7 @@ function buildExercise(
         ...base,
         prompt: `${a} ${signe} ${abs}`,
         answer,
+        verif: { op: ajout < 0 ? "sub" : "add", a, b: abs },
         correction,
       };
     }
@@ -512,6 +562,7 @@ function buildExercise(
         ...base,
         prompt: `${a} + ${b}`,
         answer,
+        verif: { op: "add", a, b },
         correction: `Unites : ${ua} + ${ub} = ${ua + ub} (je pose ${(ua + ub) % 10}, je retiens 1). Puis les dizaines. Total : ${answer}.`,
       };
     }
@@ -524,7 +575,7 @@ function buildExercise(
       const correction = presque
         ? `${a} + ${b}, c'est presque un double : ${a} + ${a} = ${2 * a}, puis + 1 = ${answer}.`
         : `${a} + ${a}, c'est un double : ${answer}.`;
-      return { ...base, prompt: `${a} + ${b}`, answer, correction };
+      return { ...base, prompt: `${a} + ${b}`, answer, verif: { op: "add", a, b }, correction };
     }
 
     if (type === "passage_par_10") {
@@ -540,6 +591,7 @@ function buildExercise(
         ...base,
         prompt: `${a} + ${b}`,
         answer,
+        verif: { op: "add", a, b },
         correction: `On passe par 10 : ${a} + ${pour10} = 10, il reste ${reste} a ajouter → 10 + ${reste} = ${answer}.`,
       };
     }
@@ -562,6 +614,7 @@ function buildExercise(
       ...base,
       prompt: `${a} + ${b}`,
       answer,
+      verif: { op: "add", a, b },
       correction: `Je pars du plus grand (${Math.max(a, b)}) et j'ajoute ${Math.min(a, b)} → ${answer}.`,
       // Depart au plus grand, un bond « +petit » ; l'arrivee (le resultat)
       // n'est pas etiquetee.
@@ -583,6 +636,7 @@ function buildExercise(
     ...base,
     prompt: "1 + 1",
     answer: 2,
+    verif: { op: "add", a: 1, b: 1 },
     correction: "1 + 1 = 2.",
   };
 }

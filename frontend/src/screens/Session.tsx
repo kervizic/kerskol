@@ -24,6 +24,7 @@ import {
   getProgressionDetail,
   getTempsAujourdhuiS,
   insertReponse,
+  plafondCode,
   type ReponseInsert,
 } from "../lib/api";
 import { enqueueReponse, flushReponses } from "../lib/reponseQueue";
@@ -248,6 +249,7 @@ export function Session({
   const [monnaie, setMonnaie] = useState(profil.monnaie);
   const [lastGain, setLastGain] = useState(0);
   const [done, setDone] = useState(false);
+  const [limite, setLimite] = useState<string | null>(null);
   const [tempsJourS, setTempsJourS] = useState(0);
   const [inputMode, setInputMode] = useState<InputMode>(() =>
     initialInputMode(prefersCoarsePointer(), getStoredInputMode())
@@ -258,6 +260,8 @@ export function Session({
   const questionStart = useRef<number>(0);
   const placement = useRef<Record<string, boolean>>({});
   const monnaieStart = useRef<number>(profil.monnaie);
+  // Saisie brute du dernier exercice valide (envoyee au serveur pour revalidation).
+  const submitted = useRef<{ reponse: number; reste: number | null }>({ reponse: 0, reste: null });
 
   // --- Initialisation : reprise ou nouvelle seance ------------------------
   useEffect(() => {
@@ -356,9 +360,13 @@ export function Session({
     }
   }, [profil, onProfilChange]);
 
-  // Envoie la reponse (ou la met en file si le reseau est coupe).
+  // Envoie la reponse au serveur, qui decide seul « juste/faux » (lot 2). En cas
+  // de reseau coupe, la reponse est mise en file et rejouee plus tard. En cas de
+  // plafond anti-abus, on affiche un message doux sans rien retirer.
+  // `correctLocal` = verdict calcule localement, uniquement pour le feedback
+  // instantane et le credit optimiste hors-ligne ; le serveur fait foi.
   const envoyer = useCallback(
-    async (correct: boolean, correctionRead: boolean) => {
+    async (correctLocal: boolean, correctionRead: boolean) => {
       if (!ex || !slot) return;
       const tooFast = Date.now() - questionStart.current;
       const row: ReponseInsert = {
@@ -369,21 +377,35 @@ export function Session({
         exercice_id: slot.source.exerciceId,
         niveau: ex.niveau,
         methode: ex.methode,
-        correct,
+        op: ex.verif.op,
+        a: ex.verif.a,
+        b: ex.verif.b,
+        reponse: submitted.current.reponse,
+        reste: submitted.current.reste,
+        fields: ex.fields,
         temps_ms: tooFast,
-        aide_utilisee: false,
         correction_lue: correctionRead,
         rattrapage: ex.rattrapage,
         placement: !placement.current[ex.competence],
         repondu_le: new Date().toISOString(),
       };
       try {
-        await insertReponse(row);
-        await relire();
-      } catch {
+        const res = await insertReponse(row);
+        if (res.monnaie != null) {
+          setMonnaie(res.monnaie);
+          onProfilChange({ ...profil, monnaie: res.monnaie });
+        }
+        void relire(); // synchronise la progression (placement) en arriere-plan
+      } catch (e) {
+        const code = plafondCode(e);
+        if (code) {
+          // Refus propre : pause anti-abus. Jamais de perte.
+          setLimite("Pause ! Reviens un peu plus tard.");
+          return;
+        }
+        // Reseau coupe : on met en file + credit optimiste (reconcilie au flush).
         enqueueReponse(row);
-        // Credit optimiste local (reconcilie au prochain flush).
-        const gain = tooFast < 1500 ? 0 : correct && ex.rattrapage ? 3 : correct ? 2 : correctionRead ? 1 : 0;
+        const gain = tooFast < 1500 ? 0 : correctLocal && ex.rattrapage ? 3 : correctLocal ? 2 : correctionRead ? 1 : 0;
         setMonnaie((m) => {
           const nm = m + gain;
           onProfilChange({ ...profil, monnaie: nm });
@@ -408,6 +430,12 @@ export function Session({
 
   const doValidate = useCallback(() => {
     if (!engine || !ex || !canValidate) return;
+    // Capture la saisie brute (envoyee au serveur pour revalidation), valable
+    // aussi pour le chemin "faux" (envoye apres lecture de la correction).
+    submitted.current = {
+      reponse: Number(value.q),
+      reste: ex.fields === 2 ? Number(value.r) : null,
+    };
     const correct = isCorrect();
     if (correct) {
       const temps = Date.now() - questionStart.current;
@@ -417,7 +445,7 @@ export function Session({
     } else {
       setPhase("wrong");
     }
-  }, [engine, ex, canValidate, isCorrect, envoyer]);
+  }, [engine, ex, canValidate, isCorrect, envoyer, value.q, value.r]);
 
   // « Tu es sure de toi ? » ~1 sur 6, avant de valider.
   const onValiderClick = useCallback(() => {
@@ -540,6 +568,24 @@ export function Session({
         tempsJourS={tempsJourS}
         onExit={onExit}
       />
+    );
+  }
+
+  if (limite) {
+    return (
+      <div className="kk-page kk-center">
+        <div className="kk-container" style={{ textAlign: "center", maxWidth: 480 }}>
+          <div className="kk-card kk-stack">
+            <h1>Pause !</h1>
+            <p className="kk-lead" style={{ margin: "0 auto" }}>
+              {limite} Tu as deja bien travaille aujourd'hui.
+            </p>
+            <button className="kk-btn kk-btn--accent kk-btn--block" onClick={onExit}>
+              Retour au village
+            </button>
+          </div>
+        </div>
+      </div>
     );
   }
 

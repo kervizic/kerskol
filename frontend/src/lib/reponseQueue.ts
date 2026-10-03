@@ -39,7 +39,7 @@ export function pendingCount(): number {
 // Rejoue toutes les reponses en attente. Chaque insertion reussie est retiree
 // de la file ; en cas d'echec on s'arrete (le reste reste en file).
 export async function flushReponses(
-  insert: (row: ReponseInsert) => Promise<void>
+  insert: (row: ReponseInsert) => Promise<unknown>
 ): Promise<void> {
   let rows = read();
   while (rows.length > 0) {

@@ -1,5 +1,10 @@
 import { describe, it, expect } from "vitest";
-import { generateExercise, type ExCalcul, type GeneratedExercise } from "./generator";
+import {
+  generateExercise,
+  computeVerif,
+  type ExCalcul,
+  type GeneratedExercise,
+} from "./generator";
 import { SEED_SOURCES } from "./seedSources";
 
 // Verifie que la reponse est arithmetiquement coherente avec l'enonce, en
@@ -83,6 +88,35 @@ describe("generateExercise : chaque competence x niveau", () => {
         // La correction cite un chiffre (elle explique un calcul).
         expect(/\d/.test(g.correction)).toBe(true);
         checkConsistency(g);
+      }
+    });
+  }
+});
+
+// INVARIANT DE SECURITE (lot 2) : l'enonce normalise `verif` doit reproduire
+// exactement la reponse attendue (et le reste). Le serveur recalcule la reponse
+// a partir de `verif` via public.verif_calcul() ; si cet invariant casse, un
+// enfant repondant juste serait refuse. On couvre toutes les competences x
+// niveaux, en mode normal ET rattrapage, sur de nombreuses graines.
+describe("verif : enonce normalise reproduit la reponse serveur", () => {
+  for (const src of SEED_SOURCES) {
+    it(`${src.competence} N${src.niveau} : computeVerif == answer/reste`, () => {
+      for (let seed = 1; seed <= 40; seed++) {
+        for (const rattrapage of [false, true]) {
+          const g = generateExercise(src, seed * 7919 + src.niveau, { rattrapage });
+          const c = computeVerif(g.verif);
+          expect(c.answer).toBe(g.answer);
+          if (g.fields === 2) {
+            expect(c.reste).toBe(g.reste);
+          }
+          // Operandes normalises exploitables par le serveur (entiers >= 0).
+          expect(Number.isInteger(g.verif.a)).toBe(true);
+          expect(Number.isInteger(g.verif.b)).toBe(true);
+          expect(g.verif.a).toBeGreaterThanOrEqual(0);
+          expect(g.verif.b).toBeGreaterThanOrEqual(0);
+          if (g.verif.op === "sub") expect(g.verif.a).toBeGreaterThanOrEqual(g.verif.b);
+          if (g.verif.op === "div") expect(g.verif.b).toBeGreaterThan(0);
+        }
       }
     });
   }

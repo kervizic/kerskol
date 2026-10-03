@@ -3,6 +3,7 @@
 
 import { supabase } from "./supabase";
 import { purgeKerskolStorage } from "./authReset";
+import { computeVerif, type VerifOp } from "../domain/calcul/generator";
 import {
   isDemo,
   DEMO_COMPETENCES,
@@ -481,6 +482,9 @@ export async function finishSeance(
 }
 
 // -------------------------------- Reponses -------------------------------
+// Lot 2 de securite : le client n'envoie plus de flag `correct`, mais l'ENONCE
+// NORMALISE (operation + operandes) et la SAISIE de l'enfant. Le SERVEUR
+// (RPC enregistrer_reponse) recalcule la bonne reponse et decide « juste/faux ».
 export interface ReponseInsert {
   id: string; // UUID client (idempotence)
   profil_id: string;
@@ -489,13 +493,24 @@ export interface ReponseInsert {
   exercice_id: string | null;
   niveau: number;
   methode: string | null;
-  correct: boolean;
+  op: VerifOp; // enonce normalise : operation...
+  a: number; //   ...operande a...
+  b: number; //   ...operande b (la reponse attendue en decoule cote serveur)
+  reponse: number; // saisie principale de l'enfant
+  reste: number | null; // saisie du reste (exercices a 2 champs), sinon null
+  fields: 1 | 2;
   temps_ms: number | null;
-  aide_utilisee: boolean;
   correction_lue: boolean;
   rattrapage: boolean;
   placement: boolean;
   repondu_le: string;
+}
+
+// Verdict renvoye par le serveur apres enregistrement.
+export interface ReponseResult {
+  correct: boolean;
+  monnaie: number | null;
+  deja: boolean;
 }
 
 // UUID valide attendu par la colonne exercice_id (les ids "MA.xxx:n" de la copie
@@ -503,32 +518,51 @@ export interface ReponseInsert {
 const UUID_RE =
   /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
-export async function insertReponse(row: ReponseInsert): Promise<void> {
+// Detecte un refus de plafond anti-abus (message serveur `plafond_*`).
+export function plafondCode(e: unknown): string | null {
+  const m = (e as { message?: unknown } | null)?.message;
+  return typeof m === "string" && m.startsWith("plafond_") ? m : null;
+}
+
+export async function insertReponse(row: ReponseInsert): Promise<ReponseResult> {
+  // Reponse en file au format anterieur au lot 2 (sans enonce normalise) :
+  // on l'ecarte proprement pour ne pas bloquer la file (perte negligeable).
+  if (!row.op) return { correct: false, monnaie: null, deja: true };
   if (isDemo()) {
+    const { answer, reste } = computeVerif({ op: row.op, a: row.a, b: row.b });
+    const correct = row.reponse === answer && (row.fields < 2 || row.reste === reste);
     const p = DEMO_PROFILS.find((x) => x.id === row.profil_id);
     if (p) {
       const tooFast = row.temps_ms != null && row.temps_ms < 1500;
-      const gain = tooFast
-        ? 0
-        : row.correct && row.rattrapage
-          ? 3
-          : row.correct
-            ? 2
-            : row.correction_lue
-              ? 1
-              : 0;
+      const gain = tooFast ? 0 : correct && row.rattrapage ? 3 : correct ? 2 : row.correction_lue ? 1 : 0;
       p.monnaie += gain;
+      return { correct, monnaie: p.monnaie, deja: false };
     }
-    return;
+    return { correct, monnaie: null, deja: false };
   }
-  const payload: ReponseInsert = {
-    ...row,
-    exercice_id: row.exercice_id && UUID_RE.test(row.exercice_id) ? row.exercice_id : null,
-  };
-  const { error } = await supabase()
-    .from("reponses")
-    .upsert(payload, { onConflict: "id", ignoreDuplicates: true });
+  const { data, error } = await supabase().rpc("enregistrer_reponse", {
+    p_id: row.id,
+    p_profil: row.profil_id,
+    p_seance: row.seance_id,
+    p_competence: row.competence,
+    p_exercice: row.exercice_id && UUID_RE.test(row.exercice_id) ? row.exercice_id : null,
+    p_niveau: row.niveau,
+    p_methode: row.methode,
+    p_op: row.op,
+    p_a: row.a,
+    p_b: row.b,
+    p_reponse: row.reponse,
+    p_reste: row.reste,
+    p_fields: row.fields,
+    p_temps_ms: row.temps_ms,
+    p_correction_lue: row.correction_lue,
+    p_rattrapage: row.rattrapage,
+    p_placement: row.placement,
+    p_repondu_le: row.repondu_le,
+  });
   if (error) throw error;
+  const d = (data ?? {}) as { correct?: boolean; monnaie?: number | null; deja?: boolean };
+  return { correct: Boolean(d.correct), monnaie: d.monnaie ?? null, deja: Boolean(d.deja) };
 }
 
 export async function getJournal(foyerId: string): Promise<JournalReglage[]> {
