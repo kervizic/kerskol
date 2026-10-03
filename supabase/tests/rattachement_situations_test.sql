@@ -257,11 +257,12 @@ SELECT _rec('8b_journal_refuse',
 -- ===========================================================================
 SET ROLE authenticated;
 SET request.jwt.claims = :'claimsX';
-SELECT public.valider_lien_enfant(:'wrong_x');  -- 1
-SELECT public.valider_lien_enfant(:'wrong_x');  -- 2
-SELECT public.valider_lien_enfant(:'wrong_x');  -- 3
-SELECT public.valider_lien_enfant(:'wrong_x');  -- 4
-SELECT (public.valider_lien_enfant(:'wrong_x')) AS r9 \gset  -- 5 -> annule
+-- 4 premiers essais, puis le 5e qui annule (le resultat du 5e dans r9).
+SELECT public.valider_lien_enfant(:'wrong_x');
+SELECT public.valider_lien_enfant(:'wrong_x');
+SELECT public.valider_lien_enfant(:'wrong_x');
+SELECT public.valider_lien_enfant(:'wrong_x');
+SELECT (public.valider_lien_enfant(:'wrong_x')) AS r9 \gset
 RESET ROLE;
 SELECT _rec('9a_annule', (:'r9'::jsonb ->> 'etat') = 'annule', 'r = ' || :'r9');
 SELECT _rec('9b_lien_supprime', (SELECT count(*) FROM liens_enfant_en_attente WHERE profil_id = :'px') = 0, 'lien px');
