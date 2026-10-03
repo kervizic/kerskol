@@ -34,6 +34,27 @@
 -- Idempotent (rejouable sans erreur).
 
 -- =========================================================================
+-- 0. Le profil_id d'une seance est fige (0011) cote API, mais la FUSION serveur
+--    doit pouvoir reaffecter les seances a la cible. On laisse passer quand le
+--    marqueur transactionnel kerskol.calcul est pose (meme principe que pour la
+--    monnaie et les colonnes enfant).
+-- =========================================================================
+CREATE OR REPLACE FUNCTION public.trg_seances_profil_fige()
+RETURNS trigger
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    IF current_setting('kerskol.calcul', true) = 'on' THEN
+        RETURN NEW;  -- reaffectation serveur de confiance (fusion de foyers)
+    END IF;
+    IF NEW.profil_id <> OLD.profil_id THEN
+        RAISE EXCEPTION 'profil_id d''une seance est fige';
+    END IF;
+    RETURN NEW;
+END;
+$$;
+
+-- =========================================================================
 -- 1. Helper prive : fusionne le profil SOURCE dans le profil CIBLE.
 --    Ne touche NI aux foyers NI au rattachement : seulement les donnees du jeu.
 --    Reentrant (aucune table temporaire). Pose le marqueur serveur kerskol.calcul.

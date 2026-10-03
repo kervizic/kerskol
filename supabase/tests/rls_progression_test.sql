@@ -233,9 +233,10 @@ SET ROLE authenticated;
 -- Claims SANS amr recent (aucun amr) -> _reauth_recente() = false
 SET request.jwt.claims = :'claimsA';
 
+-- Avec le mot « SUPPRIMER » (migration 0021) mais SANS amr recent -> reauth_requise.
 DO $$
 BEGIN
-    PERFORM supprimer_foyer('aaaaaaaa-0000-0000-0000-000000000000');
+    PERFORM supprimer_foyer('aaaaaaaa-0000-0000-0000-000000000000', 'SUPPRIMER');
     PERFORM _rec('8_supprimer_foyer_refuse_sans_amr', false, 'suppression acceptee a tort');
 EXCEPTION WHEN OTHERS THEN
     PERFORM _rec('8_supprimer_foyer_refuse_sans_amr', SQLERRM LIKE '%reauth_requise%',
