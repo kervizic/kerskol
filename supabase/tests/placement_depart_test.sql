@@ -30,8 +30,10 @@ INSERT INTO profils (id, foyer_id, surnom, classe) VALUES
 \set pCM2 'a0000002-0000-0000-0000-000000000000'
 \set claimsA '{"sub":"11111111-1111-1111-1111-111111111111","role":"authenticated"}'
 
-SET ROLE authenticated;
-SET request.jwt.claims = :'claimsA';
+-- Depuis le lot 2 (0022), l'INSERT direct sur reponses est revoque a
+-- authenticated (ecriture via la RPC enregistrer_reponse, en definer). On teste
+-- ici le MOTEUR de placement en inserant comme postgres, exactement le contexte
+-- dans lequel s'execute la RPC.
 
 -- --- 1 : CE2 + DOUBLES (depart 3), UNE bonne reponse -> escalier a 3 ---------
 INSERT INTO reponses (id, profil_id, competence, niveau, correct, temps_ms, repondu_le)
@@ -56,8 +58,6 @@ VALUES (gen_random_uuid(), :'pCE2', 'MA.TABLES.7', 1, true, 3000, timestamptz '2
 SELECT _rec('3_CE2_sans_depart_defaut1',
             (SELECT niveau FROM progression WHERE profil_id = :'pCE2' AND competence = 'MA.TABLES.7') = 2,
             'niveau = ' || (SELECT niveau FROM progression WHERE profil_id = :'pCE2' AND competence = 'MA.TABLES.7'));
-
-RESET ROLE;
 
 SELECT id, CASE WHEN ok THEN 'PASS' ELSE 'FAIL' END AS resultat, nom, detail
   FROM _res ORDER BY id;
