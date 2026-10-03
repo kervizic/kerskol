@@ -188,11 +188,16 @@ export async function listLiensEnAttente(foyerId: string): Promise<LienEnAttente
 }
 
 // Messages d'erreur clairs pour le parent (codes remontes par les RPC).
+// Les codes doivent rester alignes sur la migration 0014 : depuis 0014,
+// demander_lien_enfant ne distingue plus "parent" / "deja relie" (anti-
+// enumeration) et remonte un unique code generique 'lien_impossible'.
 const LIEN_ERREURS: Record<string, string> = {
   email_invalide: "Adresse e-mail invalide.",
+  profil_introuvable: "Profil introuvable.",
   profil_deja_relie: "Ce profil est déjà relié à un compte.",
-  compte_est_parent: "Cette adresse est celle d’un parent du foyer.",
-  compte_deja_relie: "Ce compte Google est déjà relié à un autre profil.",
+  // Generique volontaire : l'adresse est deja utilisee sur Kerskol (compte
+  // parent du foyer, ou deja reliee a un autre profil). On ne revele pas lequel.
+  lien_impossible: "Cette adresse ne peut pas être reliée à ce profil.",
   lien_deja_en_attente: "Un lien est déjà en attente pour ce profil.",
   email_deja_en_attente: "Cette adresse est déjà en attente sur un profil.",
   non_relie: "Ce profil n’est relié à aucun compte.",
@@ -201,6 +206,10 @@ const LIEN_ERREURS: Record<string, string> = {
 function lienError(e: unknown): Error {
   const msg = String((e as { message?: string })?.message ?? e ?? "");
   const code = Object.keys(LIEN_ERREURS).find((k) => msg.includes(k));
+  // Diagnostic : on journalise le code technique reel (jamais d'e-mail, les RPC
+  // ne l'incluent pas dans leurs messages). L'utilisateur ne voit qu'un message
+  // clair et non enumerant.
+  console.error("lien enfant: code d'erreur", code ?? msg);
   return new Error(code ? LIEN_ERREURS[code] : "Une erreur est survenue.");
 }
 

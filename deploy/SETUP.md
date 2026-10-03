@@ -290,6 +290,25 @@ voir `supabase/migrations/0001_mail_outbox.sql` pour la structure.
   | crontab -
 ```
 
+### Purge des comptes orphelins (cron)
+
+`maintenance.sh` supprime les comptes `auth` sans foyer/profil/lien de plus de
+24 h et les lignes `mail_outbox` envoyees depuis plus de 7 jours (fonctions
+`purge_comptes_orphelins()` / `purge_mail_outbox()`, SECURITY DEFINER). A planifier
+APRES les sauvegardes, a une heure DISTINCTE, dans le crontab `ubuntu` (qui a
+acces a Docker). Ne pas confondre avec `/usr/local/bin/docker-purge.sh` (nettoyage
+des images Docker, sans rapport).
+
+```bash
+# Test manuel (sortie : comptes_orphelins=N mail_outbox=N)
+/opt/kerskol/deploy/maintenance.sh
+
+# Cron quotidien 03:50 (installe sur le VPS)
+( crontab -l 2>/dev/null; \
+  echo "50 3 * * * /opt/kerskol/deploy/maintenance.sh >> /opt/kerskol/maintenance.log 2>&1" ) \
+  | crontab -
+```
+
 ---
 
 ## 11. Rollback
