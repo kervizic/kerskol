@@ -146,19 +146,39 @@ export async function statutLienEnfant(): Promise<StatutLien> {
   return (data as StatutLien) ?? { etat: "aucun" };
 }
 
-// Resultat d'une tentative de validation par code.
+// Resultat d'une tentative de validation par code (migration 0020).
+// Apres le BON code seulement, l'etat peut demander une confirmation selon la
+// situation du compte connecte (deja relie ailleurs / parent seul de son foyer),
+// ou refuser (foyer partage), ou exiger une reauth Google recente.
 export interface ValidationLien {
   ok: boolean;
-  etat?: "code_invalide" | "annule" | "email_non_confirme" | "aucun";
+  etat?:
+    | "code_invalide"
+    | "annule"
+    | "email_non_confirme"
+    | "aucun"
+    | "confirmation_autre_profil" // deja relie a un autre profil : confirmer ?
+    | "confirmation_suppression_foyer" // parent seul : supprimer son foyer ?
+    | "refus_foyer_partage" // parent d'un foyer partage : impossible
+    | "reauth_requise"; // confirmation c : reconnexion Google < 5 min exigee
   profil_id?: string;
   essais_restants?: number;
+  nb_profils?: number; // nombre de profils du foyer a supprimer (cas c)
 }
 
-// valider_lien_enfant(code) : relie si le code est bon ; sinon compte l'essai.
-// Ne jette pas pour un mauvais code (resultat structure, compteur persiste).
-export async function validerLienEnfant(code: string): Promise<ValidationLien> {
+// valider_lien_enfant(code, confirmer) : relie si le code est bon ; sinon compte
+// l'essai. confirmer=true valide l'action destructrice d'un ecran de confirmation
+// (delien d'un autre profil, ou suppression du foyer du compte). Ne jette pas
+// pour un mauvais code (resultat structure, compteur persiste).
+export async function validerLienEnfant(
+  code: string,
+  confirmer = false
+): Promise<ValidationLien> {
   if (isDemo()) return { ok: false, etat: "aucun" };
-  const { data, error } = await supabase().rpc("valider_lien_enfant", { p_code: code });
+  const { data, error } = await supabase().rpc("valider_lien_enfant", {
+    p_code: code,
+    p_confirmer: confirmer,
+  });
   if (error) throw error;
   return (data as ValidationLien) ?? { ok: false, etat: "aucun" };
 }
@@ -188,16 +208,15 @@ export async function listLiensEnAttente(foyerId: string): Promise<LienEnAttente
 }
 
 // Messages d'erreur clairs pour le parent (codes remontes par les RPC).
-// Les codes doivent rester alignes sur la migration 0014 : depuis 0014,
-// demander_lien_enfant ne distingue plus "parent" / "deja relie" (anti-
-// enumeration) et remonte un unique code generique 'lien_impossible'.
+// Depuis 0020, demander_lien_enfant n'echoue plus selon le STATUT du compte
+// cible (anti-enumeration) : elle renvoie toujours un code, sauf adresse
+// invalide / profil d'un autre foyer / doublon de lien (abus). La situation du
+// compte (parent, relie ailleurs...) est traitee a la validation, par son
+// titulaire.
 const LIEN_ERREURS: Record<string, string> = {
   email_invalide: "Adresse e-mail invalide.",
   profil_introuvable: "Profil introuvable.",
   profil_deja_relie: "Ce profil est déjà relié à un compte.",
-  // Generique volontaire : l'adresse est deja utilisee sur Kerskol (compte
-  // parent du foyer, ou deja reliee a un autre profil). On ne revele pas lequel.
-  lien_impossible: "Cette adresse ne peut pas être reliée à ce profil.",
   lien_deja_en_attente: "Un lien est déjà en attente pour ce profil.",
   email_deja_en_attente: "Cette adresse est déjà en attente sur un profil.",
   non_relie: "Ce profil n’est relié à aucun compte.",
@@ -213,14 +232,17 @@ function lienError(e: unknown): Error {
   return new Error(code ? LIEN_ERREURS[code] : "Une erreur est survenue.");
 }
 
-// Cree un lien de rattachement en attente (parent). L'email est normalise en base.
-export async function demanderLienEnfant(profilId: string, email: string): Promise<void> {
-  if (isDemo()) return;
-  const { error } = await supabase().rpc("demander_lien_enfant", {
+// Cree un lien de rattachement en attente (parent) et renvoie le CODE a 3
+// chiffres a transmettre a l'enfant (affiche une seule fois). L'email est
+// normalise en base.
+export async function demanderLienEnfant(profilId: string, email: string): Promise<string> {
+  if (isDemo()) return "000";
+  const { data, error } = await supabase().rpc("demander_lien_enfant", {
     p_profil: profilId,
     p_email: email,
   });
   if (error) throw lienError(error);
+  return String(data ?? "");
 }
 
 // Annule un lien en attente (parent). DELETE protege par RLS (parent du foyer).

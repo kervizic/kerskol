@@ -1,15 +1,21 @@
 import { useState } from "react";
 import { Feedback } from "../components/ui";
-import { refuserLienEnfant, validerLienEnfant } from "../lib/api";
+import { reauthGoogle, refuserLienEnfant, validerLienEnfant } from "../lib/api";
+import { confirmationTexte, nextLinkStep, type Confirmation } from "../lib/linkFlow";
 
-// Ecran NEUTRE affiche au login d'un compte dont l'email correspond a un lien
-// en attente. On ne revele NI le foyer NI le profil : seulement une invitation
-// a saisir le code a 3 chiffres donne par le parent.
+// Ecran NEUTRE affiche a CHAQUE chargement d'un compte dont l'e-mail confirme
+// correspond a un lien en attente. On ne revele NI le foyer NI le profil :
+// seulement une invitation a saisir le code a 3 chiffres donne par le parent.
 //
-//   * bon code      -> onValidated() (le compte est relie, on recharge).
-//   * mauvais code  -> message generique + essais restants (5 max).
-//   * annule        -> le lien a ete supprime (trop d'essais) : retour accueil.
-//   * "Ce n'est pas moi" -> refuserLienEnfant() puis onRefused().
+// Apres le BON code, selon la situation du compte connecte (migration 0020) :
+//   * compte libre               -> relie, onValidated().
+//   * deja relie a un AUTRE profil-> ecran de confirmation ("le relier ici ?").
+//   * parent SEUL de son foyer    -> ecran de confirmation (suppression de son
+//     espace) + reconnexion Google recente exigee.
+//   * parent d'un foyer PARTAGE   -> refus clair (le lien est supprime).
+// Mauvais code : message generique + essais restants (5 max). "Ce n'est pas
+// moi" -> refuserLienEnfant() puis onRefused().
+
 export function LinkCode({
   onValidated,
   onRefused,
@@ -21,39 +27,73 @@ export function LinkCode({
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [termine, setTermine] = useState(false);
+  const [confirm, setConfirm] = useState<Confirmation | null>(null);
+  const [reauthNeeded, setReauthNeeded] = useState(false);
+
+  // Applique le resultat d'une tentative (saisie initiale ou confirmation).
+  function appliquer(r: Awaited<ReturnType<typeof validerLienEnfant>>) {
+    const step = nextLinkStep(r);
+    switch (step.kind) {
+      case "validated":
+        onValidated();
+        break;
+      case "confirm":
+        setConfirm(step.confirmation);
+        setMessage(null);
+        break;
+      case "reauth":
+        setReauthNeeded(true);
+        setMessage(step.message);
+        break;
+      case "terminal":
+        setConfirm(null);
+        setTermine(true);
+        setMessage(step.message);
+        break;
+      case "error":
+        setMessage(step.message);
+        if (step.clearCode) setCode("");
+        break;
+    }
+  }
 
   async function valider() {
     if (busy || code.length !== 3) return;
     setBusy(true);
     setMessage(null);
     try {
-      const r = await validerLienEnfant(code);
-      if (r.ok) {
-        onValidated();
-        return;
-      }
-      if (r.etat === "annule") {
-        setTermine(true);
-        setMessage("Trop d'essais. Demande à un parent de recommencer.");
-      } else if (r.etat === "email_non_confirme") {
-        setMessage("Confirme d'abord ton adresse e-mail, puis réessaie.");
-      } else if (r.etat === "aucun") {
-        setTermine(true);
-        setMessage("Ce lien n'est plus valable.");
-      } else {
-        const reste = r.essais_restants;
-        setMessage(
-          reste != null
-            ? `Code incorrect. Il te reste ${reste} essai${reste > 1 ? "s" : ""}.`
-            : "Code incorrect."
-        );
-      }
-      setCode("");
-    } catch {
+      appliquer(await validerLienEnfant(code));
+    } catch (e) {
+      console.error("valider_lien_enfant a echoue", e);
       setMessage("Une erreur est survenue. Réessaie dans un instant.");
     } finally {
       setBusy(false);
     }
+  }
+
+  async function confirmer() {
+    if (busy || code.length !== 3) return;
+    setBusy(true);
+    setMessage(null);
+    try {
+      appliquer(await validerLienEnfant(code, true));
+    } catch (e) {
+      console.error("valider_lien_enfant (confirmation) a echoue", e);
+      setMessage("Une erreur est survenue. Réessaie dans un instant.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function reauthenticate() {
+    await reauthGoogle(); // redirige vers Google ; au retour, nouvel ecran de code
+  }
+
+  function annulerConfirmation() {
+    setConfirm(null);
+    setReauthNeeded(false);
+    setCode("");
+    setMessage(null);
   }
 
   async function refuser() {
@@ -66,6 +106,42 @@ export function LinkCode({
     } finally {
       onRefused();
     }
+  }
+
+  // ---------------------------------------------------------------- Ecrans
+  if (confirm) {
+    const texte = confirmationTexte(confirm);
+    return (
+      <div className="kk-page kk-center">
+        <main className="kk-container" style={{ maxWidth: 440, textAlign: "center" }}>
+          <div className="kk-card kk-stack">
+            <h1>Confirmation</h1>
+            <p className="kk-lead" style={{ margin: "0 auto" }}>{texte}</p>
+            {message ? <Feedback kind="error">{message}</Feedback> : null}
+            {reauthNeeded ? (
+              <button
+                className="kk-btn kk-btn--accent kk-btn--block"
+                onClick={() => void reauthenticate()}
+                disabled={busy}
+              >
+                Se reconnecter avec Google
+              </button>
+            ) : (
+              <button
+                className="kk-btn kk-btn--accent kk-btn--block"
+                onClick={() => void confirmer()}
+                disabled={busy}
+              >
+                {confirm.kind === "suppression_foyer" ? "Confirmer et rattacher" : "Oui, relier"}
+              </button>
+            )}
+            <button className="kk-btn kk-btn--block" onClick={annulerConfirmation} disabled={busy}>
+              Annuler
+            </button>
+          </div>
+        </main>
+      </div>
+    );
   }
 
   return (

@@ -172,6 +172,7 @@ function LinkAccount({
   const relie = profil.user_id != null;
   const [email, setEmail] = useState("");
   const [busy, setBusy] = useState(false);
+  const [code, setCode] = useState<string | null>(null);
   const [msg, setMsg] = useState<{ kind: "error" | "success"; text: string } | null>(null);
 
   async function relier() {
@@ -180,9 +181,10 @@ function LinkAccount({
     setBusy(true);
     setMsg(null);
     try {
-      await demanderLienEnfant(profil.id, value);
+      const nouveauCode = await demanderLienEnfant(profil.id, value);
       setEmail("");
-      setMsg({ kind: "success", text: "Lien créé. L’enfant sera relié à sa première connexion." });
+      setCode(nouveauCode);
+      setMsg(null);
       await onReload();
     } catch (e) {
       setMsg({ kind: "error", text: e instanceof Error ? e.message : "Une erreur est survenue." });
@@ -195,6 +197,7 @@ function LinkAccount({
     if (!lien) return;
     setBusy(true);
     setMsg(null);
+    setCode(null);
     try {
       await annulerLienEnfant(lien.id);
       await onReload();
@@ -255,6 +258,23 @@ function LinkAccount({
             {busy ? "..." : "Relier un compte Google"}
           </button>
         </div>
+      )}
+      {code && (
+        <Feedback kind="success">
+          Lien créé. Donne ce code à l’enfant pour qu’il relie son compte à sa
+          prochaine connexion (valable 7 jours)&nbsp;:
+          <span
+            style={{
+              display: "block",
+              fontSize: "2rem",
+              fontWeight: 700,
+              letterSpacing: "0.4rem",
+              marginTop: 8,
+            }}
+          >
+            {code}
+          </span>
+        </Feedback>
       )}
       {msg && <Feedback kind={msg.kind}>{msg.text}</Feedback>}
     </div>

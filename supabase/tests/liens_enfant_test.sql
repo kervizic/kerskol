@@ -113,18 +113,16 @@ SELECT _rec('3b_tiers_ne_voit_pas_lien',
 RESET ROLE;
 
 -- ===========================================================================
--- TEST 4 : email d'un parent -> message GENERIQUE (pas d'enumeration)
+-- TEST 4 : email d'un compte PARENT -> depuis 0020, plus d'enumeration : un
+--          code est renvoye comme pour n'importe quelle adresse (reponse
+--          identique). Nettoyage du lien pour ne pas gener les tests suivants.
 -- ===========================================================================
 SET ROLE authenticated;
 SET request.jwt.claims = :'claimsA';
-DO $$
-BEGIN
-    PERFORM public.demander_lien_enfant('c2000000-0000-0000-0000-00000000000b', 'pb@example.test');
-    PERFORM _rec('4_parent_generique', false, 'accepte a tort');
-EXCEPTION WHEN OTHERS THEN
-    PERFORM _rec('4_parent_generique', SQLERRM LIKE '%lien_impossible%', SQLERRM);
-END $$;
+SELECT public.demander_lien_enfant(:'zoe', 'pb@example.test') AS code_pb \gset
 RESET ROLE;
+SELECT _rec('4_parent_pas_enumeration', :'code_pb' ~ '^[0-9]{3}$', 'code = ' || :'code_pb');
+DELETE FROM liens_enfant_en_attente WHERE profil_id = :'zoe';
 
 -- ===========================================================================
 -- TEST 5 : statut au login de l'enfant (en attente), sans divulgation
