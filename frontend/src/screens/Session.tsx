@@ -29,7 +29,13 @@ import {
 } from "../lib/api";
 import { enqueueReponse, flushReponses } from "../lib/reponseQueue";
 import { composeSession } from "../domain/calcul/composer";
-import type { SupportData } from "../domain/calcul/generator";
+import type {
+  SupportData,
+  DroiteData,
+  PoseData,
+  ChiffresData,
+  QcmOption,
+} from "../domain/calcul/generator";
 import {
   answerCurrent,
   createEngine,
@@ -172,6 +178,214 @@ function SupportView({ data }: { data: SupportData }) {
   );
 }
 
+// --- Droite graduee : la fleche pointe la valeur a lire (jamais etiquetee) ---
+function DroiteView({ data }: { data: DroiteData }) {
+  const { from, to, step, at } = data;
+  const W = 520;
+  const H = 96;
+  const pad = 28;
+  const axisY = 62;
+  const span = Math.max(1, to - from);
+  const x = (v: number) => pad + ((v - from) / span) * (W - 2 * pad);
+  const ticks: number[] = [];
+  for (let v = from; v <= to + 1e-6; v += step) ticks.push(Math.round(v));
+  return (
+    <div className="kk-support">
+      <svg width="100%" height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label="droite graduee">
+        <line x1={pad} y1={axisY} x2={W - pad} y2={axisY} stroke="var(--kk-border)" strokeWidth={3} />
+        {ticks.map((v, i) => (
+          <g key={i}>
+            <line x1={x(v)} y1={axisY - 6} x2={x(v)} y2={axisY + 6} stroke="var(--kk-border)" strokeWidth={2} />
+            {(v === from || v === to) && (
+              <text x={x(v)} y={axisY + 24} textAnchor="middle" fontSize="16" fontWeight={700} fill="var(--kk-text)">
+                {v}
+              </text>
+            )}
+          </g>
+        ))}
+        <path
+          d={`M ${x(at)} ${axisY - 30} L ${x(at)} ${axisY - 6}`}
+          stroke="var(--kk-accent)"
+          strokeWidth={3}
+          markerEnd="url(#kk-arrow-d)"
+        />
+        <defs>
+          <marker id="kk-arrow-d" markerWidth="10" markerHeight="10" refX="4" refY="6" orient="auto">
+            <path d="M0,0 L8,0 L4,7 Z" fill="var(--kk-accent)" />
+          </marker>
+        </defs>
+      </svg>
+    </div>
+  );
+}
+
+// --- Comparaison : deux nombres encadrant le signe choisi (<, =, >) ---
+function CompareChoice({
+  a,
+  b,
+  chosen,
+  onPick,
+}: {
+  a: number;
+  b: number;
+  chosen: number | null;
+  onPick: (v: number) => void;
+}) {
+  const signs = [
+    { v: 0, s: "<" },
+    { v: 1, s: "=" },
+    { v: 2, s: ">" },
+  ];
+  return (
+    <div className="kk-compare">
+      <span className="kk-compare__num">{a}</span>
+      <div className="kk-compare__signs">
+        {signs.map((o) => (
+          <button
+            key={o.v}
+            type="button"
+            className={`kk-btn kk-compare__sign${chosen === o.v ? " kk-compare__sign--active" : ""}`}
+            onClick={() => onPick(o.v)}
+            aria-label={o.s}
+          >
+            {o.s}
+          </button>
+        ))}
+      </div>
+      <span className="kk-compare__num">{b}</span>
+    </div>
+  );
+}
+
+// --- QCM : la VALEUR de l'option choisie sera envoyee au serveur (pas d'index) ---
+function QcmChoice({
+  options,
+  chosen,
+  onPick,
+}: {
+  options: QcmOption[];
+  chosen: number | null;
+  onPick: (v: number) => void;
+}) {
+  return (
+    <div className="kk-qcm">
+      {options.map((o, i) => (
+        <button
+          key={i}
+          type="button"
+          className={`kk-btn kk-qcm__opt${chosen === o.value ? " kk-qcm__opt--active" : ""}`}
+          onClick={() => onPick(o.value)}
+        >
+          {o.label}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+// --- Decomposition : une case de chiffre par rang (m, c, d, u) ---
+function ChiffresView({
+  data,
+  digits,
+  activeCell,
+  onFocusCell,
+}: {
+  data: ChiffresData;
+  digits: string[];
+  activeCell: number;
+  onFocusCell: (i: number) => void;
+}) {
+  return (
+    <div className="kk-cells">
+      {data.ranks.map((r, i) => (
+        <div key={r.key} className="kk-cells__item">
+          <button
+            type="button"
+            className={`kk-answer__box${i === activeCell ? " kk-answer__box--active" : ""}`}
+            onClick={() => onFocusCell(i)}
+            aria-label={r.label}
+          >
+            {digits[i] || "?"}
+          </button>
+          <span className="kk-answer__label">{r.label}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// --- Calcul pose : operation en colonnes alignees, resultat chiffre a chiffre
+// (de droite a gauche), avec cases de retenue optionnelles (aide, non notees). ---
+function PoseView({
+  data,
+  digits,
+  activeCell,
+  onFocusCell,
+}: {
+  data: PoseData;
+  digits: string[];
+  activeCell: number;
+  onFocusCell: (i: number) => void;
+}) {
+  const { op, terms, width, answerDigits } = data;
+  const cols = Array.from({ length: width }, (_, c) => c); // 0 = gauche
+  const resultStart = width - answerDigits;
+  // Retenues : pur brouillon local, jamais envoye au serveur. Un clic incremente
+  // (vide -> 1 -> 2 ... -> 9 -> vide).
+  const [carries, setCarries] = useState<string[]>(() => Array(width).fill(""));
+  const cycle = (i: number) =>
+    setCarries((cs) => {
+      const n = cs.slice();
+      const cur = n[i] === "" ? 1 : Number(n[i]) + 1;
+      n[i] = cur > 9 ? "" : String(cur);
+      return n;
+    });
+  const digitAt = (t: number, c: number): string => {
+    const s = String(t);
+    return c >= width - s.length ? s[c - (width - s.length)] : "";
+  };
+  return (
+    <div className="kk-pose" role="group" aria-label="operation posee">
+      <div className="kk-pose__carries">
+        {cols.map((c) => (
+          <button key={c} type="button" className="kk-pose__carry" onClick={() => cycle(c)} aria-label="retenue (aide)">
+            {carries[c]}
+          </button>
+        ))}
+      </div>
+      {terms.map((t, ti) => (
+        <div className="kk-pose__row" key={ti}>
+          <span className="kk-pose__op">{ti === terms.length - 1 ? op : ""}</span>
+          {cols.map((c) => (
+            <span key={c} className="kk-pose__d">
+              {digitAt(t, c)}
+            </span>
+          ))}
+        </div>
+      ))}
+      <div className="kk-pose__bar" />
+      <div className="kk-pose__row">
+        <span className="kk-pose__op"> </span>
+        {cols.map((c) => {
+          const ri = c - resultStart;
+          if (ri < 0) return <span key={c} className="kk-pose__d" />;
+          return (
+            <button
+              key={c}
+              type="button"
+              className={`kk-answer__box kk-pose__cell${ri === activeCell ? " kk-answer__box--active" : ""}`}
+              onClick={() => onFocusCell(ri)}
+              aria-label={`chiffre ${answerDigits - ri}`}
+            >
+              {digits[ri] || "?"}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 // Rend l'operation avec la (les) case(s) de reponse A LEUR PLACE dans l'egalite
 // (« 2 + 5 = [ ] », « 7 × [ ] = 56 », « 38 ÷ 5 = [ ] reste [ ] »). Les enonces
 // sans jeton (questions) restent en texte simple, la case est affichee a part.
@@ -246,6 +460,10 @@ export function Session({
   const [f1, setF1] = useState("");
   const [f2, setF2] = useState("");
   const [active, setActive] = useState<1 | 2>(1);
+  // Nouveaux modes de saisie : choix (compare/qcm) et cases de chiffres (pose/chiffres).
+  const [choice, setChoice] = useState<number | null>(null);
+  const [digits, setDigits] = useState<string[]>([]);
+  const [cell, setCell] = useState(0);
   const [monnaie, setMonnaie] = useState(profil.monnaie);
   const [lastGain, setLastGain] = useState(0);
   const [done, setDone] = useState(false);
@@ -331,6 +549,17 @@ export function Session({
     setF1("");
     setF2("");
     setActive(1);
+    setChoice(null);
+    if (ex?.saisie === "pose" && ex.poseData) {
+      setDigits(Array(ex.poseData.answerDigits).fill(""));
+      setCell(ex.poseData.answerDigits - 1); // saisie de DROITE a GAUCHE
+    } else if (ex?.saisie === "chiffres" && ex.chiffresData) {
+      setDigits(Array(ex.chiffresData.ranks.length).fill(""));
+      setCell(0);
+    } else {
+      setDigits([]);
+      setCell(0);
+    }
     questionStart.current = Date.now();
   }, [ex?.key]);
 
@@ -489,19 +718,52 @@ export function Session({
   );
 
   // --- Saisie (pave + clavier) -------------------------------------------
+  // Synchronise f1 (source unique pour la validation) depuis les cases.
+  const syncCells = useCallback((next: string[]) => {
+    setDigits(next);
+    setF1(next.length > 0 && next.every((x) => x !== "") ? next.join("") : "");
+  }, []);
+
   const typeDigit = useCallback(
     (d: string) => {
       if (phase !== "answering") return;
+      if (ex && (ex.saisie === "compare" || ex.saisie === "qcm")) return;
+      if (ex && (ex.saisie === "pose" || ex.saisie === "chiffres")) {
+        const dir = ex.saisie === "pose" ? -1 : 1;
+        const next = digits.slice();
+        next[cell] = d;
+        syncCells(next);
+        setCell(Math.min(Math.max(cell + dir, 0), next.length - 1));
+        return;
+      }
       const setter = ex?.fields === 2 && active === 2 ? setF2 : setF1;
       setter((v) => (v.length >= 6 ? v : v + d));
     },
-    [phase, ex, active]
+    [phase, ex, active, digits, cell, syncCells]
   );
   const backspace = useCallback(() => {
     if (phase !== "answering") return;
+    if (ex && (ex.saisie === "compare" || ex.saisie === "qcm")) return;
+    if (ex && (ex.saisie === "pose" || ex.saisie === "chiffres")) {
+      const dir = ex.saisie === "pose" ? -1 : 1;
+      const next = digits.slice();
+      let c = cell;
+      if (next[c] === "") c = Math.min(Math.max(c - dir, 0), next.length - 1);
+      next[c] = "";
+      syncCells(next);
+      setCell(c);
+      return;
+    }
     const setter = ex?.fields === 2 && active === 2 ? setF2 : setF1;
     setter((v) => v.slice(0, -1));
-  }, [phase, ex, active]);
+  }, [phase, ex, active, digits, cell, syncCells]);
+
+  // Choix d'une option (compare / qcm) : la valeur devient la saisie (f1).
+  const pickChoice = useCallback((v: number) => {
+    if (phase !== "answering") return;
+    setChoice(v);
+    setF1(String(v));
+  }, [phase]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -638,6 +900,36 @@ export function Session({
           }}
         />
 
+        {ex.saisie === "droite" && ex.droiteData && <DroiteView data={ex.droiteData} />}
+        {(phase === "answering" || phase === "sure") && ex.saisie === "pose" && ex.poseData && (
+          <PoseView
+            data={ex.poseData}
+            digits={digits}
+            activeCell={cell}
+            onFocusCell={(i) => {
+              setCell(i);
+              touchAnswerZone();
+            }}
+          />
+        )}
+        {(phase === "answering" || phase === "sure") && ex.saisie === "chiffres" && ex.chiffresData && (
+          <ChiffresView
+            data={ex.chiffresData}
+            digits={digits}
+            activeCell={cell}
+            onFocusCell={(i) => {
+              setCell(i);
+              touchAnswerZone();
+            }}
+          />
+        )}
+        {(phase === "answering" || phase === "sure") && ex.saisie === "compare" && (
+          <CompareChoice a={ex.verif.a} b={ex.verif.b} chosen={choice} onPick={pickChoice} />
+        )}
+        {(phase === "answering" || phase === "sure") && ex.saisie === "qcm" && ex.options && (
+          <QcmChoice options={ex.options} chosen={choice} onPick={pickChoice} />
+        )}
+
         {hint && phase === "answering" && (
           <p className="kk-muted" style={{ textAlign: "center" }}>
             <Info size={16} aria-hidden="true" /> Prends ton temps, tu peux t'aider de ta methode.
@@ -646,7 +938,9 @@ export function Session({
 
         {phase === "answering" || phase === "sure" ? (
           <>
-            {!ex.prompt.includes("[q]") && !ex.prompt.includes("[r]") && (
+            {(ex.saisie === "clavier" || ex.saisie === "droite") &&
+              !ex.prompt.includes("[q]") &&
+              !ex.prompt.includes("[r]") && (
               <div className="kk-answer">
                 {ex.fields === 2 ? (
                   <>
@@ -703,6 +997,16 @@ export function Session({
                   <button className="kk-btn" onClick={() => setPhase("answering")}>Je verifie</button>
                   <button className="kk-btn kk-btn--accent" onClick={doValidate}>Oui, je valide</button>
                 </div>
+              </div>
+            ) : ex.saisie === "compare" || ex.saisie === "qcm" ? (
+              <div className="kk-row" style={{ justifyContent: "center" }}>
+                <button
+                  className="kk-btn kk-btn--accent kk-btn--big"
+                  disabled={!canValidate}
+                  onClick={onValiderClick}
+                >
+                  Valider
+                </button>
               </div>
             ) : inputMode === "pad" ? (
               <div className="kk-pad">
