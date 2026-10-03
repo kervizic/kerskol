@@ -85,10 +85,12 @@ RESET ROLE;
 
 -- ===========================================================================
 -- TEST 2 : une reponse met a jour progression ET monnaie
+-- Depuis le lot 2 (0022), l'INSERT direct sur `reponses` est revoque a
+-- authenticated : l'ecriture passe par la RPC enregistrer_reponse (en definer).
+-- On teste donc le MOTEUR (triggers progression/monnaie) en inserant comme
+-- postgres, exactement le contexte dans lequel s'execute la RPC.
 -- ===========================================================================
-SET ROLE authenticated;
-SET request.jwt.claims = :'claimsA';
-
+-- (on reste en role postgres, cf. RESET ROLE ci-dessus)
 INSERT INTO reponses (id, profil_id, competence, niveau, correct, temps_ms, repondu_le)
 VALUES ('c0000001-0000-0000-0000-000000000001', :'pMoney', 'MA.CM.ADDITION', 1, true, 3000,
         timestamptz '2026-01-01 10:00:00');
@@ -117,10 +119,8 @@ RESET ROLE;
 
 -- ===========================================================================
 -- TEST 3 : placement en escalier V,V,F,V -> niveau 2
+-- (insertion comme postgres : on teste le moteur, cf. TEST 2)
 -- ===========================================================================
-SET ROLE authenticated;
-SET request.jwt.claims = :'claimsA';
-
 INSERT INTO reponses (id, profil_id, competence, niveau, correct, temps_ms, repondu_le)
 SELECT gen_random_uuid(), 'a0000001-0000-0000-0000-000000000000', 'MA.CM.DOUBLES', 1, c, 3000,
        timestamptz '2026-02-01 10:00:00' + (n || ' minutes')::interval
