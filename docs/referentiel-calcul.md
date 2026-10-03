@@ -67,8 +67,9 @@ Le niveau par compétence est calculé **par le serveur** (trigger sur
 
 ## Compétences et niveaux
 
-16 compétences de la matière MA (8 de calcul mental + 8 tables de
-multiplication).
+23 compétences de la matière MA : 8 de calcul mental + 8 tables de
+multiplication (seed `0006`), puis 4 de **numération** et 3 de **calculs posés**
+ajoutées par la migration `0023_numeration_calcul_pose.sql` (voir plus bas).
 
 ### Calcul mental
 
@@ -110,6 +111,64 @@ Stratégies de correction (champ `correction_strategie` de `ex_calcul`) :
 | 8 | double de ×4 |
 | 9 | 10 fois − 1 fois |
 
+## Numération jusqu'à 10 000 (domaine `numeration`, migration 0023)
+
+Quatre compétences, alignées sur le programme CE2 (Éduscol : désigner, lire,
+écrire, décomposer, comparer, ranger, encadrer les nombres jusqu'à 10 000).
+
+| Code | Libellé | N1 | N2 | N3 | N4 |
+|------|---------|----|----|----|----|
+| `MA.NUM.LIRE_ECRIRE` | Lire / écrire ≤ 10 000 | lire (QCM) ≤ 100 | écrire (saisie) ≤ 1000 | écrire ≤ 10 000 | lire (QCM) ≤ 10 000 |
+| `MA.NUM.DECOMPOSER` | Décomposer (m, c, d, u) | c/d/u ≤ 999 | m/c/d/u ≤ 9999 | valeur d'un chiffre | nombre de dizaines/centaines |
+| `MA.NUM.COMPARER` | Comparer, encadrer, ranger | comparer ≤ 100 | comparer ≤ 10 000 | encadrer à la centaine | ranger (le plus grand) |
+| `MA.NUM.SUITE` | Suite, ±10/100/1000 | suivant/précédent ≤ 1000 | ±10, ±100 | droite graduée | ±1, ±10, ±100, ±1000 |
+
+## Calculs posés (domaine `calcul_pose`, migration 0023)
+
+Trois compétences : opérations posées en colonnes, résultat saisi **chiffre par
+chiffre de droite à gauche**, cases de retenue optionnelles (aide, non notées).
+
+| Code | Libellé | N1 | N2 | N3 | N4 |
+|------|---------|----|----|----|----|
+| `MA.POSE.ADDITION` | Addition posée | 2 nombres à 2 chiffres, sans retenue | 2 ou 3 chiffres, retenues | 3-4 chiffres | 3 termes |
+| `MA.POSE.SOUSTRACTION` | Soustraction posée (résultat ≥ 0) | 2 chiffres sans emprunt | 2-3 chiffres avec emprunt | 3 chiffres | 4 chiffres |
+| `MA.POSE.MULTIPLICATION` | Multiplication posée × 1 chiffre | 2 chiffres × (2..4) | 2 chiffres × (2..9) | 3 chiffres × 1 chiffre | 3 chiffres × 1 chiffre |
+
+### Énoncé normalisé et vérification serveur (nouvelles compétences)
+
+Toutes ces compétences se ramènent au contrat de sécurité du lot 2 : le client
+envoie `verif:{op,a,b}` + sa saisie, le serveur (`public.verif_calcul`)
+recalcule et décide « juste/faux ». Deux opérations sont ajoutées à
+`VerifOp` (front) et à `verif_calcul` (SQL), les autres réutilisent
+add/sub/mul/div :
+
+- `cmp` : comparaison, `expected = 0` (a < b), `1` (a = b), `2` (a > b) ;
+- `val` : la réponse **est** une valeur, `expected = a` (b doit valoir 0).
+
+Normalisations : suivant/précédent et ±10/100/1000 → `add`/`sub` ; valeur d'un
+chiffre → `mul` (chiffre × rang) ; nombre de dizaines/centaines → `div` ;
+encadrement → `sub` (n − (n mod pas)) ; décomposition, lecture/écriture, droite
+graduée et « ranger » → `val`. **Pour les QCM (lecture, ranger), le client
+envoie la VALEUR de l'option choisie, jamais un index** ; le serveur la revalide
+via `val`. Les bornes par compétence (numération ≤ 10 000 ; multiplication posée
+avec un facteur à 1 chiffre ; soustraction ≥ 0) sont vérifiées serveur.
+
+### Modes de saisie (interface)
+
+`GeneratedExercise.saisie` pilote le rendu : `clavier` (défaut, pavé/clavier
+numérique), `compare` (trois boutons <, =, >), `chiffres` (une case par rang),
+`pose` (colonnes alignées + résultat chiffre à chiffre de droite à gauche +
+retenues optionnelles), `qcm` (choix d'options), `droite` (droite graduée +
+lecture de la valeur pointée). Seule la saisie finale (un entier) est envoyée.
+
+### Ouverture progressive (prérequis, pas de placement_depart)
+
+Les nouvelles compétences **ne portent aucune ligne `placement_depart`** : elles
+démarrent au niveau 1 par le placement en escalier habituel. Elles ne sont pas
+ajoutées au plan de classe (`classes.ts`) : leur apparition est pilotée par le
+**graphe de prérequis**. `MA.NUM.LIRE_ECRIRE` (sans prérequis) s'ouvre d'abord,
+puis le reste de la numération, puis les calculs posés.
+
 ## Prérequis
 
 Un prérequis doit être atteint au **niveau 2** pour débloquer la compétence.
@@ -132,6 +191,13 @@ Un prérequis doit être atteint au **niveau 2** pour débloquer la compétence.
 | `MA.TABLES.8` | TABLES.4 |
 | `MA.TABLES.7` | TABLES.2, TABLES.5 |
 | `MA.CM.DIV_RESTE` | TABLES.2, TABLES.5 |
+| `MA.NUM.LIRE_ECRIRE` | aucun |
+| `MA.NUM.DECOMPOSER` | NUM.LIRE_ECRIRE |
+| `MA.NUM.COMPARER` | NUM.LIRE_ECRIRE |
+| `MA.NUM.SUITE` | NUM.LIRE_ECRIRE |
+| `MA.POSE.ADDITION` | SOMMES_DIFF, NUM.DECOMPOSER |
+| `MA.POSE.SOUSTRACTION` | POSE.ADDITION |
+| `MA.POSE.MULTIPLICATION` | POSE.ADDITION, X10_X100 |
 
 ## Paramètres des exercices (`ex_calcul.params`)
 
