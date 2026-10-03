@@ -16,21 +16,38 @@
 //
 // Voir docs/referentiel-calcul.md et supabase/migrations/0006_seed_referentiel_calcul.sql.
 
-import { makeRng, intBetween, pick, type Rng } from "./rng";
+import { makeRng, intBetween, pick, shuffle, type Rng } from "./rng";
 
 export type Forme =
   | "resultat"
   | "terme_manquant"
   | "decomposition"
   | "ordre_grandeur"
-  | "reste";
+  | "reste"
+  | "comparaison" // numeration : <, =, >
+  | "lecture" // numeration : lire/ecrire un nombre
+  | "encadrement" // numeration : encadrer, suivant/precedent, +-10/100/1000
+  | "pose"; // calcul pose en colonnes
 
 export type Support = "rectangle" | "droite" | "aucun" | null;
 
+// Mode de SAISIE de la reponse cote interface. "clavier" = pave/clavier
+// numerique (defaut historique). Les autres sont de nouveaux rendus :
+//   compare  -> trois boutons <, =, > ;
+//   chiffres -> cases de chiffres par rang (decomposition m/c/d/u) ;
+//   pose     -> operation en colonnes, resultat chiffre a chiffre ;
+//   qcm      -> choix parmi des options (la VALEUR de l'option choisie est
+//               envoyee au serveur, jamais un index) ;
+//   droite   -> droite graduee, l'enfant lit la valeur pointee.
+export type Saisie = "clavier" | "compare" | "chiffres" | "pose" | "qcm" | "droite";
+
 // Enonce normalise envoye au serveur pour revalidation. L'operation porte sur
 // deux operandes et son resultat est la reponse attendue :
-//   add -> a + b ; sub -> a - b ; mul -> a * b ; div -> quotient (reste = a % b).
-export type VerifOp = "add" | "sub" | "mul" | "div";
+//   add -> a + b ; sub -> a - b ; mul -> a * b ; div -> quotient (reste = a % b)
+//   cmp -> 0 si a<b, 1 si a=b, 2 si a>b (comparaison) ;
+//   val -> a (la reponse EST une valeur ; b vaut 0). Sert aux QCM / lectures /
+//          decompositions ou la saisie se ramene a « reproduire ce nombre ».
+export type VerifOp = "add" | "sub" | "mul" | "div" | "cmp" | "val";
 export interface Verif {
   op: VerifOp;
   a: number;
@@ -49,6 +66,10 @@ export function computeVerif(v: Verif): { answer: number; reste: number | null }
       return { answer: v.a * v.b, reste: null };
     case "div":
       return { answer: Math.floor(v.a / v.b), reste: v.a % v.b };
+    case "cmp":
+      return { answer: v.a < v.b ? 0 : v.a === v.b ? 1 : 2, reste: null };
+    case "val":
+      return { answer: v.a, reste: null };
   }
 }
 
@@ -81,6 +102,28 @@ export type SupportData =
       jumps: { from: number; to: number; label: string | null }[]; // bonds (arc)
     };
 
+// Donnees de rendu des nouveaux modes de saisie.
+export interface PoseData {
+  op: "+" | "-" | "×";
+  terms: number[]; // operandes a poser en colonnes (alignes a droite)
+  width: number; // nombre de colonnes (= longueur du plus grand nombre affiche)
+  answerDigits: number; // nombre de chiffres du resultat attendu
+}
+export interface ChiffresData {
+  // Cases de chiffres par rang, du plus fort au plus faible (ex. m,c,d,u).
+  ranks: { key: "m" | "c" | "d" | "u"; label: string }[];
+}
+export interface QcmOption {
+  label: string; // texte affiche a l'enfant
+  value: number; // valeur normalisee envoyee au serveur si choisie
+}
+export interface DroiteData {
+  from: number;
+  to: number;
+  step: number; // pas de graduation
+  at: number; // position pointee (= la reponse)
+}
+
 export interface GeneratedExercise {
   key: string; // clef React stable
   exerciceId: string;
@@ -94,6 +137,11 @@ export interface GeneratedExercise {
   answer: number; // reponse principale
   reste: number | null; // reste (forme reste), sinon null
   fields: 1 | 2; // 1 champ, ou 2 champs (quotient + reste)
+  saisie: Saisie; // mode de saisie cote interface (defaut "clavier")
+  options?: QcmOption[]; // mode qcm
+  poseData?: PoseData; // mode pose
+  chiffresData?: ChiffresData; // mode chiffres (decomposition)
+  droiteData?: DroiteData; // mode droite
   verif: Verif; // enonce normalise pour revalidation serveur
   correction: string; // correction expliquee
   rattrapage: boolean;
@@ -177,7 +225,9 @@ export function generateExercise(
   opts: { rattrapage?: boolean } = {}
 ): GeneratedExercise {
   const ex = buildExercise(src, seed, opts);
-  return { ...ex, prompt: withAnswerBox(ex.prompt) };
+  // La case « = [q] » ne concerne que la saisie clavier classique ; les autres
+  // modes (compare, pose, chiffres, qcm, droite) portent leur propre rendu.
+  return ex.saisie === "clavier" ? { ...ex, prompt: withAnswerBox(ex.prompt) } : ex;
 }
 
 function buildExercise(
@@ -198,8 +248,18 @@ function buildExercise(
     rattrapage: Boolean(opts.rattrapage),
     reste: null as number | null,
     fields: 1 as 1 | 2,
+    saisie: "clavier" as Saisie,
     seed,
   };
+
+  // --- Numeration : lire/ecrire, decomposer, comparer, suite ------------
+  if (src.competence.startsWith("MA.NUM.")) {
+    return buildNumeration(src, rng, base);
+  }
+  // --- Calcul pose en colonnes ------------------------------------------
+  if (src.competence.startsWith("MA.POSE.")) {
+    return buildPose(src, rng, base);
+  }
   // --- Tables de multiplication -----------------------------------------
   if (src.competence.startsWith("MA.TABLES.")) {
     const table = Number(p.table ?? src.competence.split(".").pop());
@@ -639,6 +699,421 @@ function buildExercise(
     verif: { op: "add", a: 1, b: 1 },
     correction: "1 + 1 = 2.",
   };
+}
+
+// =========================================================================
+// Nombres en toutes lettres (0..10000), orthographe francaise usuelle.
+// =========================================================================
+const MOTS_U = [
+  "zero", "un", "deux", "trois", "quatre", "cinq", "six", "sept", "huit", "neuf",
+  "dix", "onze", "douze", "treize", "quatorze", "quinze", "seize", "dix-sept",
+  "dix-huit", "dix-neuf",
+];
+const MOTS_D = ["", "", "vingt", "trente", "quarante", "cinquante", "soixante"];
+
+function sousCent(n: number): string {
+  if (n < 20) return MOTS_U[n];
+  if (n < 70) {
+    const d = Math.floor(n / 10);
+    const u = n % 10;
+    if (u === 0) return MOTS_D[d];
+    if (u === 1) return `${MOTS_D[d]}-et-un`;
+    return `${MOTS_D[d]}-${MOTS_U[u]}`;
+  }
+  if (n < 80) {
+    if (n === 71) return "soixante-et-onze";
+    return `soixante-${MOTS_U[n - 60]}`;
+  }
+  const u = n - 80;
+  if (u === 0) return "quatre-vingts";
+  return `quatre-vingt-${MOTS_U[u]}`;
+}
+
+function sousMille(n: number): string {
+  if (n < 100) return sousCent(n);
+  const c = Math.floor(n / 100);
+  const r = n % 100;
+  const cent = c === 1 ? "cent" : `${MOTS_U[c]} cent${r === 0 ? "s" : ""}`;
+  return r === 0 ? cent : `${cent} ${sousCent(r)}`;
+}
+
+export function enLettres(n: number): string {
+  if (n === 10000) return "dix mille";
+  if (n < 1000) return sousMille(n);
+  const m = Math.floor(n / 1000);
+  const r = n % 1000;
+  const mille = m === 1 ? "mille" : `${sousMille(m)} mille`;
+  return r === 0 ? mille : `${mille} ${sousMille(r)}`;
+}
+
+// =========================================================================
+// Generateurs NUMERATION et CALCUL POSE
+// =========================================================================
+type Base = Omit<
+  GeneratedExercise,
+  | "prompt" | "answer" | "verif" | "correction"
+  | "supportData" | "options" | "poseData" | "chiffresData" | "droiteData"
+>;
+
+// Trois distracteurs plausibles pour la lecture d'un nombre (voisins, chiffres
+// permutes), distincts entre eux, dans [0, max].
+function lectureOptions(rng: Rng, n: number, max: number): QcmOption[] {
+  const vals = new Set<number>([n]);
+  const candidates = [n + 1, n - 1, n + 10, n - 10, n + 100, n - 100, n + 2, n - 2];
+  const shuffled = shuffle(rng, candidates);
+  for (const c of shuffled) {
+    if (vals.size >= 4) break;
+    if (c >= 0 && c <= max && !vals.has(c)) vals.add(c);
+  }
+  let guard = 2;
+  while (vals.size < 4 && guard <= max) {
+    if (!vals.has(guard)) vals.add(guard);
+    guard++;
+  }
+  return shuffle(rng, [...vals]).map((v) => ({ label: enLettres(v), value: v }));
+}
+
+function buildNumeration(src: ExCalcul, rng: Rng, base: Base): GeneratedExercise {
+  const p = src.params || {};
+  const type = String(p.type || "");
+  const max = Number(p.max ?? 9999);
+  const min = Number(p.min ?? 0);
+
+  // --- Lire (chiffres -> lettres, QCM) ---
+  if (type === "lire") {
+    const n = intBetween(rng, Math.max(min, 0), max);
+    return {
+      ...base,
+      saisie: "qcm",
+      options: lectureOptions(rng, n, max),
+      prompt: `Comment se lit le nombre ${n} ?`,
+      answer: n,
+      verif: { op: "val", a: n, b: 0 },
+      correction: `${n} se lit « ${enLettres(n)} ».`,
+    };
+  }
+
+  // --- Ecrire (lettres -> chiffres, saisie) ---
+  if (type === "ecrire") {
+    const n = intBetween(rng, Math.max(min, 1), max);
+    return {
+      ...base,
+      prompt: `Quel nombre s'ecrit « ${enLettres(n)} » ?`,
+      answer: n,
+      verif: { op: "val", a: n, b: 0 },
+      correction: `« ${enLettres(n)} » s'ecrit ${n}.`,
+    };
+  }
+
+  // --- Decomposer (nombre -> chiffres par rang) ---
+  if (type === "decomposer") {
+    const ranks = (numList(p.ranks) as unknown as ("m" | "c" | "d" | "u")[]) || ["m", "c", "d", "u"];
+    const span = Math.pow(10, ranks.length);
+    const n = intBetween(rng, Math.max(min, ranks.length === 4 ? 1000 : 100), Math.min(max, span - 1));
+    const labels: Record<string, string> = { m: "milliers", c: "centaines", d: "dizaines", u: "unites" };
+    const detail = ranks
+      .map((rk, i) => {
+        const place = Math.pow(10, ranks.length - 1 - i);
+        return `${Math.floor(n / place) % 10} ${labels[rk]}`;
+      })
+      .join(", ");
+    return {
+      ...base,
+      saisie: "chiffres",
+      chiffresData: { ranks: ranks.map((rk) => ({ key: rk, label: labels[rk] })) },
+      prompt: `Decompose le nombre ${n} par rang.`,
+      answer: n,
+      verif: { op: "val", a: n, b: 0 },
+      correction: `${n} = ${detail}.`,
+    };
+  }
+
+  // --- Valeur d'un chiffre dans un nombre ---
+  if (type === "valeur_chiffre") {
+    const n = intBetween(rng, 1000, Math.min(max, 9999));
+    const places = [1000, 100, 10, 1];
+    const noms: Record<number, string> = { 1000: "milliers", 100: "centaines", 10: "dizaines", 1: "unites" };
+    const place = pick(rng, places);
+    const chiffre = Math.floor(n / place) % 10;
+    const answer = chiffre * place;
+    return {
+      ...base,
+      prompt: `Dans ${n}, quelle est la valeur du chiffre des ${noms[place]} ?`,
+      answer,
+      verif: { op: "mul", a: chiffre, b: place },
+      correction: `Le chiffre des ${noms[place]} est ${chiffre} : sa valeur est ${chiffre} × ${place} = ${answer}.`,
+    };
+  }
+
+  // --- Nombre de dizaines / centaines entieres ---
+  if (type === "compter_rangs") {
+    const diviseur = pick(rng, [10, 100]);
+    const n = intBetween(rng, diviseur === 100 ? 100 : 10, Math.min(max, 9999));
+    const answer = Math.floor(n / diviseur);
+    const nom = diviseur === 100 ? "centaines" : "dizaines";
+    return {
+      ...base,
+      prompt: `Combien de ${nom} entieres y a-t-il dans ${n} ?`,
+      answer,
+      verif: { op: "div", a: n, b: diviseur },
+      correction: `${n} ÷ ${diviseur} = ${answer} (il y a ${answer} ${nom} entieres).`,
+    };
+  }
+
+  // --- Comparer (<, =, >) ---
+  if (type === "comparer") {
+    const a = intBetween(rng, min, max);
+    // Parfois egaux, sinon un voisin proche ou un nombre quelconque.
+    let b: number;
+    const r = rng();
+    if (r < 0.2) b = a;
+    else if (r < 0.6) b = Math.max(0, Math.min(max, a + pick(rng, [-100, -10, -1, 1, 10, 100])));
+    else b = intBetween(rng, min, max);
+    const answer = a < b ? 0 : a === b ? 1 : 2;
+    const signe = answer === 0 ? "<" : answer === 1 ? "=" : ">";
+    return {
+      ...base,
+      saisie: "compare",
+      prompt: "Place le bon signe entre ces deux nombres.",
+      answer,
+      verif: { op: "cmp", a, b },
+      correction: `${a} ${signe} ${b}.`,
+    };
+  }
+
+  // --- Encadrer (centaine / millier inferieur) ---
+  if (type === "encadrer") {
+    const pas = Number(p.pas ?? 100);
+    let n = intBetween(rng, pas + 1, Math.min(max, 9999));
+    if (n % pas === 0) n += intBetween(rng, 1, pas - 1); // evite un nombre deja rond
+    const reste = n % pas;
+    const inf = n - reste;
+    const nom = pas === 1000 ? "millier" : pas === 100 ? "centaine" : "dizaine";
+    return {
+      ...base,
+      prompt: `Quelle est la ${nom} juste en dessous de ${n} ?`,
+      answer: inf,
+      verif: { op: "sub", a: n, b: reste },
+      correction: `${n} est entre ${inf} et ${inf + pas}. La ${nom} juste en dessous est ${inf}.`,
+    };
+  }
+
+  // --- Ranger (le plus grand) ---
+  if (type === "ranger") {
+    const k = Number(p.n ?? 3);
+    const vals = new Set<number>();
+    while (vals.size < k) vals.add(intBetween(rng, min, max));
+    const list = [...vals];
+    const answer = Math.max(...list);
+    return {
+      ...base,
+      saisie: "qcm",
+      options: shuffle(rng, list).map((v) => ({ label: String(v), value: v })),
+      prompt: "Quel est le plus grand de ces nombres ?",
+      answer,
+      verif: { op: "val", a: answer, b: 0 },
+      correction: `Le plus grand est ${answer}.`,
+    };
+  }
+
+  // --- Suivant / precedent ---
+  if (type === "voisins") {
+    const n = intBetween(rng, Math.max(min, 1), max);
+    const apres = rng() < 0.5;
+    const answer = apres ? n + 1 : n - 1;
+    return {
+      ...base,
+      prompt: `Quel nombre vient juste ${apres ? "apres" : "avant"} ${n} ?`,
+      answer,
+      verif: apres ? { op: "add", a: n, b: 1 } : { op: "sub", a: n, b: 1 },
+      correction: `Juste ${apres ? "apres" : "avant"} ${n}, c'est ${answer}.`,
+    };
+  }
+
+  // --- Bonds +/- 10, 100, 1000 ---
+  if (type === "bond") {
+    const pasList = (numList(p.pas) as number[]) || [10, 100];
+    const pas = pick(rng, pasList);
+    const plus = rng() < 0.5;
+    // Garantit un resultat dans [0, 10000].
+    let n = intBetween(rng, Math.max(min, 0), max);
+    if (plus) n = Math.min(n, 10000 - pas);
+    else n = Math.max(n, pas);
+    const answer = plus ? n + pas : n - pas;
+    return {
+      ...base,
+      prompt: `${n} ${plus ? "+" : "−"} ${pas}`,
+      answer,
+      verif: plus ? { op: "add", a: n, b: pas } : { op: "sub", a: n, b: pas },
+      correction: `${n} ${plus ? "+" : "−"} ${pas} = ${answer}.`,
+    };
+  }
+
+  // --- Droite graduee ---
+  if (type === "droite") {
+    const step = Number(p.step ?? 100);
+    const nbInter = Number(p.intervalles ?? 10);
+    const from = intBetween(rng, 0, Math.floor((max - nbInter * step) / step < 0 ? 0 : (max - nbInter * step) / step)) * step;
+    const to = from + nbInter * step;
+    const at = from + intBetween(rng, 1, nbInter - 1) * step;
+    return {
+      ...base,
+      saisie: "droite",
+      droiteData: { from, to, step, at },
+      prompt: "Quel nombre est indique par la fleche ?",
+      answer: at,
+      verif: { op: "val", a: at, b: 0 },
+      correction: `La fleche est a ${at} (de ${from} a ${to}, pas de ${step}).`,
+    };
+  }
+
+  // Repli (ne devrait pas arriver).
+  const n = intBetween(rng, 0, max);
+  return {
+    ...base,
+    prompt: `Quel nombre s'ecrit « ${enLettres(n)} » ?`,
+    answer: n,
+    verif: { op: "val", a: n, b: 0 },
+    correction: `« ${enLettres(n)} » s'ecrit ${n}.`,
+  };
+}
+
+// --- Calcul pose en colonnes ---
+function digitsOf(n: number): number[] {
+  return String(n).split("").map(Number);
+}
+
+function buildPose(src: ExCalcul, rng: Rng, base: Base): GeneratedExercise {
+  const p = src.params || {};
+  const comp = src.competence;
+  const nbTerms = Number(p.terms ?? 2);
+  const termMin = Number(p.min ?? 10);
+  const termMax = Number(p.max ?? 99);
+  const noCarry = p.sans_retenue === true;
+
+  // ---- Addition posee ----
+  if (comp.endsWith("ADDITION")) {
+    let terms: number[];
+    if (noCarry) {
+      // Construction colonne par colonne pour garantir l'absence de retenue.
+      const nDig = String(termMax).length;
+      const cols: number[][] = Array.from({ length: nbTerms }, () => []);
+      for (let col = 0; col < nDig; col++) {
+        const leading = col === nDig - 1;
+        // somme de la colonne <= 9
+        let budget = 9;
+        for (let t = 0; t < nbTerms; t++) {
+          const lo = leading ? 1 : 0;
+          const d = intBetween(rng, lo, Math.max(lo, Math.floor(budget / (nbTerms - t))));
+          cols[t].unshift(d);
+          budget -= d;
+        }
+      }
+      terms = cols.map((ds) => Number(ds.join("")));
+    } else {
+      terms = Array.from({ length: nbTerms }, () => intBetween(rng, termMin, termMax));
+    }
+    const answer = terms.reduce((s, t) => s + t, 0);
+    const verif: Verif =
+      terms.length === 2
+        ? { op: "add", a: terms[0], b: terms[1] }
+        : { op: "add", a: terms.slice(0, -1).reduce((s, t) => s + t, 0), b: terms[terms.length - 1] };
+    const width = Math.max(...terms.map((t) => String(t).length), String(answer).length);
+    return {
+      ...base,
+      saisie: "pose",
+      poseData: { op: "+", terms, width, answerDigits: String(answer).length },
+      prompt: `Pose et calcule : ${terms.join(" + ")}`,
+      answer,
+      verif,
+      correction: correctionAdditionPosee(terms, answer),
+    };
+  }
+
+  // ---- Soustraction posee ----
+  if (comp.endsWith("SOUSTRACTION")) {
+    let a = intBetween(rng, termMin, termMax);
+    let b = intBetween(rng, Number(p.bmin ?? 10), Number(p.bmax ?? termMax));
+    if (a < b) [a, b] = [b, a];
+    if (noCarry) {
+      // Chaque chiffre de a >= chiffre de b (aucun emprunt).
+      const da = digitsOf(a);
+      const db = digitsOf(b);
+      while (db.length < da.length) db.unshift(0);
+      for (let i = 0; i < da.length; i++) if (db[i] > da[i]) db[i] = intBetween(rng, 0, da[i]);
+      b = Number(db.join(""));
+    }
+    const answer = a - b;
+    const width = Math.max(String(a).length, String(b).length);
+    return {
+      ...base,
+      saisie: "pose",
+      poseData: { op: "-", terms: [a, b], width, answerDigits: String(answer).length },
+      prompt: `Pose et calcule : ${a} − ${b}`,
+      answer,
+      verif: { op: "sub", a, b },
+      correction: correctionSoustractionPosee(a, b, answer),
+    };
+  }
+
+  // ---- Multiplication posee (x 1 chiffre) ----
+  const a = intBetween(rng, termMin, termMax);
+  const b = intBetween(rng, Number(p.bmin ?? 2), Number(p.bmax ?? 9));
+  const answer = a * b;
+  const width = Math.max(String(a).length, String(b).length);
+  return {
+    ...base,
+    saisie: "pose",
+    poseData: { op: "×", terms: [a, b], width, answerDigits: String(answer).length },
+    prompt: `Pose et calcule : ${a} × ${b}`,
+    answer,
+    verif: { op: "mul", a, b },
+    correction: correctionMultiplicationPosee(a, b, answer),
+  };
+}
+
+// Corrections colonne par colonne (retenues mises en evidence).
+function correctionAdditionPosee(terms: number[], answer: number): string {
+  const noms = ["unites", "dizaines", "centaines", "milliers", "dix-milliers"];
+  const maxLen = Math.max(...terms.map((t) => String(t).length));
+  const parts: string[] = [];
+  let carry = 0;
+  for (let col = 0; col < maxLen; col++) {
+    const place = Math.pow(10, col);
+    const chiffres = terms.map((t) => Math.floor(t / place) % 10);
+    const somme = chiffres.reduce((s, d) => s + d, 0) + carry;
+    const pose = somme % 10;
+    const ret = Math.floor(somme / 10);
+    const detailCarry = carry > 0 ? ` (+ ${carry} retenue)` : "";
+    parts.push(
+      `${noms[col]} : ${chiffres.join(" + ")}${detailCarry} = ${somme}, je pose ${pose}${ret > 0 ? `, je retiens ${ret}` : ""}`
+    );
+    carry = ret;
+  }
+  if (carry > 0) parts.push(`il reste ${carry} a poser a gauche`);
+  return `${parts.join(" ; ")}. Total : ${answer}.`;
+}
+
+function correctionSoustractionPosee(a: number, b: number, answer: number): string {
+  return `Je soustrais colonne par colonne en partant des unites, avec emprunt si le chiffre du haut est plus petit. ${a} − ${b} = ${answer}.`;
+}
+
+function correctionMultiplicationPosee(a: number, b: number, answer: number): string {
+  const noms = ["unites", "dizaines", "centaines"];
+  const parts: string[] = [];
+  let carry = 0;
+  const da = digitsOf(a).reverse();
+  for (let i = 0; i < da.length; i++) {
+    const prod = da[i] * b + carry;
+    const pose = prod % 10;
+    const ret = Math.floor(prod / 10);
+    parts.push(
+      `${b} × ${da[i]} (${noms[i]})${carry > 0 ? ` + ${carry}` : ""} = ${prod}, je pose ${pose}${ret > 0 ? `, je retiens ${ret}` : ""}`
+    );
+    carry = ret;
+  }
+  if (carry > 0) parts.push(`je pose la retenue ${carry}`);
+  return `${parts.join(" ; ")}. Resultat : ${answer}.`;
 }
 
 function evenIn(rng: Rng, r: Range): number {

@@ -60,6 +60,47 @@ const CM: Row[] = [
   ["MA.CM.DIV_RESTE", 4, "div", "reste", "probleme_dabord", "aucun", "division_en_contexte", { type: "melange", tables: [2, 3, 4, 5, 6, 7, 8, 9], diviseurs: [10, 25, 50, 100], contexte: true }],
 ];
 
+// --- Numeration jusqu'a 10 000 (domaine numeration) ---
+const NUM: Row[] = [
+  ["MA.NUM.LIRE_ECRIRE", 1, "lire", "lecture", "cpa_barres", "aucun", "lire_nombre", { type: "lire", max: 100 }],
+  ["MA.NUM.LIRE_ECRIRE", 2, "lire", "lecture", "exemples_estompes", "aucun", "ecrire_nombre", { type: "ecrire", max: 1000 }],
+  ["MA.NUM.LIRE_ECRIRE", 3, "lire", "lecture", "variation", "aucun", "ecrire_nombre", { type: "ecrire", max: 9999 }],
+  ["MA.NUM.LIRE_ECRIRE", 4, "lire", "lecture", "probleme_dabord", "aucun", "lire_nombre", { type: "lire", max: 9999 }],
+
+  ["MA.NUM.DECOMPOSER", 1, "decomposer", "decomposition", "cpa_barres", "aucun", "decomposition_rangs", { type: "decomposer", ranks: ["c", "d", "u"], max: 999 }],
+  ["MA.NUM.DECOMPOSER", 2, "decomposer", "decomposition", "exemples_estompes", "aucun", "decomposition_rangs", { type: "decomposer", ranks: ["m", "c", "d", "u"], min: 1000, max: 9999 }],
+  ["MA.NUM.DECOMPOSER", 3, "decomposer", "decomposition", "variation", "aucun", "valeur_position", { type: "valeur_chiffre", max: 9999 }],
+  ["MA.NUM.DECOMPOSER", 4, "decomposer", "decomposition", "probleme_dabord", "aucun", "compter_rangs", { type: "compter_rangs", max: 9999 }],
+
+  ["MA.NUM.COMPARER", 1, "comparer", "comparaison", "cpa_barres", "aucun", "comparer_signes", { type: "comparer", min: 0, max: 100 }],
+  ["MA.NUM.COMPARER", 2, "comparer", "comparaison", "exemples_estompes", "aucun", "comparer_signes", { type: "comparer", min: 0, max: 9999 }],
+  ["MA.NUM.COMPARER", 3, "comparer", "comparaison", "variation", "aucun", "encadrement", { type: "encadrer", pas: 100, max: 9999 }],
+  ["MA.NUM.COMPARER", 4, "comparer", "comparaison", "probleme_dabord", "aucun", "ranger", { type: "ranger", min: 1000, max: 9999, n: 3 }],
+
+  ["MA.NUM.SUITE", 1, "encadrer", "encadrement", "cpa_barres", "aucun", "voisins", { type: "voisins", max: 1000 }],
+  ["MA.NUM.SUITE", 2, "encadrer", "encadrement", "exemples_estompes", "aucun", "bonds", { type: "bond", pas: [10, 100], max: 9999 }],
+  ["MA.NUM.SUITE", 3, "encadrer", "encadrement", "plateau_lineaire", "aucun", "droite_graduee", { type: "droite", step: 100, intervalles: 10, max: 1000 }],
+  ["MA.NUM.SUITE", 4, "encadrer", "encadrement", "probleme_dabord", "aucun", "bonds", { type: "bond", pas: [1, 10, 100, 1000], max: 10000 }],
+];
+
+// --- Calculs poses (domaine calcul_pose) ---
+const POSE: Row[] = [
+  ["MA.POSE.ADDITION", 1, "add", "pose", "cpa_barres", "aucun", "addition_posee", { terms: 2, min: 10, max: 99, sans_retenue: true }],
+  ["MA.POSE.ADDITION", 2, "add", "pose", "exemples_estompes", "aucun", "addition_posee", { terms: 2, min: 10, max: 999 }],
+  ["MA.POSE.ADDITION", 3, "add", "pose", "variation", "aucun", "addition_posee", { terms: 2, min: 100, max: 9999 }],
+  ["MA.POSE.ADDITION", 4, "add", "pose", "probleme_dabord", "aucun", "addition_posee", { terms: 3, min: 10, max: 999 }],
+
+  ["MA.POSE.SOUSTRACTION", 1, "sub", "pose", "cpa_barres", "aucun", "soustraction_posee", { min: 10, max: 99, bmin: 10, bmax: 99, sans_retenue: true }],
+  ["MA.POSE.SOUSTRACTION", 2, "sub", "pose", "exemples_estompes", "aucun", "soustraction_posee", { min: 20, max: 999, bmin: 10, bmax: 999 }],
+  ["MA.POSE.SOUSTRACTION", 3, "sub", "pose", "variation", "aucun", "soustraction_posee", { min: 100, max: 9999, bmin: 100, bmax: 9999 }],
+  ["MA.POSE.SOUSTRACTION", 4, "sub", "pose", "probleme_dabord", "aucun", "soustraction_posee", { min: 1000, max: 9999, bmin: 100, bmax: 9999 }],
+
+  ["MA.POSE.MULTIPLICATION", 1, "mul", "pose", "cpa_barres", "aucun", "multiplication_posee", { min: 11, max: 99, bmin: 2, bmax: 4 }],
+  ["MA.POSE.MULTIPLICATION", 2, "mul", "pose", "exemples_estompes", "aucun", "multiplication_posee", { min: 11, max: 99, bmin: 2, bmax: 9 }],
+  ["MA.POSE.MULTIPLICATION", 3, "mul", "pose", "variation", "aucun", "multiplication_posee", { min: 100, max: 999, bmin: 2, bmax: 9 }],
+  ["MA.POSE.MULTIPLICATION", 4, "mul", "pose", "probleme_dabord", "aucun", "multiplication_posee", { min: 100, max: 999, bmin: 2, bmax: 9 }],
+];
+
 const TABLE_STRATS: Record<number, string> = {
   2: "double",
   3: "double_plus_une_fois",
@@ -105,4 +146,4 @@ function toSource(r: Row): ExCalcul {
   };
 }
 
-export const SEED_SOURCES: ExCalcul[] = [...CM, ...tableRows()].map(toSource);
+export const SEED_SOURCES: ExCalcul[] = [...CM, ...tableRows(), ...NUM, ...POSE].map(toSource);

@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest";
 import {
   generateExercise,
   computeVerif,
+  enLettres,
   type ExCalcul,
   type GeneratedExercise,
 } from "./generator";
@@ -203,6 +204,78 @@ describe("egalite : case de reponse a sa place dans l'operation", () => {
     const g = generateExercise(src, 7);
     expect(g.prompt).toMatch(/^\d+ ÷ \d+ = \[q\] reste \[r\]$/);
     expect(g.fields).toBe(2);
+  });
+});
+
+describe("enLettres : orthographe francaise", () => {
+  it("valeurs de reference", () => {
+    const cas: [number, string][] = [
+      [0, "zero"],
+      [7, "sept"],
+      [16, "seize"],
+      [21, "vingt-et-un"],
+      [71, "soixante-et-onze"],
+      [80, "quatre-vingts"],
+      [81, "quatre-vingt-un"],
+      [91, "quatre-vingt-onze"],
+      [100, "cent"],
+      [200, "deux cents"],
+      [201, "deux cent un"],
+      [1000, "mille"],
+      [3482, "trois mille quatre cent quatre-vingt-deux"],
+      [10000, "dix mille"],
+    ];
+    for (const [n, mot] of cas) expect(enLettres(n)).toBe(mot);
+  });
+});
+
+describe("numeration & calcul pose : saisie et verif normalise", () => {
+  it("comparer : saisie compare, verif cmp, reponse 0/1/2", () => {
+    const src = SEED_SOURCES.find((s) => s.competence === "MA.NUM.COMPARER" && s.niveau === 2)!;
+    for (let s = 1; s <= 30; s++) {
+      const g = generateExercise(src, s * 31 + 2);
+      expect(g.saisie).toBe("compare");
+      expect(g.verif.op).toBe("cmp");
+      expect([0, 1, 2]).toContain(g.answer);
+      expect(computeVerif(g.verif).answer).toBe(g.answer);
+    }
+  });
+  it("addition posee : concatenation des chiffres du resultat = somme des termes", () => {
+    const src = SEED_SOURCES.find((s) => s.competence === "MA.POSE.ADDITION" && s.niveau === 4)!;
+    for (let s = 1; s <= 30; s++) {
+      const g = generateExercise(src, s * 97 + 4);
+      expect(g.saisie).toBe("pose");
+      expect(g.poseData!.answerDigits).toBe(String(g.answer).length);
+      expect(g.poseData!.terms.reduce((a, b) => a + b, 0)).toBe(g.answer);
+    }
+  });
+  it("multiplication posee : un facteur a 1 chiffre", () => {
+    const src = SEED_SOURCES.find((s) => s.competence === "MA.POSE.MULTIPLICATION" && s.niveau === 3)!;
+    for (let s = 1; s <= 30; s++) {
+      const g = generateExercise(src, s * 53 + 3);
+      const [a, b] = g.poseData!.terms;
+      expect((a >= 2 && a <= 9) || (b >= 2 && b <= 9)).toBe(true);
+      expect(a * b).toBe(g.answer);
+    }
+  });
+  it("lecture QCM : une option porte la valeur attendue, options distinctes", () => {
+    const src = SEED_SOURCES.find((s) => s.competence === "MA.NUM.LIRE_ECRIRE" && s.niveau === 1)!;
+    for (let s = 1; s <= 30; s++) {
+      const g = generateExercise(src, s * 17 + 1);
+      expect(g.saisie).toBe("qcm");
+      expect(g.options!.some((o) => o.value === g.answer)).toBe(true);
+      expect(new Set(g.options!.map((o) => o.value)).size).toBe(g.options!.length);
+    }
+  });
+  it("decomposition : saisie chiffres, concatenation des rangs = nombre", () => {
+    const src = SEED_SOURCES.find((s) => s.competence === "MA.NUM.DECOMPOSER" && s.niveau === 2)!;
+    for (let s = 1; s <= 30; s++) {
+      const g = generateExercise(src, s * 41 + 2);
+      expect(g.saisie).toBe("chiffres");
+      expect(g.chiffresData!.ranks.length).toBe(4);
+      expect(g.verif.op).toBe("val");
+      expect(g.answer).toBe(g.verif.a);
+    }
   });
 });
 
