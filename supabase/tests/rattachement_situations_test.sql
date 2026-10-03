@@ -183,35 +183,36 @@ SELECT _rec('5g_journal_ancien_foyer',
 SELECT _rec('5h_lien_supprime', (SELECT count(*) FROM liens_enfant_en_attente WHERE profil_id = :'pb') = 0, 'lien pb');
 
 -- ===========================================================================
--- TEST 6 : SITUATION C (parent SEUL de son foyer). Confirmation + reauth Google
---          recente exigee (amr < 5 min).
+-- TEST 6 : SITUATION C (parent SEUL de son foyer). FUSION (migration 0021) :
+--          plus de suppression seche ni de reauth. Confirmation + choix du
+--          profil source (FC a 2 profils), puis fusion dans la cible.
 -- ===========================================================================
--- 6a : confirmation (sans confirmer) -> nb_profils = 2 (profils de FC), FC intact.
+-- 6a : sans confirmer -> confirmation_fusion + nb_profils = 2 + liste des profils,
+--      AUCUNE reauth, FC intact.
 SET ROLE authenticated;
 SET request.jwt.claims = :'claimsC';
 SELECT (public.valider_lien_enfant(:'code_c')) AS r6a \gset
 RESET ROLE;
-SELECT _rec('6a_confirmation_suppression', (:'r6a'::jsonb ->> 'etat') = 'confirmation_suppression_foyer', 'r = ' || :'r6a');
+SELECT _rec('6a_confirmation_fusion', (:'r6a'::jsonb ->> 'etat') = 'confirmation_fusion', 'r = ' || :'r6a');
 SELECT _rec('6b_nb_profils', (:'r6a'::jsonb ->> 'nb_profils') = '2', 'r = ' || :'r6a');
+SELECT _rec('6b2_profils_listes', (:'r6a'::jsonb -> 'profils_source') @> '[{"surnom":"Cfille"},{"surnom":"Cgars"}]'::jsonb, 'r = ' || :'r6a');
 SELECT _rec('6c_fc_intact', (SELECT count(*) FROM foyers WHERE id = :'FC') = 1, 'FC existe');
 
--- 6d : confirmer SANS reauth recente (amr vieux) -> reauth_requise, FC intact.
-SELECT jsonb_build_object('sub', :'uC', 'role', 'authenticated', 'amr',
-    jsonb_build_array(jsonb_build_object('method','oauth','timestamp',(extract(epoch from now())::bigint - 600))))::text AS cc_old \gset
+-- 6d : confirmer SANS choisir de source (FC a 2 profils) -> redemande le choix,
+--      FC toujours intact, pc non relie (aucune reauth n'est exigee).
 SET ROLE authenticated;
-SET request.jwt.claims = :'cc_old';
+SET request.jwt.claims = :'claimsC';
 SELECT (public.valider_lien_enfant(:'code_c', true)) AS r6d \gset
 RESET ROLE;
-SELECT _rec('6d_reauth_requise', (:'r6d'::jsonb ->> 'etat') = 'reauth_requise', 'r = ' || :'r6d');
+SELECT _rec('6d_choix_source_requis', (:'r6d'::jsonb ->> 'etat') = 'confirmation_fusion', 'r = ' || :'r6d');
 SELECT _rec('6e_fc_toujours_intact', (SELECT count(*) FROM foyers WHERE id = :'FC') = 1, 'FC existe');
 SELECT _rec('6f_pc_non_relie', (SELECT user_id FROM profils WHERE id = :'pc') IS NULL, 'pc libre');
 
--- 6g : confirmer AVEC reauth recente -> suppression FC (cascade) + rattachement.
-SELECT jsonb_build_object('sub', :'uC', 'role', 'authenticated', 'amr',
-    jsonb_build_array(jsonb_build_object('method','oauth','timestamp',(extract(epoch from now())::bigint))))::text AS cc_recent \gset
+-- 6g : confirmer AVEC un choix de source (pc1) -> fusion + suppression FC (cascade)
+--      + rattachement, SANS aucune reauth Google.
 SET ROLE authenticated;
-SET request.jwt.claims = :'cc_recent';
-SELECT (public.valider_lien_enfant(:'code_c', true)) AS r6g \gset
+SET request.jwt.claims = :'claimsC';
+SELECT (public.valider_lien_enfant(:'code_c', true, :'pc1')) AS r6g \gset
 RESET ROLE;
 SELECT _rec('6g_relie', (:'r6g'::jsonb ->> 'ok') = 'true' AND (:'r6g'::jsonb ->> 'profil_id') = :'pc', 'r = ' || :'r6g');
 SELECT _rec('6h_pc_relie', (SELECT user_id FROM profils WHERE id = :'pc') = :'uC', 'pc = uC');
@@ -219,6 +220,9 @@ SELECT _rec('6i_fc_supprime', (SELECT count(*) FROM foyers WHERE id = :'FC') = 0
 SELECT _rec('6j_profils_fc_supprimes', (SELECT count(*) FROM profils WHERE id IN (:'pc1', :'pc2')) = 0, 'profils FC supprimes');
 SELECT _rec('6k_uC_plus_parent', (SELECT count(*) FROM membres_foyer WHERE user_id = :'uC') = 0, 'uC plus membre');
 SELECT _rec('6l_lien_supprime', (SELECT count(*) FROM liens_enfant_en_attente WHERE profil_id = :'pc') = 0, 'lien pc');
+SELECT _rec('6m_journal_fusion',
+    (SELECT count(*) FROM journal_reglages WHERE profil_id = :'pc' AND cle = 'compte_enfant'
+       AND nouvelle = to_jsonb('relie, progression fusionnee'::text)) = 1, 'journal fusion pc');
 
 -- ===========================================================================
 -- TEST 7 : SITUATION D (parent d'un foyer PARTAGE) -> refus clair, lien

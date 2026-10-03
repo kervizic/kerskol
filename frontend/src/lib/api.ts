@@ -158,26 +158,31 @@ export interface ValidationLien {
     | "email_non_confirme"
     | "aucun"
     | "confirmation_autre_profil" // deja relie a un autre profil : confirmer ?
-    | "confirmation_suppression_foyer" // parent seul : supprimer son foyer ?
-    | "refus_foyer_partage" // parent d'un foyer partage : impossible
-    | "reauth_requise"; // confirmation c : reconnexion Google < 5 min exigee
+    | "confirmation_fusion" // parent seul (cas c) : fusionner son espace dans ce profil ?
+    | "refus_foyer_partage"; // parent d'un foyer partage : impossible
   profil_id?: string;
   essais_restants?: number;
-  nb_profils?: number; // nombre de profils du foyer a supprimer (cas c)
+  nb_profils?: number; // nombre de profils de l'ancien foyer (cas c)
+  // Profils de l'ancien foyer (cas c) : l'enfant choisit la source si > 1.
+  // C'est SON propre foyer : aucune fuite d'information d'un tiers.
+  profils_source?: { id: string; surnom: string }[];
 }
 
-// valider_lien_enfant(code, confirmer) : relie si le code est bon ; sinon compte
-// l'essai. confirmer=true valide l'action destructrice d'un ecran de confirmation
-// (delien d'un autre profil, ou suppression du foyer du compte). Ne jette pas
-// pour un mauvais code (resultat structure, compteur persiste).
+// valider_lien_enfant(code, confirmer, source) : relie si le code est bon ; sinon
+// compte l'essai. confirmer=true valide l'ecran de confirmation (delien d'un autre
+// profil, ou FUSION de l'ancien espace du compte, cas c). source = profil de
+// l'ancien foyer a fusionner quand il en contient plusieurs. Ne jette pas pour un
+// mauvais code (resultat structure, compteur persiste).
 export async function validerLienEnfant(
   code: string,
-  confirmer = false
+  confirmer = false,
+  sourceProfilId?: string
 ): Promise<ValidationLien> {
   if (isDemo()) return { ok: false, etat: "aucun" };
   const { data, error } = await supabase().rpc("valider_lien_enfant", {
     p_code: code,
     p_confirmer: confirmer,
+    p_source_profil: sourceProfilId ?? null,
   });
   if (error) throw error;
   return (data as ValidationLien) ?? { ok: false, etat: "aucun" };
@@ -545,15 +550,27 @@ export class ReauthRequiseError extends Error {
   }
 }
 
-// supprimer_foyer : peut renvoyer 'reauth_requise' si la connexion n'est pas
-// recente (< 5 min). On remonte une erreur typee pour relancer Google.
-export async function deleteFoyer(foyerId: string): Promise<void> {
+// Levee quand supprimer_foyer est appele sans le mot de confirmation « SUPPRIMER ».
+export class ConfirmationRequiseError extends Error {
+  constructor() {
+    super("confirmation_requise");
+    this.name = "ConfirmationRequiseError";
+  }
+}
+
+// supprimer_foyer : exige le mot « SUPPRIMER » (confirmation forte, car Google
+// peut revenir sans rien redemander) PUIS une reconnexion recente (< 5 min).
+// Remonte des erreurs typees pour piloter l'UI (saisie du mot, relance Google).
+export async function deleteFoyer(foyerId: string, confirmation: string): Promise<void> {
   if (isDemo()) return;
-  const { error } = await supabase().rpc("supprimer_foyer", { p_foyer: foyerId });
+  const { error } = await supabase().rpc("supprimer_foyer", {
+    p_foyer: foyerId,
+    p_confirmation: confirmation,
+  });
   if (error) {
-    if (String(error.message || "").includes("reauth_requise")) {
-      throw new ReauthRequiseError();
-    }
+    const msg = String(error.message || "");
+    if (msg.includes("confirmation_requise")) throw new ConfirmationRequiseError();
+    if (msg.includes("reauth_requise")) throw new ReauthRequiseError();
     throw error;
   }
 }

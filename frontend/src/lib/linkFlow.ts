@@ -6,15 +6,16 @@ import type { ValidationLien } from "./api";
 
 export type Confirmation =
   | { kind: "autre_profil" }
-  | { kind: "suppression_foyer"; nbProfils: number };
+  // Cas c (migration 0021) : fusion de l'ancien espace du compte dans ce profil.
+  // profils = profils de l'ancien foyer (c'est SON foyer) ; l'enfant choisit la
+  // source si plus d'un. Aucune donnee n'est perdue, aucune reauth exigee.
+  | { kind: "fusion"; nbProfils: number; profils: { id: string; surnom: string }[] };
 
 export type LinkStep =
   // Compte relie -> on recharge l'app (village).
   | { kind: "validated" }
-  // Confirmation requise avant une action destructrice (cas b ou c).
+  // Confirmation requise avant une action sensible (cas b ou c/fusion).
   | { kind: "confirm"; confirmation: Confirmation }
-  // Cas c : reconnexion Google recente exigee avant de confirmer.
-  | { kind: "reauth"; message: string }
   // Fin de parcours (refus foyer partage, 5 essais, lien expire) : plus de saisie.
   | { kind: "terminal"; message: string }
   // Erreur recuperable : message + faut-il vider le champ code ?
@@ -32,15 +33,14 @@ export function nextLinkStep(r: ValidationLien): LinkStep {
   switch (r.etat) {
     case "confirmation_autre_profil":
       return { kind: "confirm", confirmation: { kind: "autre_profil" } };
-    case "confirmation_suppression_foyer":
+    case "confirmation_fusion":
       return {
         kind: "confirm",
-        confirmation: { kind: "suppression_foyer", nbProfils: r.nb_profils ?? 0 },
-      };
-    case "reauth_requise":
-      return {
-        kind: "reauth",
-        message: "Pour ta sécurité, reconnecte-toi avec Google pour confirmer.",
+        confirmation: {
+          kind: "fusion",
+          nbProfils: r.nb_profils ?? 0,
+          profils: r.profils_source ?? [],
+        },
       };
     case "refus_foyer_partage":
       return {
@@ -65,12 +65,14 @@ export function nextLinkStep(r: ValidationLien): LinkStep {
   }
 }
 
-// Texte de l'ecran de confirmation (cas b / c), sans aucune info de foyer tiers.
+// Texte de l'ecran de confirmation (cas b / c). Cas c = c'est SON propre espace,
+// donc on peut nommer ses profils ; rien n'est perdu (fusion).
 export function confirmationTexte(c: Confirmation): string {
   if (c.kind === "autre_profil") {
     return "Ce compte est déjà relié à un autre profil. Le relier à celui-ci ?";
   }
-  return `Ce compte gère déjà son propre espace Kerskol (${c.nbProfils} profil${
-    c.nbProfils > 1 ? "s" : ""
-  }). Le rattacher en tant qu'enfant supprimera cet espace et ses profils.`;
+  if (c.nbProfils > 1) {
+    return "Tes progrès de ton ancien espace seront regroupés dans ce profil. Choisis l'espace à regrouper : les autres seront supprimés.";
+  }
+  return "Tes progrès de ton ancien espace seront regroupés dans ce profil.";
 }

@@ -13,18 +13,29 @@ describe("nextLinkStep (rattachement par code, migration 0020)", () => {
     });
   });
 
-  it("parent seul -> confirmation de suppression de foyer avec nb de profils", () => {
-    expect(
-      nextLinkStep({ ok: false, etat: "confirmation_suppression_foyer", nb_profils: 2 })
-    ).toEqual({
-      kind: "confirm",
-      confirmation: { kind: "suppression_foyer", nbProfils: 2 },
+  it("parent seul (cas c) -> confirmation de FUSION (jamais de reauth) avec les profils", () => {
+    const profils = [{ id: "a", surnom: "Alpha" }, { id: "b", surnom: "Beta" }];
+    const s = nextLinkStep({
+      ok: false,
+      etat: "confirmation_fusion",
+      nb_profils: 2,
+      profils_source: profils,
     });
+    expect(s).toEqual({
+      kind: "confirm",
+      confirmation: { kind: "fusion", nbProfils: 2, profils },
+    });
+    // Bug corrige : le cas c ne passe PLUS par une reconnexion Google (donc pas
+    // de retour qui redemanderait le code). Il va directement a la confirmation.
+    expect(s.kind).not.toBe("reauth");
   });
 
-  it("confirmation c sans reauth recente -> etape de reconnexion", () => {
-    const s = nextLinkStep({ ok: false, etat: "reauth_requise" });
-    expect(s.kind).toBe("reauth");
+  it("fusion a un seul profil -> confirmation sans choix (liste par defaut vide)", () => {
+    const s = nextLinkStep({ ok: false, etat: "confirmation_fusion", nb_profils: 1 });
+    expect(s).toEqual({
+      kind: "confirm",
+      confirmation: { kind: "fusion", nbProfils: 1, profils: [] },
+    });
   });
 
   it("foyer partage -> terminal avec message clair", () => {
@@ -65,8 +76,18 @@ describe("confirmationTexte (aucune info de foyer tiers)", () => {
     expect(confirmationTexte({ kind: "autre_profil" })).toMatch(/déjà relié à un autre profil/);
   });
 
-  it("suppression foyer : pluriel selon nb de profils", () => {
-    expect(confirmationTexte({ kind: "suppression_foyer", nbProfils: 1 })).toMatch(/1 profil\b/);
-    expect(confirmationTexte({ kind: "suppression_foyer", nbProfils: 3 })).toMatch(/3 profils/);
+  it("fusion : un profil -> message de regroupement, sans parler de suppression", () => {
+    const t = confirmationTexte({ kind: "fusion", nbProfils: 1, profils: [] });
+    expect(t).toMatch(/regroupés dans ce profil/);
+    expect(t).not.toMatch(/supprim/i);
+  });
+
+  it("fusion : plusieurs profils -> invite a choisir l'espace a regrouper", () => {
+    const t = confirmationTexte({
+      kind: "fusion",
+      nbProfils: 2,
+      profils: [{ id: "a", surnom: "Alpha" }, { id: "b", surnom: "Beta" }],
+    });
+    expect(t).toMatch(/Choisis l'espace à regrouper/);
   });
 });

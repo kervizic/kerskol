@@ -3,6 +3,7 @@ import { AvatarView } from "../domain/avatars";
 import { Feedback, Spinner } from "../components/ui";
 import {
   annulerLienEnfant,
+  ConfirmationRequiseError,
   delierCompteEnfant,
   deleteFoyer,
   demanderLienEnfant,
@@ -23,6 +24,8 @@ import {
 } from "../lib/types";
 
 const RETRY_KEY = "kerskol_retry_suppr_foyer";
+const SUPPR_WORD_KEY = "kerskol_suppr_foyer_mot";
+const SUPPR_WORD = "SUPPRIMER";
 const MATIERE_ACTIVE = "MA";
 
 function num(v: string): number | null {
@@ -303,6 +306,7 @@ export function ParentSpace({
   const [confirming, setConfirming] = useState(false);
   const [reauthNeeded, setReauthNeeded] = useState(false);
   const [deleting, setDeleting] = useState(false);
+  const [motSuppr, setMotSuppr] = useState("");
 
   const reloadLiens = useCallback(
     () =>
@@ -329,26 +333,34 @@ export function ParentSpace({
       /* ignore */
     }
     if (flag) {
+      let mot = "";
       try {
         sessionStorage.removeItem(RETRY_KEY);
+        mot = sessionStorage.getItem(SUPPR_WORD_KEY) ?? "";
+        sessionStorage.removeItem(SUPPR_WORD_KEY);
       } catch {
         /* ignore */
       }
-      void runDelete();
+      // On revient de Google : on avait deja confirme le mot « SUPPRIMER ».
+      setConfirming(true);
+      setMotSuppr(mot);
+      void runDelete(mot);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [foyerId]);
 
-  async function runDelete() {
+  async function runDelete(mot: string = motSuppr) {
     setDeleting(true);
     setReauthNeeded(false);
     try {
-      await deleteFoyer(foyerId);
+      await deleteFoyer(foyerId, mot);
       onFoyerDeleted();
     } catch (e) {
       setDeleting(false);
       if (e instanceof ReauthRequiseError) {
         setReauthNeeded(true);
+      } else if (e instanceof ConfirmationRequiseError) {
+        alert(`Tape le mot ${SUPPR_WORD} pour confirmer la suppression.`);
       } else {
         console.error("supprimer_foyer a echoue", e);
         alert("La suppression a échoué. Réessaie plus tard.");
@@ -359,6 +371,7 @@ export function ParentSpace({
   async function reauthThenDelete() {
     try {
       sessionStorage.setItem(RETRY_KEY, foyerId);
+      sessionStorage.setItem(SUPPR_WORD_KEY, motSuppr);
     } catch {
       /* ignore */
     }
@@ -429,17 +442,36 @@ export function ParentSpace({
               Supprimer le foyer
             </button>
           ) : (
-            <div className="kk-row">
-              <button
-                className="kk-btn kk-btn--danger"
-                disabled={deleting}
-                onClick={() => (reauthNeeded ? void reauthThenDelete() : void runDelete())}
-              >
-                {deleting ? "Suppression..." : reauthNeeded ? "Se reconnecter et supprimer" : "Confirmer la suppression"}
-              </button>
-              <button className="kk-btn kk-btn--ghost" onClick={() => { setConfirming(false); setReauthNeeded(false); }}>
-                Annuler
-              </button>
+            <div className="kk-stack">
+              <label className="kk-field">
+                <span>
+                  Pour confirmer, tape le mot <strong>{SUPPR_WORD}</strong>
+                </span>
+                <input
+                  className="kk-input"
+                  value={motSuppr}
+                  disabled={deleting}
+                  autoComplete="off"
+                  spellCheck={false}
+                  aria-label={`Taper ${SUPPR_WORD} pour confirmer`}
+                  onChange={(e) => setMotSuppr(e.target.value)}
+                />
+              </label>
+              <div className="kk-row">
+                <button
+                  className="kk-btn kk-btn--danger"
+                  disabled={deleting || motSuppr !== SUPPR_WORD}
+                  onClick={() => (reauthNeeded ? void reauthThenDelete() : void runDelete())}
+                >
+                  {deleting ? "Suppression..." : reauthNeeded ? "Se reconnecter et supprimer" : "Confirmer la suppression"}
+                </button>
+                <button
+                  className="kk-btn kk-btn--ghost"
+                  onClick={() => { setConfirming(false); setReauthNeeded(false); setMotSuppr(""); }}
+                >
+                  Annuler
+                </button>
+              </div>
             </div>
           )}
         </div>
