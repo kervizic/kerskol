@@ -506,6 +506,9 @@ export interface ReponseInsert {
   rattrapage: boolean;
   placement: boolean;
   repondu_le: string;
+  // Mode d'enregistrement : "seance" (defaut) ou "defi" (exclu de la
+  // progression, credit monnaie regle en fin de defi par terminer_defi).
+  mode?: "seance" | "defi";
 }
 
 // Verdict renvoye par le serveur apres enregistrement.
@@ -566,10 +569,69 @@ export async function insertReponse(row: ReponseInsert): Promise<ReponseResult> 
     p_rattrapage: row.rattrapage,
     p_placement: row.placement,
     p_repondu_le: row.repondu_le,
+    p_mode: row.mode ?? "seance",
   });
   if (error) throw error;
   const d = (data ?? {}) as { correct?: boolean; monnaie?: number | null; deja?: boolean };
   return { correct: Boolean(d.correct), monnaie: d.monnaie ?? null, deja: Boolean(d.deja) };
+}
+
+// -------------------------------- Defi chrono ----------------------------
+// Resultat (serveur) d'un defi termine : SCORE et RECORD calcules cote serveur
+// a partir des reponses verifiees ; le client ne peut pas declarer un score.
+export interface DefiResult {
+  score: number;
+  record: number;
+  nouveau_record: boolean;
+  credit: number; // monnaie creditee (respecte le plafond jour + plafond defi)
+  monnaie: number | null; // total du profil apres credit
+}
+
+// Cloture un defi : le serveur compte les bonnes reponses (mode='defi') de la
+// seance, gere le record du theme et credite la monnaie. Idempotent.
+export async function terminerDefi(seanceId: string, theme: string): Promise<DefiResult> {
+  if (isDemo()) {
+    return { score: 0, record: 0, nouveau_record: false, credit: 0, monnaie: null };
+  }
+  const { data, error } = await supabase().rpc("terminer_defi", {
+    p_seance: seanceId,
+    p_theme: theme,
+  });
+  if (error) throw error;
+  const d = (data ?? {}) as Partial<DefiResult>;
+  return {
+    score: Number(d.score ?? 0),
+    record: Number(d.record ?? 0),
+    nouveau_record: Boolean(d.nouveau_record),
+    credit: Number(d.credit ?? 0),
+    monnaie: d.monnaie ?? null,
+  };
+}
+
+// Resume des defis d'un profil (vue parent) : record par theme + nombre de defis.
+export interface DefiResume {
+  theme: string;
+  nb: number;
+  record: number;
+  dernier: string | null;
+}
+export async function getDefiResume(profilId: string): Promise<DefiResume[]> {
+  if (isDemo()) return [];
+  const { data, error } = await supabase()
+    .from("defi_resultats")
+    .select("theme, score, cree_le")
+    .eq("profil_id", profilId);
+  if (error) throw error;
+  const rows = (data ?? []) as { theme: string; score: number; cree_le: string }[];
+  const byTheme = new Map<string, DefiResume>();
+  for (const r of rows) {
+    const cur = byTheme.get(r.theme) ?? { theme: r.theme, nb: 0, record: 0, dernier: null };
+    cur.nb += 1;
+    cur.record = Math.max(cur.record, Number(r.score ?? 0));
+    if (!cur.dernier || r.cree_le > cur.dernier) cur.dernier = r.cree_le;
+    byTheme.set(r.theme, cur);
+  }
+  return [...byTheme.values()];
 }
 
 export async function getJournal(foyerId: string): Promise<JournalReglage[]> {

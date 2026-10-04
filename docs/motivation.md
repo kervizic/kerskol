@@ -99,6 +99,47 @@ En fin de séance, un **récapitulatif** présente la monnaie gagnée, les bâti
 qui ont évolué et le temps passé aujourd'hui, puis ouvre une **attente
 positive** : « Demain, tu pourras peut-être construire le moulin ! »
 
+## Défi chrono (option)
+
+Le **défi chrono** est un jeu de **rapidité optionnel**, strictement séparé de la
+séance normale. Il est accessible depuis le village de l'enfant par un bouton
+**« Défi chrono »** distinct du bouton « C'est parti ! » ; il n'est **jamais
+proposé de force** ni glissé dans une séance.
+
+Règles, pensées pour rester fidèles au « récompenser, jamais punir » :
+
+- **Uniquement sur ce qui est déjà maîtrisé.** Le défi ne porte que sur des
+  compétences de niveau **≥ 3** (tables, calcul mental, numération simple) :
+  c'est un jeu de vitesse, **pas un apprentissage**. L'enfant choisit son thème
+  parmi ceux débloqués (« Tables de 2 à 5 », « Toutes mes tables », « Calcul
+  mental », « Numération »). Si rien n'est encore assez solide, un message doux
+  s'affiche : « Continue tes séances, le défi arrive bientôt ! ».
+- **Format.** **60 secondes**, le plus de calculs possible. Une erreur montre
+  **brièvement la bonne réponse** puis on continue, **sans pénalité de temps**.
+  Un bouton **pause / arrêter** est disponible à tout moment, **sans rien
+  perdre**.
+- **Minuteur non stressant.** Le temps est figuré par une **barre qui se vide**
+  (pas de compte à rebours anxiogène, aucun son agressif) ; l'animation respecte
+  `prefers-reduced-motion`.
+- **Comparaison au seul record personnel.** Le score est le **nombre de bonnes
+  réponses**. On le compare **uniquement** au propre record de l'enfant par
+  thème (« Nouveau record ! » ou « Ton record : 23 »). **Aucun classement**,
+  aucune comparaison avec d'autres enfants, et **jamais de message négatif** si
+  le score est plus bas (« Bravo, 18 bonnes réponses ! »).
+- **Récompense.** Un **petit gain** de monnaie de l'univers (**1 par bonne
+  réponse**, **plafonné à 30 par défi**), plus un **bonus record modeste**
+  (**+5**). Ce gain **respecte le plafond de monnaie par jour** et ne retire
+  jamais rien.
+- **Aucun effet sur la maîtrise.** Les réponses du défi sont marquées
+  `mode = 'defi'` et **exclues du calcul de progression** (EMA, niveaux) : la
+  vitesse ne fait **jamais** baisser un niveau. Le **score et le record sont
+  calculés par le serveur** à partir des réponses vérifiées (le client ne peut
+  pas déclarer un score). Chaque réponse passe par `enregistrer_reponse` ; le
+  plafond anti-boucle est relevé de 60 à **90 réponses/min** pour tenir compte
+  d'un enfant rapide, tout en restant raisonnable.
+- **Côté parent.** L'espace parent affiche un **résumé simple** par enfant
+  (records et nombre de défis par thème). Rien n'est public.
+
 ## Interdits
 
 Pour rester fidèle à la règle « récompenser, jamais punir », Kerskol s'interdit :

@@ -6,6 +6,7 @@ import { WhoPlays } from "./screens/WhoPlays";
 import { Village } from "./screens/Village";
 import { ParentSpace } from "./screens/ParentSpace";
 import { Session } from "./screens/Session";
+import { DefiChrono } from "./screens/DefiChrono";
 import { LinkCode } from "./screens/LinkCode";
 import { ChildTheme } from "./components/ChildTheme";
 import {
@@ -37,7 +38,7 @@ function currentPath(): string {
     return "/";
   }
 }
-const CHILD_RE = /^\/enfant\/([^/]+)\/(village|seance)$/;
+const CHILD_RE = /^\/enfant\/([^/]+)\/(village|seance|defi)$/;
 
 export function App() {
   const [ready, setReady] = useState(false);
@@ -153,7 +154,7 @@ export function App() {
     const busy =
       path === "/creer-profil" ||
       path === "/reglages" ||
-      /^\/enfant\/[^/]+\/seance$/.test(path);
+      /^\/enfant\/[^/]+\/(seance|defi)$/.test(path);
     window.Kerskol?.version?.setBusy?.(busy);
     // A chaque changement d'ecran : on verifie /version.json. Si non occupe et
     // qu'une nouvelle version existe, app-version.js l'applique (transition).
@@ -323,6 +324,18 @@ export function App() {
               referentiel={referentiel}
               onExit={() => navigate("/")}
               onStart={() => navigate(`/enfant/${prof.id}/seance`)}
+              onDefi={() => navigate(`/enfant/${prof.id}/defi`)}
+              onProfilChange={upsertProfil}
+            />
+          </ChildTheme>
+        );
+      }
+      if (m[2] === "defi") {
+        return (
+          <ChildTheme couleur={couleur}>
+            <DefiChrono
+              profil={prof}
+              onExit={() => navigate(`/enfant/${prof.id}/village`)}
               onProfilChange={upsertProfil}
             />
           </ChildTheme>

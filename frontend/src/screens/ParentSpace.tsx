@@ -7,13 +7,52 @@ import {
   delierCompteEnfant,
   deleteFoyer,
   demanderLienEnfant,
+  getDefiResume,
   getJournal,
   listLiensEnAttente,
   reauthGoogle,
   ReauthRequiseError,
   updateProfil,
+  type DefiResume,
 } from "../lib/api";
+import { DEFI_THEMES } from "../domain/calcul/defi";
 import { messageClasse } from "./CreateProfile";
+
+function defiThemeLabel(id: string): string {
+  return DEFI_THEMES.find((t) => t.id === id)?.label ?? id;
+}
+
+// Resume des defis d'un enfant (vue parent) : rien de public, juste records et
+// nombre de defis par theme. Comparaison au seul record personnel.
+function DefiSummary({ profilId }: { profilId: string }) {
+  const [resume, setResume] = useState<DefiResume[] | null>(null);
+  useEffect(() => {
+    let alive = true;
+    getDefiResume(profilId)
+      .then((r) => alive && setResume(r))
+      .catch(() => alive && setResume([]));
+    return () => {
+      alive = false;
+    };
+  }, [profilId]);
+  if (resume === null) return null;
+  if (resume.length === 0) {
+    return <p className="kk-muted" style={{ margin: 0 }}>Défi chrono : aucun défi joué pour l’instant.</p>;
+  }
+  return (
+    <div>
+      <h3 style={{ margin: "0 0 6px" }}>Défi chrono</h3>
+      <ul className="kk-list" style={{ margin: 0 }}>
+        {resume.map((r) => (
+          <li key={r.theme} style={{ padding: "6px 0", border: "none" }}>
+            <strong>{defiThemeLabel(r.theme)}</strong> — record {r.record} ·{" "}
+            {r.nb} défi{r.nb > 1 ? "s" : ""} joué{r.nb > 1 ? "s" : ""}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
 import {
   CLASSES,
   type Classe,
@@ -398,6 +437,7 @@ export function ParentSpace({
               onProfilChange={onProfilChange}
               onReload={reloadLiens}
             />
+            <DefiSummary profilId={p.id} />
           </div>
         ))}
 

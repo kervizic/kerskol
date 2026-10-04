@@ -67,6 +67,12 @@ récompense pas.
 La difficulté est réglée pour viser une **réussite de 75 à 85 %** : assez de
 succès pour entretenir la confiance, assez d'obstacle pour apprendre.
 
+Le **défi chrono** (jeu de rapidité optionnel, décrit dans `docs/motivation.md`)
+est **exclu** de ce pilotage : ses réponses portent `mode = 'defi'` et n'entrent
+**pas** dans le calcul des EMA ni des niveaux (`calc_progression` les ignore).
+Il ne porte que sur des compétences **déjà acquises (niveau ≥ 3)** ; la vitesse
+ne doit jamais faire baisser un niveau installé.
+
 La métacognition reste **légère** et orale, par de courtes relances du type
 « Comment tu as trouvé ? » ou « Tu es sûre ? », sans transformer la séance en
 questionnaire.

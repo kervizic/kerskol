@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Settings } from "lucide-react";
+import { Settings, Timer } from "lucide-react";
 import { AvatarView } from "../domain/avatars";
 import {
   AVATAR_COLORS,
@@ -35,12 +35,14 @@ export function Village({
   referentiel,
   onExit,
   onStart,
+  onDefi,
   onProfilChange,
 }: {
   profil: Profil;
   referentiel: Referentiel;
   onExit: () => void;
   onStart: () => void;
+  onDefi: () => void;
   onProfilChange: (p: Profil) => void;
 }) {
   const [progression, setProgression] = useState<Progression[] | null>(null);
@@ -205,9 +207,16 @@ export function Village({
         )}
       </main>
 
-      <div className="kk-village__cta">
+      <div className="kk-village__cta kk-stack">
         <button className="kk-btn kk-btn--accent kk-btn--big kk-btn--block" onClick={onStart}>
           C’est parti !
+        </button>
+        <button
+          className="kk-btn kk-btn--block kk-defi-cta"
+          onClick={onDefi}
+          title="Un jeu de rapidité, sur ce que tu maîtrises déjà"
+        >
+          <Timer size={20} aria-hidden="true" /> Défi chrono
         </button>
       </div>
     </div>
