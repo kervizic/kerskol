@@ -19,6 +19,7 @@
 import { makeRng, intBetween, pick, shuffle, type Rng } from "./rng";
 import { buildProbleme } from "./problemes";
 import { buildMesure } from "./measures";
+import { buildFraction } from "./fractions";
 
 export type Forme =
   | "resultat"
@@ -409,6 +410,10 @@ function buildExercise(
   // --- Mesures (heure, durees, longueurs, masses, contenances) ----------
   if (src.competence.startsWith("MA.MES.")) {
     return buildMesure(src, rng, base);
+  }
+  // --- Fractions simples -------------------------------------------------
+  if (src.competence.startsWith("MA.FRAC.")) {
+    return buildFraction(src, rng, base);
   }
   // --- Tables de multiplication -----------------------------------------
   if (src.competence.startsWith("MA.TABLES.")) {

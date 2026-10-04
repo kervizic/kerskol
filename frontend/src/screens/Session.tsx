@@ -39,6 +39,7 @@ import type {
   HorlogeData,
   RegleData,
   BalanceData,
+  FractionData,
   BarModel,
 } from "../domain/calcul/generator";
 import {
@@ -780,6 +781,88 @@ function BalanceView({ data }: { data: BalanceData }) {
   );
 }
 
+// --- Figure de fraction (SVG) : `den` parts egales ; `filled[i]` colorie la
+// part i. onToggle rend les parts cliquables (coloriage interactif). ---
+function FractionShape({
+  shape,
+  den,
+  filled,
+  onToggle,
+}: {
+  shape: FractionData["shape"];
+  den: number;
+  filled: boolean[];
+  onToggle?: (i: number) => void;
+}) {
+  const fillOf = (on: boolean) => (on ? "var(--kk-accent)" : "var(--kk-surface, #fff)");
+  const stroke = "var(--kk-border)";
+  const clickable = !!onToggle;
+  const style = clickable ? { cursor: "pointer" as const } : undefined;
+
+  if (shape === "disque") {
+    const C = 90;
+    const R = 82;
+    const parts = [];
+    for (let i = 0; i < den; i++) {
+      const a0 = (i / den) * 2 * Math.PI - Math.PI / 2;
+      const a1 = ((i + 1) / den) * 2 * Math.PI - Math.PI / 2;
+      const x0 = C + R * Math.cos(a0), y0 = C + R * Math.sin(a0);
+      const x1 = C + R * Math.cos(a1), y1 = C + R * Math.sin(a1);
+      const large = a1 - a0 > Math.PI ? 1 : 0;
+      const d = den === 1 ? `M ${C - R} ${C} a ${R} ${R} 0 1 0 ${2 * R} 0 a ${R} ${R} 0 1 0 ${-2 * R} 0`
+        : `M ${C} ${C} L ${x0} ${y0} A ${R} ${R} 0 ${large} 1 ${x1} ${y1} Z`;
+      parts.push(
+        <path key={i} d={d} fill={fillOf(filled[i])} stroke={stroke} strokeWidth={2}
+          style={style} onClick={onToggle ? () => onToggle(i) : undefined} />
+      );
+    }
+    return (
+      <div className="kk-support kk-fraction">
+        <svg width="184" height="184" viewBox="0 0 180 180" role="img" aria-label={`figure en ${den} parts, ${filled.filter(Boolean).length} coloriee(s)`}>
+          {parts}
+        </svg>
+      </div>
+    );
+  }
+
+  // rectangle (colonnes) / bande (barre large) : den cellules cote a cote.
+  const W = shape === "bande" ? 360 : 240;
+  const H = shape === "bande" ? 70 : 120;
+  const cw = W / den;
+  const cells = Array.from({ length: den }, (_, i) => (
+    <rect key={i} x={i * cw} y={0} width={cw} height={H} fill={fillOf(filled[i])} stroke={stroke}
+      strokeWidth={2} style={style} onClick={onToggle ? () => onToggle(i) : undefined} />
+  ));
+  return (
+    <div className="kk-support kk-fraction">
+      <svg width="100%" height={H + 4} viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid meet"
+        role="img" aria-label={`figure en ${den} parts, ${filled.filter(Boolean).length} coloriee(s)`}>
+        {cells}
+      </svg>
+    </div>
+  );
+}
+
+function FractionFigure({ data }: { data: FractionData }) {
+  const filled = Array.from({ length: data.den }, (_, i) => i < data.num);
+  return <FractionShape shape={data.shape} den={data.den} filled={filled} />;
+}
+
+// Coloriage interactif (saisie "fraction") : l'enfant touche les parts ; la
+// reponse est le NOMBRE de parts coloriees.
+function FractionColor({ data, onCount }: { data: FractionData; onCount: (n: number) => void }) {
+  const [filled, setFilled] = useState<boolean[]>(() => Array(data.den).fill(false));
+  const toggle = (i: number) => {
+    setFilled((prev) => {
+      const next = prev.slice();
+      next[i] = !next[i];
+      onCount(next.filter(Boolean).length);
+      return next;
+    });
+  };
+  return <FractionShape shape={data.shape} den={data.den} filled={filled} onToggle={toggle} />;
+}
+
 type Phase = "answering" | "sure" | "correct" | "wrong";
 
 export function Session({
@@ -1122,6 +1205,11 @@ export function Session({
     setF1(String(mins));
   }, []);
 
+  // Fraction : le nombre de parts coloriees devient f1 (0 => pas de saisie).
+  const onFractionValue = useCallback((n: number) => {
+    setF1(n > 0 ? String(n) : "");
+  }, []);
+
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       const isDigit = e.key >= "0" && e.key <= "9";
@@ -1260,6 +1348,10 @@ export function Session({
         {ex.horlogeData && <HorlogeView data={ex.horlogeData} />}
         {ex.regleData && <RegleView data={ex.regleData} />}
         {ex.balanceData && <BalanceView data={ex.balanceData} />}
+        {ex.fractionData && ex.saisie !== "fraction" && <FractionFigure data={ex.fractionData} />}
+        {(phase === "answering" || phase === "sure") && ex.saisie === "fraction" && ex.fractionData && (
+          <FractionColor key={ex.key} data={ex.fractionData} onCount={onFractionValue} />
+        )}
         {(phase === "answering" || phase === "sure") && ex.saisie === "heure" && ex.horlogeData && (
           <HorlogeInput key={ex.key} data={ex.horlogeData} onValue={onHeureValue} />
         )}

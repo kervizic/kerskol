@@ -246,6 +246,27 @@ mesures dans la **plus petite unité commune** puis envoient `cmp` (le mode
 (`val`). Bornes serveur famille `MA.MES.%` : opérandes ≤ 20 000. Prérequis :
 conversions ← `MA.CM.X10_X100` ; masses/contenances ← longueurs.
 
+## Fractions simples (domaine `fractions`, migration 0029)
+
+Une compétence `MA.FRAC.SIMPLES`, alignée sur le programme CE2 (approche des
+fractions simples : demi, tiers, quart, puis n/2, n/3, n/4, n/5, n/10).
+
+| Code | Libellé | N1 | N2 | N3 | N4 |
+|------|---------|----|----|----|----|
+| `MA.FRAC.SIMPLES` | Fractions simples | nommer la fraction coloriée (QCM, figure SVG : disque/rectangle/bande) | colorier/sélectionner les parts + nommer (n/2..n/5) | comparer une fraction à 1 (y compris > 1) | fraction d'une quantité (la moitié de 12, le quart de 20) |
+
+Normalisations en `verif` : **nommer** → `val` (la saisie = **code** de la
+fraction `num × 100 + den`, revalidé par simple égalité) ; **colorier** → `val`
+(la saisie = nombre de parts coloriées) ; **comparer à 1** → `cmp` (`a = num`,
+`b = den` : `num < den` ⇒ < 1) ; **fraction d'une quantité** → `div`
+(`quantité ÷ dénominateur`, exacte). Bornes serveur famille `MA.FRAC.%` :
+opérandes ≤ 2 000. **Non retenu faute d'appui dans le programme CE2** : les
+opérations sur fractions (somme, simplification) et l'écriture décimale, laissées
+au CM. Visuels SVG originaux (`FractionShape` : parts égales coloriées,
+`aria-label`, interactif pour le coloriage). Prérequis : `MA.CM.MOITIES`,
+`MA.TABLES.2` (fraction d'une quantité ← tables/partage). Nouveau mode de saisie
+`fraction` (coloriage tactile des parts).
+
 ### Ouverture progressive (prérequis, pas de placement_depart)
 
 Les nouvelles compétences **ne portent aucune ligne `placement_depart`** : elles
@@ -291,6 +312,7 @@ Un prérequis doit être atteint au **niveau 2** pour débloquer la compétence.
 | `MA.MES.DUREES` | MES.HEURE, SOMMES_DIFF |
 | `MA.MES.LONGUEURS` | X10_X100 |
 | `MA.MES.MASSES_CONTENANCES` | X10_X100, MES.LONGUEURS |
+| `MA.FRAC.SIMPLES` | MOITIES, TABLES.2 |
 
 ## Paramètres des exercices (`ex_calcul.params`)
 

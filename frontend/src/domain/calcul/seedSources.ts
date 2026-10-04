@@ -147,6 +147,14 @@ const MES: Row[] = [
   ["MA.MES.MASSES_CONTENANCES", 4, "masse", "mesure", "probleme_dabord", "aucun", "lire_balance_verre", { types: ["lecture"], lecture: ["balance", "verre"] }],
 ];
 
+// --- Fractions simples (domaine fractions) ---
+const FRAC: Row[] = [
+  ["MA.FRAC.SIMPLES", 1, "fraction", "fraction", "cpa_barres", "aucun", "nommer_fraction", { types: ["nommer"], dens: [2, 3, 4] }],
+  ["MA.FRAC.SIMPLES", 2, "fraction", "fraction", "exemples_estompes", "aucun", "colorier_parts", { types: ["colorier", "nommer"], dens: [2, 3, 4, 5] }],
+  ["MA.FRAC.SIMPLES", 3, "fraction", "fraction", "variation", "aucun", "comparer_a_1", { types: ["comparer_1", "nommer"], dens: [2, 3, 4, 5, 10] }],
+  ["MA.FRAC.SIMPLES", 4, "fraction", "fraction", "probleme_dabord", "aucun", "fraction_quantite", { types: ["quantite"], dens: [2, 3, 4, 5, 10] }],
+];
+
 const TABLE_STRATS: Record<number, string> = {
   2: "double",
   3: "double_plus_une_fois",
@@ -192,4 +200,4 @@ function toSource(r: Row): ExCalcul {
   };
 }
 
-export const SEED_SOURCES: ExCalcul[] = [...CM, ...tableRows(), ...NUM, ...POSE, ...PB, ...MES].map(toSource);
+export const SEED_SOURCES: ExCalcul[] = [...CM, ...tableRows(), ...NUM, ...POSE, ...PB, ...MES, ...FRAC].map(toSource);

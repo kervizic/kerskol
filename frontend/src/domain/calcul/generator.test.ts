@@ -345,6 +345,34 @@ describe("mesures : longueurs, masses et contenances", () => {
   }
 });
 
+describe("fractions simples : saisies et verif normalise", () => {
+  const allowed = new Set(["val", "cmp", "div"]);
+  it("chaque niveau : op autorisee, computeVerif == answer, saisies coherentes", () => {
+    for (const niveau of [1, 2, 3, 4]) {
+      const src = SEED_SOURCES.find((s) => s.competence === "MA.FRAC.SIMPLES" && s.niveau === niveau)!;
+      for (let s = 1; s <= 60; s++) {
+        const g = generateExercise(src, s * 47 + niveau);
+        expect(allowed.has(g.verif.op)).toBe(true);
+        expect(computeVerif(g.verif).answer).toBe(g.answer);
+        expect(g.answer).toBeGreaterThanOrEqual(0);
+        if (g.saisie === "qcm") {
+          expect(g.fractionData).toBeTruthy();
+          expect(g.options!.some((o) => o.value === g.answer)).toBe(true);
+          expect(g.answer).toBe(g.verif.a); // code = num*100+den
+        }
+        if (g.saisie === "fraction") {
+          expect(g.fractionData?.interactive).toBe(true);
+          expect(g.answer).toBeLessThanOrEqual(g.fractionData!.den);
+        }
+        if (g.saisie === "compare") {
+          expect([0, 1, 2]).toContain(g.answer);
+          expect(g.compareLabels).toBeTruthy();
+        }
+      }
+    }
+  });
+});
+
 describe("correction : strategies des tables", () => {
   it("table 7 -> 5 fois + 2 fois", () => {
     const src: ExCalcul = {
