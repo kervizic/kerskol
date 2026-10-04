@@ -117,7 +117,11 @@ non.
 reconnaissables : réunion, comparaison, transformation), étayée par les essais
 de Jitendra et al. (2007, puis essai contrôlé 2013) et Zhang & Xin (2012). On
 utilise aussi des **problèmes sans nombres**, pour travailler la structure avant
-le calcul.
+le calcul. Kerskol implémente ces schémas sous forme de **modèle en barres**
+(tout/parties, comparaison) : aide optionnelle pendant la recherche (l'inconnue
+reste « ? ») et correction systématique. Les problèmes à **une étape** (additifs,
+multiplicatifs, monnaie) puis à **deux étapes** (premiers exercices mixtes) sont
+décrits dans `docs/referentiel-calcul.md` (compétences `MA.PB.*`).
 
 **Géométrie.** Progression de **van Hiele** (du visuel à l'analytique) et
 **entraînement spatial**, dont l'efficacité est bien établie : la méta-analyse

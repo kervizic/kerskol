@@ -67,9 +67,10 @@ Le niveau par compétence est calculé **par le serveur** (trigger sur
 
 ## Compétences et niveaux
 
-23 compétences de la matière MA : 8 de calcul mental + 8 tables de
+27 compétences de la matière MA : 8 de calcul mental + 8 tables de
 multiplication (seed `0006`), puis 4 de **numération** et 3 de **calculs posés**
-ajoutées par la migration `0023_numeration_calcul_pose.sql` (voir plus bas).
+(migration `0023_numeration_calcul_pose.sql`), enfin 4 de **problèmes**
+(migration `0024_problemes.sql`, voir plus bas).
 
 ### Calcul mental
 
@@ -134,6 +135,40 @@ chiffre de droite à gauche**, cases de retenue optionnelles (aide, non notées)
 | `MA.POSE.SOUSTRACTION` | Soustraction posée (résultat ≥ 0) | 2 chiffres sans emprunt | 2-3 chiffres avec emprunt | 3 chiffres | 4 chiffres |
 | `MA.POSE.MULTIPLICATION` | Multiplication posée × 1 chiffre | 2 chiffres × (2..4) | 2 chiffres × (2..9) | 3 chiffres × 1 chiffre | 3 chiffres × 1 chiffre |
 
+## Problèmes (domaine `problemes`, migration 0024)
+
+Quatre compétences, alignées sur le programme CE2 (Éduscol : résoudre des
+problèmes à une puis deux étapes, relevant des quatre opérations et de la
+monnaie). Méthode par **schémas en barres** (tout/parties, comparaison),
+disponible en aide (bouton « Je veux un schéma », l'inconnue reste « ? ») et
+systématiquement dans la correction expliquée. Les énoncés sont tirés d'une
+**banque de gabarits** (≥ 15 par compétence) et peuvent utiliser le **surnom**
+de l'enfant (mascotte) et son univers.
+
+| Code | Libellé | N1 | N2 | N3 | N4 |
+|------|---------|----|----|----|----|
+| `MA.PB.ADD_SUB` | Problèmes additifs à une étape | réunion / ajout / retrait ≤ 20 | « de plus / de moins » ≤ 100 | les 5 structures ≤ 1 000 | recherche de l'état initial ≤ 1 000 |
+| `MA.PB.MULT_DIV` | Problèmes multiplicatifs à une étape | groupement / partage (tables 2-5) | « fois plus » / groupement | les 3 structures (tables 2-9) | partage / fois plus / groupement (tables 2-9) |
+| `MA.PB.MONNAIE` | Billets et pièces (euros) | composer une somme (€ entiers) | comparer des prix / rendre la monnaie | composer avec des centimes | rendre la monnaie / comparer |
+| `MA.PB.DEUX_ETAPES` | Problèmes à deux étapes (MIXTES) | n×p puis ±c | n×p puis ±c (tables 2-5) | (a+b)÷c, (a+b)−c | les combinaisons (tables 2-9) |
+
+Chaque problème se normalise en `verif` : `add`/`sub`/`mul`/`div` (additif,
+multiplicatif, rendre la monnaie), `cmp` (comparer des prix), `val` (composer une
+somme : la saisie **est** le total composé). Les problèmes à deux étapes chaînent
+une **seconde opération** : `verif` transporte `op2` et `c`, le serveur calcule
+`r1 = op(a,b)` puis `réponse = op2(r1, c)`. `op2` est **réservé** à
+`MA.PB.DEUX_ETAPES` (vérifié serveur) ; la seconde étape refuse une soustraction
+négative ou une division non exacte.
+
+Unités monétaires (choix de cohérence, saisie entière) : la **composition** d'une
+somme travaille en **centimes** (on ne tape jamais, on touche billets et pièces,
+`val` sur le total en centimes) ; **rendre la monnaie** et **comparer des prix**
+restent en **euros entiers** (saisie clavier / boutons `<,=,>`). Aucune valeur
+flottante : tout est vérifié en entiers.
+
+Nouveau mode de saisie `monnaie` (billets et pièces SVG, touche/clavier) : seul
+le **total composé** (centimes) est envoyé au serveur (`val`).
+
 ### Énoncé normalisé et vérification serveur (nouvelles compétences)
 
 Toutes ces compétences se ramènent au contrat de sécurité du lot 2 : le client
@@ -159,7 +194,8 @@ avec un facteur à 1 chiffre ; soustraction ≥ 0) sont vérifiées serveur.
 numérique), `compare` (trois boutons <, =, >), `chiffres` (une case par rang),
 `pose` (colonnes alignées + résultat chiffre à chiffre de droite à gauche +
 retenues optionnelles), `qcm` (choix d'options), `droite` (droite graduée +
-lecture de la valeur pointée). Seule la saisie finale (un entier) est envoyée.
+lecture de la valeur pointée), `monnaie` (composer une somme en touchant billets
+et pièces ; total en centimes). Seule la saisie finale (un entier) est envoyée.
 
 ### Ouverture progressive (prérequis, pas de placement_depart)
 
@@ -198,6 +234,10 @@ Un prérequis doit être atteint au **niveau 2** pour débloquer la compétence.
 | `MA.POSE.ADDITION` | SOMMES_DIFF, NUM.DECOMPOSER |
 | `MA.POSE.SOUSTRACTION` | POSE.ADDITION |
 | `MA.POSE.MULTIPLICATION` | POSE.ADDITION, X10_X100 |
+| `MA.PB.ADD_SUB` | SOMMES_DIFF |
+| `MA.PB.MULT_DIV` | TABLES.2, TABLES.5 |
+| `MA.PB.MONNAIE` | SOMMES_DIFF, NUM.LIRE_ECRIRE |
+| `MA.PB.DEUX_ETAPES` | PB.ADD_SUB, PB.MULT_DIV |
 
 ## Paramètres des exercices (`ex_calcul.params`)
 
