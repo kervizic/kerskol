@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Check, Grid3x3, Info, Keyboard } from "lucide-react";
+import { Check, Grid3x3, Info, Keyboard, RotateCcw } from "lucide-react";
 import { Spinner } from "../components/ui";
 import { ThemeToggle } from "../components/ThemeToggle";
 import {
@@ -53,6 +53,7 @@ import {
   summary,
   type EngineState,
 } from "../domain/calcul/engine";
+import { wrapHour, wrapMinute, startHour, START_MINUTE } from "../domain/calcul/horloge";
 
 function uuid(): string {
   try {
@@ -651,8 +652,10 @@ function HorlogeView({ data }: { data: HorlogeData }) {
   );
 }
 
-// --- Saisie d'une heure : deux steppers (heures + minutes). La saisie est
-// NORMALISEE en minutes (h x 60 + m) et envoyee au serveur (verif val/add). ---
+// --- Saisie d'une heure : deux blocs (HEURES / MINUTES) avec boutons tactiles
+// et tour du cadran (logique pure testee dans ./horloge). L'horloge a aiguilles
+// se met a jour en direct. La saisie est NORMALISEE en minutes (h x 60 + m) et
+// envoyee au serveur (verif val/add) : contrat de valeur inchange. ---
 function HorlogeInput({
   data,
   onValue,
@@ -660,10 +663,9 @@ function HorlogeInput({
   data: HorlogeData;
   onValue: (mins: number) => void;
 }) {
-  const step = Math.max(1, data.minuteStep || 1);
   const hoursMax = data.hoursMax || 12;
-  const [h, setH] = useState(12);
-  const [m, setM] = useState(0);
+  const [h, setH] = useState(() => startHour(hoursMax));
+  const [m, setM] = useState(START_MINUTE);
   const apply = (nh: number, nm: number) => {
     setH(nh);
     setM(nm);
@@ -673,20 +675,65 @@ function HorlogeInput({
     onValue(h * 60 + m);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const wrapH = (v: number) => ((v - 1 + hoursMax) % hoursMax) + 1; // 1..hoursMax
-  const wrapM = (v: number) => ((v % 60) + 60) % 60;
+  const addH = (d: number) => apply(wrapHour(h + d, hoursMax), m);
+  const addM = (d: number) => apply(h, wrapMinute(m + d));
+  const reset = () => apply(startHour(hoursMax), START_MINUTE);
+
+  // Fleches haut/bas = +/- 1 sur le bloc focalise ; Tab change de bloc ;
+  // Entree est gere globalement (validation).
+  const hourKey = (e: React.KeyboardEvent) => {
+    if (e.key === "ArrowUp") { e.preventDefault(); addH(1); }
+    else if (e.key === "ArrowDown") { e.preventDefault(); addH(-1); }
+  };
+  const minuteKey = (e: React.KeyboardEvent) => {
+    if (e.key === "ArrowUp") { e.preventDefault(); addM(1); }
+    else if (e.key === "ArrowDown") { e.preventDefault(); addM(-1); }
+  };
+
+  const liveData: HorlogeData = { showHours: h, showMinutes: m, minuteStep: data.minuteStep, hoursMax, digital: false };
+
   return (
-    <div className="kk-horloge-input" role="group" aria-label="choisir l'heure">
-      <div className="kk-horloge-input__field">
-        <button type="button" className="kk-btn kk-horloge-input__step" aria-label="heures plus" onClick={() => apply(wrapH(h + 1), m)}>+</button>
-        <div className="kk-horloge-input__val" aria-label={`${h} heures`}>{h}<span className="kk-horloge-input__unit"> h</span></div>
-        <button type="button" className="kk-btn kk-horloge-input__step" aria-label="heures moins" onClick={() => apply(wrapH(h - 1), m)}>−</button>
+    <div className="kk-heure" role="group" aria-label="choisir l'heure">
+      <HorlogeView data={liveData} />
+      <div className="kk-heure__read" aria-live="polite">
+        {h}<span className="kk-heure__unit"> h </span>{String(m).padStart(2, "0")}
       </div>
-      <div className="kk-horloge-input__field">
-        <button type="button" className="kk-btn kk-horloge-input__step" aria-label="minutes plus" onClick={() => apply(h, wrapM(m + step))}>+</button>
-        <div className="kk-horloge-input__val" aria-label={`${m} minutes`}>{String(m).padStart(2, "0")}<span className="kk-horloge-input__unit"> min</span></div>
-        <button type="button" className="kk-btn kk-horloge-input__step" aria-label="minutes moins" onClick={() => apply(h, wrapM(m - step))}>−</button>
+      <div className="kk-heure__blocks">
+        <div
+          className="kk-heure__block"
+          role="group"
+          aria-label={`heures : ${h}`}
+          tabIndex={0}
+          onKeyDown={hourKey}
+        >
+          <div className="kk-heure__title">Heures</div>
+          <div className="kk-heure__big">{h}</div>
+          <div className="kk-heure__btns">
+            <button type="button" className="kk-btn kk-heure__btn" aria-label="Enlever 1 heure" onClick={() => addH(-1)}>−1</button>
+            <button type="button" className="kk-btn kk-btn--accent kk-heure__btn" aria-label="Ajouter 1 heure" onClick={() => addH(1)}>+1</button>
+            <button type="button" className="kk-btn kk-btn--accent kk-heure__btn" aria-label="Ajouter 3 heures" onClick={() => addH(3)}>+3</button>
+          </div>
+        </div>
+        <div
+          className="kk-heure__block"
+          role="group"
+          aria-label={`minutes : ${m}`}
+          tabIndex={0}
+          onKeyDown={minuteKey}
+        >
+          <div className="kk-heure__title">Minutes</div>
+          <div className="kk-heure__big">{String(m).padStart(2, "0")}</div>
+          <div className="kk-heure__btns">
+            <button type="button" className="kk-btn kk-heure__btn" aria-label="Enlever 1 minute" onClick={() => addM(-1)}>−1</button>
+            <button type="button" className="kk-btn kk-btn--accent kk-heure__btn" aria-label="Ajouter 1 minute" onClick={() => addM(1)}>+1</button>
+            <button type="button" className="kk-btn kk-btn--accent kk-heure__btn" aria-label="Ajouter 5 minutes" onClick={() => addM(5)}>+5</button>
+            <button type="button" className="kk-btn kk-btn--accent kk-heure__btn" aria-label="Ajouter 15 minutes" onClick={() => addM(15)}>+15</button>
+          </div>
+        </div>
       </div>
+      <button type="button" className="kk-btn kk-heure__reset" aria-label="Remettre a zero" onClick={reset}>
+        <RotateCcw size={18} aria-hidden="true" /> Remettre a zero
+      </button>
     </div>
   );
 }
