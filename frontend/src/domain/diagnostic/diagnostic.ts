@@ -186,7 +186,6 @@ function detecteS(
 export function diagnostiquer(n: number, saisie: string): Diagnostic {
   const bonne = enLettresFr(n, "trad");
   const trad = normaliser(bonne);
-  const rect = normaliser(enLettresFr(n, "rect1990"));
   const input = normaliser(saisie);
 
   if (estJuste(n, saisie)) {

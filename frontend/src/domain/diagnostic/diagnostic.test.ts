@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { enLettresFr, normaliser, formesAcceptees, estJuste } from "./lettres";
+import { enLettresFr, formesAcceptees, estJuste } from "./lettres";
 import { diagnostiquer, type TypeFaute } from "./diagnostic";
 
 // GOLDEN partage (orthographe TRADITIONNELLE). Les MEMES chaines exactes sont
