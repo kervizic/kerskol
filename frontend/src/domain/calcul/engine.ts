@@ -10,7 +10,7 @@
 //     reinsere 2 a 4 positions plus loin (rattrapage) ;
 //   * « Tu es sure de toi ? » environ 1 fois sur 6.
 
-import { generateExercise, type ExCalcul, type GeneratedExercise } from "./generator";
+import { generateExercise, type ExCalcul, type GeneratedExercise, type ProblemContext } from "./generator";
 import { makeRng, hashSeed } from "./rng";
 import type { Category, PlannedItem } from "./composer";
 
@@ -38,6 +38,7 @@ export interface EngineState {
   sourceByComp: Record<string, ExCalcul>; // 1 source par competence (bascule)
   seed: number;
   counter: number;
+  ctx?: ProblemContext; // personnalisation des enonces (mascotte/univers)
 }
 
 export interface AnswerEvent {
@@ -47,7 +48,7 @@ export interface AnswerEvent {
   switched: string | null; // competence maitrisee vers laquelle on a bascule
 }
 
-export function createEngine(plan: PlannedItem[], seed: number): EngineState {
+export function createEngine(plan: PlannedItem[], seed: number, ctx?: ProblemContext): EngineState {
   const comps: Record<string, CompLive> = {};
   const sourceByComp: Record<string, ExCalcul> = {};
   const slots: Slot[] = plan.map((it) => {
@@ -70,7 +71,7 @@ export function createEngine(plan: PlannedItem[], seed: number): EngineState {
       correct: null,
     };
   });
-  return { slots, pos: skipDropped(slots, comps, 0), comps, sourceByComp, seed, counter: plan.length };
+  return { slots, pos: skipDropped(slots, comps, 0), comps, sourceByComp, seed, counter: plan.length, ctx };
 }
 
 // Choisit une competence MAITRISEE (moral eleve) vers laquelle basculer pour
@@ -207,7 +208,7 @@ export function answerCurrent(
     const eff: ExCalcul = { ...s.source, niveau: live.niveau };
     const newSeed = hashSeed(state.seed, code, live.niveau, "rattrapage", counter);
     slots.splice(insertAt, 0, {
-      exercise: generateExercise(eff, newSeed, { rattrapage: true }),
+      exercise: generateExercise(eff, newSeed, { rattrapage: true, ctx: state.ctx }),
       source: eff,
       category: s.category,
       answered: false,
@@ -226,7 +227,7 @@ export function answerCurrent(
       const eff: ExCalcul = { ...confSource, niveau: comps[conf].niveau };
       const newSeed = hashSeed(state.seed, conf, comps[conf].niveau, "confiance", counter);
       slots.splice(state.pos + 1, 0, {
-        exercise: generateExercise(eff, newSeed),
+        exercise: generateExercise(eff, newSeed, { ctx: state.ctx }),
         source: eff,
         category: "revision",
         answered: false,
@@ -244,6 +245,7 @@ export function answerCurrent(
     sourceByComp: state.sourceByComp,
     seed: state.seed,
     counter,
+    ctx: state.ctx,
   };
   next.pos = skipDropped(slots, comps, state.pos + 1);
   return { state: next, event };
@@ -264,7 +266,7 @@ function regenerateFuture(
     slots[i] = {
       ...sl,
       source: eff,
-      exercise: generateExercise(eff, seed, { rattrapage: sl.exercise.rattrapage }),
+      exercise: generateExercise(eff, seed, { rattrapage: sl.exercise.rattrapage, ctx: state.ctx }),
     };
   }
 }

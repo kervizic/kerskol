@@ -101,6 +101,29 @@ const POSE: Row[] = [
   ["MA.POSE.MULTIPLICATION", 4, "mul", "pose", "probleme_dabord", "aucun", "multiplication_posee", { min: 100, max: 999, bmin: 2, bmax: 9 }],
 ];
 
+// --- Problemes (domaine problemes) : mascotte, monnaie, deux etapes ---
+const PB: Row[] = [
+  ["MA.PB.ADD_SUB", 1, "probleme", "probleme", "cpa_barres", "aucun", "schema_barres", { types: ["reunion", "ajout", "retrait"], mag: 20 }],
+  ["MA.PB.ADD_SUB", 2, "probleme", "probleme", "exemples_estompes", "aucun", "schema_barres", { types: ["de_plus", "de_moins", "reunion", "retrait"], mag: 100 }],
+  ["MA.PB.ADD_SUB", 3, "probleme", "probleme", "variation", "aucun", "schema_barres", { types: ["reunion", "ajout", "retrait", "de_plus", "de_moins"], mag: 1000 }],
+  ["MA.PB.ADD_SUB", 4, "probleme", "probleme", "probleme_dabord", "aucun", "schema_barres", { types: ["etat_recu", "etat_don", "de_plus", "de_moins"], mag: 1000 }],
+
+  ["MA.PB.MULT_DIV", 1, "probleme", "probleme", "cpa_barres", "aucun", "schema_barres", { types: ["groupement", "partage"], tables: [2, 3, 4, 5], qmax: 10 }],
+  ["MA.PB.MULT_DIV", 2, "probleme", "probleme", "exemples_estompes", "aucun", "schema_barres", { types: ["fois_plus", "groupement"], tables: [2, 3, 4, 5], qmax: 10 }],
+  ["MA.PB.MULT_DIV", 3, "probleme", "probleme", "variation", "aucun", "schema_barres", { types: ["groupement", "partage", "fois_plus"], tables: [2, 3, 4, 5, 6, 7, 8, 9], qmax: 10 }],
+  ["MA.PB.MULT_DIV", 4, "probleme", "probleme", "probleme_dabord", "aucun", "schema_barres", { types: ["partage", "fois_plus", "groupement"], tables: [2, 3, 4, 5, 6, 7, 8, 9], qmax: 10 }],
+
+  ["MA.PB.MONNAIE", 1, "probleme", "probleme", "cpa_barres", "aucun", "schema_barres", { types: ["composer"], mag: 50 }],
+  ["MA.PB.MONNAIE", 2, "probleme", "probleme", "exemples_estompes", "aucun", "schema_barres", { types: ["comparer", "rendre"], mag: 100 }],
+  ["MA.PB.MONNAIE", 3, "probleme", "probleme", "variation", "aucun", "schema_barres", { types: ["composer"], cents: true, mag: 30 }],
+  ["MA.PB.MONNAIE", 4, "probleme", "probleme", "probleme_dabord", "aucun", "schema_barres", { types: ["rendre", "comparer"], mag: 100 }],
+
+  ["MA.PB.DEUX_ETAPES", 1, "probleme", "probleme", "cpa_barres", "aucun", "schema_barres", { types: ["mul_add", "add_sub"], tables: [2, 3, 4, 5], qmax: 5, mag: 10 }],
+  ["MA.PB.DEUX_ETAPES", 2, "probleme", "probleme", "exemples_estompes", "aucun", "schema_barres", { types: ["mul_sub", "mul_add"], tables: [2, 3, 4, 5], qmax: 5, mag: 20 }],
+  ["MA.PB.DEUX_ETAPES", 3, "probleme", "probleme", "variation", "aucun", "schema_barres", { types: ["add_div", "add_sub"], tables: [2, 3, 4, 5], qmax: 10, mag: 100 }],
+  ["MA.PB.DEUX_ETAPES", 4, "probleme", "probleme", "probleme_dabord", "aucun", "schema_barres", { types: ["mul_add", "mul_sub", "add_div"], tables: [2, 3, 4, 5, 6, 7, 8, 9], qmax: 10, mag: 100 }],
+];
+
 const TABLE_STRATS: Record<number, string> = {
   2: "double",
   3: "double_plus_une_fois",
@@ -146,4 +169,4 @@ function toSource(r: Row): ExCalcul {
   };
 }
 
-export const SEED_SOURCES: ExCalcul[] = [...CM, ...tableRows(), ...NUM, ...POSE].map(toSource);
+export const SEED_SOURCES: ExCalcul[] = [...CM, ...tableRows(), ...NUM, ...POSE, ...PB].map(toSource);

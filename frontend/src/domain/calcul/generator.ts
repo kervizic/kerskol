@@ -17,6 +17,7 @@
 // Voir docs/referentiel-calcul.md et supabase/migrations/0006_seed_referentiel_calcul.sql.
 
 import { makeRng, intBetween, pick, shuffle, type Rng } from "./rng";
+import { buildProbleme } from "./problemes";
 
 export type Forme =
   | "resultat"
@@ -27,7 +28,8 @@ export type Forme =
   | "comparaison" // numeration : <, =, >
   | "lecture" // numeration : lire/ecrire un nombre
   | "encadrement" // numeration : encadrer, suivant/precedent, +-10/100/1000
-  | "pose"; // calcul pose en colonnes
+  | "pose" // calcul pose en colonnes
+  | "probleme"; // probleme en francais (mascotte, monnaie, deux etapes)
 
 export type Support = "rectangle" | "droite" | "aucun" | null;
 
@@ -39,7 +41,8 @@ export type Support = "rectangle" | "droite" | "aucun" | null;
 //   qcm      -> choix parmi des options (la VALEUR de l'option choisie est
 //               envoyee au serveur, jamais un index) ;
 //   droite   -> droite graduee, l'enfant lit la valeur pointee.
-export type Saisie = "clavier" | "compare" | "chiffres" | "pose" | "qcm" | "droite";
+//   monnaie  -> composition d'une somme en touchant billets et pieces.
+export type Saisie = "clavier" | "compare" | "chiffres" | "pose" | "qcm" | "droite" | "monnaie";
 
 // Enonce normalise envoye au serveur pour revalidation. L'operation porte sur
 // deux operandes et son resultat est la reponse attendue :
@@ -47,30 +50,79 @@ export type Saisie = "clavier" | "compare" | "chiffres" | "pose" | "qcm" | "droi
 //   cmp -> 0 si a<b, 1 si a=b, 2 si a>b (comparaison) ;
 //   val -> a (la reponse EST une valeur ; b vaut 0). Sert aux QCM / lectures /
 //          decompositions ou la saisie se ramene a « reproduire ce nombre ».
+//
+// PROBLEMES A DEUX ETAPES : un enonce peut chainer une SECONDE operation
+// (`op2`, `c`). Le serveur calcule r1 = op(a,b), puis la reponse = op2(r1, c).
+// `op2` est reserve a la competence MA.PB.DEUX_ETAPES (verifie cote serveur).
 export type VerifOp = "add" | "sub" | "mul" | "div" | "cmp" | "val";
+export type VerifOp2 = "add" | "sub" | "mul" | "div";
 export interface Verif {
   op: VerifOp;
   a: number;
   b: number;
+  op2?: VerifOp2; // seconde etape (problemes a deux etapes)
+  c?: number; // operande de la seconde etape
+}
+
+// Applique une operation a deux operandes (etape unique).
+function applyOp(op: VerifOp, a: number, b: number): { answer: number; reste: number | null } {
+  switch (op) {
+    case "add":
+      return { answer: a + b, reste: null };
+    case "sub":
+      return { answer: a - b, reste: null };
+    case "mul":
+      return { answer: a * b, reste: null };
+    case "div":
+      return { answer: Math.floor(a / b), reste: a % b };
+    case "cmp":
+      return { answer: a < b ? 0 : a === b ? 1 : 2, reste: null };
+    case "val":
+      return { answer: a, reste: null };
+  }
 }
 
 // Recalcule localement la reponse (et le reste) a partir de l'enonce normalise.
 // DOIT rester synchrone avec public.verif_calcul() cote serveur.
 export function computeVerif(v: Verif): { answer: number; reste: number | null } {
-  switch (v.op) {
-    case "add":
-      return { answer: v.a + v.b, reste: null };
-    case "sub":
-      return { answer: v.a - v.b, reste: null };
-    case "mul":
-      return { answer: v.a * v.b, reste: null };
-    case "div":
-      return { answer: Math.floor(v.a / v.b), reste: v.a % v.b };
-    case "cmp":
-      return { answer: v.a < v.b ? 0 : v.a === v.b ? 1 : 2, reste: null };
-    case "val":
-      return { answer: v.a, reste: null };
-  }
+  const step1 = applyOp(v.op, v.a, v.b);
+  if (v.op2 == null) return step1;
+  // Deux etapes : la reponse est la seconde operation appliquee au resultat
+  // intermediaire. Un probleme a deux etapes n'a qu'un entier en reponse.
+  const step2 = applyOp(v.op2, step1.answer, v.c ?? 0);
+  return { answer: step2.answer, reste: null };
+}
+
+// Contexte de personnalisation d'un enonce (jamais utilise dans le calcul : il
+// ne touche QUE le texte). `hero` = surnom de l'enfant ou mascotte.
+export interface ProblemContext {
+  hero?: string;
+  univers?: string;
+}
+
+// --- Modele en barres (« a la singapourienne »), aide optionnelle + correction.
+// Chaque cellule porte sa valeur reelle et une largeur en unites. `unknown`
+// marque la cellule inconnue : rendue « ? » en AIDE, revelee en CORRECTION.
+export interface BarCell {
+  units: number; // largeur relative
+  value: number; // valeur reelle
+  label: string; // texte si connu (nombre deja dans l'enonce, ou « ? »)
+  unknown: boolean;
+}
+export interface BarModel {
+  variant: "tout_parties" | "comparaison";
+  whole?: BarCell; // tout_parties : barre du tout (en haut)
+  parts: BarCell[]; // tout_parties : parties ; comparaison : [grand, petit]
+  diff?: BarCell; // comparaison : l'ecart
+}
+
+// Composition d'une somme : l'enfant touche billets et pieces (valeurs en
+// CENTIMES) jusqu'a atteindre la cible. Seul le total final (centimes) est
+// envoye au serveur (verif val). Les centimes n'apparaissent qu'aux niveaux hauts.
+export interface MoneyData {
+  target: number; // somme a composer, en centimes
+  cents: boolean; // true si des pieces en centimes sont proposees
+  units: number[]; // valeurs disponibles (centimes), du plus grand au plus petit
 }
 
 // Description d'un exercice cote base (ex_calcul + exercices).
@@ -142,6 +194,8 @@ export interface GeneratedExercise {
   poseData?: PoseData; // mode pose
   chiffresData?: ChiffresData; // mode chiffres (decomposition)
   droiteData?: DroiteData; // mode droite
+  moneyData?: MoneyData; // mode monnaie (composer une somme)
+  barres?: BarModel; // schema en barres (aide optionnelle + correction)
   verif: Verif; // enonce normalise pour revalidation serveur
   correction: string; // correction expliquee
   rattrapage: boolean;
@@ -219,21 +273,29 @@ function withAnswerBox(prompt: string): string {
   return `${prompt} = [q]`;
 }
 
+export interface GenerateOpts {
+  rattrapage?: boolean;
+  ctx?: ProblemContext;
+}
+
 export function generateExercise(
   src: ExCalcul,
   seed: number,
-  opts: { rattrapage?: boolean } = {}
+  opts: GenerateOpts = {}
 ): GeneratedExercise {
   const ex = buildExercise(src, seed, opts);
   // La case « = [q] » ne concerne que la saisie clavier classique ; les autres
-  // modes (compare, pose, chiffres, qcm, droite) portent leur propre rendu.
-  return ex.saisie === "clavier" ? { ...ex, prompt: withAnswerBox(ex.prompt) } : ex;
+  // modes (compare, pose, chiffres, qcm, droite, monnaie) portent leur propre
+  // rendu. Les problemes en francais sont des questions : on ne les suffixe pas.
+  if (ex.saisie !== "clavier") return ex;
+  if (ex.forme === "probleme") return ex;
+  return { ...ex, prompt: withAnswerBox(ex.prompt) };
 }
 
 function buildExercise(
   src: ExCalcul,
   seed: number,
-  opts: { rattrapage?: boolean } = {}
+  opts: GenerateOpts = {}
 ): GeneratedExercise {
   const rng = makeRng(seed);
   const p = src.params || {};
@@ -259,6 +321,10 @@ function buildExercise(
   // --- Calcul pose en colonnes ------------------------------------------
   if (src.competence.startsWith("MA.POSE.")) {
     return buildPose(src, rng, base);
+  }
+  // --- Problemes (mascotte, monnaie, deux etapes) -----------------------
+  if (src.competence.startsWith("MA.PB.")) {
+    return buildProbleme(src, rng, base, opts.ctx);
   }
   // --- Tables de multiplication -----------------------------------------
   if (src.competence.startsWith("MA.TABLES.")) {
@@ -749,10 +815,11 @@ export function enLettres(n: number): string {
 // =========================================================================
 // Generateurs NUMERATION et CALCUL POSE
 // =========================================================================
-type Base = Omit<
+export type Base = Omit<
   GeneratedExercise,
   | "prompt" | "answer" | "verif" | "correction"
   | "supportData" | "options" | "poseData" | "chiffresData" | "droiteData"
+  | "moneyData" | "barres"
 >;
 
 // Trois distracteurs plausibles pour la lecture d'un nombre (voisins, chiffres

@@ -11,7 +11,7 @@
 
 import { isUnlocked } from "../buildings";
 import type { Classe, Competence, Prerequis, ProgressionDetail } from "../../lib/types";
-import { generateExercise, type ExCalcul, type GeneratedExercise } from "./generator";
+import { generateExercise, type ExCalcul, type GeneratedExercise, type ProblemContext } from "./generator";
 import { classPlan, classUnlocks } from "./classes";
 import { hashSeed, makeRng, pick, type Rng } from "./rng";
 
@@ -34,6 +34,7 @@ export interface ComposeInput {
   now: number; // ms epoch
   count?: number;
   classe?: Classe; // pilote la 1re seance et les competences presumees debloquees
+  ctx?: ProblemContext; // personnalisation des enonces (mascotte/univers)
 }
 
 function progMap(progress: ProgressionDetail[]): Record<string, ProgressionDetail> {
@@ -73,7 +74,8 @@ function composeFirstSession(
   sources: ExCalcul[],
   count: number,
   seed: number,
-  rng: Rng
+  rng: Rng,
+  ctx?: ProblemContext
 ): PlannedItem[] {
   const plan = classPlan(classe);
   const exists = (code: string) =>
@@ -100,7 +102,7 @@ function composeFirstSession(
     ci++;
   }
 
-  return materialize(specs, sources, seed, rng);
+  return materialize(specs, sources, seed, rng, ctx);
 }
 
 export function composeSession(input: ComposeInput): PlannedItem[] {
@@ -126,7 +128,7 @@ export function composeSession(input: ComposeInput): PlannedItem[] {
   // (classe precedente, niveau eleve) en amorce, puis le coeur de la classe.
   const isFirstSession = input.progress.length === 0;
   if (isFirstSession) {
-    return composeFirstSession(classe, active, sources, count, seed, rng);
+    return composeFirstSession(classe, active, sources, count, seed, rng, input.ctx);
   }
 
   // --- Classement des competences debloquees ------------------------------
@@ -193,7 +195,7 @@ export function composeSession(input: ComposeInput): PlannedItem[] {
   });
 
   const specs = buildBlocks(specsRaw, count);
-  return materialize(specs, sources, seed, rng);
+  return materialize(specs, sources, seed, rng, input.ctx);
 }
 
 function clampNiveau(n: number): number {
@@ -251,7 +253,8 @@ function materialize(
   specs: BlockSpec[],
   sources: ExCalcul[],
   seed: number,
-  rng: Rng
+  rng: Rng,
+  ctx?: ProblemContext
 ): PlannedItem[] {
   const items: PlannedItem[] = [];
   let idx = 0;
@@ -264,7 +267,7 @@ function materialize(
       items.push({
         source: eff,
         category: spec.category,
-        exercise: generateExercise(eff, s),
+        exercise: generateExercise(eff, s, { ctx }),
       });
       idx++;
     }
