@@ -312,8 +312,15 @@ describe("mesures : heure et durees (saisie + verif normalise en minutes)", () =
         expect(allowed.has(g.verif.op)).toBe(true);
         expect(computeVerif(g.verif).answer).toBe(g.answer);
         expect(g.answer).toBeGreaterThanOrEqual(0);
-        // Une heure d'arrivee (saisie heure) reste dans la journee (< 24 h).
-        if (g.saisie === "heure") expect(g.answer).toBeLessThan(24 * 60);
+        // Une heure d'arrivee (saisie heure) doit etre COMPOSABLE sur le cadran
+        // a aiguilles 12 h : h dans 1..12, soit answer <= 12*60+59 (= 779).
+        // Sinon l'enfant ne peut pas saisir la bonne reponse (bug corrige).
+        if (g.saisie === "heure") {
+          expect(g.horlogeData!.hoursMax).toBe(12);
+          expect(g.answer).toBeLessThanOrEqual(12 * 60 + 59);
+          expect(g.answer % 60).toBeLessThan(60);
+          expect(Math.floor(g.answer / 60)).toBeGreaterThanOrEqual(1);
+        }
       }
     }
   });

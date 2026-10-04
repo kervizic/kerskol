@@ -186,7 +186,14 @@ function buildDuree(src: ExCalcul, rng: Rng, base: Base): GeneratedExercise {
     };
   }
 
-  // --- Heure d'arrivee (depart + duree) : la reponse est une HEURE ---
+  // --- Heure d'arrivee (depart + duree) : la reponse est une HEURE lue sur le
+  // cadran a aiguilles (12 h). La saisie se fait sur une horloge 12 h : la reponse
+  // attendue est donc la LECTURE DU CADRAN (modulo 12 h, 1..12), pas l'heure en
+  // 24 h — sinon une arrivee l'apres-midi (ex. 16 h 30) serait impossible a
+  // composer. L'enfant fait une arithmetique d'horloge simple (8 h 30 + 3 h =
+  // 11 h 30) ; matin/apres-midi non exige. La saisie normalise en h*60+m avec
+  // h dans 1..12 -> on normalise la reponse de la meme facon et on verifie en
+  // `val` (meme motif que MA.MES.HEURE lecture, autorise serveur). ---
   if (type === "arrivee") {
     const step = Number(p.minuteStep ?? 15);
     const startH = intBetween(rng, 7, 20);
@@ -196,16 +203,21 @@ function buildDuree(src: ExCalcul, rng: Rng, base: Base): GeneratedExercise {
     let dur = intBetween(rng, 1, Math.max(1, Math.floor(maxDur / step))) * step;
     if (dur < step) dur = step;
     const arr = start + dur;
-    const arrH = Math.floor(arr / 60);
     const arrM = arr % 60;
+    // Lecture 12 h (1..12) du depart et de l'arrivee.
+    const toClock = (h24: number): number => ((Math.floor(h24) + 11) % 12) + 1;
+    const startClockH = toClock(startH);
+    const arrClockH = toClock(Math.floor(arr / 60));
+    // Reponse normalisee comme la saisie horloge 12 h : clockH * 60 + minutes.
+    const answer = arrClockH * 60 + arrM;
     return {
       ...base,
       saisie: "heure",
-      horlogeData: { showHours: startH > 12 ? startH - 12 : startH, showMinutes: startM, minuteStep: step, hoursMax: 12 },
-      prompt: `Il est ${fmtHeure(startH, startM)}. Dans ${fmtDuree(dur)}, quelle heure sera-t-il ?`,
-      answer: arr,
-      verif: { op: "add", a: start, b: dur },
-      correction: `${fmtHeure(startH, startM)} + ${fmtDuree(dur)} = ${fmtHeure(arrH, arrM)}.`,
+      horlogeData: { showHours: startClockH, showMinutes: startM, minuteStep: step, hoursMax: 12 },
+      prompt: `Il est ${fmtHeure(startClockH, startM)}. Dans ${fmtDuree(dur)}, quelle heure l'horloge indiquera-t-elle ?`,
+      answer,
+      verif: { op: "val", a: answer, b: 0 },
+      correction: `Sur l'horloge : ${fmtHeure(startClockH, startM)} + ${fmtDuree(dur)} = ${fmtHeure(arrClockH, arrM)}.`,
     };
   }
 
