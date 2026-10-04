@@ -127,6 +127,48 @@ EXCEPTION WHEN OTHERS THEN
     PERFORM _rec('4f_deux_etapes_op2_requis', SQLERRM LIKE '%enonce_incoherent%', SQLERRM);
 END $$;
 
+-- =========================================================================
+-- 5. RENDU SUR PLUSIEURS ARTICLES (op2 = rsub : reponse = c - r1), 0025
+-- =========================================================================
+-- « 3 cahiers a 4 €, paye 20 € » -> 20 - (3×4) = 8.
+SELECT _rec('5a_rsub_juste',
+    (public.enregistrer_reponse(gen_random_uuid(), :'pA'::uuid, NULL, 'MA.PB.DEUX_ETAPES', NULL, 3, NULL,
+        'mul', 3, 4, 8, NULL, 1, 3000, false, false, false, now(), 'rsub', 20) ->> 'correct')::boolean = true,
+    '3x4=12 puis rendu 20-12 = 8');
+-- Addition puis rendu : (8 + 5) depenses sur 20 -> reste 7.
+SELECT _rec('5b_rsub_add_juste',
+    (public.enregistrer_reponse(gen_random_uuid(), :'pA'::uuid, NULL, 'MA.PB.DEUX_ETAPES', NULL, 3, NULL,
+        'add', 8, 5, 7, NULL, 1, 3000, false, false, false, now(), 'rsub', 20) ->> 'correct')::boolean = true,
+    '8+5=13 puis reste 20-13 = 7');
+SELECT _rec('5c_rsub_faux',
+    (public.enregistrer_reponse(gen_random_uuid(), :'pA'::uuid, NULL, 'MA.PB.DEUX_ETAPES', NULL, 3, NULL,
+        'mul', 3, 4, 7, NULL, 1, 3000, false, false, false, now(), 'rsub', 20) ->> 'correct')::boolean = false,
+    '3x4 puis rendu, saisie 7 (faux)');
+-- Rendu negatif refuse : r1 = 5×4 = 20 > c = 10.
+DO $$ BEGIN
+    PERFORM public.enregistrer_reponse(gen_random_uuid(), 'a0000001-0000-0000-0000-000000000000'::uuid, NULL,
+        'MA.PB.DEUX_ETAPES', NULL, 3, NULL, 'mul', 5, 4, 0, NULL, 1, 3000, false, false, false, now(), 'rsub', 10);
+    PERFORM _rec('5d_rsub_rendu_negatif', false, 'accepte a tort');
+EXCEPTION WHEN OTHERS THEN
+    PERFORM _rec('5d_rsub_rendu_negatif', SQLERRM LIKE '%enonce_incoherent%', SQLERRM);
+END $$;
+-- rsub reserve a DEUX_ETAPES : refuse sur une competence a une etape.
+DO $$ BEGIN
+    PERFORM public.enregistrer_reponse(gen_random_uuid(), 'a0000001-0000-0000-0000-000000000000'::uuid, NULL,
+        'MA.PB.ADD_SUB', NULL, 3, NULL, 'add', 8, 5, 7, NULL, 1, 3000, false, false, false, now(), 'rsub', 20);
+    PERFORM _rec('5e_rsub_reserve_deux_etapes', false, 'accepte a tort');
+EXCEPTION WHEN OTHERS THEN
+    PERFORM _rec('5e_rsub_reserve_deux_etapes', SQLERRM LIKE '%enonce_incoherent%', SQLERRM);
+END $$;
+-- c hors bornes refuse (rendu : c = montant paye).
+DO $$ BEGIN
+    PERFORM public.enregistrer_reponse(gen_random_uuid(), 'a0000001-0000-0000-0000-000000000000'::uuid, NULL,
+        'MA.PB.DEUX_ETAPES', NULL, 3, NULL, 'mul', 3, 4, 0, NULL, 1, 3000, false, false, false, now(), 'rsub', 50000);
+    PERFORM _rec('5f_rsub_c_hors_bornes', false, 'accepte a tort');
+EXCEPTION WHEN OTHERS THEN
+    PERFORM _rec('5f_rsub_c_hors_bornes', SQLERRM LIKE '%enonce_incoherent%', SQLERRM);
+END $$;
+
 RESET ROLE;
 
 -- =========================================================================

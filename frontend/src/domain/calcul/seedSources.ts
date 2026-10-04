@@ -120,8 +120,8 @@ const PB: Row[] = [
 
   ["MA.PB.DEUX_ETAPES", 1, "probleme", "probleme", "cpa_barres", "aucun", "schema_barres", { types: ["mul_add", "add_sub"], tables: [2, 3, 4, 5], qmax: 5, mag: 10 }],
   ["MA.PB.DEUX_ETAPES", 2, "probleme", "probleme", "exemples_estompes", "aucun", "schema_barres", { types: ["mul_sub", "mul_add"], tables: [2, 3, 4, 5], qmax: 5, mag: 20 }],
-  ["MA.PB.DEUX_ETAPES", 3, "probleme", "probleme", "variation", "aucun", "schema_barres", { types: ["add_div", "add_sub"], tables: [2, 3, 4, 5], qmax: 10, mag: 100 }],
-  ["MA.PB.DEUX_ETAPES", 4, "probleme", "probleme", "probleme_dabord", "aucun", "schema_barres", { types: ["mul_add", "mul_sub", "add_div"], tables: [2, 3, 4, 5, 6, 7, 8, 9], qmax: 10, mag: 100 }],
+  ["MA.PB.DEUX_ETAPES", 3, "probleme", "probleme", "variation", "aucun", "schema_barres", { types: ["add_div", "add_sub", "mul_rsub", "add_rsub"], tables: [2, 3, 4, 5], qmax: 10, mag: 100 }],
+  ["MA.PB.DEUX_ETAPES", 4, "probleme", "probleme", "probleme_dabord", "aucun", "schema_barres", { types: ["mul_add", "mul_sub", "add_div", "mul_rsub", "add_rsub"], tables: [2, 3, 4, 5, 6, 7, 8, 9], qmax: 10, mag: 100 }],
 ];
 
 const TABLE_STRATS: Record<number, string> = {

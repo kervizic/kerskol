@@ -189,6 +189,21 @@ const DEUX_ETAPES_BANK: Gabarit[] = [
   { type: "mul_add", t: (v) => `Une boîte contient ${fmt(v.n1)} fois ${fmt(v.n2)} ${v.obj}, et ${fmt(cFrom(v))} ${v.obj} sont posés dessus. Combien de ${v.obj} en tout ?` },
   { type: "mul_sub", t: (v) => `${v.friend} a ${fmt(v.n1)} ${v.grp} de ${fmt(v.n2)} ${v.obj} et en mange ${fmt(cFrom(v))}. Combien lui en reste-t-il ?` },
   { type: "add_div", t: (v) => `${v.hero} et ${v.friend} ont ${fmt(v.n1)} et ${fmt(v.n2)} ${v.obj}. Ils les partagent entre ${fmt(cFrom(v))} amis. Combien chacun en reçoit-il ?` },
+
+  // --- RENDU SUR PLUSIEURS ARTICLES (op2 = rsub : reponse = c - r1) ---------
+  // mul_rsub : n articles a p €, paye avec c € -> rendu = c - n×p (euros entiers).
+  { type: "mul_rsub", t: (v) => `${v.hero} achète ${fmt(v.n1)} ${v.obj} à ${fmt(v.n2)} € pièce. Il paie avec un billet de ${fmt(cFrom(v))} €. Combien lui rend-on ?` },
+  { type: "mul_rsub", t: (v) => `${v.hero} prend ${fmt(v.n1)} ${v.obj} qui coûtent ${fmt(v.n2)} € chacun. Il donne ${fmt(cFrom(v))} €. Combien le marchand rend-il ?` },
+  { type: "mul_rsub", t: (v) => `Au marché, les ${v.obj} coûtent ${fmt(v.n2)} € l'unité. ${v.hero} en achète ${fmt(v.n1)} et paie avec ${fmt(cFrom(v))} €. Combien lui rend-on ?` },
+  { type: "mul_rsub", t: (v) => `${v.hero} achète ${fmt(v.n1)} ${v.obj} à ${fmt(v.n2)} €. Avec un billet de ${fmt(cFrom(v))} €, combien récupère-t-il ?` },
+  { type: "mul_rsub", t: (v) => `${v.friend} vend ${fmt(v.n1)} ${v.obj} à ${fmt(v.n2)} € pièce à ${v.hero}, qui tend ${fmt(cFrom(v))} €. Combien ${v.friend} rend-il ?` },
+  { type: "mul_rsub", t: (v) => `${v.hero} a ${fmt(cFrom(v))} €. Il achète ${fmt(v.n1)} ${v.obj} à ${fmt(v.n2)} € chacun. Combien lui reste-t-il ?` },
+  // add_rsub : avec c €, on paie n1 € puis n2 € -> reste = c - (n1 + n2).
+  { type: "add_rsub", t: (v) => `${v.hero} a ${fmt(cFrom(v))} €. Il achète ${v.item} à ${fmt(v.n1)} € et ${v.item2} à ${fmt(v.n2)} €. Combien lui reste-t-il ?` },
+  { type: "add_rsub", t: (v) => `Avec ${fmt(cFrom(v))} €, ${v.hero} dépense ${fmt(v.n1)} € le matin et ${fmt(v.n2)} € l'après-midi. Combien lui reste-t-il ?` },
+  { type: "add_rsub", t: (v) => `${v.hero} part faire des courses avec ${fmt(cFrom(v))} €. Il paie ${fmt(v.n1)} € puis ${fmt(v.n2)} €. Combien lui reste-t-il ?` },
+  { type: "add_rsub", t: (v) => `${v.hero} a ${fmt(cFrom(v))} € dans sa tirelire. Il achète ${v.item} (${fmt(v.n1)} €) et ${v.item2} (${fmt(v.n2)} €). Combien reste-t-il ?` },
+  { type: "add_rsub", t: (v) => `${v.hero} reçoit ${fmt(cFrom(v))} €, dépense ${fmt(v.n1)} € puis ${fmt(v.n2)} €. Combien lui reste-t-il ?` },
 ];
 
 // `c` (seconde etape) est transporte dans v.res uniquement pour le rendu texte :
@@ -543,6 +558,40 @@ function buildDeuxEtapes(
       Array.from({ length: Math.min(n, 10) }, () => cell(per, true))
     );
     correction = `D'abord ${fmt(n)} × ${fmt(per)} = ${fmt(r1)}. Ensuite ${fmt(r1)} ${op2 === "add" ? "+" : "−"} ${fmt(c)} = ${fmt(answer)}.`;
+  } else if (type === "mul_rsub") {
+    // Rendu sur plusieurs articles : n articles a p € payes avec c € ->
+    // rendu = c - n×p (euros entiers, rendu >= 0).
+    const n = intBetween(rng, 2, Math.min(10, Number(p.qmax ?? 10)));
+    const per = pick(rng, tables);
+    r1 = n * per; // cout total
+    c = roundPaid(r1); // montant paye : billet rond strictement > cout
+    answer = c - r1;
+    verif = { op: "mul", a: n, b: per, op2: "rsub", c };
+    v.n1 = n; v.n2 = per;
+    barres = toutParties(cell(c, true, `${fmt(c)} €`), [
+      cell(r1, true, `${fmt(n)}×${fmt(per)}`),
+      cell(answer, false),
+    ]);
+    correction = `D'abord le prix : ${fmt(n)} × ${fmt(per)} = ${fmt(r1)} €. On rend ${fmt(c)} − ${fmt(r1)} = ${fmt(answer)} €.`;
+  } else if (type === "add_rsub") {
+    // « Il reste combien » apres deux achats : avec c €, on depense a € puis
+    // b € -> reste = c - (a + b) (euros entiers, reste >= 0).
+    const hi = Math.max(4, Math.floor(mag / 2));
+    const a = intBetween(rng, 2, hi);
+    const b = intBetween(rng, 2, hi);
+    r1 = a + b; // total depense
+    c = roundPaid(r1); // argent disponible au depart
+    answer = c - r1;
+    verif = { op: "add", a, b, op2: "rsub", c };
+    v.n1 = a; v.n2 = b;
+    v.item = pick(rng, ITEMS);
+    v.item2 = pick(rng, ITEMS.filter((x) => x !== v.item));
+    barres = toutParties(cell(c, true, `${fmt(c)} €`), [
+      cell(a, true, `${fmt(a)} €`),
+      cell(b, true, `${fmt(b)} €`),
+      cell(answer, false),
+    ]);
+    correction = `D'abord le total dépensé : ${fmt(a)} + ${fmt(b)} = ${fmt(r1)} €. Il reste ${fmt(c)} − ${fmt(r1)} = ${fmt(answer)} €.`;
   } else if (type === "add_div") {
     const divisor = pick(rng, tables);
     const quotient = intBetween(rng, 2, Number(p.qmax ?? 10));

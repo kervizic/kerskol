@@ -160,6 +160,16 @@ une **seconde opération** : `verif` transporte `op2` et `c`, le serveur calcule
 `MA.PB.DEUX_ETAPES` (vérifié serveur) ; la seconde étape refuse une soustraction
 négative ou une division non exacte.
 
+**Rendu sur plusieurs articles (`op2 = rsub`, migration 0025).** Pour les
+problèmes de rendu de monnaie et de « il reste combien » portant sur plusieurs
+articles, la seconde opération est une **soustraction inversée** `rsub` :
+`réponse = c − r1` (et non `r1 − c`). Exemple : « Léa achète 3 cahiers à 4 €.
+Elle paie avec un billet de 20 €. Combien lui rend-on ? » → `r1 = 3 × 4 = 12`,
+`réponse = 20 − 12 = 8`. `rsub` reste **réservé** à `MA.PB.DEUX_ETAPES` (N3-N4),
+le serveur refuse un **rendu négatif** (il exige `c ≥ r1`) et travaille en
+**euros entiers**. Côté client, `computeVerif` reproduit exactement ce calcul
+(test d'invariant sur tous les gabarits).
+
 Unités monétaires (choix de cohérence, saisie entière) : la **composition** d'une
 somme travaille en **centimes** (on ne tape jamais, on touche billets et pièces,
 `val` sur le total en centimes) ; **rendre la monnaie** et **comparer des prix**

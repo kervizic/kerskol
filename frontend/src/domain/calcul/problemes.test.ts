@@ -59,8 +59,23 @@ describe("problemes : deux etapes (op2) reserve a DEUX_ETAPES", () => {
         const r1 = computeVerif({ op: g.verif.op, a: g.verif.a, b: g.verif.b }).answer;
         if (g.verif.op2 === "sub") expect(r1).toBeGreaterThanOrEqual(g.verif.c!);
         if (g.verif.op2 === "div") expect(r1 % g.verif.c!).toBe(0);
+        // rsub (rendu / « il reste » : reponse = c - r1) : le rendu reste >= 0.
+        if (g.verif.op2 === "rsub") {
+          expect(g.verif.c!).toBeGreaterThanOrEqual(r1);
+          expect(g.answer).toBe(g.verif.c! - r1);
+          expect(g.answer).toBeGreaterThanOrEqual(0);
+        }
       }
     }
+  });
+  it("DEUX_ETAPES expose le cas rendu rsub (plusieurs articles)", () => {
+    const src = PB_SOURCES.find((s) => s.competence === "MA.PB.DEUX_ETAPES" && s.niveau === 3)!;
+    let sawRsub = false;
+    for (let seed = 1; seed <= 400 && !sawRsub; seed++) {
+      const g = generateExercise(src, seed * 211 + 3);
+      if (g.verif.op2 === "rsub") sawRsub = true;
+    }
+    expect(sawRsub).toBe(true);
   });
   it("les competences a une etape ne portent jamais op2", () => {
     const srcs = PB_SOURCES.filter((s) => s.competence !== "MA.PB.DEUX_ETAPES");

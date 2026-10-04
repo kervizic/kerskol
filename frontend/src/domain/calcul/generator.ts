@@ -54,8 +54,14 @@ export type Saisie = "clavier" | "compare" | "chiffres" | "pose" | "qcm" | "droi
 // PROBLEMES A DEUX ETAPES : un enonce peut chainer une SECONDE operation
 // (`op2`, `c`). Le serveur calcule r1 = op(a,b), puis la reponse = op2(r1, c).
 // `op2` est reserve a la competence MA.PB.DEUX_ETAPES (verifie cote serveur).
+//
+// Cas « rendu / il reste » (rendu sur plusieurs articles) : `op2 = "rsub"` est
+// une soustraction INVERSEE, reponse = c - r1 (et non r1 - c). Exemple : « Lea
+// achete 3 cahiers a 4 €. Elle paie avec un billet de 20 €. Combien lui rend-on ? »
+// -> r1 = 3 × 4 = 12, reponse = 20 - 12 = 8. Le serveur refuse un rendu negatif
+// (c >= r1) ; les montants d'argent sont des euros entiers.
 export type VerifOp = "add" | "sub" | "mul" | "div" | "cmp" | "val";
-export type VerifOp2 = "add" | "sub" | "mul" | "div";
+export type VerifOp2 = "add" | "sub" | "mul" | "div" | "rsub";
 export interface Verif {
   op: VerifOp;
   a: number;
@@ -88,9 +94,29 @@ export function computeVerif(v: Verif): { answer: number; reste: number | null }
   const step1 = applyOp(v.op, v.a, v.b);
   if (v.op2 == null) return step1;
   // Deux etapes : la reponse est la seconde operation appliquee au resultat
-  // intermediaire. Un probleme a deux etapes n'a qu'un entier en reponse.
-  const step2 = applyOp(v.op2, step1.answer, v.c ?? 0);
-  return { answer: step2.answer, reste: null };
+  // intermediaire r1. Un probleme a deux etapes n'a qu'un entier en reponse.
+  // `rsub` (rendu / « il reste ») est la soustraction INVERSEE : c - r1.
+  const r1 = step1.answer;
+  const c = v.c ?? 0;
+  let answer: number;
+  switch (v.op2) {
+    case "add":
+      answer = r1 + c;
+      break;
+    case "sub":
+      answer = r1 - c;
+      break;
+    case "mul":
+      answer = r1 * c;
+      break;
+    case "div":
+      answer = c === 0 ? 0 : Math.floor(r1 / c);
+      break;
+    case "rsub":
+      answer = c - r1;
+      break;
+  }
+  return { answer, reste: null };
 }
 
 // Contexte de personnalisation d'un enonce (jamais utilise dans le calcul : il
