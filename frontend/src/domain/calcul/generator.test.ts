@@ -279,6 +279,46 @@ describe("numeration & calcul pose : saisie et verif normalise", () => {
   });
 });
 
+describe("mesures : heure et durees (saisie + verif normalise en minutes)", () => {
+  it("heure N1 : QCM, horloge presente, une option = la reponse (minutes depuis minuit)", () => {
+    const src = SEED_SOURCES.find((s) => s.competence === "MA.MES.HEURE" && s.niveau === 1)!;
+    for (let s = 1; s <= 40; s++) {
+      const g = generateExercise(src, s * 23 + 1);
+      expect(g.saisie).toBe("qcm");
+      expect(g.horlogeData).toBeTruthy();
+      expect(g.verif.op).toBe("val");
+      expect(g.answer).toBe(g.horlogeData!.showHours * 60 + g.horlogeData!.showMinutes);
+      expect(g.options!.some((o) => o.value === g.answer)).toBe(true);
+      expect(new Set(g.options!.map((o) => o.value)).size).toBe(g.options!.length);
+    }
+  });
+  it("heure N2/N3 : saisie 'heure', minutes multiples du pas, computeVerif == answer", () => {
+    for (const niveau of [2, 3]) {
+      const src = SEED_SOURCES.find((s) => s.competence === "MA.MES.HEURE" && s.niveau === niveau)!;
+      for (let s = 1; s <= 40; s++) {
+        const g = generateExercise(src, s * 29 + niveau);
+        expect(g.saisie).toBe("heure");
+        expect(g.horlogeData!.showMinutes % g.horlogeData!.minuteStep).toBe(0);
+        expect(computeVerif(g.verif).answer).toBe(g.answer);
+      }
+    }
+  });
+  it("durees : op dans l'ensemble autorise, duree/arrivee coherentes sur 200 tirages", () => {
+    const allowed = new Set(["val", "add", "sub", "mul", "div"]);
+    for (const niveau of [1, 2, 3, 4]) {
+      const src = SEED_SOURCES.find((s) => s.competence === "MA.MES.DUREES" && s.niveau === niveau)!;
+      for (let s = 1; s <= 50; s++) {
+        const g = generateExercise(src, s * 37 + niveau);
+        expect(allowed.has(g.verif.op)).toBe(true);
+        expect(computeVerif(g.verif).answer).toBe(g.answer);
+        expect(g.answer).toBeGreaterThanOrEqual(0);
+        // Une heure d'arrivee (saisie heure) reste dans la journee (< 24 h).
+        if (g.saisie === "heure") expect(g.answer).toBeLessThan(24 * 60);
+      }
+    }
+  });
+});
+
 describe("correction : strategies des tables", () => {
   it("table 7 -> 5 fois + 2 fois", () => {
     const src: ExCalcul = {

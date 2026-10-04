@@ -352,3 +352,21 @@ p.kk-lead { color: var(--kk-text-2); max-width: 52ch; }
 .kk-badge-soon { font-size: 0.7rem; background: var(--kk-border); color: var(--kk-text-2); border-radius: 999px; padding: 2px 8px; margin-left: 6px; }
 .kk-switch-row { display: flex; align-items: center; gap: 10px; font-weight: 700; cursor: pointer; min-height: 44px; }
 .kk-switch-row input { width: 22px; height: 22px; accent-color: var(--kk-accent); cursor: pointer; }
+
+/* ------------------------------ Mesures -------------------------------- */
+/* Horloge a aiguilles (lecture de l'heure). */
+.kk-horloge { flex-direction: column; align-items: center; gap: 6px; }
+.kk-horloge__digital { font-weight: 700; font-size: 1.2rem; color: var(--kk-text); }
+/* Saisie d'une heure : deux steppers (heures / minutes), gros boutons tactiles. */
+.kk-horloge-input { display: flex; gap: 20px; justify-content: center; align-items: center; margin: 14px 0; }
+.kk-horloge-input__field { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.kk-horloge-input__step {
+  width: 60px; height: 44px; font-size: 1.6rem; font-weight: 700; padding: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.kk-horloge-input__val {
+  min-width: 90px; text-align: center; font-size: 2rem; font-weight: 700;
+  color: var(--kk-text); background: var(--kk-surface); border: 2px solid var(--kk-border);
+  border-radius: var(--kk-radius-sm); padding: 6px 10px;
+}
+.kk-horloge-input__unit { font-size: 1rem; color: var(--kk-text-2); font-weight: 700; }

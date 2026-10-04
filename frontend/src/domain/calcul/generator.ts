@@ -18,6 +18,7 @@
 
 import { makeRng, intBetween, pick, shuffle, type Rng } from "./rng";
 import { buildProbleme } from "./problemes";
+import { buildMesure } from "./measures";
 
 export type Forme =
   | "resultat"
@@ -29,7 +30,9 @@ export type Forme =
   | "lecture" // numeration : lire/ecrire un nombre
   | "encadrement" // numeration : encadrer, suivant/precedent, +-10/100/1000
   | "pose" // calcul pose en colonnes
-  | "probleme"; // probleme en francais (mascotte, monnaie, deux etapes)
+  | "probleme" // probleme en francais (mascotte, monnaie, deux etapes)
+  | "mesure" // mesures (heure, durees, longueurs, masses, contenances)
+  | "fraction"; // fractions simples
 
 export type Support = "rectangle" | "droite" | "aucun" | null;
 
@@ -42,7 +45,13 @@ export type Support = "rectangle" | "droite" | "aucun" | null;
 //               envoyee au serveur, jamais un index) ;
 //   droite   -> droite graduee, l'enfant lit la valeur pointee.
 //   monnaie  -> composition d'une somme en touchant billets et pieces.
-export type Saisie = "clavier" | "compare" | "chiffres" | "pose" | "qcm" | "droite" | "monnaie";
+//   heure    -> deux champs (heures + minutes) avec steppers ; la saisie est
+//               NORMALISEE en minutes (depuis minuit pour une heure, duree sinon).
+//   fraction -> l'enfant colorie/selectionne des parts d'une figure ; la saisie
+//               est le NOMBRE de parts coloriees.
+export type Saisie =
+  | "clavier" | "compare" | "chiffres" | "pose" | "qcm" | "droite" | "monnaie"
+  | "heure" | "fraction";
 
 // Enonce normalise envoye au serveur pour revalidation. L'operation porte sur
 // deux operandes et son resultat est la reponse attendue :
@@ -202,6 +211,46 @@ export interface DroiteData {
   at: number; // position pointee (= la reponse)
 }
 
+// --- MESURES : visuels et saisies originaux -------------------------------
+// Horloge a aiguilles (SVG). `show` affiche les aiguilles d'une heure donnee
+// (lecture : les aiguilles SONT la question, pas une aide). `input` active la
+// saisie par deux steppers (heures + minutes). `minuteStep` pilote le pas des
+// minutes (60 = heures pleines, 30 = demies, 15 = quarts, 5, 1). `hoursMax` = 12
+// (cadran classique) ou 24.
+export interface HorlogeData {
+  showHours: number; // position de la grande aiguille des heures (0..hoursMax)
+  showMinutes: number; // position de l'aiguille des minutes (0..59)
+  minuteStep: number; // pas de saisie des minutes
+  hoursMax: number; // 12 par defaut
+  digital?: boolean; // afficher aussi l'heure en chiffres sous le cadran
+}
+// Regle graduee (SVG) : un segment de `length` unites, graduation `max` unites,
+// pas `step`. L'enfant lit la longueur (saisie clavier).
+export interface RegleData {
+  length: number; // longueur du segment (en unites de graduation)
+  max: number; // longueur totale de la regle
+  step: number; // pas des graduations chiffrees
+  unit: string; // "cm" (affiche)
+}
+// Balance / verre gradue (SVG) : une aiguille (ou un niveau) pointe `value` sur
+// une graduation 0..max, pas `step`. L'enfant lit la mesure (saisie clavier).
+export interface BalanceData {
+  value: number; // valeur pointee
+  max: number; // graduation maximale
+  step: number; // pas des graduations chiffrees
+  unit: string; // "g", "kg", "L"...
+  kind: "balance" | "verre"; // cadran a aiguille ou verre doseur
+}
+// Figure de fraction (SVG) : `den` parts egales, `shaded` coloriees, forme
+// disque / rectangle / bande. `interactive` = l'enfant colorie lui-meme (saisie
+// fraction : la reponse est le nombre de parts a colorier).
+export interface FractionData {
+  num: number; // parts coloriees (lecture) ou cible (coloriage)
+  den: number; // nombre total de parts
+  shape: "disque" | "rectangle" | "bande";
+  interactive?: boolean;
+}
+
 export interface GeneratedExercise {
   key: string; // clef React stable
   exerciceId: string;
@@ -221,6 +270,10 @@ export interface GeneratedExercise {
   chiffresData?: ChiffresData; // mode chiffres (decomposition)
   droiteData?: DroiteData; // mode droite
   moneyData?: MoneyData; // mode monnaie (composer une somme)
+  horlogeData?: HorlogeData; // horloge a aiguilles (mesures : heure / duree)
+  regleData?: RegleData; // regle graduee (mesures : longueur)
+  balanceData?: BalanceData; // balance / verre gradue (mesures : masse / contenance)
+  fractionData?: FractionData; // figure de fraction (nommer / colorier)
   barres?: BarModel; // schema en barres (aide optionnelle + correction)
   verif: Verif; // enonce normalise pour revalidation serveur
   correction: string; // correction expliquee
@@ -351,6 +404,10 @@ function buildExercise(
   // --- Problemes (mascotte, monnaie, deux etapes) -----------------------
   if (src.competence.startsWith("MA.PB.")) {
     return buildProbleme(src, rng, base, opts.ctx);
+  }
+  // --- Mesures (heure, durees, longueurs, masses, contenances) ----------
+  if (src.competence.startsWith("MA.MES.")) {
+    return buildMesure(src, rng, base);
   }
   // --- Tables de multiplication -----------------------------------------
   if (src.competence.startsWith("MA.TABLES.")) {
@@ -845,7 +902,7 @@ export type Base = Omit<
   GeneratedExercise,
   | "prompt" | "answer" | "verif" | "correction"
   | "supportData" | "options" | "poseData" | "chiffresData" | "droiteData"
-  | "moneyData" | "barres"
+  | "moneyData" | "horlogeData" | "regleData" | "balanceData" | "fractionData" | "barres"
 >;
 
 // Trois distracteurs plausibles pour la lecture d'un nombre (voisins, chiffres

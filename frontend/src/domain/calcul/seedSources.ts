@@ -124,6 +124,19 @@ const PB: Row[] = [
   ["MA.PB.DEUX_ETAPES", 4, "probleme", "probleme", "probleme_dabord", "aucun", "schema_barres", { types: ["mul_add", "mul_sub", "add_div", "mul_rsub", "add_rsub"], tables: [2, 3, 4, 5, 6, 7, 8, 9], qmax: 10, mag: 100 }],
 ];
 
+// --- Mesures (domaine mesures) : heure, durees ---
+const MES: Row[] = [
+  ["MA.MES.HEURE", 1, "heure", "mesure", "cpa_barres", "aucun", "lire_horloge", { types: ["lire"], minuteStep: 30, saisie: "qcm" }],
+  ["MA.MES.HEURE", 2, "heure", "mesure", "exemples_estompes", "aucun", "lire_horloge", { types: ["lire"], minuteStep: 15 }],
+  ["MA.MES.HEURE", 3, "heure", "mesure", "variation", "aucun", "lire_horloge", { types: ["lire"], minuteStep: 5 }],
+  ["MA.MES.HEURE", 4, "heure", "mesure", "probleme_dabord", "aucun", "matin_apres_midi", { types: ["lire", "ap_midi"], minuteStep: 1 }],
+
+  ["MA.MES.DUREES", 1, "duree", "mesure", "cpa_barres", "aucun", "conversion_h_min", { types: ["conversion_hm"] }],
+  ["MA.MES.DUREES", 2, "duree", "mesure", "exemples_estompes", "aucun", "de_heure_a_heure", { types: ["conversion_hm", "de_a"], demi: true, minuteStep: 15 }],
+  ["MA.MES.DUREES", 3, "duree", "mesure", "variation", "aucun", "heure_arrivee", { types: ["de_a", "arrivee"], minuteStep: 15 }],
+  ["MA.MES.DUREES", 4, "duree", "mesure", "probleme_dabord", "aucun", "jours_semaines", { types: ["arrivee", "jours_semaines", "de_a"], minuteStep: 5 }],
+];
+
 const TABLE_STRATS: Record<number, string> = {
   2: "double",
   3: "double_plus_une_fois",
@@ -169,4 +182,4 @@ function toSource(r: Row): ExCalcul {
   };
 }
 
-export const SEED_SOURCES: ExCalcul[] = [...CM, ...tableRows(), ...NUM, ...POSE, ...PB].map(toSource);
+export const SEED_SOURCES: ExCalcul[] = [...CM, ...tableRows(), ...NUM, ...POSE, ...PB, ...MES].map(toSource);

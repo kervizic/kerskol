@@ -205,7 +205,34 @@ numérique), `compare` (trois boutons <, =, >), `chiffres` (une case par rang),
 `pose` (colonnes alignées + résultat chiffre à chiffre de droite à gauche +
 retenues optionnelles), `qcm` (choix d'options), `droite` (droite graduée +
 lecture de la valeur pointée), `monnaie` (composer une somme en touchant billets
-et pièces ; total en centimes). Seule la saisie finale (un entier) est envoyée.
+et pièces ; total en centimes), `heure` (deux steppers heures + minutes,
+normalisés en minutes). Seule la saisie finale (un entier) est envoyée.
+
+## Mesures (domaine `mesures`, migration 0027)
+
+Deux compétences, alignées sur le programme CE2 (Éduscol / programmes 2024 cycle 2 :
+lire l'heure, résoudre des problèmes de durées). **Normalisation en entiers** : une
+**heure de la journée** est normalisée en **minutes depuis minuit** (`h × 60 + m`),
+une **durée** en **minutes**. Toutes les réponses se ramènent donc aux opérations
+existantes (aucune nouvelle opération serveur).
+
+| Code | Libellé | N1 | N2 | N3 | N4 |
+|------|---------|----|----|----|----|
+| `MA.MES.HEURE` | Lire / écrire l'heure | heures pleines et demies (horloge SVG, QCM) | quarts (saisie heures+minutes) | de 5 min en 5 min | à la minute + matin/après-midi (14 h = 2 h de l'après-midi) |
+| `MA.MES.DUREES` | Durées | conversions h → min (1 h = 60 min, 1 h 30 = 90 min) | conversions + « de … à … » | « de … à … » + heure d'arrivée (départ + durée) | heure d'arrivée + jours/semaines (1 semaine = 7 jours) |
+
+Normalisations en `verif` : lecture/écriture d'une heure → `val` (minutes depuis
+minuit) ; conversion h → min et semaines → jours → `mul` ; jours → semaines →
+`div` ; « de … à … » → `sub` (fin − début, en minutes) ; départ + durée → arrivée
+→ `add` ; correspondance 24 h ↔ 12 h → `sub` / `add`. Les bornes serveur (famille
+`MA.MES.%`) rejettent tout opérande > 20 000 (une semaine = 10 080 min).
+
+**Visuel original** : une **horloge à aiguilles** en SVG (`HorlogeView`), cadran de
+12 h, aiguilles des heures (courte) et des minutes (longue), graduations des 60
+minutes, `aria-label` décrivant l'heure, couleurs par variables de thème (lisible
+en clair/sombre). Pour la **lecture**, les aiguilles **sont** la question (jamais
+un indice). **Saisie `heure`** : deux steppers (heures + minutes, gros boutons
+tactiles) dont la valeur est normalisée en minutes avant envoi ; au niveau 1, QCM.
 
 ### Ouverture progressive (prérequis, pas de placement_depart)
 
@@ -248,6 +275,8 @@ Un prérequis doit être atteint au **niveau 2** pour débloquer la compétence.
 | `MA.PB.MULT_DIV` | TABLES.2, TABLES.5 |
 | `MA.PB.MONNAIE` | SOMMES_DIFF, NUM.LIRE_ECRIRE |
 | `MA.PB.DEUX_ETAPES` | PB.ADD_SUB, PB.MULT_DIV |
+| `MA.MES.HEURE` | aucun |
+| `MA.MES.DUREES` | MES.HEURE, SOMMES_DIFF |
 
 ## Paramètres des exercices (`ex_calcul.params`)
 

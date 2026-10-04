@@ -36,6 +36,7 @@ import type {
   ChiffresData,
   QcmOption,
   MoneyData,
+  HorlogeData,
   BarModel,
 } from "../domain/calcul/generator";
 import {
@@ -578,6 +579,115 @@ function MoneyCompose({
   );
 }
 
+// --- Horloge a aiguilles (SVG original). Pour la LECTURE, les aiguilles sont la
+// question (pas une aide). Accessible (aria-label), lisible en mode sombre. ---
+function HorlogeView({ data }: { data: HorlogeData }) {
+  const { showHours, showMinutes } = data;
+  const C = 110;
+  const R = 94;
+  const hourAngle = ((showHours % 12) + showMinutes / 60) * 30; // deg depuis 12 h
+  const minAngle = showMinutes * 6;
+  const hand = (angleDeg: number, len: number) => {
+    const a = ((angleDeg - 90) * Math.PI) / 180;
+    return { x: C + len * Math.cos(a), y: C + len * Math.sin(a) };
+  };
+  const hh = hand(hourAngle, 50);
+  const mm = hand(minAngle, 76);
+  const nums = [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+  const label = `horloge indiquant ${showHours} heure${showHours > 1 ? "s" : ""}${
+    showMinutes > 0 ? ` ${showMinutes}` : ""
+  }`;
+  return (
+    <div className="kk-support kk-horloge">
+      <svg width="220" height="220" viewBox="0 0 220 220" role="img" aria-label={label}>
+        <circle cx={C} cy={C} r={R} fill="var(--kk-surface, #fff)" stroke="var(--kk-border)" strokeWidth={4} />
+        {Array.from({ length: 60 }, (_, i) => {
+          const a = ((i * 6 - 90) * Math.PI) / 180;
+          const big = i % 5 === 0;
+          const r1 = big ? R - 12 : R - 6;
+          return (
+            <line
+              key={i}
+              x1={C + r1 * Math.cos(a)}
+              y1={C + r1 * Math.sin(a)}
+              x2={C + R * Math.cos(a)}
+              y2={C + R * Math.sin(a)}
+              stroke="var(--kk-border)"
+              strokeWidth={big ? 2.5 : 1}
+            />
+          );
+        })}
+        {nums.map((n, i) => {
+          const a = ((i * 30 - 90) * Math.PI) / 180;
+          const r = R - 26;
+          return (
+            <text
+              key={n}
+              x={C + r * Math.cos(a)}
+              y={C + r * Math.sin(a) + 6}
+              textAnchor="middle"
+              fontSize="18"
+              fontWeight={700}
+              fill="var(--kk-text)"
+            >
+              {n}
+            </text>
+          );
+        })}
+        {/* Aiguille des heures (courte, epaisse) puis des minutes (longue). */}
+        <line x1={C} y1={C} x2={hh.x} y2={hh.y} stroke="var(--kk-text)" strokeWidth={6} strokeLinecap="round" />
+        <line x1={C} y1={C} x2={mm.x} y2={mm.y} stroke="var(--kk-accent)" strokeWidth={4} strokeLinecap="round" />
+        <circle cx={C} cy={C} r={6} fill="var(--kk-accent)" />
+      </svg>
+      {data.digital && (
+        <div className="kk-horloge__digital" aria-hidden="true">
+          {showHours} h {String(showMinutes).padStart(2, "0")}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// --- Saisie d'une heure : deux steppers (heures + minutes). La saisie est
+// NORMALISEE en minutes (h x 60 + m) et envoyee au serveur (verif val/add). ---
+function HorlogeInput({
+  data,
+  onValue,
+}: {
+  data: HorlogeData;
+  onValue: (mins: number) => void;
+}) {
+  const step = Math.max(1, data.minuteStep || 1);
+  const hoursMax = data.hoursMax || 12;
+  const [h, setH] = useState(12);
+  const [m, setM] = useState(0);
+  const apply = (nh: number, nm: number) => {
+    setH(nh);
+    setM(nm);
+    onValue(nh * 60 + nm);
+  };
+  useEffect(() => {
+    onValue(h * 60 + m);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  const wrapH = (v: number) => ((v - 1 + hoursMax) % hoursMax) + 1; // 1..hoursMax
+  const wrapM = (v: number) => ((v % 60) + 60) % 60;
+  return (
+    <div className="kk-horloge-input" role="group" aria-label="choisir l'heure">
+      <div className="kk-horloge-input__field">
+        <button type="button" className="kk-btn kk-horloge-input__step" aria-label="heures plus" onClick={() => apply(wrapH(h + 1), m)}>+</button>
+        <div className="kk-horloge-input__val" aria-label={`${h} heures`}>{h}<span className="kk-horloge-input__unit"> h</span></div>
+        <button type="button" className="kk-btn kk-horloge-input__step" aria-label="heures moins" onClick={() => apply(wrapH(h - 1), m)}>−</button>
+      </div>
+      <div className="kk-horloge-input__field">
+        <button type="button" className="kk-btn kk-horloge-input__step" aria-label="minutes plus" onClick={() => apply(h, wrapM(m + step))}>+</button>
+        <div className="kk-horloge-input__val" aria-label={`${m} minutes`}>{String(m).padStart(2, "0")}<span className="kk-horloge-input__unit"> min</span></div>
+        <button type="button" className="kk-btn kk-horloge-input__step" aria-label="minutes moins" onClick={() => apply(h, wrapM(m - step))}>−</button>
+      </div>
+    </div>
+  );
+}
+
 type Phase = "answering" | "sure" | "correct" | "wrong";
 
 export function Session({
@@ -872,7 +982,7 @@ export function Session({
   const typeDigit = useCallback(
     (d: string) => {
       if (phase !== "answering") return;
-      if (ex && (ex.saisie === "compare" || ex.saisie === "qcm" || ex.saisie === "monnaie")) return;
+      if (ex && (ex.saisie === "compare" || ex.saisie === "qcm" || ex.saisie === "monnaie" || ex.saisie === "heure" || ex.saisie === "fraction")) return;
       if (ex && (ex.saisie === "pose" || ex.saisie === "chiffres")) {
         const dir = ex.saisie === "pose" ? -1 : 1;
         const next = digits.slice();
@@ -888,7 +998,7 @@ export function Session({
   );
   const backspace = useCallback(() => {
     if (phase !== "answering") return;
-    if (ex && (ex.saisie === "compare" || ex.saisie === "qcm")) return;
+    if (ex && (ex.saisie === "compare" || ex.saisie === "qcm" || ex.saisie === "monnaie" || ex.saisie === "heure" || ex.saisie === "fraction")) return;
     if (ex && (ex.saisie === "pose" || ex.saisie === "chiffres")) {
       const dir = ex.saisie === "pose" ? -1 : 1;
       const next = digits.slice();
@@ -913,6 +1023,11 @@ export function Session({
   // Monnaie : le total compose (centimes) devient la saisie. 0 => pas de saisie.
   const onMoneyTotal = useCallback((cents: number) => {
     setF1(cents > 0 ? String(cents) : "");
+  }, []);
+
+  // Heure : la saisie normalisee (minutes = h x 60 + m) devient f1.
+  const onHeureValue = useCallback((mins: number) => {
+    setF1(String(mins));
   }, []);
 
   useEffect(() => {
@@ -1050,6 +1165,10 @@ export function Session({
           }}
         />
 
+        {ex.horlogeData && <HorlogeView data={ex.horlogeData} />}
+        {(phase === "answering" || phase === "sure") && ex.saisie === "heure" && ex.horlogeData && (
+          <HorlogeInput key={ex.key} data={ex.horlogeData} onValue={onHeureValue} />
+        )}
         {ex.saisie === "droite" && ex.droiteData && <DroiteView data={ex.droiteData} />}
         {(phase === "answering" || phase === "sure") && ex.saisie === "pose" && ex.poseData && (
           <PoseView
@@ -1165,7 +1284,7 @@ export function Session({
                   <button className="kk-btn kk-btn--accent" onClick={doValidate}>Oui, je valide</button>
                 </div>
               </div>
-            ) : ex.saisie === "compare" || ex.saisie === "qcm" || ex.saisie === "monnaie" ? (
+            ) : ex.saisie === "compare" || ex.saisie === "qcm" || ex.saisie === "monnaie" || ex.saisie === "heure" || ex.saisie === "fraction" ? (
               <div className="kk-row" style={{ justifyContent: "center" }}>
                 <button
                   className="kk-btn kk-btn--accent kk-btn--big"
