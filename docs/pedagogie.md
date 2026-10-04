@@ -99,6 +99,41 @@ Chaque exercice porte donc un **champ « correction »**. Pour le calcul, il est
 doubles). Pour le français et les problèmes, il est **rédigé** et renvoie vers
 la leçon correspondante.
 
+## Règle de format de réponse : QCM aux niveaux faciles, réponse libre au N4
+
+Décision transverse (s'applique aux maths aujourd'hui, au français et aux autres
+matières plus tard, dès qu'elles auront des exercices à niveaux).
+
+Le **QCM** (choix parmi des options) est réservé aux **niveaux faciles**, surtout
+le **niveau 1**, pour amorcer une notion en douceur. Au **niveau le plus
+difficile (N4)**, la réponse est **saisie librement** dès que c'est pertinent :
+l'enfant écrit sa réponse plutôt que de la choisir, ce qui supprime le hasard du
+QCM et vérifie une maîtrise réelle. Cette règle prolonge la règle de placement
+(réponses à saisir plutôt qu'en QCM) et la règle de format du référentiel de
+calcul (QCM au seul niveau 1, saisie ensuite).
+
+Déclinaison concrète côté calcul :
+
+- **Fractions** : au N1, QCM pour nommer la fraction coloriée ; dès le N2, saisie
+  libre du **numérateur** et du **dénominateur** (deux cases séparées par une
+  barre, pavé tactile + clavier).
+- **Heure** : aux N1-N3, horloge à aiguilles réglée par steppers (+1/+5/+15…) ;
+  au N4, **saisie directe des chiffres** (heures et minutes au pavé).
+- **Ranger / comparer / numération / droite graduée** : saisie numérique libre
+  quand c'est faisable (ex. « écris le plus grand de ces nombres » au lieu d'un
+  QCM au N4).
+- **Unités et conversions** : saisie numérique libre (ex. « 3 m = … cm ») ;
+  le choix d'une unité par QCM reste cantonné au N1.
+
+**Exceptions gardées en QCM** (saisie libre sans objet) : **lire un nombre**,
+c'est-à-dire choisir son écriture **en lettres** (`MA.NUM.LIRE_ECRIRE`, y compris
+au N4) — taper des lettres n'aurait pas de sens pédagogique ici.
+
+Le **contrat de sécurité serveur est inchangé** : qu'elle vienne d'un QCM ou
+d'une saisie libre, la réponse envoyée reste la **valeur** (jamais un index), et
+`verif_calcul` la recalcule. Passer un exercice en saisie libre ne change donc
+pas le contrat.
+
 ## Boîte à méthodes par matière
 
 Chaque matière dispose de plusieurs méthodes, ordonnées grossièrement du plus

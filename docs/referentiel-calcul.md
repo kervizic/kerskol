@@ -11,7 +11,11 @@ par le générateur d'exercices côté client. Il complète `docs/pedagogie.md`
 - **Saisie sur pavé numérique** par défaut : l'enfant tape le résultat. La
   saisie évite le hasard du QCM et rend le placement fiable.
 - **QCM autorisé uniquement au niveau 1** d'une compétence, pour amorcer en
-  douceur ; dès le niveau 2, la réponse est saisie.
+  douceur ; dès le niveau 2, la réponse est saisie. Au **niveau 4** (le plus
+  difficile), la réponse est **toujours saisie librement** quand c'est pertinent
+  (règle « réponse libre au N4 », cf. `docs/pedagogie.md`). Les rares QCM
+  restants (lire un nombre = choisir son écriture **en lettres**) n'ont pas
+  d'équivalent en saisie libre et sont conservés.
 - Le **temps de réponse est enregistré** (`reponses.temps_ms`) mais **jamais
   affiché** à l'enfant : aucun chronomètre visible, aucune pression. Il sert au
   pilotage interne (une réponse < 1,5 s n'est pas créditée en monnaie, car trop
@@ -121,7 +125,7 @@ Quatre compétences, alignées sur le programme CE2 (Éduscol : désigner, lire,
 |------|---------|----|----|----|----|
 | `MA.NUM.LIRE_ECRIRE` | Lire / écrire ≤ 10 000 | lire (QCM) ≤ 100 | écrire (saisie) ≤ 1000 | écrire ≤ 10 000 | lire (QCM) ≤ 10 000 |
 | `MA.NUM.DECOMPOSER` | Décomposer (m, c, d, u) | c/d/u ≤ 999 | m/c/d/u ≤ 9999 | valeur d'un chiffre | nombre de dizaines/centaines |
-| `MA.NUM.COMPARER` | Comparer, encadrer, ranger | comparer ≤ 100 | comparer ≤ 10 000 | encadrer à la centaine | ranger (le plus grand) |
+| `MA.NUM.COMPARER` | Comparer, encadrer, ranger | comparer ≤ 100 | comparer ≤ 10 000 | encadrer à la centaine | ranger : **écrire** le plus grand (saisie) |
 | `MA.NUM.SUITE` | Suite, ±10/100/1000 | suivant/précédent ≤ 1000 | ±10, ±100 | droite graduée | ±1, ±10, ±100, ±1000 |
 
 ## Calculs posés (domaine `calcul_pose`, migration 0023)
@@ -205,8 +209,11 @@ numérique), `compare` (trois boutons <, =, >), `chiffres` (une case par rang),
 `pose` (colonnes alignées + résultat chiffre à chiffre de droite à gauche +
 retenues optionnelles), `qcm` (choix d'options), `droite` (droite graduée +
 lecture de la valeur pointée), `monnaie` (composer une somme en touchant billets
-et pièces ; total en centimes), `heure` (deux steppers heures + minutes,
-normalisés en minutes). Seule la saisie finale (un entier) est envoyée.
+et pièces ; total en centimes), `heure` (deux champs heures + minutes : steppers
+aux N1-N3, **saisie directe des chiffres au pavé** au N4 via
+`horlogeData.freeInput` ; normalisés en minutes), `fraction_num` (saisie libre
+d'une fraction : numérateur et dénominateur en deux cases séparées par une barre,
+envoie le code `num × 100 + den`). Seule la saisie finale (un entier) est envoyée.
 
 ## Mesures (domaine `mesures`, migration 0027)
 
@@ -218,7 +225,7 @@ existantes (aucune nouvelle opération serveur).
 
 | Code | Libellé | N1 | N2 | N3 | N4 |
 |------|---------|----|----|----|----|
-| `MA.MES.HEURE` | Lire / écrire l'heure | heures pleines et demies (horloge SVG, QCM) | quarts (saisie heures+minutes) | de 5 min en 5 min | à la minute + matin/après-midi (14 h = 2 h de l'après-midi) |
+| `MA.MES.HEURE` | Lire / écrire l'heure | heures pleines et demies (horloge SVG, QCM) | quarts (steppers heures+minutes) | de 5 min en 5 min (steppers) | à la minute + matin/après-midi (14 h = 2 h de l'après-midi), **saisie directe des chiffres au pavé** |
 | `MA.MES.DUREES` | Durées | conversions h → min (1 h = 60 min, 1 h 30 = 90 min) | conversions + « de … à … » | « de … à … » + heure d'arrivée (départ + durée) | heure d'arrivée + jours/semaines (1 semaine = 7 jours) |
 | `MA.MES.LONGUEURS` | Longueurs (mm, cm, m, km) | choisir l'unité adaptée (QCM) | conversions (1 cm = 10 mm, 1 m = 100 cm, 1 km = 1 000 m) | comparer deux longueurs | mesurer un segment sur une règle graduée (SVG) |
 | `MA.MES.MASSES_CONTENANCES` | Masses (g, kg) et contenances (L, dL, cL) | choisir l'unité (QCM) | conversions (1 kg = 1 000 g ; 1 L = 100 cL) | comparer | lire une balance / un verre gradué (SVG) |
@@ -253,7 +260,7 @@ fractions simples : demi, tiers, quart, puis n/2, n/3, n/4, n/5, n/10).
 
 | Code | Libellé | N1 | N2 | N3 | N4 |
 |------|---------|----|----|----|----|
-| `MA.FRAC.SIMPLES` | Fractions simples | nommer la fraction coloriée (QCM, figure SVG : disque/rectangle/bande) | colorier/sélectionner les parts + nommer (n/2..n/5) | comparer une fraction à 1 (y compris > 1) | fraction d'une quantité (la moitié de 12, le quart de 20) |
+| `MA.FRAC.SIMPLES` | Fractions simples | nommer la fraction coloriée (QCM, figure SVG : disque/rectangle/bande) | colorier/sélectionner les parts + nommer (**saisie libre num/dén** dès le N2, n/2..n/5) | comparer une fraction à 1 (y compris > 1) | fraction d'une quantité (la moitié de 12, le quart de 20) |
 
 Normalisations en `verif` : **nommer** → `val` (la saisie = **code** de la
 fraction `num × 100 + den`, revalidé par simple égalité) ; **colorier** → `val`
@@ -264,8 +271,10 @@ opérandes ≤ 2 000. **Non retenu faute d'appui dans le programme CE2** : les
 opérations sur fractions (somme, simplification) et l'écriture décimale, laissées
 au CM. Visuels SVG originaux (`FractionShape` : parts égales coloriées,
 `aria-label`, interactif pour le coloriage). Prérequis : `MA.CM.MOITIES`,
-`MA.TABLES.2` (fraction d'une quantité ← tables/partage). Nouveau mode de saisie
-`fraction` (coloriage tactile des parts).
+`MA.TABLES.2` (fraction d'une quantité ← tables/partage). Modes de saisie
+`fraction` (coloriage tactile des parts) et `fraction_num` (saisie libre du
+numérateur / dénominateur, dès le N2 pour « nommer » : la saisie remplace le QCM
+mais envoie le même code `num × 100 + den`).
 
 ### Ouverture progressive (prérequis, pas de placement_depart)
 
