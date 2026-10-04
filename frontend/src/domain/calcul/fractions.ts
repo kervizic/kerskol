@@ -24,9 +24,6 @@ const SHAPES: Shape[] = ["disque", "rectangle", "bande"];
 function fracCode(num: number, den: number): number {
   return num * 100 + den;
 }
-const NOM_FRAC: Record<number, string> = {
-  2: "demi", 3: "tiers", 4: "quart", 5: "cinquieme", 10: "dixieme",
-};
 const ARTICLE_DE: Record<number, string> = {
   2: "la moitie de", 3: "le tiers de", 4: "le quart de", 5: "le cinquieme de", 10: "le dixieme de",
 };
