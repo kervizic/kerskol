@@ -39,10 +39,13 @@ INSERT INTO public.seances (id, profil_id, debut) VALUES (:'sD2', :'pA', now());
 -- =========================================================================
 -- A. calc_progression EXCLUT les reponses de defi.
 -- =========================================================================
--- 10 reponses de SEANCE justes sur MA.TABLES.2 -> niveau installe.
+-- 10 reponses de SEANCE justes sur MA.TABLES.2 -> niveau installe. Datees de la
+-- VEILLE : elles n'entrent pas dans le cumul monnaie du JOUR (teste en D) mais
+-- comptent bien dans calc_progression (qui n'a pas de fenetre temporelle).
 INSERT INTO public.reponses (id, profil_id, competence, niveau, correct, repondu_le, recu_le, mode)
 SELECT gen_random_uuid(), :'pA', 'MA.TABLES.2', 2, true,
-       now() - (interval '1 minute') * (20 - g), now() - (interval '1 minute') * (20 - g), 'seance'
+       now() - interval '1 day' - (interval '1 minute') * (20 - g),
+       now() - interval '1 day' - (interval '1 minute') * (20 - g), 'seance'
   FROM generate_series(1, 10) g;
 
 SELECT _rec('A_niveau_seance_seul',
