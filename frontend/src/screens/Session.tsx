@@ -652,11 +652,181 @@ function HorlogeView({ data }: { data: HorlogeData }) {
   );
 }
 
+// --- Pave numerique autonome (saisies libres heure / fraction au niveau 4).
+// Reutilise le style .kk-pad et ecoute aussi le clavier physique (chiffres +
+// effacement) ; Entree reste gere globalement (validation). ---
+function useDigitKeyboard(onDigit: (d: string) => void, onDelete: () => void) {
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.ctrlKey || e.altKey || e.metaKey) return;
+      if (e.key >= "0" && e.key <= "9") onDigit(e.key);
+      else if (e.key === "Backspace") onDelete();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onDigit, onDelete]);
+}
+
+function MiniKeypad({ onDigit, onDelete }: { onDigit: (d: string) => void; onDelete: () => void }) {
+  return (
+    <div className="kk-pad kk-pad--mini">
+      {["1", "2", "3", "4", "5", "6", "7", "8", "9"].map((d) => (
+        <button type="button" key={d} onClick={() => onDigit(d)} aria-label={d}>{d}</button>
+      ))}
+      <span aria-hidden="true" />
+      <button type="button" onClick={() => onDigit("0")} aria-label="0">0</button>
+      <button type="button" onClick={onDelete} aria-label="Effacer"><Delete size={26} aria-hidden="true" /></button>
+    </div>
+  );
+}
+
+// Saisie LIBRE d'une heure (niveau 4) : l'enfant tape directement les chiffres
+// des heures puis des minutes au pave, sans steppers. L'horloge a aiguilles se
+// met a jour en direct. Valeur normalisee en minutes (h x 60 + m) ; tant que les
+// deux champs ne sont pas remplis, on signale -1 (pas de saisie => pas de
+// validation). Contrat serveur inchange (verif val/add).
+function HorlogeLibreInput({ data, onValue }: { data: HorlogeData; onValue: (mins: number) => void }) {
+  const hoursMax = data.hoursMax || 12;
+  const maxH = hoursMax === 24 ? 23 : 12;
+  const [hStr, setHStr] = useState("");
+  const [mStr, setMStr] = useState("");
+  const [active, setActive] = useState<"h" | "m">("h");
+
+  useEffect(() => {
+    if (hStr === "" || mStr === "") onValue(-1);
+    else onValue(Number(hStr) * 60 + Number(mStr));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hStr, mStr]);
+
+  const onDigit = useCallback((d: string) => {
+    if (active === "h") {
+      setHStr((cur) => {
+        const next = (cur === "0" ? "" : cur) + d;
+        if (next.length > 2 || Number(next) > maxH) return cur;
+        // Auto-avance vers les minutes des que les heures ne peuvent plus grandir.
+        if (next.length === 2 || Number(next + "0") > maxH) setActive("m");
+        return next;
+      });
+    } else {
+      setMStr((cur) => {
+        const next = (cur === "0" ? "" : cur) + d;
+        if (next.length > 2 || Number(next) > 59) return cur;
+        return next;
+      });
+    }
+  }, [active, maxH]);
+
+  const onDelete = useCallback(() => {
+    if (active === "m" && mStr === "") { setActive("h"); setHStr((c) => c.slice(0, -1)); return; }
+    if (active === "m") { setMStr((c) => c.slice(0, -1)); return; }
+    setHStr((c) => c.slice(0, -1));
+  }, [active, mStr]);
+
+  useDigitKeyboard(onDigit, onDelete);
+
+  const liveData: HorlogeData = {
+    showHours: hStr === "" ? startHour(hoursMax) : Number(hStr),
+    showMinutes: mStr === "" ? 0 : Number(mStr),
+    minuteStep: data.minuteStep,
+    hoursMax,
+    digital: false,
+  };
+
+  return (
+    <div className="kk-heure" role="group" aria-label="choisir l'heure">
+      <HorlogeView data={liveData} />
+      <div className="kk-heure__blocks">
+        <button
+          type="button"
+          className={`kk-heure__block kk-heure__block--input${active === "h" ? " kk-heure__block--active" : ""}`}
+          aria-label={`heures : ${hStr || "a completer"}`}
+          onClick={() => setActive("h")}
+        >
+          <div className="kk-heure__title">Heures</div>
+          <div className="kk-heure__big">{hStr || "?"}</div>
+        </button>
+        <button
+          type="button"
+          className={`kk-heure__block kk-heure__block--input${active === "m" ? " kk-heure__block--active" : ""}`}
+          aria-label={`minutes : ${mStr || "a completer"}`}
+          onClick={() => setActive("m")}
+        >
+          <div className="kk-heure__title">Minutes</div>
+          <div className="kk-heure__big">{mStr === "" ? "?" : mStr.padStart(2, "0")}</div>
+        </button>
+      </div>
+      <MiniKeypad onDigit={onDigit} onDelete={onDelete} />
+    </div>
+  );
+}
+
+// Saisie LIBRE d'une fraction (niveau >= 2 de MA.FRAC.SIMPLES, type « nommer ») :
+// deux cases (numerateur au-dessus, denominateur en dessous) separees par une
+// barre. La valeur envoyee est le CODE num*100+den (identique au QCM). Tant que
+// les deux cases ne sont pas valides (num >= 1, den >= 2) on signale -1.
+function FractionInput({ onCode }: { onCode: (code: number) => void }) {
+  const [numStr, setNumStr] = useState("");
+  const [denStr, setDenStr] = useState("");
+  const [active, setActive] = useState<"num" | "den">("num");
+
+  useEffect(() => {
+    const n = Number(numStr);
+    const d = Number(denStr);
+    if (numStr === "" || denStr === "" || n < 1 || d < 2) onCode(-1);
+    else onCode(n * 100 + d);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [numStr, denStr]);
+
+  const setter = active === "num" ? setNumStr : setDenStr;
+  const onDigit = useCallback((digit: string) => {
+    setter((cur) => {
+      const next = (cur === "0" ? "" : cur) + digit;
+      return next.length > 2 || Number(next) > 99 ? cur : next;
+    });
+  }, [setter]);
+  const onDelete = useCallback(() => setter((c) => c.slice(0, -1)), [setter]);
+
+  useDigitKeyboard(onDigit, onDelete);
+
+  return (
+    <div className="kk-fracinput" role="group" aria-label="ecrire la fraction">
+      <div className="kk-fracinput__stack">
+        <button
+          type="button"
+          className={`kk-answer__box${active === "num" ? " kk-answer__box--active" : ""}`}
+          aria-label={`numerateur : ${numStr || "a completer"}`}
+          onClick={() => setActive("num")}
+        >
+          {numStr || "?"}
+        </button>
+        <div className="kk-fracinput__bar" aria-hidden="true" />
+        <button
+          type="button"
+          className={`kk-answer__box${active === "den" ? " kk-answer__box--active" : ""}`}
+          aria-label={`denominateur : ${denStr || "a completer"}`}
+          onClick={() => setActive("den")}
+        >
+          {denStr || "?"}
+        </button>
+      </div>
+      <MiniKeypad onDigit={onDigit} onDelete={onDelete} />
+    </div>
+  );
+}
+
 // --- Saisie d'une heure : deux blocs (HEURES / MINUTES) avec boutons tactiles
 // et tour du cadran (logique pure testee dans ./horloge). L'horloge a aiguilles
 // se met a jour en direct. La saisie est NORMALISEE en minutes (h x 60 + m) et
-// envoyee au serveur (verif val/add) : contrat de valeur inchange. ---
-function HorlogeInput({
+// envoyee au serveur (verif val/add) : contrat de valeur inchange. Au niveau 4
+// (data.freeInput), on bascule sur la saisie directe des chiffres (pas de
+// steppers). ---
+function HorlogeInput({ data, onValue }: { data: HorlogeData; onValue: (mins: number) => void }) {
+  return data.freeInput
+    ? <HorlogeLibreInput data={data} onValue={onValue} />
+    : <HorlogeStepperInput data={data} onValue={onValue} />;
+}
+
+function HorlogeStepperInput({
   data,
   onValue,
 }: {
@@ -1206,7 +1376,7 @@ export function Session({
   const typeDigit = useCallback(
     (d: string) => {
       if (phase !== "answering") return;
-      if (ex && (ex.saisie === "compare" || ex.saisie === "qcm" || ex.saisie === "monnaie" || ex.saisie === "heure" || ex.saisie === "fraction")) return;
+      if (ex && (ex.saisie === "compare" || ex.saisie === "qcm" || ex.saisie === "monnaie" || ex.saisie === "heure" || ex.saisie === "fraction" || ex.saisie === "fraction_num")) return;
       if (ex && (ex.saisie === "pose" || ex.saisie === "chiffres")) {
         const dir = ex.saisie === "pose" ? -1 : 1;
         const next = digits.slice();
@@ -1222,7 +1392,7 @@ export function Session({
   );
   const backspace = useCallback(() => {
     if (phase !== "answering") return;
-    if (ex && (ex.saisie === "compare" || ex.saisie === "qcm" || ex.saisie === "monnaie" || ex.saisie === "heure" || ex.saisie === "fraction")) return;
+    if (ex && (ex.saisie === "compare" || ex.saisie === "qcm" || ex.saisie === "monnaie" || ex.saisie === "heure" || ex.saisie === "fraction" || ex.saisie === "fraction_num")) return;
     if (ex && (ex.saisie === "pose" || ex.saisie === "chiffres")) {
       const dir = ex.saisie === "pose" ? -1 : 1;
       const next = digits.slice();
@@ -1249,14 +1419,20 @@ export function Session({
     setF1(cents > 0 ? String(cents) : "");
   }, []);
 
-  // Heure : la saisie normalisee (minutes = h x 60 + m) devient f1.
+  // Heure : la saisie normalisee (minutes = h x 60 + m) devient f1. La saisie
+  // libre (niveau 4) signale -1 tant qu'elle est incomplete => pas de validation.
   const onHeureValue = useCallback((mins: number) => {
-    setF1(String(mins));
+    setF1(mins >= 0 ? String(mins) : "");
   }, []);
 
-  // Fraction : le nombre de parts coloriees devient f1 (0 => pas de saisie).
+  // Fraction (coloriage) : le nombre de parts coloriees devient f1 (0 => rien).
   const onFractionValue = useCallback((n: number) => {
     setF1(n > 0 ? String(n) : "");
+  }, []);
+
+  // Fraction (saisie libre num/den) : le code num*100+den devient f1 ; -1 => rien.
+  const onFractionCode = useCallback((code: number) => {
+    setF1(code > 0 ? String(code) : "");
   }, []);
 
   useEffect(() => {
@@ -1401,6 +1577,9 @@ export function Session({
         {(phase === "answering" || phase === "sure") && ex.saisie === "fraction" && ex.fractionData && (
           <FractionColor key={ex.key} data={ex.fractionData} onCount={onFractionValue} />
         )}
+        {(phase === "answering" || phase === "sure") && ex.saisie === "fraction_num" && (
+          <FractionInput key={ex.key} onCode={onFractionCode} />
+        )}
         {(phase === "answering" || phase === "sure") && ex.saisie === "heure" && ex.horlogeData && (
           <HorlogeInput key={ex.key} data={ex.horlogeData} onValue={onHeureValue} />
         )}
@@ -1524,7 +1703,7 @@ export function Session({
                   <button className="kk-btn kk-btn--accent" onClick={doValidate}>Oui, je valide</button>
                 </div>
               </div>
-            ) : ex.saisie === "compare" || ex.saisie === "qcm" || ex.saisie === "monnaie" || ex.saisie === "heure" || ex.saisie === "fraction" ? (
+            ) : ex.saisie === "compare" || ex.saisie === "qcm" || ex.saisie === "monnaie" || ex.saisie === "heure" || ex.saisie === "fraction" || ex.saisie === "fraction_num" ? (
               <div className="kk-row" style={{ justifyContent: "center" }}>
                 <button
                   className="kk-btn kk-btn--accent kk-btn--big"

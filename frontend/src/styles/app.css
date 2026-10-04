@@ -384,3 +384,16 @@ p.kk-lead { color: var(--kk-text-2); max-width: 52ch; }
 @media (prefers-reduced-motion: reduce) {
   .kk-heure__btn { transition: none; }
 }
+
+/* Saisie LIBRE au niveau 4 : blocs heures/minutes cliquables (selection du
+   champ actif) + pave numerique compact. Meme look que les steppers. */
+.kk-heure__block--input { cursor: pointer; }
+.kk-heure__block--active { border-color: var(--kk-accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--kk-accent) 25%, transparent); }
+.kk-pad--mini { max-width: 300px; margin-top: 4px; }
+
+/* Saisie LIBRE d'une fraction : numerateur au-dessus, barre, denominateur en
+   dessous, puis pave numerique. */
+.kk-fracinput { display: flex; flex-direction: column; align-items: center; gap: 14px; margin: 14px 0; }
+.kk-fracinput__stack { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.kk-fracinput__bar { width: 92px; height: 4px; border-radius: 2px; background: var(--kk-text); }
+.kk-fracinput .kk-answer__box { min-width: 88px; text-align: center; }
