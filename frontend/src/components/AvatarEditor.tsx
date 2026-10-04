@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Shuffle, Ban } from "lucide-react";
+import { Shuffle, Ban, ChevronDown, ChevronRight } from "lucide-react";
 import { AvatarView } from "../domain/avatars";
 import {
   DICEBEAR_STYLES,
@@ -128,7 +128,7 @@ function ControlSection({
         style={{ width: "100%", background: "none", border: "none", cursor: "pointer", justifyContent: "space-between", padding: 0 }}
       >
         <span style={{ fontWeight: 700 }}>{control.label}</span>
-        <span aria-hidden="true">{expanded ? "▾" : "▸"}</span>
+        {expanded ? <ChevronDown size={20} aria-hidden="true" /> : <ChevronRight size={20} aria-hidden="true" />}
       </button>
 
       {expanded && control.kind === "color" && (

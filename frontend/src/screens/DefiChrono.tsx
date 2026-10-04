@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Check, Pause, Play, Timer, X } from "lucide-react";
+import { Check, Delete, Pause, Play, Timer, X } from "lucide-react";
 import { Spinner } from "../components/ui";
 import { ThemeToggle } from "../components/ThemeToggle";
 import { AvatarView } from "../domain/avatars";
@@ -440,7 +440,7 @@ export function DefiChrono({
                   {["1", "2", "3", "4", "5", "6", "7", "8", "9"].map((d) => (
                     <button key={d} onClick={() => setVal((v) => (v.length >= 6 ? v : v + d))} aria-label={d}>{d}</button>
                   ))}
-                  <button onClick={() => setVal((v) => v.slice(0, -1))} aria-label="Effacer" style={{ fontSize: "1.5rem" }}>⌫</button>
+                  <button onClick={() => setVal((v) => v.slice(0, -1))} aria-label="Effacer"><Delete size={26} aria-hidden="true" /></button>
                   <button onClick={() => setVal((v) => (v.length >= 6 ? v : v + "0"))} aria-label="0">0</button>
                   <button
                     onClick={submitClavier}

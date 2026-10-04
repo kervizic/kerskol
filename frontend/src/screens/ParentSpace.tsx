@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import { ArrowLeft } from "lucide-react";
 import { AvatarView } from "../domain/avatars";
 import { Feedback, Spinner } from "../components/ui";
 import {
@@ -425,7 +426,7 @@ export function ParentSpace({
       <div className="kk-container">
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 8 }}>
           <h1>Espace parent</h1>
-          <button className="kk-link" onClick={onExit}>← Qui joue ?</button>
+          <button className="kk-link" onClick={onExit} style={{ display: "inline-flex", alignItems: "center", gap: 6 }}><ArrowLeft size={18} aria-hidden="true" /> Qui joue ?</button>
         </div>
 
         {profils.map((p) => (

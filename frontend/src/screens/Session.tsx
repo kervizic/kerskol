@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Check, Grid3x3, Info, Keyboard, RotateCcw } from "lucide-react";
+import { Check, Delete, Grid3x3, Info, Keyboard, RotateCcw } from "lucide-react";
 import { Spinner } from "../components/ui";
 import { ThemeToggle } from "../components/ThemeToggle";
 import {
@@ -1539,7 +1539,7 @@ export function Session({
                 {["1", "2", "3", "4", "5", "6", "7", "8", "9"].map((d) => (
                   <button key={d} onClick={() => typeDigit(d)} aria-label={d}>{d}</button>
                 ))}
-                <button onClick={backspace} aria-label="Effacer" style={{ fontSize: "1.5rem" }}>⌫</button>
+                <button onClick={backspace} aria-label="Effacer"><Delete size={26} aria-hidden="true" /></button>
                 <button onClick={() => typeDigit("0")} aria-label="0">0</button>
                 <button
                   onClick={onValiderClick}
