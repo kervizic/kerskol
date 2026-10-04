@@ -54,6 +54,7 @@ import {
   type EngineState,
 } from "../domain/calcul/engine";
 import { wrapHour, wrapMinute, startHour, START_MINUTE } from "../domain/calcul/horloge";
+import { moneyAsset } from "../domain/calcul/moneyAssets";
 
 function uuid(): string {
   try {
@@ -557,7 +558,8 @@ function MoneyCompose({
       </div>
       <div className="kk-money-units">
         {data.units.map((u, i) => {
-          const isBill = u >= 500;
+          const asset = moneyAsset(u);
+          const isBill = asset ? asset.bill : u >= 500;
           return (
             <button
               key={i}
@@ -566,7 +568,17 @@ function MoneyCompose({
               onClick={() => apply([...picked, u])}
               aria-label={`Ajouter ${euroFmt(u)}`}
             >
-              {euroFmt(u)}
+              {asset ? (
+                <img
+                  className="kk-money-unit__img"
+                  src={asset.src}
+                  alt={asset.alt}
+                  width={asset.width}
+                  style={{ width: asset.width }}
+                  draggable={false}
+                />
+              ) : null}
+              <span className="kk-money-unit__label" aria-hidden="true">{euroFmt(u)}</span>
             </button>
           );
         })}

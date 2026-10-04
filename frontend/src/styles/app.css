@@ -311,13 +311,31 @@ p.kk-lead { color: var(--kk-text-2); max-width: 52ch; }
 /* ---- Monnaie : composer une somme (billets et pieces) ---- */
 .kk-money-compose { display: flex; flex-direction: column; gap: 12px; align-items: center; margin: 10px 0; width: 100%; }
 .kk-money-total { font-size: 1.2rem; color: var(--kk-text); }
-.kk-money-units { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; max-width: 460px; }
+.kk-money-units { display: flex; flex-wrap: wrap; gap: 12px 14px; justify-content: center; align-items: center; max-width: 520px; }
+/* Bouton = vraie image de billet / piece. Fond transparent pour laisser lire
+   l'objet ; cible tactile large ; etiquette de valeur sous l'image (lisibilite
+   + accessibilite). La taille de l'image est fixee en ligne (realisme relatif). */
 .kk-money-unit {
-  min-width: 68px; min-height: 48px; padding: 6px 12px; font-size: 1.05rem; font-weight: 700;
-  cursor: pointer; font-family: inherit; color: var(--kk-text); border: 2px solid var(--kk-accent);
+  display: inline-flex; flex-direction: column; align-items: center; gap: 2px;
+  padding: 6px; border: 2px solid transparent; border-radius: 12px; background: none;
+  cursor: pointer; font-family: inherit; color: var(--kk-text);
+  -webkit-tap-highlight-color: transparent;
 }
-.kk-money-unit--bill { border-radius: 8px; background: color-mix(in srgb, var(--kk-accent) 16%, transparent); }
-.kk-money-unit--coin { border-radius: 999px; background: color-mix(in srgb, var(--kk-accent) 8%, transparent); }
+.kk-money-unit:hover, .kk-money-unit:focus-visible {
+  border-color: var(--kk-accent); background: color-mix(in srgb, var(--kk-accent) 10%, transparent);
+  outline: none;
+}
+.kk-money-unit:active { transform: scale(0.96); }
+.kk-money-unit__img { display: block; height: auto; object-fit: contain; pointer-events: none; }
+.kk-money-unit--bill .kk-money-unit__img {
+  border-radius: 4px; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
+}
+/* Pieces : photo recadree carre, affichee en disque (cover) pour un rendu net. */
+.kk-money-unit--coin .kk-money-unit__img {
+  aspect-ratio: 1 / 1; height: auto; object-fit: cover; object-position: center;
+  border-radius: 50%; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.22);
+}
+.kk-money-unit__label { font-size: 0.82rem; font-weight: 700; color: var(--kk-text-2); }
 
 /* ---- Defi chrono ---- */
 .kk-defi-cta {
