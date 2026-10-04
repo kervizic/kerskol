@@ -112,22 +112,33 @@ QCM et vérifie une maîtrise réelle. Cette règle prolonge la règle de placem
 (réponses à saisir plutôt qu'en QCM) et la règle de format du référentiel de
 calcul (QCM au seul niveau 1, saisie ensuite).
 
+**Ce qui compte comme réponse libre.** Une saisie à **boutons** (steppers,
+touches) ou au **pavé** est une **réponse libre** : l'enfant **produit** sa
+réponse. Seul le **choix parmi des propositions affichées** est un **QCM**. Régler
+une horloge avec des boutons, composer une somme en touchant des pièces, écrire
+un nombre en lettres au clavier : tout cela est de la réponse libre, pas du QCM.
+
 Déclinaison concrète côté calcul :
 
 - **Fractions** : au N1, QCM pour nommer la fraction coloriée ; dès le N2, saisie
   libre du **numérateur** et du **dénominateur** (deux cases séparées par une
   barre, pavé tactile + clavier).
-- **Heure** : aux N1-N3, horloge à aiguilles réglée par steppers (+1/+5/+15…) ;
-  au N4, **saisie directe des chiffres** (heures et minutes au pavé).
+- **Heure** : horloge à aiguilles réglée par **boutons** (+1/+3 h, +1/+5/+15 min,
+  icônes de remise à zéro) à **tous les niveaux**. Ces boutons sont une réponse
+  libre ; au N4 (pas d'une minute) ils couvrent n'importe quelle minute. Il n'y a
+  **pas** de pavé de chiffres pour l'heure.
 - **Ranger / comparer / numération / droite graduée** : saisie numérique libre
   quand c'est faisable (ex. « écris le plus grand de ces nombres » au lieu d'un
   QCM au N4).
 - **Unités et conversions** : saisie numérique libre (ex. « 3 m = … cm ») ;
   le choix d'une unité par QCM reste cantonné au N1.
-
-**Exceptions gardées en QCM** (saisie libre sans objet) : **lire un nombre**,
-c'est-à-dire choisir son écriture **en lettres** (`MA.NUM.LIRE_ECRIRE`, y compris
-au N4) — taper des lettres n'aurait pas de sens pédagogique ici.
+- **Lire / écrire un nombre** (`MA.NUM.LIRE_ECRIRE`) : au N1, QCM pour **lire** un
+  nombre (choisir son écriture en lettres) ; aux N2-N3, écrire le nombre en
+  **chiffres** ; au **N4**, l'enfant **écrit le nombre en toutes lettres** dans un
+  **champ texte libre** (clavier de l'appareil, correcteur désactivé). Le serveur
+  accepte l'orthographe **traditionnelle** et **rectifiée 1990**, et un
+  **diagnostic déterministe** nomme la faute (accord vingt/cent/mille, trait
+  d'union, « et un », orthographe, mauvais nombre) pour une correction ciblée.
 
 Le **contrat de sécurité serveur est inchangé** : qu'elle vienne d'un QCM ou
 d'une saisie libre, la réponse envoyée reste la **valeur** (jamais un index), et

@@ -13,9 +13,11 @@ par le générateur d'exercices côté client. Il complète `docs/pedagogie.md`
 - **QCM autorisé uniquement au niveau 1** d'une compétence, pour amorcer en
   douceur ; dès le niveau 2, la réponse est saisie. Au **niveau 4** (le plus
   difficile), la réponse est **toujours saisie librement** quand c'est pertinent
-  (règle « réponse libre au N4 », cf. `docs/pedagogie.md`). Les rares QCM
-  restants (lire un nombre = choisir son écriture **en lettres**) n'ont pas
-  d'équivalent en saisie libre et sont conservés.
+  (règle « réponse libre au N4 », cf. `docs/pedagogie.md`). Une saisie à
+  **boutons** (steppers, touches) ou au **pavé** compte comme réponse libre ;
+  seul le **choix parmi des propositions** est un QCM. Le QCM « lire un nombre »
+  (choisir son écriture en lettres) reste au **N1** ; au **N4**, l'enfant **écrit
+  le nombre en toutes lettres** dans un champ texte libre (op `lettres`).
 - Le **temps de réponse est enregistré** (`reponses.temps_ms`) mais **jamais
   affiché** à l'enfant : aucun chronomètre visible, aucune pression. Il sert au
   pilotage interne (une réponse < 1,5 s n'est pas créditée en monnaie, car trop
@@ -123,7 +125,7 @@ Quatre compétences, alignées sur le programme CE2 (Éduscol : désigner, lire,
 
 | Code | Libellé | N1 | N2 | N3 | N4 |
 |------|---------|----|----|----|----|
-| `MA.NUM.LIRE_ECRIRE` | Lire / écrire ≤ 10 000 | lire (QCM) ≤ 100 | écrire (saisie) ≤ 1000 | écrire ≤ 10 000 | lire (QCM) ≤ 10 000 |
+| `MA.NUM.LIRE_ECRIRE` | Lire / écrire ≤ 10 000 | lire (QCM) ≤ 100 | écrire en chiffres (saisie) ≤ 1000 | écrire en chiffres ≤ 10 000 | **écrire en toutes lettres** (saisie texte libre) ≤ 10 000 |
 | `MA.NUM.DECOMPOSER` | Décomposer (m, c, d, u) | c/d/u ≤ 999 | m/c/d/u ≤ 9999 | valeur d'un chiffre | nombre de dizaines/centaines |
 | `MA.NUM.COMPARER` | Comparer, encadrer, ranger | comparer ≤ 100 | comparer ≤ 10 000 | encadrer à la centaine | ranger : **écrire** le plus grand (saisie) |
 | `MA.NUM.SUITE` | Suite, ±10/100/1000 | suivant/précédent ≤ 1000 | ±10, ±100 | droite graduée | ±1, ±10, ±100, ±1000 |
@@ -209,9 +211,10 @@ numérique), `compare` (trois boutons <, =, >), `chiffres` (une case par rang),
 `pose` (colonnes alignées + résultat chiffre à chiffre de droite à gauche +
 retenues optionnelles), `qcm` (choix d'options), `droite` (droite graduée +
 lecture de la valeur pointée), `monnaie` (composer une somme en touchant billets
-et pièces ; total en centimes), `heure` (deux champs heures + minutes : steppers
-aux N1-N3, **saisie directe des chiffres au pavé** au N4 via
-`horlogeData.freeInput` ; normalisés en minutes), `fraction_num` (saisie libre
+et pièces ; total en centimes), `heure` (deux champs heures + minutes réglés par
+**boutons** +1/+3 h, +1/+5/+15 min et remise à zéro à **tous les niveaux** ;
+normalisés en minutes), `lettres` (champ **texte libre** : écrire un nombre en
+toutes lettres, vérifié par le serveur `verif_lettres` trad + 1990), `fraction_num` (saisie libre
 d'une fraction : numérateur et dénominateur en deux cases séparées par une barre,
 envoie le code `num × 100 + den`). Seule la saisie finale (un entier) est envoyée.
 
@@ -225,7 +228,7 @@ existantes (aucune nouvelle opération serveur).
 
 | Code | Libellé | N1 | N2 | N3 | N4 |
 |------|---------|----|----|----|----|
-| `MA.MES.HEURE` | Lire / écrire l'heure | heures pleines et demies (horloge SVG, QCM) | quarts (steppers heures+minutes) | de 5 min en 5 min (steppers) | à la minute + matin/après-midi (14 h = 2 h de l'après-midi), **saisie directe des chiffres au pavé** |
+| `MA.MES.HEURE` | Lire / écrire l'heure | heures pleines et demies (horloge SVG, QCM) | quarts (boutons heures+minutes) | de 5 min en 5 min (boutons) | à la minute + matin/après-midi (14 h = 2 h de l'après-midi), **boutons** (+1/+5/+15 min) |
 | `MA.MES.DUREES` | Durées | conversions h → min (1 h = 60 min, 1 h 30 = 90 min) | conversions + « de … à … » | « de … à … » + heure d'arrivée (départ + durée) | heure d'arrivée + jours/semaines (1 semaine = 7 jours) |
 | `MA.MES.LONGUEURS` | Longueurs (mm, cm, m, km) | choisir l'unité adaptée (QCM) | conversions (1 cm = 10 mm, 1 m = 100 cm, 1 km = 1 000 m) | comparer deux longueurs | mesurer un segment sur une règle graduée (SVG) |
 | `MA.MES.MASSES_CONTENANCES` | Masses (g, kg) et contenances (L, dL, cL) | choisir l'unité (QCM) | conversions (1 kg = 1 000 g ; 1 L = 100 cL) | comparer | lire une balance / un verre gradué (SVG) |
