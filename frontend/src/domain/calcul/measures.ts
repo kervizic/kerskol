@@ -264,7 +264,7 @@ function buildLongueur(src: ExCalcul, rng: Rng, base: Base): GeneratedExercise {
       prompt: `Pour mesurer ${o.obj}, quelle unite choisis-tu ?`,
       answer: code,
       verif: { op: "val", a: code, b: 0 },
-      correction: `${o.obj.charAt(0).toUpperCase()}${o.obj.slice(1)} se mesure en ${o.u}.`,
+      correction: `${o.obj.charAt(0).toUpperCase()}${o.obj.slice(1)} se mesure en ${o.u}. Rappel : 1 cm = 10 mm, 1 m = 100 cm, 1 km = 1000 m.`,
     };
   }
 
@@ -368,7 +368,7 @@ function buildMasseContenance(src: ExCalcul, rng: Rng, base: Base): GeneratedExe
       prompt: `Pour mesurer ${o.obj}, quelle unite choisis-tu ?`,
       answer: code,
       verif: { op: "val", a: code, b: 0 },
-      correction: `On exprime ${o.obj} en ${o.u}.`,
+      correction: `On exprime ${o.obj} en ${o.u}. Rappel : 1 kg = 1000 g ; 1 L = 10 dL = 100 cL.`,
     };
   }
 
