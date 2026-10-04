@@ -173,4 +173,11 @@ describe("diagnostiquer : saisie tapee -> type de faute", () => {
   it("normalisation tolere la casse pour le diagnostic de justesse", () => {
     expect(diagnostiquer(21, "VINGT ET UN").juste).toBe(true);
   });
+  it("message INCONNU : encourageant, avec la bonne ecriture", () => {
+    const d = diagnostiquer(42, "beaucoup");
+    expect(d.fautes[0].type).toBe("INCONNU");
+    expect(d.fautes[0].message).toBe(
+      "Presque ! Regarde bien : on écrit « quarante-deux ».",
+    );
+  });
 });

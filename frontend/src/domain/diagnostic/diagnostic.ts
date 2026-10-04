@@ -158,7 +158,7 @@ function msgMauvaisNombre(rang: string, bonne: string): string {
   return `Ce n'est pas le bon nombre : regarde ${rang}. On écrit « ${bonne} ».`;
 }
 function msgInconnu(bonne: string): string {
-  return `Ce n'est pas ça. On écrit « ${bonne} ».`;
+  return `Presque ! Regarde bien : on écrit « ${bonne} ».`;
 }
 
 // --- Detecteurs de fautes « cosmetiques » (memes mots-nombres) ----------------
@@ -281,5 +281,5 @@ export const MESSAGES_CATALOGUE: Record<TypeFaute | "JUSTE", string> = {
   ET_UN: "On dit vingt et un, trente et un… pas vingt-un. On met « et » devant un et onze.",
   ORTHO_MOT: "Ce mot s'écrit « {mot} ». Regarde bien les lettres.",
   MAUVAIS_NOMBRE: "Ce n'est pas le bon nombre : regarde {rang}. On écrit « {nombre} ».",
-  INCONNU: "Ce n'est pas ça. On écrit « {nombre} ».",
+  INCONNU: "Presque ! Regarde bien : on écrit « {nombre} ».",
 };

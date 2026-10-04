@@ -64,6 +64,6 @@ rang qui diffère (les milliers / les centaines / les dizaines / les unités).
 
 ## INCONNU - repli
 
-- « Ce n'est pas ça. On écrit « {nombre} ». »
+- « Presque ! Regarde bien : on écrit « {nombre} ». »
 - Utilisé quand la saisie ne correspond à aucune règle (mots inconnus, texte vide,
   mots en trop). Ces cas sont aussi enregistrés pour enrichir les règles.
