@@ -378,7 +378,9 @@ p.kk-lead { color: var(--kk-text-2); max-width: 52ch; }
 .kk-heure__btn {
   min-width: 56px; min-height: 56px; font-size: 1.4rem; padding: 10px 12px;
 }
-.kk-heure__reset { min-height: 48px; }
+/* Icone de remise a zero propre a chaque bloc (sans texte, currentColor). */
+.kk-heure__btn--reset { color: var(--kk-text-2); }
+.kk-heure__btn--reset:hover, .kk-heure__btn--reset:focus-visible { color: var(--kk-accent); border-color: var(--kk-accent); }
 @media (prefers-reduced-motion: reduce) {
-  .kk-heure__btn, .kk-heure__reset { transition: none; }
+  .kk-heure__btn { transition: none; }
 }

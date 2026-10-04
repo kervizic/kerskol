@@ -677,10 +677,11 @@ function HorlogeInput({
   }, []);
   const addH = (d: number) => apply(wrapHour(h + d, hoursMax), m);
   const addM = (d: number) => apply(h, wrapMinute(m + d));
-  const reset = () => apply(startHour(hoursMax), START_MINUTE);
+  const resetH = () => apply(startHour(hoursMax), m);
+  const resetM = () => apply(h, START_MINUTE);
 
-  // Fleches haut/bas = +/- 1 sur le bloc focalise ; Tab change de bloc ;
-  // Entree est gere globalement (validation).
+  // Clavier (pratique, non affiche) : fleche haut = +1 sur le bloc focalise,
+  // fleche bas = -1 ; Tab change de bloc ; Entree est gere globalement.
   const hourKey = (e: React.KeyboardEvent) => {
     if (e.key === "ArrowUp") { e.preventDefault(); addH(1); }
     else if (e.key === "ArrowDown") { e.preventDefault(); addH(-1); }
@@ -709,9 +710,11 @@ function HorlogeInput({
           <div className="kk-heure__title">Heures</div>
           <div className="kk-heure__big">{h}</div>
           <div className="kk-heure__btns">
-            <button type="button" className="kk-btn kk-heure__btn" aria-label="Enlever 1 heure" onClick={() => addH(-1)}>−1</button>
             <button type="button" className="kk-btn kk-btn--accent kk-heure__btn" aria-label="Ajouter 1 heure" onClick={() => addH(1)}>+1</button>
             <button type="button" className="kk-btn kk-btn--accent kk-heure__btn" aria-label="Ajouter 3 heures" onClick={() => addH(3)}>+3</button>
+            <button type="button" className="kk-btn kk-heure__btn kk-heure__btn--reset" aria-label="Remettre les heures a zero" onClick={resetH}>
+              <RotateCcw size={22} aria-hidden="true" />
+            </button>
           </div>
         </div>
         <div
@@ -724,16 +727,15 @@ function HorlogeInput({
           <div className="kk-heure__title">Minutes</div>
           <div className="kk-heure__big">{String(m).padStart(2, "0")}</div>
           <div className="kk-heure__btns">
-            <button type="button" className="kk-btn kk-heure__btn" aria-label="Enlever 1 minute" onClick={() => addM(-1)}>−1</button>
             <button type="button" className="kk-btn kk-btn--accent kk-heure__btn" aria-label="Ajouter 1 minute" onClick={() => addM(1)}>+1</button>
             <button type="button" className="kk-btn kk-btn--accent kk-heure__btn" aria-label="Ajouter 5 minutes" onClick={() => addM(5)}>+5</button>
             <button type="button" className="kk-btn kk-btn--accent kk-heure__btn" aria-label="Ajouter 15 minutes" onClick={() => addM(15)}>+15</button>
+            <button type="button" className="kk-btn kk-heure__btn kk-heure__btn--reset" aria-label="Remettre les minutes a zero" onClick={resetM}>
+              <RotateCcw size={22} aria-hidden="true" />
+            </button>
           </div>
         </div>
       </div>
-      <button type="button" className="kk-btn kk-heure__reset" aria-label="Remettre a zero" onClick={reset}>
-        <RotateCcw size={18} aria-hidden="true" /> Remettre a zero
-      </button>
     </div>
   );
 }
