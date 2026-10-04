@@ -35,6 +35,8 @@ import type {
   PoseData,
   ChiffresData,
   QcmOption,
+  MoneyData,
+  BarModel,
 } from "../domain/calcul/generator";
 import {
   answerCurrent,
@@ -439,6 +441,143 @@ function EquationView({
   );
 }
 
+// --- Somme d'argent (centimes -> « 12 € » ou « 12 € 50 ») ---
+function euroFmt(cents: number): string {
+  const e = Math.floor(cents / 100);
+  const c = cents % 100;
+  const es = String(e).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  return c === 0 ? `${es} €` : `${es} € ${String(c).padStart(2, "0")}`;
+}
+
+// --- Schema en barres (modele tout/parties ou comparaison). Aide optionnelle
+// (reveal=false : l'inconnue reste « ? ») et correction (reveal=true). ---
+function BarModelView({ model, reveal }: { model: BarModel; reveal: boolean }) {
+  const W = 480;
+  const barH = 34;
+  const gap = 10;
+  const pad = 6;
+  const label = (c: { label: string; value: number; unknown: boolean }) =>
+    c.unknown && !reveal ? "?" : c.unknown ? String(c.value) : c.label;
+
+  if (model.variant === "comparaison") {
+    const grand = model.parts[0];
+    const petit = model.parts[1];
+    const diff = model.diff!;
+    const unit = (W - pad) / Math.max(1, grand.units);
+    const gw = Math.max(40, grand.units * unit);
+    const pw = Math.max(30, petit.units * unit);
+    const dw = Math.max(24, diff.units * unit);
+    const seg = (x: number, w: number, c: typeof grand, fill: string) => (
+      <g>
+        <rect x={x} y={0} width={w} height={barH} rx={6} fill={fill} stroke="var(--kk-border)" />
+        <text x={x + w / 2} y={barH / 2 + 5} textAnchor="middle" fontSize="15" fontWeight={700} fill="var(--kk-on-accent)">
+          {label(c)}
+        </text>
+      </g>
+    );
+    const H = barH * 2 + gap + 22;
+    return (
+      <div className="kk-support kk-barres">
+        <svg width="100%" height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label="schema en barres (comparaison)">
+          <g transform={`translate(${pad},0)`}>{seg(0, gw, grand, "var(--kk-accent)")}</g>
+          <g transform={`translate(${pad},${barH + gap})`}>
+            {seg(0, pw, petit, "var(--kk-accent)")}
+            <g transform={`translate(${pw},0)`}>
+              <rect x={0} y={0} width={dw} height={barH} rx={6} fill="transparent" stroke="var(--kk-accent)" strokeDasharray="4 3" />
+              <text x={dw / 2} y={barH / 2 + 5} textAnchor="middle" fontSize="15" fontWeight={700} fill="var(--kk-accent)">
+                {label(diff)}
+              </text>
+            </g>
+          </g>
+        </svg>
+      </div>
+    );
+  }
+
+  // tout_parties : barre du tout (haut) + parties (bas), memes largeurs.
+  const whole = model.whole!;
+  const partsTotal = model.parts.reduce((s, p) => s + p.units, 0) || 1;
+  const unit = (W - pad) / Math.max(whole.units, partsTotal);
+  const ww = Math.max(60, whole.units * unit);
+  const H = barH * 2 + gap + 8;
+  let x = 0;
+  return (
+    <div className="kk-support kk-barres">
+      <svg width="100%" height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label="schema en barres (tout et parties)">
+        <g transform={`translate(${pad},0)`}>
+          <rect x={0} y={0} width={ww} height={barH} rx={6} fill="var(--kk-accent)" stroke="var(--kk-border)" />
+          <text x={ww / 2} y={barH / 2 + 5} textAnchor="middle" fontSize="15" fontWeight={700} fill="var(--kk-on-accent)">
+            {label(whole)}
+          </text>
+        </g>
+        <g transform={`translate(${pad},${barH + gap})`}>
+          {model.parts.map((pt, i) => {
+            const w = Math.max(28, pt.units * unit);
+            const el = (
+              <g key={i} transform={`translate(${x},0)`}>
+                <rect x={0} y={0} width={w} height={barH} rx={6} fill="var(--kk-accent-soft, var(--kk-border))" stroke="var(--kk-accent)" />
+                <text x={w / 2} y={barH / 2 + 5} textAnchor="middle" fontSize="15" fontWeight={700} fill="var(--kk-text)">
+                  {label(pt)}
+                </text>
+              </g>
+            );
+            x += w + 2;
+            return el;
+          })}
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+// --- Monnaie : composer une somme en touchant billets et pieces. Seul le total
+// (centimes) est envoye au serveur. Clavier accessible (boutons natifs). ---
+function MoneyCompose({
+  data,
+  onTotal,
+}: {
+  data: MoneyData;
+  onTotal: (cents: number) => void;
+}) {
+  const [picked, setPicked] = useState<number[]>([]);
+  const total = picked.reduce((s, u) => s + u, 0);
+  const apply = (next: number[]) => {
+    setPicked(next);
+    onTotal(next.reduce((s, u) => s + u, 0));
+  };
+  return (
+    <div className="kk-money-compose">
+      <div className="kk-money-total" aria-live="polite">
+        Total : <strong>{euroFmt(total)}</strong>
+      </div>
+      <div className="kk-money-units">
+        {data.units.map((u, i) => {
+          const isBill = u >= 500;
+          return (
+            <button
+              key={i}
+              type="button"
+              className={`kk-money-unit${isBill ? " kk-money-unit--bill" : " kk-money-unit--coin"}`}
+              onClick={() => apply([...picked, u])}
+              aria-label={`Ajouter ${euroFmt(u)}`}
+            >
+              {euroFmt(u)}
+            </button>
+          );
+        })}
+      </div>
+      <div className="kk-row" style={{ justifyContent: "center" }}>
+        <button type="button" className="kk-btn" disabled={picked.length === 0} onClick={() => apply(picked.slice(0, -1))}>
+          Retirer
+        </button>
+        <button type="button" className="kk-btn" disabled={picked.length === 0} onClick={() => apply([])}>
+          Tout effacer
+        </button>
+      </div>
+    </div>
+  );
+}
+
 type Phase = "answering" | "sure" | "correct" | "wrong";
 
 export function Session({
@@ -464,6 +603,7 @@ export function Session({
   const [choice, setChoice] = useState<number | null>(null);
   const [digits, setDigits] = useState<string[]>([]);
   const [cell, setCell] = useState(0);
+  const [showSchema, setShowSchema] = useState(false);
   const [monnaie, setMonnaie] = useState(profil.monnaie);
   const [lastGain, setLastGain] = useState(0);
   const [done, setDone] = useState(false);
@@ -502,6 +642,7 @@ export function Session({
           getProgressionDetail(profil.id),
           getExercicesCalcul(),
         ]);
+        const ctx = { hero: profil.surnom, univers: profil.univers };
         const plan = composeSession({
           competences: referentiel.competences,
           prerequis: referentiel.prerequis,
@@ -510,6 +651,7 @@ export function Session({
           seed: (Date.now() ^ 0x9e3779b9) >>> 0,
           now: Date.now(),
           classe: profil.classe,
+          ctx,
         });
         placement.current = {};
         for (const p of progress_) placement.current[p.competence] = p.placement_termine;
@@ -517,7 +659,7 @@ export function Session({
           if (alive) setEmpty(true);
           return;
         }
-        const eng = createEngine(plan, (Date.now() ^ 0x85ebca6b) >>> 0);
+        const eng = createEngine(plan, (Date.now() ^ 0x85ebca6b) >>> 0, ctx);
         seanceId.current = uuid();
         startedAt.current = Date.now();
         questionStart.current = Date.now();
@@ -550,6 +692,7 @@ export function Session({
     setF2("");
     setActive(1);
     setChoice(null);
+    setShowSchema(false);
     if (ex?.saisie === "pose" && ex.poseData) {
       setDigits(Array(ex.poseData.answerDigits).fill(""));
       setCell(ex.poseData.answerDigits - 1); // saisie de DROITE a GAUCHE
@@ -609,6 +752,8 @@ export function Session({
         op: ex.verif.op,
         a: ex.verif.a,
         b: ex.verif.b,
+        op2: ex.verif.op2 ?? null,
+        c: ex.verif.c ?? null,
         reponse: submitted.current.reponse,
         reste: submitted.current.reste,
         fields: ex.fields,
@@ -727,7 +872,7 @@ export function Session({
   const typeDigit = useCallback(
     (d: string) => {
       if (phase !== "answering") return;
-      if (ex && (ex.saisie === "compare" || ex.saisie === "qcm")) return;
+      if (ex && (ex.saisie === "compare" || ex.saisie === "qcm" || ex.saisie === "monnaie")) return;
       if (ex && (ex.saisie === "pose" || ex.saisie === "chiffres")) {
         const dir = ex.saisie === "pose" ? -1 : 1;
         const next = digits.slice();
@@ -764,6 +909,11 @@ export function Session({
     setChoice(v);
     setF1(String(v));
   }, [phase]);
+
+  // Monnaie : le total compose (centimes) devient la saisie. 0 => pas de saisie.
+  const onMoneyTotal = useCallback((cents: number) => {
+    setF1(cents > 0 ? String(cents) : "");
+  }, []);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -929,6 +1079,23 @@ export function Session({
         {(phase === "answering" || phase === "sure") && ex.saisie === "qcm" && ex.options && (
           <QcmChoice options={ex.options} chosen={choice} onPick={pickChoice} />
         )}
+        {(phase === "answering" || phase === "sure") && ex.saisie === "monnaie" && ex.moneyData && (
+          <MoneyCompose key={ex.key} data={ex.moneyData} onTotal={onMoneyTotal} />
+        )}
+
+        {/* Schema en barres : aide optionnelle pendant la recherche (ne revele
+            jamais la reponse : l'inconnue reste « ? »). */}
+        {(phase === "answering" || phase === "sure") && ex.barres && (
+          <div className="kk-stack" style={{ textAlign: "center" }}>
+            {!showSchema ? (
+              <button type="button" className="kk-btn" onClick={() => setShowSchema(true)}>
+                <Info size={16} aria-hidden="true" /> Je veux un schema
+              </button>
+            ) : (
+              <BarModelView model={ex.barres} reveal={false} />
+            )}
+          </div>
+        )}
 
         {hint && phase === "answering" && (
           <p className="kk-muted" style={{ textAlign: "center" }}>
@@ -998,7 +1165,7 @@ export function Session({
                   <button className="kk-btn kk-btn--accent" onClick={doValidate}>Oui, je valide</button>
                 </div>
               </div>
-            ) : ex.saisie === "compare" || ex.saisie === "qcm" ? (
+            ) : ex.saisie === "compare" || ex.saisie === "qcm" || ex.saisie === "monnaie" ? (
               <div className="kk-row" style={{ justifyContent: "center" }}>
                 <button
                   className="kk-btn kk-btn--accent kk-btn--big"
@@ -1037,6 +1204,7 @@ export function Session({
         ) : (
           <div className="kk-banner kk-banner--ko">
             <span className="kk-banner__title">Ce n'est pas ca, voici comment trouver</span>
+            {ex.barres && <BarModelView model={ex.barres} reveal={true} />}
             <p style={{ margin: 0 }}>{ex.correction}</p>
             <button
               className="kk-btn kk-btn--accent kk-btn--block"

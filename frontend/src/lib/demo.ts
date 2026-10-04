@@ -43,10 +43,14 @@ export const DEMO_COMPETENCES: Competence[] = [
   ["MA.TABLES.2", "Table de 2", 100],
   ["MA.TABLES.5", "Table de 5", 110],
   ["MA.TABLES.3", "Table de 3", 120],
+  ["MA.PB.ADD_SUB", "Problemes : additions et soustractions", 500],
+  ["MA.PB.MULT_DIV", "Problemes : multiplications et partages", 510],
+  ["MA.PB.MONNAIE", "Problemes : billets et pieces", 520],
+  ["MA.PB.DEUX_ETAPES", "Problemes a deux etapes", 530],
 ].map(([code, libelle, ordre]) => ({
   code: code as string,
   matiere: "MA",
-  domaine: "calcul_mental",
+  domaine: (code as string).startsWith("MA.PB.") ? "problemes" : "calcul_mental",
   libelle: libelle as string,
   ordre: ordre as number,
   nb_niveaux: 4,
@@ -61,6 +65,12 @@ export const DEMO_PREREQUIS: Prerequis[] = [
   { competence: "MA.TABLES.2", prerequis: "MA.CM.DOUBLES", niveau_min: 2 },
   { competence: "MA.TABLES.5", prerequis: "MA.CM.X10_X100", niveau_min: 2 },
   { competence: "MA.TABLES.3", prerequis: "MA.TABLES.2", niveau_min: 2 },
+  { competence: "MA.PB.ADD_SUB", prerequis: "MA.CM.SOMMES_DIFF", niveau_min: 2 },
+  { competence: "MA.PB.MULT_DIV", prerequis: "MA.TABLES.2", niveau_min: 2 },
+  { competence: "MA.PB.MULT_DIV", prerequis: "MA.TABLES.5", niveau_min: 2 },
+  { competence: "MA.PB.MONNAIE", prerequis: "MA.CM.SOMMES_DIFF", niveau_min: 2 },
+  { competence: "MA.PB.DEUX_ETAPES", prerequis: "MA.PB.ADD_SUB", niveau_min: 2 },
+  { competence: "MA.PB.DEUX_ETAPES", prerequis: "MA.PB.MULT_DIV", niveau_min: 2 },
 ];
 
 export const DEMO_PROFILS: Profil[] = [

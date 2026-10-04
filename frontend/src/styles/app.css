@@ -304,6 +304,21 @@ p.kk-lead { color: var(--kk-text-2); max-width: 52ch; }
   border-radius: 8px; cursor: pointer;
 }
 
+/* ---- Schema en barres (problemes) ---- */
+.kk-barres { margin: 8px 0; }
+.kk-barres svg { max-width: 520px; }
+
+/* ---- Monnaie : composer une somme (billets et pieces) ---- */
+.kk-money-compose { display: flex; flex-direction: column; gap: 12px; align-items: center; margin: 10px 0; width: 100%; }
+.kk-money-total { font-size: 1.2rem; color: var(--kk-text); }
+.kk-money-units { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; max-width: 460px; }
+.kk-money-unit {
+  min-width: 68px; min-height: 48px; padding: 6px 12px; font-size: 1.05rem; font-weight: 700;
+  cursor: pointer; font-family: inherit; color: var(--kk-text); border: 2px solid var(--kk-accent);
+}
+.kk-money-unit--bill { border-radius: 8px; background: color-mix(in srgb, var(--kk-accent) 16%, transparent); }
+.kk-money-unit--coin { border-radius: 999px; background: color-mix(in srgb, var(--kk-accent) 8%, transparent); }
+
 /* ------------------------------ Divers --------------------------------- */
 .kk-row { display: flex; gap: 12px; flex-wrap: wrap; }
 .kk-stack > * + * { margin-top: 14px; }

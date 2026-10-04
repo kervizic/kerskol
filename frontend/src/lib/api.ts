@@ -3,7 +3,7 @@
 
 import { supabase } from "./supabase";
 import { purgeKerskolStorage } from "./authReset";
-import { computeVerif, type VerifOp } from "../domain/calcul/generator";
+import { computeVerif, type VerifOp, type VerifOp2 } from "../domain/calcul/generator";
 import {
   isDemo,
   DEMO_COMPETENCES,
@@ -496,6 +496,8 @@ export interface ReponseInsert {
   op: VerifOp; // enonce normalise : operation...
   a: number; //   ...operande a...
   b: number; //   ...operande b (la reponse attendue en decoule cote serveur)
+  op2?: VerifOp2 | null; // seconde etape (problemes a deux etapes), sinon null
+  c?: number | null; //   operande de la seconde etape, sinon null
   reponse: number; // saisie principale de l'enfant
   reste: number | null; // saisie du reste (exercices a 2 champs), sinon null
   fields: 1 | 2;
@@ -529,7 +531,10 @@ export async function insertReponse(row: ReponseInsert): Promise<ReponseResult> 
   // on l'ecarte proprement pour ne pas bloquer la file (perte negligeable).
   if (!row.op) return { correct: false, monnaie: null, deja: true };
   if (isDemo()) {
-    const { answer, reste } = computeVerif({ op: row.op, a: row.a, b: row.b });
+    const { answer, reste } = computeVerif({
+      op: row.op, a: row.a, b: row.b,
+      op2: row.op2 ?? undefined, c: row.c ?? undefined,
+    });
     const correct = row.reponse === answer && (row.fields < 2 || row.reste === reste);
     const p = DEMO_PROFILS.find((x) => x.id === row.profil_id);
     if (p) {
@@ -551,6 +556,8 @@ export async function insertReponse(row: ReponseInsert): Promise<ReponseResult> 
     p_op: row.op,
     p_a: row.a,
     p_b: row.b,
+    p_op2: row.op2 ?? null,
+    p_c: row.c ?? null,
     p_reponse: row.reponse,
     p_reste: row.reste,
     p_fields: row.fields,
