@@ -20,6 +20,7 @@ import {
   createSeance,
   finishSeance,
   getExercicesCalcul,
+  getFrancais,
   getMonnaie,
   getProgressionDetail,
   getTempsAujourdhuiS,
@@ -55,7 +56,7 @@ import {
 } from "../domain/calcul/engine";
 import { wrapHour, wrapMinute, startHour, START_MINUTE } from "../domain/calcul/horloge";
 import { moneyAsset } from "../domain/calcul/moneyAssets";
-import { diagnostiquer, type Diagnostic, type Faute } from "../domain/diagnostic";
+import { diagnostiquer, diagnostiquerConjugaison, type Diagnostic, type Faute } from "../domain/diagnostic";
 
 function uuid(): string {
   try {
@@ -286,6 +287,34 @@ function QcmChoice({
           onClick={() => onPick(o.value)}
         >
           {o.label}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+// --- QCM TEXTE : choix parmi des formes (conjugaison, niveaux faciles).
+// La VALEUR choisie est la forme (texte) ; elle est jugee par le serveur
+// (op 'conj') comme une saisie libre. ---
+function QcmTexte({
+  options,
+  chosen,
+  onPick,
+}: {
+  options: string[];
+  chosen: string;
+  onPick: (s: string) => void;
+}) {
+  return (
+    <div className="kk-qcm">
+      {options.map((o, i) => (
+        <button
+          key={i}
+          type="button"
+          className={`kk-btn kk-qcm__opt${chosen === o ? " kk-qcm__opt--active" : ""}`}
+          onClick={() => onPick(o)}
+        >
+          {o}
         </button>
       ))}
     </div>
@@ -1146,20 +1175,25 @@ export function Session({
         return;
       }
       try {
-        const [progress_, sources] = await Promise.all([
+        // Le francais (conjugaison) n'est charge que pour les profils qui l'ont
+        // active (matieres_actives) : les profils existants (['MA']) sont inchanges.
+        const francaisActif = (profil.matieres_actives ?? []).includes("FR");
+        const [progress_, sources, fr] = await Promise.all([
           getProgressionDetail(profil.id),
           getExercicesCalcul(),
+          francaisActif ? getFrancais() : Promise.resolve({ competences: [], sources: [] }),
         ]);
         const ctx = { hero: profil.surnom, univers: profil.univers };
         const plan = composeSession({
-          competences: referentiel.competences,
+          competences: [...referentiel.competences, ...fr.competences],
           prerequis: referentiel.prerequis,
           progress: progress_,
-          sources,
+          sources: [...sources, ...fr.sources],
           seed: (Date.now() ^ 0x9e3779b9) >>> 0,
           now: Date.now(),
           classe: profil.classe,
           ctx,
+          matieres: profil.matieres_actives,
         });
         placement.current = {};
         for (const p of progress_) placement.current[p.competence] = p.placement_termine;
@@ -1264,6 +1298,7 @@ export function Session({
         b: ex.verif.b,
         op2: ex.verif.op2 ?? null,
         c: ex.verif.c ?? null,
+        cle: ex.verif.cle ?? null,
         reponse: submitted.current.reponse,
         reste: submitted.current.reste,
         reponse_texte: submitted.current.texte ?? null,
@@ -1306,7 +1341,13 @@ export function Session({
 
   const isCorrect = useCallback((): boolean => {
     if (!ex) return false;
-    if (ex.saisie === "lettres") return diagnostiquer(ex.answer, texte).juste;
+    // Saisie TEXTE (ecriture en lettres ou conjugaison) : jugee par le diagnostic
+    // approprie. La conjugaison porte ex.conj (verbe/temps/personne).
+    if (ex.saisie === "lettres" || ex.saisie === "qcm_texte") {
+      return ex.conj
+        ? diagnostiquerConjugaison(ex.conj.verbe, ex.conj.temps, ex.conj.personne, texte).juste
+        : diagnostiquer(ex.answer, texte).juste;
+    }
     if (ex.fields === 2) {
       return Number(value.q) === ex.answer && Number(value.r) === (ex.reste ?? -1);
     }
@@ -1314,7 +1355,7 @@ export function Session({
   }, [ex, value.q, value.r, texte]);
 
   const canValidate = ex
-    ? ex.saisie === "lettres"
+    ? ex.saisie === "lettres" || ex.saisie === "qcm_texte"
       ? texte.trim() !== ""
       : ex.fields === 2
         ? f1 !== "" && f2 !== ""
@@ -1325,8 +1366,10 @@ export function Session({
     if (!engine || !ex || !canValidate) return;
     // Ecriture en toutes lettres : le diagnostic local sert au feedback et
     // enregistre le type de faute (indicatif) ; le serveur reste seul juge.
-    if (ex.saisie === "lettres") {
-      const d = diagnostiquer(ex.answer, texte);
+    if (ex.saisie === "lettres" || ex.saisie === "qcm_texte") {
+      const d = ex.conj
+        ? diagnostiquerConjugaison(ex.conj.verbe, ex.conj.temps, ex.conj.personne, texte)
+        : diagnostiquer(ex.answer, texte);
       setDiag(d);
       submitted.current = {
         reponse: ex.answer,
@@ -1412,7 +1455,7 @@ export function Session({
   const typeDigit = useCallback(
     (d: string) => {
       if (phase !== "answering") return;
-      if (ex && (ex.saisie === "compare" || ex.saisie === "qcm" || ex.saisie === "monnaie" || ex.saisie === "heure" || ex.saisie === "fraction" || ex.saisie === "fraction_num" || ex.saisie === "lettres")) return;
+      if (ex && (ex.saisie === "compare" || ex.saisie === "qcm" || ex.saisie === "monnaie" || ex.saisie === "heure" || ex.saisie === "fraction" || ex.saisie === "fraction_num" || ex.saisie === "lettres" || ex.saisie === "qcm_texte")) return;
       if (ex && (ex.saisie === "pose" || ex.saisie === "chiffres")) {
         const dir = ex.saisie === "pose" ? -1 : 1;
         const next = digits.slice();
@@ -1428,7 +1471,7 @@ export function Session({
   );
   const backspace = useCallback(() => {
     if (phase !== "answering") return;
-    if (ex && (ex.saisie === "compare" || ex.saisie === "qcm" || ex.saisie === "monnaie" || ex.saisie === "heure" || ex.saisie === "fraction" || ex.saisie === "fraction_num" || ex.saisie === "lettres")) return;
+    if (ex && (ex.saisie === "compare" || ex.saisie === "qcm" || ex.saisie === "monnaie" || ex.saisie === "heure" || ex.saisie === "fraction" || ex.saisie === "fraction_num" || ex.saisie === "lettres" || ex.saisie === "qcm_texte")) return;
     if (ex && (ex.saisie === "pose" || ex.saisie === "chiffres")) {
       const dir = ex.saisie === "pose" ? -1 : 1;
       const next = digits.slice();
@@ -1448,6 +1491,12 @@ export function Session({
     if (phase !== "answering") return;
     setChoice(v);
     setF1(String(v));
+  }, [phase]);
+
+  // QCM texte (conjugaison facile) : la forme choisie devient la saisie texte.
+  const pickTexte = useCallback((s: string) => {
+    if (phase !== "answering") return;
+    setTexte(s);
   }, [phase]);
 
   // Monnaie : le total compose (centimes) devient la saisie. 0 => pas de saisie.
@@ -1627,6 +1676,9 @@ export function Session({
         {(phase === "answering" || phase === "sure") && ex.saisie === "lettres" && (
           <LettresInput key={ex.key} onText={onLettresText} />
         )}
+        {(phase === "answering" || phase === "sure") && ex.saisie === "qcm_texte" && ex.optionsTexte && (
+          <QcmTexte options={ex.optionsTexte} chosen={texte} onPick={pickTexte} />
+        )}
         {ex.saisie === "droite" && ex.droiteData && <DroiteView data={ex.droiteData} />}
         {(phase === "answering" || phase === "sure") && ex.saisie === "pose" && ex.poseData && (
           <PoseView
@@ -1747,7 +1799,7 @@ export function Session({
                   <button className="kk-btn kk-btn--accent" onClick={doValidate}>Oui, je valide</button>
                 </div>
               </div>
-            ) : ex.saisie === "compare" || ex.saisie === "qcm" || ex.saisie === "monnaie" || ex.saisie === "heure" || ex.saisie === "fraction" || ex.saisie === "fraction_num" || ex.saisie === "lettres" ? (
+            ) : ex.saisie === "compare" || ex.saisie === "qcm" || ex.saisie === "monnaie" || ex.saisie === "heure" || ex.saisie === "fraction" || ex.saisie === "fraction_num" || ex.saisie === "lettres" || ex.saisie === "qcm_texte" ? (
               <div className="kk-row" style={{ justifyContent: "center" }}>
                 <button
                   className="kk-btn kk-btn--accent kk-btn--big"
@@ -1787,7 +1839,7 @@ export function Session({
           <div className="kk-banner kk-banner--ko">
             <span className="kk-banner__title">Ce n'est pas ca, voici comment trouver</span>
             {ex.barres && <BarModelView model={ex.barres} reveal={true} />}
-            {ex.saisie === "lettres" && diag ? (
+            {(ex.saisie === "lettres" || ex.saisie === "qcm_texte") && diag ? (
               <LettresCorrection diag={diag} />
             ) : (
               <p style={{ margin: 0 }}>{ex.correction}</p>

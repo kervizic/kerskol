@@ -67,3 +67,58 @@ rang qui diffère (les milliers / les centaines / les dizaines / les unités).
 - « Presque ! Regarde bien : on écrit « {nombre} ». »
 - Utilisé quand la saisie ne correspond à aucune règle (mots inconnus, texte vide,
   mots en trop). Ces cas sont aussi enregistrés pour enrichir les règles.
+
+---
+
+# Messages de correction - conjugaison (français)
+
+Liste **complète** des explications affichées quand l'enfant conjugue un verbe
+(compétences `FR.CONJ.PRESENT`, `FR.CONJ.FUTUR`, `FR.CONJ.IMPARFAIT`). Même style
+« enfant de 8 ans » : phrases très courtes, toujours un exemple concret, jamais
+de grammaire abstraite. La bonne forme est affichée et la partie fautive
+surlignée. **Les accents sont exigés** (le serveur reste seul juge ; le type de
+faute est indicatif et enregistré dans `reponses.type_faute`).
+
+Source : `frontend/src/domain/diagnostic/conjugaison.ts` (`diagnostiquerConjugaison`,
+`MESSAGES_CONJUGAISON`). Parties entre accolades : `{forme}` = forme attendue,
+`{pronom}` = le sujet, `{temps}` = le temps (le présent / le futur / l'imparfait).
+
+## Bonne réponse (JUSTE)
+
+- « Bravo ! C'est la bonne forme. »
+
+## ACCENT - un accent manquant
+
+- « N'oublie pas l'accent : « {forme} ». vous êtes → avec un accent sur le e. /
+  vous etes → pas juste. »
+- Exemple : pour **vous (être) présent**, *etes* → pas juste ; *êtes* → juste.
+
+## MAUVAISE_PERSONNE - la forme d'une autre personne
+
+- « Attention à la personne : avec {pronom}, on écrit « {forme} ». tu chantes →
+  avec un s. / il chante → pas de s. »
+- Exemple : pour **il (chanter) présent**, *chantes* (c'est la forme de « tu ») →
+  on écrit « chante ».
+
+## MAUVAIS_TEMPS - le bon verbe, mais pas au bon moment
+
+- « Ce n'est pas le bon moment : ici c'est {temps}. On écrit « {forme} ». hier je
+  chantais / demain je chanterai. »
+- Exemple : pour **je (chanter) présent**, *chanterai* (c'est le futur) → on
+  écrit « chante ».
+
+## TERMINAISON - bon début, mauvaise fin
+
+- « Bon début, mauvaise fin : avec {pronom}, on écrit « {forme} ». tu joues → un s
+  à la fin. / il joue → pas de s. »
+- Exemple : pour **il (chanter) présent**, *chanter* → on écrit « chante ».
+
+## ORTHO_RADICAL - le mot est mal écrit
+
+- « Regarde bien les lettres : on écrit « {forme} ». »
+- Exemple : pour **il (chanter) présent**, *chnte* → on écrit « chante ».
+
+## INCONNU - repli
+
+- « Presque ! Regarde bien : on écrit « {forme} ». »
+- Utilisé quand la saisie ne correspond à aucune règle. Enregistré aussi.

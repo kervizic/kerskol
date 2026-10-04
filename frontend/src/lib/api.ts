@@ -4,7 +4,8 @@
 import { supabase } from "./supabase";
 import { purgeKerskolStorage } from "./authReset";
 import { computeVerif, type VerifOp, type VerifOp2 } from "../domain/calcul/generator";
-import { estJuste } from "../domain/diagnostic";
+import { estJuste, estJusteConjugaison } from "../domain/diagnostic";
+import { TEMPS_PAR_CODE, type Personne } from "../domain/francais/conjugaison";
 import {
   isDemo,
   DEMO_COMPETENCES,
@@ -436,6 +437,44 @@ export async function getExercicesCalcul(): Promise<ExCalcul[]> {
   }
 }
 
+// Referentiel FRANCAIS : competences (matiere FR) + sources d'exercices. La
+// GENERATION des exercices de conjugaison est faite cote client (le generateur
+// derive verbes/personnes de domain/francais/conjugaison) ; les lignes
+// `exercices` (type 'conjugaison') ne fournissent que l'identite (exercice_id
+// deterministe, competence, niveau, methode). Les prerequis FR sont deja
+// charges par getReferentiel (requete competence_prerequis sans filtre).
+export async function getFrancais(): Promise<{ competences: Competence[]; sources: ExCalcul[] }> {
+  if (isDemo()) return { competences: [], sources: [] };
+  const sb = supabase();
+  const [comp, ex] = await Promise.all([
+    sb
+      .from("competences")
+      .select("code, matiere, domaine, libelle, ordre, nb_niveaux, actif")
+      .eq("matiere", "FR")
+      .eq("actif", true)
+      .order("ordre", { ascending: true }),
+    sb
+      .from("exercices")
+      .select("id, competence, niveau, methode")
+      .eq("type", "conjugaison")
+      .eq("actif", true),
+  ]);
+  if (comp.error) throw comp.error;
+  if (ex.error) throw ex.error;
+  const sources = (ex.data ?? []).map((e): ExCalcul => ({
+    exerciceId: e.id as string,
+    competence: e.competence as string,
+    niveau: e.niveau as number,
+    methode: (e.methode as string | null) ?? null,
+    operation: "conj",
+    forme: "conjugaison" as Forme,
+    params: {},
+    support: null,
+    correctionStrategie: null,
+  }));
+  return { competences: (comp.data ?? []) as Competence[], sources };
+}
+
 export async function getMonnaie(profilId: string): Promise<number> {
   if (isDemo()) return DEMO_PROFILS.find((p) => p.id === profilId)?.monnaie ?? 0;
   const { data, error } = await supabase()
@@ -505,6 +544,9 @@ export interface ReponseInsert {
   // type de faute diagnostique cote client (INDICATIF ; le serveur reste juge).
   reponse_texte?: string | null;
   type_faute?: string | null;
+  // Conjugaison (op 'conj') : le verbe (infinitif), envoye au serveur dans
+  // p_op2 ; a = code du temps, b = personne, reponse_texte = la forme saisie.
+  cle?: string | null;
   fields: 1 | 2;
   temps_ms: number | null;
   correction_lue: boolean;
@@ -547,7 +589,11 @@ export async function insertReponse(row: ReponseInsert): Promise<ReponseResult> 
     const correct =
       row.op === "lettres"
         ? estJuste(row.a, row.reponse_texte ?? "")
-        : row.reponse === answer && (row.fields < 2 || row.reste === reste);
+        : row.op === "conj"
+          ? estJusteConjugaison(
+              row.cle ?? "", TEMPS_PAR_CODE[row.a], row.b as Personne, row.reponse_texte ?? ""
+            )
+          : row.reponse === answer && (row.fields < 2 || row.reste === reste);
     const p = DEMO_PROFILS.find((x) => x.id === row.profil_id);
     if (p) {
       const tooFast = row.temps_ms != null && row.temps_ms < 1500;
@@ -568,7 +614,7 @@ export async function insertReponse(row: ReponseInsert): Promise<ReponseResult> 
     p_op: row.op,
     p_a: row.a,
     p_b: row.b,
-    p_op2: row.op2 ?? null,
+    p_op2: row.op2 ?? row.cle ?? null,
     p_c: row.c ?? null,
     p_reponse: row.reponse,
     p_reste: row.reste,

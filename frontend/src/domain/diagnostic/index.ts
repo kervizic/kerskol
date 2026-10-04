@@ -10,7 +10,14 @@ export {
 export {
   diagnostiquer,
   MESSAGES_CATALOGUE,
+  levenshtein,
   type TypeFaute,
   type Faute,
   type Diagnostic,
 } from "./diagnostic";
+export {
+  diagnostiquerConjugaison,
+  estJusteConjugaison,
+  phraseAttendue,
+  MESSAGES_CONJUGAISON,
+} from "./conjugaison";

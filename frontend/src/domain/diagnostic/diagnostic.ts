@@ -21,12 +21,20 @@
 import { enLettresFr, normaliser, estJuste } from "./lettres";
 
 export type TypeFaute =
+  // Ecriture des nombres en lettres
   | "TRAIT_UNION"
   | "S_VINGT_CENT"
   | "S_MILLE"
   | "ET_UN"
   | "ORTHO_MOT"
   | "MAUVAIS_NOMBRE"
+  // Conjugaison (francais)
+  | "ACCENT"
+  | "MAUVAISE_PERSONNE"
+  | "MAUVAIS_TEMPS"
+  | "TERMINAISON"
+  | "ORTHO_RADICAL"
+  // Repli commun
   | "INCONNU";
 
 export interface Faute {
@@ -69,7 +77,7 @@ function motsCanon(atoms: string[]): string {
 }
 
 // Distance d'edition de Levenshtein (plafonnee implicitement par la taille).
-function levenshtein(a: string, b: string): number {
+export function levenshtein(a: string, b: string): number {
   const m = a.length;
   const n = b.length;
   const d = Array.from({ length: m + 1 }, (_, i) => [i, ...Array(n).fill(0)]);
@@ -272,7 +280,11 @@ function hyphensDe(bonne: string): string[] {
 
 // Catalogue des messages (pour relecture et docs/explications.md). Les parties
 // variables (nombre, mot) sont notees entre accolades.
-export const MESSAGES_CATALOGUE: Record<TypeFaute | "JUSTE", string> = {
+// Catalogue des messages de l'ecriture en lettres (sous-ensemble de TypeFaute).
+type FauteLettres =
+  | "TRAIT_UNION" | "S_VINGT_CENT" | "S_MILLE" | "ET_UN" | "ORTHO_MOT"
+  | "MAUVAIS_NOMBRE" | "INCONNU";
+export const MESSAGES_CATALOGUE: Record<FauteLettres | "JUSTE", string> = {
   JUSTE: "Bravo ! C'est la bonne écriture.",
   TRAIT_UNION: "Les mots d'un nombre se relient avec un petit trait. Écris « {nombre} ». cinquante-deux → on relie les deux mots avec un petit trait.",
   S_VINGT_CENT:

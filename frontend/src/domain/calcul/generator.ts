@@ -21,6 +21,8 @@ import { buildProbleme } from "./problemes";
 import { buildMesure } from "./measures";
 import { buildFraction } from "./fractions";
 import { enLettresFr } from "../diagnostic/lettres";
+import { buildFrancaisConjugaison } from "../francais/generator";
+import type { Temps, Personne } from "../francais/conjugaison";
 
 export type Forme =
   | "resultat"
@@ -34,7 +36,8 @@ export type Forme =
   | "pose" // calcul pose en colonnes
   | "probleme" // probleme en francais (mascotte, monnaie, deux etapes)
   | "mesure" // mesures (heure, durees, longueurs, masses, contenances)
-  | "fraction"; // fractions simples
+  | "fraction" // fractions simples
+  | "conjugaison"; // francais : conjuguer un verbe (present / futur / imparfait)
 
 export type Support = "rectangle" | "droite" | "aucun" | null;
 
@@ -59,9 +62,12 @@ export type Support = "rectangle" | "droite" | "aucun" | null;
 //   fraction_num -> saisie LIBRE d'une fraction : l'enfant tape le numerateur et
 //               le denominateur (deux cases separees par une barre) ; la saisie
 //               envoyee est le CODE num*100+den (identique au QCM « nommer »).
+//   qcm_texte -> choix parmi des propositions TEXTE (conjugaison aux niveaux
+//               faciles) : la VALEUR choisie est la forme, envoyee comme TEXTE
+//               (reponse_texte) et jugee par le serveur (op 'conj').
 export type Saisie =
   | "clavier" | "compare" | "chiffres" | "pose" | "qcm" | "droite" | "monnaie"
-  | "heure" | "fraction" | "fraction_num" | "lettres";
+  | "heure" | "fraction" | "fraction_num" | "lettres" | "qcm_texte";
 
 // Enonce normalise envoye au serveur pour revalidation. L'operation porte sur
 // deux operandes et son resultat est la reponse attendue :
@@ -82,7 +88,11 @@ export type Saisie =
 // `lettres` : l'enonce porte un NOMBRE (a) et la reponse est du TEXTE (ecriture
 // en toutes lettres) ; la verification est faite a part (serveur : verif_lettres,
 // client : domain/diagnostic). computeVerif renvoie a (le nombre) pour l'invariant.
-export type VerifOp = "add" | "sub" | "mul" | "div" | "cmp" | "val" | "lettres";
+// `conj` : conjugaison. a = code du temps (1 present, 2 futur, 3 imparfait),
+// b = personne (1..6), `cle` = verbe (infinitif) ; la reponse est du TEXTE
+// (reponse_texte). computeVerif renvoie a (invariant), la verification reelle
+// est serveur (verif_conjugaison) / client (domain/diagnostic/conjugaison).
+export type VerifOp = "add" | "sub" | "mul" | "div" | "cmp" | "val" | "lettres" | "conj";
 export type VerifOp2 = "add" | "sub" | "mul" | "div" | "rsub";
 export interface Verif {
   op: VerifOp;
@@ -90,6 +100,7 @@ export interface Verif {
   b: number;
   op2?: VerifOp2; // seconde etape (problemes a deux etapes)
   c?: number; // operande de la seconde etape
+  cle?: string; // conjugaison : le verbe (infinitif), envoye au serveur (p_op2)
 }
 
 // Applique une operation a deux operandes (etape unique).
@@ -109,6 +120,9 @@ function applyOp(op: VerifOp, a: number, b: number): { answer: number; reste: nu
       return { answer: a, reste: null };
     case "lettres":
       // La reponse est du texte ; a porte le nombre a ecrire (invariant answer=a).
+      return { answer: a, reste: null };
+    case "conj":
+      // La reponse est du texte (conjugaison) ; a porte le code du temps.
       return { answer: a, reste: null };
   }
 }
@@ -281,7 +295,9 @@ export interface GeneratedExercise {
   reste: number | null; // reste (forme reste), sinon null
   fields: 1 | 2; // 1 champ, ou 2 champs (quotient + reste)
   saisie: Saisie; // mode de saisie cote interface (defaut "clavier")
-  options?: QcmOption[]; // mode qcm
+  options?: QcmOption[]; // mode qcm (valeurs numeriques)
+  optionsTexte?: string[]; // mode qcm_texte (propositions TEXTE : conjugaison)
+  conj?: { verbe: string; temps: Temps; personne: Personne }; // diagnostic conjugaison
   poseData?: PoseData; // mode pose
   chiffresData?: ChiffresData; // mode chiffres (decomposition)
   droiteData?: DroiteData; // mode droite
@@ -410,6 +426,10 @@ function buildExercise(
     seed,
   };
 
+  // --- Francais : conjugaison -------------------------------------------
+  if (src.competence.startsWith("FR.CONJ.")) {
+    return buildFrancaisConjugaison(src, rng, base);
+  }
   // --- Numeration : lire/ecrire, decomposer, comparer, suite ------------
   if (src.competence.startsWith("MA.NUM.")) {
     return buildNumeration(src, rng, base);

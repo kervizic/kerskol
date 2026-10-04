@@ -35,6 +35,7 @@ export interface ComposeInput {
   count?: number;
   classe?: Classe; // pilote la 1re seance et les competences presumees debloquees
   ctx?: ProblemContext; // personnalisation des enonces (mascotte/univers)
+  matieres?: string[]; // matieres actives du profil (ex. ['MA','FR']) ; si absent, toutes
 }
 
 function progMap(progress: ProgressionDetail[]): Record<string, ProgressionDetail> {
@@ -112,7 +113,12 @@ export function composeSession(input: ComposeInput): PlannedItem[] {
   const rng = makeRng(seed);
   const byCode = progMap(input.progress);
 
-  const active = competences.filter((c) => c.actif !== false);
+  // Filtre par matieres actives du profil (profils existants = ['MA'] : le
+  // francais n'apparait que pour les profils qui l'ont active). Absent = toutes.
+  const mats = input.matieres;
+  const active = competences.filter(
+    (c) => c.actif !== false && (!mats || mats.includes(c.matiere))
+  );
   // Une progression sert de reference "deja debloque". Une competence est
   // retenue si ses prerequis sont atteints OU si la classe la presume debloquee
   // (coeur/revision de la classe, prerequis presumes tant qu'ils ne sont pas

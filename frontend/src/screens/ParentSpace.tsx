@@ -110,7 +110,16 @@ function ProfilEditor({
   const [jour, setJour] = useState(profil.limite_jour_min?.toString() ?? "20");
   const [semaineOn, setSemaineOn] = useState(profil.limite_semaine_min != null);
   const [semaine, setSemaine] = useState(profil.limite_semaine_min?.toString() ?? "90");
+  // Matieres actives (calcul toujours present ; francais optionnel).
+  const [matActives, setMatActives] = useState<string[]>(profil.matieres_actives ?? [MATIERE_ACTIVE]);
   const [state, setState] = useState<"idle" | "saving" | "ok" | "err">("idle");
+
+  const nextMatieres = matActives.includes(MATIERE_ACTIVE)
+    ? matActives
+    : [MATIERE_ACTIVE, ...matActives];
+  const matKey = (a: string[]) => [...a].sort().join(",");
+  const toggleMatiere = (code: string) =>
+    setMatActives((cur) => (cur.includes(code) ? cur.filter((c) => c !== code) : [...cur, code]));
 
   // Valeur effective : null si l'interrupteur est off (retrait de la limite).
   const nextJour = jourOn ? num(jour) : null;
@@ -118,13 +127,17 @@ function ProfilEditor({
   const dirty =
     classe !== profil.classe ||
     nextJour !== profil.limite_jour_min ||
-    nextSemaine !== profil.limite_semaine_min;
+    nextSemaine !== profil.limite_semaine_min ||
+    matKey(nextMatieres) !== matKey(profil.matieres_actives ?? [MATIERE_ACTIVE]);
 
   async function save() {
     setState("saving");
     try {
       // null <-> valeur et changement de classe : journalises par le trigger.
-      const patch = { classe, limite_jour_min: nextJour, limite_semaine_min: nextSemaine };
+      const patch = {
+        classe, limite_jour_min: nextJour, limite_semaine_min: nextSemaine,
+        matieres_actives: nextMatieres,
+      };
       await updateProfil(profil.id, patch);
       onSaved({ ...profil, ...patch });
       setState("ok");
@@ -147,12 +160,23 @@ function ProfilEditor({
           <button className="kk-chip" aria-pressed="true" disabled>Calcul</button>
           {matieres
             .filter((m) => m.code !== MATIERE_ACTIVE)
-            .map((m) => (
-              <button key={m.code} className="kk-chip" disabled>
-                {m.libelle.replace(/^.*- /, "")}
-                <small>bientôt</small>
-              </button>
-            ))}
+            .map((m) => {
+              const dispo = m.code === "FR"; // conjugaison disponible
+              const actif = matActives.includes(m.code);
+              return (
+                <button
+                  key={m.code}
+                  type="button"
+                  className={`kk-chip${actif ? " kk-chip--active" : ""}`}
+                  aria-pressed={actif}
+                  disabled={!dispo}
+                  onClick={dispo ? () => toggleMatiere(m.code) : undefined}
+                >
+                  {m.libelle.replace(/^.*- /, "")}
+                  {!dispo && <small>bientôt</small>}
+                </button>
+              );
+            })}
         </div>
       </div>
 

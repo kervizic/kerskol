@@ -68,6 +68,11 @@ export function CreateProfile({
   const [univers, setUnivers] = useState<UniversId>(d?.univers ?? "village_breton");
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  // Matieres actives : le calcul (MA) est toujours actif ; le francais (FR) est
+  // optionnel (conjugaison). Les autres matieres restent « bientot ».
+  const [matActives, setMatActives] = useState<string[]>([MATIERE_ACTIVE]);
+  const toggleMatiere = (code: string) =>
+    setMatActives((cur) => (cur.includes(code) ? cur.filter((c) => c !== code) : [...cur, code]));
 
   const surnomOk = surnom.trim().length >= 1 && surnom.trim().length <= 30;
 
@@ -86,7 +91,7 @@ export function CreateProfile({
         avatar: { style, options, couleur },
         univers,
         classe,
-        matieres_actives: [MATIERE_ACTIVE],
+        matieres_actives: matActives.includes(MATIERE_ACTIVE) ? matActives : [MATIERE_ACTIVE, ...matActives],
         limite_jour_min: jourOn ? posInt(jour) : null,
         limite_semaine_min: semaineOn ? posInt(semaine) : null,
       });
@@ -132,12 +137,23 @@ export function CreateProfile({
                 </button>
                 {matieres
                   .filter((m) => m.code !== MATIERE_ACTIVE)
-                  .map((m) => (
-                    <button key={m.code} className="kk-chip" disabled>
-                      {m.libelle.replace(/^.*- /, "")}
-                      <small>bientôt</small>
-                    </button>
-                  ))}
+                  .map((m) => {
+                    const dispo = m.code === "FR"; // conjugaison disponible
+                    const actif = matActives.includes(m.code);
+                    return (
+                      <button
+                        key={m.code}
+                        type="button"
+                        className={`kk-chip${actif ? " kk-chip--active" : ""}`}
+                        aria-pressed={actif}
+                        disabled={!dispo}
+                        onClick={dispo ? () => toggleMatiere(m.code) : undefined}
+                      >
+                        {m.libelle.replace(/^.*- /, "")}
+                        {!dispo && <small>bientôt</small>}
+                      </button>
+                    );
+                  })}
               </div>
             </div>
 
