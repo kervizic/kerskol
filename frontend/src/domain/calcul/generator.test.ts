@@ -400,33 +400,30 @@ describe("regle pedagogique : reponse libre au niveau le plus difficile (N4)", (
       expect(computeVerif(g.verif).answer).toBe(g.answer);
     }
   });
-  it("heure (MES.HEURE N4, lecture) : saisie directe des chiffres (freeInput)", () => {
-    const src = SEED_SOURCES.find((s) => s.competence === "MA.MES.HEURE" && s.niveau === 4)!;
-    let sawLire = false;
-    for (let s = 1; s <= 60; s++) {
-      const g = generateExercise(src, s * 23 + 4);
-      if (g.saisie === "heure") {
-        sawLire = true;
-        expect(g.horlogeData!.freeInput).toBe(true);
-      }
-    }
-    expect(sawLire).toBe(true);
-  });
-  it("heure (MES.HEURE N1-N3) : steppers conserves (pas de freeInput)", () => {
-    for (const niveau of [2, 3]) {
+  it("heure (MES.HEURE, tous niveaux) : saisie 'heure' a BOUTONS (plus de freeInput)", () => {
+    for (const niveau of [1, 2, 3, 4]) {
       const src = SEED_SOURCES.find((s) => s.competence === "MA.MES.HEURE" && s.niveau === niveau)!;
-      for (let s = 1; s <= 30; s++) {
-        const g = generateExercise(src, s * 29 + niveau);
-        if (g.saisie === "heure") expect(g.horlogeData!.freeInput).toBeFalsy();
+      for (let s = 1; s <= 40; s++) {
+        const g = generateExercise(src, s * 23 + niveau);
+        if (g.saisie === "heure") {
+          expect(g.horlogeData).toBeDefined();
+          // Le champ freeInput a ete retire : les steppers (boutons) partout.
+          expect("freeInput" in (g.horlogeData as object)).toBe(false);
+        }
       }
     }
   });
-  it("exception : lire un nombre (NUM.LIRE_ECRIRE N4) reste un QCM (lettres)", () => {
+  it("NUM.LIRE_ECRIRE N4 : ecrire le nombre EN LETTRES (saisie libre texte)", () => {
     const src = SEED_SOURCES.find((s) => s.competence === "MA.NUM.LIRE_ECRIRE" && s.niveau === 4)!;
     for (let s = 1; s <= 30; s++) {
       const g = generateExercise(src, s * 13 + 4);
-      expect(g.saisie).toBe("qcm");
-      expect(g.options!.some((o) => o.value === g.answer)).toBe(true);
+      expect(g.saisie).toBe("lettres");
+      expect(g.verif.op).toBe("lettres");
+      expect(g.verif.a).toBe(g.answer);
+      expect(g.answer).toBeGreaterThanOrEqual(100);
+      expect(g.answer).toBeLessThanOrEqual(10000);
+      // La case « = [q] » ne doit pas etre ajoutee a une saisie texte.
+      expect(g.prompt.includes("[q]")).toBe(false);
     }
   });
 });

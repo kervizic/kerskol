@@ -55,6 +55,7 @@ import {
 } from "../domain/calcul/engine";
 import { wrapHour, wrapMinute, startHour, START_MINUTE } from "../domain/calcul/horloge";
 import { moneyAsset } from "../domain/calcul/moneyAssets";
+import { diagnostiquer, type Diagnostic, type Faute } from "../domain/diagnostic";
 
 function uuid(): string {
   try {
@@ -692,86 +693,6 @@ function MiniKeypad({ onDigit, onDelete }: { onDigit: (d: string) => void; onDel
   );
 }
 
-// Saisie LIBRE d'une heure (niveau 4) : l'enfant tape directement les chiffres
-// des heures puis des minutes au pave, sans steppers. L'horloge a aiguilles se
-// met a jour en direct. Valeur normalisee en minutes (h x 60 + m) ; tant que les
-// deux champs ne sont pas remplis, on signale -1 (pas de saisie => pas de
-// validation). Contrat serveur inchange (verif val/add).
-function HorlogeLibreInput({ data, onValue }: { data: HorlogeData; onValue: (mins: number) => void }) {
-  const hoursMax = data.hoursMax || 12;
-  const maxH = hoursMax === 24 ? 23 : 12;
-  const [hStr, setHStr] = useState("");
-  const [mStr, setMStr] = useState("");
-  const [active, setActive] = useState<"h" | "m">("h");
-
-  useEffect(() => {
-    if (hStr === "" || mStr === "") onValue(-1);
-    else onValue(Number(hStr) * 60 + Number(mStr));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [hStr, mStr]);
-
-  const onDigit = useCallback((d: string) => {
-    if (active === "h") {
-      setHStr((cur) => {
-        const next = (cur === "0" ? "" : cur) + d;
-        if (next.length > 2 || Number(next) > maxH) return cur;
-        // Auto-avance vers les minutes des que les heures ne peuvent plus grandir.
-        if (next.length === 2 || Number(next + "0") > maxH) setActive("m");
-        return next;
-      });
-    } else {
-      setMStr((cur) => {
-        const next = (cur === "0" ? "" : cur) + d;
-        if (next.length > 2 || Number(next) > 59) return cur;
-        return next;
-      });
-    }
-  }, [active, maxH]);
-
-  const onDelete = useCallback(() => {
-    if (active === "m" && mStr === "") { setActive("h"); setHStr((c) => c.slice(0, -1)); return; }
-    if (active === "m") { setMStr((c) => c.slice(0, -1)); return; }
-    setHStr((c) => c.slice(0, -1));
-  }, [active, mStr]);
-
-  useDigitKeyboard(onDigit, onDelete);
-
-  const liveData: HorlogeData = {
-    showHours: hStr === "" ? startHour(hoursMax) : Number(hStr),
-    showMinutes: mStr === "" ? 0 : Number(mStr),
-    minuteStep: data.minuteStep,
-    hoursMax,
-    digital: false,
-  };
-
-  return (
-    <div className="kk-heure" role="group" aria-label="choisir l'heure">
-      <HorlogeView data={liveData} />
-      <div className="kk-heure__blocks">
-        <button
-          type="button"
-          className={`kk-heure__block kk-heure__block--input${active === "h" ? " kk-heure__block--active" : ""}`}
-          aria-label={`heures : ${hStr || "a completer"}`}
-          onClick={() => setActive("h")}
-        >
-          <div className="kk-heure__title">Heures</div>
-          <div className="kk-heure__big">{hStr || "?"}</div>
-        </button>
-        <button
-          type="button"
-          className={`kk-heure__block kk-heure__block--input${active === "m" ? " kk-heure__block--active" : ""}`}
-          aria-label={`minutes : ${mStr || "a completer"}`}
-          onClick={() => setActive("m")}
-        >
-          <div className="kk-heure__title">Minutes</div>
-          <div className="kk-heure__big">{mStr === "" ? "?" : mStr.padStart(2, "0")}</div>
-        </button>
-      </div>
-      <MiniKeypad onDigit={onDigit} onDelete={onDelete} />
-    </div>
-  );
-}
-
 // Saisie LIBRE d'une fraction (niveau >= 2 de MA.FRAC.SIMPLES, type « nommer ») :
 // deux cases (numerateur au-dessus, denominateur en dessous) separees par une
 // barre. La valeur envoyee est le CODE num*100+den (identique au QCM). Tant que
@@ -826,16 +747,78 @@ function FractionInput({ onCode }: { onCode: (code: number) => void }) {
   );
 }
 
+// --- Saisie LIBRE d'un nombre en toutes lettres (MA.NUM.LIRE_ECRIRE N4).
+// Gros champ texte : le clavier de l'appareil s'ouvre sur tablette, le clavier
+// physique fonctionne sur ordinateur. Correcteur automatique DESACTIVE
+// (autocomplete / autocorrect / autocapitalize / spellcheck off) pour ne pas
+// souffler l'orthographe. La saisie TEXTE remonte telle quelle ; le serveur et
+// le diagnostic la verifient. ---
+function LettresInput({ onText }: { onText: (t: string) => void }) {
+  const [t, setT] = useState("");
+  useEffect(() => {
+    onText(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [t]);
+  return (
+    <div className="kk-lettres" role="group" aria-label="écrire le nombre en toutes lettres">
+      <input
+        type="text"
+        inputMode="text"
+        className="kk-lettres__input"
+        value={t}
+        onChange={(e) => setT(e.target.value)}
+        placeholder="écris le nombre en lettres…"
+        aria-label="nombre en toutes lettres"
+        autoComplete="off"
+        autoCorrect="off"
+        autoCapitalize="off"
+        spellCheck={false}
+        enterKeyHint="done"
+      />
+    </div>
+  );
+}
+
+// Correction d'une ecriture en lettres : la bonne ecriture (partie fautive
+// SURLIGNEE) puis l'explication courte de chaque faute (au plus 2).
+function LettresCorrection({ diag }: { diag: Diagnostic }) {
+  const fragments = diag.fautes.flatMap((f) => f.surligne);
+  return (
+    <div className="kk-lettres-corr kk-stack">
+      <p className="kk-lettres-corr__bonne" style={{ margin: 0 }}>
+        On écrit « {surlignerFragments(diag.bonneEcriture, fragments)} ».
+      </p>
+      {diag.fautes.map((f: Faute, i) => (
+        <p key={i} className="kk-lettres-corr__msg" style={{ margin: 0 }}>{f.message}</p>
+      ))}
+    </div>
+  );
+}
+
+// Met en evidence les fragments donnes dans un texte (insensible aux
+// separateurs : un fragment « quatre-vingts » surligne aussi « quatre vingts »).
+function surlignerFragments(texte: string, fragments: string[]): React.ReactNode {
+  if (fragments.length === 0) return texte;
+  // Echappe et autorise espace/trait d'union interchangeables dans les fragments.
+  const parts = fragments
+    .filter(Boolean)
+    .map((f) => f.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").replace(/[\s-]+/g, "[\\s-]+"));
+  if (parts.length === 0) return texte;
+  // split avec groupe capturant : les fragments correspondants sont aux index
+  // IMPAIRS du tableau resultant.
+  const chunks = texte.split(new RegExp(`(${parts.join("|")})`, "i"));
+  return chunks.map((c, i) =>
+    i % 2 === 1 ? <mark key={i} className="kk-mark">{c}</mark> : <span key={i}>{c}</span>
+  );
+}
+
 // --- Saisie d'une heure : deux blocs (HEURES / MINUTES) avec boutons tactiles
 // et tour du cadran (logique pure testee dans ./horloge). L'horloge a aiguilles
 // se met a jour en direct. La saisie est NORMALISEE en minutes (h x 60 + m) et
-// envoyee au serveur (verif val/add) : contrat de valeur inchange. Au niveau 4
-// (data.freeInput), on bascule sur la saisie directe des chiffres (pas de
-// steppers). ---
+// envoyee au serveur (verif val/add) : contrat de valeur inchange. Les boutons
+// (steppers) comptent comme reponse libre A TOUS LES NIVEAUX. ---
 function HorlogeInput({ data, onValue }: { data: HorlogeData; onValue: (mins: number) => void }) {
-  return data.freeInput
-    ? <HorlogeLibreInput data={data} onValue={onValue} />
-    : <HorlogeStepperInput data={data} onValue={onValue} />;
+  return <HorlogeStepperInput data={data} onValue={onValue} />;
 }
 
 function HorlogeStepperInput({
@@ -1117,6 +1100,10 @@ export function Session({
   const [active, setActive] = useState<1 | 2>(1);
   // Nouveaux modes de saisie : choix (compare/qcm) et cases de chiffres (pose/chiffres).
   const [choice, setChoice] = useState<number | null>(null);
+  // Ecriture en toutes lettres (op 'lettres') : saisie texte + diagnostic de la
+  // derniere reponse fausse (affiche pendant la correction).
+  const [texte, setTexte] = useState("");
+  const [diag, setDiag] = useState<Diagnostic | null>(null);
   const [digits, setDigits] = useState<string[]>([]);
   const [cell, setCell] = useState(0);
   const [showSchema, setShowSchema] = useState(false);
@@ -1135,7 +1122,12 @@ export function Session({
   const placement = useRef<Record<string, boolean>>({});
   const monnaieStart = useRef<number>(profil.monnaie);
   // Saisie brute du dernier exercice valide (envoyee au serveur pour revalidation).
-  const submitted = useRef<{ reponse: number; reste: number | null }>({ reponse: 0, reste: null });
+  const submitted = useRef<{
+    reponse: number;
+    reste: number | null;
+    texte?: string | null;
+    typeFaute?: string | null;
+  }>({ reponse: 0, reste: null });
 
   // --- Initialisation : reprise ou nouvelle seance ------------------------
   useEffect(() => {
@@ -1208,6 +1200,8 @@ export function Session({
     setF2("");
     setActive(1);
     setChoice(null);
+    setTexte("");
+    setDiag(null);
     setShowSchema(false);
     if (ex?.saisie === "pose" && ex.poseData) {
       setDigits(Array(ex.poseData.answerDigits).fill(""));
@@ -1272,6 +1266,8 @@ export function Session({
         c: ex.verif.c ?? null,
         reponse: submitted.current.reponse,
         reste: submitted.current.reste,
+        reponse_texte: submitted.current.texte ?? null,
+        type_faute: submitted.current.typeFaute ?? null,
         fields: ex.fields,
         temps_ms: tooFast,
         correction_lue: correctionRead,
@@ -1310,16 +1306,44 @@ export function Session({
 
   const isCorrect = useCallback((): boolean => {
     if (!ex) return false;
+    if (ex.saisie === "lettres") return diagnostiquer(ex.answer, texte).juste;
     if (ex.fields === 2) {
       return Number(value.q) === ex.answer && Number(value.r) === (ex.reste ?? -1);
     }
     return value.q !== "" && Number(value.q) === ex.answer;
-  }, [ex, value.q, value.r]);
+  }, [ex, value.q, value.r, texte]);
 
-  const canValidate = ex ? (ex.fields === 2 ? f1 !== "" && f2 !== "" : f1 !== "") : false;
+  const canValidate = ex
+    ? ex.saisie === "lettres"
+      ? texte.trim() !== ""
+      : ex.fields === 2
+        ? f1 !== "" && f2 !== ""
+        : f1 !== ""
+    : false;
 
   const doValidate = useCallback(() => {
     if (!engine || !ex || !canValidate) return;
+    // Ecriture en toutes lettres : le diagnostic local sert au feedback et
+    // enregistre le type de faute (indicatif) ; le serveur reste seul juge.
+    if (ex.saisie === "lettres") {
+      const d = diagnostiquer(ex.answer, texte);
+      setDiag(d);
+      submitted.current = {
+        reponse: ex.answer,
+        reste: null,
+        texte,
+        typeFaute: d.juste ? null : (d.fautes[0]?.type ?? "INCONNU"),
+      };
+      if (d.juste) {
+        const temps = Date.now() - questionStart.current;
+        setLastGain(temps < 1500 ? 0 : ex.rattrapage ? 3 : 2);
+        void envoyer(true, false);
+        setPhase("correct");
+      } else {
+        setPhase("wrong");
+      }
+      return;
+    }
     // Capture la saisie brute (envoyee au serveur pour revalidation), valable
     // aussi pour le chemin "faux" (envoye apres lecture de la correction).
     submitted.current = {
@@ -1335,7 +1359,7 @@ export function Session({
     } else {
       setPhase("wrong");
     }
-  }, [engine, ex, canValidate, isCorrect, envoyer, value.q, value.r]);
+  }, [engine, ex, canValidate, isCorrect, envoyer, value.q, value.r, texte]);
 
   // « Tu es sure de toi ? » ~1 sur 6, avant de valider.
   const onValiderClick = useCallback(() => {
@@ -1388,7 +1412,7 @@ export function Session({
   const typeDigit = useCallback(
     (d: string) => {
       if (phase !== "answering") return;
-      if (ex && (ex.saisie === "compare" || ex.saisie === "qcm" || ex.saisie === "monnaie" || ex.saisie === "heure" || ex.saisie === "fraction" || ex.saisie === "fraction_num")) return;
+      if (ex && (ex.saisie === "compare" || ex.saisie === "qcm" || ex.saisie === "monnaie" || ex.saisie === "heure" || ex.saisie === "fraction" || ex.saisie === "fraction_num" || ex.saisie === "lettres")) return;
       if (ex && (ex.saisie === "pose" || ex.saisie === "chiffres")) {
         const dir = ex.saisie === "pose" ? -1 : 1;
         const next = digits.slice();
@@ -1404,7 +1428,7 @@ export function Session({
   );
   const backspace = useCallback(() => {
     if (phase !== "answering") return;
-    if (ex && (ex.saisie === "compare" || ex.saisie === "qcm" || ex.saisie === "monnaie" || ex.saisie === "heure" || ex.saisie === "fraction" || ex.saisie === "fraction_num")) return;
+    if (ex && (ex.saisie === "compare" || ex.saisie === "qcm" || ex.saisie === "monnaie" || ex.saisie === "heure" || ex.saisie === "fraction" || ex.saisie === "fraction_num" || ex.saisie === "lettres")) return;
     if (ex && (ex.saisie === "pose" || ex.saisie === "chiffres")) {
       const dir = ex.saisie === "pose" ? -1 : 1;
       const next = digits.slice();
@@ -1445,6 +1469,11 @@ export function Session({
   // Fraction (saisie libre num/den) : le code num*100+den devient f1 ; -1 => rien.
   const onFractionCode = useCallback((code: number) => {
     setF1(code > 0 ? String(code) : "");
+  }, []);
+
+  // Ecriture en toutes lettres : la saisie texte est conservee telle quelle.
+  const onLettresText = useCallback((t: string) => {
+    setTexte(t);
   }, []);
 
   useEffect(() => {
@@ -1595,6 +1624,9 @@ export function Session({
         {(phase === "answering" || phase === "sure") && ex.saisie === "heure" && ex.horlogeData && (
           <HorlogeInput key={ex.key} data={ex.horlogeData} onValue={onHeureValue} />
         )}
+        {(phase === "answering" || phase === "sure") && ex.saisie === "lettres" && (
+          <LettresInput key={ex.key} onText={onLettresText} />
+        )}
         {ex.saisie === "droite" && ex.droiteData && <DroiteView data={ex.droiteData} />}
         {(phase === "answering" || phase === "sure") && ex.saisie === "pose" && ex.poseData && (
           <PoseView
@@ -1715,7 +1747,7 @@ export function Session({
                   <button className="kk-btn kk-btn--accent" onClick={doValidate}>Oui, je valide</button>
                 </div>
               </div>
-            ) : ex.saisie === "compare" || ex.saisie === "qcm" || ex.saisie === "monnaie" || ex.saisie === "heure" || ex.saisie === "fraction" || ex.saisie === "fraction_num" ? (
+            ) : ex.saisie === "compare" || ex.saisie === "qcm" || ex.saisie === "monnaie" || ex.saisie === "heure" || ex.saisie === "fraction" || ex.saisie === "fraction_num" || ex.saisie === "lettres" ? (
               <div className="kk-row" style={{ justifyContent: "center" }}>
                 <button
                   className="kk-btn kk-btn--accent kk-btn--big"
@@ -1755,7 +1787,11 @@ export function Session({
           <div className="kk-banner kk-banner--ko">
             <span className="kk-banner__title">Ce n'est pas ca, voici comment trouver</span>
             {ex.barres && <BarModelView model={ex.barres} reveal={true} />}
-            <p style={{ margin: 0 }}>{ex.correction}</p>
+            {ex.saisie === "lettres" && diag ? (
+              <LettresCorrection diag={diag} />
+            ) : (
+              <p style={{ margin: 0 }}>{ex.correction}</p>
+            )}
             <button
               className="kk-btn kk-btn--accent kk-btn--block"
               onClick={() => {

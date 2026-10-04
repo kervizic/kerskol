@@ -65,7 +65,7 @@ const NUM: Row[] = [
   ["MA.NUM.LIRE_ECRIRE", 1, "lire", "lecture", "cpa_barres", "aucun", "lire_nombre", { type: "lire", max: 100 }],
   ["MA.NUM.LIRE_ECRIRE", 2, "lire", "lecture", "exemples_estompes", "aucun", "ecrire_nombre", { type: "ecrire", max: 1000 }],
   ["MA.NUM.LIRE_ECRIRE", 3, "lire", "lecture", "variation", "aucun", "ecrire_nombre", { type: "ecrire", max: 9999 }],
-  ["MA.NUM.LIRE_ECRIRE", 4, "lire", "lecture", "probleme_dabord", "aucun", "lire_nombre", { type: "lire", max: 9999 }],
+  ["MA.NUM.LIRE_ECRIRE", 4, "lire", "lecture", "probleme_dabord", "aucun", "ecrire_en_lettres", { type: "ecrire_lettres", min: 100, max: 10000 }],
 
   ["MA.NUM.DECOMPOSER", 1, "decomposer", "decomposition", "cpa_barres", "aucun", "decomposition_rangs", { type: "decomposer", ranks: ["c", "d", "u"], max: 999 }],
   ["MA.NUM.DECOMPOSER", 2, "decomposer", "decomposition", "exemples_estompes", "aucun", "decomposition_rangs", { type: "decomposer", ranks: ["m", "c", "d", "u"], min: 1000, max: 9999 }],

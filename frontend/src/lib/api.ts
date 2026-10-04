@@ -4,6 +4,7 @@
 import { supabase } from "./supabase";
 import { purgeKerskolStorage } from "./authReset";
 import { computeVerif, type VerifOp, type VerifOp2 } from "../domain/calcul/generator";
+import { estJuste } from "../domain/diagnostic";
 import {
   isDemo,
   DEMO_COMPETENCES,
@@ -498,8 +499,12 @@ export interface ReponseInsert {
   b: number; //   ...operande b (la reponse attendue en decoule cote serveur)
   op2?: VerifOp2 | null; // seconde etape (problemes a deux etapes), sinon null
   c?: number | null; //   operande de la seconde etape, sinon null
-  reponse: number; // saisie principale de l'enfant
+  reponse: number; // saisie principale de l'enfant (pour op 'lettres' : le nombre)
   reste: number | null; // saisie du reste (exercices a 2 champs), sinon null
+  // Ecriture en toutes lettres (op 'lettres') : la saisie TEXTE de l'enfant, et le
+  // type de faute diagnostique cote client (INDICATIF ; le serveur reste juge).
+  reponse_texte?: string | null;
+  type_faute?: string | null;
   fields: 1 | 2;
   temps_ms: number | null;
   correction_lue: boolean;
@@ -538,7 +543,11 @@ export async function insertReponse(row: ReponseInsert): Promise<ReponseResult> 
       op: row.op, a: row.a, b: row.b,
       op2: row.op2 ?? undefined, c: row.c ?? undefined,
     });
-    const correct = row.reponse === answer && (row.fields < 2 || row.reste === reste);
+    // Ecriture en lettres : on juge le TEXTE (trad ou 1990), comme le serveur.
+    const correct =
+      row.op === "lettres"
+        ? estJuste(row.a, row.reponse_texte ?? "")
+        : row.reponse === answer && (row.fields < 2 || row.reste === reste);
     const p = DEMO_PROFILS.find((x) => x.id === row.profil_id);
     if (p) {
       const tooFast = row.temps_ms != null && row.temps_ms < 1500;
@@ -570,6 +579,8 @@ export async function insertReponse(row: ReponseInsert): Promise<ReponseResult> 
     p_placement: row.placement,
     p_repondu_le: row.repondu_le,
     p_mode: row.mode ?? "seance",
+    p_reponse_texte: row.reponse_texte ?? null,
+    p_type_faute: row.type_faute ?? null,
   });
   if (error) throw error;
   const d = (data ?? {}) as { correct?: boolean; monnaie?: number | null; deja?: boolean };

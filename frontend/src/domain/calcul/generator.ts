@@ -20,6 +20,7 @@ import { makeRng, intBetween, pick, shuffle, type Rng } from "./rng";
 import { buildProbleme } from "./problemes";
 import { buildMesure } from "./measures";
 import { buildFraction } from "./fractions";
+import { enLettresFr } from "../diagnostic/lettres";
 
 export type Forme =
   | "resultat"
@@ -46,10 +47,13 @@ export type Support = "rectangle" | "droite" | "aucun" | null;
 //               envoyee au serveur, jamais un index) ;
 //   droite   -> droite graduee, l'enfant lit la valeur pointee.
 //   monnaie  -> composition d'une somme en touchant billets et pieces.
-//   heure    -> deux champs (heures + minutes) ; aux niveaux 1-3 par steppers
-//               tactiles, au niveau 4 (le plus difficile) par SAISIE DIRECTE des
-//               chiffres au pave (horlogeData.freeInput) ; la saisie reste
-//               NORMALISEE en minutes (depuis minuit pour une heure, duree sinon).
+//   heure    -> deux champs (heures + minutes) regles par BOUTONS tactiles
+//               (+1/+3 h, +1/+5/+15 min, remise a zero) a TOUS les niveaux ; la
+//               saisie a boutons compte comme reponse libre (cf. pedagogie.md) et
+//               reste NORMALISEE en minutes (depuis minuit pour une heure, duree sinon).
+//   lettres  -> champ texte LIBRE : l'enfant ecrit un nombre en toutes lettres
+//               (clavier de l'appareil) ; la saisie TEXTE est verifiee par le
+//               serveur (op 'lettres', trad + rectifiee 1990) et diagnostiquee.
 //   fraction -> l'enfant colorie/selectionne des parts d'une figure ; la saisie
 //               est le NOMBRE de parts coloriees.
 //   fraction_num -> saisie LIBRE d'une fraction : l'enfant tape le numerateur et
@@ -57,7 +61,7 @@ export type Support = "rectangle" | "droite" | "aucun" | null;
 //               envoyee est le CODE num*100+den (identique au QCM « nommer »).
 export type Saisie =
   | "clavier" | "compare" | "chiffres" | "pose" | "qcm" | "droite" | "monnaie"
-  | "heure" | "fraction" | "fraction_num";
+  | "heure" | "fraction" | "fraction_num" | "lettres";
 
 // Enonce normalise envoye au serveur pour revalidation. L'operation porte sur
 // deux operandes et son resultat est la reponse attendue :
@@ -75,7 +79,10 @@ export type Saisie =
 // achete 3 cahiers a 4 €. Elle paie avec un billet de 20 €. Combien lui rend-on ? »
 // -> r1 = 3 × 4 = 12, reponse = 20 - 12 = 8. Le serveur refuse un rendu negatif
 // (c >= r1) ; les montants d'argent sont des euros entiers.
-export type VerifOp = "add" | "sub" | "mul" | "div" | "cmp" | "val";
+// `lettres` : l'enonce porte un NOMBRE (a) et la reponse est du TEXTE (ecriture
+// en toutes lettres) ; la verification est faite a part (serveur : verif_lettres,
+// client : domain/diagnostic). computeVerif renvoie a (le nombre) pour l'invariant.
+export type VerifOp = "add" | "sub" | "mul" | "div" | "cmp" | "val" | "lettres";
 export type VerifOp2 = "add" | "sub" | "mul" | "div" | "rsub";
 export interface Verif {
   op: VerifOp;
@@ -99,6 +106,9 @@ function applyOp(op: VerifOp, a: number, b: number): { answer: number; reste: nu
     case "cmp":
       return { answer: a < b ? 0 : a === b ? 1 : 2, reste: null };
     case "val":
+      return { answer: a, reste: null };
+    case "lettres":
+      // La reponse est du texte ; a porte le nombre a ecrire (invariant answer=a).
       return { answer: a, reste: null };
   }
 }
@@ -229,7 +239,6 @@ export interface HorlogeData {
   minuteStep: number; // pas de saisie des minutes
   hoursMax: number; // 12 par defaut
   digital?: boolean; // afficher aussi l'heure en chiffres sous le cadran
-  freeInput?: boolean; // niveau 4 : saisie directe des chiffres au pave (pas de steppers)
 }
 // Regle graduee (SVG) : un segment de `length` unites, graduation `max` unites,
 // pas `step`. L'enfant lit la longueur (saisie clavier).
@@ -953,6 +962,22 @@ function buildNumeration(src: ExCalcul, rng: Rng, base: Base): GeneratedExercise
       answer: n,
       verif: { op: "val", a: n, b: 0 },
       correction: `${n} se lit « ${enLettres(n)} ».`,
+    };
+  }
+
+  // --- Ecrire EN LETTRES (chiffres -> lettres, saisie TEXTE libre, N4) ---
+  // L'enfant tape le nombre en toutes lettres. Le serveur (op 'lettres') accepte
+  // l'orthographe traditionnelle OU rectifiee 1990 ; le diagnostic client
+  // identifie le type de faute. La correction affiche l'ecriture traditionnelle.
+  if (type === "ecrire_lettres") {
+    const n = intBetween(rng, Math.max(min, 1), max);
+    return {
+      ...base,
+      saisie: "lettres",
+      prompt: `Écris en lettres le nombre ${n}.`,
+      answer: n,
+      verif: { op: "lettres", a: n, b: 0 },
+      correction: `${n} s'écrit « ${enLettresFr(n, "trad")} ».`,
     };
   }
 
