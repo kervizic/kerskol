@@ -58,7 +58,8 @@ export function LegalLinks() {
     <div className="kk-legal">
       <a href="/mentions-legales">Mentions legales</a>·
       <a href="/confidentialite">Confidentialite</a>·
-      <a href="/conditions">Conditions</a>
+      <a href="/conditions">Conditions</a>·
+      <a href="/credits">Credits</a>
     </div>
   );
 }
