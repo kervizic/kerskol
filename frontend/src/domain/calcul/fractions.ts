@@ -60,21 +60,38 @@ export function buildFraction(src: ExCalcul, rng: Rng, base: Base): GeneratedExe
   const type = pick(rng, (p.types as string[] | undefined) || ["nommer"]);
   const dens = (p.dens as number[] | undefined) || [2, 3, 4];
 
-  // --- Nommer la fraction coloriee (QCM + figure) ---
+  // --- Nommer la fraction coloriee (figure) ---
+  // QCM au niveau 1 (amorce en douceur) ; SAISIE LIBRE du numerateur et du
+  // denominateur des le niveau 2 (regle pedagogique « reponse libre » + regle
+  // transverse du referentiel : QCM au seul niveau 1, saisie ensuite). Le
+  // contrat serveur est identique : la saisie envoyee est le CODE num*100+den
+  // (verif val), que ce soit par QCM ou par saisie libre.
   if (type === "nommer") {
     const den = pick(rng, dens);
     const num = intBetween(rng, 1, den - 1);
     const shape = pick(rng, SHAPES);
     const code = fracCode(num, den);
+    const correction = `La figure est partagee en ${den} parts egales, ${num} ${num > 1 ? "sont" : "est"} coloriee${num > 1 ? "s" : ""} : c'est ${num}/${den}.`;
+    if (base.niveau <= 1) {
+      return {
+        ...base,
+        saisie: "qcm",
+        options: nommerOptions(rng, num, den),
+        fractionData: { num, den, shape },
+        prompt: "Quelle fraction de la figure est coloriee ?",
+        answer: code,
+        verif: { op: "val", a: code, b: 0 },
+        correction,
+      };
+    }
     return {
       ...base,
-      saisie: "qcm",
-      options: nommerOptions(rng, num, den),
+      saisie: "fraction_num",
       fractionData: { num, den, shape },
-      prompt: "Quelle fraction de la figure est coloriee ?",
+      prompt: "Ecris la fraction de la figure qui est coloriee.",
       answer: code,
       verif: { op: "val", a: code, b: 0 },
-      correction: `La figure est partagee en ${den} parts egales, ${num} ${num > 1 ? "sont" : "est"} coloriee${num > 1 ? "s" : ""} : c'est ${num}/${den}.`,
+      correction,
     };
   }
 

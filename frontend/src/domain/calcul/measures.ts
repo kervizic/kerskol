@@ -102,8 +102,11 @@ function buildHeure(src: ExCalcul, rng: Rng, base: Base): GeneratedExercise {
   const m = intBetween(rng, 0, Math.floor(59 / step)) * step;
   const mins = h * 60 + m;
   const saisieQcm = p.saisie === "qcm";
+  // Niveau 4 (le plus difficile) : saisie directe des chiffres au pave, pas de
+  // steppers +1/+5/+15 (regle pedagogique « reponse libre au N4 »).
+  const freeInput = base.niveau >= 4;
 
-  const horlogeData = { showHours: h, showMinutes: m, minuteStep: step, hoursMax: 12 };
+  const horlogeData = { showHours: h, showMinutes: m, minuteStep: step, hoursMax: 12, freeInput };
   const correction = `La petite aiguille est sur ${h} et la grande indique ${m} minute${m > 1 ? "s" : ""} : il est ${fmtHeure(h, m)}.`;
 
   if (saisieQcm) {

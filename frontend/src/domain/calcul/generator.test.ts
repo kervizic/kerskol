@@ -356,8 +356,17 @@ describe("fractions simples : saisies et verif normalise", () => {
         expect(computeVerif(g.verif).answer).toBe(g.answer);
         expect(g.answer).toBeGreaterThanOrEqual(0);
         if (g.saisie === "qcm") {
+          expect(niveau).toBe(1); // QCM « nommer » seulement au niveau 1 (amorce)
           expect(g.fractionData).toBeTruthy();
           expect(g.options!.some((o) => o.value === g.answer)).toBe(true);
+          expect(g.answer).toBe(g.verif.a); // code = num*100+den
+        }
+        if (g.saisie === "fraction_num") {
+          // Saisie libre num/den (niveau >= 2) : meme contrat que le QCM (code).
+          expect(niveau).toBeGreaterThanOrEqual(2);
+          expect(g.fractionData).toBeTruthy();
+          expect(g.options).toBeUndefined();
+          expect(g.verif.op).toBe("val");
           expect(g.answer).toBe(g.verif.a); // code = num*100+den
         }
         if (g.saisie === "fraction") {
@@ -369,6 +378,48 @@ describe("fractions simples : saisies et verif normalise", () => {
           expect(g.compareLabels).toBeTruthy();
         }
       }
+    }
+  });
+});
+
+describe("regle pedagogique : reponse libre au niveau le plus difficile (N4)", () => {
+  it("ranger (NUM.COMPARER N4) : saisie libre au clavier, plus de QCM, verif val", () => {
+    const src = SEED_SOURCES.find((s) => s.competence === "MA.NUM.COMPARER" && s.niveau === 4)!;
+    for (let s = 1; s <= 40; s++) {
+      const g = generateExercise(src, s * 19 + 4);
+      expect(g.saisie).toBe("clavier");
+      expect(g.options).toBeUndefined();
+      expect(g.verif.op).toBe("val");
+      expect(computeVerif(g.verif).answer).toBe(g.answer);
+    }
+  });
+  it("heure (MES.HEURE N4, lecture) : saisie directe des chiffres (freeInput)", () => {
+    const src = SEED_SOURCES.find((s) => s.competence === "MA.MES.HEURE" && s.niveau === 4)!;
+    let sawLire = false;
+    for (let s = 1; s <= 60; s++) {
+      const g = generateExercise(src, s * 23 + 4);
+      if (g.saisie === "heure") {
+        sawLire = true;
+        expect(g.horlogeData!.freeInput).toBe(true);
+      }
+    }
+    expect(sawLire).toBe(true);
+  });
+  it("heure (MES.HEURE N1-N3) : steppers conserves (pas de freeInput)", () => {
+    for (const niveau of [2, 3]) {
+      const src = SEED_SOURCES.find((s) => s.competence === "MA.MES.HEURE" && s.niveau === niveau)!;
+      for (let s = 1; s <= 30; s++) {
+        const g = generateExercise(src, s * 29 + niveau);
+        if (g.saisie === "heure") expect(g.horlogeData!.freeInput).toBeFalsy();
+      }
+    }
+  });
+  it("exception : lire un nombre (NUM.LIRE_ECRIRE N4) reste un QCM (lettres)", () => {
+    const src = SEED_SOURCES.find((s) => s.competence === "MA.NUM.LIRE_ECRIRE" && s.niveau === 4)!;
+    for (let s = 1; s <= 30; s++) {
+      const g = generateExercise(src, s * 13 + 4);
+      expect(g.saisie).toBe("qcm");
+      expect(g.options!.some((o) => o.value === g.answer)).toBe(true);
     }
   });
 });

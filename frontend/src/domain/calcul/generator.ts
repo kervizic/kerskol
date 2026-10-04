@@ -46,13 +46,18 @@ export type Support = "rectangle" | "droite" | "aucun" | null;
 //               envoyee au serveur, jamais un index) ;
 //   droite   -> droite graduee, l'enfant lit la valeur pointee.
 //   monnaie  -> composition d'une somme en touchant billets et pieces.
-//   heure    -> deux champs (heures + minutes) avec steppers ; la saisie est
+//   heure    -> deux champs (heures + minutes) ; aux niveaux 1-3 par steppers
+//               tactiles, au niveau 4 (le plus difficile) par SAISIE DIRECTE des
+//               chiffres au pave (horlogeData.freeInput) ; la saisie reste
 //               NORMALISEE en minutes (depuis minuit pour une heure, duree sinon).
 //   fraction -> l'enfant colorie/selectionne des parts d'une figure ; la saisie
 //               est le NOMBRE de parts coloriees.
+//   fraction_num -> saisie LIBRE d'une fraction : l'enfant tape le numerateur et
+//               le denominateur (deux cases separees par une barre) ; la saisie
+//               envoyee est le CODE num*100+den (identique au QCM « nommer »).
 export type Saisie =
   | "clavier" | "compare" | "chiffres" | "pose" | "qcm" | "droite" | "monnaie"
-  | "heure" | "fraction";
+  | "heure" | "fraction" | "fraction_num";
 
 // Enonce normalise envoye au serveur pour revalidation. L'operation porte sur
 // deux operandes et son resultat est la reponse attendue :
@@ -224,6 +229,7 @@ export interface HorlogeData {
   minuteStep: number; // pas de saisie des minutes
   hoursMax: number; // 12 par defaut
   digital?: boolean; // afficher aussi l'heure en chiffres sous le cadran
+  freeInput?: boolean; // niveau 4 : saisie directe des chiffres au pave (pas de steppers)
 }
 // Regle graduee (SVG) : un segment de `length` unites, graduation `max` unites,
 // pas `step`. L'enfant lit la longueur (saisie clavier).
@@ -1055,21 +1061,22 @@ function buildNumeration(src: ExCalcul, rng: Rng, base: Base): GeneratedExercise
     };
   }
 
-  // --- Ranger (le plus grand) ---
+  // --- Ranger (le plus grand) : saisie LIBRE au niveau le plus difficile ---
+  // On liste les nombres dans l'enonce et l'enfant ECRIT le plus grand (pas de
+  // QCM : au niveau 4, le hasard du choix est evite). Contrat serveur inchange
+  // (val : la saisie EST la valeur attendue).
   if (type === "ranger") {
     const k = Number(p.n ?? 3);
     const vals = new Set<number>();
     while (vals.size < k) vals.add(intBetween(rng, min, max));
-    const list = [...vals];
+    const list = shuffle(rng, [...vals]);
     const answer = Math.max(...list);
     return {
       ...base,
-      saisie: "qcm",
-      options: shuffle(rng, list).map((v) => ({ label: String(v), value: v })),
-      prompt: "Quel est le plus grand de ces nombres ?",
+      prompt: `Parmi ${list.join(", ")}, quel est le plus grand ?`,
       answer,
       verif: { op: "val", a: answer, b: 0 },
-      correction: `Le plus grand est ${answer}.`,
+      correction: `Parmi ${list.join(", ")}, le plus grand est ${answer}.`,
     };
   }
 
