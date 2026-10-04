@@ -228,9 +228,239 @@ function buildDuree(src: ExCalcul, rng: Rng, base: Base): GeneratedExercise {
   };
 }
 
+// ---------------------------- MA.MES.LONGUEURS -----------------------------
+// Codes d'unite envoyes au serveur (QCM « unite adaptee ») : la saisie EST la
+// valeur du code (verif val). Le serveur revalide par simple egalite.
+const LEN_CODE: Record<string, number> = { mm: 1, cm: 2, m: 3, km: 4 };
+// Objets du quotidien et unite adaptee (reference CE2).
+const LEN_OBJETS: { obj: string; u: string }[] = [
+  { obj: "la longueur d'un crayon", u: "cm" },
+  { obj: "la longueur d'une gomme", u: "cm" },
+  { obj: "la largeur d'un timbre", u: "cm" },
+  { obj: "l'epaisseur d'une piece de monnaie", u: "mm" },
+  { obj: "la longueur d'une fourmi", u: "mm" },
+  { obj: "l'epaisseur d'un cahier", u: "mm" },
+  { obj: "la hauteur d'une porte", u: "m" },
+  { obj: "la longueur d'une voiture", u: "m" },
+  { obj: "la largeur d'une piscine", u: "m" },
+  { obj: "la distance entre deux villes", u: "km" },
+  { obj: "la longueur d'une route", u: "km" },
+  { obj: "la distance d'un marathon", u: "km" },
+];
+
+function buildLongueur(src: ExCalcul, rng: Rng, base: Base): GeneratedExercise {
+  const p = src.params || {};
+  const type = pick(rng, (p.types as string[] | undefined) || ["unite"]);
+
+  // --- Choisir l'unite adaptee (QCM : la valeur = code de l'unite) ---
+  if (type === "unite") {
+    const o = pick(rng, LEN_OBJETS);
+    const code = LEN_CODE[o.u];
+    const options = shuffle(rng, ["mm", "cm", "m", "km"]).map((u) => ({ label: u, value: LEN_CODE[u] }));
+    return {
+      ...base,
+      saisie: "qcm",
+      options,
+      prompt: `Pour mesurer ${o.obj}, quelle unite choisis-tu ?`,
+      answer: code,
+      verif: { op: "val", a: code, b: 0 },
+      correction: `${o.obj.charAt(0).toUpperCase()}${o.obj.slice(1)} se mesure en ${o.u}.`,
+    };
+  }
+
+  // --- Conversions simples (1 cm = 10 mm, 1 m = 100 cm, 1 km = 1000 m) ---
+  if (type === "conversion") {
+    const paires = [
+      { from: "cm", to: "mm", f: 10, xmax: 30 },
+      { from: "m", to: "cm", f: 100, xmax: 50 },
+      { from: "km", to: "m", f: 1000, xmax: 9 },
+    ];
+    const pr = pick(rng, paires);
+    const x = intBetween(rng, 1, pr.xmax);
+    if (rng() < 0.6) {
+      const answer = x * pr.f;
+      return {
+        ...base,
+        prompt: `${x} ${pr.from} = [q] ${pr.to}`,
+        answer,
+        verif: { op: "mul", a: x, b: pr.f },
+        correction: `1 ${pr.from} = ${pr.f} ${pr.to}, donc ${x} ${pr.from} = ${x} × ${pr.f} = ${answer} ${pr.to}.`,
+      };
+    }
+    const grand = x * pr.f;
+    return {
+      ...base,
+      prompt: `${grand} ${pr.to} = [q] ${pr.from}`,
+      answer: x,
+      verif: { op: "div", a: grand, b: pr.f },
+      correction: `${pr.f} ${pr.to} = 1 ${pr.from}, donc ${grand} ÷ ${pr.f} = ${x} ${pr.from}.`,
+    };
+  }
+
+  // --- Comparer deux longueurs (normalisees dans la plus petite unite) ---
+  if (type === "comparer") {
+    const paires = [
+      { ua: "cm", ub: "mm", f: 10, amax: 9, bmax: 90 },
+      { ua: "m", ub: "cm", f: 100, amax: 5, bmax: 500 },
+      { ua: "km", ub: "m", f: 1000, amax: 5, bmax: 5000 },
+    ];
+    const pr = pick(rng, paires);
+    const a = intBetween(rng, 1, pr.amax);
+    // Parfois egal (valeur ronde), sinon un voisin.
+    let b: number;
+    const r = rng();
+    if (r < 0.25) b = a * pr.f;
+    else b = intBetween(rng, 1, pr.bmax);
+    const normA = a * pr.f;
+    const answer = normA < b ? 0 : normA === b ? 1 : 2;
+    const signe = answer === 0 ? "<" : answer === 1 ? "=" : ">";
+    return {
+      ...base,
+      saisie: "compare",
+      compareLabels: { left: `${a} ${pr.ua}`, right: `${b} ${pr.ub}` },
+      prompt: "Place le bon signe entre ces deux longueurs.",
+      answer,
+      verif: { op: "cmp", a: normA, b },
+      correction: `${a} ${pr.ua} = ${normA} ${pr.ub}. Donc ${a} ${pr.ua} ${signe} ${b} ${pr.ub}.`,
+    };
+  }
+
+  // --- Mesurer un segment sur une regle graduee (lecture, saisie clavier) ---
+  const max = Number(p.max ?? 15);
+  const length = intBetween(rng, 2, max - 1);
+  return {
+    ...base,
+    regleData: { length, max, step: 5, unit: "cm" },
+    prompt: `Quelle est la longueur du trait rouge ? [q] cm`,
+    answer: length,
+    verif: { op: "val", a: length, b: 0 },
+    correction: `Le trait va de 0 a ${length} : il mesure ${length} cm.`,
+  };
+}
+
+// ----------------------- MA.MES.MASSES_CONTENANCES -------------------------
+// Codes d'unite (QCM). Masses : g, kg. Contenances : mL, cL, dL, L.
+const MASS_CODE: Record<string, number> = { g: 10, kg: 11, mL: 20, cL: 21, dL: 22, L: 23 };
+const MASS_OBJETS: { obj: string; u: string; opts: string[] }[] = [
+  { obj: "la masse d'une pomme", u: "g", opts: ["g", "kg", "L", "cL"] },
+  { obj: "la masse d'un stylo", u: "g", opts: ["g", "kg", "mL", "L"] },
+  { obj: "la masse d'un sac de sucre", u: "kg", opts: ["g", "kg", "L", "cL"] },
+  { obj: "la masse d'un enfant", u: "kg", opts: ["g", "kg", "mL", "L"] },
+  { obj: "la quantite d'eau dans un verre", u: "cL", opts: ["mL", "cL", "L", "kg"] },
+  { obj: "la quantite d'eau dans une bouteille", u: "L", opts: ["mL", "cL", "L", "g"] },
+  { obj: "une cuillere de sirop", u: "mL", opts: ["mL", "cL", "L", "kg"] },
+  { obj: "l'eau d'une baignoire", u: "L", opts: ["cL", "dL", "L", "g"] },
+];
+
+function buildMasseContenance(src: ExCalcul, rng: Rng, base: Base): GeneratedExercise {
+  const p = src.params || {};
+  const type = pick(rng, (p.types as string[] | undefined) || ["unite"]);
+
+  // --- Choisir l'unite adaptee (QCM) ---
+  if (type === "unite") {
+    const o = pick(rng, MASS_OBJETS);
+    const code = MASS_CODE[o.u];
+    const options = shuffle(rng, o.opts).map((u) => ({ label: u, value: MASS_CODE[u] }));
+    return {
+      ...base,
+      saisie: "qcm",
+      options,
+      prompt: `Pour mesurer ${o.obj}, quelle unite choisis-tu ?`,
+      answer: code,
+      verif: { op: "val", a: code, b: 0 },
+      correction: `On exprime ${o.obj} en ${o.u}.`,
+    };
+  }
+
+  // --- Conversions (1 kg = 1000 g ; 1 L = 10 dL = 100 cL) ---
+  if (type === "conversion") {
+    const paires = [
+      { from: "kg", to: "g", f: 1000, xmax: 9 },
+      { from: "L", to: "cL", f: 100, xmax: 9 },
+      { from: "L", to: "dL", f: 10, xmax: 9 },
+    ];
+    const pr = pick(rng, paires);
+    const x = intBetween(rng, 1, pr.xmax);
+    if (rng() < 0.6) {
+      const answer = x * pr.f;
+      return {
+        ...base,
+        prompt: `${x} ${pr.from} = [q] ${pr.to}`,
+        answer,
+        verif: { op: "mul", a: x, b: pr.f },
+        correction: `1 ${pr.from} = ${pr.f} ${pr.to}, donc ${x} ${pr.from} = ${x} × ${pr.f} = ${answer} ${pr.to}.`,
+      };
+    }
+    const grand = x * pr.f;
+    return {
+      ...base,
+      prompt: `${grand} ${pr.to} = [q] ${pr.from}`,
+      answer: x,
+      verif: { op: "div", a: grand, b: pr.f },
+      correction: `${pr.f} ${pr.to} = 1 ${pr.from}, donc ${grand} ÷ ${pr.f} = ${x} ${pr.from}.`,
+    };
+  }
+
+  // --- Comparer (normalisees dans la plus petite unite) ---
+  if (type === "comparer") {
+    const paires = [
+      { ua: "kg", ub: "g", f: 1000, amax: 5, bmax: 5000 },
+      { ua: "L", ub: "cL", f: 100, amax: 5, bmax: 500 },
+      { ua: "L", ub: "dL", f: 10, amax: 9, bmax: 90 },
+    ];
+    const pr = pick(rng, paires);
+    const a = intBetween(rng, 1, pr.amax);
+    let b: number;
+    const r = rng();
+    if (r < 0.25) b = a * pr.f;
+    else b = intBetween(rng, 1, pr.bmax);
+    const normA = a * pr.f;
+    const answer = normA < b ? 0 : normA === b ? 1 : 2;
+    const signe = answer === 0 ? "<" : answer === 1 ? "=" : ">";
+    return {
+      ...base,
+      saisie: "compare",
+      compareLabels: { left: `${a} ${pr.ua}`, right: `${b} ${pr.ub}` },
+      prompt: "Place le bon signe entre ces deux mesures.",
+      answer,
+      verif: { op: "cmp", a: normA, b },
+      correction: `${a} ${pr.ua} = ${normA} ${pr.ub}. Donc ${a} ${pr.ua} ${signe} ${b} ${pr.ub}.`,
+    };
+  }
+
+  // --- Lire une balance (masse) ou un verre gradue (contenance) ---
+  const kind = pick(rng, (p.lecture as string[] | undefined) || ["balance", "verre"]) as "balance" | "verre";
+  if (kind === "balance") {
+    const max = 1000;
+    const step = 100;
+    const value = intBetween(rng, 1, 9) * step; // multiple de 100 g, < 1 kg
+    return {
+      ...base,
+      balanceData: { value, max, step, unit: "g", kind: "balance" },
+      prompt: `Combien pese l'objet sur la balance ? [q] g`,
+      answer: value,
+      verif: { op: "val", a: value, b: 0 },
+      correction: `L'aiguille pointe sur ${value} : l'objet pese ${value} g.`,
+    };
+  }
+  const max = 100;
+  const step = 10;
+  const value = intBetween(rng, 1, 9) * step; // multiple de 10 cL
+  return {
+    ...base,
+    balanceData: { value, max, step, unit: "cL", kind: "verre" },
+    prompt: `Quelle quantite de liquide y a-t-il dans le verre ? [q] cL`,
+    answer: value,
+    verif: { op: "val", a: value, b: 0 },
+    correction: `Le niveau atteint ${value} : il y a ${value} cL.`,
+  };
+}
+
 export function buildMesure(src: ExCalcul, rng: Rng, base: Base): GeneratedExercise {
   if (src.competence === "MA.MES.HEURE") return buildHeure(src, rng, base);
   if (src.competence === "MA.MES.DUREES") return buildDuree(src, rng, base);
+  if (src.competence === "MA.MES.LONGUEURS") return buildLongueur(src, rng, base);
+  if (src.competence === "MA.MES.MASSES_CONTENANCES") return buildMasseContenance(src, rng, base);
   // Repli defensif (ne devrait pas arriver : dispatch par prefixe en amont).
   return {
     ...base,

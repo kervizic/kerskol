@@ -135,6 +135,16 @@ const MES: Row[] = [
   ["MA.MES.DUREES", 2, "duree", "mesure", "exemples_estompes", "aucun", "de_heure_a_heure", { types: ["conversion_hm", "de_a"], demi: true, minuteStep: 15 }],
   ["MA.MES.DUREES", 3, "duree", "mesure", "variation", "aucun", "heure_arrivee", { types: ["de_a", "arrivee"], minuteStep: 15 }],
   ["MA.MES.DUREES", 4, "duree", "mesure", "probleme_dabord", "aucun", "jours_semaines", { types: ["arrivee", "jours_semaines", "de_a"], minuteStep: 5 }],
+
+  ["MA.MES.LONGUEURS", 1, "longueur", "mesure", "cpa_barres", "aucun", "unite_adaptee", { types: ["unite"] }],
+  ["MA.MES.LONGUEURS", 2, "longueur", "mesure", "exemples_estompes", "aucun", "conversions_longueur", { types: ["conversion"] }],
+  ["MA.MES.LONGUEURS", 3, "longueur", "mesure", "variation", "aucun", "comparer_longueurs", { types: ["comparer", "conversion"] }],
+  ["MA.MES.LONGUEURS", 4, "longueur", "mesure", "probleme_dabord", "aucun", "mesurer_regle", { types: ["regle", "comparer"], max: 20 }],
+
+  ["MA.MES.MASSES_CONTENANCES", 1, "masse", "mesure", "cpa_barres", "aucun", "unite_adaptee", { types: ["unite"] }],
+  ["MA.MES.MASSES_CONTENANCES", 2, "masse", "mesure", "exemples_estompes", "aucun", "conversions_masse", { types: ["conversion"] }],
+  ["MA.MES.MASSES_CONTENANCES", 3, "masse", "mesure", "variation", "aucun", "comparer_mesures", { types: ["comparer", "conversion"] }],
+  ["MA.MES.MASSES_CONTENANCES", 4, "masse", "mesure", "probleme_dabord", "aucun", "lire_balance_verre", { types: ["lecture"], lecture: ["balance", "verre"] }],
 ];
 
 const TABLE_STRATS: Record<number, string> = {

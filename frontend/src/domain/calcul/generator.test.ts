@@ -319,6 +319,32 @@ describe("mesures : heure et durees (saisie + verif normalise en minutes)", () =
   });
 });
 
+describe("mesures : longueurs, masses et contenances", () => {
+  const codesAllowed = new Set(["val", "mul", "div", "cmp"]);
+  for (const comp of ["MA.MES.LONGUEURS", "MA.MES.MASSES_CONTENANCES"]) {
+    it(`${comp} : op autorisee, computeVerif == answer, compare etiquete`, () => {
+      for (const niveau of [1, 2, 3, 4]) {
+        const src = SEED_SOURCES.find((s) => s.competence === comp && s.niveau === niveau)!;
+        for (let s = 1; s <= 50; s++) {
+          const g = generateExercise(src, s * 43 + niveau);
+          expect(codesAllowed.has(g.verif.op)).toBe(true);
+          expect(computeVerif(g.verif).answer).toBe(g.answer);
+          expect(g.answer).toBeGreaterThanOrEqual(0);
+          if (g.saisie === "compare") {
+            expect([0, 1, 2]).toContain(g.answer);
+            expect(g.compareLabels).toBeTruthy();
+          }
+          if (g.saisie === "qcm") {
+            expect(g.options!.some((o) => o.value === g.answer)).toBe(true);
+          }
+          if (g.regleData) expect(g.answer).toBe(g.regleData.length);
+          if (g.balanceData) expect(g.answer).toBe(g.balanceData.value);
+        }
+      }
+    });
+  }
+});
+
 describe("correction : strategies des tables", () => {
   it("table 7 -> 5 fois + 2 fois", () => {
     const src: ExCalcul = {

@@ -274,6 +274,7 @@ export interface GeneratedExercise {
   regleData?: RegleData; // regle graduee (mesures : longueur)
   balanceData?: BalanceData; // balance / verre gradue (mesures : masse / contenance)
   fractionData?: FractionData; // figure de fraction (nommer / colorier)
+  compareLabels?: { left: string; right: string }; // libelles affiches en mode compare (ex. « 3 cm » / « 25 mm »)
   barres?: BarModel; // schema en barres (aide optionnelle + correction)
   verif: Verif; // enonce normalise pour revalidation serveur
   correction: string; // correction expliquee
@@ -902,7 +903,8 @@ export type Base = Omit<
   GeneratedExercise,
   | "prompt" | "answer" | "verif" | "correction"
   | "supportData" | "options" | "poseData" | "chiffresData" | "droiteData"
-  | "moneyData" | "horlogeData" | "regleData" | "balanceData" | "fractionData" | "barres"
+  | "moneyData" | "horlogeData" | "regleData" | "balanceData" | "fractionData"
+  | "compareLabels" | "barres"
 >;
 
 // Trois distracteurs plausibles pour la lecture d'un nombre (voisins, chiffres

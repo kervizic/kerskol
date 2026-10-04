@@ -37,6 +37,8 @@ import type {
   QcmOption,
   MoneyData,
   HorlogeData,
+  RegleData,
+  BalanceData,
   BarModel,
 } from "../domain/calcul/generator";
 import {
@@ -224,13 +226,13 @@ function DroiteView({ data }: { data: DroiteData }) {
 
 // --- Comparaison : deux nombres encadrant le signe choisi (<, =, >) ---
 function CompareChoice({
-  a,
-  b,
+  left,
+  right,
   chosen,
   onPick,
 }: {
-  a: number;
-  b: number;
+  left: React.ReactNode;
+  right: React.ReactNode;
   chosen: number | null;
   onPick: (v: number) => void;
 }) {
@@ -241,7 +243,7 @@ function CompareChoice({
   ];
   return (
     <div className="kk-compare">
-      <span className="kk-compare__num">{a}</span>
+      <span className="kk-compare__num">{left}</span>
       <div className="kk-compare__signs">
         {signs.map((o) => (
           <button
@@ -255,7 +257,7 @@ function CompareChoice({
           </button>
         ))}
       </div>
-      <span className="kk-compare__num">{b}</span>
+      <span className="kk-compare__num">{right}</span>
     </div>
   );
 }
@@ -684,6 +686,96 @@ function HorlogeInput({
         <div className="kk-horloge-input__val" aria-label={`${m} minutes`}>{String(m).padStart(2, "0")}<span className="kk-horloge-input__unit"> min</span></div>
         <button type="button" className="kk-btn kk-horloge-input__step" aria-label="minutes moins" onClick={() => apply(h, wrapM(m - step))}>−</button>
       </div>
+    </div>
+  );
+}
+
+// --- Regle graduee (SVG) : lire la longueur d'un segment rouge. ---
+function RegleView({ data }: { data: RegleData }) {
+  const { length, max, step, unit } = data;
+  const W = 520;
+  const pad = 22;
+  const H = 96;
+  const top = 34;
+  const x = (v: number) => pad + (v / max) * (W - 2 * pad);
+  const ticks: number[] = [];
+  for (let v = 0; v <= max; v++) ticks.push(v);
+  return (
+    <div className="kk-support kk-regle">
+      <svg width="100%" height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={`regle graduee en ${unit}, trait de 0 a ${length}`}>
+        {/* Segment a mesurer (rouge), pose sur le zero de la regle. */}
+        <line x1={x(0)} y1={top - 10} x2={x(length)} y2={top - 10} stroke="#e23" strokeWidth={5} strokeLinecap="round" />
+        {/* Corps de la regle. */}
+        <rect x={pad} y={top} width={W - 2 * pad} height={40} fill="var(--kk-surface, #fff)" stroke="var(--kk-border)" strokeWidth={2} />
+        {ticks.map((v) => {
+          const big = v % step === 0;
+          return (
+            <g key={v}>
+              <line x1={x(v)} y1={top} x2={x(v)} y2={top + (big ? 18 : 9)} stroke="var(--kk-text)" strokeWidth={big ? 2 : 1} />
+              {big && (
+                <text x={x(v)} y={top + 34} textAnchor="middle" fontSize="13" fontWeight={700} fill="var(--kk-text)">
+                  {v}
+                </text>
+              )}
+            </g>
+          );
+        })}
+      </svg>
+    </div>
+  );
+}
+
+// --- Balance (echelle horizontale a aiguille) ou verre gradue (remplissage). ---
+function BalanceView({ data }: { data: BalanceData }) {
+  const { value, max, step, unit, kind } = data;
+  if (kind === "verre") {
+    const W = 180;
+    const H = 200;
+    const gx = 60;
+    const gw = 60;
+    const gTop = 16;
+    const gBot = 180;
+    const level = gBot - (value / max) * (gBot - gTop);
+    const ticks: number[] = [];
+    for (let v = 0; v <= max; v += step) ticks.push(v);
+    return (
+      <div className="kk-support kk-balance">
+        <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={`verre gradue, niveau a ${value} ${unit}`}>
+          <rect x={level < gBot ? gx : gx} y={level} width={gw} height={gBot - level} fill="color-mix(in srgb, var(--kk-accent) 45%, transparent)" />
+          <rect x={gx} y={gTop} width={gw} height={gBot - gTop} fill="none" stroke="var(--kk-border)" strokeWidth={3} />
+          {ticks.map((v) => {
+            const ty = gBot - (v / max) * (gBot - gTop);
+            return (
+              <g key={v}>
+                <line x1={gx} y1={ty} x2={gx + 12} y2={ty} stroke="var(--kk-text)" strokeWidth={2} />
+                <text x={gx - 6} y={ty + 4} textAnchor="end" fontSize="12" fontWeight={700} fill="var(--kk-text)">{v}</text>
+              </g>
+            );
+          })}
+        </svg>
+      </div>
+    );
+  }
+  // Balance : echelle horizontale graduee avec une aiguille (triangle) sur value.
+  const W = 520;
+  const pad = 26;
+  const H = 86;
+  const axisY = 54;
+  const x = (v: number) => pad + (v / max) * (W - 2 * pad);
+  const ticks: number[] = [];
+  for (let v = 0; v <= max; v += step) ticks.push(v);
+  return (
+    <div className="kk-support kk-balance">
+      <svg width="100%" height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={`balance indiquant ${value} ${unit}`}>
+        <line x1={pad} y1={axisY} x2={W - pad} y2={axisY} stroke="var(--kk-border)" strokeWidth={3} />
+        {ticks.map((v) => (
+          <g key={v}>
+            <line x1={x(v)} y1={axisY - 6} x2={x(v)} y2={axisY + 6} stroke="var(--kk-text)" strokeWidth={2} />
+            <text x={x(v)} y={axisY + 22} textAnchor="middle" fontSize="12" fontWeight={700} fill="var(--kk-text)">{v}</text>
+          </g>
+        ))}
+        <path d={`M ${x(value)} ${axisY - 26} L ${x(value) - 8} ${axisY - 8} L ${x(value) + 8} ${axisY - 8} Z`} fill="var(--kk-accent)" />
+      </svg>
     </div>
   );
 }
@@ -1166,6 +1258,8 @@ export function Session({
         />
 
         {ex.horlogeData && <HorlogeView data={ex.horlogeData} />}
+        {ex.regleData && <RegleView data={ex.regleData} />}
+        {ex.balanceData && <BalanceView data={ex.balanceData} />}
         {(phase === "answering" || phase === "sure") && ex.saisie === "heure" && ex.horlogeData && (
           <HorlogeInput key={ex.key} data={ex.horlogeData} onValue={onHeureValue} />
         )}
@@ -1193,7 +1287,12 @@ export function Session({
           />
         )}
         {(phase === "answering" || phase === "sure") && ex.saisie === "compare" && (
-          <CompareChoice a={ex.verif.a} b={ex.verif.b} chosen={choice} onPick={pickChoice} />
+          <CompareChoice
+            left={ex.compareLabels?.left ?? ex.verif.a}
+            right={ex.compareLabels?.right ?? ex.verif.b}
+            chosen={choice}
+            onPick={pickChoice}
+          />
         )}
         {(phase === "answering" || phase === "sure") && ex.saisie === "qcm" && ex.options && (
           <QcmChoice options={ex.options} chosen={choice} onPick={pickChoice} />

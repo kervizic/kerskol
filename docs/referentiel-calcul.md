@@ -220,6 +220,8 @@ existantes (aucune nouvelle opération serveur).
 |------|---------|----|----|----|----|
 | `MA.MES.HEURE` | Lire / écrire l'heure | heures pleines et demies (horloge SVG, QCM) | quarts (saisie heures+minutes) | de 5 min en 5 min | à la minute + matin/après-midi (14 h = 2 h de l'après-midi) |
 | `MA.MES.DUREES` | Durées | conversions h → min (1 h = 60 min, 1 h 30 = 90 min) | conversions + « de … à … » | « de … à … » + heure d'arrivée (départ + durée) | heure d'arrivée + jours/semaines (1 semaine = 7 jours) |
+| `MA.MES.LONGUEURS` | Longueurs (mm, cm, m, km) | choisir l'unité adaptée (QCM) | conversions (1 cm = 10 mm, 1 m = 100 cm, 1 km = 1 000 m) | comparer deux longueurs | mesurer un segment sur une règle graduée (SVG) |
+| `MA.MES.MASSES_CONTENANCES` | Masses (g, kg) et contenances (L, dL, cL) | choisir l'unité (QCM) | conversions (1 kg = 1 000 g ; 1 L = 100 cL) | comparer | lire une balance / un verre gradué (SVG) |
 
 Normalisations en `verif` : lecture/écriture d'une heure → `val` (minutes depuis
 minuit) ; conversion h → min et semaines → jours → `mul` ; jours → semaines →
@@ -233,6 +235,16 @@ minutes, `aria-label` décrivant l'heure, couleurs par variables de thème (lisi
 en clair/sombre). Pour la **lecture**, les aiguilles **sont** la question (jamais
 un indice). **Saisie `heure`** : deux steppers (heures + minutes, gros boutons
 tactiles) dont la valeur est normalisée en minutes avant envoi ; au niveau 1, QCM.
+
+**Longueurs, masses et contenances (migration 0028).** Le choix de l'unité est un
+QCM dont la **valeur** envoyée est un **code d'unité** entier (revalidé `val`). Les
+conversions se ramènent à `mul` / `div` ; les comparaisons normalisent les deux
+mesures dans la **plus petite unité commune** puis envoient `cmp` (le mode
+`compare` affiche les libellés d'origine, ex. « 3 cm » / « 25 mm », via
+`compareLabels`). La lecture d'une **règle graduée** (`RegleView`), d'une
+**balance** ou d'un **verre gradué** (`BalanceView`) se fait à la saisie clavier
+(`val`). Bornes serveur famille `MA.MES.%` : opérandes ≤ 20 000. Prérequis :
+conversions ← `MA.CM.X10_X100` ; masses/contenances ← longueurs.
 
 ### Ouverture progressive (prérequis, pas de placement_depart)
 
@@ -277,6 +289,8 @@ Un prérequis doit être atteint au **niveau 2** pour débloquer la compétence.
 | `MA.PB.DEUX_ETAPES` | PB.ADD_SUB, PB.MULT_DIV |
 | `MA.MES.HEURE` | aucun |
 | `MA.MES.DUREES` | MES.HEURE, SOMMES_DIFF |
+| `MA.MES.LONGUEURS` | X10_X100 |
+| `MA.MES.MASSES_CONTENANCES` | X10_X100, MES.LONGUEURS |
 
 ## Paramètres des exercices (`ex_calcul.params`)
 
