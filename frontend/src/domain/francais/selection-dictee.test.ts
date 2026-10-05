@@ -28,6 +28,15 @@ describe("notionCible : lacunes > frontiere > revision", () => {
     };
     expect(notionCible(ctx)).toBe("a_a");
   });
+  it("PREREQUIS ne BLOQUENT jamais : une lacune profonde passe avant la frontiere", () => {
+    // Notions 1..9 non maitrisees (frontiere = pluriel), mais lacune sur accord (#10).
+    const ctx: ContexteDictee = {
+      niveau: 1, ordre: ORDRE,
+      maitrise: {},
+      lacunes: { accord: 2 },
+    };
+    expect(notionCible(ctx)).toBe("accord"); // la lacune prime, l'ordre n'est pas un verrou
+  });
   it("REVISION quand tout est maitrise", () => {
     const maitrise: Record<string, boolean> = {};
     ORDRE.forEach((n) => (maitrise[n] = true));
@@ -73,6 +82,15 @@ describe("choisirTexteDictee : par niveau, cible la notion, pas de repetition", 
     const bank = [txt({ id: 1 }), txt({ id: 2 })];
     const ctx: ContexteDictee = { niveau: 1, ordre: ORDRE, vus: [1, 2] };
     expect(choisirTexteDictee(bank, ctx, rng0)).not.toBeNull();
+  });
+
+  it("lacune profonde SERVIE meme si notions precedentes non maitrisees", () => {
+    const bank = [
+      txt({ id: 1, notion: "pluriel" }),      // frontiere
+      txt({ id: 2, notion: "accord" }),        // lacune #10
+    ];
+    const ctx: ContexteDictee = { niveau: 1, ordre: ORDRE, maitrise: {}, lacunes: { accord: 1 } };
+    expect(choisirTexteDictee(bank, ctx, rng0)?.id).toBe(2);
   });
 
   it("repli de NIVEAU : prend le niveau disponible le plus proche", () => {
