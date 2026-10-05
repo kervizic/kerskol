@@ -194,3 +194,87 @@ describe("composeSession : competences debloquees uniquement", () => {
     expect(codes.has("MA.CM.ADDITION") || codes.has("MA.CM.X10_X100")).toBe(true);
   });
 });
+
+// ---------------------------------------------------------------------------
+// Compositeur MULTI-MATIERES (maths + francais) : choix par BESOIN sur
+// l'ensemble des competences actives, sans quota ni tirage de matiere, avec un
+// garde-fou de variete (cf. docs/pedagogie.md).
+// ---------------------------------------------------------------------------
+const FR_CODES = ["FR.CONJ.PRESENT", "FR.CONJ.FUTUR", "FR.CONJ.IMPARFAIT", "FR.ORTHO.DETECTIVE"];
+const COMPETENCES_FR: Competence[] = FR_CODES.map((code, i) => ({
+  code,
+  matiere: "FR",
+  domaine: code.startsWith("FR.ORTHO") ? "orthographe" : "conjugaison",
+  libelle: code,
+  ordre: 500 + i,
+  nb_niveaux: 4,
+  actif: true,
+}));
+const SOURCES_FR: typeof SEED_SOURCES = FR_CODES.map((code): (typeof SEED_SOURCES)[number] => ({
+  exerciceId: `fr-${code}`,
+  competence: code,
+  niveau: 2,
+  methode: null,
+  operation: code.startsWith("FR.ORTHO") ? "dictee" : "conj",
+  forme: code.startsWith("FR.ORTHO") ? "dictee" : "conjugaison",
+  params: {},
+  support: null,
+  correctionStrategie: null,
+}));
+
+// Progression « tout solide » pour TOUTES les competences de maths (neutralise
+// les deblocages de classe : rien n'est en besoin cote maths par defaut).
+function maSolide(): ProgressionDetail[] {
+  return COMPETENCES.map((c) => prog(c.code, { ema_courte: 0.9, niveau: 2, niveau_max_atteint: 2 }));
+}
+
+describe("composeSession : maths + francais (besoin, pas de quota)", () => {
+  it("francais seul en besoin, maths tout solide -> seance 100% francais (pas de quota maths)", () => {
+    const progress = [
+      ...maSolide(),
+      ...FR_CODES.map((c) => prog(c, { ema_courte: 0.5, niveau: 2, niveau_max_atteint: 2 })),
+    ];
+    const plan = composeSession({
+      competences: [...COMPETENCES, ...COMPETENCES_FR],
+      prerequis: PREREQUIS, // aucun prerequis FR -> FR debloque
+      progress,
+      sources: [...SEED_SOURCES, ...SOURCES_FR],
+      seed: 7,
+      now: NOW,
+      classe: "CE2",
+      matieres: ["MA", "FR"],
+    });
+    const codes = plan.map((p) => p.exercise.competence);
+    expect(codes.length).toBeGreaterThan(0);
+    // Le besoin est 100% francais : aucune competence de maths n'est imposee.
+    expect(codes.every((c) => c.startsWith("FR."))).toBe(true);
+  });
+
+  it("garde-fou de variete : les deux matieres ont un besoin -> jamais 100% d'une seule", () => {
+    // Maths : une seule lacune (ADDITION) ; francais : plusieurs lacunes.
+    for (let seed = 0; seed < 40; seed++) {
+      const progress = [
+        ...maSolide().map((p) =>
+          p.competence === "MA.CM.ADDITION" ? { ...p, ema_courte: 0.5 } : p
+        ),
+        ...FR_CODES.map((c) => prog(c, { ema_courte: 0.5, niveau: 2, niveau_max_atteint: 2 })),
+      ];
+      const plan = composeSession({
+        competences: [...COMPETENCES, ...COMPETENCES_FR],
+        prerequis: PREREQUIS,
+        progress,
+        sources: [...SEED_SOURCES, ...SOURCES_FR],
+        seed,
+        now: NOW,
+        count: 4,
+        classe: "CE2",
+        matieres: ["MA", "FR"],
+      });
+      const codes = plan.map((p) => p.exercise.competence);
+      const hasMA = codes.some((c) => c.startsWith("MA."));
+      const hasFR = codes.some((c) => c.startsWith("FR."));
+      expect(hasMA, `seed ${seed} : maths absent malgre un besoin`).toBe(true);
+      expect(hasFR, `seed ${seed} : francais absent malgre un besoin`).toBe(true);
+    }
+  });
+});

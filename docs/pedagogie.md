@@ -77,6 +77,29 @@ La métacognition reste **légère** et orale, par de courtes relances du type
 « Comment tu as trouvé ? » ou « Tu es sûre ? », sans transformer la séance en
 questionnaire.
 
+## Composition d'une séance quand plusieurs matières sont actives
+
+Quand plusieurs matières sont actives sur un profil (par exemple **maths + français**),
+le choix des exercices d'une séance se fait selon les **besoins de l'enfant** sur
+l'**ensemble des compétences actives des deux matières**, et **pas** matière par
+matière. Concrètement (`frontend/src/domain/calcul/composer.ts`) :
+
+- toutes les compétences actives et débloquées (maths **et** français) sont
+  versées dans les **mêmes** réservoirs de besoin : **révisions dues**,
+  **lacunes** (EMA courte < 0,7 ou niveau ≤ 1), **nouveautés** ;
+- la répartition cible reste **~40 % révisions / ~40 % lacunes / ~20 %
+  nouveauté**, c'est-à-dire par **catégorie de besoin**, jamais par matière ;
+- il n'y a **aucun quota par matière** ni **tirage au sort de la matière** : une
+  séance peut légitimement être majoritairement (voire entièrement) d'une
+  matière si c'est là que sont les besoins du moment.
+
+**Seul garde-fou de variété** : si au moins deux matières sont actives et que la
+séance serait composée à **100 % d'une seule** alors qu'une **autre** matière
+active a un besoin (révision, lacune ou nouveauté), on **remplace le dernier
+exercice** (le moins prioritaire) par ce besoin de l'autre matière. On ne force
+rien d'autre : le besoin reste le seul critère de sélection. Cette règle est
+vérifiée par un test (`composer.test.ts`, « maths + francais »).
+
 ## Règle de correction
 
 Une erreur **compte comme fausse** : elle vaut zéro et il n'y a **pas de

@@ -194,6 +194,37 @@ export function composeSession(input: ComposeInput): PlannedItem[] {
     for (const c of unlocked) chosen.push({ competence: c.code, category: "lacune" });
   }
 
+  // --- Garde-fou de VARIETE (pas de quota par matiere) --------------------
+  // La selection ci-dessus se fait UNIQUEMENT selon le besoin (revision /
+  // lacune / nouveaute), sur l'ENSEMBLE des competences actives des deux
+  // matieres, sans tirage au sort de la matiere ni quota. Seul garde-fou : si
+  // plusieurs matieres sont actives et que la seance serait a 100 % d'une seule
+  // alors qu'une AUTRE matiere active a un besoin, on remplace le dernier item
+  // (le moins prioritaire) par ce besoin. On ne force rien d'autre : le besoin
+  // reste le seul critere (cf. docs/pedagogie.md).
+  const matByCode: Record<string, string> = {};
+  for (const c of active) matByCode[c.code] = c.matiere;
+  if (mats && mats.length >= 2 && chosen.length >= 2) {
+    const matieresChoisies = new Set(chosen.map((x) => matByCode[x.competence]));
+    if (matieresChoisies.size === 1) {
+      const seule = [...matieresChoisies][0];
+      const besoinAutre = (pool: string[], category: Category) => {
+        const c = pool.find((x) => matByCode[x] && matByCode[x] !== seule && !seen.has(x));
+        return c ? { competence: c, category } : null;
+      };
+      const rempl =
+        besoinAutre(revision, "revision") ??
+        besoinAutre(lacune, "lacune") ??
+        besoinAutre(nouveaute, "nouveaute");
+      if (rempl) {
+        const retire = chosen.pop();
+        if (retire) seen.delete(retire.competence);
+        seen.add(rempl.competence);
+        chosen.push(rempl);
+      }
+    }
+  }
+
   const specsRaw = chosen.map(({ competence, category }) => {
     const p = byCode[competence];
     const niveau = clampNiveau(p ? p.niveau : 1);
