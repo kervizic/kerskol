@@ -173,6 +173,11 @@ INSERT INTO profils (id, foyer_id, surnom, classe) VALUES
 
 \set claimsA '{"sub":"11111111-1111-1111-1111-111111111111","role":"authenticated"}'
 
+-- Capture la position de l'erreur du texte 1 AVANT de passer en authenticated
+-- (qui ne voit aucune ligne de dictee_erreur via la RLS), pour les tests 5a/5b.
+SELECT set_config('dictee.t1pos',
+    (SELECT position::text FROM public.dictee_erreur WHERE texte_id = 1), false);
+
 SET ROLE authenticated;
 SET request.jwt.claims = :'claimsA';
 
@@ -215,7 +220,7 @@ END $$;
 DO $$
 DECLARE v jsonb; v_id uuid := gen_random_uuid(); p1 integer;
 BEGIN
-    SELECT position INTO p1 FROM public.dictee_erreur WHERE texte_id = 1;
+    p1 := current_setting('dictee.t1pos')::integer;
     v := public.enregistrer_reponse(
         v_id, 'a0000001-0000-0000-0000-000000000000'::uuid, NULL, 'FR.ORTHO.DETECTIVE', NULL, 1, NULL,
         'dictee', 1, NULL, 0, NULL, 1, 3000, false, false, false, now(),
