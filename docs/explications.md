@@ -123,3 +123,65 @@ Source : `frontend/src/domain/diagnostic/conjugaison.ts` (`diagnostiquerConjugai
 
 - « Presque ! Regarde bien : on écrit « {forme} ». »
 - Utilisé quand la saisie ne correspond à aucune règle. Enregistré aussi.
+
+
+---
+
+# Messages de correction - dictée détective (français)
+
+Liste **complète** des messages de la « dictée détective » (compétence
+`FR.ORTHO.DETECTIVE`). Même style « enfant de 8 ans » : phrases très courtes,
+**toujours un exemple juste / pas juste**, jamais de grammaire abstraite. Le
+**serveur** est seul juge : il révèle, pour chaque erreur plantée, son type et
+si l'enfant l'a trouvée / bien corrigée, et liste les fausses alertes. Affichage
+**toujours valorisant, jamais punitif**.
+
+Source : `frontend/src/domain/diagnostic/dictee.ts` (`MESSAGES_DICTEE`,
+`messageErreur`, `messageFausseAlerte`, `messageBilan`). Parties entre
+accolades : `{faute}` = le mot fautif affiché, `{correction}` = la bonne forme.
+
+## Astuce + exemple par type d'erreur (`MESSAGES_DICTEE`)
+
+- **a / à** : « a sans accent = avoir : il a un chat (il avait). / à avec accent :
+  il va à l'école. »
+- **et / est** : « est = était : le chat est noir. / et = et puis : du pain et du
+  lait. »
+- **son / sont** : « sont = étaient : ils sont là. / son = le sien : son chat. »
+- **on / ont** : « ont = avaient : ils ont faim. / on = quelqu'un : on joue. »
+- **ces / ses** : « ses = les siens : ses jouets (à lui). / ces = ceux-là : ces
+  jouets. »
+- **ce / se** : « se = juste devant le verbe : il se lave. / ce = ce garçon, ce
+  que. »
+- **pluriel** : « Quand il y en a plusieurs, on ajoute un s (ou un x) : un chat →
+  des chats, un jeu → des jeux. »
+- **accord** : « Le petit mot qui décrit s'habille comme le nom : une fleur rouge
+  → des fleurs rouges. »
+- **verbe -ent** : « Plusieurs qui font l'action : le verbe prend -ent : il joue
+  → ils jouent. »
+- **m devant m/b/p** : « Devant m, b, p, on écrit m et pas n : un tambour, une
+  jambe, important. »
+- **é / er / ez** : « er quand on peut dire « vendre » : il va manger (vendre). /
+  é quand c'est fait : il a mangé (vendu). »
+
+## Message par situation (`messageErreur`)
+
+- **Mot trouvé (niveau 1)** : « Bien joué, tu as trouvé le mot piégé « {faute} » ! »
+- **Mot trouvé ET corrigé (niveau 2+)** : « Bravo ! Tu as trouvé ET corrigé : on
+  écrit « {correction} ». »
+- **Mot trouvé mais mal corrigé** : « Bien trouvé ! Mais on écrit « {correction} ».
+  » + l'astuce du type ci-dessus.
+- **Mot manqué** : « Un mot piégé était caché ici : « {faute} » → on écrit
+  « {correction} ». » + l'astuce du type (le mot est surligné dans le texte).
+
+## Fausse alerte (`messageFausseAlerte`)
+
+- « Ce mot était juste ! « {mot} » n'avait pas d'erreur. »
+
+## Bilan valorisant (`messageBilan`, toujours affiché)
+
+- **Tout juste (plusieurs)** : « Super détective ! Tu as tout trouvé (3 sur 3) ! »
+- **Tout juste (une seule)** : « Super ! Tu as tout repéré ! »
+- **Niveau 1 incomplet** : « Tu en as trouvé 2 sur 3 ! Regarde les autres, tu y
+  arriveras ! »
+- **Niveau 2+ incomplet** : « Tu en as bien corrigé 1 sur 3 ! On regarde ensemble
+  les autres. »

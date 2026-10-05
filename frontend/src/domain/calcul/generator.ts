@@ -21,7 +21,7 @@ import { buildProbleme } from "./problemes";
 import { buildMesure } from "./measures";
 import { buildFraction } from "./fractions";
 import { enLettresFr } from "../diagnostic/lettres";
-import { buildFrancaisConjugaison } from "../francais/generator";
+import { buildFrancaisConjugaison, buildFrancaisDictee } from "../francais/generator";
 import type { Temps, Personne } from "../francais/conjugaison";
 
 export type Forme =
@@ -37,7 +37,8 @@ export type Forme =
   | "probleme" // probleme en francais (mascotte, monnaie, deux etapes)
   | "mesure" // mesures (heure, durees, longueurs, masses, contenances)
   | "fraction" // fractions simples
-  | "conjugaison"; // francais : conjuguer un verbe (present / futur / imparfait)
+  | "conjugaison" // francais : conjuguer un verbe (present / futur / imparfait)
+  | "dictee"; // francais : dictee detective (trouver / corriger des erreurs)
 
 export type Support = "rectangle" | "droite" | "aucun" | null;
 
@@ -67,7 +68,10 @@ export type Support = "rectangle" | "droite" | "aucun" | null;
 //               (reponse_texte) et jugee par le serveur (op 'conj').
 export type Saisie =
   | "clavier" | "compare" | "chiffres" | "pose" | "qcm" | "droite" | "monnaie"
-  | "heure" | "fraction" | "fraction_num" | "lettres" | "qcm_texte";
+  | "heure" | "fraction" | "fraction_num" | "lettres" | "qcm_texte"
+  // dictee -> enquete d'orthographe : l'enfant touche les mots fautifs puis les
+  // corrige (selon le niveau) ; le texte et la verification viennent du serveur.
+  | "dictee";
 
 // Enonce normalise envoye au serveur pour revalidation. L'operation porte sur
 // deux operandes et son resultat est la reponse attendue :
@@ -92,7 +96,7 @@ export type Saisie =
 // b = personne (1..6), `cle` = verbe (infinitif) ; la reponse est du TEXTE
 // (reponse_texte). computeVerif renvoie a (invariant), la verification reelle
 // est serveur (verif_conjugaison) / client (domain/diagnostic/conjugaison).
-export type VerifOp = "add" | "sub" | "mul" | "div" | "cmp" | "val" | "lettres" | "conj";
+export type VerifOp = "add" | "sub" | "mul" | "div" | "cmp" | "val" | "lettres" | "conj" | "dictee";
 export type VerifOp2 = "add" | "sub" | "mul" | "div" | "rsub";
 export interface Verif {
   op: VerifOp;
@@ -123,6 +127,11 @@ function applyOp(op: VerifOp, a: number, b: number): { answer: number; reste: nu
       return { answer: a, reste: null };
     case "conj":
       // La reponse est du texte (conjugaison) ; a porte le code du temps.
+      return { answer: a, reste: null };
+    case "dictee":
+      // Dictee : la reponse est la LISTE des positions corrigees (envoyee a
+      // part, p_dictee) ; a porte l'id du texte (invariant answer=a). La
+      // verification reelle est serveur (verif_dictee).
       return { answer: a, reste: null };
   }
 }
@@ -298,6 +307,7 @@ export interface GeneratedExercise {
   options?: QcmOption[]; // mode qcm (valeurs numeriques)
   optionsTexte?: string[]; // mode qcm_texte (propositions TEXTE : conjugaison)
   conj?: { verbe: string; temps: Temps; personne: Personne }; // diagnostic conjugaison
+  dictee?: { niveau: number }; // dictee detective : le texte est choisi a l'affichage (serveur)
   poseData?: PoseData; // mode pose
   chiffresData?: ChiffresData; // mode chiffres (decomposition)
   droiteData?: DroiteData; // mode droite
@@ -429,6 +439,10 @@ function buildExercise(
   // --- Francais : conjugaison -------------------------------------------
   if (src.competence.startsWith("FR.CONJ.")) {
     return buildFrancaisConjugaison(src, rng, base);
+  }
+  // --- Francais : dictee detective --------------------------------------
+  if (src.competence.startsWith("FR.ORTHO.")) {
+    return buildFrancaisDictee(src, base);
   }
   // --- Numeration : lire/ecrire, decomposer, comparer, suite ------------
   if (src.competence.startsWith("MA.NUM.")) {

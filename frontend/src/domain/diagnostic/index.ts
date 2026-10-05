@@ -21,3 +21,12 @@ export {
   phraseAttendue,
   MESSAGES_CONJUGAISON,
 } from "./conjugaison";
+export {
+  messageErreur,
+  messageFausseAlerte,
+  messageBilan,
+  expliquerType,
+  MESSAGES_DICTEE,
+  type MessageDictee,
+  type TonDictee,
+} from "./dictee";

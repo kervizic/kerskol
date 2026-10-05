@@ -68,6 +68,26 @@ function propositions(
   return shuffle(rng, [attendu, ...choisis]);
 }
 
+// Dictee detective : le generateur n'emet qu'un MARQUEUR (competence + niveau).
+// Le TEXTE est choisi a l'affichage par le composant <DicteeDetective> dans la
+// banque chargee du serveur (dictee_charger_tous) : le generateur reste pur et
+// n'a pas besoin de la banque, et le client ne tient aucune erreur plantee.
+export function buildFrancaisDictee(src: ExCalcul, base: Base): GeneratedExercise {
+  return {
+    ...base,
+    forme: "dictee",
+    support: "aucun",
+    saisie: "dictee",
+    prompt: "Enquête d'orthographe : trouve les mots piégés !",
+    answer: 0,
+    reste: null,
+    fields: 1,
+    dictee: { niveau: src.niveau },
+    verif: { op: "dictee", a: 0, b: 0 },
+    correction: "",
+  };
+}
+
 export function buildFrancaisConjugaison(
   src: ExCalcul, rng: Rng, base: Base
 ): GeneratedExercise {

@@ -21,6 +21,7 @@ import {
   finishSeance,
   getExercicesCalcul,
   getFrancais,
+  getDicteeTextes,
   getMonnaie,
   getProgressionDetail,
   getTempsAujourdhuiS,
@@ -28,6 +29,8 @@ import {
   plafondCode,
   type ReponseInsert,
 } from "../lib/api";
+import DicteeDetective from "../components/DicteeDetective";
+import type { DicteeTexte, DicteeReponse, DicteeResultat } from "../domain/francais/dictee";
 import { enqueueReponse, flushReponses } from "../lib/reponseQueue";
 import { composeSession } from "../domain/calcul/composer";
 import type {
@@ -1140,6 +1143,9 @@ export function Session({
   const [lastGain, setLastGain] = useState(0);
   const [done, setDone] = useState(false);
   const [limite, setLimite] = useState<string | null>(null);
+  // Banque de textes de la dictee detective (mots + nombre d'erreurs seulement ;
+  // jamais les erreurs) ; chargee une fois si le francais est actif.
+  const [dicteeBank, setDicteeBank] = useState<DicteeTexte[]>([]);
   const [tempsJourS, setTempsJourS] = useState(0);
   const [inputMode, setInputMode] = useState<InputMode>(() =>
     initialInputMode(prefersCoarsePointer(), getStoredInputMode())
@@ -1223,6 +1229,17 @@ export function Session({
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [profil.id]);
+
+  // Banque de dictee : chargee des que le francais est actif, y compris a la
+  // reprise d'une seance en cours (independante du plan).
+  useEffect(() => {
+    if (!(profil.matieres_actives ?? []).includes("FR")) return;
+    let alive = true;
+    getDicteeTextes().then((b) => alive && setDicteeBank(b)).catch(() => {});
+    return () => {
+      alive = false;
+    };
+  }, [profil.id, profil.matieres_actives]);
 
   const slot = engine ? currentSlot(engine) : null;
   const ex = slot?.exercise ?? null;
@@ -1332,6 +1349,58 @@ export function Session({
           onProfilChange({ ...profil, monnaie: nm });
           return nm;
         });
+      }
+    },
+    [ex, slot, profil, relire, onProfilChange]
+  );
+
+  // Dictee detective : envoi dedie (le serveur juge via verif_dictee et renvoie
+  // le detail a reveler). Hors ligne : mise en file, jugee au flush (pas de
+  // verdict local possible, le client n'a pas les erreurs).
+  const soumettreDictee = useCallback(
+    async (texteId: number, niv: number, reponses: DicteeReponse[]): Promise<DicteeResultat | null> => {
+      if (!ex || !slot) return null;
+      const row: ReponseInsert = {
+        id: uuid(),
+        profil_id: profil.id,
+        seance_id: seanceId.current,
+        competence: ex.competence,
+        exercice_id: slot.source.exerciceId,
+        niveau: niv,
+        methode: ex.methode,
+        op: "dictee",
+        a: texteId,
+        b: 0,
+        op2: null,
+        c: null,
+        cle: null,
+        dictee: reponses,
+        reponse: texteId,
+        reste: null,
+        reponse_texte: null,
+        type_faute: null,
+        fields: 1,
+        temps_ms: Date.now() - questionStart.current,
+        correction_lue: true,
+        rattrapage: ex.rattrapage,
+        placement: !placement.current[ex.competence],
+        repondu_le: new Date().toISOString(),
+      };
+      try {
+        const res = await insertReponse(row);
+        if (res.monnaie != null) {
+          setMonnaie(res.monnaie);
+          onProfilChange({ ...profil, monnaie: res.monnaie });
+        }
+        void relire();
+        return res.dictee ?? null;
+      } catch (e) {
+        if (plafondCode(e)) {
+          setLimite("Pause ! Reviens un peu plus tard.");
+          return null;
+        }
+        enqueueReponse(row);
+        return null;
       }
     },
     [ex, slot, profil, relire, onProfilChange]
@@ -1646,6 +1715,16 @@ export function Session({
       </div>
 
       <main className="kk-seance__main">
+        {ex.saisie === "dictee" ? (
+          <DicteeDetective
+            key={ex.key}
+            niveau={ex.niveau}
+            bank={dicteeBank}
+            onSoumettre={soumettreDictee}
+            onContinuer={(correct) => advance(correct, true)}
+          />
+        ) : (
+        <>
         {ex.support !== "aucun" && ex.supportData && <SupportView data={ex.supportData} />}
 
         <EquationView
@@ -1854,6 +1933,8 @@ export function Session({
               J'ai compris
             </button>
           </div>
+        )}
+        </>
         )}
       </main>
     </div>

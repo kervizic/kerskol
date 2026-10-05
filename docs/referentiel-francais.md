@@ -111,9 +111,61 @@ mérite une conception dédiée (table des participes, règle d'accord, diagnost
 `AUXILIAIRE` / `PARTICIPE` / `ACCORD`). À arbitrer avec Manu avant de l'ajouter
 comme 4e compétence `FR.CONJ.PASSE_COMPOSE`.
 
-## Dictée détective — spécifiée, non livrée (budget)
+## Compétence livrée : DICTÉE DÉTECTIVE
 
-La « dictée détective » (`FR.ORTHO.DETECTIVE`, banque de textes à erreurs
-plantées, vérification serveur des positions corrigées) est décrite dans la
-mission mais **non livrée** dans ce lot (budget). Elle fera l'objet d'un commit
-B séparé.
+`FR.ORTHO.DETECTIVE` (« Dictée détective »), matière `FR`, domaine
+`orthographe`, **4 niveaux**, **ouverte d'emblée** (aucun prérequis ; le
+français s'active par profil). L'enfant joue au détective : on lui montre un
+texte très court (2 à 4 phrases, vocabulaire CE2) qui contient **1 à 4 erreurs
+plantées** ; il doit les **trouver** (toucher le mot), puis selon le niveau les
+**corriger**.
+
+### Typologie des erreurs (programme CE2)
+
+Homophones `a/à`, `et/est`, `son/sont`, `on/ont`, `ces/ses`, `ce/se` ; **pluriel
+des noms** (-s/-x) ; **accord nom-adjectif** ; **verbe au pluriel** (-ent) ;
+**m devant m/b/p** ; **é/er/ez** en fin de verbe.
+
+### Progression par niveau (décisions pédagogiques OBLIGATOIRES)
+
+- **N1** — le **nombre** d'erreurs est annoncé ; il suffit de **trouver**.
+- **N2** — trouver + **corriger par QCM** (2-3 propositions par mot touché).
+- **N3** — trouver + corriger en **saisie libre** ; nombre annoncé.
+- **N4** — **saisie libre** ; nombre **NON** annoncé (il peut n'y en avoir qu'une).
+
+Une saisie à boutons ou au clavier = réponse libre ; seul le choix parmi des
+propositions est un QCM (cf. `docs/pedagogie.md`).
+
+### Banque et SÉCURITÉ (le client ne voit pas les erreurs avant l'envoi)
+
+Banque de **40 textes originaux** (migration `0032`), thèmes variés, certains
+ancrés dans l'univers de l'enfant (village breton, île tropicale, base spatiale,
+royaume enchanté, vallée des dinosaures, village gourmand). Chaque texte est
+stocké **avec les formes fautives déjà en place** (`public.dictee_texte`) ; les
+positions, corrections et types vivent dans `public.dictee_erreur`, **sans aucun
+droit de lecture côté API**. Le serveur n'expose que les **mots affichés** et le
+**nombre d'erreurs** (`dictee_charger_tous`) ; la correction et les positions ne
+sont **révélées qu'après l'envoi**.
+
+### Vérification SERVEUR (seul juge)
+
+Le client envoie la liste `{position, correction?}`. `verif_dictee(texte, niveau,
+réponses)` compare aux erreurs plantées → **trouvées / corrigées / manquées /
+fausses alertes**. La correction est comparée après normalisation
+(`normaliser_mot` : minuscules, espaces, ponctuation de bord ; **ACCENTS
+EXIGÉS**). Règle « juste » (EMA) : **toutes** les erreurs trouvées ET (niveau ≥ 2)
+corrigées, **sans fausse alerte**. Opération normalisée `op = 'dictee'` dans
+`enregistrer_reponse` (`p_a` = id du texte, `p_dictee` = la liste des positions).
+Le `type_faute` enregistré est le type dominant manqué/mal corrigé (sert à
+reproposer plus tard un texte ciblé sur la même difficulté).
+
+### Diagnostic et messages
+
+Le serveur révèle le **type** de chaque erreur ; le client affiche un message
+court « enfant de 8 ans » avec un exemple (astuce de remplacement quand elle
+existe). Mot manqué : surligné + correction. Fausse alerte : « Ce mot était
+juste ! ». Mot bien trouvé mais mal corrigé : « Bien trouvé ! Mais on écrit
+« … ». » + l'astuce du type. Affichage **toujours valorisant** (« Tu en as trouvé
+2 sur 3 ! »), **jamais punitif**. Messages complets dans
+`docs/explications.md` (section dictée) et dans
+`frontend/src/domain/diagnostic/dictee.ts` (`MESSAGES_DICTEE`).

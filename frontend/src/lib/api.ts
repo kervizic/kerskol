@@ -6,6 +6,7 @@ import { purgeKerskolStorage } from "./authReset";
 import { computeVerif, type VerifOp, type VerifOp2 } from "../domain/calcul/generator";
 import { estJuste, estJusteConjugaison } from "../domain/diagnostic";
 import { TEMPS_PAR_CODE, type Personne } from "../domain/francais/conjugaison";
+import type { DicteeTexte, DicteeReponse, DicteeResultat } from "../domain/francais/dictee";
 import {
   isDemo,
   DEMO_COMPETENCES,
@@ -455,24 +456,45 @@ export async function getFrancais(): Promise<{ competences: Competence[]; source
       .order("ordre", { ascending: true }),
     sb
       .from("exercices")
-      .select("id, competence, niveau, methode")
-      .eq("type", "conjugaison")
+      .select("id, competence, niveau, methode, type")
+      .in("type", ["conjugaison", "dictee"])
       .eq("actif", true),
   ]);
   if (comp.error) throw comp.error;
   if (ex.error) throw ex.error;
-  const sources = (ex.data ?? []).map((e): ExCalcul => ({
-    exerciceId: e.id as string,
-    competence: e.competence as string,
-    niveau: e.niveau as number,
-    methode: (e.methode as string | null) ?? null,
-    operation: "conj",
-    forme: "conjugaison" as Forme,
-    params: {},
-    support: null,
-    correctionStrategie: null,
-  }));
+  const sources = (ex.data ?? []).map((e): ExCalcul => {
+    const dictee = (e.type as string) === "dictee";
+    return {
+      exerciceId: e.id as string,
+      competence: e.competence as string,
+      niveau: e.niveau as number,
+      methode: (e.methode as string | null) ?? null,
+      operation: dictee ? "dictee" : "conj",
+      forme: (dictee ? "dictee" : "conjugaison") as Forme,
+      params: {},
+      support: null,
+      correctionStrategie: null,
+    };
+  });
   return { competences: (comp.data ?? []) as Competence[], sources };
+}
+
+// Banque de textes de la DICTEE DETECTIVE (dictee_charger_tous). Le serveur ne
+// renvoie que les MOTS AFFICHES et le NOMBRE d'erreurs : jamais les positions,
+// corrections ou types (qui ne sont reveles qu'apres validation). Charge une
+// seule fois par seance et partage a tous les exercices de dictee.
+export async function getDicteeTextes(): Promise<DicteeTexte[]> {
+  if (isDemo()) return [];
+  const { data, error } = await supabase().rpc("dictee_charger_tous");
+  if (error) throw error;
+  const arr = Array.isArray(data) ? data : [];
+  return arr.map((t): DicteeTexte => ({
+    id: Number((t as Record<string, unknown>).id),
+    niveau: Number((t as Record<string, unknown>).niveau),
+    theme: String((t as Record<string, unknown>).theme ?? ""),
+    mots: ((t as Record<string, unknown>).mots as string[]) ?? [],
+    nbErreurs: Number((t as Record<string, unknown>).nb_erreurs ?? 0),
+  }));
 }
 
 export async function getMonnaie(profilId: string): Promise<number> {
@@ -547,6 +569,9 @@ export interface ReponseInsert {
   // Conjugaison (op 'conj') : le verbe (infinitif), envoye au serveur dans
   // p_op2 ; a = code du temps, b = personne, reponse_texte = la forme saisie.
   cle?: string | null;
+  // Dictee detective (op 'dictee') : a = id du texte ; dictee = liste des mots
+  // touches {pos, cor?}. Le serveur (verif_dictee) compare et juge.
+  dictee?: DicteeReponse[] | null;
   fields: 1 | 2;
   temps_ms: number | null;
   correction_lue: boolean;
@@ -563,6 +588,9 @@ export interface ReponseResult {
   correct: boolean;
   monnaie: number | null;
   deja: boolean;
+  // Dictee detective : detail revele par le serveur (erreurs trouvees/manquees,
+  // corrections, fausses alertes). Present uniquement pour op 'dictee'.
+  dictee?: DicteeResultat | null;
 }
 
 // UUID valide attendu par la colonne exercice_id (les ids "MA.xxx:n" de la copie
@@ -586,6 +614,9 @@ export async function insertReponse(row: ReponseInsert): Promise<ReponseResult> 
       op2: row.op2 ?? undefined, c: row.c ?? undefined,
     });
     // Ecriture en lettres : on juge le TEXTE (trad ou 1990), comme le serveur.
+    // La dictee est jugee UNIQUEMENT par le serveur (le client n'a pas les
+    // erreurs) : en demo, pas de banque, donc jamais d'exercice de dictee.
+    if (row.op === "dictee") return { correct: false, monnaie: null, deja: false, dictee: null };
     const correct =
       row.op === "lettres"
         ? estJuste(row.a, row.reponse_texte ?? "")
@@ -627,10 +658,18 @@ export async function insertReponse(row: ReponseInsert): Promise<ReponseResult> 
     p_mode: row.mode ?? "seance",
     p_reponse_texte: row.reponse_texte ?? null,
     p_type_faute: row.type_faute ?? null,
+    p_dictee: row.dictee ?? null,
   });
   if (error) throw error;
-  const d = (data ?? {}) as { correct?: boolean; monnaie?: number | null; deja?: boolean };
-  return { correct: Boolean(d.correct), monnaie: d.monnaie ?? null, deja: Boolean(d.deja) };
+  const d = (data ?? {}) as {
+    correct?: boolean; monnaie?: number | null; deja?: boolean; dictee?: DicteeResultat | null;
+  };
+  return {
+    correct: Boolean(d.correct),
+    monnaie: d.monnaie ?? null,
+    deja: Boolean(d.deja),
+    dictee: d.dictee ?? null,
+  };
 }
 
 // -------------------------------- Defi chrono ----------------------------
