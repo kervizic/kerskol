@@ -180,4 +180,12 @@ describe("diagnostiquer : saisie tapee -> type de faute", () => {
       "Presque ! Regarde bien : on écrit « quarante-deux ».",
     );
   });
+  it("message TRAIT_UNION : seulement l'exemple, plus de phrase generale", () => {
+    const d = diagnostiquer(52, "cinquante deux");
+    expect(d.fautes[0].type).toBe("TRAIT_UNION");
+    expect(d.fautes[0].message).toBe(
+      "cinquante-deux → on relie les deux mots avec un petit trait.",
+    );
+    expect(d.fautes[0].message).not.toContain("Les mots d'un nombre");
+  });
 });

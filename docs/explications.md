@@ -21,8 +21,7 @@ rang qui diffère (les milliers / les centaines / les dizaines / les unités).
 
 ## TRAIT_UNION - traits d'union / espaces
 
-- « Les mots d'un nombre se relient avec un petit trait. Écris « {nombre} ».
-  cinquante-deux → on relie les deux mots avec un petit trait. »
+- « cinquante-deux → on relie les deux mots avec un petit trait. »
 - Exemple : pour **23**, *vingt trois* → pas juste ; *vingt-trois* → juste.
 
 ## S_VINGT_CENT - le « s » de vingt et de cent
@@ -102,10 +101,12 @@ Source : `frontend/src/domain/diagnostic/conjugaison.ts` (`diagnostiquerConjugai
 
 ## MAUVAIS_TEMPS - le bon verbe, mais pas au bon moment
 
-- « Ce n'est pas le bon moment : ici c'est {temps}. On écrit « {forme} ». hier je
-  chantais / demain je chanterai. »
-- Exemple : pour **je (chanter) présent**, *chanterai* (c'est le futur) → on
-  écrit « chante ».
+- « Attention au temps : ici c'est {temps} ({repère}). On écrit « {forme} ». hier
+  je chantais / demain je chanterai. »
+- `{repère}` = « maintenant » (présent), « demain » (futur), « avant / hier »
+  (imparfait).
+- Exemple : pour **je (chanter) présent**, *chanterai* (c'est le futur) → « Attention
+  au temps : ici c'est le présent (maintenant). On écrit « chante ». »
 
 ## TERMINAISON - bon début, mauvaise fin
 

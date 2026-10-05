@@ -145,6 +145,21 @@ describe("diagnostiquerConjugaison : saisie -> type de faute", () => {
     expect(d.fautes[0].message).toContain("il");
     expect(d.fautes[0].message.toLowerCase()).toContain("chante");
   });
+
+  it("message MAUVAIS_TEMPS : repere temporel concret, plus de « bon moment »", () => {
+    const present = diagnostiquerConjugaison("chanter", "present", 1, "chanterai");
+    expect(present.fautes[0].type).toBe("MAUVAIS_TEMPS");
+    expect(present.fautes[0].message).toBe(
+      "Attention au temps : ici c'est le présent (maintenant). On écrit « chante ». hier je chantais / demain je chanterai.",
+    );
+    expect(present.fautes[0].message).not.toContain("bon moment");
+
+    const futur = diagnostiquerConjugaison("chanter", "futur", 1, "chante");
+    expect(futur.fautes[0].message).toContain("le futur (demain)");
+
+    const imparfait = diagnostiquerConjugaison("chanter", "imparfait", 1, "chante");
+    expect(imparfait.fautes[0].message).toContain("l'imparfait (avant / hier)");
+  });
 });
 
 // --- Coherence interne : chaque forme du golden se diagnostique JUSTE --------

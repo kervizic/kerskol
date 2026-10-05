@@ -46,8 +46,14 @@ function msgAccent(bonne: string): string {
 function msgMauvaisePersonne(p: Personne, bonne: string): string {
   return `Attention à la personne : avec ${pronom(p, bonne)}, on écrit « ${bonne} ». tu chantes → avec un s. / il chante → pas de s.`;
 }
-function msgMauvaisTemps(libelle: string, bonne: string): string {
-  return `Ce n'est pas le bon moment : ici c'est ${libelle}. On écrit « ${bonne} ». hier je chantais / demain je chanterai.`;
+// Repere temporel concret pour l'enfant (pas de grammaire abstraite).
+const REPERE_TEMPS: Record<Temps, string> = {
+  present: "maintenant",
+  futur: "demain",
+  imparfait: "avant / hier",
+};
+function msgMauvaisTemps(temps: Temps, bonne: string): string {
+  return `Attention au temps : ici c'est ${TEMPS_LIBELLE[temps]} (${REPERE_TEMPS[temps]}). On écrit « ${bonne} ». hier je chantais / demain je chanterai.`;
 }
 function msgTerminaison(p: Personne, bonne: string): string {
   return `Bon début, mauvaise fin : avec ${pronom(p, bonne)}, on écrit « ${bonne} ». tu joues → un s à la fin. / il joue → pas de s.`;
@@ -117,7 +123,7 @@ export function diagnostiquerConjugaison(
       if (normaliser(c[t][p - 1]) === input) {
         return faire({
           type: "MAUVAIS_TEMPS",
-          message: msgMauvaisTemps(TEMPS_LIBELLE[temps], attendu),
+          message: msgMauvaisTemps(temps, attendu),
           surligne: [attendu],
         });
       }
@@ -167,7 +173,7 @@ export const MESSAGES_CONJUGAISON: Record<string, string> = {
   MAUVAISE_PERSONNE:
     "Attention à la personne : avec {pronom}, on écrit « {forme} ». tu chantes → avec un s. / il chante → pas de s.",
   MAUVAIS_TEMPS:
-    "Ce n'est pas le bon moment : ici c'est {temps}. On écrit « {forme} ». hier je chantais / demain je chanterai.",
+    "Attention au temps : ici c'est {temps} ({repère}). On écrit « {forme} ». hier je chantais / demain je chanterai.",
   TERMINAISON:
     "Bon début, mauvaise fin : avec {pronom}, on écrit « {forme} ». tu joues → un s à la fin. / il joue → pas de s.",
   ORTHO_RADICAL: "Regarde bien les lettres : on écrit « {forme} ».",

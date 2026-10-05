@@ -140,8 +140,8 @@ function arraysEqual(a: string[], b: string[]): boolean {
 }
 
 // --- Messages (style « enfant de 8 ans », toujours un exemple concret) --------
-function msgTraitUnion(bonne: string): string {
-  return `Les mots d'un nombre se relient avec un petit trait. Écris « ${bonne} ». cinquante-deux → on relie les deux mots avec un petit trait.`;
+function msgTraitUnion(): string {
+  return `cinquante-deux → on relie les deux mots avec un petit trait.`;
 }
 function msgSVingtCent(word: "vingt" | "cent", sens: "manquant" | "en trop"): string {
   if (word === "vingt") {
@@ -216,7 +216,7 @@ export function diagnostiquer(n: number, saisie: string): Diagnostic {
     // b) TRAIT_UNION pur : atomes identiques (meme « et », memes « s »), seuls
     //    les separateurs different (sinon on serait « juste »).
     if (arraysEqual(atomsI, atomsC)) {
-      return faire([{ type: "TRAIT_UNION", message: msgTraitUnion(bonne), surligne: hyphensDe(bonne) }]);
+      return faire([{ type: "TRAIT_UNION", message: msgTraitUnion(), surligne: hyphensDe(bonne) }]);
     }
     const fautes: Faute[] = [];
     // c) S d'accord.
@@ -286,7 +286,7 @@ type FauteLettres =
   | "MAUVAIS_NOMBRE" | "INCONNU";
 export const MESSAGES_CATALOGUE: Record<FauteLettres | "JUSTE", string> = {
   JUSTE: "Bravo ! C'est la bonne écriture.",
-  TRAIT_UNION: "Les mots d'un nombre se relient avec un petit trait. Écris « {nombre} ». cinquante-deux → on relie les deux mots avec un petit trait.",
+  TRAIT_UNION: "cinquante-deux → on relie les deux mots avec un petit trait.",
   S_VINGT_CENT:
     "cents : deux cents → avec un s (rien après) / deux cent trois → pas de s (un nombre vient après). vingts : quatre-vingts → avec un s / quatre-vingt-deux → pas de s.",
   S_MILLE: "Jamais de s à « mille ». Mille ne change jamais. trois mille → jamais de s.",
