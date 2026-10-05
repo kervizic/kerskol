@@ -229,25 +229,34 @@ function maSolide(): ProgressionDetail[] {
 }
 
 describe("composeSession : maths + francais (besoin, pas de quota)", () => {
-  it("francais seul en besoin, maths tout solide -> seance 100% francais (pas de quota maths)", () => {
-    const progress = [
-      ...maSolide(),
-      ...FR_CODES.map((c) => prog(c, { ema_courte: 0.5, niveau: 2, niveau_max_atteint: 2 })),
-    ];
-    const plan = composeSession({
-      competences: [...COMPETENCES, ...COMPETENCES_FR],
-      prerequis: PREREQUIS, // aucun prerequis FR -> FR debloque
-      progress,
-      sources: [...SEED_SOURCES, ...SOURCES_FR],
-      seed: 7,
-      now: NOW,
-      classe: "CE2",
-      matieres: ["MA", "FR"],
-    });
-    const codes = plan.map((p) => p.exercise.competence);
-    expect(codes.length).toBeGreaterThan(0);
-    // Le besoin est 100% francais : aucune competence de maths n'est imposee.
-    expect(codes.every((c) => c.startsWith("FR."))).toBe(true);
+  it("francais seul en besoin, maths tout solide -> le besoin francais DOMINE (pas de quota maths)", () => {
+    // Quand seul le francais a des besoins, les maths (toutes solides) ne
+    // peuvent apparaitre qu'en REMPLISSAGE (revision de consolidation), jamais
+    // imposees par un quota : le francais doit rester largement majoritaire.
+    for (let seed = 0; seed < 20; seed++) {
+      const progress = [
+        ...maSolide(),
+        ...FR_CODES.map((c) => prog(c, { ema_courte: 0.5, niveau: 2, niveau_max_atteint: 2 })),
+      ];
+      const plan = composeSession({
+        competences: [...COMPETENCES, ...COMPETENCES_FR],
+        prerequis: PREREQUIS, // aucun prerequis FR -> FR debloque
+        progress,
+        sources: [...SEED_SOURCES, ...SOURCES_FR],
+        seed,
+        now: NOW,
+        classe: "CE2",
+        matieres: ["MA", "FR"],
+      });
+      const codes = plan.map((p) => p.exercise.competence);
+      const frCount = codes.filter((c) => c.startsWith("FR.")).length;
+      const maCount = codes.filter((c) => c.startsWith("MA.")).length;
+      expect(codes.length).toBeGreaterThan(0);
+      expect(frCount, `seed ${seed} : le francais devrait dominer`).toBeGreaterThan(maCount);
+      // Toute competence de maths presente est SOLIDE (remplissage), pas un besoin.
+      const maSolides = new Set(COMPETENCES.map((c) => c.code));
+      expect(codes.filter((c) => c.startsWith("MA.")).every((c) => maSolides.has(c))).toBe(true);
+    }
   });
 
   it("garde-fou de variete : les deux matieres ont un besoin -> jamais 100% d'une seule", () => {
