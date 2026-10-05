@@ -176,14 +176,24 @@ INSERT INTO profils (id, foyer_id, surnom, classe) VALUES
 SET ROLE authenticated;
 SET request.jwt.claims = :'claimsA';
 
--- 4a. Lecture directe de dictee_erreur INTERDITE (aucun GRANT).
+-- 4a. dictee_erreur n'expose AUCUNE donnee cote API : soit la lecture est
+--     refusee (permission), soit la RLS (activee, sans policy) renvoie 0 ligne.
+--     Toute ligne visible serait une fuite.
 DO $$
+DECLARE n integer;
 BEGIN
-    PERFORM 1 FROM public.dictee_erreur LIMIT 1;
-    RAISE EXCEPTION 'dictee_erreur ne devrait PAS etre lisible cote API';
-EXCEPTION
-    WHEN insufficient_privilege THEN
-        RAISE NOTICE 'dictee_erreur non exposee : OK';
+    BEGIN
+        SELECT count(*) INTO n FROM public.dictee_erreur;
+    EXCEPTION WHEN insufficient_privilege THEN
+        RAISE NOTICE 'dictee_erreur : lecture refusee (permission) : OK';
+        n := -1;
+    END;
+    IF n > 0 THEN
+        RAISE EXCEPTION 'dictee_erreur NE DOIT PAS exposer de donnees (% lignes visibles)', n;
+    END IF;
+    IF n = 0 THEN
+        RAISE NOTICE 'dictee_erreur : 0 ligne visible (RLS) : OK';
+    END IF;
 END $$;
 
 -- 4b. dictee_charger_tous (cote API) : aucune correction/position exposee.
