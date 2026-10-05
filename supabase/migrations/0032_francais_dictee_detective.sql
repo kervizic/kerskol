@@ -380,6 +380,11 @@ INSERT INTO public.competences (code, matiere, domaine, libelle, ordre, nb_nivea
 ON CONFLICT (code) DO UPDATE SET matiere = EXCLUDED.matiere, domaine = EXCLUDED.domaine,
     libelle = EXCLUDED.libelle, ordre = EXCLUDED.ordre, nb_niveaux = EXCLUDED.nb_niveaux, actif = true;
 
+-- Methode referencee par exercices.methode (FK vers public.methodes).
+INSERT INTO public.methodes (code, libelle) VALUES
+    ('orthographe', 'Orthographe : reperer et corriger les erreurs (dictee detective)')
+ON CONFLICT (code) DO NOTHING;
+
 -- =========================================================================
 -- 8. Exercices de reference (FK pour reponses.exercice_id + progression).
 --    exercice_id deterministe = md5('<competence>:<niveau>:dictee').
