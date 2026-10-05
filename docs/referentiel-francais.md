@@ -138,9 +138,12 @@ propositions est un QCM (cf. `docs/pedagogie.md`).
 
 ### Banque et SÉCURITÉ (le client ne voit pas les erreurs avant l'envoi)
 
-Banque de **40 textes originaux** (migration `0032`), thèmes variés, certains
-ancrés dans l'univers de l'enfant (village breton, île tropicale, base spatiale,
-royaume enchanté, vallée des dinosaures, village gourmand). Chaque texte est
+Banque de **100 textes originaux** (40 de la migration `0032` + 60 ajoutés par
+`0033`, accents corrigés par `0035`), rattachés à **12 notions ordonnées** (table
+`dictee_notion`, progression **par niveau** sans calendrier ; voir
+`docs/progression-dictee-notions.md`). Thèmes variés, certains ancrés dans
+l'univers de l'enfant (village breton, île tropicale, base spatiale, royaume
+enchanté, vallée des dinosaures, village gourmand). Chaque texte est
 stocké **avec les formes fautives déjà en place** (`public.dictee_texte`) ; les
 positions, corrections et types vivent dans `public.dictee_erreur`, **sans aucun
 droit de lecture côté API**. Le serveur n'expose que les **mots affichés** et le

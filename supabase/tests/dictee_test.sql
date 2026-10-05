@@ -106,6 +106,38 @@ BEGIN
 END $$;
 
 -- ===========================================================================
+-- 1 quater. ACCENTS : aucun mot courant connu ne doit apparaitre SANS accent
+--           dans un texte (ex. vallee, journee, ecole, foret, apres...). Les
+--           mots fautifs homophones (a, et, on, son, ce...) restent bare et ne
+--           sont PAS dans cette liste.
+-- ===========================================================================
+DO $$
+DECLARE
+    r       record;
+    bare    text := '\m(' ||
+        'vallee|journee|journees|deplace|deplacent|geant|geants|ete|eleve|eleves|' ||
+        'foret|forets|ecole|ecoles|maitresse|maitre|pecheur|pecheurs|ile|iles|' ||
+        'apres|vegetal|general|generaux|etoile|etoiles|cafe|fenetre|fenetres|' ||
+        'recreation|numero|reve|reves|tres|pres|derriere|riviere|rivieres|' ||
+        'lumiere|theatre|chateau|chateaux|bientot|flute|gouter|present|presente|' ||
+        'prefere|repare|recite|dore|doree|parfume|parfumee|chene|coute|fete|tete|' ||
+        'etait|etaient|arrivee|montee|epuises' ||
+        ')\M';
+    n integer := 0;
+BEGIN
+    FOR r IN SELECT id, texte FROM public.dictee_texte LOOP
+        IF lower(public.normaliser_lettres(r.texte)) ~ bare THEN
+            RAISE WARNING 'dictee % : mot sans accent dans « % »', r.id, r.texte;
+            n := n + 1;
+        END IF;
+    END LOOP;
+    IF n > 0 THEN
+        RAISE EXCEPTION 'dictee : % texte(s) contiennent un mot courant SANS accent', n;
+    END IF;
+    RAISE NOTICE 'accents dictee : aucun mot courant sans accent : OK';
+END $$;
+
+-- ===========================================================================
 -- 2. dictee_charger_tous : expose mots + nb_erreurs, JAMAIS les erreurs
 -- ===========================================================================
 DO $$
