@@ -12,15 +12,19 @@
 
 export type TypeDictee =
   | "a_a" | "et_est" | "son_sont" | "on_ont" | "ces_ses" | "ce_se"
-  | "pluriel" | "accord" | "verbe_ent" | "m_mbp" | "e_er_ez";
+  | "pluriel" | "pluriel_al_aux" | "accord" | "verbe_ent" | "m_mbp" | "e_er_ez";
 
 // Texte servi par le serveur (dictee_charger_tous) : jamais d'erreurs.
+// notion rattache le texte a une notion de la progression (migration 0033) ;
+// null pour les textes non encore rattaches. Le CHOIX du texte selon le niveau
+// et les lacunes vit dans ./selection-dictee (fonction pure, testee).
 export interface DicteeTexte {
   id: number;
   niveau: number;
   theme: string;
   mots: string[];
   nbErreurs: number;
+  notion?: string | null;
 }
 
 // Erreur REVELEE par le serveur apres validation (jamais avant).
@@ -111,15 +115,21 @@ export function propositionsDictee(token: string): string[] {
   // 2) Verbe au pluriel : forme en -ent -> on propose la forme sans « nt ».
   if (/ent$/.test(bas) && bas.length > 3) {
     push(mot.slice(0, -2));
+  } else if (/aux$/.test(bas) && bas.length > 3) {
+    // 3) Pluriel en -aux : on propose le singulier en -al (chevaux -> cheval).
+    push(mot.slice(0, -3) + "al");
+  } else if (/als?$/.test(bas) && bas.length > 2) {
+    // 4) Mot en -al : on propose le pluriel en -aux (cheval -> chevaux).
+    push(mot.replace(/s$/, "").replace(/al$/, "aux"));
   } else if (/e$/.test(bas)) {
-    // 3) Forme en -e : pluriel du nom/adjectif (+s) OU verbe pluriel (+ent).
+    // 5) Forme en -e : pluriel du nom/adjectif (+s) OU verbe pluriel (+ent).
     push(mot + "s");
     push(mot + "nt");
   } else if (/(s|x)$/.test(bas) && bas.length > 2) {
-    // 4) Deja au pluriel : on propose le singulier.
+    // 6) Deja au pluriel : on propose le singulier.
     push(mot.slice(0, -1));
   } else {
-    // 5) Autre fin : on propose le pluriel (x pour -eau/-eu/-au, sinon s).
+    // 7) Autre fin : on propose le pluriel (x pour -eau/-eu/-au, sinon s).
     push(/(eau|eu|au)$/.test(bas) ? mot + "x" : mot + "s");
   }
   return out.length >= 2 ? out.slice(0, 3) : [];

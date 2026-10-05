@@ -146,14 +146,17 @@ accolades : `{faute}` = le mot fautif affiché, `{correction}` = la bonne forme.
   il va à l'école. »
 - **et / est** : « est = était : le chat est noir. / et = et puis : du pain et du
   lait. »
-- **son / sont** : « sont = étaient : ils sont là. / son = le sien : son chat. »
+- **son / sont** : « son chat = le chat à lui. / ils sont là = ils étaient là. »
+  (message simplifié, validé par Manu)
 - **on / ont** : « ont = avaient : ils ont faim. / on = quelqu'un : on joue. »
-- **ces / ses** : « ses = les siens : ses jouets (à lui). / ces = ceux-là : ces
-  jouets. »
+- **ces / ses** : « ses jouets = les jouets à lui. / ces jouets = ceux-là, je les
+  montre. » (message simplifié, validé par Manu)
 - **ce / se** : « se = juste devant le verbe : il se lave. / ce = ce garçon, ce
   que. »
 - **pluriel** : « Quand il y en a plusieurs, on ajoute un s (ou un x) : un chat →
   des chats, un jeu → des jeux. »
+- **pluriel -al/-aux** (nouveau type) : « un cheval → des chevaux. Beaucoup de
+  mots en -al font -aux au pluriel. »
 - **accord** : « Le petit mot qui décrit s'habille comme le nom : une fleur rouge
   → des fleurs rouges. »
 - **verbe -ent** : « Plusieurs qui font l'action : le verbe prend -ent : il joue

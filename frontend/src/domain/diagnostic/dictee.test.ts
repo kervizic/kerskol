@@ -17,7 +17,7 @@ import {
 
 const TYPES: TypeDictee[] = [
   "a_a", "et_est", "son_sont", "on_ont", "ces_ses", "ce_se",
-  "pluriel", "accord", "verbe_ent", "m_mbp", "e_er_ez",
+  "pluriel", "pluriel_al_aux", "accord", "verbe_ent", "m_mbp", "e_er_ez",
 ];
 
 function err(over: Partial<DicteeErreurRevelee>): DicteeErreurRevelee {
@@ -155,6 +155,11 @@ describe("propositionsDictee : QCM leakless", () => {
   });
   it("pluriel : forme en s -> propose le singulier", () => {
     expect(propositionsDictee("chats")).toContain("chat");
+  });
+  it("pluriel -al/-aux : cheval <-> chevaux", () => {
+    expect(propositionsDictee("cheval")).toContain("chevaux");
+    expect(propositionsDictee("chevaux")).toContain("cheval");
+    expect(propositionsDictee("animal")).toContain("animaux");
   });
   it("verbe : -e <-> -ent", () => {
     expect(propositionsDictee("joue")).toContain("jouent");
