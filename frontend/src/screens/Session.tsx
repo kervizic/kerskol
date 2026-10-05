@@ -22,6 +22,8 @@ import {
   getExercicesCalcul,
   getFrancais,
   getDicteeTextes,
+  getDicteeContexte,
+  enregistrerDictee,
   getMonnaie,
   getProgressionDetail,
   getTempsAujourdhuiS,
@@ -31,6 +33,7 @@ import {
 } from "../lib/api";
 import DicteeDetective from "../components/DicteeDetective";
 import type { DicteeTexte, DicteeReponse, DicteeResultat } from "../domain/francais/dictee";
+import type { ContexteDictee } from "../domain/francais/selection-dictee";
 import { enqueueReponse, flushReponses } from "../lib/reponseQueue";
 import { composeSession } from "../domain/calcul/composer";
 import type {
@@ -1146,6 +1149,7 @@ export function Session({
   // Banque de textes de la dictee detective (mots + nombre d'erreurs seulement ;
   // jamais les erreurs) ; chargee une fois si le francais est actif.
   const [dicteeBank, setDicteeBank] = useState<DicteeTexte[]>([]);
+  const [dicteeCtx, setDicteeCtx] = useState<ContexteDictee | null>(null);
   const [tempsJourS, setTempsJourS] = useState(0);
   const [inputMode, setInputMode] = useState<InputMode>(() =>
     initialInputMode(prefersCoarsePointer(), getStoredInputMode())
@@ -1236,6 +1240,14 @@ export function Session({
     if (!(profil.matieres_actives ?? []).includes("FR")) return;
     let alive = true;
     getDicteeTextes().then((b) => alive && setDicteeBank(b)).catch(() => {});
+    // Contexte de ciblage PAR NIVEAU (ordre des notions, maitrise, lacunes, textes
+    // vus ; aucune date). Repli silencieux : si echec, la dictee reste jouable.
+    getDicteeContexte(profil.id)
+      .then((c) => {
+        if (!alive || !c) return;
+        setDicteeCtx({ niveau: 1, ordre: c.ordre, maitrise: c.maitrise, lacunes: c.lacunes, vus: c.vus });
+      })
+      .catch(() => {});
     return () => {
       alive = false;
     };
@@ -1720,8 +1732,10 @@ export function Session({
             key={ex.key}
             niveau={ex.niveau}
             bank={dicteeBank}
+            ctx={dicteeCtx}
             onSoumettre={soumettreDictee}
             onContinuer={(correct) => advance(correct, true)}
+            onResultat={(texteId, correct) => { void enregistrerDictee(profil.id, texteId, correct); }}
           />
         ) : (
         <>

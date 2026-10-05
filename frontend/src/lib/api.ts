@@ -488,13 +488,44 @@ export async function getDicteeTextes(): Promise<DicteeTexte[]> {
   const { data, error } = await supabase().rpc("dictee_charger_tous");
   if (error) throw error;
   const arr = Array.isArray(data) ? data : [];
-  return arr.map((t): DicteeTexte => ({
-    id: Number((t as Record<string, unknown>).id),
-    niveau: Number((t as Record<string, unknown>).niveau),
-    theme: String((t as Record<string, unknown>).theme ?? ""),
-    mots: ((t as Record<string, unknown>).mots as string[]) ?? [],
-    nbErreurs: Number((t as Record<string, unknown>).nb_erreurs ?? 0),
-  }));
+  return arr.map((t): DicteeTexte => {
+    const r = t as Record<string, unknown>;
+    return {
+      id: Number(r.id),
+      niveau: Number(r.niveau),
+      theme: String(r.theme ?? ""),
+      mots: (r.mots as string[]) ?? [],
+      nbErreurs: Number(r.nb_erreurs ?? 0),
+      notion: r.notion == null ? null : String(r.notion),
+    };
+  });
+}
+
+// Contexte de CIBLAGE de la dictee (dictee_contexte), PAR NIVEAU (aucune date) :
+// ordre des notions, maitrise et lacunes par notion, derniers textes vus. Sert a
+// choisir le texte selon le niveau et les lacunes. Repli silencieux si
+// indisponible (la dictee reste jouable).
+export async function getDicteeContexte(
+  profilId: string,
+): Promise<{ ordre: string[]; maitrise: Record<string, boolean>; lacunes: Record<string, number>; vus: number[] } | null> {
+  if (isDemo()) return null;
+  const { data, error } = await supabase().rpc("dictee_contexte", { p_profil: profilId });
+  if (error || !data) return null;
+  const d = data as Record<string, unknown>;
+  return {
+    ordre: Array.isArray(d.ordre) ? (d.ordre as string[]).map(String) : [],
+    maitrise: (d.maitrise as Record<string, boolean>) ?? {},
+    lacunes: (d.lacunes as Record<string, number>) ?? {},
+    vus: Array.isArray(d.vus) ? (d.vus as number[]).map(Number) : [],
+  };
+}
+
+// Enregistre le resultat d'un texte (apres le verdict serveur) : marque le texte
+// vu (anti-repetition) et met a jour le suivi de sa notion (escalier). Silencieux :
+// un echec reseau n'empeche jamais de continuer a jouer.
+export async function enregistrerDictee(profilId: string, texteId: number, correct: boolean): Promise<void> {
+  if (isDemo()) return;
+  await supabase().rpc("dictee_enregistrer", { p_profil: profilId, p_texte: texteId, p_correct: correct });
 }
 
 export async function getMonnaie(profilId: string): Promise<number> {

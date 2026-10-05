@@ -56,6 +56,56 @@ BEGIN
 END $$;
 
 -- ===========================================================================
+-- 1 bis. Progression par NOTIONS (0033) : chaque notion >= 2 textes ; les 12
+--        notions ordonnees presentes ; nouveau type pluriel_al_aux present.
+-- ===========================================================================
+DO $$
+DECLARE
+    r          record;
+    n_notions  integer;
+    n_al_aux   integer;
+BEGIN
+    -- Chaque notion rattachee doit porter au moins 2 textes.
+    FOR r IN SELECT notion, count(*) AS n FROM public.dictee_texte
+              WHERE notion IS NOT NULL GROUP BY notion
+    LOOP
+        IF r.n < 2 THEN
+            RAISE EXCEPTION 'dictee : notion % n''a que % texte(s) (>= 2 attendus)', r.notion, r.n;
+        END IF;
+    END LOOP;
+
+    -- Les 12 notions ordonnees doivent exister et chacune porter des textes.
+    SELECT count(*) INTO n_notions FROM public.dictee_notion;
+    IF n_notions <> 12 THEN
+        RAISE EXCEPTION 'dictee_notion : 12 notions attendues, obtenu %', n_notions;
+    END IF;
+    IF EXISTS (
+        SELECT 1 FROM public.dictee_notion dn
+         WHERE NOT EXISTS (SELECT 1 FROM public.dictee_texte t WHERE t.notion = dn.code)
+    ) THEN
+        RAISE EXCEPTION 'dictee : une notion ordonnee n''a aucun texte';
+    END IF;
+
+    -- Toute notion utilisee sur un texte est connue (12 notions + 'revision').
+    IF EXISTS (
+        SELECT 1 FROM public.dictee_texte t
+         WHERE t.notion IS NOT NULL AND t.notion <> 'revision'
+           AND NOT EXISTS (SELECT 1 FROM public.dictee_notion dn WHERE dn.code = t.notion)
+    ) THEN
+        RAISE EXCEPTION 'dictee : un texte porte une notion hors de dictee_notion';
+    END IF;
+
+    -- Nouveau type d'erreur pluriel_al_aux effectivement planté.
+    SELECT count(*) INTO n_al_aux FROM public.dictee_erreur WHERE type = 'pluriel_al_aux';
+    IF n_al_aux < 1 THEN
+        RAISE EXCEPTION 'dictee : aucun exemple du type pluriel_al_aux';
+    END IF;
+
+    RAISE NOTICE 'progression dictee (% notions, chacune >= 2 textes, al/aux x%) : OK',
+        n_notions, n_al_aux;
+END $$;
+
+-- ===========================================================================
 -- 2. dictee_charger_tous : expose mots + nb_erreurs, JAMAIS les erreurs
 -- ===========================================================================
 DO $$
@@ -72,7 +122,7 @@ BEGIN
     IF t1 IS NULL THEN RAISE EXCEPTION 'texte 1 absent du chargement'; END IF;
     -- Clefs autorisees uniquement.
     FOR k IN SELECT jsonb_object_keys(t1) LOOP
-        IF k NOT IN ('id','niveau','theme','mots','nb_erreurs') THEN
+        IF k NOT IN ('id','niveau','theme','mots','nb_erreurs','notion') THEN
             RAISE EXCEPTION 'dictee_charger_tous expose une clef interdite : %', k;
         END IF;
     END LOOP;
@@ -210,6 +260,65 @@ BEGIN
     IF dump LIKE '%correction%' OR dump LIKE '%"position"%' OR dump LIKE '%"faute"%' THEN
         RAISE EXCEPTION 'dictee_charger_tous fuite des donnees sensibles';
     END IF;
+END $$;
+
+-- 4c. dictee_contexte : accessible pour son propre profil, clefs non sensibles
+--     (ordre/maitrise/lacunes/vus), refuse un profil d'un autre foyer.
+DO $$
+DECLARE v jsonb; k text;
+BEGIN
+    v := public.dictee_contexte('a0000001-0000-0000-0000-000000000000'::uuid);
+    FOR k IN SELECT jsonb_object_keys(v) LOOP
+        IF k NOT IN ('ordre','maitrise','lacunes','vus') THEN
+            RAISE EXCEPTION 'dictee_contexte expose une clef interdite : %', k;
+        END IF;
+    END LOOP;
+    IF jsonb_array_length(v->'ordre') <> 12 THEN
+        RAISE EXCEPTION 'contexte : ordre des notions attendu 12, obtenu %', v->'ordre';
+    END IF;
+    IF (v->'ordre'->>0) <> 'pluriel' THEN
+        RAISE EXCEPTION 'contexte : 1re notion attendue pluriel, obtenu %', v->'ordre'->>0;
+    END IF;
+
+    BEGIN
+        PERFORM public.dictee_contexte('b0000001-0000-0000-0000-000000000000'::uuid);
+        RAISE EXCEPTION 'dictee_contexte aurait du refuser un autre foyer';
+    EXCEPTION WHEN others THEN
+        IF SQLERRM NOT LIKE '%acces_refuse%' THEN
+            RAISE EXCEPTION 'contexte autre foyer : erreur inattendue : %', SQLERRM;
+        END IF;
+    END;
+    RAISE NOTICE 'dictee_contexte : OK';
+END $$;
+
+-- 4d. dictee_enregistrer : marque le texte vu + met a jour le suivi de la notion
+--     (escalier : 2 reussites d'affilee -> maitrise ; 1 echec -> lacune).
+DO $$
+DECLARE v jsonb; v_notion text;
+BEGIN
+    SELECT notion INTO v_notion FROM public.dictee_texte WHERE id = 1; -- notion du texte 1
+
+    -- Un echec : la notion devient une lacune, pas encore maitrisee.
+    PERFORM public.dictee_enregistrer('a0000001-0000-0000-0000-000000000000'::uuid, 1, false);
+    v := public.dictee_contexte('a0000001-0000-0000-0000-000000000000'::uuid);
+    IF NOT (v->'vus' @> '1'::jsonb) THEN
+        RAISE EXCEPTION 'dictee_enregistrer : texte 1 absent des vus : %', v;
+    END IF;
+    IF (v->'lacunes'->>v_notion) IS NULL THEN
+        RAISE EXCEPTION 'dictee_enregistrer : notion % attendue en lacune apres un echec : %', v_notion, v;
+    END IF;
+
+    -- Deux reussites d'affilee : la notion devient maitrisee, plus de lacune.
+    PERFORM public.dictee_enregistrer('a0000001-0000-0000-0000-000000000000'::uuid, 1, true);
+    PERFORM public.dictee_enregistrer('a0000001-0000-0000-0000-000000000000'::uuid, 1, true);
+    v := public.dictee_contexte('a0000001-0000-0000-0000-000000000000'::uuid);
+    IF (v->'maitrise'->>v_notion) <> 'true' THEN
+        RAISE EXCEPTION 'dictee_enregistrer : notion % attendue maitrisee apres 2 reussites : %', v_notion, v;
+    END IF;
+    IF (v->'lacunes'->>v_notion) IS NOT NULL THEN
+        RAISE EXCEPTION 'dictee_enregistrer : notion % ne doit plus etre une lacune : %', v_notion, v;
+    END IF;
+    RAISE NOTICE 'dictee_enregistrer : OK';
 END $$;
 
 -- ===========================================================================

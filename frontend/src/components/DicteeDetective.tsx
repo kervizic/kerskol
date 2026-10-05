@@ -19,13 +19,16 @@ import {
   propositionsDictee, motAffichable,
   type DicteeTexte, type DicteeReponse, type DicteeResultat,
 } from "../domain/francais/dictee";
+import { choisirTexteDictee, type ContexteDictee } from "../domain/francais/selection-dictee";
 import { messageErreur, messageFausseAlerte, messageBilan } from "../domain/diagnostic/dictee";
 
 interface Props {
   niveau: number;
   bank: DicteeTexte[];
+  ctx?: ContexteDictee | null;
   onSoumettre: (texteId: number, niveau: number, reponses: DicteeReponse[]) => Promise<DicteeResultat | null>;
   onContinuer: (correct: boolean) => void;
+  onResultat?: (texteId: number, correct: boolean) => void;
 }
 
 interface SelState {
@@ -33,16 +36,13 @@ interface SelState {
   cor: string;
 }
 
-function choisirTexte(bank: DicteeTexte[], niveau: number): DicteeTexte | null {
-  const pool = bank.filter((t) => t.niveau === niveau);
-  const src = pool.length > 0 ? pool : bank;
-  if (src.length === 0) return null;
-  return src[Math.floor(Math.random() * src.length)];
-}
-
-export default function DicteeDetective({ niveau, bank, onSoumettre, onContinuer }: Props) {
-  // Texte choisi UNE fois (variete : tirage aleatoire dans la banque du niveau).
-  const texte = useMemo(() => choisirTexte(bank, niveau), [bank, niveau]);
+export default function DicteeDetective({ niveau, bank, ctx, onSoumettre, onContinuer, onResultat }: Props) {
+  // CHOIX DU TEXTE par NIVEAU et lacunes (notion a travailler, pas de repetition) ;
+  // repli sur le niveau seul si le contexte est absent. Aucune logique de date.
+  const texte = useMemo(
+    () => choisirTexteDictee(bank, { niveau, ordre: ctx?.ordre ?? [], maitrise: ctx?.maitrise, lacunes: ctx?.lacunes, vus: ctx?.vus }),
+    [bank, niveau, ctx],
+  );
   const [sel, setSel] = useState<Record<number, SelState>>({});
   const [busy, setBusy] = useState(false);
   const [res, setRes] = useState<DicteeResultat | null>(null);
@@ -87,8 +87,11 @@ export default function DicteeDetective({ niveau, bank, onSoumettre, onContinuer
       .map(([pos, s]) => (corrige ? { pos: Number(pos), cor: s.cor } : { pos: Number(pos) }));
     try {
       const r = await onSoumettre(texte.id, niveau, reponses);
-      if (r) setRes(r);
-      else setErreurReseau(true);
+      if (r) {
+        setRes(r);
+        // Suivi par notion (escalier) + anti-repetition, apres le verdict serveur.
+        onResultat?.(texte.id, r.juste);
+      } else setErreurReseau(true);
     } catch {
       setErreurReseau(true);
     } finally {

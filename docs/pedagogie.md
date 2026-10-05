@@ -284,3 +284,38 @@ Règle de progression (future, non implémentée ici) :
   (elles ne sont pas ré-apprises, seulement entretenues).
 
 Le changement de classe est horodaté (`profils.classe_maj_le`) et journalisé.
+
+## Dictée détective : choix du texte PAR NIVEAU et par notion (aucun calendrier)
+
+Le texte de la dictée n'est **plus tiré au hasard**. Décision de Manu : **on
+n'est pas un prof mais une app ; comme en maths, tout se joue par niveau, pas par
+le temps.** Il n'y a **aucune date, aucune semaine, aucune rentrée.** Les notions
+sont **ordonnées** (table `dictee_notion` : ordre + prérequis, voir
+`docs/progression-dictee-notions.md`) et chaque notion a son **suivi en escalier**
+(table `dictee_notion_suivi` : série de réussites consécutives → maîtrise à **2
+d'affilée**, remise à zéro à chaque échec).
+
+Règle de choix (fonction pure `choisirTexteDictee`,
+`frontend/src/domain/francais/selection-dictee.ts`, testée par
+`selection-dictee.test.ts`), dans l'ordre :
+
+1. **Niveau de l'enfant** (repli : le niveau disponible le plus proche), comme
+   l'escalier des maths.
+2. **Pas de répétition** : on évite les **derniers textes faits** (10 derniers,
+   table `dictee_vu`, par **compte** et non par date), sauf si tout a déjà été vu
+   (jamais de blocage).
+3. **Notion à travailler**, dans l'ordre : d'abord les **lacunes** (notion la
+   plus en difficulté : série à 0 et des échecs) ; puis la **1re notion non
+   maîtrisée** dans l'ordre (la frontière) ; puis la **révision** (`revision`)
+   quand tout est maîtrisé.
+
+Un enfant avance donc **aussi vite que son niveau le permet** : trois jours
+suffisent à franchir plusieurs notions s'il réussit.
+
+Le serveur reste **source de vérité** du suivi via `dictee_contexte(profil)`, qui
+expose seulement : l'**ordre** des notions, la **maîtrise** et les **lacunes** par
+notion, et les ids des **derniers textes vus**. Il n'expose **jamais** les
+erreurs plantées. Après chaque dictée, `dictee_enregistrer(profil, texte,
+correct)` marque le texte vu et met à jour le suivi de sa notion. Repli
+silencieux : si le contexte est indisponible, la dictée reste jouable (choix par
+niveau).
