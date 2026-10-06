@@ -20,6 +20,17 @@ export interface PlayItem {
 let token = 0; // invalide les enchainements en cours
 let current: HTMLAudioElement | null = null;
 let activated = false;
+let ticks: ReturnType<typeof setTimeout>[] = []; // minuteries de surlignage (karaoke)
+
+// Programme un rappel relatif a maintenant ; annule par stop().
+export function scheduleTick(ms: number, fn: () => void): void {
+  ticks.push(setTimeout(fn, Math.max(0, ms)));
+}
+
+function clearTicks(): void {
+  for (const t of ticks) clearTimeout(t);
+  ticks = [];
+}
 
 export function markUserActivated(): void {
   activated = true;
@@ -31,6 +42,7 @@ export function isUserActivated(): boolean {
 
 export function stop(): void {
   token++;
+  clearTicks();
   if (current) {
     try {
       current.pause();
@@ -72,15 +84,21 @@ function attendre(ms: number, monToken: number): Promise<void> {
   });
 }
 
-// Joue une sequence. Renvoie une promesse resolue a la fin (ou a la coupure).
-export async function playItems(items: PlayItem[]): Promise<void> {
+// Joue une sequence. onItemStart(index) est appele juste avant chaque clip
+// (sert a demarrer le surlignage karaoke de la phrase correspondante).
+export async function playItems(
+  items: PlayItem[],
+  opts?: { onItemStart?: (index: number) => void }
+): Promise<void> {
   stop();
   const monToken = token;
-  for (const it of items) {
+  for (let i = 0; i < items.length; i++) {
     if (monToken !== token) return; // coupe
-    await jouerUn(it.url);
+    opts?.onItemStart?.(i);
+    await jouerUn(items[i].url);
     if (monToken !== token) return;
-    if (it.gapAfterMs && it.gapAfterMs > 0) await attendre(it.gapAfterMs, monToken);
+    const gap = items[i].gapAfterMs;
+    if (gap && gap > 0) await attendre(gap, monToken);
   }
 }
 

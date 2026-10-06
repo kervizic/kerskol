@@ -139,3 +139,55 @@ valider d'abord.
 
 Commande (PC Windows) : `python gen_kerskol.py --out C:\kerskol-tts\sortie`
 (sans `--pilot`). Reprise automatique.
+
+## 10. Relecture et calage au mot (phase 2)
+
+### `toks()` — découpage en mots unique
+`tools/tts/toks.py` et `frontend/src/lib/voix/toks.ts` sont **byte-identiques**
+(jeu commun `tools/tts/toks_fixture.json`, testé des deux côtés). Les chiffres
+sont convertis en lettres via la **même verbalisation que l'audio**
+(`nombres_fr` / `nombres.ts`), les apostrophes et traits d'union deviennent des
+séparateurs. Le front ajoute la correspondance **mot affiché ↔ tokens**
+(`mapperMots`, ex. « l'école » = 1 span / 2 tokens) pour surligner le bon mot.
+
+### A. Relecture (`tools/tts/relecture.py`, PC, après génération)
+- **A1** audit de niveau : crête < −40 dB MUET ; −40..−30 QUASI_MUET ; RMS
+  < −35 dB FAIBLE ; texte > 10 car rendu en < 0,3 s suspect.
+- **A2** faster-whisper large-v3 (CPU int8), `beam_size=5`, `word_timestamps`,
+  `temperature=0`. WER (Levenshtein mots) + couverture, les deux via `toks()`.
+  `couverture < 0,85` TRONQUE ; WER < 0,05 OK ; 0,05–0,15 SUSPECT ; ≥ 0,15 FAUTIF.
+  **FAUTIF/TRONQUE régénérés** (graines 4321/2025/777/9999, ancien WAV sauvé).
+  Les **briques d'un seul mot** (nombres, « plus ») sont signalées à part (WER
+  trop sensible à la normalisation Whisper) et **jamais** régénérées en boucle.
+- **A3** `tools/tts/kit_ecoute.py` : page HTML autonome (sons en `data:` URI) des
+  clips à risque de prononciation (liaisons des nombres, homographes, ligatures,
+  traits d'union, noms propres). **Hors repo / hors site** (déposée dans
+  `~/Documents/Programmation/kerskol-kits/`).
+
+### B. Calage au mot (`tools/tts/alignement.py`, PC, CPU)
+`jonatasgrosman/wav2vec2-large-xlsr-53-french` → `forced_align` sur le texte
+prononcé découpé par `toks()` → regroupement par mot → début/fin ms. `align_ok`
+= nb de mots alignés == nb attendu. Contrôle croisé avec les `word_timestamps`
+de Whisper (écart médian rapporté). **Décalage d'encodage MP3** mesuré par
+corrélation croisée (`mp3_offset_ms`) et appliqué au surlignage pour éviter la
+dérive. Sortie `alignement.json` (un bloc par clip), déposée avec l'audio sur le
+VPS (hors git), chargée à la demande par le front.
+
+### Front — surlignage karaoké
+Dans la **dictée** (lecture et relecture), le mot en cours est surligné (anneau
+bleu). Le lecteur programme un rappel par mot (`scheduleTick`, `player.ts`) aux
+instants `alignement.s + mp3_offset`, mappés au mot affiché par `spanPourToken`.
+**Repli** : si `align_ok=false` ou alignement absent, toute la phrase est
+surlignée (jamais de blocage). Respecte la bascule voix de l'exercice.
+Positions dans l'assemblage (`assemblage.ts`, B3) : `début(n) = Σ (durée+pause)`
+des clips précédents, avec les pauses exactes du lecteur (invariant testé).
+**API future exercice de lecture** : `lecture.ts` (`planLectureSansAudio`,
+vitesse imposée mots/min, sans audio) réutilise le même mapping de spans.
+
+## 11. Interventions éditoriales
+
+Correction de prononciation = graphie phonétique dans `texte_lu` **uniquement**
+(le texte affiché ne change jamais). Coquille dans la source = correction du
+texte affiché, à consigner ici.
+
+- (aucune pour l'instant)

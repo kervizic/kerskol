@@ -5,11 +5,17 @@
 // clips manquants), les fonctions ne font rien et l'app continue normalement.
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { chargerManifest, urlsPourCles, type VoixManifest } from "./manifest";
+import { chargerAlignement, chargerManifest, urlsPourCles, type Alignement, type VoixManifest } from "./manifest";
 import { enonceEnCles } from "./verbalize";
 import { lectureAutoDeProfil, shouldAutoPlay, shouldPlayManual } from "./autoplay";
 import { effectiveLectureAuto, getStoredLectureAuto, setStoredLectureAuto } from "./lectureAutoLocale";
-import { markUserActivated, playItems, playUrls, precharger, stop } from "./player";
+import { markUserActivated, playItems, playUrls, precharger, scheduleTick, stop } from "./player";
+
+// Rappels de surlignage karaoke (indices relatifs a la phrase du clip).
+export interface KaraokeCallbacks {
+  onSentence?: (sentenceIndex: number) => void;
+  onToken?: (sentenceIndex: number, tokenIndex: number) => void; // -1 fin, -2 phrase entiere (repli)
+}
 
 // silences (ms) — calques sur la recette audiobook (0,5 s intra, 1,0 s fin)
 const GAP_NOMBRE = 110; // enchainement serre pour les nombres/operateurs
@@ -25,7 +31,10 @@ export interface Voix {
   couper: () => void;
   direCles: (cles: string[], opts?: { auto?: boolean; gapMs?: number }) => void;
   direEnonce: (prompt: string, opts?: { auto?: boolean }) => void;
-  direDictee: (id: number, opts?: { auto?: boolean; mode?: "simple" | "dictee" }) => void;
+  direDictee: (
+    id: number,
+    opts?: { auto?: boolean; mode?: "simple" | "dictee" } & KaraokeCallbacks
+  ) => void;
 }
 
 export function useVoix(profil: { id?: string; lecture_auto?: boolean | null } | null): Voix {
@@ -55,6 +64,14 @@ export function useVoix(profil: { id?: string; lecture_auto?: boolean | null } |
 
   // coupe la voix au demontage du composant qui detient le hook
   useEffect(() => () => stop(), []);
+
+  // alignement au mot (karaoke) : chargement paresseux une fois.
+  const alnRef = useRef<Alignement | null>(null);
+  useEffect(() => {
+    chargerAlignement().then((a) => {
+      alnRef.current = a;
+    });
+  }, []);
 
   const disponible = Boolean(manifest && Object.keys(manifest.keys).length > 0);
 
@@ -96,9 +113,9 @@ export function useVoix(profil: { id?: string; lecture_auto?: boolean | null } |
   );
 
   const direDictee = useCallback(
-    (id: number, opts?: { auto?: boolean; mode?: "simple" | "dictee" }) => {
+    (id: number, opts?: { auto?: boolean; mode?: "simple" | "dictee" } & KaraokeCallbacks) => {
       if (!manifest) return;
-      // recupere les phrases dictee:<id>:s0, s1, ... dans l'ordre
+      // phrases dictee:<id>:s0, s1, ... dans l'ordre (= index de phrase)
       const cles = Object.keys(manifest.keys)
         .filter((k) => k.startsWith(`dictee:${id}:s`))
         .sort((a, b) => {
@@ -106,27 +123,57 @@ export function useVoix(profil: { id?: string; lecture_auto?: boolean | null } |
           const nb = parseInt(b.slice(b.lastIndexOf("s") + 1), 10);
           return na - nb;
         });
-      const urls = urlsPourCles(manifest, cles);
-      const hasClips = urls.length > 0;
+      // phrase -> { url, cid, sentenceIndex } (l'index de phrase = l'ordre sN)
+      const phrases = cles
+        .map((cle, idx) => ({
+          cid: manifest.keys[cle],
+          sentenceIndex: idx,
+          url: urlsPourCles(manifest, [cle])[0] ?? null,
+        }))
+        .filter((p): p is { cid: string; sentenceIndex: number; url: string } => Boolean(p.url));
+
+      const hasClips = phrases.length > 0;
       const ok = opts?.auto
         ? shouldAutoPlay(lectureAuto, activeRef.current, hasClips)
         : shouldPlayManual(hasClips);
       if (!ok) return;
       if (!opts?.auto) activer();
 
+      // decouverte (lecture continue) -> ecriture phrase par phrase (pauses
+      // longues) -> relecture complete. Granularite phrase (cf. docs/voix.md).
+      type It = { url: string; gapAfterMs: number; cid: string; sentenceIndex: number };
+      let items: It[];
       if (opts?.mode === "dictee") {
-        // decouverte (lecture continue) -> ecriture phrase par phrase (pauses
-        // longues) -> relecture complete. Pas de clip "mot a mot" : granularite
-        // phrase (cf. docs/voix.md).
-        const items = [
-          ...urls.map((url) => ({ url, gapAfterMs: GAP_PHRASE })),
-          ...urls.map((url, i) => ({ url, gapAfterMs: i < urls.length - 1 ? GAP_DICTEE : GAP_PARAGRAPHE })),
-          ...urls.map((url) => ({ url, gapAfterMs: GAP_PHRASE })),
+        items = [
+          ...phrases.map((p) => ({ ...p, gapAfterMs: GAP_PHRASE })),
+          ...phrases.map((p, i) => ({ ...p, gapAfterMs: i < phrases.length - 1 ? GAP_DICTEE : GAP_PARAGRAPHE })),
+          ...phrases.map((p) => ({ ...p, gapAfterMs: GAP_PHRASE })),
         ];
-        void playItems(items);
       } else {
-        void playUrls(urls, GAP_PHRASE);
+        items = phrases.map((p) => ({ ...p, gapAfterMs: GAP_PHRASE }));
       }
+
+      const planifierKaraoke = (cid: string, sentenceIndex: number) => {
+        opts?.onSentence?.(sentenceIndex);
+        const a = alnRef.current?.clips[cid];
+        const offset = alnRef.current?.mp3_offset_ms ?? 0;
+        if (!a || !a.align_ok || a.words.length === 0) {
+          opts?.onToken?.(sentenceIndex, -2); // repli : phrase entiere surlignee
+          return;
+        }
+        a.words.forEach((w, j) => scheduleTick(w.s + offset, () => opts?.onToken?.(sentenceIndex, j)));
+        const dernier = a.words[a.words.length - 1];
+        scheduleTick(dernier.e + offset, () => opts?.onToken?.(sentenceIndex, -1));
+      };
+
+      void playItems(
+        items.map((it) => ({ url: it.url, gapAfterMs: it.gapAfterMs })),
+        {
+          onItemStart: (i) => {
+            if (opts?.onSentence || opts?.onToken) planifierKaraoke(items[i].cid, items[i].sentenceIndex);
+          },
+        }
+      );
     },
     [manifest, lectureAuto, activer]
   );

@@ -13,10 +13,11 @@
 // est seul juge ; il revele les erreurs dans le resultat, affiche ensuite de
 // facon toujours valorisante (jamais punitive).
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Check, Search } from "lucide-react";
 import { SpeakerButton } from "./SpeakerButton";
 import { AutoReadToggle } from "./AutoReadToggle";
+import { phrasesDepuisMots, mapperMots, spanPourToken } from "../lib/voix/toks";
 import {
   propositionsDictee, motAffichable,
   type DicteeTexte, type DicteeReponse, type DicteeResultat,
@@ -55,10 +56,30 @@ export default function DicteeDetective({ niveau, bank, ctx, onSoumettre, onCont
   const [res, setRes] = useState<DicteeResultat | null>(null);
   const [erreurReseau, setErreurReseau] = useState(false);
 
+  // Karaoke : surlignage du mot en cours (pos = index+1). Repli phrase entiere
+  // si l'alignement n'est pas fiable (tokenIndex -2).
+  const [surlignes, setSurlignes] = useState<Set<number>>(new Set());
+  const phrases = useMemo(() => (texte ? phrasesDepuisMots(texte.mots) : []), [texte]);
+  const spansParPhrase = useMemo(
+    () => (texte ? phrases.map((idxs) => mapperMots(idxs.map((i) => texte.mots[i]))) : []),
+    [phrases, texte]
+  );
+  const onSentence = useCallback(() => setSurlignes(new Set()), []);
+  const onToken = useCallback(
+    (s: number, tok: number) => {
+      if (tok === -1) return setSurlignes(new Set());
+      const idxs = phrases[s] ?? [];
+      if (tok === -2) return setSurlignes(new Set(idxs.map((i) => i + 1)));
+      const local = spanPourToken(spansParPhrase[s] ?? [], tok);
+      if (local >= 0 && idxs[local] !== undefined) setSurlignes(new Set([idxs[local] + 1]));
+    },
+    [phrases, spansParPhrase]
+  );
+
   // Lecture AUTO de la dictee a l'arrivee sur l'exercice (mode dictee : lecture
   // continue -> phrase par phrase -> relecture). Avant le verdict uniquement.
   useEffect(() => {
-    if (texte && !res) lireDictee?.(texte.id, { auto: true, mode: "dictee" });
+    if (texte && !res) lireDictee?.(texte.id, { auto: true, mode: "dictee", onSentence, onToken });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [texte?.id]);
 
@@ -132,7 +153,7 @@ export default function DicteeDetective({ niveau, bank, ctx, onSoumettre, onCont
             <SpeakerButton
               disponible={Boolean(voixDisponible)}
               label="Réécouter la dictée"
-              onClick={() => lireDictee(texte.id, { mode: "dictee" })}
+              onClick={() => lireDictee(texte.id, { mode: "dictee", onSentence, onToken })}
             />
             {onToggleLectureAuto && (
               <AutoReadToggle
@@ -152,6 +173,7 @@ export default function DicteeDetective({ niveau, bank, ctx, onSoumettre, onCont
           const on = Boolean(sel[pos]?.on);
           const e = errByPos.get(pos);
           const fa = faussesAlertes.has(pos);
+          const surligne = surlignes.has(pos);
           let bg = "transparent";
           let color = "inherit";
           if (res) {
@@ -169,10 +191,16 @@ export default function DicteeDetective({ niveau, bank, ctx, onSoumettre, onCont
               className="kk-dictee__mot"
               onClick={() => toggle(pos)}
               disabled={Boolean(res)}
+              aria-current={surligne ? "true" : undefined}
               style={{
                 display: "inline-block", margin: "2px 4px", padding: "4px 10px",
-                minHeight: 40, borderRadius: 10, border: "2px solid var(--kk-border, #ccc)",
-                background: bg, color, font: "inherit", cursor: res ? "default" : "pointer",
+                minHeight: 40, borderRadius: 10,
+                border: surligne ? "2px solid #2563eb" : "2px solid var(--kk-border, #ccc)",
+                background: surligne && bg === "transparent" ? "#dbeafe" : bg,
+                color: surligne && bg === "transparent" ? "#1e3a8a" : color,
+                boxShadow: surligne ? "0 0 0 3px rgba(37,99,235,0.35)" : undefined,
+                font: "inherit", cursor: res ? "default" : "pointer",
+                transition: "background 80ms, box-shadow 80ms",
               }}
             >
               {res && e ? e.correction : mot}

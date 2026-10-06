@@ -45,6 +45,44 @@ export async function chargerManifest(): Promise<VoixManifest | null> {
   return enCours;
 }
 
+// --- Alignement au mot (karaoke) ------------------------------------------
+export interface MotAligne {
+  w: string;
+  s: number; // debut ms (relatif au clip)
+  e: number; // fin ms
+}
+export interface ClipAligne {
+  words: MotAligne[];
+  align_ok: boolean;
+  dur_ms: number;
+}
+export interface Alignement {
+  voice: string;
+  mp3_offset_ms: number;
+  clips: Record<string, ClipAligne>;
+}
+
+export const ALIGNEMENT_URL = `${AUDIO_BASE}/alignement.json`;
+
+let alnCache: Alignement | null = null;
+let alnEnCours: Promise<Alignement | null> | null = null;
+
+export async function chargerAlignement(): Promise<Alignement | null> {
+  if (alnCache) return alnCache;
+  if (alnEnCours) return alnEnCours;
+  alnEnCours = fetch(ALIGNEMENT_URL)
+    .then((r) => (r.ok ? r.json() : null))
+    .then((j: Alignement | null) => {
+      if (j && j.clips) alnCache = j;
+      return alnCache;
+    })
+    .catch(() => null)
+    .finally(() => {
+      alnEnCours = null;
+    });
+  return alnEnCours;
+}
+
 // URL du fichier audio pour une cle logique, ou null si absente du manifest.
 export function urlPourCle(manifest: VoixManifest | null, cle: string): string | null {
   if (!manifest) return null;
