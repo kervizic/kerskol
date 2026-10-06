@@ -33,7 +33,15 @@ interface Props {
   onContinuer: (correct: boolean) => void;
   onResultat?: (texteId: number, correct: boolean) => void;
   // Voix : lit la dictee CORRECTE (jamais la version piegee), phrase par phrase.
-  lireDictee?: (id: number, opts?: { auto?: boolean; mode?: "simple" | "dictee" }) => void;
+  lireDictee?: (
+    id: number,
+    opts?: {
+      auto?: boolean;
+      mode?: "simple" | "dictee";
+      onSentence?: (sentenceIndex: number) => void;
+      onToken?: (sentenceIndex: number, tokenIndex: number) => void;
+    }
+  ) => void;
   voixDisponible?: boolean;
   lectureAutoActive?: boolean;
   onToggleLectureAuto?: () => void;
