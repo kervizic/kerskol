@@ -109,7 +109,7 @@ export async function listProfils(foyerId: string): Promise<Profil[]> {
   const { data, error } = await supabase()
     .from("profils")
     .select(
-      "id, foyer_id, surnom, avatar, univers, classe, matieres_actives, limite_jour_min, limite_semaine_min, monnaie, user_id"
+      "id, foyer_id, surnom, avatar, univers, classe, matieres_actives, limite_jour_min, limite_semaine_min, monnaie, user_id, lecture_auto"
     )
     .eq("foyer_id", foyerId)
     .order("cree_le", { ascending: true });
@@ -128,7 +128,7 @@ export async function getProfilById(id: string): Promise<Profil> {
   const { data, error } = await supabase()
     .from("profils")
     .select(
-      "id, foyer_id, surnom, avatar, univers, classe, matieres_actives, limite_jour_min, limite_semaine_min, monnaie, user_id"
+      "id, foyer_id, surnom, avatar, univers, classe, matieres_actives, limite_jour_min, limite_semaine_min, monnaie, user_id, lecture_auto"
     )
     .eq("id", id)
     .single();
@@ -292,7 +292,7 @@ export async function createProfil(input: CreateProfilInput): Promise<Profil> {
     .from("profils")
     .insert(input)
     .select(
-      "id, foyer_id, surnom, avatar, univers, classe, matieres_actives, limite_jour_min, limite_semaine_min, monnaie"
+      "id, foyer_id, surnom, avatar, univers, classe, matieres_actives, limite_jour_min, limite_semaine_min, monnaie, lecture_auto"
     )
     .single();
   if (error) throw error;
@@ -311,6 +311,7 @@ export async function updateProfil(
       | "matieres_actives"
       | "limite_jour_min"
       | "limite_semaine_min"
+      | "lecture_auto"
     >
   >
 ): Promise<void> {

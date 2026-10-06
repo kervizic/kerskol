@@ -32,6 +32,10 @@ export interface Profil {
   limite_jour_min: number | null;
   limite_semaine_min: number | null;
   monnaie: number;
+  // Lecture a voix haute des consignes/dictees (reglage par profil, espace
+  // parent). Optionnel : absent des anciens profils / du mode demo -> actif par
+  // defaut (voir lib/voix/autoplay.lectureAutoDeProfil).
+  lecture_auto?: boolean | null;
   // Compte Google relie a ce profil (enfant). null = aucun compte relie.
   user_id?: string | null;
   cree_le?: string;

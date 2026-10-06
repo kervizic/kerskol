@@ -13,8 +13,9 @@
 // est seul juge ; il revele les erreurs dans le resultat, affiche ensuite de
 // facon toujours valorisante (jamais punitive).
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Check, Search } from "lucide-react";
+import { SpeakerButton } from "./SpeakerButton";
 import {
   propositionsDictee, motAffichable,
   type DicteeTexte, type DicteeReponse, type DicteeResultat,
@@ -29,6 +30,9 @@ interface Props {
   onSoumettre: (texteId: number, niveau: number, reponses: DicteeReponse[]) => Promise<DicteeResultat | null>;
   onContinuer: (correct: boolean) => void;
   onResultat?: (texteId: number, correct: boolean) => void;
+  // Voix : lit la dictee CORRECTE (jamais la version piegee), phrase par phrase.
+  lireDictee?: (id: number, opts?: { auto?: boolean; mode?: "simple" | "dictee" }) => void;
+  voixDisponible?: boolean;
 }
 
 interface SelState {
@@ -36,7 +40,7 @@ interface SelState {
   cor: string;
 }
 
-export default function DicteeDetective({ niveau, bank, ctx, onSoumettre, onContinuer, onResultat }: Props) {
+export default function DicteeDetective({ niveau, bank, ctx, onSoumettre, onContinuer, onResultat, lireDictee, voixDisponible }: Props) {
   // CHOIX DU TEXTE par NIVEAU et lacunes (notion a travailler, pas de repetition) ;
   // repli sur le niveau seul si le contexte est absent. Aucune logique de date.
   const texte = useMemo(
@@ -47,6 +51,13 @@ export default function DicteeDetective({ niveau, bank, ctx, onSoumettre, onCont
   const [busy, setBusy] = useState(false);
   const [res, setRes] = useState<DicteeResultat | null>(null);
   const [erreurReseau, setErreurReseau] = useState(false);
+
+  // Lecture AUTO de la dictee a l'arrivee sur l'exercice (mode dictee : lecture
+  // continue -> phrase par phrase -> relecture). Avant le verdict uniquement.
+  useEffect(() => {
+    if (texte && !res) lireDictee?.(texte.id, { auto: true, mode: "dictee" });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [texte?.id]);
 
   if (!texte) {
     // Banque indisponible (ne devrait pas arriver si l'exercice existe).
@@ -112,6 +123,16 @@ export default function DicteeDetective({ niveau, bank, ctx, onSoumettre, onCont
           ? `Trouve les ${texte.nbErreurs} mot${texte.nbErreurs > 1 ? "s" : ""} piégé${texte.nbErreurs > 1 ? "s" : ""}`
           : "Trouve les mots piégés (il peut y en avoir un ou plusieurs)"}
         {corrige ? ", puis corrige-les." : "."}
+        {lireDictee && (
+          <>
+            {" "}
+            <SpeakerButton
+              disponible={Boolean(voixDisponible)}
+              label="Réécouter la dictée"
+              onClick={() => lireDictee(texte.id, { mode: "dictee" })}
+            />
+          </>
+        )}
       </p>
 
       {/* Texte : chaque mot est touchable. */}

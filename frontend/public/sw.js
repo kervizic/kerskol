@@ -34,7 +34,13 @@ self.addEventListener("activate", function (event) {
 });
 
 function isImmutableAsset(url) {
-  return url.pathname.startsWith("/assets/") || url.pathname.startsWith("/theme/");
+  // /audio/ = clips voix (noms = hash du texte, contenu immuable) -> mis en
+  // cache A LA DEMANDE (cache-first avec cache.put), pas de prechargement massif.
+  return (
+    url.pathname.startsWith("/assets/") ||
+    url.pathname.startsWith("/theme/") ||
+    url.pathname.startsWith("/audio/")
+  );
 }
 
 self.addEventListener("fetch", function (event) {

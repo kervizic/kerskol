@@ -2,6 +2,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Check, Delete, Grid3x3, Info, Keyboard, RotateCcw } from "lucide-react";
 import { Spinner } from "../components/ui";
 import { ThemeToggle } from "../components/ThemeToggle";
+import { SpeakerButton } from "../components/SpeakerButton";
+import { useVoix } from "../lib/voix/useVoix";
 import {
   getStoredInputMode,
   initialInputMode,
@@ -1127,6 +1129,12 @@ export function Session({
 }) {
   const u = universDef(profil.univers);
 
+  // Voix (lecture des consignes). Le ref garde la derniere instance utilisable
+  // dans les effets sans les relancer a chaque chargement du manifest.
+  const voix = useVoix(profil);
+  const voixRef = useRef(voix);
+  voixRef.current = voix;
+
   const [engine, setEngine] = useState<EngineState | null>(null);
   const [phase, setPhase] = useState<Phase>("answering");
   const [empty, setEmpty] = useState(false);
@@ -1258,7 +1266,8 @@ export function Session({
   const prog = engine ? progress(engine) : { done: 0, total: 1 };
 
   useEffect(() => {
-    // Nouvelle question : reinitialise la saisie et le chrono.
+    // Nouvelle question : coupe la voix en cours puis reinitialise saisie/chrono.
+    voixRef.current.couper();
     setF1("");
     setF2("");
     setActive(1);
@@ -1278,6 +1287,15 @@ export function Session({
     }
     questionStart.current = Date.now();
   }, [ex?.key]);
+
+  // Lecture AUTO de la consigne (non-dictee) : au changement d'exercice ET des
+  // que le manifest est pret. Respecte le reglage par profil + le geste iOS
+  // (gere dans useVoix). La dictee a sa propre lecture dans DicteeDetective.
+  useEffect(() => {
+    if (!voix.disponible || !ex || ex.saisie === "dictee" || !ex.prompt) return;
+    voix.direEnonce(ex.prompt, { auto: true });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ex?.key, voix.disponible]);
 
   const persist = useCallback(
     (eng: EngineState) => {
@@ -1631,6 +1649,7 @@ export function Session({
   // Toucher la zone de reponse reaffiche le pave (bascule automatique et
   // reversible). Utilise aussi bien pour le clic souris que le toucher.
   const touchAnswerZone = useCallback(() => {
+    voixRef.current.activer(); // 1er geste de seance : debloque l'audio (iOS)
     setInputMode((m) => onAnswerZoneTouch(m));
   }, []);
 
@@ -1723,6 +1742,13 @@ export function Session({
         >
           {inputMode === "pad" ? <Keyboard size={22} aria-hidden="true" /> : <Grid3x3 size={22} aria-hidden="true" />}
         </button>
+        {ex && ex.saisie !== "dictee" && ex.prompt && (
+          <SpeakerButton
+            disponible={voix.disponible}
+            label="Relire la consigne"
+            onClick={() => voix.direEnonce(ex.prompt)}
+          />
+        )}
         <ThemeToggle />
       </div>
 
@@ -1736,6 +1762,8 @@ export function Session({
             onSoumettre={soumettreDictee}
             onContinuer={(correct) => advance(correct, true)}
             onResultat={(texteId, correct) => { void enregistrerDictee(profil.id, texteId, correct); }}
+            lireDictee={(id, opts) => voix.direDictee(id, opts)}
+            voixDisponible={voix.disponible}
           />
         ) : (
         <>

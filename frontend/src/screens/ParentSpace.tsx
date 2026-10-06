@@ -81,6 +81,8 @@ function journalLabel(cle: string): string {
       return "Limite par semaine (min)";
     case "matieres_actives":
       return "Matières actives";
+    case "lecture_auto":
+      return "Lecture à voix haute";
     case "mails_actives":
       return "Mails de suivi";
     case "compte_enfant":
@@ -112,6 +114,8 @@ function ProfilEditor({
   const [semaine, setSemaine] = useState(profil.limite_semaine_min?.toString() ?? "90");
   // Matieres actives (calcul toujours present ; francais optionnel).
   const [matActives, setMatActives] = useState<string[]>(profil.matieres_actives ?? [MATIERE_ACTIVE]);
+  // Lecture auto a voix haute (defaut actif si le champ est absent).
+  const [lectureAuto, setLectureAuto] = useState(profil.lecture_auto !== false);
   const [state, setState] = useState<"idle" | "saving" | "ok" | "err">("idle");
 
   const nextMatieres = matActives.includes(MATIERE_ACTIVE)
@@ -128,7 +132,8 @@ function ProfilEditor({
     classe !== profil.classe ||
     nextJour !== profil.limite_jour_min ||
     nextSemaine !== profil.limite_semaine_min ||
-    matKey(nextMatieres) !== matKey(profil.matieres_actives ?? [MATIERE_ACTIVE]);
+    matKey(nextMatieres) !== matKey(profil.matieres_actives ?? [MATIERE_ACTIVE]) ||
+    lectureAuto !== (profil.lecture_auto !== false);
 
   async function save() {
     setState("saving");
@@ -136,7 +141,7 @@ function ProfilEditor({
       // null <-> valeur et changement de classe : journalises par le trigger.
       const patch = {
         classe, limite_jour_min: nextJour, limite_semaine_min: nextSemaine,
-        matieres_actives: nextMatieres,
+        matieres_actives: nextMatieres, lecture_auto: lectureAuto,
       };
       await updateProfil(profil.id, patch);
       onSaved({ ...profil, ...patch });
@@ -212,6 +217,17 @@ function ProfilEditor({
             onChange={(e) => setSemaine(e.target.value)} aria-label="Minutes par semaine"
             placeholder="minutes par semaine" style={{ marginTop: 8 }} />
         )}
+      </div>
+
+      <div className="kk-field">
+        <span>Voix</span>
+        <label className="kk-switch-row">
+          <input type="checkbox" checked={lectureAuto} onChange={(e) => setLectureAuto(e.target.checked)} />
+          <span>Lire les consignes et dictées à voix haute</span>
+        </label>
+        <p className="kk-muted" style={{ fontSize: "0.85rem", marginTop: 6 }}>
+          Le bouton haut-parleur reste disponible même si la lecture automatique est désactivée.
+        </p>
       </div>
 
       {state === "ok" && <Feedback kind="success">Réglages enregistrés. Le changement est journalisé.</Feedback>}
