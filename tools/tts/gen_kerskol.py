@@ -84,7 +84,7 @@ def _encoder_mp3(wav: Path, mp3: Path, core) -> None:
     os.replace(tmp, mp3)
 
 
-def generer(out_dir: Path, pilot: bool, only: set[str] | None) -> dict:
+def generer(out_dir: Path, pilot: bool, only: set[str] | None, force: bool = False) -> dict:
     import core
     from voix import VoixEngine
 
@@ -123,8 +123,8 @@ def generer(out_dir: Path, pilot: bool, only: set[str] | None) -> dict:
         mp3 = vdir / f"{cid}.mp3"
         wav = vdir / f"{cid}.wav"
 
-        # reprise : clip deja encode
-        if mp3.exists() and mp3.stat().st_size > 400 and cid in manifest["clips"]:
+        # reprise : clip deja encode (sauf regeneration forcee)
+        if not force and mp3.exists() and mp3.stat().st_size > 400 and cid in manifest["clips"]:
             continue
 
         att = len(texte) / core.SIG_PER_SEC
@@ -195,9 +195,11 @@ def main(argv=None) -> int:
     ap.add_argument("--out", required=True)
     ap.add_argument("--pilot", action="store_true")
     ap.add_argument("--only", default=None, help="cles separees par des virgules")
+    ap.add_argument("--force", action="store_true",
+                    help="regenere meme si deja present (regen pilotee par relecture)")
     a = ap.parse_args(argv)
     only = set(x.strip() for x in a.only.split(",") if x.strip()) if a.only else None
-    generer(Path(a.out), a.pilot, only)
+    generer(Path(a.out), a.pilot, only, force=a.force)
     return 0
 
 

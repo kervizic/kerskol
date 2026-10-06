@@ -175,7 +175,8 @@ def main() -> int:
     voice = man["voice"]
     vdir = out / voice
     items = [(cid, info) for cid, info in man["clips"].items()
-             if (a.cat is None or info.get("cat") == a.cat)]
+             if (a.cat is None or info.get("cat") == a.cat)
+             and (vdir / f"{cid}.wav").exists()]
     if a.limit:
         items = items[: a.limit]
 
