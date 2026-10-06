@@ -10,6 +10,7 @@ import { enonceEnCles } from "./verbalize";
 import { lectureAutoDeProfil, shouldAutoPlay, shouldPlayManual } from "./autoplay";
 import { effectiveLectureAuto, getStoredLectureAuto, setStoredLectureAuto } from "./lectureAutoLocale";
 import { markUserActivated, playItems, playUrls, precharger, scheduleTick, stop } from "./player";
+import { jouerBriques, stopSequence, webAudioDisponible } from "./audioEngine";
 
 // Rappels de surlignage karaoke (indices relatifs a la phrase du clip).
 export interface KaraokeCallbacks {
@@ -78,9 +79,13 @@ export function useVoix(profil: { id?: string; lecture_auto?: boolean | null } |
   const activer = useCallback(() => {
     activeRef.current = true;
     markUserActivated();
+    webAudioDisponible(); // cree/relance l'AudioContext sur le geste (iOS)
   }, []);
 
-  const couper = useCallback(() => stop(), []);
+  const couper = useCallback(() => {
+    stop(); // clips entiers (HTMLAudio) + minuteries karaoke
+    stopSequence(); // briques (Web Audio)
+  }, []);
 
   // Bascule enfant : applique tout de suite, memorise pour ce profil ; couper
   // l'auto coupe aussi le son en cours.
@@ -100,7 +105,10 @@ export function useVoix(profil: { id?: string; lecture_auto?: boolean | null } |
         : shouldPlayManual(hasClips);
       if (!ok) return;
       if (!opts?.auto) activer();
-      void playUrls(urls, opts?.gapMs ?? GAP_NOMBRE);
+      // Briques assemblées serré en Web Audio (gap 0 + fondu) ; repli HTMLAudio.
+      stop();
+      if (webAudioDisponible()) void jouerBriques(urls);
+      else void playUrls(urls, opts?.gapMs ?? GAP_NOMBRE);
     },
     [manifest, lectureAuto, activer]
   );
