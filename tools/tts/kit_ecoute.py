@@ -23,6 +23,11 @@ import re
 from pathlib import Path
 
 HOMOGRAPHES = {"plus", "os", "as", "vis", "couvent", "est", "fils", "sens", "tous", "plans"}
+# consonne finale muette frequente (retour d'ecoute Manu : « chat » lu « chate »)
+CONSONNE_FINALE = {"chat", "chats", "petit", "petits", "tout", "tous", "gros", "nez",
+                   "dos", "lit", "lits", "nuit", "nuits", "haut", "pied", "pieds",
+                   "loup", "loups", "vent", "vents", "bout", "bouts", "sang", "plus",
+                   "os", "fils", "rat", "rats", "pot", "pots", "mot", "mots", "temps"}
 # nombres a liaison delicate
 NOMBRES_RISQUE = set([18, 80, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
                      + [21, 31, 41, 51, 61, 71, 81, 91]
@@ -42,6 +47,8 @@ def _raisons(key: str, texte: str) -> list[str]:
             pass
     if any(m in HOMOGRAPHES for m in mots):
         r.append("homographe")
+    if any(m in CONSONNE_FINALE for m in mots):
+        r.append("consonne finale muette")
     if "œ" in low or "æ" in low:
         r.append("ligature")
     if "-" in texte and not key.startswith("num:"):
