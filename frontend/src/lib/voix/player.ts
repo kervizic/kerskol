@@ -43,7 +43,7 @@ export function stop(): void {
 }
 
 function jouerUn(url: string): Promise<void> {
-  return new Promise((resolve) => {
+  return new Promise<void>((resolve) => {
     let fini = false;
     const done = () => {
       if (fini) return;
@@ -64,7 +64,7 @@ function jouerUn(url: string): Promise<void> {
 }
 
 function attendre(ms: number, monToken: number): Promise<void> {
-  return new Promise((resolve) => {
+  return new Promise<void>((resolve) => {
     if (ms <= 0) return resolve();
     setTimeout(() => resolve(), ms);
   }).then(() => {
