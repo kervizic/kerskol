@@ -1,0 +1,13 @@
+[
+  { "t": "L'école est fermée.", "toks": ["l", "école", "est", "fermée"] },
+  { "t": "Les poules picorent le grain.", "toks": ["les", "poules", "picorent", "le", "grain"] },
+  { "t": "vingt-sept", "toks": ["vingt", "sept"] },
+  { "t": "27 ÷ 3", "toks": ["vingt", "sept", "trois"] },
+  { "t": "l'œuf et l'âne", "toks": ["l", "œuf", "et", "l", "âne"] },
+  { "t": "100", "toks": ["cent"] },
+  { "t": "71", "toks": ["soixante", "et", "onze"] },
+  { "t": "quatre-vingts", "toks": ["quatre", "vingts"] },
+  { "t": "Dans la forêt, les feuilles tombent doucement.", "toks": ["dans", "la", "forêt", "les", "feuilles", "tombent", "doucement"] },
+  { "t": "Léa a rangé ses crayons.", "toks": ["léa", "a", "rangé", "ses", "crayons"] },
+  { "t": "Combien font 2534 ?", "toks": ["combien", "font", "deux", "mille", "cinq", "cent", "trente", "quatre"] }
+]
