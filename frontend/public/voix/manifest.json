@@ -1,0 +1,316 @@
+{
+  "voice": "naf_D-v1",
+  "format": "mp3",
+  "sample_rate": 24000,
+  "bitrate": "64k",
+  "clips": {
+    "0cce373d19ca7707": {
+      "text": "trois",
+      "ms": 400,
+      "cat": "nombre"
+    },
+    "2964cea0c53e10e0": {
+      "text": "zéro",
+      "ms": 480,
+      "cat": "nombre"
+    },
+    "f5f3be4078ca51b8": {
+      "text": "un",
+      "ms": 880,
+      "cat": "nombre"
+    },
+    "75493b32bdeeac04": {
+      "text": "deux",
+      "ms": 400,
+      "cat": "nombre"
+    },
+    "46e9c828f53d7430": {
+      "text": "quatre",
+      "ms": 400,
+      "cat": "nombre"
+    },
+    "7623147b832be23b": {
+      "text": "cinq",
+      "ms": 480,
+      "cat": "nombre"
+    },
+    "263d8d88117e0d30": {
+      "text": "six",
+      "ms": 400,
+      "cat": "nombre"
+    },
+    "04c8f36d759261d4": {
+      "text": "sept",
+      "ms": 480,
+      "cat": "nombre"
+    },
+    "aa7c59ff7fcf8950": {
+      "text": "huit",
+      "ms": 480,
+      "cat": "nombre"
+    },
+    "5a3dd70b0b10f201": {
+      "text": "neuf",
+      "ms": 320,
+      "cat": "nombre"
+    },
+    "49a0aebb7adfaff2": {
+      "text": "dix",
+      "ms": 400,
+      "cat": "nombre"
+    },
+    "fc807c59f89d61ec": {
+      "text": "onze",
+      "ms": 480,
+      "cat": "nombre"
+    },
+    "a01631f411a58be0": {
+      "text": "douze",
+      "ms": 480,
+      "cat": "nombre"
+    },
+    "5999502ea80a1596": {
+      "text": "treize",
+      "ms": 480,
+      "cat": "nombre"
+    },
+    "e43cd358ef69459d": {
+      "text": "quatorze",
+      "ms": 720,
+      "cat": "nombre"
+    },
+    "130911430248e112": {
+      "text": "quinze",
+      "ms": 480,
+      "cat": "nombre"
+    },
+    "49bad914a6167008": {
+      "text": "seize",
+      "ms": 640,
+      "cat": "nombre"
+    },
+    "9e0ec90762cbb1c8": {
+      "text": "dix-sept",
+      "ms": 720,
+      "cat": "nombre"
+    },
+    "12434e59e4de9a99": {
+      "text": "dix-huit",
+      "ms": 560,
+      "cat": "nombre"
+    },
+    "86282ffa30376138": {
+      "text": "dix-neuf",
+      "ms": 560,
+      "cat": "nombre"
+    },
+    "548346ae3ae9ebef": {
+      "text": "vingt",
+      "ms": 480,
+      "cat": "nombre"
+    },
+    "b48659a99c51be51": {
+      "text": "vingt et un",
+      "ms": 800,
+      "cat": "nombre"
+    },
+    "621175fd1ae2e77c": {
+      "text": "vingt-deux",
+      "ms": 640,
+      "cat": "nombre"
+    },
+    "3a48ab253018e26f": {
+      "text": "vingt-trois",
+      "ms": 560,
+      "cat": "nombre"
+    },
+    "157785418dc92f47": {
+      "text": "vingt-quatre",
+      "ms": 640,
+      "cat": "nombre"
+    },
+    "fd54c8b00471150d": {
+      "text": "vingt-cinq",
+      "ms": 880,
+      "cat": "nombre"
+    },
+    "c9df0a6d4a60da60": {
+      "text": "vingt-six",
+      "ms": 880,
+      "cat": "nombre"
+    },
+    "3229837ff1602da9": {
+      "text": "vingt-sept",
+      "ms": 1120,
+      "cat": "nombre"
+    },
+    "20d6f422489e6460": {
+      "text": "vingt-huit",
+      "ms": 1200,
+      "cat": "nombre"
+    },
+    "8be2866d2034c553": {
+      "text": "vingt-neuf",
+      "ms": 640,
+      "cat": "nombre"
+    },
+    "54507f2db3db1379": {
+      "text": "trente",
+      "ms": 560,
+      "cat": "nombre"
+    },
+    "4b61d8750dbc4b4e": {
+      "text": "plus",
+      "ms": 400,
+      "cat": "operateur"
+    },
+    "f8e813e76382f0c6": {
+      "text": "moins",
+      "ms": 560,
+      "cat": "operateur"
+    },
+    "0d7378c51292ae30": {
+      "text": "fois",
+      "ms": 320,
+      "cat": "operateur"
+    },
+    "8420e16f1eb2a29b": {
+      "text": "divisé par",
+      "ms": 640,
+      "cat": "operateur"
+    },
+    "dda4d5b74ad669a0": {
+      "text": "égale",
+      "ms": 560,
+      "cat": "operateur"
+    },
+    "ea5e910bb3ec16a2": {
+      "text": "Écoute bien.",
+      "ms": 640,
+      "cat": "consigne"
+    },
+    "710b7e1c2e26848e": {
+      "text": "À toi de jouer.",
+      "ms": 1200,
+      "cat": "consigne"
+    },
+    "f9c4a73985ca4e7c": {
+      "text": "Lis bien la consigne.",
+      "ms": 960,
+      "cat": "consigne"
+    },
+    "1072ff19ad06d115": {
+      "text": "Prends ton temps.",
+      "ms": 1120,
+      "cat": "consigne"
+    },
+    "c9bda05b4d21b495": {
+      "text": "C'est parti !",
+      "ms": 560,
+      "cat": "consigne"
+    },
+    "c66f42226c3e3596": {
+      "text": "Bravo ! C'est la bonne réponse.",
+      "ms": 1760,
+      "cat": "message"
+    },
+    "8f3c5d21e3d2e2dc": {
+      "text": "Ce n'est pas tout à fait ça. Regarde bien et essaie encore.",
+      "ms": 4800,
+      "cat": "message"
+    },
+    "d1ee0862eec1c469": {
+      "text": "Super détective ! Tu as trouvé tous les mots piégés.",
+      "ms": 3440,
+      "cat": "message"
+    },
+    "696a07048851d291": {
+      "text": "Jamais de s à mille. Mille ne change jamais.",
+      "ms": 3040,
+      "cat": "message"
+    },
+    "4c57de4a4fa8eae7": {
+      "text": "Vérifie bien ta réponse avant de valider.",
+      "ms": 1840,
+      "cat": "message"
+    },
+    "0f681da1263bca25": {
+      "text": "Le chat et le chien sont dans le jardin.",
+      "ms": 1920,
+      "cat": "dictee"
+    },
+    "6c0f97217eeb1807": {
+      "text": "On joue avec eux tous les jours.",
+      "ms": 1520,
+      "cat": "dictee"
+    },
+    "16c9c746d94816e2": {
+      "text": "Dans la forêt, les feuilles tombent doucement.",
+      "ms": 2240,
+      "cat": "dictee"
+    },
+    "76776ea8a23360f1": {
+      "text": "Elles sont jaunes et rouges.",
+      "ms": 1200,
+      "cat": "dictee"
+    },
+    "234d4206d8bb8737": {
+      "text": "Les oiseaux sont partis vers le sud.",
+      "ms": 1840,
+      "cat": "dictee"
+    }
+  },
+  "keys": {
+    "num:3": "0cce373d19ca7707",
+    "num:0": "2964cea0c53e10e0",
+    "num:1": "f5f3be4078ca51b8",
+    "num:2": "75493b32bdeeac04",
+    "num:4": "46e9c828f53d7430",
+    "num:5": "7623147b832be23b",
+    "num:6": "263d8d88117e0d30",
+    "num:7": "04c8f36d759261d4",
+    "num:8": "aa7c59ff7fcf8950",
+    "num:9": "5a3dd70b0b10f201",
+    "num:10": "49a0aebb7adfaff2",
+    "num:11": "fc807c59f89d61ec",
+    "num:12": "a01631f411a58be0",
+    "num:13": "5999502ea80a1596",
+    "num:14": "e43cd358ef69459d",
+    "num:15": "130911430248e112",
+    "num:16": "49bad914a6167008",
+    "num:17": "9e0ec90762cbb1c8",
+    "num:18": "12434e59e4de9a99",
+    "num:19": "86282ffa30376138",
+    "num:20": "548346ae3ae9ebef",
+    "num:21": "b48659a99c51be51",
+    "num:22": "621175fd1ae2e77c",
+    "num:23": "3a48ab253018e26f",
+    "num:24": "157785418dc92f47",
+    "num:25": "fd54c8b00471150d",
+    "num:26": "c9df0a6d4a60da60",
+    "num:27": "3229837ff1602da9",
+    "num:28": "20d6f422489e6460",
+    "num:29": "8be2866d2034c553",
+    "num:30": "54507f2db3db1379",
+    "op:plus": "4b61d8750dbc4b4e",
+    "op:moins": "f8e813e76382f0c6",
+    "op:fois": "0d7378c51292ae30",
+    "op:divise": "8420e16f1eb2a29b",
+    "op:egale": "dda4d5b74ad669a0",
+    "consigne:ecoute-bien": "ea5e910bb3ec16a2",
+    "consigne:a-toi-de-jouer": "710b7e1c2e26848e",
+    "consigne:lis-la-consigne": "f9c4a73985ca4e7c",
+    "consigne:prends-ton-temps": "1072ff19ad06d115",
+    "consigne:c-est-parti": "c9bda05b4d21b495",
+    "msg:bravo": "c66f42226c3e3596",
+    "msg:presque": "8f3c5d21e3d2e2dc",
+    "msg:detective-tout-trouve": "d1ee0862eec1c469",
+    "msg:mille-invariable": "696a07048851d291",
+    "msg:verifie-ta-reponse": "4c57de4a4fa8eae7",
+    "dictee:1:s0": "0f681da1263bca25",
+    "dictee:1:s1": "6c0f97217eeb1807",
+    "dictee:104:s0": "16c9c746d94816e2",
+    "dictee:104:s1": "76776ea8a23360f1",
+    "dictee:104:s2": "234d4206d8bb8737"
+  }
+}
