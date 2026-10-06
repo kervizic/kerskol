@@ -58,9 +58,16 @@ def _log(msg: str) -> None:
 
 
 def _bornes_suspect(n_signes: int, att: float) -> tuple[float, float]:
-    """Intervalle de duree acceptable (s)."""
+    """Intervalle de duree acceptable (s).
+
+    Textes TRES COURTS (< 15 car : un nombre, « Bravo ») : la duree attendue
+    (caracteres/20,3) est peu fiable (un mot isole dure 0,4 a 1,2 s sans rapport
+    lineaire avec sa longueur). On n'utilise donc que des bornes ABSOLUES larges
+    [0,25 s ; 6 s] : les cas reels (muet, emballement) restent captures par les
+    controles MUET (< -40 dB) et EMBALLE (>= 95% du plafond), et on evite des
+    regenerations inutiles. Au-dela de 15 car, regle nominale [0,5 ; 1,7] x att."""
     if n_signes < SEUIL_COURT:
-        return (max(0.25, 0.3 * att), min(6.0, 3.0 * att) if att > 0 else 6.0)
+        return (0.25, 6.0)
     return (0.5 * att, 1.7 * att)
 
 
