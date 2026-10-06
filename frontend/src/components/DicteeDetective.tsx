@@ -16,6 +16,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Check, Search } from "lucide-react";
 import { SpeakerButton } from "./SpeakerButton";
+import { AutoReadToggle } from "./AutoReadToggle";
 import {
   propositionsDictee, motAffichable,
   type DicteeTexte, type DicteeReponse, type DicteeResultat,
@@ -33,6 +34,8 @@ interface Props {
   // Voix : lit la dictee CORRECTE (jamais la version piegee), phrase par phrase.
   lireDictee?: (id: number, opts?: { auto?: boolean; mode?: "simple" | "dictee" }) => void;
   voixDisponible?: boolean;
+  lectureAutoActive?: boolean;
+  onToggleLectureAuto?: () => void;
 }
 
 interface SelState {
@@ -40,7 +43,7 @@ interface SelState {
   cor: string;
 }
 
-export default function DicteeDetective({ niveau, bank, ctx, onSoumettre, onContinuer, onResultat, lireDictee, voixDisponible }: Props) {
+export default function DicteeDetective({ niveau, bank, ctx, onSoumettre, onContinuer, onResultat, lireDictee, voixDisponible, lectureAutoActive, onToggleLectureAuto }: Props) {
   // CHOIX DU TEXTE par NIVEAU et lacunes (notion a travailler, pas de repetition) ;
   // repli sur le niveau seul si le contexte est absent. Aucune logique de date.
   const texte = useMemo(
@@ -131,6 +134,13 @@ export default function DicteeDetective({ niveau, bank, ctx, onSoumettre, onCont
               label="Réécouter la dictée"
               onClick={() => lireDictee(texte.id, { mode: "dictee" })}
             />
+            {onToggleLectureAuto && (
+              <AutoReadToggle
+                disponible={Boolean(voixDisponible)}
+                active={Boolean(lectureAutoActive)}
+                onToggle={onToggleLectureAuto}
+              />
+            )}
           </>
         )}
       </p>

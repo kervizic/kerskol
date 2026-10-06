@@ -3,6 +3,7 @@ import { Check, Delete, Grid3x3, Info, Keyboard, RotateCcw } from "lucide-react"
 import { Spinner } from "../components/ui";
 import { ThemeToggle } from "../components/ThemeToggle";
 import { SpeakerButton } from "../components/SpeakerButton";
+import { AutoReadToggle } from "../components/AutoReadToggle";
 import { useVoix } from "../lib/voix/useVoix";
 import {
   getStoredInputMode,
@@ -1743,11 +1744,18 @@ export function Session({
           {inputMode === "pad" ? <Keyboard size={22} aria-hidden="true" /> : <Grid3x3 size={22} aria-hidden="true" />}
         </button>
         {ex && ex.saisie !== "dictee" && ex.prompt && (
-          <SpeakerButton
-            disponible={voix.disponible}
-            label="Relire la consigne"
-            onClick={() => voix.direEnonce(ex.prompt)}
-          />
+          <>
+            <SpeakerButton
+              disponible={voix.disponible}
+              label="Relire la consigne"
+              onClick={() => voix.direEnonce(ex.prompt)}
+            />
+            <AutoReadToggle
+              disponible={voix.disponible}
+              active={voix.lectureAutoActive}
+              onToggle={voix.basculerLectureAuto}
+            />
+          </>
         )}
         <ThemeToggle />
       </div>
@@ -1764,6 +1772,8 @@ export function Session({
             onResultat={(texteId, correct) => { void enregistrerDictee(profil.id, texteId, correct); }}
             lireDictee={(id, opts) => voix.direDictee(id, opts)}
             voixDisponible={voix.disponible}
+            lectureAutoActive={voix.lectureAutoActive}
+            onToggleLectureAuto={voix.basculerLectureAuto}
           />
         ) : (
         <>

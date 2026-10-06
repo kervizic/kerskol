@@ -8,6 +8,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { chargerManifest, urlsPourCles, type VoixManifest } from "./manifest";
 import { enonceEnCles } from "./verbalize";
 import { lectureAutoDeProfil, shouldAutoPlay, shouldPlayManual } from "./autoplay";
+import { effectiveLectureAuto, getStoredLectureAuto, setStoredLectureAuto } from "./lectureAutoLocale";
 import { markUserActivated, playItems, playUrls, precharger, stop } from "./player";
 
 // silences (ms) — calques sur la recette audiobook (0,5 s intra, 1,0 s fin)
@@ -19,6 +20,7 @@ const GAP_PARAGRAPHE = 1000;
 export interface Voix {
   disponible: boolean;
   lectureAutoActive: boolean;
+  basculerLectureAuto: () => void; // bascule enfant depuis l'exercice (persistee par profil)
   activer: () => void; // a appeler au 1er geste de seance (debloque iOS)
   couper: () => void;
   direCles: (cles: string[], opts?: { auto?: boolean; gapMs?: number }) => void;
@@ -26,10 +28,20 @@ export interface Voix {
   direDictee: (id: number, opts?: { auto?: boolean; mode?: "simple" | "dictee" }) => void;
 }
 
-export function useVoix(profil: { lecture_auto?: boolean | null } | null): Voix {
+export function useVoix(profil: { id?: string; lecture_auto?: boolean | null } | null): Voix {
   const [manifest, setManifest] = useState<VoixManifest | null>(null);
-  const lectureAuto = lectureAutoDeProfil(profil);
   const activeRef = useRef(false);
+
+  // Reglage parent = defaut ; surcharge enfant locale par profil = prime.
+  const profilId = profil?.id ?? null;
+  const parDefaut = lectureAutoDeProfil(profil);
+  const [surcharge, setSurcharge] = useState<boolean | null>(() =>
+    profilId ? getStoredLectureAuto(profilId) : null
+  );
+  useEffect(() => {
+    setSurcharge(profilId ? getStoredLectureAuto(profilId) : null);
+  }, [profilId]);
+  const lectureAuto = effectiveLectureAuto(surcharge, parDefaut);
 
   useEffect(() => {
     let vivant = true;
@@ -52,6 +64,15 @@ export function useVoix(profil: { lecture_auto?: boolean | null } | null): Voix 
   }, []);
 
   const couper = useCallback(() => stop(), []);
+
+  // Bascule enfant : applique tout de suite, memorise pour ce profil ; couper
+  // l'auto coupe aussi le son en cours.
+  const basculerLectureAuto = useCallback(() => {
+    const next = !lectureAuto;
+    if (profilId) setStoredLectureAuto(profilId, next);
+    setSurcharge(next);
+    if (!next) stop();
+  }, [lectureAuto, profilId]);
 
   const direCles = useCallback(
     (cles: string[], opts?: { auto?: boolean; gapMs?: number }) => {
@@ -116,7 +137,7 @@ export function useVoix(profil: { lecture_auto?: boolean | null } | null): Voix 
   }, [manifest]);
 
   return useMemo(
-    () => ({ disponible, lectureAutoActive: lectureAuto, activer, couper, direCles, direEnonce, direDictee }),
-    [disponible, lectureAuto, activer, couper, direCles, direEnonce, direDictee]
+    () => ({ disponible, lectureAutoActive: lectureAuto, basculerLectureAuto, activer, couper, direCles, direEnonce, direDictee }),
+    [disponible, lectureAuto, basculerLectureAuto, activer, couper, direCles, direEnonce, direDictee]
   );
 }
