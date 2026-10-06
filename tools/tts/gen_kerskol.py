@@ -57,16 +57,16 @@ def _log(msg: str) -> None:
     print(f"[{datetime.now().strftime('%H:%M:%S')}] {msg}", flush=True)
 
 
-def _bornes_suspect(n_signes: int, att: float) -> tuple[float, float]:
+def _bornes_suspect(n_signes: int, att: float, cat: str = "") -> tuple[float, float]:
     """Intervalle de duree acceptable (s).
 
-    Textes TRES COURTS (< 15 car : un nombre, « Bravo ») : la duree attendue
-    (caracteres/20,3) est peu fiable (un mot isole dure 0,4 a 1,2 s sans rapport
-    lineaire avec sa longueur). On n'utilise donc que des bornes ABSOLUES larges
-    [0,25 s ; 6 s] : les cas reels (muet, emballement) restent captures par les
-    controles MUET (< -40 dB) et EMBALLE (>= 95% du plafond), et on evite des
-    regenerations inutiles. Au-dela de 15 car, regle nominale [0,5 ; 1,7] x att."""
-    if n_signes < SEUIL_COURT:
+    Textes TRES COURTS (< 15 car) ET BRIQUES d'assemblage (nombres, operateurs) :
+    la duree attendue (caracteres/20,3) est peu fiable (« cent quatre-vingts »
+    dure ~1,5 s mais att ~0,8 s -> faux SUSPECT -> regens inutiles). On n'utilise
+    donc que des bornes ABSOLUES larges [0,25 s ; 6 s] ; MUET (< -40 dB) et EMBALLE
+    (>= 95% du plafond) restent les vrais garde-fous. Au-dela, regle nominale
+    [0,5 ; 1,7] x att (phrases : dictees, messages, consignes, titres)."""
+    if n_signes < SEUIL_COURT or cat in ("nombre", "operateur"):
         return (0.25, 6.0)
     return (0.5 * att, 1.7 * att)
 
@@ -128,7 +128,7 @@ def generer(out_dir: Path, pilot: bool, only: set[str] | None, force: bool = Fal
             continue
 
         att = len(texte) / core.SIG_PER_SEC
-        lo, hi = _bornes_suspect(len(texte), att)
+        lo, hi = _bornes_suspect(len(texte), att, cat)
 
         meilleur = None
         for sd in SEEDS:
