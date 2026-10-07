@@ -13,10 +13,14 @@ import {
   listLiensEnAttente,
   reauthGoogle,
   ReauthRequiseError,
+  reglerAutorisationMatieres,
+  reglerMatieres,
   updateProfil,
   type DefiResume,
 } from "../lib/api";
 import { DEFI_THEMES } from "../domain/calcul/defi";
+import { MatieresEditor } from "../components/MatieresEditor";
+import { TOUS_DOMAINES } from "../domain/matieres";
 import { messageClasse } from "./CreateProfile";
 
 function defiThemeLabel(id: string): string {
@@ -59,7 +63,6 @@ import {
   type Classe,
   type JournalReglage,
   type LienEnAttente,
-  type Matiere,
   type Profil,
 } from "../lib/types";
 
@@ -100,11 +103,9 @@ function fmt(v: unknown): string {
 
 function ProfilEditor({
   profil,
-  matieres,
   onSaved,
 }: {
   profil: Profil;
-  matieres: Matiere[];
   onSaved: (p: Profil) => void;
 }) {
   const [classe, setClasse] = useState<Classe>(profil.classe);
@@ -112,18 +113,38 @@ function ProfilEditor({
   const [jour, setJour] = useState(profil.limite_jour_min?.toString() ?? "20");
   const [semaineOn, setSemaineOn] = useState(profil.limite_semaine_min != null);
   const [semaine, setSemaine] = useState(profil.limite_semaine_min?.toString() ?? "90");
-  // Matieres actives (calcul toujours present ; francais optionnel).
-  const [matActives, setMatActives] = useState<string[]>(profil.matieres_actives ?? [MATIERE_ACTIVE]);
+  // Matieres + sous-matieres : persistees A PART (RPC regler_matieres), hors du
+  // bouton « Enregistrer » (qui ne gere que classe / limites / voix).
+  const [mat, setMat] = useState<string[]>(profil.matieres_actives ?? [MATIERE_ACTIVE]);
+  const [dom, setDom] = useState<string[]>(profil.domaines_actifs ?? TOUS_DOMAINES);
+  const [autorise, setAutorise] = useState(profil.enfant_regle_matieres !== false);
+  const [matErr, setMatErr] = useState(false);
   // Lecture auto a voix haute (defaut actif si le champ est absent).
   const [lectureAuto, setLectureAuto] = useState(profil.lecture_auto !== false);
   const [state, setState] = useState<"idle" | "saving" | "ok" | "err">("idle");
 
-  const nextMatieres = matActives.includes(MATIERE_ACTIVE)
-    ? matActives
-    : [MATIERE_ACTIVE, ...matActives];
-  const matKey = (a: string[]) => [...a].sort().join(",");
-  const toggleMatiere = (code: string) =>
-    setMatActives((cur) => (cur.includes(code) ? cur.filter((c) => c !== code) : [...cur, code]));
+  async function changeMatieres(matieres: string[], domaines: string[]) {
+    const pMat = mat, pDom = dom;
+    setMat(matieres); setDom(domaines); setMatErr(false);
+    try {
+      await reglerMatieres(profil.id, matieres, domaines);
+      onSaved({ ...profil, matieres_actives: matieres, domaines_actifs: domaines });
+    } catch (e) {
+      console.error("reglerMatieres a echoue", e);
+      setMat(pMat); setDom(pDom); setMatErr(true);
+    }
+  }
+  async function changeAutorisation(next: boolean) {
+    const prev = autorise;
+    setAutorise(next);
+    try {
+      await reglerAutorisationMatieres(profil.id, next);
+      onSaved({ ...profil, enfant_regle_matieres: next });
+    } catch (e) {
+      console.error("reglerAutorisationMatieres a echoue", e);
+      setAutorise(prev);
+    }
+  }
 
   // Valeur effective : null si l'interrupteur est off (retrait de la limite).
   const nextJour = jourOn ? num(jour) : null;
@@ -132,7 +153,6 @@ function ProfilEditor({
     classe !== profil.classe ||
     nextJour !== profil.limite_jour_min ||
     nextSemaine !== profil.limite_semaine_min ||
-    matKey(nextMatieres) !== matKey(profil.matieres_actives ?? [MATIERE_ACTIVE]) ||
     lectureAuto !== (profil.lecture_auto !== false);
 
   async function save() {
@@ -141,7 +161,7 @@ function ProfilEditor({
       // null <-> valeur et changement de classe : journalises par le trigger.
       const patch = {
         classe, limite_jour_min: nextJour, limite_semaine_min: nextSemaine,
-        matieres_actives: nextMatieres, lecture_auto: lectureAuto,
+        lecture_auto: lectureAuto,
       };
       await updateProfil(profil.id, patch);
       onSaved({ ...profil, ...patch });
@@ -160,29 +180,27 @@ function ProfilEditor({
       </div>
 
       <div className="kk-field">
-        <span>Matières</span>
-        <div className="kk-chips">
-          <button className="kk-chip" aria-pressed="true" disabled>Calcul</button>
-          {matieres
-            .filter((m) => m.code !== MATIERE_ACTIVE)
-            .map((m) => {
-              const dispo = m.code === "FR"; // conjugaison disponible
-              const actif = matActives.includes(m.code);
-              return (
-                <button
-                  key={m.code}
-                  type="button"
-                  className={`kk-chip${actif ? " kk-chip--active" : ""}`}
-                  aria-pressed={actif}
-                  disabled={!dispo}
-                  onClick={dispo ? () => toggleMatiere(m.code) : undefined}
-                >
-                  {m.libelle.replace(/^.*- /, "")}
-                  {!dispo && <small>bientôt</small>}
-                </button>
-              );
-            })}
-        </div>
+        <span>Matières et sous-matières</span>
+        <p className="kk-muted" style={{ fontSize: "0.85rem", margin: "0 0 4px" }}>
+          Active ou désactive ce que {profil.surnom} travaille. Au moins une sous-matière doit rester active.
+        </p>
+        <MatieresEditor matieresActives={mat} domainesActifs={dom} onChange={changeMatieres} />
+        {matErr && (
+          <p className="kk-muted" role="alert">Échec de l’enregistrement des matières. Réessaie.</p>
+        )}
+        <label className="kk-switch-row" style={{ marginTop: 14 }}>
+          <input
+            type="checkbox"
+            checked={autorise}
+            onChange={(e) => void changeAutorisation(e.target.checked)}
+          />
+          <span>Laisser {profil.surnom} choisir ses matières</span>
+        </label>
+        <p className="kk-muted" style={{ fontSize: "0.85rem", marginTop: 6 }}>
+          {autorise
+            ? `${profil.surnom} peut régler ses matières depuis son écran. Vos réglages partagent le même profil.`
+            : `La section « Mes matières » est masquée chez ${profil.surnom} : seuls vos réglages comptent.`}
+        </p>
       </div>
 
       <label className="kk-field">
@@ -367,7 +385,6 @@ function LinkAccount({
 export function ParentSpace({
   foyerId,
   profils,
-  matieres,
   onProfilChange,
   onAddChild,
   onExit,
@@ -375,7 +392,6 @@ export function ParentSpace({
 }: {
   foyerId: string;
   profils: Profil[];
-  matieres: Matiere[];
   onProfilChange: (p: Profil) => void;
   onAddChild: () => void;
   onExit: () => void;
@@ -471,7 +487,7 @@ export function ParentSpace({
 
         {profils.map((p) => (
           <div key={p.id} className="kk-card kk-stack" style={{ marginBottom: 16 }}>
-            <ProfilEditor profil={p} matieres={matieres} onSaved={onProfilChange} />
+            <ProfilEditor profil={p} onSaved={onProfilChange} />
             <LinkAccount
               profil={p}
               lien={liens.find((l) => l.profil_id === p.id)}

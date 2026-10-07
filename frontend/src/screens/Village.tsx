@@ -11,11 +11,13 @@ import {
   type StyleKey,
 } from "../domain/avatarConfig";
 import { AvatarEditor } from "../components/AvatarEditor";
+import { MatieresEditor } from "../components/MatieresEditor";
 import { UNIVERS_LIST, universDef } from "../domain/univers";
 import { BUILDING_LABEL, computePort, type BuildingState } from "../domain/buildings";
+import { TOUS_DOMAINES } from "../domain/matieres";
 import { Spinner } from "../components/ui";
 import { ThemeToggle } from "../components/ThemeToggle";
-import { getProgression, updateProfil } from "../lib/api";
+import { getProgression, reglerMatieres, updateProfil } from "../lib/api";
 import type { Avatar, Profil, Progression, UniversId } from "../lib/types";
 import type { Referentiel } from "../lib/api";
 
@@ -105,6 +107,18 @@ export function Village({
     void persistAvatar({ ...(profil.avatar as object), couleur: next } as Avatar);
   }
 
+  // Mes matieres (optimiste). Persiste via la RPC regler_matieres (le serveur
+  // refuse si plus aucune sous-matiere, et verifie l'autorisation parent).
+  async function changeMatieres(matieres: string[], domaines: string[]) {
+    const previous = profil;
+    onProfilChange({ ...profil, matieres_actives: matieres, domaines_actifs: domaines });
+    try {
+      await reglerMatieres(profil.id, matieres, domaines);
+    } catch {
+      onProfilChange(previous);
+    }
+  }
+
   const port = progression
     ? computePort(referentiel.competences, referentiel.prerequis, progression)
     : [];
@@ -177,6 +191,21 @@ export function Village({
               />
             ))}
           </div>
+
+          {/* Mes matieres : visible seulement si le parent laisse l'enfant choisir. */}
+          {profil.enfant_regle_matieres !== false && (
+            <>
+              <h2 style={{ margin: "8px 0 0" }}>Mes matières</h2>
+              <p className="kk-muted" style={{ margin: 0 }}>
+                Choisis ce que tu veux travailler.
+              </p>
+              <MatieresEditor
+                matieresActives={profil.matieres_actives ?? ["MA"]}
+                domainesActifs={profil.domaines_actifs ?? TOUS_DOMAINES}
+                onChange={changeMatieres}
+              />
+            </>
+          )}
         </div>
       )}
 

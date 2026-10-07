@@ -302,7 +302,6 @@ export function App() {
         <ParentSpace
           foyerId={foyerId}
           profils={profils}
-          matieres={referentiel.matieres}
           onProfilChange={upsertProfil}
           onAddChild={() => navigate("/creer-profil")}
           onExit={() => navigate("/")}

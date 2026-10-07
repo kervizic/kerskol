@@ -1253,6 +1253,7 @@ export function Session({
           classe: profil.classe,
           ctx,
           matieres: profil.matieres_actives,
+          domaines: profil.domaines_actifs,
         });
         placement.current = {};
         for (const p of progress_) placement.current[p.competence] = p.placement_termine;

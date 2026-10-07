@@ -287,3 +287,28 @@ describe("composeSession : maths + francais (besoin, pas de quota)", () => {
     }
   });
 });
+
+describe("composeSession : filtre par sous-matieres (domaines)", () => {
+  it("ne garde que les competences dont le domaine est actif", () => {
+    // Les COMPETENCES de test sont toutes du domaine 'calcul_mental'.
+    const plan = composeSession({
+      competences: COMPETENCES, prerequis: PREREQUIS, progress: [],
+      sources: SEED_SOURCES, seed: 7, now: NOW, classe: "CE2",
+      matieres: ["MA"], domaines: ["calcul_mental", "tables_multiplication"],
+    });
+    expect(plan.length).toBeGreaterThan(0);
+    for (const p of plan) {
+      const c = COMPETENCES.find((x) => x.code === p.exercise.competence)!;
+      expect(["calcul_mental", "tables_multiplication"]).toContain(c.domaine);
+    }
+  });
+
+  it("une sous-matiere desactivee exclut toutes ses competences", () => {
+    const plan = composeSession({
+      competences: COMPETENCES, prerequis: PREREQUIS, progress: [],
+      sources: SEED_SOURCES, seed: 7, now: NOW, classe: "CE2",
+      matieres: ["MA"], domaines: ["fractions"], // aucun exercice de ce domaine
+    });
+    expect(plan.length).toBe(0);
+  });
+});

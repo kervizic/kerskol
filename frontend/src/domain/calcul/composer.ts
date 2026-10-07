@@ -36,6 +36,7 @@ export interface ComposeInput {
   classe?: Classe; // pilote la 1re seance et les competences presumees debloquees
   ctx?: ProblemContext; // personnalisation des enonces (mascotte/univers)
   matieres?: string[]; // matieres actives du profil (ex. ['MA','FR']) ; si absent, toutes
+  domaines?: string[]; // sous-matieres actives (domaines de competences) ; si absent, toutes
 }
 
 function progMap(progress: ProgressionDetail[]): Record<string, ProgressionDetail> {
@@ -113,11 +114,16 @@ export function composeSession(input: ComposeInput): PlannedItem[] {
   const rng = makeRng(seed);
   const byCode = progMap(input.progress);
 
-  // Filtre par matieres actives du profil (profils existants = ['MA'] : le
-  // francais n'apparait que pour les profils qui l'ont active). Absent = toutes.
+  // Filtre par matieres ET sous-matieres actives du profil. Une competence est
+  // retenue si sa matiere est active ET son domaine est actif (profils existants
+  // = ['MA'] + toutes les sous-matieres). Absent = toutes (aucune restriction).
   const mats = input.matieres;
+  const doms = input.domaines;
   const active = competences.filter(
-    (c) => c.actif !== false && (!mats || mats.includes(c.matiere))
+    (c) =>
+      c.actif !== false &&
+      (!mats || mats.includes(c.matiere)) &&
+      (!doms || doms.includes(c.domaine))
   );
   // Une progression sert de reference "deja debloque". Une competence est
   // retenue si ses prerequis sont atteints OU si la classe la presume debloquee

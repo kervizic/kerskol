@@ -110,7 +110,7 @@ export async function listProfils(foyerId: string): Promise<Profil[]> {
   const { data, error } = await supabase()
     .from("profils")
     .select(
-      "id, foyer_id, surnom, avatar, univers, classe, matieres_actives, limite_jour_min, limite_semaine_min, monnaie, user_id, lecture_auto"
+      "id, foyer_id, surnom, avatar, univers, classe, matieres_actives, domaines_actifs, enfant_regle_matieres, limite_jour_min, limite_semaine_min, monnaie, user_id, lecture_auto"
     )
     .eq("foyer_id", foyerId)
     .order("cree_le", { ascending: true });
@@ -129,7 +129,7 @@ export async function getProfilById(id: string): Promise<Profil> {
   const { data, error } = await supabase()
     .from("profils")
     .select(
-      "id, foyer_id, surnom, avatar, univers, classe, matieres_actives, limite_jour_min, limite_semaine_min, monnaie, user_id, lecture_auto"
+      "id, foyer_id, surnom, avatar, univers, classe, matieres_actives, domaines_actifs, enfant_regle_matieres, limite_jour_min, limite_semaine_min, monnaie, user_id, lecture_auto"
     )
     .eq("id", id)
     .single();
@@ -293,7 +293,7 @@ export async function createProfil(input: CreateProfilInput): Promise<Profil> {
     .from("profils")
     .insert(input)
     .select(
-      "id, foyer_id, surnom, avatar, univers, classe, matieres_actives, limite_jour_min, limite_semaine_min, monnaie, lecture_auto"
+      "id, foyer_id, surnom, avatar, univers, classe, matieres_actives, domaines_actifs, enfant_regle_matieres, limite_jour_min, limite_semaine_min, monnaie, lecture_auto"
     )
     .single();
   if (error) throw error;
@@ -322,6 +322,44 @@ export async function updateProfil(
     return;
   }
   const { error } = await supabase().from("profils").update(patch).eq("id", id);
+  if (error) throw error;
+}
+
+// Reglage des matieres + sous-matieres (RPC serveur regler_matieres). Autorise au
+// parent ; a l'enfant seulement si le parent l'autorise (enfant_regle_matieres).
+// Le serveur refuse un reglage qui ne laisserait aucune sous-matiere jouable.
+export async function reglerMatieres(
+  profilId: string,
+  matieres: string[],
+  domaines: string[]
+): Promise<void> {
+  if (isDemo()) {
+    const p = DEMO_PROFILS.find((x) => x.id === profilId);
+    if (p) { p.matieres_actives = matieres; p.domaines_actifs = domaines; }
+    return;
+  }
+  const { error } = await supabase().rpc("regler_matieres", {
+    p_profil: profilId,
+    p_matieres: matieres,
+    p_domaines: domaines,
+  });
+  if (error) throw error;
+}
+
+// Le parent (seul) autorise ou non l'enfant a choisir ses matieres.
+export async function reglerAutorisationMatieres(
+  profilId: string,
+  autorise: boolean
+): Promise<void> {
+  if (isDemo()) {
+    const p = DEMO_PROFILS.find((x) => x.id === profilId);
+    if (p) p.enfant_regle_matieres = autorise;
+    return;
+  }
+  const { error } = await supabase().rpc("regler_autorisation_matieres", {
+    p_profil: profilId,
+    p_autorise: autorise,
+  });
   if (error) throw error;
 }
 

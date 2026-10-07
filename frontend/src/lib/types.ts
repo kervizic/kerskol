@@ -29,6 +29,12 @@ export interface Profil {
   univers: UniversId;
   classe: Classe;
   matieres_actives: string[];
+  // Sous-matieres actives (= domaines de competences). Optionnel : absent des
+  // anciens profils / du mode demo -> toutes actives (voir domaine/matieres).
+  domaines_actifs?: string[];
+  // Le parent laisse-t-il l'enfant choisir ses matieres ? Defaut true (absent ->
+  // true). Si false, la section « Mes matieres » de l'enfant est masquee.
+  enfant_regle_matieres?: boolean;
   limite_jour_min: number | null;
   limite_semaine_min: number | null;
   monnaie: number;
