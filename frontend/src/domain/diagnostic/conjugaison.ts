@@ -19,7 +19,7 @@
 // exercice cible. INCONNU est enregistre aussi.
 
 import { normaliser } from "./lettres";
-import { levenshtein, type Diagnostic, type Faute } from "./diagnostic";
+import { levenshtein, decrireAccent, type Diagnostic, type Faute } from "./diagnostic";
 import {
   CONJ, TEMPS, TEMPS_LIBELLE, PERSONNES, avecPronom, pronom, forme,
   type Temps, type Personne,
@@ -41,8 +41,10 @@ function prefixeCommun(a: string, b: string): number {
 
 // --- Messages (style enfant, rediges POUR L'ORAL : phrases parlees courtes,
 //     un exemple juste ET un exemple pas juste, aucun symbole ni fleche) -------
+// ACCENT : on DECRIT l'accent et la lettre qui le porte (compréhensible a
+// l'oral), au lieu d'opposer deux graphies qui sonnent pareil.
 function msgAccent(bonne: string): string {
-  return `N'oublie pas l'accent. On écrit : ${bonne}. On écrit êtes avec un accent sur le e, pas êtes sans accent.`;
+  return `N'oublie pas l'accent. Regarde bien, il y a ${decrireAccent(bonne)}. On écrit : ${bonne}.`;
 }
 function msgMauvaisePersonne(p: Personne, bonne: string): string {
   return `Attention à la personne. Avec ${pronom(p, bonne)}, on écrit : ${bonne}. On dit tu chantes avec un s, mais il chante sans s.`;
@@ -170,7 +172,7 @@ export function phraseAttendue(verbe: string, temps: Temps, personne: Personne):
 // entre accolades : {forme} = forme attendue, {pronom} = sujet, {temps} = temps.
 export const MESSAGES_CONJUGAISON: Record<string, string> = {
   JUSTE: "Bravo ! C'est la bonne forme.",
-  ACCENT: "N'oublie pas l'accent. On écrit : {forme}. On écrit êtes avec un accent sur le e, pas êtes sans accent.",
+  ACCENT: "N'oublie pas l'accent. Regarde bien, il y a un accent sur le e. On écrit : {forme}.",
   MAUVAISE_PERSONNE:
     "Attention à la personne. Avec {pronom}, on écrit : {forme}. On dit tu chantes avec un s, mais il chante sans s.",
   MAUVAIS_TEMPS:

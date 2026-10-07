@@ -3,8 +3,8 @@
 // pas de fleche, pas de barre oblique, pas de guillemet decoratif.
 
 import { describe, it, expect } from "vitest";
-import { MESSAGES_CONJUGAISON } from "./diagnostic/conjugaison";
-import { MESSAGES_PASSE_COMPOSE } from "./diagnostic/passe-compose";
+import { MESSAGES_CONJUGAISON, diagnostiquerConjugaison } from "./diagnostic/conjugaison";
+import { MESSAGES_PASSE_COMPOSE, diagnostiquerPasseCompose } from "./diagnostic/passe-compose";
 import { MESSAGES_DICTEE } from "./diagnostic/dictee";
 import { MESSAGES_CATALOGUE } from "./diagnostic/diagnostic";
 import { INDICES, indicePour } from "./indices";
@@ -37,6 +37,67 @@ describe("messages enfant rediges pour l'oral", () => {
   });
   it("indices : aucun symbole non parlable", () => {
     verifieOral("INDICES", Object.values(INDICES));
+  });
+});
+
+// Un message de correction ne doit JAMAIS opposer deux formes qui sonnent pareil
+// a l'oral parce qu'elles ne different que par un accent (ex. « êtes avec accent,
+// pas êtes sans accent » : l'enfant entend deux fois le meme son). On NE compare
+// QUE des formes d'au moins deux lettres : les homophones grammaticaux d'une
+// seule lettre (a / à) sont enseignes par le SENS, pas par l'opposition de
+// graphies, et restent donc autorises.
+function sansAccents(s: string): string {
+  return s.normalize("NFD").replace(/[̀-ͯ]/g, "");
+}
+function paireAccentSeule(texte: string): [string, string] | null {
+  const mots = (texte.match(/\p{L}+/gu) ?? [])
+    .map((w) => w.toLowerCase())
+    .filter((w) => w.length >= 2);
+  for (let i = 0; i < mots.length; i++) {
+    for (let j = i + 1; j < mots.length; j++) {
+      const a = mots[i];
+      const b = mots[j];
+      if (a !== b && sansAccents(a) === sansAccents(b)) return [a, b];
+    }
+  }
+  return null;
+}
+
+describe("messages de correction : pas d'opposition d'accents ambigue a l'oral", () => {
+  const SOURCES: Record<string, Record<string, string>> = {
+    MESSAGES_CONJUGAISON,
+    MESSAGES_PASSE_COMPOSE,
+    MESSAGES_DICTEE,
+    MESSAGES_CATALOGUE,
+  };
+  for (const [nom, cat] of Object.entries(SOURCES)) {
+    it(`${nom} : aucun message n'oppose deux formes differant seulement par un accent`, () => {
+      for (const [cle, texte] of Object.entries(cat)) {
+        const p = paireAccentSeule(texte);
+        expect(
+          p,
+          `${nom}.${cle} oppose « ${p?.[0]} » et « ${p?.[1]} » (meme son a l'oral) : ${texte}`
+        ).toBeNull();
+      }
+    });
+  }
+
+  it("le detecteur reconnait bien une opposition ambigue (garde-fou du test)", () => {
+    expect(paireAccentSeule("On écrit êtes, pas etes.")).not.toBeNull();
+    expect(paireAccentSeule("il a mangé, pas il a mange.")).not.toBeNull();
+    // Deux mots qui different par de VRAIES lettres (et / est) ne sont pas vises.
+    expect(paireAccentSeule("le mot est avec un s, et le mot et.")).toBeNull();
+    // Un homophone d'une seule lettre (a / à) reste autorise.
+    expect(paireAccentSeule("le mot a, et le mot à.")).toBeNull();
+  });
+
+  it("messages ACCENT generes : decrivent l'accent, sans opposer deux graphies", () => {
+    const m1 = diagnostiquerConjugaison("etre", "present", 5, "etes").fautes[0].message;
+    expect(m1).toContain("accent chapeau sur le e");
+    expect(paireAccentSeule(m1)).toBeNull();
+    const m2 = diagnostiquerPasseCompose("manger", 3, "a mange", { genre: null }).fautes[0].message;
+    expect(m2).toContain("accent sur le e");
+    expect(paireAccentSeule(m2)).toBeNull();
   });
 });
 

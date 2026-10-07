@@ -90,8 +90,11 @@ Source : `frontend/src/domain/diagnostic/conjugaison.ts` (`diagnostiquerConjugai
 
 ## ACCENT - un accent manquant
 
-- « N'oublie pas l'accent. On écrit : {forme}. On écrit êtes avec un accent sur le
-  e, pas êtes sans accent. »
+- « N'oublie pas l'accent. Regarde bien, il y a un accent sur le e. On écrit :
+  {forme}. »
+- À l'oral, on **décrit** l'accent et la lettre qui le porte (par exemple « un
+  accent chapeau sur le e » pour « êtes ») au lieu d'opposer deux graphies qui
+  sonnent pareil.
 
 ## MAUVAISE_PERSONNE - la forme d'une autre personne
 
@@ -143,8 +146,11 @@ s'accordent. Pour lever l'ambiguïté, le **genre est imposé** aux 3e personnes
 
 ## ACCENT - un accent manquant
 
-- « N'oublie pas l'accent. On écrit : {forme}. On écrit il a mangé avec un accent,
-  pas il a mange sans accent. »
+- « N'oublie pas l'accent. Regarde bien, il y a un accent sur le e. On écrit :
+  {forme}. »
+- À l'oral, on **décrit** l'accent et la lettre qui le porte (par exemple « un
+  accent sur le e » pour « mangé ») au lieu d'opposer deux graphies qui sonnent
+  pareil.
 
 ## AUXILIAIRE - le mauvais petit mot (avoir / être)
 

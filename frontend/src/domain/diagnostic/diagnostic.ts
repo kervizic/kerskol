@@ -130,6 +130,33 @@ function parseNombre(atoms: string[]): number | null {
   return result + current;
 }
 
+// Decrit A L'ORAL l'accent present dans une forme (le premier rencontre), pour
+// un enfant de 8 ans : on NOMME l'accent et la lettre qui le porte, au lieu
+// d'opposer deux graphies qui sonnent pareil (« êtes avec accent, pas êtes sans
+// accent » est incomprehensible a l'oreille). Exemples de sortie :
+//   « êtes »  -> « un accent chapeau sur le e »
+//   « mangé » -> « un accent sur le e »
+//   « ça »    -> « une cédille sous le c »
+const NOM_ACCENT: Record<string, string> = {
+  "̂": "accent chapeau", // circonflexe
+  "̀": "accent", // grave
+  "́": "accent", // aigu
+  "̈": "tréma",
+  "̧": "cédille",
+};
+export function decrireAccent(forme: string): string {
+  const d = forme.normalize("NFD");
+  for (let i = 0; i < d.length; i++) {
+    const nom = NOM_ACCENT[d[i]];
+    if (!nom) continue;
+    const lettre = (d[i - 1] ?? "").toLowerCase();
+    if (nom === "cédille") return `une cédille sous le ${lettre}`;
+    if (nom === "tréma") return `un tréma sur le ${lettre}`;
+    return `un ${nom} sur le ${lettre}`;
+  }
+  return "un accent";
+}
+
 // Rang (en francais) ou n et m different pour la premiere fois (du plus fort).
 function rangDifferent(n: number, m: number): string {
   const rangs: [number, string][] = [

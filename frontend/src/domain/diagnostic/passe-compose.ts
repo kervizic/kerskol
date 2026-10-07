@@ -25,7 +25,7 @@
 // enregistre pour reproposer un exercice cible. Messages « enfant de 8 ans ».
 
 import { normaliser } from "./lettres";
-import type { Diagnostic, Faute } from "./diagnostic";
+import { decrireAccent, type Diagnostic, type Faute } from "./diagnostic";
 import { CONJ, TEMPS, PERSONNES, type Personne } from "../francais/conjugaison";
 import {
   AUXILIAIRE, PARTICIPE, accordeAvecEtre, participeAccorde, auxiliaireForme,
@@ -44,8 +44,10 @@ function decouper(saisie: string): { aux: string; part: string } {
 
 // --- Messages (style enfant, rediges POUR L'ORAL : phrases parlees courtes, un
 //     exemple juste ET un exemple pas juste, aucun symbole ni fleche) ----------
+// ACCENT : on DECRIT l'accent et la lettre qui le porte (compréhensible a
+// l'oral), au lieu d'opposer deux graphies qui sonnent pareil.
 function msgAccent(bonne: string): string {
-  return `N'oublie pas l'accent. On écrit : ${bonne}. On écrit il a mangé avec un accent, pas il a mange sans accent.`;
+  return `N'oublie pas l'accent. Regarde bien, il y a ${decrireAccent(bonne)}. On écrit : ${bonne}.`;
 }
 function msgAuxiliaire(verbe: string, bonne: string): string {
   return accordeAvecEtre(verbe)
@@ -169,7 +171,7 @@ export function estJustePasseCompose(
 // ecriture attendue (auxiliaire + participe accorde).
 export const MESSAGES_PASSE_COMPOSE: Record<string, string> = {
   JUSTE: "Bravo ! C'est le bon passé composé.",
-  ACCENT: "N'oublie pas l'accent. On écrit : {forme}. On écrit il a mangé avec un accent, pas il a mange sans accent.",
+  ACCENT: "N'oublie pas l'accent. Regarde bien, il y a un accent sur le e. On écrit : {forme}.",
   AUXILIAIRE_ETRE:
     "Ce verbe se dit avec être. On écrit : {forme}. On dit : il est allé. On ne dit pas : il a allé.",
   AUXILIAIRE_AVOIR:
