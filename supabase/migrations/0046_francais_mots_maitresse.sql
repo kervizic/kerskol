@@ -423,9 +423,10 @@ DECLARE
     v_niv integer;
     v_id  uuid;
 BEGIN
-    FOR v_rows IN (VALUES
-        ('FR.MAITRESSE.MOTS',   'mots_maitresse'),
-        ('FR.MAITRESSE.DICTEE', 'dictee_maitresse')) AS t(comp, typ)
+    FOR v_rows IN
+        SELECT comp, typ FROM (VALUES
+            ('FR.MAITRESSE.MOTS',   'mots_maitresse'),
+            ('FR.MAITRESSE.DICTEE', 'dictee_maitresse')) AS t(comp, typ)
     LOOP
         FOR v_niv IN 1..4 LOOP
             v_id := md5(v_rows.comp || ':' || v_niv || ':' || v_rows.typ)::uuid;

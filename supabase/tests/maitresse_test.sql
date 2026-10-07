@@ -42,10 +42,10 @@ INSERT INTO profils (id, foyer_id, surnom, classe) VALUES (:'pA1', :'fA', 'Enfan
 -- Listes : une liste A active (mots + texte), une liste B active.
 INSERT INTO maitresse_liste (foyer_id, titre, mots, texte, active)
 VALUES (:'fA', 'Liste A', ARRAY['maison','toujours','jardin'], 'Le chat est beau.', true)
-RETURNING id AS listeA \gset
+RETURNING id AS listea \gset
 INSERT INTO maitresse_liste (foyer_id, titre, mots, texte, active)
 VALUES (:'fB', 'Liste B', ARRAY['beaucoup','poisson','ecole'], 'Il a un tambour.', true)
-RETURNING id AS listeB \gset
+RETURNING id AS listeb \gset
 
 -- ===========================================================================
 -- TEST 1 : isolation RLS inter-foyers
@@ -215,7 +215,7 @@ SELECT _rec('4b_core_fausse_alerte',
 -- ===========================================================================
 -- Id de la liste B expose via un parametre de session (les \set psql ne sont pas
 -- visibles dans un bloc plpgsql) pour le test d'isolation 5c.
-SELECT set_config('kerskol.test_listeB', :'listeB', false);
+SELECT set_config('kerskol.test_listeb', :'listeb', false);
 
 SET ROLE authenticated;
 SET request.jwt.claims = :'claimsA';
@@ -230,7 +230,7 @@ SELECT _rec('5a_mmots_correct',
         p_a:=1, p_b:=0, p_reponse:=NULL, p_reste:=NULL, p_fields:=1,
         p_temps_ms:=3000, p_correction_lue:=false, p_rattrapage:=false,
         p_placement:=false, p_repondu_le:=now(),
-        p_op2:=:'listeA', p_reponse_texte:='maison')->>'correct')::boolean,
+        p_op2:=:'listea', p_reponse_texte:='maison')->>'correct')::boolean,
     'maison doit etre juste');
 
 -- 5b : mauvais mot -> faux
@@ -243,7 +243,7 @@ SELECT _rec('5b_mmots_faux',
         p_a:=1, p_b:=0, p_reponse:=NULL, p_reste:=NULL, p_fields:=1,
         p_temps_ms:=3000, p_correction_lue:=false, p_rattrapage:=false,
         p_placement:=false, p_repondu_le:=now(),
-        p_op2:=:'listeA', p_reponse_texte:='mezon')->>'correct')::boolean = false,
+        p_op2:=:'listea', p_reponse_texte:='mezon')->>'correct')::boolean = false,
     'mezon doit etre faux');
 
 -- 5c : liste d'un AUTRE foyer -> refus (isolation)
@@ -257,10 +257,11 @@ BEGIN
         p_a:=1, p_b:=0, p_reponse:=NULL, p_reste:=NULL, p_fields:=1,
         p_temps_ms:=3000, p_correction_lue:=false, p_rattrapage:=false,
         p_placement:=false, p_repondu_le:=now(),
-        p_op2:=current_setting('kerskol.test_listeB'), p_reponse_texte:='beaucoup');
+        p_op2:=current_setting('kerskol.test_listeb'), p_reponse_texte:='beaucoup');
     PERFORM _rec('5c_mmots_isolation', false, 'liste B acceptee a tort');
 EXCEPTION WHEN OTHERS THEN
-    PERFORM _rec('5c_mmots_isolation', SQLERRM LIKE '%liste absente ou inactive%', SQLERRM);
+    -- Isolation OK : enonce_incoherent (DETAIL « mmots : liste absente ou inactive »).
+    PERFORM _rec('5c_mmots_isolation', SQLERRM LIKE '%enonce_incoherent%', SQLERRM);
 END $$;
 
 RESET ROLE;
@@ -281,7 +282,7 @@ SELECT _rec('6a_mtrou_correct',
         p_a:=2, p_b:=0, p_reponse:=NULL, p_reste:=NULL, p_fields:=1,
         p_temps_ms:=3000, p_correction_lue:=false, p_rattrapage:=false,
         p_placement:=false, p_repondu_le:=now(),
-        p_op2:=:'listeA', p_reponse_texte:='chat')->>'correct')::boolean,
+        p_op2:=:'listea', p_reponse_texte:='chat')->>'correct')::boolean,
     'chat (token 2) doit etre juste');
 
 SELECT _rec('6b_mtrou_faux',
@@ -293,7 +294,7 @@ SELECT _rec('6b_mtrou_faux',
         p_a:=2, p_b:=0, p_reponse:=NULL, p_reste:=NULL, p_fields:=1,
         p_temps_ms:=3000, p_correction_lue:=false, p_rattrapage:=false,
         p_placement:=false, p_repondu_le:=now(),
-        p_op2:=:'listeA', p_reponse_texte:='chien')->>'correct')::boolean = false,
+        p_op2:=:'listea', p_reponse_texte:='chien')->>'correct')::boolean = false,
     'chien doit etre faux');
 
 -- ===========================================================================
@@ -308,7 +309,7 @@ SELECT _rec('7a_mdictee_juste',
         p_a:=NULL, p_b:=0, p_reponse:=NULL, p_reste:=NULL, p_fields:=1,
         p_temps_ms:=3000, p_correction_lue:=false, p_rattrapage:=false,
         p_placement:=false, p_repondu_le:=now(),
-        p_op2:=:'listeA', p_dictee:='[{"pos":3}]'::jsonb)->>'correct')::boolean,
+        p_op2:=:'listea', p_dictee:='[{"pos":3}]'::jsonb)->>'correct')::boolean,
     'touche la position 3 (N1) -> juste');
 
 SELECT _rec('7b_mdictee_fausse_alerte',
@@ -320,7 +321,7 @@ SELECT _rec('7b_mdictee_fausse_alerte',
         p_a:=NULL, p_b:=0, p_reponse:=NULL, p_reste:=NULL, p_fields:=1,
         p_temps_ms:=3000, p_correction_lue:=false, p_rattrapage:=false,
         p_placement:=false, p_repondu_le:=now(),
-        p_op2:=:'listeA', p_dictee:='[{"pos":1}]'::jsonb)->>'correct')::boolean = false,
+        p_op2:=:'listea', p_dictee:='[{"pos":1}]'::jsonb)->>'correct')::boolean = false,
     'touche la position 1 (juste) -> fausse alerte -> faux');
 
 RESET ROLE;
@@ -348,8 +349,8 @@ SELECT regler_matieres('a0000001-0000-0000-0000-000000000000',
 RESET ROLE;
 
 SELECT _rec('9_regler_force_maitresse',
-            'mots-maitresse' = ANY ((SELECT domaines_actifs FROM profils
-                                      WHERE id = 'a0000001-0000-0000-0000-000000000000')),
+            (SELECT 'mots-maitresse' = ANY (domaines_actifs) FROM profils
+              WHERE id = 'a0000001-0000-0000-0000-000000000000'),
             'domaines = ' || (SELECT array_to_string(domaines_actifs, ',') FROM profils
                                WHERE id = 'a0000001-0000-0000-0000-000000000000'));
 
