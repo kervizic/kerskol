@@ -1,6 +1,5 @@
 {
   "_commentaire": "Phrases statiques a synthetiser. cle logique -> texte affiche (nettoye a la generation). Les nombres et les dictees sont generes par code (nombres_fr.py, dictees.py).",
-
   "operateur": {
     "op:plus": "plus",
     "op:moins": "moins",
@@ -16,7 +15,6 @@
     "amorce:ecris-en-lettres": "Écris en lettres le nombre",
     "amorce:comment-se-lit": "Comment se lit le nombre"
   },
-
   "consigne": {
     "consigne:ecoute-bien": "Écoute bien.",
     "consigne:a-toi-de-jouer": "À toi de jouer.",
@@ -27,7 +25,6 @@
     "consigne:recommence": "On recommence.",
     "consigne:pause": "Pause !"
   },
-
   "message": {
     "msg:bravo": "Bravo ! C'est la bonne réponse.",
     "msg:presque": "Ce n'est pas tout à fait ça. Regarde bien et essaie encore.",
@@ -41,9 +38,9 @@
     "msg:accord-etre-fille": "Avec est, on ajoute un e à la fin pour une fille : elle est allée.",
     "msg:accord-sont-plusieurs": "Avec sont, on ajoute un s à la fin pour plusieurs : ils sont allés.",
     "msg:auxiliaire-etre-exemple": "On dit : il est allé. On ne dit pas : il a allé.",
-    "msg:metre-cent-centimetres": "Attention, un mètre, c'est cent centimètres. Donc trois mètres, c'est trois cents centimètres."
+    "msg:metre-cent-centimetres": "Attention, un mètre, c'est cent centimètres. Donc trois mètres, c'est trois cents centimètres.",
+    "msg:grammaire-regarde": "Ce n'est pas tout à fait ça. Regarde la réponse."
   },
-
   "indice": {
     "_commentaire": "Indices du bouton Indice (niveaux 1 et 2). Un par competence. Textes identiques a frontend/src/domain/indices.ts. Aucun audio genere pour l'instant.",
     "indice:fr-conj-present": "Le présent, c'est maintenant. Regarde bien le petit mot devant le verbe. Avec nous, le verbe finit souvent par ons. Avec vous, il finit souvent par ez.",
@@ -73,9 +70,13 @@
     "indice:ma-pb-mult-div": "Demande-toi si on partage en parts égales ou si on groupe par paquets.",
     "indice:ma-pose-addition": "Commence par les unités, à droite. Quand tu dépasses neuf, tu poses une retenue.",
     "indice:ma-pose-soustraction": "Commence par les unités, à droite. Si le chiffre du haut est trop petit, tu empruntes une dizaine à côté.",
-    "indice:ma-pose-multiplication": "Commence par les unités, à droite, et n'oublie pas les retenues."
+    "indice:ma-pose-multiplication": "Commence par les unités, à droite, et n'oublie pas les retenues.",
+    "indice:fr-gram-nature": "Le nom dit une personne, un animal ou une chose, comme chat. Le verbe dit une action, comme jouer. L'adjectif décrit, comme grand. Le petit mot devant le nom est un déterminant.",
+    "indice:fr-gram-sujet-verbe": "Le verbe dit l'action. Pour trouver le sujet, demande-toi qui fait l'action, comme dans la fille court.",
+    "indice:fr-gram-types-phrases": "Écoute la phrase. Si elle attend une réponse, elle pose une question. Si elle montre une émotion forte, c'est une exclamation. Si elle commande, elle donne un ordre.",
+    "indice:fr-gram-ponctuation": "On met un point quand la phrase raconte quelque chose. On met un point d'interrogation quand la phrase pose une question. Un nom de personne ou de ville prend une majuscule.",
+    "indice:fr-gram-groupe-nominal": "Regarde le petit mot du début. Le mot les montre qu'il y a plusieurs choses, c'est le pluriel. Le nom dit la chose, l'adjectif la décrit."
   },
-
   "titre": {
     "titre:tables-addition": "Tables d'addition",
     "titre:doubles": "Les doubles",
@@ -91,5 +92,90 @@
     "titre:dictee-detective": "Dictée détective",
     "titre:conjugaison-passe-compose": "Conjuguer au passé composé",
     "titre:problemes-mesures": "Problèmes de mesures"
+  },
+  "grammaire": {
+    "_commentaire": "Grammaire (migration 0041). Consignes distinctes et explications de correction par item (cle = grammaire.ts / public.grammaire_item). Textes lus a l'oral ; aucun audio genere pour l'instant.",
+    "consigne:quel-mot-est-un-nom": "Quel mot est un nom ?",
+    "consigne:quel-mot-est-un-verbe": "Quel mot est un verbe ?",
+    "consigne:quel-mot-est-un-adjectif": "Quel mot est un adjectif ?",
+    "consigne:quel-mot-est-un-determinant": "Quel mot est un déterminant ?",
+    "consigne:quel-mot-est-un-pronom": "Quel mot est un pronom ?",
+    "consigne:clique-sur-le-nom": "Clique sur le nom.",
+    "consigne:clique-sur-le-verbe": "Clique sur le verbe.",
+    "consigne:clique-sur-l-adjectif": "Clique sur l'adjectif.",
+    "consigne:clique-sur-le-determinant": "Clique sur le déterminant.",
+    "consigne:clique-sur-le-pronom": "Clique sur le pronom.",
+    "consigne:ecris-le-verbe-de-la-phrase": "Écris le verbe de la phrase.",
+    "consigne:ecris-le-nom-de-la-phrase": "Écris le nom de la phrase.",
+    "consigne:ecris-l-adjectif-de-la-phrase": "Écris l'adjectif de la phrase.",
+    "consigne:quel-est-le-verbe": "Quel est le verbe ?",
+    "consigne:qui-fait-l-action": "Qui fait l'action ?",
+    "consigne:clique-sur-le-sujet": "Clique sur le sujet.",
+    "consigne:ecris-le-sujet-de-la-phrase": "Écris le sujet de la phrase.",
+    "consigne:que-fait-cette-phrase": "Que fait cette phrase ?",
+    "consigne:cette-phrase-dit-oui-ou-dit-non": "Cette phrase dit oui ou dit non ?",
+    "consigne:quel-est-le-type-de-cette-phrase": "Quel est le type de cette phrase ?",
+    "consigne:cette-phrase-est-a-quelle-forme": "Cette phrase est à quelle forme ?",
+    "consigne:quelle-est-la-bonne-fin-pour-cette-phrase": "Quelle est la bonne fin pour cette phrase ?",
+    "consigne:clique-sur-le-mot-qui-doit-commencer-par-une-maj": "Clique sur le mot qui doit commencer par une majuscule.",
+    "consigne:ce-groupe-est-au-singulier-ou-au-pluriel": "Ce groupe est au singulier ou au pluriel ?",
+    "consigne:ce-groupe-est-masculin-ou-feminin": "Ce groupe est masculin ou féminin ?",
+    "consigne:ecris-le-nom-de-ce-groupe": "Écris le nom de ce groupe.",
+    "consigne:ecris-l-adjectif-de-ce-groupe": "Écris l'adjectif de ce groupe.",
+    "expl:nature-n1-nom": "Un nom désigne une personne, un animal ou une chose. Le mot chat est un nom, c'est un animal.",
+    "expl:nature-n1-verbe": "Un verbe dit une action. Le mot joue est un verbe, c'est ce qu'on fait.",
+    "expl:nature-n1-adjectif": "Un adjectif décrit, il dit comment est la chose. Le mot grand dit la taille.",
+    "expl:nature-n1-determinant": "Le déterminant est un petit mot placé devant le nom. Le mot le est un déterminant, comme dans le chat.",
+    "expl:nature-n1-pronom": "Un pronom remplace un nom. Le mot elle remplace une personne, comme la fille.",
+    "expl:nature-n2-nom": "Le nom désigne l'animal. Ici, le nom est chien.",
+    "expl:nature-n2-verbe": "Le verbe dit l'action. Ici, l'action est chante.",
+    "expl:nature-n2-adjectif": "L'adjectif décrit le chat. Ici, l'adjectif est petit.",
+    "expl:nature-n2-determinant": "Le déterminant est devant le nom. Ici, c'est le mot le, devant garçon.",
+    "expl:nature-n2-pronom": "Le pronom remplace une personne. Ici, c'est le mot elle.",
+    "expl:nature-n3-verbe": "Le verbe dit l'action. Ici, l'action est joue.",
+    "expl:nature-n3-nom": "Le nom désigne une chose. Ici, le nom est télévision.",
+    "expl:nature-n3-adjectif": "L'adjectif décrit le vélo. Ici, l'adjectif est rouge.",
+    "expl:nature-n3-determinant": "Le déterminant est devant le nom. Ici, c'est le mot mon, devant frère.",
+    "expl:nature-n4-verbe": "Le verbe dit l'action. Ici, l'action est volent.",
+    "expl:nature-n4-nom": "Le nom désigne une chose. Ici, le nom est bateau.",
+    "expl:nature-n4-adjectif": "L'adjectif décrit la girafe. Ici, l'adjectif est grande.",
+    "expl:sv-n1-verbe": "Le verbe dit l'action. Ici, l'action est aboie.",
+    "expl:sv-n1-sujet": "On cherche qui fait l'action. C'est la fille qui court, donc le sujet est la fille.",
+    "expl:sv-n2-verbe": "Le verbe dit l'action. Ici, l'action est dort.",
+    "expl:sv-n2-sujet-pronom": "On cherche qui fait l'action. C'est elle qui danse, donc le sujet est elle.",
+    "expl:sv-n2-sujet-nom": "On cherche qui fait l'action. C'est Paul qui mange, donc le sujet est Paul.",
+    "expl:sv-n3-verbe": "Le verbe dit l'action. Ici, l'action est partiront.",
+    "expl:sv-n3-sujet": "On cherche qui fait l'action. C'est Lucie qui plante, donc le sujet est Lucie.",
+    "expl:sv-n4-sujet": "On cherche qui fait l'action. C'est nous qui chantons, donc le sujet est nous.",
+    "expl:sv-n4-verbe": "Le verbe dit l'action. Ici, l'action est écoutent.",
+    "expl:types-n1-question": "Cette phrase pose une question. On le voit, elle attend une réponse.",
+    "expl:types-n1-ordre": "Cette phrase donne un ordre. Elle dit ce qu'il faut faire : ranger la chambre.",
+    "expl:types-n1-raconte": "Cette phrase raconte quelque chose. Elle dit une information : le soleil brille.",
+    "expl:types-n2-emotion": "Cette phrase montre une émotion forte. On sent la joie, comme un cri de surprise.",
+    "expl:types-n2-negative": "Cette phrase dit non. Les petits mots ne et pas entourent le verbe, c'est une phrase négative.",
+    "expl:types-n2-affirmative": "Cette phrase dit oui. Il n'y a pas les mots ne et pas, c'est une phrase affirmative.",
+    "expl:types-n3-interro": "Cette phrase pose une question : c'est une phrase interrogative, comme dans où habites-tu.",
+    "expl:types-n3-imperative": "Cette phrase donne un ordre : c'est une phrase impérative, comme dans ferme la porte.",
+    "expl:types-n3-declarative": "Cette phrase raconte quelque chose : c'est une phrase déclarative.",
+    "expl:types-n4-exclamative": "Cette phrase montre une émotion forte : c'est une phrase exclamative.",
+    "expl:types-n4-interro": "Cette phrase pose une question : c'est une phrase interrogative.",
+    "expl:types-n4-negative": "Les mots ne et pas entourent le verbe : la phrase est à la forme négative.",
+    "expl:ponct-n1-point": "Cette phrase raconte quelque chose. On met un point à la fin.",
+    "expl:ponct-n1-interro": "Cette phrase pose une question. On met un point d'interrogation à la fin.",
+    "expl:ponct-n2-exclam": "Cette phrase montre une émotion forte. On met un point d'exclamation à la fin.",
+    "expl:ponct-n2-interro": "Cette phrase pose une question. On met un point d'interrogation à la fin.",
+    "expl:ponct-n3-majuscule": "Paris est le nom d'une ville. Un nom de ville prend toujours une majuscule.",
+    "expl:ponct-n3-majuscule2": "Julie est un prénom. Un prénom prend toujours une majuscule.",
+    "expl:ponct-n4-point": "Cette phrase raconte quelque chose. On met un point à la fin.",
+    "expl:ponct-n4-exclam": "Cette phrase lance un avertissement fort. On met un point d'exclamation à la fin.",
+    "expl:gn-n1-pluriel": "Il y a plusieurs chiens. Le groupe les chiens est au pluriel.",
+    "expl:gn-n1-singulier": "Il y a un seul chat. Le groupe un chat est au singulier.",
+    "expl:gn-n2-determinant": "Le déterminant est devant le nom. Ici, c'est le mot les.",
+    "expl:gn-n2-nom": "Le nom désigne la chose. Ici, le nom est arbre.",
+    "expl:gn-n2-adjectif": "L'adjectif décrit la maison. Ici, l'adjectif est jolie.",
+    "expl:gn-n3-feminin": "On dit la fille. Le groupe la petite fille est féminin.",
+    "expl:gn-n3-adjectif": "L'adjectif décrit le château. Ici, l'adjectif est beau.",
+    "expl:gn-n4-nom": "Le nom désigne la chose. Dans une belle histoire, le nom est histoire.",
+    "expl:gn-n4-adjectif": "L'adjectif décrit le voyage. Ici, l'adjectif est long."
   }
 }

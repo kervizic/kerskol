@@ -8,6 +8,7 @@ import { estJuste, estJusteConjugaison, estJustePasseCompose } from "../domain/d
 import { TEMPS_PAR_CODE, type Personne } from "../domain/francais/conjugaison";
 import { PC_CODE } from "../domain/francais/passe-compose";
 import type { DicteeTexte, DicteeReponse, DicteeResultat } from "../domain/francais/dictee";
+import { estJusteGrammaire } from "../domain/francais/grammaire";
 import {
   isDemo,
   DEMO_COMPETENCES,
@@ -497,20 +498,22 @@ export async function getFrancais(): Promise<{ competences: Competence[]; source
     sb
       .from("exercices")
       .select("id, competence, niveau, methode, type")
-      .in("type", ["conjugaison", "dictee"])
+      .in("type", ["conjugaison", "dictee", "grammaire"])
       .eq("actif", true),
   ]);
   if (comp.error) throw comp.error;
   if (ex.error) throw ex.error;
   const sources = (ex.data ?? []).map((e): ExCalcul => {
-    const dictee = (e.type as string) === "dictee";
+    const type = e.type as string;
+    const operation = type === "dictee" ? "dictee" : type === "grammaire" ? "gram" : "conj";
+    const forme = (type === "dictee" ? "dictee" : type === "grammaire" ? "grammaire" : "conjugaison") as Forme;
     return {
       exerciceId: e.id as string,
       competence: e.competence as string,
       niveau: e.niveau as number,
       methode: (e.methode as string | null) ?? null,
-      operation: dictee ? "dictee" : "conj",
-      forme: (dictee ? "dictee" : "conjugaison") as Forme,
+      operation,
+      forme,
       params: {},
       support: null,
       correctionStrategie: null,
@@ -689,7 +692,9 @@ export async function insertReponse(row: ReponseInsert): Promise<ReponseResult> 
     // erreurs) : en demo, pas de banque, donc jamais d'exercice de dictee.
     if (row.op === "dictee") return { correct: false, monnaie: null, deja: false, dictee: null };
     const correct =
-      row.op === "lettres"
+      row.op === "gram"
+        ? estJusteGrammaire(row.cle ?? "", row.reponse_texte ?? "")
+        : row.op === "lettres"
         ? estJuste(row.a, row.reponse_texte ?? "")
         : row.op === "conj"
           ? row.a === PC_CODE

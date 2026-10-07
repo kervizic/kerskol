@@ -19,9 +19,20 @@ describe("catalogue matieres / sous-matieres", () => {
 
   it("matiereDe retrouve la matiere d'un domaine", () => {
     expect(matiereDe("conjugaison")).toBe("FR");
+    expect(matiereDe("grammaire")).toBe("FR");
     expect(matiereDe("mesures")).toBe("MA");
     expect(matiereDe("heure")).toBe("MA");
     expect(matiereDe("inconnu")).toBeUndefined();
+  });
+
+  it("« Grammaire » est une sous-matiere FR", () => {
+    const fr = MATIERES.find((m) => m.code === "FR")!;
+    const grammaire = fr.sousMatieres.find((s) => s.domaine === "grammaire");
+    expect(grammaire?.libelle).toBe("Grammaire");
+    expect(TOUS_DOMAINES).toContain("grammaire");
+    // Jouable seulement si FR actif ET grammaire active.
+    expect(competenceActivable("FR", "grammaire", ["FR"], ["grammaire"])).toBe(true);
+    expect(competenceActivable("FR", "grammaire", ["MA"], ["grammaire"])).toBe(false);
   });
 
   it("« Mesures » et « Lire l'heure » sont deux sous-matieres MA distinctes", () => {

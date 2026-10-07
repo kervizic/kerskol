@@ -286,6 +286,53 @@ accolades : `{faute}` = le mot fautif affiché, `{correction}` = la bonne forme.
 
 ---
 
+# Messages de correction - grammaire (français)
+
+Sous-matière **Grammaire** (domaine `grammaire`, compétences `FR.GRAM.*`,
+migration 0041). Cinq compétences : nature des mots (`FR.GRAM.NATURE`), verbe et
+sujet (`FR.GRAM.SUJET_VERBE`), types et formes de phrases (`FR.GRAM.TYPES_PHRASES`),
+ponctuation et majuscule (`FR.GRAM.PONCTUATION`), groupe nominal
+(`FR.GRAM.GROUPE_NOMINAL`). Le **groupe nominal** porte sur l'**identification**
+(reconnaître le déterminant, le nom, l'adjectif, le genre et le nombre) : l'**accord
+orthographique** reste travaillé par la **dictée détective**, on ne doublonne pas.
+
+Le **serveur** est seul juge (`verif_grammaire`, op `gram`) : il compare la saisie
+normalisée (minuscules, espaces, apostrophes ; ponctuation de bord retirée pour un
+mot ; **accents exigés**) à la réponse attendue de `public.grammaire_item` (miroir
+de `frontend/src/domain/francais/grammaire.ts`).
+
+Trois formats, progression pédagogique : **N1** QCM (le plus facile) ; **N2** clic
+sur un mot d'une phrase courte ; **N3** clic dans une phrase plus longue (ou QCM
+pour les notions sans mot à montrer : types, ponctuation) ; **N4** réponse libre
+tapée quand c'est pertinent (nature, sujet/verbe, groupe nominal), sinon QCM (types
+de phrases, ponctuation). Escalier + EMA comme les autres compétences.
+
+## Deux messages de situation (affichage toujours valorisant)
+
+- **Bonne réponse** : « Bravo ! C'est la bonne réponse. »
+- **Réponse fausse** : « Ce n'est pas tout à fait ça. Regarde la réponse. »
+
+Dans les deux cas, la **bonne réponse est montrée** (surlignée pour un clic) avec
+une **explication courte et concrète** portée par chaque item (champ `explication`),
+rédigée **pour l'oral** (aucun symbole, un exemple à chaque fois). Exemples :
+
+- **nature, clic sur le verbe** : « Le verbe dit l'action. Ici, l'action est
+  chante. »
+- **sujet** : « On cherche qui fait l'action. C'est la fille qui court, donc le
+  sujet est la fille. »
+- **type de phrase** : « Cette phrase pose une question : c'est une phrase
+  interrogative, comme dans où habites-tu. »
+- **ponctuation** : « Cette phrase pose une question. On met un point
+  d'interrogation à la fin. »
+- **groupe nominal, nombre** : « Il y a plusieurs chiens. Le groupe les chiens est
+  au pluriel. »
+
+Les consignes et explications sont au catalogue voix
+(`tools/tts/data/phrases.json`, section `grammaire`, aucun audio généré pour
+l'instant).
+
+---
+
 # Indices (bouton « Indice », niveaux 1 et 2)
 
 Bouton **Indice** (icône Lucide Lightbulb) affiché **aux niveaux 1 et 2
@@ -311,6 +358,20 @@ l'instant).
   être, puis le verbe. Avec être, pense à accorder avec le sujet. »
 - **FR.ORTHO.DETECTIVE** : « Lis la phrase tout doucement dans ta tête. Cherche les
   petits mots qui se ressemblent et qui se cachent. »
+- **FR.GRAM.NATURE** : « Le nom dit une personne, un animal ou une chose, comme
+  chat. Le verbe dit une action, comme jouer. L'adjectif décrit, comme grand. Le
+  petit mot devant le nom est un déterminant. »
+- **FR.GRAM.SUJET_VERBE** : « Le verbe dit l'action. Pour trouver le sujet,
+  demande-toi qui fait l'action, comme dans la fille court. »
+- **FR.GRAM.TYPES_PHRASES** : « Écoute la phrase. Si elle attend une réponse, elle
+  pose une question. Si elle montre une émotion forte, c'est une exclamation. Si
+  elle commande, elle donne un ordre. »
+- **FR.GRAM.PONCTUATION** : « On met un point quand la phrase raconte quelque chose.
+  On met un point d'interrogation quand la phrase pose une question. Un nom de
+  personne ou de ville prend une majuscule. »
+- **FR.GRAM.GROUPE_NOMINAL** : « Regarde le petit mot du début. Le mot les montre
+  qu'il y a plusieurs choses, c'est le pluriel. Le nom dit la chose, l'adjectif la
+  décrit. »
 - **MA.CM.ADDITION** : « Tu peux passer par un nombre rond, comme dix ou vingt,
   pour aller plus vite. »
 - **MA.CM.COMPL_SUP** : « Demande-toi combien il manque pour arriver jusqu'au

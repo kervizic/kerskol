@@ -38,6 +38,7 @@ import {
   type Genre,
 } from "./passe-compose";
 import { normaliser } from "../diagnostic/lettres";
+import { itemsDe } from "./grammaire";
 
 // Temps « etendu » : les 3 temps simples + le passe compose.
 type Temps4 = Temps | "pc";
@@ -261,6 +262,52 @@ export function buildFrancaisDictee(src: ExCalcul, base: Base): GeneratedExercis
     dictee: { niveau: src.niveau },
     verif: { op: "dictee", a: 0, b: 0 },
     correction: "",
+  };
+}
+
+// =========================================================================
+// GRAMMAIRE : le generateur choisit un ITEM de la banque (grammaire.ts) pour la
+// competence et le niveau, de facon reproductible (graine). Le composant
+// <Grammaire> rend l'item (QCM / clic / texte) ; le serveur (verif_grammaire)
+// est seul juge via la cle de l'item. Repli robuste si aucun item (ne devrait
+// pas arriver, le referentiel ne cree l'exercice que si des items existent).
+export function buildFrancaisGrammaire(src: ExCalcul, rng: Rng, base: Base): GeneratedExercise {
+  const choix = itemsDe(src.competence, src.niveau);
+  const item = choix.length > 0 ? pick(rng, choix) : null;
+  if (!item) {
+    return {
+      ...base,
+      forme: "grammaire",
+      support: "aucun",
+      saisie: "grammaire",
+      prompt: "Grammaire",
+      answer: 0,
+      reste: null,
+      fields: 1,
+      verif: { op: "gram", a: 0, b: 0, cle: "" },
+      correction: "",
+    };
+  }
+  return {
+    ...base,
+    forme: "grammaire",
+    support: "aucun",
+    saisie: "grammaire",
+    prompt: item.consigne,
+    answer: 0,
+    reste: null,
+    fields: 1,
+    gram: {
+      cle: item.cle,
+      format: item.format,
+      consigne: item.consigne,
+      phrase: item.phrase,
+      options: item.options,
+      attendu: item.attendu,
+      explication: item.explication,
+    },
+    verif: { op: "gram", a: 0, b: 0, cle: item.cle },
+    correction: item.explication,
   };
 }
 

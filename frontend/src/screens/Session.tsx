@@ -35,6 +35,7 @@ import {
   type ReponseInsert,
 } from "../lib/api";
 import DicteeDetective from "../components/DicteeDetective";
+import Grammaire from "../components/Grammaire";
 import type { DicteeTexte, DicteeReponse, DicteeResultat } from "../domain/francais/dictee";
 import type { ContexteDictee } from "../domain/francais/selection-dictee";
 import { enqueueReponse, flushReponses } from "../lib/reponseQueue";
@@ -1479,6 +1480,58 @@ export function Session({
     [ex, slot, profil, relire, onProfilChange]
   );
 
+  // GRAMMAIRE (op 'gram') : le composant <Grammaire> soumet la cle de l'item et
+  // la saisie (mot clique / choix QCM / texte libre). Le serveur (verif_grammaire)
+  // est seul juge. Memes garde-fous que la dictee (plafond -> pause, hors-ligne
+  // -> file + credit optimiste gere par le serveur au rejeu).
+  const soumettreGrammaire = useCallback(
+    async (cle: string, reponseTexte: string): Promise<{ correct: boolean } | null> => {
+      if (!ex || !slot) return null;
+      const row: ReponseInsert = {
+        id: uuid(),
+        profil_id: profil.id,
+        seance_id: seanceId.current,
+        competence: ex.competence,
+        exercice_id: slot.source.exerciceId,
+        niveau: ex.niveau,
+        methode: ex.methode,
+        op: "gram",
+        a: 0,
+        b: 0,
+        op2: null,
+        c: null,
+        cle,
+        reponse: 0,
+        reste: null,
+        reponse_texte: reponseTexte,
+        type_faute: null,
+        fields: 1,
+        temps_ms: Date.now() - questionStart.current,
+        correction_lue: true,
+        rattrapage: ex.rattrapage,
+        placement: !placement.current[ex.competence],
+        repondu_le: new Date().toISOString(),
+      };
+      try {
+        const res = await insertReponse(row);
+        if (res.monnaie != null) {
+          setMonnaie(res.monnaie);
+          onProfilChange({ ...profil, monnaie: res.monnaie });
+        }
+        void relire();
+        return { correct: res.correct };
+      } catch (e) {
+        if (plafondCode(e)) {
+          setLimite("Pause ! Reviens un peu plus tard.");
+          return null;
+        }
+        enqueueReponse(row);
+        return null;
+      }
+    },
+    [ex, slot, profil, relire, onProfilChange]
+  );
+
   const value = ex && ex.fields === 2 ? { q: f1, r: f2 } : { q: f1, r: "" };
 
   const isCorrect = useCallback((): boolean => {
@@ -1832,6 +1885,13 @@ export function Session({
             voixDisponible={voix.disponible}
             lectureAutoActive={voix.lectureAutoActive}
             onToggleLectureAuto={voix.basculerLectureAuto}
+          />
+        ) : ex.saisie === "grammaire" && ex.gram ? (
+          <Grammaire
+            key={ex.key}
+            item={ex.gram}
+            onSoumettre={soumettreGrammaire}
+            onContinuer={(correct) => advance(correct, true)}
           />
         ) : (
         <>

@@ -21,7 +21,7 @@ import { buildProbleme } from "./problemes";
 import { buildMesure } from "./measures";
 import { buildFraction } from "./fractions";
 import { enLettresFr } from "../diagnostic/lettres";
-import { buildFrancaisConjugaison, buildFrancaisDictee, buildFrancaisPasseCompose } from "../francais/generator";
+import { buildFrancaisConjugaison, buildFrancaisDictee, buildFrancaisPasseCompose, buildFrancaisGrammaire } from "../francais/generator";
 import type { Temps, Personne } from "../francais/conjugaison";
 import type { Genre } from "../francais/passe-compose";
 
@@ -39,7 +39,8 @@ export type Forme =
   | "mesure" // mesures (heure, durees, longueurs, masses, contenances)
   | "fraction" // fractions simples
   | "conjugaison" // francais : conjuguer un verbe (present / futur / imparfait)
-  | "dictee"; // francais : dictee detective (trouver / corriger des erreurs)
+  | "dictee" // francais : dictee detective (trouver / corriger des erreurs)
+  | "grammaire"; // francais : grammaire (nature, sujet/verbe, types, ponctuation, GN)
 
 export type Support = "rectangle" | "droite" | "aucun" | null;
 
@@ -72,7 +73,10 @@ export type Saisie =
   | "heure" | "fraction" | "fraction_num" | "lettres" | "qcm_texte"
   // dictee -> enquete d'orthographe : l'enfant touche les mots fautifs puis les
   // corrige (selon le niveau) ; le texte et la verification viennent du serveur.
-  | "dictee";
+  | "dictee"
+  // grammaire -> composant autonome : QCM, clic sur un mot d'une phrase, ou
+  // saisie libre (N4). Le serveur (verif_grammaire) reste seul juge.
+  | "grammaire";
 
 // Enonce normalise envoye au serveur pour revalidation. L'operation porte sur
 // deux operandes et son resultat est la reponse attendue :
@@ -97,7 +101,10 @@ export type Saisie =
 // b = personne (1..6), `cle` = verbe (infinitif) ; la reponse est du TEXTE
 // (reponse_texte). computeVerif renvoie a (invariant), la verification reelle
 // est serveur (verif_conjugaison) / client (domain/diagnostic/conjugaison).
-export type VerifOp = "add" | "sub" | "mul" | "div" | "cmp" | "val" | "lettres" | "conj" | "dictee";
+// `gram` : grammaire. La reponse est du TEXTE (reponse_texte) ; `cle` porte
+// l'identifiant de l'item (p_op2). computeVerif renvoie a (invariant), la
+// verification reelle est serveur (verif_grammaire) / client (grammaire.ts).
+export type VerifOp = "add" | "sub" | "mul" | "div" | "cmp" | "val" | "lettres" | "conj" | "dictee" | "gram";
 export type VerifOp2 = "add" | "sub" | "mul" | "div" | "rsub";
 export interface Verif {
   op: VerifOp;
@@ -133,6 +140,10 @@ function applyOp(op: VerifOp, a: number, b: number): { answer: number; reste: nu
       // Dictee : la reponse est la LISTE des positions corrigees (envoyee a
       // part, p_dictee) ; a porte l'id du texte (invariant answer=a). La
       // verification reelle est serveur (verif_dictee).
+      return { answer: a, reste: null };
+    case "gram":
+      // Grammaire : la reponse est du TEXTE (p_reponse_texte) ; a = 0 (invariant
+      // answer=a). La verification reelle est serveur (verif_grammaire).
       return { answer: a, reste: null };
   }
 }
@@ -335,6 +346,19 @@ export interface GeneratedExercise {
   diagPieges?: { answer: number; type: string }[];
   diagFallback?: string;
   dictee?: { niveau: number }; // dictee detective : le texte est choisi a l'affichage (serveur)
+  // Grammaire : item choisi par le generateur (reproductible via la graine).
+  // Le composant <Grammaire> le rend (QCM / clic / texte) ; le serveur
+  // (verif_grammaire) juge via `cle`. `attendu` sert au feedback local et au
+  // mode demo (le serveur reste la source de verite).
+  gram?: {
+    cle: string;
+    format: "qcm" | "clic" | "texte";
+    consigne: string;
+    phrase: string;
+    options?: string[];
+    attendu: string;
+    explication: string;
+  };
   poseData?: PoseData; // mode pose
   chiffresData?: ChiffresData; // mode chiffres (decomposition)
   droiteData?: DroiteData; // mode droite
@@ -472,6 +496,10 @@ function buildExercise(
   // --- Francais : dictee detective --------------------------------------
   if (src.competence.startsWith("FR.ORTHO.")) {
     return buildFrancaisDictee(src, base);
+  }
+  // --- Francais : grammaire ---------------------------------------------
+  if (src.competence.startsWith("FR.GRAM.")) {
+    return buildFrancaisGrammaire(src, rng, base);
   }
   // --- Numeration : lire/ecrire, decomposer, comparer, suite ------------
   if (src.competence.startsWith("MA.NUM.")) {

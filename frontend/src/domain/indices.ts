@@ -23,6 +23,18 @@ export const INDICES: Record<string, string> = {
   "FR.ORTHO.DETECTIVE":
     "Lis la phrase tout doucement dans ta tête. Cherche les petits mots qui se ressemblent et qui se cachent.",
 
+  // --- Grammaire (indices aux niveaux 1 et 2 seulement) ---------------------
+  "FR.GRAM.NATURE":
+    "Le nom dit une personne, un animal ou une chose, comme chat. Le verbe dit une action, comme jouer. L'adjectif décrit, comme grand. Le petit mot devant le nom est un déterminant.",
+  "FR.GRAM.SUJET_VERBE":
+    "Le verbe dit l'action. Pour trouver le sujet, demande-toi qui fait l'action, comme dans la fille court.",
+  "FR.GRAM.TYPES_PHRASES":
+    "Écoute la phrase. Si elle attend une réponse, elle pose une question. Si elle montre une émotion forte, c'est une exclamation. Si elle commande, elle donne un ordre.",
+  "FR.GRAM.PONCTUATION":
+    "On met un point quand la phrase raconte quelque chose. On met un point d'interrogation quand la phrase pose une question. Un nom de personne ou de ville prend une majuscule.",
+  "FR.GRAM.GROUPE_NOMINAL":
+    "Regarde le petit mot du début. Le mot les montre qu'il y a plusieurs choses, c'est le pluriel. Le nom dit la chose, l'adjectif la décrit.",
+
   // --- Calcul mental --------------------------------------------------------
   "MA.CM.ADDITION":
     "Tu peux passer par un nombre rond, comme dix ou vingt, pour aller plus vite.",
