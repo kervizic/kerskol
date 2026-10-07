@@ -16,7 +16,12 @@ import {
   reglerAutorisationMatieres,
   reglerMatieres,
   updateProfil,
+  listerMaitresse,
+  upsertMaitresse,
+  activerMaitresse,
+  supprimerMaitresse,
   type DefiResume,
+  type MaitresseListeParent,
 } from "../lib/api";
 import { DEFI_THEMES } from "../domain/calcul/defi";
 import { MatieresEditor } from "../components/MatieresEditor";
@@ -382,6 +387,189 @@ function LinkAccount({
   );
 }
 
+// --------------------------------------------------------------------------
+// « Les mots de la maitresse » (phase 6). Le PARENT saisit des listes de mots a
+// apprendre et/ou des textes de dictee donnes par la maitresse ; elles
+// deviennent des exercices pour l'enfant. CRUD + activation + apercu. Les
+// garde-fous sont verifies cote serveur (migration 0046) ; on en affiche un
+// rappel clair et on remonte les erreurs serveur telles quelles.
+const MAITRESSE_MAX_ACTIVES = 10;
+
+function parseMots(raw: string): string[] {
+  return raw
+    .split(/[\s,;]+/)
+    .map((m) => m.trim())
+    .filter((m) => m.length > 0);
+}
+
+function MaitresseManager({ foyerId }: { foyerId: string }) {
+  const [listes, setListes] = useState<MaitresseListeParent[] | null>(null);
+  const [edition, setEdition] = useState<string | "new" | null>(null); // id en cours, "new", ou null
+  const [titre, setTitre] = useState("");
+  const [motsRaw, setMotsRaw] = useState("");
+  const [texte, setTexte] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [err, setErr] = useState<string | null>(null);
+
+  const reload = useCallback(() => {
+    listerMaitresse(foyerId).then(setListes).catch(() => setListes([]));
+  }, [foyerId]);
+  useEffect(() => { reload(); }, [reload]);
+
+  const mots = parseMots(motsRaw);
+  const nbActives = (listes ?? []).filter((l) => l.active).length;
+
+  // Validation cliente (rappel ; le serveur reste la source de verite).
+  function valider(): string | null {
+    const t = titre.trim();
+    if (t.length < 1 || t.length > 60) return "Le titre doit faire entre 1 et 60 caractères.";
+    if (/[<>]/.test(t) || /[<>]/.test(texte)) return "Les caractères < et > ne sont pas autorisés.";
+    if (mots.length > 0 && mots.length < 3) return "Mets au moins 3 mots (ou laisse vide et mets un texte).";
+    if (mots.length > 20) return "Au plus 20 mots par liste.";
+    if (mots.some((m) => m.length > 30)) return "Un mot est trop long (30 lettres maximum).";
+    if (mots.some((m) => /[<>]/.test(m))) return "Les caractères < et > ne sont pas autorisés.";
+    if (texte.length > 600) return "Le texte est trop long (600 caractères maximum).";
+    if (mots.length < 3 && texte.trim() === "") return "Mets au moins 3 mots ou un texte de dictée.";
+    return null;
+  }
+
+  function startNew() {
+    setEdition("new"); setTitre(""); setMotsRaw(""); setTexte(""); setErr(null);
+  }
+  function startEdit(l: MaitresseListeParent) {
+    setEdition(l.id); setTitre(l.titre); setMotsRaw(l.mots.join(" ")); setTexte(l.texte ?? ""); setErr(null);
+  }
+  function cancel() { setEdition(null); setErr(null); }
+
+  async function save() {
+    const probleme = valider();
+    if (probleme) { setErr(probleme); return; }
+    setBusy(true); setErr(null);
+    try {
+      await upsertMaitresse(
+        edition === "new" ? null : edition,
+        foyerId, titre.trim(), mots, texte.trim() === "" ? null : texte.trim(),
+      );
+      setEdition(null);
+      reload();
+    } catch (e) {
+      setErr(e instanceof Error ? e.message : "L'enregistrement a échoué.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function toggle(l: MaitresseListeParent) {
+    if (!l.active && nbActives >= MAITRESSE_MAX_ACTIVES) {
+      setErr(`Au plus ${MAITRESSE_MAX_ACTIVES} listes actives à la fois.`);
+      return;
+    }
+    try { await activerMaitresse(l.id, !l.active); reload(); }
+    catch (e) { setErr(e instanceof Error ? e.message : "Le changement a échoué."); }
+  }
+
+  async function remove(l: MaitresseListeParent) {
+    if (!confirm(`Supprimer la liste « ${l.titre} » ?`)) return;
+    try { await supprimerMaitresse(l.id); reload(); }
+    catch (e) { setErr(e instanceof Error ? e.message : "La suppression a échoué."); }
+  }
+
+  return (
+    <div className="kk-card kk-stack" style={{ marginTop: 24 }}>
+      <h2>Les mots de la maîtresse</h2>
+      <p className="kk-muted" style={{ margin: 0 }}>
+        Ajoute les listes de mots à apprendre et les textes de dictée donnés par la
+        maîtresse. Ils deviennent des exercices pour l'enfant quand la liste est
+        active. Au moins 3 mots, ou un texte. Au plus {MAITRESSE_MAX_ACTIVES} listes actives.
+      </p>
+
+      {listes === null ? (
+        <Spinner />
+      ) : listes.length === 0 ? (
+        <p className="kk-muted">Aucune liste pour l'instant.</p>
+      ) : (
+        <ul className="kk-list">
+          {listes.map((l) => (
+            <li key={l.id} style={{ padding: "8px 0" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
+                <div>
+                  <strong>{l.titre}</strong>{" "}
+                  <span className="kk-muted">
+                    {l.mots.length > 0 ? `${l.mots.length} mot${l.mots.length > 1 ? "s" : ""}` : ""}
+                    {l.mots.length > 0 && l.texte ? " · " : ""}
+                    {l.texte ? "texte de dictée" : ""}
+                  </span>
+                </div>
+                <div className="kk-row" style={{ gap: 6, flexWrap: "wrap" }}>
+                  <label className="kk-switch-row" style={{ margin: 0 }}>
+                    <input type="checkbox" checked={l.active} onChange={() => void toggle(l)} />
+                    <span>{l.active ? "Active" : "Inactive"}</span>
+                  </label>
+                  <button className="kk-btn kk-btn--ghost" onClick={() => startEdit(l)}>Modifier</button>
+                  <button className="kk-btn kk-btn--ghost" onClick={() => void remove(l)}>Supprimer</button>
+                </div>
+              </div>
+              {/* Apercu : mots et debut du texte. */}
+              {(l.mots.length > 0 || l.texte) && (
+                <p className="kk-muted" style={{ margin: "4px 0 0", fontSize: "0.85rem" }}>
+                  {l.mots.length > 0 && <>Mots : {l.mots.join(", ")}. </>}
+                  {l.texte && <>Texte : {l.texte.length > 120 ? l.texte.slice(0, 120) + "…" : l.texte}</>}
+                </p>
+              )}
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {edition === null ? (
+        <button className="kk-btn kk-btn--accent" onClick={startNew}>+ Ajouter une liste</button>
+      ) : (
+        <div className="kk-stack" style={{ borderTop: "1px solid var(--kk-border, #ddd)", paddingTop: 12 }}>
+          <h3 style={{ margin: 0 }}>{edition === "new" ? "Nouvelle liste" : "Modifier la liste"}</h3>
+          <label className="kk-field">
+            <span>Titre</span>
+            <input className="kk-input" value={titre} maxLength={60} onChange={(e) => setTitre(e.target.value)}
+              placeholder="Mots de la semaine" />
+          </label>
+          <label className="kk-field">
+            <span>Mots à apprendre (séparés par des espaces ou des virgules)</span>
+            <textarea className="kk-input" rows={3} value={motsRaw} onChange={(e) => setMotsRaw(e.target.value)}
+              placeholder="maison toujours jardin beaucoup poisson" spellCheck={false} />
+            <span className="kk-muted" style={{ fontSize: "0.8rem" }}>{mots.length} mot{mots.length > 1 ? "s" : ""}</span>
+          </label>
+          <label className="kk-field">
+            <span>Texte de dictée (optionnel)</span>
+            <textarea className="kk-input" rows={4} value={texte} maxLength={600} onChange={(e) => setTexte(e.target.value)}
+              placeholder="Le chat de la maison dort toujours dans le jardin." spellCheck={false} />
+            <span className="kk-muted" style={{ fontSize: "0.8rem" }}>{texte.length} / 600</span>
+          </label>
+
+          {/* Apercu avant activation. */}
+          {(mots.length > 0 || texte.trim() !== "") && (
+            <div className="kk-support" style={{ padding: 10 }}>
+              <strong>Aperçu</strong>
+              {mots.length > 0 && <p style={{ margin: "4px 0" }}>Mots : {mots.join(", ")}.</p>}
+              {texte.trim() !== "" && <p style={{ margin: "4px 0" }}>Texte : {texte.trim()}</p>}
+            </div>
+          )}
+
+          {err && <Feedback kind="error">{err}</Feedback>}
+          <div className="kk-row" style={{ gap: 8 }}>
+            <button className="kk-btn kk-btn--accent" disabled={busy} onClick={() => void save()}>
+              {busy ? "..." : "Enregistrer"}
+            </button>
+            <button className="kk-btn kk-btn--ghost" disabled={busy} onClick={cancel}>Annuler</button>
+          </div>
+          <p className="kk-muted" style={{ fontSize: "0.8rem", margin: 0 }}>
+            La liste est créée inactive : vérifie l'aperçu, puis active-la pour qu'elle apparaisse dans les exercices.
+          </p>
+        </div>
+      )}
+      {edition === null && err && <Feedback kind="error">{err}</Feedback>}
+    </div>
+  );
+}
+
 export function ParentSpace({
   foyerId,
   profils,
@@ -501,6 +689,8 @@ export function ParentSpace({
         <button className="kk-btn kk-btn--accent kk-btn--block" onClick={onAddChild}>
           + Ajouter un enfant
         </button>
+
+        <MaitresseManager foyerId={foyerId} />
 
         <div className="kk-card kk-stack" style={{ marginTop: 24 }}>
           <h2>Journal des réglages</h2>

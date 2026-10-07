@@ -250,6 +250,32 @@ function propositions(
 // Le TEXTE est choisi a l'affichage par le composant <DicteeDetective> dans la
 // banque chargee du serveur (dictee_charger_tous) : le generateur reste pur et
 // n'a pas besoin de la banque, et le client ne tient aucune erreur plantee.
+// =========================================================================
+// LES MOTS DE LA MAITRESSE (phase 6). Marqueur : le composant <MaitresseExo>
+// choisit la liste et le type d'exercice (QCM orthographe, memoriser/ecrire,
+// mot a trou, dictee detective) dans la banque du foyer chargee par la seance.
+// L'op de verification serveur (mmots / mtrou / mdictee) est posee par le
+// composant a la soumission (selon l'exercice choisi).
+// =========================================================================
+export function buildMaitresse(src: ExCalcul, base: Base): GeneratedExercise {
+  const kind = src.competence.endsWith("DICTEE") ? "dictee" : "mots";
+  return {
+    ...base,
+    forme: "maitresse",
+    support: "aucun",
+    saisie: "maitresse",
+    prompt: kind === "dictee" ? "La dictée de la maîtresse" : "Les mots à apprendre",
+    answer: 0,
+    reste: null,
+    fields: 1,
+    maitresse: { niveau: src.niveau, kind },
+    // Op par defaut (invariant) ; l'op reelle est choisie par le composant selon
+    // l'exercice (mmots / mtrou / mdictee).
+    verif: { op: kind === "dictee" ? "mdictee" : "mmots", a: 0, b: 0 },
+    correction: "",
+  };
+}
+
 export function buildFrancaisDictee(src: ExCalcul, base: Base): GeneratedExercise {
   return {
     ...base,

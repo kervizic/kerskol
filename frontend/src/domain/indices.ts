@@ -63,6 +63,12 @@ export const INDICES: Record<string, string> = {
   "FR.LECTURE.SENS_MOT":
     "Relis toute la phrase où se trouve le mot. Les autres mots autour t'aident à deviner ce qu'il veut dire.",
 
+  // --- Les mots de la maitresse (indices aux niveaux 1 et 2 seulement) ------
+  "FR.MAITRESSE.MOTS":
+    "Regarde bien chaque lettre. Écoute les lettres de la fin qu'on n'entend pas, et pense aux accents.",
+  "FR.MAITRESSE.DICTEE":
+    "Lis la phrase tout doucement dans ta tête. Cherche le mot qui manque ou le mot piégé qui se cache.",
+
   // --- Calcul mental --------------------------------------------------------
   "MA.CM.ADDITION":
     "Tu peux passer par un nombre rond, comme dix ou vingt, pour aller plus vite.",

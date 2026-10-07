@@ -21,7 +21,7 @@ import { buildProbleme } from "./problemes";
 import { buildMesure } from "./measures";
 import { buildFraction } from "./fractions";
 import { enLettresFr } from "../diagnostic/lettres";
-import { buildFrancaisConjugaison, buildFrancaisDictee, buildFrancaisPasseCompose, buildFrancaisGrammaire, buildFrancaisLexique } from "../francais/generator";
+import { buildFrancaisConjugaison, buildFrancaisDictee, buildFrancaisPasseCompose, buildFrancaisGrammaire, buildFrancaisLexique, buildMaitresse } from "../francais/generator";
 import { buildGeometrie } from "../geometrie/geometrie";
 import type { GeoFigure, GeoFormat, GeoInteract } from "../geometrie/geometrie";
 import { buildDonnees } from "../donnees/donnees";
@@ -49,7 +49,8 @@ export type Forme =
   | "grammaire" // francais : grammaire (nature, sujet/verbe, types, ponctuation, GN)
   | "geometrie" // maths : geometrie et reperage (figures, solides, symetrie, quadrillage, plan)
   | "donnees" // maths : tableaux et graphiques (tableau, barres, pictogramme, comparer)
-  | "comprehension"; // francais : comprendre un texte (info, inference, ordre, vrai/faux, sens d'un mot)
+  | "comprehension" // francais : comprendre un texte (info, inference, ordre, vrai/faux, sens d'un mot)
+  | "maitresse"; // francais : les mots de la maitresse (listes/textes saisis par le parent)
 
 export type Support = "rectangle" | "droite" | "aucun" | null;
 
@@ -98,7 +99,12 @@ export type Saisie =
   // LECTURE SILENCIEUSE (aucun audio), puis une question (QCM / clic sur un mot
   // du texte / saisie libre / remise d'evenements dans l'ordre). Le serveur
   // (verif_comprehension, op 'lire') reste seul juge via la cle.
-  | "comprehension";
+  | "comprehension"
+  // maitresse -> composant autonome <MaitresseExo> : mots a apprendre (QCM
+  // orthographe / memoriser puis ecrire), mot a trou, et dictee detective sur le
+  // texte du foyer (reutilise <DicteeDetective>). Contenu saisi par le parent ;
+  // le serveur (ops 'mmots' / 'mtrou' / 'mdictee') reste seul juge.
+  | "maitresse";
 
 // Enonce normalise envoye au serveur pour revalidation. L'operation porte sur
 // deux operandes et son resultat est la reponse attendue :
@@ -129,7 +135,11 @@ export type Saisie =
 // `lex` : vocabulaire / mots a savoir (phase 2). Meme principe que `gram` : la
 // reponse est du TEXTE (reponse_texte), `cle` porte l'item (p_op2) ; la
 // verification reelle est serveur (verif_lexique) / client (lexique.ts).
-export type VerifOp = "add" | "sub" | "mul" | "div" | "cmp" | "val" | "lettres" | "conj" | "dictee" | "gram" | "lex" | "geo" | "don" | "lire";
+// `mmots` / `mtrou` / `mdictee` : « les mots de la maitresse » (phase 6). La
+// reponse est du TEXTE (mot a apprendre, mot a trou) ou une liste de positions
+// (dictee) ; `cle` porte l'id de la liste du foyer (p_op2), `a` l'index 1-base
+// du mot (mmots / mtrou). Verification serveur uniquement (ops dediees).
+export type VerifOp = "add" | "sub" | "mul" | "div" | "cmp" | "val" | "lettres" | "conj" | "dictee" | "gram" | "lex" | "geo" | "don" | "lire" | "mmots" | "mtrou" | "mdictee";
 export type VerifOp2 = "add" | "sub" | "mul" | "div" | "rsub";
 export interface Verif {
   op: VerifOp;
@@ -185,6 +195,13 @@ function applyOp(op: VerifOp, a: number, b: number): { answer: number; reste: nu
     case "lire":
       // Comprehension de texte : la reponse est du TEXTE (p_reponse_texte) ;
       // a = 0 (invariant answer=a). Verification serveur (verif_comprehension) via la cle.
+      return { answer: a, reste: null };
+    case "mmots":
+    case "mtrou":
+    case "mdictee":
+      // Les mots de la maitresse : reponse TEXTE (mot) ou liste de positions
+      // (dictee). a = index 1-base (mmots/mtrou) ou 0 (mdictee). Verification
+      // serveur uniquement (ops dediees, contenu du foyer).
       return { answer: a, reste: null };
   }
 }
@@ -444,6 +461,12 @@ export interface GeneratedExercise {
     explication: string;
     preuve: string; // phrase du texte citee en cas d'erreur (correctif phase 5)
   };
+  // Les mots de la maitresse (phase 6) : marqueur. Le composant <MaitresseExo>
+  // choisit la liste/l'exercice dans la banque du foyer (chargee par la seance).
+  maitresse?: {
+    niveau: number;
+    kind: "mots" | "dictee"; // FR.MAITRESSE.MOTS vs FR.MAITRESSE.DICTEE
+  };
   poseData?: PoseData; // mode pose
   chiffresData?: ChiffresData; // mode chiffres (decomposition)
   droiteData?: DroiteData; // mode droite
@@ -593,6 +616,10 @@ function buildExercise(
   // --- Francais : comprendre un texte (phase 5) -------------------------
   if (src.competence.startsWith("FR.LECTURE.")) {
     return buildComprehension(src, rng, base);
+  }
+  // --- Francais : les mots de la maitresse (phase 6) --------------------
+  if (src.competence.startsWith("FR.MAITRESSE.")) {
+    return buildMaitresse(src, base);
   }
   // --- Maths : geometrie + reperage (phase 3) ---------------------------
   if (src.competence.startsWith("MA.GEO.") || src.competence.startsWith("MA.REPERE.")) {

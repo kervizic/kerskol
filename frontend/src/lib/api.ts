@@ -8,6 +8,7 @@ import { estJuste, estJusteConjugaison, estJustePasseCompose } from "../domain/d
 import { TEMPS_PAR_CODE, type Personne } from "../domain/francais/conjugaison";
 import { PC_CODE } from "../domain/francais/passe-compose";
 import type { DicteeTexte, DicteeReponse, DicteeResultat } from "../domain/francais/dictee";
+import type { MaitresseListe } from "../domain/francais/maitresse";
 import { estJusteGrammaire } from "../domain/francais/grammaire";
 import { estJusteGeometrie } from "../domain/geometrie/geometrie";
 import { estJusteDonnees } from "../domain/donnees/donnees";
@@ -654,6 +655,91 @@ export async function enregistrerDictee(profilId: string, texteId: number, corre
   await supabase().rpc("dictee_enregistrer", { p_profil: profilId, p_texte: texteId, p_correct: correct });
 }
 
+// ------------------------- Les mots de la maitresse (phase 6) ------------
+// Cote ENFANT : listes ACTIVES du foyer (RPC maitresse_charger). Pour la dictee,
+// le serveur n'expose que les mots AFFICHES (deja fautifs) + le nombre d'erreurs
+// par niveau ; jamais les positions ni corrections.
+export async function getMaitresse(profilId: string): Promise<MaitresseListe[]> {
+  if (isDemo()) return [];
+  try {
+    const { data, error } = await supabase().rpc("maitresse_charger", { p_profil: profilId });
+    if (error || !Array.isArray(data)) return [];
+    return (data as unknown[]).map((row): MaitresseListe => {
+      const r = row as Record<string, unknown>;
+      let dictees: MaitresseListe["dictees"] = null;
+      if (r.dictees && typeof r.dictees === "object") {
+        dictees = {};
+        for (const [niv, v] of Object.entries(r.dictees as Record<string, unknown>)) {
+          const d = v as Record<string, unknown>;
+          dictees[niv] = { mots: (d.mots as string[]) ?? [], nb: Number(d.nb ?? 0) };
+        }
+      }
+      return {
+        id: String(r.id),
+        titre: String(r.titre ?? ""),
+        mots: (r.mots as string[]) ?? [],
+        texte: r.texte == null ? null : String(r.texte),
+        dictees,
+      };
+    });
+  } catch {
+    return [];
+  }
+}
+
+// Cote PARENT : gestion des listes (espace parent). La lecture passe par RLS
+// (est_parent_du_foyer) ; l'ecriture par des RPC SECURITY DEFINER (garde-fous).
+export interface MaitresseListeParent {
+  id: string;
+  titre: string;
+  mots: string[];
+  texte: string | null;
+  active: boolean;
+  date_ajout: string;
+}
+
+export async function listerMaitresse(foyerId: string): Promise<MaitresseListeParent[]> {
+  if (isDemo()) return [];
+  const { data, error } = await supabase()
+    .from("maitresse_liste")
+    .select("id, titre, mots, texte, active, date_ajout")
+    .eq("foyer_id", foyerId)
+    .order("cree_le", { ascending: true });
+  if (error) throw error;
+  return (data ?? []).map((r) => ({
+    id: String(r.id),
+    titre: String(r.titre ?? ""),
+    mots: (r.mots as string[]) ?? [],
+    texte: r.texte == null ? null : String(r.texte),
+    active: Boolean(r.active),
+    date_ajout: String(r.date_ajout ?? ""),
+  }));
+}
+
+export async function upsertMaitresse(
+  id: string | null,
+  foyerId: string,
+  titre: string,
+  mots: string[],
+  texte: string | null,
+): Promise<string> {
+  const { data, error } = await supabase().rpc("maitresse_upsert", {
+    p_id: id, p_foyer: foyerId, p_titre: titre, p_mots: mots, p_texte: texte,
+  });
+  if (error) throw error;
+  return String(data);
+}
+
+export async function activerMaitresse(id: string, active: boolean): Promise<void> {
+  const { error } = await supabase().rpc("maitresse_activer", { p_id: id, p_active: active });
+  if (error) throw error;
+}
+
+export async function supprimerMaitresse(id: string): Promise<void> {
+  const { error } = await supabase().rpc("maitresse_supprimer", { p_id: id });
+  if (error) throw error;
+}
+
 export async function getMonnaie(profilId: string): Promise<number> {
   if (isDemo()) return DEMO_PROFILS.find((p) => p.id === profilId)?.monnaie ?? 0;
   const { data, error } = await supabase()
@@ -774,6 +860,10 @@ export async function insertReponse(row: ReponseInsert): Promise<ReponseResult> 
     // La dictee est jugee UNIQUEMENT par le serveur (le client n'a pas les
     // erreurs) : en demo, pas de banque, donc jamais d'exercice de dictee.
     if (row.op === "dictee") return { correct: false, monnaie: null, deja: false, dictee: null };
+    // Les mots de la maitresse : contenu du foyer, jamais present en demo.
+    if (row.op === "mmots" || row.op === "mtrou" || row.op === "mdictee") {
+      return { correct: false, monnaie: null, deja: false, dictee: null };
+    }
     const correct =
       row.op === "gram"
         ? estJusteGrammaire(row.cle ?? "", row.reponse_texte ?? "")

@@ -29,6 +29,7 @@ import {
   getDicteeTextes,
   getDicteeContexte,
   enregistrerDictee,
+  getMaitresse,
   getMonnaie,
   getProgressionDetail,
   getTempsAujourdhuiS,
@@ -41,6 +42,8 @@ import Grammaire from "../components/Grammaire";
 import Geometrie from "../components/Geometrie";
 import Donnees from "../components/Donnees";
 import Comprehension from "../components/Comprehension";
+import MaitresseExo, { type MaitresseSubmit } from "../components/MaitresseExo";
+import type { MaitresseListe } from "../domain/francais/maitresse";
 import type { DicteeTexte, DicteeReponse, DicteeResultat } from "../domain/francais/dictee";
 import type { ContexteDictee } from "../domain/francais/selection-dictee";
 import { enqueueReponse, flushReponses } from "../lib/reponseQueue";
@@ -1205,6 +1208,7 @@ export function Session({
   // jamais les erreurs) ; chargee une fois si le francais est actif.
   const [dicteeBank, setDicteeBank] = useState<DicteeTexte[]>([]);
   const [dicteeCtx, setDicteeCtx] = useState<ContexteDictee | null>(null);
+  const [maitresseBank, setMaitresseBank] = useState<MaitresseListe[]>([]);
   const [tempsJourS, setTempsJourS] = useState(0);
   const [inputMode, setInputMode] = useState<InputMode>(() =>
     initialInputMode(prefersCoarsePointer(), getStoredInputMode())
@@ -1244,7 +1248,7 @@ export function Session({
         // active (matieres_actives) : les profils existants (['MA']) sont inchanges.
         const francaisActif = (profil.matieres_actives ?? []).includes("FR");
         const mathsActif = (profil.matieres_actives ?? []).includes("MA");
-        const [progress_, sources, fr, geo, don] = await Promise.all([
+        const [progress_, sources, fr, geo, don, maitresse] = await Promise.all([
           getProgressionDetail(profil.id),
           getExercicesCalcul(),
           francaisActif ? getFrancais() : Promise.resolve({ competences: [], sources: [] }),
@@ -1254,7 +1258,16 @@ export function Session({
           // Tableaux et graphiques (phase 4) : sources d'exercices (matiere MA).
           // Les competences MA.DONNEES.* sont deja dans referentiel.competences.
           mathsActif ? getDonnees() : Promise.resolve([]),
+          // Les mots de la maitresse (phase 6) : listes actives du foyer.
+          francaisActif ? getMaitresse(profil.id) : Promise.resolve([]),
         ]);
+        if (alive) setMaitresseBank(maitresse);
+        // Le domaine `mots-maitresse` n'est propose QUE s'il existe au moins une
+        // liste active (sinon invisible, non compte dans le garde-fou). On le
+        // retire des domaines effectifs quand la banque est vide.
+        const domainesEffectifs = (profil.domaines_actifs ?? []).filter(
+          (d) => d !== "mots-maitresse" || maitresse.length > 0,
+        );
         const ctx = { hero: profil.surnom, univers: profil.univers };
         const plan = composeSession({
           competences: [...referentiel.competences, ...fr.competences],
@@ -1266,7 +1279,7 @@ export function Session({
           classe: profil.classe,
           ctx,
           matieres: profil.matieres_actives,
-          domaines: profil.domaines_actifs,
+          domaines: domainesEffectifs,
         });
         placement.current = {};
         for (const p of progress_) placement.current[p.competence] = p.placement_termine;
@@ -1303,6 +1316,8 @@ export function Session({
     if (!(profil.matieres_actives ?? []).includes("FR")) return;
     let alive = true;
     getDicteeTextes().then((b) => alive && setDicteeBank(b)).catch(() => {});
+    // Banque « mots de la maitresse » (listes actives du foyer), aussi a la reprise.
+    getMaitresse(profil.id).then((b) => alive && setMaitresseBank(b)).catch(() => {});
     // Contexte de ciblage PAR NIVEAU (ordre des notions, maitrise, lacunes, textes
     // vus ; aucune date). Repli silencieux : si echec, la dictee reste jouable.
     getDicteeContexte(profil.id)
@@ -1538,6 +1553,59 @@ export function Session({
         }
         void relire();
         return { correct: res.correct };
+      } catch (e) {
+        if (plafondCode(e)) {
+          setLimite("Pause ! Reviens un peu plus tard.");
+          return null;
+        }
+        enqueueReponse(row);
+        return null;
+      }
+    },
+    [ex, slot, profil, relire, onProfilChange]
+  );
+
+  // LES MOTS DE LA MAITRESSE (ops 'mmots' / 'mtrou' / 'mdictee', phase 6) : le
+  // composant <MaitresseExo> soumet l'id de liste (cle), l'index du mot (a) et la
+  // saisie (mot) ou, pour la dictee, les positions touchees. Le serveur est seul
+  // juge. Memes garde-fous que la dictee (plafond -> pause, hors-ligne -> file).
+  const soumettreMaitresse = useCallback(
+    async (p: MaitresseSubmit): Promise<{ correct: boolean; dictee?: DicteeResultat | null } | null> => {
+      if (!ex || !slot) return null;
+      const row: ReponseInsert = {
+        id: uuid(),
+        profil_id: profil.id,
+        seance_id: seanceId.current,
+        competence: ex.competence,
+        exercice_id: slot.source.exerciceId,
+        niveau: p.niveau,
+        methode: ex.methode,
+        op: p.op,
+        a: p.index ?? 0,
+        b: 0,
+        op2: null,
+        c: null,
+        cle: p.listeId, // transmis au serveur dans p_op2 (id de la liste)
+        dictee: p.dictee ?? null,
+        reponse: 0,
+        reste: null,
+        reponse_texte: p.reponseTexte ?? null,
+        type_faute: null,
+        fields: 1,
+        temps_ms: Date.now() - questionStart.current,
+        correction_lue: true,
+        rattrapage: ex.rattrapage,
+        placement: !placement.current[ex.competence],
+        repondu_le: new Date().toISOString(),
+      };
+      try {
+        const res = await insertReponse(row);
+        if (res.monnaie != null) {
+          setMonnaie(res.monnaie);
+          onProfilChange({ ...profil, monnaie: res.monnaie });
+        }
+        void relire();
+        return { correct: res.correct, dictee: res.dictee ?? null };
       } catch (e) {
         if (plafondCode(e)) {
           setLimite("Pause ! Reviens un peu plus tard.");
@@ -1931,6 +1999,17 @@ export function Session({
             item={ex.comp}
             indice={indice}
             onSoumettre={soumettreGrammaire}
+            onContinuer={(correct) => advance(correct, true)}
+          />
+        ) : ex.saisie === "maitresse" && ex.maitresse ? (
+          <MaitresseExo
+            key={ex.key}
+            bank={maitresseBank}
+            competence={ex.competence}
+            niveau={ex.maitresse.niveau}
+            exKey={ex.key}
+            indice={indice}
+            onSoumettre={soumettreMaitresse}
             onContinuer={(correct) => advance(correct, true)}
           />
         ) : (
