@@ -1,19 +1,24 @@
 // Geometrie et reperage (maths, CE2). Composant AUTONOME, rendu dans Session.tsx
-// quand ex.saisie === "geometrie". Il dessine une FIGURE SVG tactile (figures
-// planes, solides, quadrillage, plan) et gere quatre formats de reponse :
-//   - qcm    : propositions en gros boutons (la figure sert de contexte) ;
-//   - clic   : on touche une figure (parmi plusieurs), une case ou un sommet ;
-//   - texte  : saisie LIBRE (N4), l'enfant tape un nom ou un code de case ;
-//   - grille : coloriage de cases (symetrie axiale) ou placement d'un point sur
-//              un noeud (quadrillage).
+// quand ex.saisie === "geometrie". Il dessine une FIGURE SVG tactile et gere
+// plusieurs formats de reponse :
+//   - qcm        : propositions en gros boutons (la figure sert de contexte) ;
+//   - clic       : on touche une figure, une case ou un sommet ; en mode
+//                  « programmation », on lit un programme et on touche l'arrivee ;
+//   - texte      : saisie LIBRE (N4), l'enfant tape un nom ou un code de case ;
+//   - grille     : coloriage de cases (symetrie) ou placement d'un point (noeud) ;
+//   - construire : quadrillage de NOEUDS aimante ; l'enfant touche les noeuds
+//                  pour placer les sommets, les segments se tracent tout seuls ;
+//   - programme  : l'enfant ASSEMBLE des cartes (« avance », « tourne a droite »,
+//                  « tourne a gauche ») pour amener un robot jusqu'a la cible.
 // Toutes les cibles tactiles font au moins 44 px. Le SERVEUR (verif_geo, op
-// 'geo') reste SEUL JUGE : onSoumettre renvoie le verdict serveur ; `attendu` ne
-// sert qu'au feedback (surlignage) et au mode demo. Feedback TOUJOURS valorisant.
+// 'geo') reste SEUL JUGE : onSoumettre renvoie le verdict serveur ; pour
+// construire/programme la saisie est un JSON (sommets / cartes) juge par
+// proprietes/simulation. Feedback TOUJOURS valorisant.
 
 import { useMemo, useState } from "react";
-import { Check, RotateCcw } from "lucide-react";
-import type { GeoRender, GeoShape, GeoGridSpec, SolidName } from "../domain/geometrie/geometrie";
-import { canonCells, comparerGeometrie } from "../domain/geometrie/geometrie";
+import { Check, RotateCcw, Undo2, Play } from "lucide-react";
+import type { GeoRender, GeoShape, GeoGridSpec, SolidName, Dir, ProgToken } from "../domain/geometrie/geometrie";
+import { canonCells, comparerGeometrie, simulerProgramme } from "../domain/geometrie/geometrie";
 
 interface Props {
   item: GeoRender;
@@ -25,6 +30,13 @@ const COLS = "ABCDEFGH";
 function codeOf(col: number, row: number): string {
   return `${COLS[col]}${row}`;
 }
+
+// Cartes de programme affichees EN TOUTES LETTRES (jamais de fleche ni de symbole).
+const PROG_LABEL: Record<ProgToken, string> = {
+  avance: "avance",
+  droite: "tourne à droite",
+  gauche: "tourne à gauche",
+};
 
 // --------------------------------------------------------------------------
 // Rendu d'une figure « formes » (polygones, cercles, segments, points) et des
@@ -167,17 +179,21 @@ function SolidView({ solid }: { solid: SolidName }) {
 
 // --------------------------------------------------------------------------
 // Rendu d'une grille (quadrillage) : cases coloriees, axe de symetrie, depart,
-// marques (plan), cases/noeuds cliquables.
+// obstacles, robot, cible, marques (plan), cases/noeuds cliquables.
 // --------------------------------------------------------------------------
 const S = 14; // taille d'une case (unites SVG) -> cibles larges une fois affichees
 
 function GridView({
-  spec, mode, colored, selectedCell, onToggleCell, onPickCell, onPickNode,
+  spec, mode, colored, selectedCell, robot, goal, obstacles,
+  onToggleCell, onPickCell, onPickNode,
 }: {
   spec: GeoGridSpec;
   mode: "none" | "color" | "point" | "clickCell";
-  colored: string[]; // cases coloriees par l'enfant (color)
-  selectedCell: string | null; // case/noeud selectionne (clic / point)
+  colored: string[];
+  selectedCell: string | null;
+  robot?: { cell: string; dir: Dir } | null;
+  goal?: string | null; // case cible (programmation) affichee en vert
+  obstacles?: string[];
   onToggleCell: (code: string) => void;
   onPickCell: (code: string) => void;
   onPickNode: (code: string) => void;
@@ -194,6 +210,8 @@ function GridView({
 
   const prefilled = new Set(fill.map((c) => c.toUpperCase()));
   const coloredSet = new Set(colored.map((c) => c.toUpperCase()));
+  const obstSet = new Set((obstacles ?? []).map((c) => c.toUpperCase()));
+  const goalUp = goal ? goal.toUpperCase() : null;
 
   const cellsEls: React.ReactNode[] = [];
   for (let col = 0; col < cols; col++) {
@@ -206,16 +224,20 @@ function GridView({
       const isSelected = selectedCell === code;
       const isStart = start && start.toUpperCase() === code;
       const isTarget = target && target.toUpperCase() === code;
+      const isGoal = goalUp === code;
+      const isObst = obstSet.has(code);
       let f = "transparent";
-      if (isPrefilled || isColored) f = "var(--kk-accent)";
+      if (isObst) f = "var(--kk-text)";
+      else if (isPrefilled || isColored) f = "var(--kk-accent)";
       else if (isSelected) f = "var(--kk-accent)";
-      else if (isTarget) f = "#16a34a";
+      else if (isGoal || isTarget) f = "#16a34a";
       const clickable = mode === "color" ? !isPrefilled : mode === "clickCell";
       cellsEls.push(
         <rect
           key={code}
           x={x} y={y} width={S} height={S}
-          fill={f} fillOpacity={isColored || isSelected ? 0.85 : isPrefilled ? 0.6 : isTarget ? 0.4 : 1}
+          fill={f}
+          fillOpacity={isObst ? 0.55 : isColored || isSelected ? 0.85 : isPrefilled ? 0.6 : isGoal || isTarget ? 0.4 : 1}
           stroke="var(--kk-border)" strokeWidth={1.2}
           style={clickable ? { cursor: "pointer" } : undefined}
           onClick={clickable ? () => (mode === "color" ? onToggleCell(code) : onPickCell(code)) : undefined}
@@ -228,9 +250,10 @@ function GridView({
           <text key={`${code}-mk`} x={x + S / 2} y={y + S / 2 + 3} textAnchor="middle" fontSize={S * 0.42} fontWeight={700} fill="var(--kk-text)">{mk.text}</text>
         );
       }
-      if (isStart) {
+      // Marqueur « depart » seulement si le robot n'est pas dessine ici.
+      if (isStart && !robot) {
         cellsEls.push(
-          <text key={`${code}-st`} x={x + S / 2} y={y + S / 2 + 3} textAnchor="middle" fontSize={S * 0.42} fontWeight={700} fill="var(--kk-on-accent)">départ</text>
+          <text key={`${code}-st`} x={x + S / 2} y={y + S / 2 + 3} textAnchor="middle" fontSize={S * 0.36} fontWeight={700} fill="var(--kk-on-accent)">départ</text>
         );
       }
     }
@@ -258,8 +281,28 @@ function GridView({
       const x = cellX(axis.at);
       axisEl = <line x1={x} y1={0} x2={x} y2={rows * S} stroke="#E06A00" strokeWidth={3} strokeDasharray="5 3" />;
     } else {
-      const y = cellYTop(axis.at); // ligne du haut de la case `at` = trait entre at et at+1
+      const y = cellYTop(axis.at);
       axisEl = <line x1={LEFT * S} y1={y} x2={(LEFT + cols) * S} y2={y} stroke="#E06A00" strokeWidth={3} strokeDasharray="5 3" />;
+    }
+  }
+
+  // Robot (programmation) : rond + petit « nez » du cote ou il regarde.
+  let robotEl: React.ReactNode = null;
+  if (robot) {
+    const up = robot.cell.toUpperCase();
+    const rc = up.charCodeAt(0) - 65;
+    const rr = parseInt(up.slice(1), 10);
+    if (rc >= 0 && rc < cols && rr >= 1 && rr <= rows) {
+      const cxp = cellX(rc) + S / 2;
+      const cyp = cellYTop(rr) + S / 2;
+      const nz = S * 0.32;
+      const nose = robot.dir === "N" ? [0, -nz] : robot.dir === "S" ? [0, nz] : robot.dir === "E" ? [nz, 0] : [-nz, 0];
+      robotEl = (
+        <g>
+          <circle cx={cxp} cy={cyp} r={S * 0.34} fill="var(--kk-accent)" stroke="var(--kk-text)" strokeWidth={1.2} />
+          <circle cx={cxp + nose[0]} cy={cyp + nose[1]} r={S * 0.1} fill="var(--kk-text)" />
+        </g>
+      );
     }
   }
 
@@ -282,14 +325,73 @@ function GridView({
     }
   }
 
-  const px = Math.min(360, Math.max(220, W * 6));
+  const px = Math.min(360, Math.max(240, W * 7));
   return (
     <div className="kk-support kk-geo__grid">
       <svg width="100%" style={{ maxWidth: px }} viewBox={`0 0 ${W} ${H}`} role="img" aria-label="quadrillage">
         {axisEl}
         {cellsEls}
         {nodeEls}
+        {robotEl}
         {labels}
+      </svg>
+    </div>
+  );
+}
+
+// --------------------------------------------------------------------------
+// Construction sur quadrillage de NOEUDS aimante (format 'construire'). L'enfant
+// touche les noeuds ; les segments relient les sommets dans l'ordre ; au-dela de
+// deux sommets, un trait en pointilles ferme la figure.
+// --------------------------------------------------------------------------
+function BuildView({
+  cols, rows, vertices, onPick, locked,
+}: {
+  cols: number; rows: number; vertices: Array<[number, number]>; onPick: (p: [number, number]) => void; locked: boolean;
+}) {
+  const U = 12;
+  const P = 10;
+  const Wv = cols * U + 2 * P;
+  const Hv = rows * U + 2 * P;
+  const sx = (x: number) => P + x * U;
+  const sy = (y: number) => P + (rows - y) * U;
+
+  const lines: React.ReactNode[] = [];
+  for (let x = 0; x <= cols; x++) {
+    lines.push(<line key={`vx${x}`} x1={sx(x)} y1={sy(0)} x2={sx(x)} y2={sy(rows)} stroke="var(--kk-border)" strokeWidth={0.8} />);
+  }
+  for (let y = 0; y <= rows; y++) {
+    lines.push(<line key={`hy${y}`} x1={sx(0)} y1={sy(y)} x2={sx(cols)} y2={sy(y)} stroke="var(--kk-border)" strokeWidth={0.8} />);
+  }
+
+  const poly = vertices.map(([x, y]) => `${sx(x)},${sy(y)}`).join(" ");
+
+  const nodeEls: React.ReactNode[] = [];
+  for (let x = 0; x <= cols; x++) {
+    for (let y = 0; y <= rows; y++) {
+      const idx = vertices.findIndex(([vx, vy]) => vx === x && vy === y);
+      const placed = idx >= 0;
+      nodeEls.push(
+        <g key={`n${x}-${y}`} style={locked ? undefined : { cursor: "pointer" }} onClick={locked ? undefined : () => onPick([x, y])}>
+          <circle cx={sx(x)} cy={sy(y)} r={U * 0.5} fill="transparent" />
+          <circle cx={sx(x)} cy={sy(y)} r={placed ? U * 0.26 : U * 0.14} fill={placed ? "var(--kk-accent)" : "var(--kk-border)"} />
+        </g>
+      );
+    }
+  }
+
+  const px = Math.min(380, Math.max(260, (cols + 1) * 46));
+  return (
+    <div className="kk-support kk-geo__grid">
+      <svg width="100%" style={{ maxWidth: px }} viewBox={`0 0 ${Wv} ${Hv}`} role="img" aria-label="quadrillage à construire">
+        {lines}
+        {vertices.length >= 3 && (
+          <polygon points={poly} fill="var(--kk-accent)" fillOpacity={0.14} stroke="var(--kk-accent)" strokeWidth={2} />
+        )}
+        {vertices.length === 2 && (
+          <polyline points={poly} fill="none" stroke="var(--kk-accent)" strokeWidth={2} strokeLinecap="round" />
+        )}
+        {nodeEls}
       </svg>
     </div>
   );
@@ -299,6 +401,9 @@ export default function Geometrie({ item, onSoumettre, onContinuer }: Props) {
   const [choix, setChoix] = useState<string | null>(null); // qcm / clic / point
   const [colored, setColored] = useState<string[]>([]); // grille color
   const [saisie, setSaisie] = useState(""); // texte
+  const [vertices, setVertices] = useState<Array<[number, number]>>([]); // construire
+  const [tokens, setTokens] = useState<ProgToken[]>([]); // programme
+  const [robotCell, setRobotCell] = useState<string | null>(null); // apercu du robot
   const [busy, setBusy] = useState(false);
   const [res, setRes] = useState<{ correct: boolean } | null>(null);
   const [erreurReseau, setErreurReseau] = useState(false);
@@ -306,15 +411,20 @@ export default function Geometrie({ item, onSoumettre, onContinuer }: Props) {
   const isColor = item.format === "grille" && item.interact === "color";
   const isPoint = item.format === "grille" && item.interact === "point";
   const gridClic = item.format === "clic" && item.figure.kind === "grid";
+  const isConstruire = item.format === "construire" && item.figure.kind === "build";
+  const isProgramme = item.format === "programme" && item.figure.kind === "grid";
+  const grid = item.figure.kind === "grid" ? item.figure.grid : null;
+  const programAffiche = grid?.program ?? null; // programme a LIRE (clic)
 
   // Reponse courante (texte envoye au serveur) selon le format.
   const reponse = useMemo(() => {
     if (item.format === "qcm") return choix ?? "";
     if (item.format === "texte") return saisie;
     if (isColor) return canonCells(colored);
-    // clic (figure ou grille) / point : la valeur choisie.
-    return choix ?? "";
-  }, [item.format, isColor, choix, saisie, colored]);
+    if (isConstruire) return vertices.length >= 2 ? JSON.stringify(vertices) : "";
+    if (isProgramme) return tokens.length >= 1 ? JSON.stringify(tokens) : "";
+    return choix ?? ""; // clic (figure ou grille) / point
+  }, [item.format, isColor, isConstruire, isProgramme, choix, saisie, colored, vertices, tokens]);
 
   const peutValider = reponse.trim().length > 0 && !res && !busy;
 
@@ -337,7 +447,27 @@ export default function Geometrie({ item, onSoumettre, onContinuer }: Props) {
     setColored((prev) => (prev.includes(code) ? prev.filter((c) => c !== code) : [...prev, code]));
   };
 
-  // Figure (surlignee apres coup pour la correction).
+  const pickNode = (p: [number, number]) => {
+    if (res) return;
+    setVertices((prev) => [...prev, p]);
+  };
+
+  const addToken = (t: ProgToken) => {
+    if (res) return;
+    setRobotCell(null);
+    setTokens((prev) => [...prev, t]);
+  };
+
+  // Apercu local du deplacement (le serveur reste seul juge).
+  const essayer = () => {
+    if (!grid || tokens.length === 0) return;
+    const arr = simulerProgramme(
+      { cols: grid.cols, rows: grid.rows, start: grid.start ?? "A1", dir: grid.dir ?? "N", target: grid.target ?? "A1", obstacles: grid.obstacles ?? [] },
+      tokens,
+    );
+    setRobotCell(arr ?? grid.start ?? null);
+  };
+
   const fig = item.figure;
   const gridMode: "none" | "color" | "point" | "clickCell" = isColor
     ? "color"
@@ -347,9 +477,23 @@ export default function Geometrie({ item, onSoumettre, onContinuer }: Props) {
         ? "clickCell"
         : "none";
 
+  // Robot a afficher : apercu si demande, sinon au depart (lecture / assemblage).
+  const robotAffiche: { cell: string; dir: Dir } | null = grid && (isProgramme || programAffiche)
+    ? { cell: robotCell ?? grid.start ?? "A1", dir: grid.dir ?? "N" }
+    : null;
+
   return (
     <div className="kk-stack kk-geo">
       <p className="kk-lead" style={{ textAlign: "center", margin: "0 auto" }}>{item.consigne}</p>
+
+      {/* Programme a LIRE : cartes affichees en toutes lettres. */}
+      {programAffiche && (
+        <div className="kk-geo__cards" role="list" aria-label="programme à lire">
+          {programAffiche.map((t, i) => (
+            <span key={i} role="listitem" className="kk-chip">{i + 1}. {PROG_LABEL[t]}</span>
+          ))}
+        </div>
+      )}
 
       {/* Figure */}
       {fig.kind === "solid" && <SolidView solid={fig.solid} />}
@@ -368,16 +512,66 @@ export default function Geometrie({ item, onSoumettre, onContinuer }: Props) {
           </svg>
         </div>
       )}
+      {fig.kind === "build" && (
+        <BuildView cols={fig.cols} rows={fig.rows} vertices={vertices} onPick={pickNode} locked={Boolean(res)} />
+      )}
       {fig.kind === "grid" && (
         <GridView
           spec={res && (gridMode === "point" || gridMode === "clickCell") ? { ...fig.grid, target: item.attendu } : fig.grid}
           mode={res ? "none" : gridMode}
           colored={colored}
           selectedCell={choix}
+          robot={robotAffiche}
+          goal={isProgramme ? fig.grid.target ?? null : null}
+          obstacles={fig.grid.obstacles}
           onToggleCell={toggleCell}
           onPickCell={(c) => !res && setChoix(c)}
           onPickNode={(c) => !res && setChoix(c)}
         />
+      )}
+
+      {/* CONSTRUIRE : commandes annuler / effacer. */}
+      {isConstruire && !res && (
+        <div className="kk-row" style={{ justifyContent: "center", flexWrap: "wrap" }}>
+          <button type="button" className="kk-btn" disabled={vertices.length === 0} onClick={() => setVertices((p) => p.slice(0, -1))}>
+            <Undo2 size={18} aria-hidden="true" /> Annuler le dernier point
+          </button>
+          <button type="button" className="kk-btn" disabled={vertices.length === 0} onClick={() => setVertices([])}>
+            <RotateCcw size={18} aria-hidden="true" /> Tout effacer
+          </button>
+        </div>
+      )}
+
+      {/* PROGRAMME : cartes assemblees + boutons. */}
+      {isProgramme && (
+        <>
+          <div className="kk-geo__cards" role="list" aria-label="ton programme">
+            {tokens.length === 0 && <span className="kk-chip kk-chip--empty">Ton programme est vide</span>}
+            {tokens.map((t, i) => (
+              <span key={i} role="listitem" className="kk-chip">{i + 1}. {PROG_LABEL[t]}</span>
+            ))}
+          </div>
+          {!res && (
+            <>
+              <div className="kk-row" style={{ justifyContent: "center", flexWrap: "wrap" }}>
+                <button type="button" className="kk-btn kk-btn--accent" onClick={() => addToken("avance")}>avance</button>
+                <button type="button" className="kk-btn kk-btn--accent" onClick={() => addToken("gauche")}>tourne à gauche</button>
+                <button type="button" className="kk-btn kk-btn--accent" onClick={() => addToken("droite")}>tourne à droite</button>
+              </div>
+              <div className="kk-row" style={{ justifyContent: "center", flexWrap: "wrap" }}>
+                <button type="button" className="kk-btn" disabled={tokens.length === 0} onClick={essayer}>
+                  <Play size={18} aria-hidden="true" /> Essayer
+                </button>
+                <button type="button" className="kk-btn" disabled={tokens.length === 0} onClick={() => { setTokens((p) => p.slice(0, -1)); setRobotCell(null); }}>
+                  <Undo2 size={18} aria-hidden="true" /> Enlever la dernière carte
+                </button>
+                <button type="button" className="kk-btn" disabled={tokens.length === 0} onClick={() => { setTokens([]); setRobotCell(null); }}>
+                  <RotateCcw size={18} aria-hidden="true" /> Tout effacer
+                </button>
+              </div>
+            </>
+          )}
+        </>
       )}
 
       {/* QCM : gros boutons empiles. */}
@@ -418,15 +612,6 @@ export default function Geometrie({ item, onSoumettre, onContinuer }: Props) {
             autoCorrect="off"
             spellCheck={false}
           />
-        </div>
-      )}
-
-      {/* Coloriage : bouton pour tout effacer. */}
-      {isColor && !res && (
-        <div className="kk-row" style={{ justifyContent: "center" }}>
-          <button type="button" className="kk-btn" disabled={colored.length === 0} onClick={() => setColored([])}>
-            <RotateCcw size={18} aria-hidden="true" /> Tout effacer
-          </button>
         </div>
       )}
 

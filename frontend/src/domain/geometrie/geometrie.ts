@@ -43,10 +43,29 @@ import type { Base, GeneratedExercise, ExCalcul } from "../calcul/generator";
 // --------------------------------------------------------------------------
 // Schema d'une figure (dessinee par le composant <Geometrie>, viewBox 0..100).
 // --------------------------------------------------------------------------
-export type GeoFormat = "qcm" | "clic" | "texte" | "grille";
+export type GeoFormat = "qcm" | "clic" | "texte" | "grille" | "construire" | "programme";
 export type GeoInteract = "color" | "point"; // mode d'un exercice « grille »
 
 export type SolidName = "cube" | "pave" | "cylindre" | "sphere" | "pyramide" | "cone";
+
+// Orientation (programmation de deplacement type Blue-Bot) : Nord (haut), Est
+// (droite), Sud (bas), Ouest (gauche). Decrite ORALEMENT dans la consigne.
+export type Dir = "N" | "E" | "S" | "O";
+export type ProgToken = "avance" | "droite" | "gauche";
+
+// Contrat de verification PAR PROPRIETES (miroir de la colonne `spec` serveur).
+export type ConstruireSpec =
+  | { t: "seg"; len: number }
+  | { t: "rect"; w: number; h: number }
+  | { t: "tri_right" };
+export interface ProgrammeSpec {
+  cols: number;
+  rows: number;
+  start: string; // case de depart (ex. "A1")
+  dir: Dir; // orientation de depart
+  target: string; // case cible (ex. "C3")
+  obstacles: string[]; // cases infranchissables
+}
 
 export interface GeoShape {
   kind: "polygon" | "circle" | "segment" | "dot" | "right";
@@ -67,8 +86,11 @@ export interface GeoGridSpec {
   nodes?: boolean; // mode noeuds (placer un point sur une intersection)
   fill?: string[]; // cases deja coloriees (codes, ex. ["B3","C3"])
   axis?: { dir: "v" | "h"; at: number }; // axe de symetrie (v: entre colonnes at|at+1)
-  start?: string; // marqueur de depart (deplacements)
-  target?: string; // case/noeud mis en evidence (correction)
+  start?: string; // marqueur de depart (deplacements / robot)
+  dir?: Dir; // orientation du robot (programmation)
+  obstacles?: string[]; // cases infranchissables (programmation)
+  program?: ProgToken[]; // programme a LIRE (affiche en toutes lettres)
+  target?: string; // case/noeud mis en evidence (cible / correction)
   marks?: Array<{ cell: string; text: string }>; // objets d'un plan / etiquettes
 }
 
@@ -76,6 +98,7 @@ export type GeoFigure =
   | { kind: "shapes"; shapes: GeoShape[] }
   | { kind: "solid"; solid: SolidName }
   | { kind: "grid"; grid: GeoGridSpec }
+  | { kind: "build"; cols: number; rows: number } // quadrillage de noeuds aimante (construction)
   | { kind: "none" };
 
 export interface GeoItem {
@@ -89,6 +112,7 @@ export interface GeoItem {
   explication: string; // correction courte et valorisante, avec un exemple
   figure: GeoFigure; // schema dessine par le composant
   interact?: GeoInteract; // mode « grille » : colorier (symetrie) ou placer un point
+  spec?: ConstruireSpec | ProgrammeSpec; // contrat de verification par proprietes (construire / programme)
 }
 
 // Donnees de RENDU (ce que l'exercice porte et que <Geometrie> affiche) : tout
@@ -121,6 +145,94 @@ export function canonCells(codes: string[]): string {
 }
 
 // --------------------------------------------------------------------------
+// Verification PAR PROPRIETES (miroir EXACT de verif_geo_construire /
+// verif_geo_programme cote serveur). Coordonnees ENTIERES de noeuds -> tout en
+// arithmetique exacte (aucun flottant). Sert au mode demo, au feedback local et
+// aux tests golden ; le SERVEUR reste seul juge en production.
+// --------------------------------------------------------------------------
+type Pt = [number, number];
+
+// Decode "A1" -> { col: 0, row: 1 } (col = lettre - A, row = numero).
+export function cellColRow(code: string): { col: number; row: number } {
+  const up = code.trim().toUpperCase();
+  return { col: up.charCodeAt(0) - 65, row: parseInt(up.slice(1), 10) };
+}
+
+export function verifConstruire(spec: ConstruireSpec, pts: Pt[]): boolean {
+  if (!Array.isArray(pts)) return false;
+  if (spec.t === "seg") {
+    if (pts.length !== 2) return false;
+    const [x0, y0] = pts[0];
+    const [x1, y1] = pts[1];
+    return (x0 === x1 && Math.abs(y1 - y0) === spec.len) || (y0 === y1 && Math.abs(x1 - x0) === spec.len);
+  }
+  if (spec.t === "rect") {
+    if (pts.length !== 4) return false;
+    const [[x0, y0], [x1, y1], [x2, y2], [x3, y3]] = pts;
+    const ax = x1 - x0, ay = y1 - y0;
+    const bx = x2 - x1, by = y2 - y1;
+    const cx = x3 - x2, cy = y3 - y2;
+    const dx = x0 - x3, dy = y0 - y3;
+    if (ax * bx + ay * by !== 0) return false;
+    if (bx * cx + by * cy !== 0) return false;
+    if (cx * dx + cy * dy !== 0) return false;
+    if (dx * ax + dy * ay !== 0) return false;
+    const s0 = ax * ax + ay * ay;
+    const s1 = bx * bx + by * by;
+    if (s0 === 0 || s1 === 0) return false;
+    const { w, h } = spec;
+    return (s0 === w * w && s1 === h * h) || (s0 === h * h && s1 === w * w);
+  }
+  if (spec.t === "tri_right") {
+    if (pts.length !== 3) return false;
+    const [[x0, y0], [x1, y1], [x2, y2]] = pts;
+    if ((x1 - x0) * (y2 - y0) - (y1 - y0) * (x2 - x0) === 0) return false; // degenere
+    if ((x1 - x0) * (x2 - x0) + (y1 - y0) * (y2 - y0) === 0) return true;
+    if ((x0 - x1) * (x2 - x1) + (y0 - y1) * (y2 - y1) === 0) return true;
+    if ((x0 - x2) * (x1 - x2) + (y0 - y2) * (y1 - y2) === 0) return true;
+    return false;
+  }
+  return false;
+}
+
+const TURN_RIGHT: Record<Dir, Dir> = { N: "E", E: "S", S: "O", O: "N" };
+const TURN_LEFT: Record<Dir, Dir> = { N: "O", O: "S", S: "E", E: "N" };
+
+// Simule le programme ; renvoie la case d'arrivee, ou null si sortie du
+// quadrillage ou heurt d'un obstacle (ou carte inconnue).
+export function simulerProgramme(spec: ProgrammeSpec, tokens: ProgToken[]): string | null {
+  if (!Array.isArray(tokens) || tokens.length < 1 || tokens.length > 60) return null;
+  let { col, row } = cellColRow(spec.start);
+  let dir: Dir = spec.dir;
+  const obst = new Set(spec.obstacles.map((o) => o.toUpperCase()));
+  for (const tok of tokens) {
+    if (tok === "avance") {
+      let nc = col, nr = row;
+      if (dir === "N") nr = row + 1;
+      else if (dir === "S") nr = row - 1;
+      else if (dir === "E") nc = col + 1;
+      else if (dir === "O") nc = col - 1;
+      if (nc < 0 || nc > spec.cols - 1 || nr < 1 || nr > spec.rows) return null;
+      const code = `${String.fromCharCode(65 + nc)}${nr}`;
+      if (obst.has(code)) return null;
+      col = nc; row = nr;
+    } else if (tok === "droite") {
+      dir = TURN_RIGHT[dir];
+    } else if (tok === "gauche") {
+      dir = TURN_LEFT[dir];
+    } else {
+      return null;
+    }
+  }
+  return `${String.fromCharCode(65 + col)}${row}`;
+}
+
+export function verifProgramme(spec: ProgrammeSpec, tokens: ProgToken[]): boolean {
+  const arrivee = simulerProgramme(spec, tokens);
+  return arrivee != null && arrivee.toUpperCase() === spec.target.toUpperCase();
+}
+
+// --------------------------------------------------------------------------
 // Helpers de construction des figures (gardent la banque lisible).
 // --------------------------------------------------------------------------
 function square(cx: number, cy: number, s: number, extra: Partial<GeoShape> = {}): GeoShape {
@@ -141,9 +253,6 @@ function triRight(cx: number, cy: number, s: number, extra: Partial<GeoShape> = 
   const h = s / 2;
   return { kind: "polygon", pts: [[cx - h, cy - h], [cx - h, cy + h], [cx + h, cy + h]], ...extra };
 }
-function circle(cx: number, cy: number, r: number, extra: Partial<GeoShape> = {}): GeoShape {
-  return { kind: "circle", cx, cy, r, ...extra };
-}
 function dot(cx: number, cy: number, extra: Partial<GeoShape> = {}): GeoShape {
   return { kind: "dot", cx, cy, ...extra };
 }
@@ -151,70 +260,102 @@ function dot(cx: number, cy: number, extra: Partial<GeoShape> = {}): GeoShape {
 const shapes = (...s: GeoShape[]): GeoFigure => ({ kind: "shapes", shapes: s });
 const grid = (g: GeoGridSpec): GeoFigure => ({ kind: "grid", grid: g });
 const solid = (s: SolidName): GeoFigure => ({ kind: "solid", solid: s });
+const build = (cols: number, rows: number): GeoFigure => ({ kind: "build", cols, rows });
+
+// Construit un item « lire un programme » (format clic) : la grille affiche le
+// depart, l'orientation et le programme en toutes lettres ; l'enfant touche la
+// case d'arrivee. L'arrivee (`attendu`) est calculee par simulation -> toujours
+// coherente (verifiee par le test golden).
+function progLire(
+  cle: string, niveau: number, consigne: string,
+  g: GeoGridSpec, explication: string,
+): GeoItem {
+  const arrivee = simulerProgramme(
+    { cols: g.cols, rows: g.rows, start: g.start!, dir: g.dir!, target: "A1", obstacles: g.obstacles ?? [] },
+    g.program!,
+  );
+  return {
+    cle, competence: "MA.REPERE.PROGRAMMER", niveau, format: "clic", consigne,
+    attendu: arrivee ?? "", explication, figure: grid({ ...g, coded: true }),
+  };
+}
+
+// Construit un item « assembler un programme » (format programme) : la grille
+// montre depart, cible et obstacles ; l'enfant compose les cartes. Le `spec`
+// (juge serveur) et la figure partagent la meme source.
+function progEcrire(
+  cle: string, niveau: number, consigne: string,
+  spec: ProgrammeSpec, attenduSample: ProgToken[], explication: string,
+): GeoItem {
+  return {
+    cle, competence: "MA.REPERE.PROGRAMMER", niveau, format: "programme", consigne,
+    attendu: JSON.stringify(attenduSample), explication, spec,
+    figure: grid({
+      cols: spec.cols, rows: spec.rows, coded: true,
+      start: spec.start, dir: spec.dir, target: spec.target, obstacles: spec.obstacles,
+    }),
+  };
+}
+
+// Construit un item « construire une figure » (format construire).
+function con(
+  cle: string, niveau: number, consigne: string,
+  spec: ConstruireSpec, cols: number, rows: number,
+  attenduSample: Pt[], explication: string,
+): GeoItem {
+  return {
+    cle, competence: "MA.GEO.CONSTRUIRE", niveau, format: "construire", consigne,
+    attendu: JSON.stringify(attenduSample), explication, spec, figure: build(cols, rows),
+  };
+}
 
 // ==========================================================================
 // BANQUE
 // ==========================================================================
 export const BANQUE_GEOMETRIE: GeoItem[] = [
   // =======================================================================
-  // MA.GEO.FIGURES — reconnaitre et nommer les figures planes
+  // MA.GEO.FIGURES — DECRIRE les figures par leurs proprietes (devinettes)
+  //   N1 = court rappel « nommer » (CE1) ; N2..N4 = devinettes de proprietes
+  //   (cotes, sommets, angles droits). On NE demande plus « nomme la figure »
+  //   au-dela du rappel N1 : au CE2 l'enfant raisonne sur les proprietes.
   // =======================================================================
-  // N1 : QCM « quelle est cette figure ? » (une figure dessinee)
+  // N1 : rappel court — reconnaitre une figure dessinee
   { cle: "geo-fig-n1-carre", competence: "MA.GEO.FIGURES", niveau: 1, format: "qcm",
     consigne: "Quelle est cette figure ?", options: ["un carré", "un rectangle", "un triangle"],
     attendu: "un carré", figure: shapes(square(50, 50, 48, { fill: true })),
     explication: "Cette figure a quatre côtés de la même longueur et quatre coins bien droits : c'est un carré." },
-  { cle: "geo-fig-n1-rectangle", competence: "MA.GEO.FIGURES", niveau: 1, format: "qcm",
-    consigne: "Quelle est cette figure ?", options: ["un rectangle", "un carré", "un cercle"],
-    attendu: "un rectangle", figure: shapes(rect(50, 50, 72, 40, { fill: true })),
-    explication: "Cette figure a quatre coins droits, deux côtés longs et deux côtés courts : c'est un rectangle." },
   { cle: "geo-fig-n1-triangle", competence: "MA.GEO.FIGURES", niveau: 1, format: "qcm",
     consigne: "Quelle est cette figure ?", options: ["un triangle", "un carré", "un cercle"],
     attendu: "un triangle", figure: shapes(triangle(50, 52, 56, { fill: true })),
     explication: "Cette figure a trois côtés et trois coins : c'est un triangle." },
-  { cle: "geo-fig-n1-cercle", competence: "MA.GEO.FIGURES", niveau: 1, format: "qcm",
-    consigne: "Quelle est cette figure ?", options: ["un cercle", "un carré", "un triangle"],
-    attendu: "un cercle", figure: shapes(circle(50, 50, 30, { fill: true })),
-    explication: "Cette figure est toute ronde, sans aucun coin : c'est un cercle." },
-  // N2 : clic sur la bonne figure parmi trois
-  { cle: "geo-fig-n2-carre", competence: "MA.GEO.FIGURES", niveau: 2, format: "clic",
-    consigne: "Clique sur le carré.", attendu: "carré",
-    figure: shapes(circle(20, 50, 15, { name: "cercle" }), square(50, 50, 30, { name: "carré" }), triangle(82, 52, 30, { name: "triangle" })),
-    explication: "Le carré a quatre côtés de la même longueur. C'est celui du milieu." },
-  { cle: "geo-fig-n2-triangle", competence: "MA.GEO.FIGURES", niveau: 2, format: "clic",
-    consigne: "Clique sur le triangle.", attendu: "triangle",
-    figure: shapes(square(20, 50, 28, { name: "carré" }), triangle(50, 52, 30, { name: "triangle" }), circle(82, 50, 15, { name: "cercle" })),
-    explication: "Le triangle a trois côtés. C'est celui du milieu." },
-  { cle: "geo-fig-n2-cercle", competence: "MA.GEO.FIGURES", niveau: 2, format: "clic",
-    consigne: "Clique sur le cercle.", attendu: "cercle",
-    figure: shapes(triangle(20, 52, 30, { name: "triangle" }), rect(52, 50, 34, 24, { name: "rectangle" }), circle(84, 50, 15, { name: "cercle" })),
-    explication: "Le cercle est tout rond, sans coin. C'est celui de droite." },
-  // N3 : QCM — reconnaitre un triangle rectangle (un angle droit comme un coin de feuille)
-  { cle: "geo-fig-n3-trirect", competence: "MA.GEO.FIGURES", niveau: 3, format: "qcm",
-    consigne: "Ce triangle a-t-il un angle droit, comme le coin d'une feuille ?", options: ["oui", "non"],
-    attendu: "oui", figure: shapes(triRight(50, 50, 52, { fill: true }), { kind: "right", cx: 24, cy: 76 }),
-    explication: "Un de ses coins forme un angle droit, bien carré comme le coin d'une feuille. On dit un triangle rectangle." },
-  { cle: "geo-fig-n3-tri", competence: "MA.GEO.FIGURES", niveau: 3, format: "qcm",
-    consigne: "Ce triangle a-t-il un angle droit, comme le coin d'une feuille ?", options: ["non", "oui"],
-    attendu: "non", figure: shapes(triangle(50, 52, 56, { fill: true })),
-    explication: "Aucun de ses coins n'est bien carré : c'est un triangle ordinaire, pas un triangle rectangle." },
-  { cle: "geo-fig-n3-rect", competence: "MA.GEO.FIGURES", niveau: 3, format: "qcm",
-    consigne: "Quelle est cette figure ?", options: ["un rectangle", "un carré", "un triangle rectangle"],
-    attendu: "un rectangle", figure: shapes(rect(50, 50, 74, 38, { fill: true })),
-    explication: "Elle a quatre coins droits mais ses côtés ne sont pas tous égaux : c'est un rectangle." },
-  // N4 : reponse libre — ecrire le nom de la figure
-  { cle: "geo-fig-n4-carre", competence: "MA.GEO.FIGURES", niveau: 4, format: "texte",
-    consigne: "Écris le nom de cette figure.", attendu: "carré", figure: shapes(square(50, 50, 46, { fill: true })),
-    explication: "Quatre côtés égaux et quatre coins droits : c'est un carré." },
-  { cle: "geo-fig-n4-rectangle", competence: "MA.GEO.FIGURES", niveau: 4, format: "texte",
-    consigne: "Écris le nom de cette figure.", attendu: "rectangle", figure: shapes(rect(50, 50, 72, 40, { fill: true })),
-    explication: "Quatre coins droits, deux côtés longs et deux côtés courts : c'est un rectangle." },
-  { cle: "geo-fig-n4-triangle", competence: "MA.GEO.FIGURES", niveau: 4, format: "texte",
-    consigne: "Écris le nom de cette figure.", attendu: "triangle", figure: shapes(triangle(50, 52, 56, { fill: true })),
-    explication: "Trois côtés et trois coins : c'est un triangle." },
-  { cle: "geo-fig-n4-cercle", competence: "MA.GEO.FIGURES", niveau: 4, format: "texte",
-    consigne: "Écris le nom de cette figure.", attendu: "cercle", figure: shapes(circle(50, 50, 30, { fill: true })),
-    explication: "Tout rond, sans coin : c'est un cercle." },
+  // N2 : devinette simple (sans dessin) — on reconnait par le nombre de cotes
+  { cle: "geo-fig-n2-dev-triangle", competence: "MA.GEO.FIGURES", niveau: 2, format: "qcm",
+    consigne: "Je suis une figure. J'ai trois côtés et trois sommets. Qui suis-je ?",
+    options: ["un triangle", "un carré", "un cercle"], attendu: "un triangle", figure: { kind: "none" },
+    explication: "Trois côtés et trois sommets : c'est un triangle. Par exemple, un morceau de part de pizza a trois côtés." },
+  { cle: "geo-fig-n2-dev-cercle", competence: "MA.GEO.FIGURES", niveau: 2, format: "qcm",
+    consigne: "Je suis une figure. Je suis toute ronde et je n'ai aucun coin. Qui suis-je ?",
+    options: ["un cercle", "un carré", "un triangle"], attendu: "un cercle", figure: { kind: "none" },
+    explication: "Toute ronde, sans aucun coin : c'est un cercle. Par exemple, une assiette ronde a la forme d'un cercle." },
+  // N3 : proprietes du carre et difference carre / rectangle
+  { cle: "geo-fig-n3-dev-carre", competence: "MA.GEO.FIGURES", niveau: 3, format: "qcm",
+    consigne: "Je suis une figure. J'ai quatre côtés de la même longueur et quatre angles droits. Qui suis-je ?",
+    options: ["un carré", "un rectangle", "un triangle"], attendu: "un carré", figure: { kind: "none" },
+    explication: "Quatre côtés égaux et quatre angles droits : c'est un carré. Le rectangle, lui, n'a pas tous ses côtés égaux." },
+  { cle: "geo-fig-n3-pourquoi", competence: "MA.GEO.FIGURES", niveau: 3, format: "qcm",
+    consigne: "Regarde cette figure. Elle a quatre angles droits. Pourquoi n'est-ce pas un carré ?",
+    options: ["ses côtés ne sont pas tous égaux", "elle n'a pas d'angle droit", "elle a trois côtés"],
+    attendu: "ses côtés ne sont pas tous égaux", figure: shapes(rect(50, 50, 74, 38, { fill: true })),
+    explication: "Un carré a ses quatre côtés égaux. Ici, il y a deux côtés longs et deux côtés courts : c'est un rectangle, pas un carré." },
+  // N4 : proprietes plus fines (rectangle, triangle rectangle)
+  { cle: "geo-fig-n4-dev-rectangle", competence: "MA.GEO.FIGURES", niveau: 4, format: "qcm",
+    consigne: "Je suis une figure. J'ai quatre angles droits, mais mes côtés ne sont pas tous de la même longueur. Qui suis-je ?",
+    options: ["un rectangle", "un carré", "un triangle"], attendu: "un rectangle", figure: { kind: "none" },
+    explication: "Quatre angles droits mais des côtés de deux longueurs différentes : c'est un rectangle. Par exemple, une porte a la forme d'un rectangle." },
+  { cle: "geo-fig-n4-dev-trirect", competence: "MA.GEO.FIGURES", niveau: 4, format: "qcm",
+    consigne: "Je suis une figure. J'ai trois côtés, et l'un de mes coins est un angle droit comme le coin d'une feuille. Qui suis-je ?",
+    options: ["un triangle rectangle", "un carré", "un cercle"], attendu: "un triangle rectangle", figure: { kind: "none" },
+    explication: "Trois côtés et un angle droit : c'est un triangle rectangle. On peut vérifier l'angle droit avec l'équerre." },
 
   // =======================================================================
   // MA.GEO.VOCABULAIRE — cote, sommet, angle droit
@@ -471,6 +612,80 @@ export const BANQUE_GEOMETRIE: GeoItem[] = [
     consigne: "Sur ce plan, écris ce qu'il y a à gauche de la maison.",
     attendu: "l'arbre", figure: grid({ cols: 3, rows: 1, marks: [{ cell: "A1", text: "arbre" }, { cell: "B1", text: "maison" }, { cell: "C1", text: "garage" }] }),
     explication: "À gauche de la maison, juste à côté, il y a l'arbre." },
+
+  // =======================================================================
+  // MA.GEO.CONSTRUIRE — construire sur quadrillage aimante (toucher des noeuds)
+  //   N1 = tracer un segment ; N2 = carre guide ; N3 = rectangle ; N4 = triangle
+  //   rectangle / rectangle plus grand. Le serveur verifie les PROPRIETES
+  //   (longueurs, angles droits), toute position et toute orientation acceptees.
+  // =======================================================================
+  con("geo-con-n1-seg3", 1, "Touche deux nœuds pour tracer un trait droit de 3 carreaux de long.",
+    { t: "seg", len: 3 }, 6, 6, [[0, 0], [0, 3]],
+    "Un trait bien droit, long de trois carreaux. Tu peux le tracer vers le haut, vers le bas ou sur le côté."),
+  con("geo-con-n1-seg4", 1, "Touche deux nœuds pour tracer un trait droit de 4 carreaux de long.",
+    { t: "seg", len: 4 }, 6, 6, [[0, 0], [4, 0]],
+    "Un trait bien droit, long de quatre carreaux. Compte bien quatre carreaux entre les deux points."),
+  con("geo-con-n2-carre3", 2, "Construis un carré de 3 carreaux de côté. Touche les nœuds pour placer les quatre coins.",
+    { t: "rect", w: 3, h: 3 }, 6, 6, [[0, 0], [3, 0], [3, 3], [0, 3]],
+    "Un carré a ses quatre côtés égaux. Ici, chaque côté mesure trois carreaux et chaque coin est un angle droit."),
+  con("geo-con-n2-carre4", 2, "Construis un carré de 4 carreaux de côté. Touche les nœuds pour placer les quatre coins.",
+    { t: "rect", w: 4, h: 4 }, 6, 6, [[0, 0], [4, 0], [4, 4], [0, 4]],
+    "Un carré a ses quatre côtés égaux. Ici, chaque côté mesure quatre carreaux."),
+  con("geo-con-n3-rect53", 3, "Construis un rectangle de 5 carreaux sur 3. Touche les nœuds pour placer les quatre coins.",
+    { t: "rect", w: 5, h: 3 }, 7, 5, [[0, 0], [5, 0], [5, 3], [0, 3]],
+    "Le rectangle a deux côtés longs de cinq carreaux et deux côtés courts de trois carreaux, avec quatre angles droits."),
+  con("geo-con-n3-rect42", 3, "Construis un rectangle de 4 carreaux sur 2. Touche les nœuds pour placer les quatre coins.",
+    { t: "rect", w: 4, h: 2 }, 6, 5, [[0, 0], [4, 0], [4, 2], [0, 2]],
+    "Deux côtés longs de quatre carreaux, deux côtés courts de deux carreaux, et quatre angles droits : c'est un rectangle."),
+  con("geo-con-n4-trirect", 4, "Construis un triangle qui a un angle droit, comme le coin d'une feuille.",
+    { t: "tri_right" }, 6, 6, [[0, 0], [3, 0], [0, 3]],
+    "Un triangle rectangle a trois côtés et un coin bien carré. Par exemple, pars d'un coin, va tout droit, puis remonte."),
+  con("geo-con-n4-rect63", 4, "Construis un rectangle de 6 carreaux sur 3. Touche les nœuds pour placer les quatre coins.",
+    { t: "rect", w: 6, h: 3 }, 8, 5, [[0, 0], [6, 0], [6, 3], [0, 3]],
+    "Deux côtés longs de six carreaux, deux côtés courts de trois carreaux, et quatre angles droits : c'est un rectangle."),
+
+  // =======================================================================
+  // MA.REPERE.PROGRAMMER — programmer un deplacement (type Blue-Bot)
+  //   N1/N2 = LIRE un programme et toucher la case d'arrivee (clic) ;
+  //   N3/N4 = ASSEMBLER un programme pour atteindre une cible (N4 : en evitant
+  //   des obstacles). Le serveur SIMULE le deplacement.
+  // =======================================================================
+  progLire("geo-prog-n1-a", 1,
+    "Le robot est sur la case B1 et il regarde vers le haut. Il suit son programme. Clique sur la case où il arrive.",
+    { cols: 4, rows: 4, start: "B1", dir: "N", program: ["avance", "avance"] },
+    "Le robot regarde vers le haut. Il avance de deux cases : de B1 à B2, puis à B3. Il arrive sur la case B3."),
+  progLire("geo-prog-n1-b", 1,
+    "Le robot est sur la case C1 et il regarde vers le haut. Il suit son programme. Clique sur la case où il arrive.",
+    { cols: 4, rows: 4, start: "C1", dir: "N", program: ["avance", "avance", "avance"] },
+    "Le robot avance de trois cases vers le haut : de C1 à C2, C3, puis C4. Il arrive sur la case C4."),
+  progLire("geo-prog-n2-a", 2,
+    "Le robot est sur la case A1 et il regarde vers le haut. Il suit son programme. Clique sur la case où il arrive.",
+    { cols: 5, rows: 5, start: "A1", dir: "N", program: ["avance", "avance", "droite", "avance"] },
+    "Il avance deux fois vers le haut (A1, A2, A3), puis tourne à droite : il regarde maintenant vers la droite. Il avance d'une case et arrive en B3."),
+  progLire("geo-prog-n2-b", 2,
+    "Le robot est sur la case A1 et il regarde vers la droite. Il suit son programme. Clique sur la case où il arrive.",
+    { cols: 5, rows: 5, start: "A1", dir: "E", program: ["avance", "avance", "gauche", "avance"] },
+    "Il avance deux fois vers la droite (A1, B1, C1), puis tourne à gauche : il regarde vers le haut. Il avance d'une case et arrive en C2."),
+  progEcrire("geo-prog-n3-a", 3,
+    "Le robot est sur la case A1 et il regarde vers le haut. Assemble un programme pour l'amener jusqu'à la case verte.",
+    { cols: 5, rows: 5, start: "A1", dir: "N", target: "C3", obstacles: [] },
+    ["avance", "avance", "droite", "avance", "avance"],
+    "Une solution : avance, avance (jusqu'en A3), tourne à droite, puis avance, avance pour arriver en C3."),
+  progEcrire("geo-prog-n3-b", 3,
+    "Le robot est sur la case A1 et il regarde vers la droite. Assemble un programme pour l'amener jusqu'à la case verte.",
+    { cols: 5, rows: 5, start: "A1", dir: "E", target: "D2", obstacles: [] },
+    ["avance", "avance", "avance", "gauche", "avance"],
+    "Une solution : avance trois fois (jusqu'en D1), tourne à gauche, puis avance une fois pour arriver en D2."),
+  progEcrire("geo-prog-n4-a", 4,
+    "Le robot est sur la case A1 et il regarde vers le haut. Assemble un programme pour atteindre la case verte en évitant les cases grises.",
+    { cols: 5, rows: 5, start: "A1", dir: "N", target: "E5", obstacles: ["C3", "C4", "D3"] },
+    ["avance", "avance", "avance", "avance", "droite", "avance", "avance", "avance", "avance"],
+    "Une solution : monte tout en haut (jusqu'en A5), tourne à droite, puis longe le haut jusqu'en E5. Tu passes loin des cases grises."),
+  progEcrire("geo-prog-n4-b", 4,
+    "Le robot est sur la case A1 et il regarde vers le haut. Assemble un programme pour atteindre la case verte en évitant les cases grises.",
+    { cols: 5, rows: 5, start: "A1", dir: "N", target: "E3", obstacles: ["C1", "C2", "D2"] },
+    ["avance", "avance", "droite", "avance", "avance", "avance", "avance"],
+    "Une solution : avance deux fois (jusqu'en A3), tourne à droite, puis avance jusqu'en E3. Tu passes au-dessus des cases grises."),
 ];
 
 // Competences par sous-matiere (ordre d'affichage = ordre du referentiel).
@@ -479,11 +694,13 @@ export const COMPETENCES_GEOMETRIE = [
   "MA.GEO.VOCABULAIRE",
   "MA.GEO.SOLIDES",
   "MA.GEO.SYMETRIE",
+  "MA.GEO.CONSTRUIRE",
 ] as const;
 export const COMPETENCES_REPERE = [
   "MA.REPERE.QUADRILLAGE",
   "MA.REPERE.DEPLACEMENTS",
   "MA.REPERE.PLAN",
+  "MA.REPERE.PROGRAMMER",
 ] as const;
 export const COMPETENCES_GEO_TOUTES = [...COMPETENCES_GEOMETRIE, ...COMPETENCES_REPERE] as const;
 
@@ -492,10 +709,26 @@ export function itemsGeoDe(competence: string, niveau: number): GeoItem[] {
   return BANQUE_GEOMETRIE.filter((i) => i.competence === competence && i.niveau === niveau);
 }
 
-// Juge local (mode demo + feedback immediat) : miroir exact du serveur.
+// Juge local (mode demo + feedback immediat) : miroir exact du serveur. Pour les
+// formats juges par proprietes (construire / programme), la saisie est un JSON
+// (liste de sommets ou de cartes) compare au `spec` de l'item.
 export function estJusteGeometrie(cle: string, saisie: string): boolean {
   const item = BANQUE_GEOMETRIE.find((i) => i.cle === cle);
   if (!item) return false;
+  if (item.format === "construire") {
+    try {
+      return verifConstruire(item.spec as ConstruireSpec, JSON.parse(saisie) as Pt[]);
+    } catch {
+      return false;
+    }
+  }
+  if (item.format === "programme") {
+    try {
+      return verifProgramme(item.spec as ProgrammeSpec, JSON.parse(saisie) as ProgToken[]);
+    } catch {
+      return false;
+    }
+  }
   return comparerGeometrie(item.format, saisie, item.attendu);
 }
 

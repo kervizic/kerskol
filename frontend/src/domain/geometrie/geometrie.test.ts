@@ -1,6 +1,6 @@
 // Tests de la banque de GEOMETRIE / REPERAGE (maths, CE2) et du generateur.
 //
-// Le nombre d'items (66) et les cles sont un GOLDEN : le test croise SQL
+// Le nombre d'items (76) et les cles sont un GOLDEN : le test croise SQL
 // (supabase/tests/geometrie_test.sql) verifie que public.geometrie_item porte
 // EXACTEMENT les memes cles et le meme `attendu`. Si ce nombre change, il faut
 // mettre a jour la migration ET le test SQL (sinon front != serveur).
@@ -14,11 +14,15 @@ import {
   estJusteGeometrie,
   comparerGeometrie,
   canonCells,
+  verifConstruire,
+  verifProgramme,
+  simulerProgramme,
 } from "./geometrie";
+import type { ConstruireSpec, ProgrammeSpec } from "./geometrie";
 import { generateExercise } from "../calcul/generator";
 import type { ExCalcul } from "../calcul/generator";
 
-const NB_ITEMS_GOLDEN = 66;
+const NB_ITEMS_GOLDEN = 76;
 
 function source(competence: string, niveau: number): ExCalcul {
   return {
@@ -65,25 +69,35 @@ describe("banque de geometrie : structure et couverture", () => {
         expect(i.options, `${i.cle} doit avoir des options`).toBeTruthy();
         expect(i.options).toContain(i.attendu);
       }
+      if (i.format === "construire" || i.format === "programme") {
+        expect(i.spec, `${i.cle} doit porter un spec`).toBeTruthy();
+      }
     }
   });
 
-  it("niveau 1 = QCM, niveau 4 = reponse libre (texte ou grille)", () => {
-    for (const i of BANQUE_GEOMETRIE) {
-      if (i.niveau === 1) expect(i.format, i.cle).toBe("qcm");
-      if (i.niveau === 4) expect(["texte", "grille"], i.cle).toContain(i.format);
+  it("refonte CE2 : plus d'item « nomme la figure » au-dela du rappel N1", () => {
+    // Les items « ecris le nom » / « clique sur le carre » (niveau CP) sont retires.
+    expect(BANQUE_GEOMETRIE.find((i) => i.cle === "geo-fig-n4-carre")).toBeUndefined();
+    expect(BANQUE_GEOMETRIE.find((i) => i.cle === "geo-fig-n2-carre")).toBeUndefined();
+    // Le rappel N1 subsiste (court).
+    expect(itemsGeoDe("MA.GEO.FIGURES", 1).every((i) => i.format === "qcm")).toBe(true);
+  });
+
+  it("MA.GEO.CONSTRUIRE = tous 'construire' ; MA.REPERE.PROGRAMMER = lire (clic) puis ecrire (programme)", () => {
+    expect(itemsGeoDe("MA.GEO.CONSTRUIRE", 1).length).toBeGreaterThan(0);
+    for (const i of BANQUE_GEOMETRIE.filter((x) => x.competence === "MA.GEO.CONSTRUIRE")) {
+      expect(i.format, i.cle).toBe("construire");
+    }
+    for (const i of BANQUE_GEOMETRIE.filter((x) => x.competence === "MA.REPERE.PROGRAMMER")) {
+      expect(i.niveau <= 2 ? "clic" : "programme", i.cle).toBe(i.format);
     }
   });
 });
 
-describe("comparaison miroir du serveur", () => {
+describe("comparaison miroir du serveur (formats de chaine)", () => {
   it("qcm : casse ignoree, accents gardes", () => {
     expect(comparerGeometrie("qcm", "Un Carré", "un carré")).toBe(true);
     expect(comparerGeometrie("qcm", "un rectangle", "un carré")).toBe(false);
-  });
-  it("texte : accents EXIGES", () => {
-    expect(comparerGeometrie("texte", "cône", "cône")).toBe(true);
-    expect(comparerGeometrie("texte", "cone", "cône")).toBe(false);
   });
   it("clic : code de case tolerant a la casse", () => {
     expect(comparerGeometrie("clic", "b3", "B3")).toBe(true);
@@ -96,9 +110,88 @@ describe("comparaison miroir du serveur", () => {
   it("canonCells trie les codes (ordre independant de l'enfant)", () => {
     expect(canonCells(["D4", "C2", "D1", "C3"])).toBe("C2;C3;D1;D4");
   });
-  it("estJusteGeometrie : miroir local pour quelques items", () => {
+});
+
+describe("verification par proprietes : construire", () => {
+  it("rectangle 5x3 : accepte toute position / orientation", () => {
+    const spec: ConstruireSpec = { t: "rect", w: 5, h: 3 };
+    expect(verifConstruire(spec, [[0, 0], [5, 0], [5, 3], [0, 3]])).toBe(true); // ancre a l'origine
+    expect(verifConstruire(spec, [[2, 1], [7, 1], [7, 4], [2, 4]])).toBe(true); // translate
+    expect(verifConstruire(spec, [[0, 0], [3, 0], [3, 5], [0, 5]])).toBe(true); // tourne (3x5)
+    expect(verifConstruire(spec, [[0, 0], [4, 0], [4, 3], [0, 3]])).toBe(false); // 4x3 : faux
+    expect(verifConstruire(spec, [[0, 0], [5, 0], [5, 3]])).toBe(false); // 3 sommets : faux
+  });
+  it("carre 4 : cotes egaux et angles droits", () => {
+    const spec: ConstruireSpec = { t: "rect", w: 4, h: 4 };
+    expect(verifConstruire(spec, [[0, 0], [4, 0], [4, 4], [0, 4]])).toBe(true);
+    expect(verifConstruire(spec, [[0, 0], [4, 0], [4, 3], [0, 3]])).toBe(false); // pas un carre
+  });
+  it("segment de 3 carreaux : droit, horizontal ou vertical", () => {
+    const spec: ConstruireSpec = { t: "seg", len: 3 };
+    expect(verifConstruire(spec, [[1, 1], [1, 4]])).toBe(true);
+    expect(verifConstruire(spec, [[0, 2], [3, 2]])).toBe(true);
+    expect(verifConstruire(spec, [[0, 0], [2, 0]])).toBe(false);
+  });
+  it("triangle rectangle : trois cotes, un angle droit", () => {
+    const spec: ConstruireSpec = { t: "tri_right" };
+    expect(verifConstruire(spec, [[0, 0], [3, 0], [0, 3]])).toBe(true);
+    expect(verifConstruire(spec, [[0, 0], [3, 0], [1, 2]])).toBe(false); // pas d'angle droit
+    expect(verifConstruire(spec, [[0, 0], [3, 0], [6, 0]])).toBe(false); // aplat (degenere)
+  });
+});
+
+describe("verification par proprietes : programme (simulation)", () => {
+  const spec: ProgrammeSpec = { cols: 5, rows: 5, start: "A1", dir: "N", target: "C3", obstacles: [] };
+  it("une solution atteint la cible", () => {
+    expect(verifProgramme(spec, ["avance", "avance", "droite", "avance", "avance"])).toBe(true);
+  });
+  it("un autre chemin valide est accepte (toute solution)", () => {
+    expect(verifProgramme(spec, ["droite", "avance", "avance", "gauche", "avance", "avance"])).toBe(true);
+  });
+  it("rate la cible : refuse", () => {
+    expect(verifProgramme(spec, ["avance", "avance"])).toBe(false);
+  });
+  it("sortir du quadrillage : refuse", () => {
+    expect(simulerProgramme({ ...spec, start: "A1", dir: "S" }, ["avance"])).toBeNull();
+  });
+  it("heurter un obstacle : refuse", () => {
+    const s2: ProgrammeSpec = { ...spec, target: "A5", obstacles: ["A3"] };
+    expect(verifProgramme(s2, ["avance", "avance", "avance", "avance"])).toBe(false);
+  });
+});
+
+describe("items de programmation : l'arrivee a lire est coherente", () => {
+  it("chaque item 'lire un programme' pointe l'arrivee simulee", () => {
+    for (const i of BANQUE_GEOMETRIE.filter((x) => x.competence === "MA.REPERE.PROGRAMMER" && x.format === "clic")) {
+      expect(i.figure.kind).toBe("grid");
+      if (i.figure.kind !== "grid") continue;
+      const g = i.figure.grid;
+      const arr = simulerProgramme(
+        { cols: g.cols, rows: g.rows, start: g.start!, dir: g.dir!, target: "A1", obstacles: g.obstacles ?? [] },
+        g.program!,
+      );
+      expect(arr, i.cle).toBe(i.attendu);
+    }
+  });
+  it("chaque item 'assembler un programme' a une solution d'exemple valide", () => {
+    for (const i of BANQUE_GEOMETRIE.filter((x) => x.format === "programme")) {
+      expect(estJusteGeometrie(i.cle, i.attendu), i.cle).toBe(true);
+    }
+  });
+  it("chaque item 'construire' a un exemple de solution valide", () => {
+    for (const i of BANQUE_GEOMETRIE.filter((x) => x.format === "construire")) {
+      expect(estJusteGeometrie(i.cle, i.attendu), i.cle).toBe(true);
+    }
+  });
+});
+
+describe("juge local estJusteGeometrie", () => {
+  it("miroir local pour quelques items", () => {
     expect(estJusteGeometrie("geo-fig-n1-carre", "un carré")).toBe(true);
     expect(estJusteGeometrie("geo-sym-n3-a", "C2;C3;D1;D4")).toBe(true);
+    expect(estJusteGeometrie("geo-con-n3-rect53", JSON.stringify([[0, 0], [5, 0], [5, 3], [0, 3]]))).toBe(true);
+    expect(estJusteGeometrie("geo-con-n3-rect53", JSON.stringify([[0, 0], [4, 0], [4, 3], [0, 3]]))).toBe(false);
+    expect(estJusteGeometrie("geo-con-n3-rect53", "pas du json")).toBe(false);
     expect(estJusteGeometrie("cle-bidon", "x")).toBe(false);
   });
 });
@@ -121,8 +214,8 @@ describe("generateur de geometrie", () => {
   });
 
   it("reproductible pour une meme graine", () => {
-    const a = generateExercise(source("MA.GEO.FIGURES", 2), 999);
-    const b = generateExercise(source("MA.GEO.FIGURES", 2), 999);
+    const a = generateExercise(source("MA.GEO.CONSTRUIRE", 3), 999);
+    const b = generateExercise(source("MA.GEO.CONSTRUIRE", 3), 999);
     expect(a.geo!.cle).toBe(b.geo!.cle);
   });
 });

@@ -457,7 +457,12 @@ p.kk-lead { color: var(--kk-text-2); max-width: 52ch; }
 .kk-geo__grid { display: flex; justify-content: center; margin: 6px 0; }
 .kk-geo__grid svg { height: auto; touch-action: manipulation; }
 .kk-geo__grid rect, .kk-geo__grid circle { touch-action: manipulation; }
+.kk-geo__grid polygon, .kk-geo__grid line { touch-action: manipulation; }
 .kk-geo__expl { color: var(--kk-text); }
+/* Cartes de programme (programmation de deplacement, type Blue-Bot). */
+.kk-geo__cards { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 4px 0; }
+.kk-geo__cards .kk-chip { font-size: 1.05rem; min-height: 40px; display: inline-flex; align-items: center; }
+.kk-chip--empty { opacity: 0.7; font-style: italic; }
 
 /* Tableaux et graphiques (phase 4) : tableau lisible, lignes cliquables larges,
    pictogramme en lignes d'images. Cibles tactiles >=44px. */

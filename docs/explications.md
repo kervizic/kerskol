@@ -538,6 +538,44 @@ suit le format : QCM accents gardés et casse ignorée, texte et clic accents ex
 grille (liste de cases) comparaison stricte. Les figures sont **déterministes**
 (données fixes) pour les tests golden.
 
+### Refonte CE2 géométrie, lot 1 (migration 0047)
+
+La géométrie de 0043 restait au niveau maternelle / CP (« Quelle est cette
+figure ? », « clique sur le carré », « écris cercle »). Au CE2 l'enfant doit
+**décrire et construire**, pas seulement reconnaître. Le lot 1 ajoute (migration
+**additive et idempotente**, aucune réinitialisation des niveaux d'Iris) :
+
+- **Construire sur quadrillage aimanté** (`MA.GEO.CONSTRUIRE`, format `construire`) :
+  l'enfant touche les nœuds pour placer les sommets, les segments se tracent tout
+  seuls. N1 tracer un segment droit, N2 construire un carré, N3 un rectangle (« 5
+  carreaux sur 3 »), N4 un triangle rectangle. Le serveur vérifie les
+  **propriétés** (nombre de sommets, angles droits, longueurs, fermeture) via
+  `verif_geo_construire` : **toute position et toute orientation** sont acceptées.
+- **Programmer un déplacement** type Blue-Bot (`MA.REPERE.PROGRAMMER`) : N1/N2
+  **lire** un programme (cartes « avance », « tourne à droite », « tourne à
+  gauche » écrites en toutes lettres) et toucher la case d'arrivée (format `clic`,
+  arrivée déterministe) ; N3/N4 **assembler** un programme pour atteindre une case
+  cible, en évitant des obstacles au N4 (format `programme`). Le serveur **simule**
+  le déplacement via `verif_geo_programme` : toute solution valide est acceptée.
+- **Devinettes de propriétés** sur `MA.GEO.FIGURES` (« j'ai quatre côtés égaux et
+  quatre angles droits, qui suis-je ? », « pourquoi ce rectangle n'est pas un
+  carré ? ») **à la place** des items « nomme la figure » de niveau CP, qui sont
+  **retirés** : il ne reste qu'un court rappel au N1. `MA.GEO.FIGURES` change donc
+  de difficulté (de « nommer » vers « décrire »), mais la compétence et
+  l'historique sont conservés.
+
+Nouveau contrat de vérification **par propriétés** : la colonne
+`public.geometrie_item.spec` (jsonb) décrit la figure/le puzzle attendu ; la saisie
+envoyée au serveur est un **JSON** (liste de sommets, ou liste de cartes) que
+`verif_geo` juge par `verif_geo_construire` / `verif_geo_programme`. Les coordonnées
+sont **entières** (nœuds), donc la vérification est en arithmétique exacte. Le
+miroir client (`verifConstruire`, `verifProgramme`, `simulerProgramme`) sert au mode
+démo et aux tests golden ; le **serveur reste seul juge**.
+
+Le lot 2 (prévu) ajoutera : reproduire une figure (égalité à translation près),
+compléter (sommet manquant, moitié symétrique), équerre virtuelle (toucher tous les
+angles droits), refaire une figure de mémoire, et remontera la symétrie d'un cran.
+
 ## Sous-matière « Tableaux et graphiques » (maths, phase 4)
 
 Sous-matière de maths (CE2, cycle 2 révisé 2024), migration 0044, composant SVG

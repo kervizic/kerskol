@@ -30,7 +30,11 @@
     "consigne:regle-la-barre": "Touche la bonne hauteur au-dessus de la barre.",
     "consigne:lis-le-texte": "Lis bien le texte dans ta tête.",
     "consigne:clique-sur-le-mot": "Clique dans le texte sur le bon mot.",
-    "consigne:range-dans-lordre": "Range les moments de l'histoire dans l'ordre."
+    "consigne:range-dans-lordre": "Range les moments de l'histoire dans l'ordre.",
+    "consigne:touche-les-noeuds": "Touche les nœuds du quadrillage pour placer les coins.",
+    "consigne:construis-la-figure": "Construis la figure demandée sur le quadrillage.",
+    "consigne:assemble-le-programme": "Assemble les cartes pour amener le robot jusqu'à la case verte.",
+    "consigne:clique-case-arrivee": "Clique sur la case où le robot arrive."
   },
   "message": {
     "msg:bravo": "Bravo ! C'est la bonne réponse.",
@@ -49,7 +53,10 @@
     "msg:accord-sont-plusieurs": "Avec sont, on ajoute un s à la fin pour plusieurs : ils sont allés.",
     "msg:auxiliaire-etre-exemple": "On dit : il est allé. On ne dit pas : il a allé.",
     "msg:metre-cent-centimetres": "Attention, un mètre, c'est cent centimètres. Donc trois mètres, c'est trois cents centimètres.",
-    "msg:grammaire-regarde": "Ce n'est pas tout à fait ça. Regarde la réponse."
+    "msg:grammaire-regarde": "Ce n'est pas tout à fait ça. Regarde la réponse.",
+    "msg:construis-compte-carreaux": "Pour construire ta figure, compte bien les carreaux sur chaque côté. Dans un carré, tous les côtés ont le même nombre de carreaux.",
+    "msg:robot-avance-case": "Le robot avance d'une seule case à la fois, tout droit, du côté où il regarde. Quand il tourne, il change de direction mais il reste sur sa case.",
+    "msg:programme-eviter-obstacles": "Regarde bien où sont les cases grises. Fais passer le robot à côté, jamais dessus, pour arriver jusqu'à la case verte."
   },
   "indice": {
     "_commentaire": "Indices du bouton Indice (niveaux 1 et 2). Un par competence. Textes identiques a frontend/src/domain/indices.ts. Aucun audio genere pour l'instant.",
@@ -99,6 +106,8 @@
     "indice:ma-repere-quadrillage": "Pour trouver une case, lis d'abord la lettre de la colonne, puis le numéro de la ligne. La lettre d'abord, le chiffre ensuite.",
     "indice:ma-repere-deplacements": "Avance une case à la fois. Vers la droite, tu changes de colonne. Vers le haut, tu changes de ligne et tu montes.",
     "indice:ma-repere-plan": "Place-toi à côté de l'objet. Ce qui est du côté de la main qui écrit est à droite, l'autre côté est à gauche.",
+    "indice:ma-geo-construire": "Touche les nœuds du quadrillage pour poser les coins. Le trait se trace tout seul entre deux points. Compte bien les carreaux de chaque côté.",
+    "indice:ma-repere-programmer": "Lis les cartes une par une, dans l'ordre. Fais avancer le robot case par case. Quand il tourne à droite ou à gauche, il change de direction avant de repartir.",
     "indice:ma-donnees-tableau": "Pour lire une case, suis d'abord la ligne, puis descends dans la bonne colonne. L'endroit où la ligne et la colonne se croisent donne le nombre.",
     "indice:ma-donnees-completer": "Regarde le total. Additionne les nombres que tu connais, puis cherche ce qu'il manque pour arriver jusqu'au total.",
     "indice:ma-donnees-barres": "Suis la barre jusqu'en haut, puis regarde le trait en face. Le nombre à côté de ce trait donne la hauteur de la barre.",

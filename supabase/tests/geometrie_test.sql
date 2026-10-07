@@ -27,15 +27,16 @@ DECLARE
     n   integer;
 BEGIN
     SELECT count(*) INTO n FROM public.geometrie_item;
-    IF n <> 66 THEN
-        RAISE EXCEPTION 'geometrie_item : 66 items attendus, obtenu %', n;
+    IF n <> 76 THEN
+        RAISE EXCEPTION 'geometrie_item : 76 items attendus, obtenu %', n;
     END IF;
 
-    -- Couverture : chaque competence a au moins un item a chaque niveau 1..4.
+    -- Couverture : chaque competence a au moins un item a chaque niveau 1..4
+    -- (dont les deux nouvelles competences du lot 1).
     FOR r IN SELECT c AS competence, nv AS niveau
                FROM unnest(ARRAY['MA.GEO.FIGURES','MA.GEO.VOCABULAIRE','MA.GEO.SOLIDES',
-                    'MA.GEO.SYMETRIE','MA.REPERE.QUADRILLAGE','MA.REPERE.DEPLACEMENTS',
-                    'MA.REPERE.PLAN']) AS c,
+                    'MA.GEO.SYMETRIE','MA.GEO.CONSTRUIRE','MA.REPERE.QUADRILLAGE',
+                    'MA.REPERE.DEPLACEMENTS','MA.REPERE.PLAN','MA.REPERE.PROGRAMMER']) AS c,
                     generate_series(1,4) AS nv
     LOOP
         IF NOT EXISTS (SELECT 1 FROM public.geometrie_item
@@ -47,11 +48,14 @@ BEGIN
     -- Spot check (miroir exact du front).
     FOR r IN SELECT * FROM (VALUES
         ('geo-fig-n1-carre','MA.GEO.FIGURES',1,'qcm','un carré'),
-        ('geo-fig-n2-carre','MA.GEO.FIGURES',2,'clic','carré'),
+        ('geo-fig-n3-pourquoi','MA.GEO.FIGURES',3,'qcm','ses côtés ne sont pas tous égaux'),
         ('geo-voc-n2-sommet','MA.GEO.VOCABULAIRE',2,'clic','B'),
         ('geo-sol-n4-cone','MA.GEO.SOLIDES',4,'texte','cône'),
         ('geo-sym-n3-a','MA.GEO.SYMETRIE',3,'grille','C2;C3;D1;D4'),
         ('geo-sym-n4-a','MA.GEO.SYMETRIE',4,'grille','D1;D2;D4;E3;F2'),
+        ('geo-con-n3-rect53','MA.GEO.CONSTRUIRE',3,'construire','[[0,0],[5,0],[5,3],[0,3]]'),
+        ('geo-prog-n1-a','MA.REPERE.PROGRAMMER',1,'clic','B3'),
+        ('geo-prog-n3-a','MA.REPERE.PROGRAMMER',3,'programme','["avance","avance","droite","avance","avance"]'),
         ('geo-quad-n1-a','MA.REPERE.QUADRILLAGE',1,'qcm','B3'),
         ('geo-dep-n3-a','MA.REPERE.DEPLACEMENTS',3,'clic','C3'),
         ('geo-plan-n2-a','MA.REPERE.PLAN',2,'qcm','devant')
@@ -63,7 +67,7 @@ BEGIN
                 r.cle, r.format || '|' || r.attendu, got;
         END IF;
     END LOOP;
-    RAISE NOTICE 'table geometrie_item (66 + couverture + spot) : OK';
+    RAISE NOTICE 'table geometrie_item (76 + couverture + spot) : OK';
 END $$;
 
 -- ===========================================================================
@@ -87,7 +91,24 @@ BEGIN
     IF public.verif_geo('geo-sym-n3-a','c2;c3;d1')          THEN RAISE EXCEPTION 'grille incomplete acceptee'; END IF;
     -- Item absent.
     IF public.verif_geo('cle-bidon','x')                    THEN RAISE EXCEPTION 'item absent accepte'; END IF;
-    RAISE NOTICE 'verif_geo : OK';
+
+    -- CONSTRUIRE (par proprietes) : rectangle 5x3, toute position/orientation.
+    IF NOT public.verif_geo('geo-con-n3-rect53','[[0,0],[5,0],[5,3],[0,3]]') THEN RAISE EXCEPTION 'construire rect53 juste refuse'; END IF;
+    IF NOT public.verif_geo('geo-con-n3-rect53','[[2,1],[7,1],[7,4],[2,4]]') THEN RAISE EXCEPTION 'construire rect53 translate refuse'; END IF;
+    IF NOT public.verif_geo('geo-con-n3-rect53','[[0,0],[3,0],[3,5],[0,5]]') THEN RAISE EXCEPTION 'construire rect53 tourne refuse'; END IF;
+    IF     public.verif_geo('geo-con-n3-rect53','[[0,0],[4,0],[4,3],[0,3]]') THEN RAISE EXCEPTION 'construire 4x3 accepte a tort'; END IF;
+    IF     public.verif_geo('geo-con-n3-rect53','pas du json')               THEN RAISE EXCEPTION 'construire json invalide accepte'; END IF;
+    IF NOT public.verif_geo('geo-con-n4-trirect','[[0,0],[3,0],[0,3]]')      THEN RAISE EXCEPTION 'trirect juste refuse'; END IF;
+    IF     public.verif_geo('geo-con-n4-trirect','[[0,0],[3,0],[6,0]]')      THEN RAISE EXCEPTION 'trirect aplati accepte'; END IF;
+
+    -- PROGRAMME (par simulation) : toute solution qui atteint la cible est acceptee.
+    IF NOT public.verif_geo('geo-prog-n3-a','["avance","avance","droite","avance","avance"]')         THEN RAISE EXCEPTION 'programme solution refusee'; END IF;
+    IF NOT public.verif_geo('geo-prog-n3-a','["droite","avance","avance","gauche","avance","avance"]') THEN RAISE EXCEPTION 'programme autre solution refusee'; END IF;
+    IF     public.verif_geo('geo-prog-n3-a','["avance","avance"]')                                     THEN RAISE EXCEPTION 'programme rate accepte'; END IF;
+    IF     public.verif_geo('geo-prog-n3-a','rien')                                                    THEN RAISE EXCEPTION 'programme json invalide accepte'; END IF;
+    IF NOT public.verif_geo('geo-prog-n4-a','["avance","avance","avance","avance","droite","avance","avance","avance","avance"]') THEN RAISE EXCEPTION 'programme obstacles solution refusee'; END IF;
+
+    RAISE NOTICE 'verif_geo (dont construire / programme) : OK';
 END $$;
 
 -- ===========================================================================
@@ -150,6 +171,54 @@ BEGIN
         'geo-sym-n3-a', NULL, 'seance', 'C2;C3;D1;D4', NULL);
     IF (v ->> 'correct')::boolean IS NOT TRUE THEN
         RAISE EXCEPTION 'geo symetrie devrait etre juste : %', v;
+    END IF;
+END $$;
+
+-- 3c-bis. CONSTRUIRE (MA.GEO.CONSTRUIRE N3) : rectangle 5x3 juste, 4x3 faux.
+DO $$
+DECLARE v jsonb; v_id uuid := gen_random_uuid();
+BEGIN
+    v := public.enregistrer_reponse(
+        v_id, 'a0000001-0000-0000-0000-000000000000'::uuid, NULL, 'MA.GEO.CONSTRUIRE', NULL, 3, 'van_hiele',
+        'geo', 0, 0, 0, NULL, 1, 3000, false, false, false, now(),
+        'geo-con-n3-rect53', NULL, 'seance', '[[0,0],[5,0],[5,3],[0,3]]', NULL);
+    IF (v ->> 'correct')::boolean IS NOT TRUE THEN
+        RAISE EXCEPTION 'construire rect 5x3 devrait etre juste : %', v;
+    END IF;
+END $$;
+DO $$
+DECLARE v jsonb; v_id uuid := gen_random_uuid();
+BEGIN
+    v := public.enregistrer_reponse(
+        v_id, 'a0000001-0000-0000-0000-000000000000'::uuid, NULL, 'MA.GEO.CONSTRUIRE', NULL, 3, 'van_hiele',
+        'geo', 0, 0, 0, NULL, 1, 3000, false, false, false, now(),
+        'geo-con-n3-rect53', NULL, 'seance', '[[0,0],[4,0],[4,3],[0,3]]', NULL);
+    IF (v ->> 'correct')::boolean IS NOT FALSE THEN
+        RAISE EXCEPTION 'construire rect 4x3 devrait etre faux : %', v;
+    END IF;
+END $$;
+
+-- 3c-ter. PROGRAMME (MA.REPERE.PROGRAMMER N3) : une solution atteint la cible.
+DO $$
+DECLARE v jsonb; v_id uuid := gen_random_uuid();
+BEGIN
+    v := public.enregistrer_reponse(
+        v_id, 'a0000001-0000-0000-0000-000000000000'::uuid, NULL, 'MA.REPERE.PROGRAMMER', NULL, 3, 'spatial',
+        'geo', 0, 0, 0, NULL, 1, 3000, false, false, false, now(),
+        'geo-prog-n3-a', NULL, 'seance', '["avance","avance","droite","avance","avance"]', NULL);
+    IF (v ->> 'correct')::boolean IS NOT TRUE THEN
+        RAISE EXCEPTION 'programme solution devrait etre juste : %', v;
+    END IF;
+END $$;
+DO $$
+DECLARE v jsonb; v_id uuid := gen_random_uuid();
+BEGIN
+    v := public.enregistrer_reponse(
+        v_id, 'a0000001-0000-0000-0000-000000000000'::uuid, NULL, 'MA.REPERE.PROGRAMMER', NULL, 3, 'spatial',
+        'geo', 0, 0, 0, NULL, 1, 3000, false, false, false, now(),
+        'geo-prog-n3-a', NULL, 'seance', '["avance","avance"]', NULL);
+    IF (v ->> 'correct')::boolean IS NOT FALSE THEN
+        RAISE EXCEPTION 'programme rate devrait etre faux : %', v;
     END IF;
 END $$;
 

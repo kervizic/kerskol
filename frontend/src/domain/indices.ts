@@ -92,6 +92,8 @@ export const INDICES: Record<string, string> = {
     "Pense à un objet qui a la même forme. Le cube est comme un dé, le pavé comme une boîte, la boule comme un ballon, le cylindre comme une boîte de conserve.",
   "MA.GEO.SYMETRIE":
     "Imagine que tu plies la figure sur le trait du milieu. Si les deux moitiés se posent l'une sur l'autre, il y a un axe de symétrie.",
+  "MA.GEO.CONSTRUIRE":
+    "Touche les nœuds du quadrillage pour poser les coins. Le trait se trace tout seul entre deux points. Compte bien les carreaux de chaque côté.",
 
   // --- Se reperer (indices aux niveaux 1 et 2 seulement) --------------------
   "MA.REPERE.QUADRILLAGE":
@@ -100,6 +102,8 @@ export const INDICES: Record<string, string> = {
     "Avance une case à la fois. Vers la droite, tu changes de colonne. Vers le haut, tu changes de ligne et tu montes.",
   "MA.REPERE.PLAN":
     "Place-toi à côté de l'objet. Ce qui est de ton côté de la main qui écrit est à droite, l'autre côté est à gauche.",
+  "MA.REPERE.PROGRAMMER":
+    "Lis les cartes une par une, dans l'ordre. Fais avancer le robot case par case. Quand il tourne à droite ou à gauche, il change de direction avant de repartir.",
 
   // --- Tableaux et graphiques (indices aux niveaux 1 et 2 seulement) --------
   "MA.DONNEES.TABLEAU":
