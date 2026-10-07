@@ -86,8 +86,12 @@ SET ROLE authenticated;
 SET request.jwt.claims = :'claimsA';
 SELECT public.regler_matieres(:'p', ARRAY['MA'], ARRAY['heure']);
 RESET ROLE;
+-- Depuis la phase 6, regler_matieres re-ajoute toujours 'mots-maitresse' : le
+-- reglage « heure seule » donne ['heure','mots-maitresse']. On verifie donc que
+-- heure est bien active et que les autres sous-matieres de maths sont retirees.
 SELECT _rec('6_heure_seule_jouable',
-    (SELECT domaines_actifs = ARRAY['heure'] FROM profils WHERE id = :'p'),
+    (SELECT domaines_actifs @> ARRAY['heure'] AND NOT (domaines_actifs @> ARRAY['mesures'])
+       FROM profils WHERE id = :'p'),
     (SELECT array_to_string(domaines_actifs, ',') FROM profils WHERE id = :'p'));
 
 -- ===========================================================================
