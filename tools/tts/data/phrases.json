@@ -81,7 +81,14 @@
     "indice:fr-voc-syn-contraires": "Un synonyme veut dire presque la même chose. Un contraire veut dire le contraire. Parfois on ajoute un petit mot devant pour dire le contraire, comme mal ou dé.",
     "indice:fr-voc-prefixe-suffixe": "Un préfixe se met au début du mot, comme re qui veut dire encore. Un petit bout à la fin, comme eur, montre la personne qui fait l'action.",
     "indice:fr-voc-categories": "Cherche le mot général qui regroupe tous les autres. Le chien et le chat sont des animaux.",
-    "indice:fr-mots-invariables": "Ces petits mots ne changent jamais. Écoute bien les lettres de la fin qu'on n'entend pas, comme le s de toujours ou le p de beaucoup."
+    "indice:fr-mots-invariables": "Ces petits mots ne changent jamais. Écoute bien les lettres de la fin qu'on n'entend pas, comme le s de toujours ou le p de beaucoup.",
+    "indice:ma-geo-figures": "Compte les côtés et regarde les coins. Le carré a quatre côtés pareils. Le rectangle a des côtés longs et des côtés courts. Le triangle a trois côtés. Le cercle est tout rond, sans coin.",
+    "indice:ma-geo-vocabulaire": "Un côté, c'est un bord droit. Un sommet, c'est un coin où deux côtés se rejoignent. Un angle droit est bien carré, comme le coin d'une feuille.",
+    "indice:ma-geo-solides": "Pense à un objet qui a la même forme. Le cube est comme un dé, le pavé comme une boîte, la boule comme un ballon, le cylindre comme une boîte de conserve.",
+    "indice:ma-geo-symetrie": "Imagine que tu plies la figure sur le trait du milieu. Si les deux moitiés se posent l'une sur l'autre, il y a un axe de symétrie.",
+    "indice:ma-repere-quadrillage": "Pour trouver une case, lis d'abord la lettre de la colonne, puis le numéro de la ligne. La lettre d'abord, le chiffre ensuite.",
+    "indice:ma-repere-deplacements": "Avance une case à la fois. Vers la droite, tu changes de colonne. Vers le haut, tu changes de ligne et tu montes.",
+    "indice:ma-repere-plan": "Place-toi à côté de l'objet. Ce qui est du côté de la main qui écrit est à droite, l'autre côté est à gauche."
   },
   "titre": {
     "titre:tables-addition": "Tables d'addition",

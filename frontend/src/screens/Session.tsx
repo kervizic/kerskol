@@ -24,6 +24,7 @@ import {
   finishSeance,
   getExercicesCalcul,
   getFrancais,
+  getGeometrie,
   getDicteeTextes,
   getDicteeContexte,
   enregistrerDictee,
@@ -36,6 +37,7 @@ import {
 } from "../lib/api";
 import DicteeDetective from "../components/DicteeDetective";
 import Grammaire from "../components/Grammaire";
+import Geometrie from "../components/Geometrie";
 import type { DicteeTexte, DicteeReponse, DicteeResultat } from "../domain/francais/dictee";
 import type { ContexteDictee } from "../domain/francais/selection-dictee";
 import { enqueueReponse, flushReponses } from "../lib/reponseQueue";
@@ -1238,17 +1240,21 @@ export function Session({
         // Le francais (conjugaison) n'est charge que pour les profils qui l'ont
         // active (matieres_actives) : les profils existants (['MA']) sont inchanges.
         const francaisActif = (profil.matieres_actives ?? []).includes("FR");
-        const [progress_, sources, fr] = await Promise.all([
+        const mathsActif = (profil.matieres_actives ?? []).includes("MA");
+        const [progress_, sources, fr, geo] = await Promise.all([
           getProgressionDetail(profil.id),
           getExercicesCalcul(),
           francaisActif ? getFrancais() : Promise.resolve({ competences: [], sources: [] }),
+          // Geometrie / reperage : sources d'exercices (matiere MA). Les
+          // competences MA.GEO.* / MA.REPERE.* sont deja dans referentiel.competences.
+          mathsActif ? getGeometrie() : Promise.resolve([]),
         ]);
         const ctx = { hero: profil.surnom, univers: profil.univers };
         const plan = composeSession({
           competences: [...referentiel.competences, ...fr.competences],
           prerequis: referentiel.prerequis,
           progress: progress_,
-          sources: [...sources, ...fr.sources],
+          sources: [...sources, ...geo, ...fr.sources],
           seed: (Date.now() ^ 0x9e3779b9) >>> 0,
           now: Date.now(),
           classe: profil.classe,
@@ -1480,10 +1486,13 @@ export function Session({
     [ex, slot, profil, relire, onProfilChange]
   );
 
-  // GRAMMAIRE (op 'gram') : le composant <Grammaire> soumet la cle de l'item et
-  // la saisie (mot clique / choix QCM / texte libre). Le serveur (verif_grammaire)
-  // est seul juge. Memes garde-fous que la dictee (plafond -> pause, hors-ligne
-  // -> file + credit optimiste gere par le serveur au rejeu).
+  // GRAMMAIRE (op 'gram'), VOCABULAIRE/MOTS (op 'lex') et GEOMETRIE (op 'geo') :
+  // les composants <Grammaire> et <Geometrie> soumettent la cle de l'item et la
+  // saisie (mot/case/figure cliquee, choix QCM, texte libre, coloriage). Le
+  // serveur (verif_grammaire / verif_lexique / verif_geo) est seul juge. L'op
+  // vient de l'enonce normalise (ex.verif.op), si bien que cette fonction est
+  // partagee. Memes garde-fous que la dictee (plafond -> pause, hors-ligne ->
+  // file + credit optimiste gere par le serveur au rejeu).
   const soumettreGrammaire = useCallback(
     async (cle: string, reponseTexte: string): Promise<{ correct: boolean } | null> => {
       if (!ex || !slot) return null;
@@ -1892,6 +1901,13 @@ export function Session({
           <Grammaire
             key={ex.key}
             item={ex.gram}
+            onSoumettre={soumettreGrammaire}
+            onContinuer={(correct) => advance(correct, true)}
+          />
+        ) : ex.saisie === "geometrie" && ex.geo ? (
+          <Geometrie
+            key={ex.key}
+            item={ex.geo}
             onSoumettre={soumettreGrammaire}
             onContinuer={(correct) => advance(correct, true)}
           />

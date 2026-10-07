@@ -444,6 +444,17 @@ l'instant).
   facilement. »
 - **MA.FRAC.SIMPLES** : « Le chiffre du bas dit en combien de parts on coupe. Le
   chiffre du haut dit combien de parts on prend. »
+- **MA.GEO.FIGURES** : « Compte les côtés et regarde les coins. Le carré a quatre
+  côtés pareils. Le rectangle a des côtés longs et des côtés courts. Le triangle
+  a trois côtés. Le cercle est tout rond, sans coin. »
+- **MA.GEO.VOCABULAIRE** : « Un côté, c'est un bord droit. Un sommet, c'est un coin
+  où deux côtés se rejoignent. Un angle droit est bien carré, comme le coin d'une
+  feuille. »
+- **MA.GEO.SOLIDES** : « Pense à un objet qui a la même forme. Le cube est comme un
+  dé, le pavé comme une boîte, la boule comme un ballon, le cylindre comme une
+  boîte de conserve. »
+- **MA.GEO.SYMETRIE** : « Imagine que tu plies la figure sur le trait du milieu. Si
+  les deux moitiés se posent l'une sur l'autre, il y a un axe de symétrie. »
 - **MA.MES.DUREES** : « Pense à tout mettre dans la même unité. Une heure, c'est
   soixante minutes. »
 - **MA.MES.HEURE** : « Regarde d'abord la petite aiguille pour les heures, puis la
@@ -474,3 +485,38 @@ l'instant).
   haut est trop petit, tu empruntes une dizaine à côté. »
 - **MA.POSE.MULTIPLICATION** : « Commence par les unités, à droite, et n'oublie pas
   les retenues. »
+- **MA.REPERE.QUADRILLAGE** : « Pour trouver une case, lis d'abord la lettre de la
+  colonne, puis le numéro de la ligne. La lettre d'abord, le chiffre ensuite. »
+- **MA.REPERE.DEPLACEMENTS** : « Avance une case à la fois. Vers la droite, tu
+  changes de colonne. Vers le haut, tu changes de ligne et tu montes. »
+- **MA.REPERE.PLAN** : « Place-toi à côté de l'objet. Ce qui est du côté de la main
+  qui écrit est à droite, l'autre côté est à gauche. »
+
+## Sous-matières « Géométrie » et « Se repérer » (maths, phase 3)
+
+Deux sous-matières de maths (CE2, cycle 2 révisé 2024), migration 0043, composant
+SVG tactile `frontend/src/components/Geometrie.tsx`, banque
+`frontend/src/domain/geometrie/geometrie.ts` (miroir de `public.geometrie_item`).
+
+**Géométrie** (domaine `geometrie`) : reconnaître et nommer les figures planes
+(`MA.GEO.FIGURES` : carré, rectangle, triangle dont triangle rectangle, cercle),
+vocabulaire côté / sommet / angle droit (`MA.GEO.VOCABULAIRE`, l'angle droit se
+reconnaît comme avec l'équerre), solides cube / pavé / cylindre / sphère /
+pyramide / cône et leurs faces, arêtes, sommets (`MA.GEO.SOLIDES`), symétrie
+axiale (`MA.GEO.SYMETRIE` : dire si une figure a un axe, compléter une figure sur
+quadrillage). Le **périmètre** n'est pas traité ici (la mesure de longueurs vit
+dans « Mesures », `MA.MES.LONGUEURS`, on ne doublonne pas).
+
+**Se repérer** (domaine `repere`) : quadrillage, cases et nœuds, coder une case du
+type B3, placer un point (`MA.REPERE.QUADRILLAGE`), déplacements codés
+(`MA.REPERE.DEPLACEMENTS` : « avance de deux cases vers la droite… », décrits à
+l'oral, sans flèche), gauche / droite / devant / derrière et lecture d'un plan
+simple (`MA.REPERE.PLAN`).
+
+Progression des formats : **N1 QCM** sur la figure ; N2/N3 QCM ou **clic** (toucher
+une figure, une case, un sommet) ; **N4 réponse libre** (taper un nom ou un code de
+case, cliquer les cases à colorier pour la symétrie, placer un point sur un nœud).
+Le **serveur reste seul juge** (op `geo`, fonction `verif_geo`) ; la comparaison
+suit le format : QCM accents gardés et casse ignorée, texte et clic accents exigés,
+grille (liste de cases) comparaison stricte. Les figures sont **déterministes**
+(données fixes) pour les tests golden.

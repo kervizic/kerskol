@@ -9,6 +9,7 @@ import { TEMPS_PAR_CODE, type Personne } from "../domain/francais/conjugaison";
 import { PC_CODE } from "../domain/francais/passe-compose";
 import type { DicteeTexte, DicteeReponse, DicteeResultat } from "../domain/francais/dictee";
 import { estJusteGrammaire } from "../domain/francais/grammaire";
+import { estJusteGeometrie } from "../domain/geometrie/geometrie";
 import {
   isDemo,
   DEMO_COMPETENCES,
@@ -525,6 +526,37 @@ export async function getFrancais(): Promise<{ competences: Competence[]; source
   return { competences: (comp.data ?? []) as Competence[], sources };
 }
 
+// Catalogue des exercices de GEOMETRIE et REPERAGE (matiere MA, type 'geometrie',
+// phase 3). Comme la grammaire, la GENERATION est faite cote client (banque
+// geometrie.ts) ; les lignes `exercices` ne fournissent que l'identite
+// (exercice_id deterministe, competence, niveau, methode). L'op de verification
+// serveur est 'geo'. Les competences (MA.GEO.*, MA.REPERE.*) sont deja chargees
+// par getReferentiel (matiere MA). Repli silencieux : [] si lecture impossible.
+export async function getGeometrie(): Promise<ExCalcul[]> {
+  if (isDemo()) return [];
+  try {
+    const { data, error } = await supabase()
+      .from("exercices")
+      .select("id, competence, niveau, methode")
+      .eq("type", "geometrie")
+      .eq("actif", true);
+    if (error) throw error;
+    return (data ?? []).map((e): ExCalcul => ({
+      exerciceId: e.id as string,
+      competence: e.competence as string,
+      niveau: e.niveau as number,
+      methode: (e.methode as string | null) ?? null,
+      operation: "geo",
+      forme: "geometrie" as Forme,
+      params: {},
+      support: null,
+      correctionStrategie: null,
+    }));
+  } catch {
+    return [];
+  }
+}
+
 // Banque de textes de la DICTEE DETECTIVE (dictee_charger_tous). Le serveur ne
 // renvoie que les MOTS AFFICHES et le NOMBRE d'erreurs : jamais les positions,
 // corrections ou types (qui ne sont reveles qu'apres validation). Charge une
@@ -697,6 +729,8 @@ export async function insertReponse(row: ReponseInsert): Promise<ReponseResult> 
     const correct =
       row.op === "gram"
         ? estJusteGrammaire(row.cle ?? "", row.reponse_texte ?? "")
+        : row.op === "geo"
+        ? estJusteGeometrie(row.cle ?? "", row.reponse_texte ?? "")
         : row.op === "lettres"
         ? estJuste(row.a, row.reponse_texte ?? "")
         : row.op === "conj"

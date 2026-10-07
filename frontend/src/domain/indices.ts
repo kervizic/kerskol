@@ -65,6 +65,24 @@ export const INDICES: Record<string, string> = {
   "MA.CM.SOMMES_DIFF":
     "Tu peux passer par un nombre rond pour calculer plus facilement.",
 
+  // --- Geometrie (indices aux niveaux 1 et 2 seulement) ---------------------
+  "MA.GEO.FIGURES":
+    "Compte les côtés et regarde les coins. Le carré a quatre côtés pareils. Le rectangle a des côtés longs et des côtés courts. Le triangle a trois côtés. Le cercle est tout rond, sans coin.",
+  "MA.GEO.VOCABULAIRE":
+    "Un côté, c'est un bord droit. Un sommet, c'est un coin où deux côtés se rejoignent. Un angle droit est bien carré, comme le coin d'une feuille.",
+  "MA.GEO.SOLIDES":
+    "Pense à un objet qui a la même forme. Le cube est comme un dé, le pavé comme une boîte, la boule comme un ballon, le cylindre comme une boîte de conserve.",
+  "MA.GEO.SYMETRIE":
+    "Imagine que tu plies la figure sur le trait du milieu. Si les deux moitiés se posent l'une sur l'autre, il y a un axe de symétrie.",
+
+  // --- Se reperer (indices aux niveaux 1 et 2 seulement) --------------------
+  "MA.REPERE.QUADRILLAGE":
+    "Pour trouver une case, lis d'abord la lettre de la colonne, puis le numéro de la ligne. La lettre d'abord, le chiffre ensuite.",
+  "MA.REPERE.DEPLACEMENTS":
+    "Avance une case à la fois. Vers la droite, tu changes de colonne. Vers le haut, tu changes de ligne et tu montes.",
+  "MA.REPERE.PLAN":
+    "Place-toi à côté de l'objet. Ce qui est de ton côté de la main qui écrit est à droite, l'autre côté est à gauche.",
+
   // --- Fractions ------------------------------------------------------------
   "MA.FRAC.SIMPLES":
     "Le chiffre du bas dit en combien de parts on coupe. Le chiffre du haut dit combien de parts on prend.",

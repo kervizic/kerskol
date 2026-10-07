@@ -35,6 +35,8 @@ export const MATIERES: MatiereDef[] = [
       { domaine: "mesures", libelle: "Mesures" },
       { domaine: "heure", libelle: "Lire l'heure" },
       { domaine: "fractions", libelle: "Fractions" },
+      { domaine: "geometrie", libelle: "Géométrie" },
+      { domaine: "repere", libelle: "Se repérer" },
     ],
   },
   {

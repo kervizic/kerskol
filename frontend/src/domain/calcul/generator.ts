@@ -22,6 +22,8 @@ import { buildMesure } from "./measures";
 import { buildFraction } from "./fractions";
 import { enLettresFr } from "../diagnostic/lettres";
 import { buildFrancaisConjugaison, buildFrancaisDictee, buildFrancaisPasseCompose, buildFrancaisGrammaire, buildFrancaisLexique } from "../francais/generator";
+import { buildGeometrie } from "../geometrie/geometrie";
+import type { GeoFigure, GeoFormat, GeoInteract } from "../geometrie/geometrie";
 import type { Temps, Personne } from "../francais/conjugaison";
 import type { Genre } from "../francais/passe-compose";
 
@@ -40,7 +42,8 @@ export type Forme =
   | "fraction" // fractions simples
   | "conjugaison" // francais : conjuguer un verbe (present / futur / imparfait)
   | "dictee" // francais : dictee detective (trouver / corriger des erreurs)
-  | "grammaire"; // francais : grammaire (nature, sujet/verbe, types, ponctuation, GN)
+  | "grammaire" // francais : grammaire (nature, sujet/verbe, types, ponctuation, GN)
+  | "geometrie"; // maths : geometrie et reperage (figures, solides, symetrie, quadrillage, plan)
 
 export type Support = "rectangle" | "droite" | "aucun" | null;
 
@@ -76,7 +79,11 @@ export type Saisie =
   | "dictee"
   // grammaire -> composant autonome : QCM, clic sur un mot d'une phrase, ou
   // saisie libre (N4). Le serveur (verif_grammaire) reste seul juge.
-  | "grammaire";
+  | "grammaire"
+  // geometrie -> composant autonome <Geometrie> : figure SVG tactile (figures
+  // planes, solides, quadrillage), QCM / clic / saisie libre / coloriage de
+  // cases. Le serveur (verif_geo, op 'geo') reste seul juge via la cle.
+  | "geometrie";
 
 // Enonce normalise envoye au serveur pour revalidation. L'operation porte sur
 // deux operandes et son resultat est la reponse attendue :
@@ -107,7 +114,7 @@ export type Saisie =
 // `lex` : vocabulaire / mots a savoir (phase 2). Meme principe que `gram` : la
 // reponse est du TEXTE (reponse_texte), `cle` porte l'item (p_op2) ; la
 // verification reelle est serveur (verif_lexique) / client (lexique.ts).
-export type VerifOp = "add" | "sub" | "mul" | "div" | "cmp" | "val" | "lettres" | "conj" | "dictee" | "gram" | "lex";
+export type VerifOp = "add" | "sub" | "mul" | "div" | "cmp" | "val" | "lettres" | "conj" | "dictee" | "gram" | "lex" | "geo";
 export type VerifOp2 = "add" | "sub" | "mul" | "div" | "rsub";
 export interface Verif {
   op: VerifOp;
@@ -151,6 +158,10 @@ function applyOp(op: VerifOp, a: number, b: number): { answer: number; reste: nu
     case "lex":
       // Vocabulaire / mots a savoir : idem gram, verification serveur
       // (verif_lexique) via la cle de l'item.
+      return { answer: a, reste: null };
+    case "geo":
+      // Geometrie / reperage : la reponse est du TEXTE (p_reponse_texte) ;
+      // a = 0 (invariant answer=a). Verification serveur (verif_geo) via la cle.
       return { answer: a, reste: null };
   }
 }
@@ -366,6 +377,20 @@ export interface GeneratedExercise {
     attendu: string;
     explication: string;
   };
+  // Geometrie / reperage : item choisi par le generateur (reproductible via la
+  // graine). Le composant <Geometrie> le rend (figure SVG + QCM / clic / texte /
+  // coloriage) ; le serveur (verif_geo) juge via `cle`. `attendu` sert au
+  // feedback local et au mode demo (le serveur reste la source de verite).
+  geo?: {
+    cle: string;
+    format: GeoFormat;
+    consigne: string;
+    options?: string[];
+    attendu: string;
+    explication: string;
+    figure: GeoFigure;
+    interact?: GeoInteract;
+  };
   poseData?: PoseData; // mode pose
   chiffresData?: ChiffresData; // mode chiffres (decomposition)
   droiteData?: DroiteData; // mode droite
@@ -511,6 +536,10 @@ function buildExercise(
   // --- Francais : vocabulaire + mots a savoir (phase 2) -----------------
   if (src.competence.startsWith("FR.VOC.") || src.competence.startsWith("FR.MOTS.")) {
     return buildFrancaisLexique(src, rng, base);
+  }
+  // --- Maths : geometrie + reperage (phase 3) ---------------------------
+  if (src.competence.startsWith("MA.GEO.") || src.competence.startsWith("MA.REPERE.")) {
+    return buildGeometrie(src, rng, base);
   }
   // --- Numeration : lire/ecrire, decomposer, comparer, suite ------------
   if (src.competence.startsWith("MA.NUM.")) {
