@@ -71,6 +71,41 @@ const REPERE_PHRASE: Record<Temps4, string> = {
   pc: "Hier",
 };
 
+// Complement (« suite ») de chaque verbe : une VRAIE phrase courte et naturelle,
+// vocabulaire CE2, cohérente avec le mot repere. Chaque complement est INVARIABLE
+// (ni genre, ni nombre, ni temps) pour rester juste a toutes les personnes et a
+// tous les temps : lieu (« à l'école »), tournure figée (« faim »), COD placé
+// APRES le verbe (pas d'accord avec avoir), infinitif ou adverbe. Ainsi
+// « Il est à la maison. », « Vous chanterez une chanson. », « Hier, la fille est
+// allée à l'école. » sont toutes correctes sans recalcul d'accord.
+const COMPLEMENT: Record<string, string> = {
+  etre: "à la maison",
+  avoir: "faim",
+  chanter: "une chanson",
+  jouer: "au ballon",
+  aimer: "les animaux",
+  regarder: "les étoiles",
+  donner: "un cadeau",
+  trouver: "un trésor",
+  parler: "doucement",
+  manger: "une pomme",
+  placer: "les pions",
+  finir: "le jeu",
+  aller: "à l'école",
+  dire: "la vérité",
+  faire: "un gâteau",
+  pouvoir: "courir vite",
+  prendre: "le train",
+  venir: "avec nous",
+  voir: "la mer",
+  vouloir: "un bonbon",
+};
+function complementDe(verbe: string): string {
+  const c = COMPLEMENT[verbe];
+  if (!c) throw new Error(`complement manquant pour le verbe: ${verbe}`);
+  return c;
+}
+
 // --- Helpers de phrase ------------------------------------------------------
 function capFirst(s: string): string {
   return s.length === 0 ? s : s[0].toUpperCase() + s.slice(1);
@@ -106,18 +141,22 @@ function construirePhrase(args: {
   const sep = colle ? "" : " ";
   // Mot repere en debut de phrase a partir du N3 (la phrase le contient toujours).
   const prefixe = niveau >= 3 ? `${REPERE_PHRASE[temps]}, ` : "";
+  // Complement : une VRAIE suite, pour ne jamais produire « Il est. ».
+  const suite = complementDe(verbe);
   const apres = ".";
   // Majuscule : sur le prefixe s'il existe (deja capitalise), sinon sur le sujet.
   const sujet = prefixe ? sujetRaw : capFirst(sujetRaw);
+  const corps = `${sujetRaw}${sep}${bonneForme} ${suite}`;
   const complete = prefixe
-    ? `${prefixe}${sujetRaw}${sep}${bonneForme}${apres}`
-    : `${capFirst(`${sujetRaw}${sep}${bonneForme}`)}${apres}`;
+    ? `${prefixe}${corps}${apres}`
+    : `${capFirst(corps)}${apres}`;
   return {
     consigne: consigneDe(verbe, temps, niveau),
     repere: niveau === 1 ? REPERE_ENFANT[temps] : null,
     prefixe,
     sujet,
     colle,
+    suite,
     apres,
     bonneForme,
     complete,

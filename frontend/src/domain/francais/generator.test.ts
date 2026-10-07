@@ -56,6 +56,23 @@ describe("conjugaison — nouveau format phrase a completer", () => {
     }
   });
 
+  it("est une VRAIE phrase, jamais réduite à « sujet + verbe » (il y a toujours une suite)", () => {
+    for (const comp of [...SIMPLE, "FR.CONJ.PASSE_COMPOSE"]) {
+      for (let n = 1; n <= 4; n++) {
+        for (const seed of SEEDS) {
+          const p = generateExercise(src(comp, n), seed).conjPhrase!;
+          // Une suite non vide apres la forme (ex. « à la maison », « une chanson »).
+          expect(p.suite.trim().length, `${comp} N${n}`).toBeGreaterThan(0);
+          // La phrase ne s'arrete donc PAS juste apres la forme : « Il est. » refuse.
+          const sansPoint = p.complete.slice(0, -1);
+          expect(sansPoint.endsWith(p.bonneForme), `${comp} N${n}: ${p.complete}`).toBe(false);
+          // La forme est suivie de la suite dans la phrase complete.
+          expect(p.complete).toContain(`${p.bonneForme} ${p.suite}`);
+        }
+      }
+    }
+  });
+
   it("indique le temps au N1/N2, pas au N3/N4", () => {
     for (const comp of [...SIMPLE, "FR.CONJ.PASSE_COMPOSE"]) {
       for (const seed of SEEDS.slice(0, 10)) {

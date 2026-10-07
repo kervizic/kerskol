@@ -319,7 +319,8 @@ export interface GeneratedExercise {
     prefixe: string; // mot repere en debut de phrase (N3/N4) ou "" ; ex. « Hier, »
     sujet: string; // sujet affiche, mis en couleur (decide de la forme)
     colle: boolean; // true => pas d'espace entre le sujet et la case (elision « j' »)
-    apres: string; // texte apres la case (ex. « . »)
+    suite: string; // complement affiche APRES la case (ex. « à la maison ») : une vraie phrase
+    apres: string; // texte apres la suite (ex. « . »)
     bonneForme: string; // bonne forme a afficher dans la case apres la reponse
     complete: string; // phrase complete (aria + reference pour la voix future)
     voixCle: string; // clef voix de la phrase complete (aucun audio genere ici)

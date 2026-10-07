@@ -360,6 +360,8 @@ function ConjugaisonView({
         >
           {box}
         </span>
+        {" "}
+        {phrase.suite}
         {phrase.apres}
       </p>
     </div>
