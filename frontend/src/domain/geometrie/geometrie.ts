@@ -43,8 +43,9 @@ import type { Base, GeneratedExercise, ExCalcul } from "../calcul/generator";
 // --------------------------------------------------------------------------
 // Schema d'une figure (dessinee par le composant <Geometrie>, viewBox 0..100).
 // --------------------------------------------------------------------------
-export type GeoFormat = "qcm" | "clic" | "texte" | "grille" | "construire" | "programme";
-export type GeoInteract = "color" | "point"; // mode d'un exercice « grille »
+export type GeoFormat = "qcm" | "clic" | "texte" | "grille" | "construire" | "programme" | "reproduire";
+export type GeoInteract = "color" | "point" | "multi"; // mode d'un exercice « grille » (multi = selection de sommets)
+export type Pt = [number, number]; // coordonnees entieres d'un noeud
 
 export type SolidName = "cube" | "pave" | "cylindre" | "sphere" | "pyramide" | "cone";
 
@@ -65,6 +66,12 @@ export interface ProgrammeSpec {
   dir: Dir; // orientation de depart
   target: string; // case cible (ex. "C3")
   obstacles: string[]; // cases infranchissables
+}
+// Reproduire : un modele (polygone) a retracer ; egalite a translation pres.
+// `memoire` : le modele est masque au bout de 3 secondes (refaire de memoire, N4).
+export interface ReproduireSpec {
+  model: Pt[];
+  memoire?: boolean;
 }
 
 export interface GeoShape {
@@ -98,7 +105,7 @@ export type GeoFigure =
   | { kind: "shapes"; shapes: GeoShape[] }
   | { kind: "solid"; solid: SolidName }
   | { kind: "grid"; grid: GeoGridSpec }
-  | { kind: "build"; cols: number; rows: number } // quadrillage de noeuds aimante (construction)
+  | { kind: "build"; cols: number; rows: number; model?: Pt[]; prefill?: Pt[]; memoire?: boolean } // quadrillage de noeuds aimante
   | { kind: "none" };
 
 export interface GeoItem {
@@ -111,8 +118,8 @@ export interface GeoItem {
   attendu: string; // reponse attendue (comparee normalisee)
   explication: string; // correction courte et valorisante, avec un exemple
   figure: GeoFigure; // schema dessine par le composant
-  interact?: GeoInteract; // mode « grille » : colorier (symetrie) ou placer un point
-  spec?: ConstruireSpec | ProgrammeSpec; // contrat de verification par proprietes (construire / programme)
+  interact?: GeoInteract; // mode « grille » : colorier (symetrie), placer un point, selection multiple
+  spec?: ConstruireSpec | ProgrammeSpec | ReproduireSpec; // contrat de verification par proprietes
 }
 
 // Donnees de RENDU (ce que l'exercice porte et que <Geometrie> affiche) : tout
@@ -150,7 +157,6 @@ export function canonCells(codes: string[]): string {
 // arithmetique exacte (aucun flottant). Sert au mode demo, au feedback local et
 // aux tests golden ; le SERVEUR reste seul juge en production.
 // --------------------------------------------------------------------------
-type Pt = [number, number];
 
 // Decode "A1" -> { col: 0, row: 1 } (col = lettre - A, row = numero).
 export function cellColRow(code: string): { col: number; row: number } {
@@ -232,6 +238,30 @@ export function verifProgramme(spec: ProgrammeSpec, tokens: ProgToken[]): boolea
   return arrivee != null && arrivee.toUpperCase() === spec.target.toUpperCase();
 }
 
+// Ensemble (trie) des aretes normalisees d'un polygone, recale sur son coin
+// bas-gauche : invariant par translation, sommet de depart et sens de parcours.
+function edgesOf(poly: Pt[]): string[] | null {
+  const n = poly.length;
+  if (n < 2) return null;
+  const minx = Math.min(...poly.map((p) => p[0]));
+  const miny = Math.min(...poly.map((p) => p[1]));
+  const res: string[] = [];
+  for (let i = 0; i < n; i++) {
+    const xa = poly[i][0] - minx, ya = poly[i][1] - miny;
+    const xb = poly[(i + 1) % n][0] - minx, yb = poly[(i + 1) % n][1] - miny;
+    res.push(xa > xb || (xa === xb && ya > yb) ? `${xb},${yb}-${xa},${ya}` : `${xa},${ya}-${xb},${yb}`);
+  }
+  return res.sort();
+}
+
+// Reproduire : egalite des figures A TRANSLATION pres (meme ensemble d'aretes).
+export function verifReproduire(spec: ReproduireSpec, drawn: Pt[]): boolean {
+  const md = edgesOf(spec.model);
+  const dr = edgesOf(drawn);
+  if (!md || !dr || md.length !== dr.length) return false;
+  return md.every((e, i) => e === dr[i]);
+}
+
 // --------------------------------------------------------------------------
 // Helpers de construction des figures (gardent la banque lisible).
 // --------------------------------------------------------------------------
@@ -306,6 +336,36 @@ function con(
   return {
     cle, competence: "MA.GEO.CONSTRUIRE", niveau, format: "construire", consigne,
     attendu: JSON.stringify(attenduSample), explication, spec, figure: build(cols, rows),
+  };
+}
+
+// Construit un item « completer un sommet manquant » : des sommets sont deja
+// places (prefill), l'enfant pose le dernier ; la figure complete doit valider le
+// `spec` (rectangle/carre). Jugee comme une construction.
+function comp(
+  cle: string, niveau: number, consigne: string,
+  spec: ConstruireSpec, cols: number, rows: number,
+  prefill: Pt[], attenduSample: Pt[], explication: string,
+): GeoItem {
+  return {
+    cle, competence: "MA.GEO.CONSTRUIRE", niveau, format: "construire", consigne,
+    attendu: JSON.stringify(attenduSample), explication, spec,
+    figure: { kind: "build", cols, rows, prefill },
+  };
+}
+
+// Construit un item « reproduire une figure » (ou « de memoire » si memoire=true :
+// le modele est masque au bout de 3 s). Jugee a translation pres.
+function rep(
+  cle: string, niveau: number, consigne: string,
+  model: Pt[], cols: number, rows: number,
+  attenduSample: Pt[], explication: string, memoire = false,
+): GeoItem {
+  const spec: ReproduireSpec = memoire ? { model, memoire: true } : { model };
+  return {
+    cle, competence: "MA.GEO.CONSTRUIRE", niveau, format: "reproduire", consigne,
+    attendu: JSON.stringify(attenduSample), explication, spec,
+    figure: { kind: "build", cols, rows, model, ...(memoire ? { memoire: true } : {}) },
   };
 }
 
@@ -686,6 +746,59 @@ export const BANQUE_GEOMETRIE: GeoItem[] = [
     { cols: 5, rows: 5, start: "A1", dir: "N", target: "E3", obstacles: ["C1", "C2", "D2"] },
     ["avance", "avance", "droite", "avance", "avance", "avance", "avance"],
     "Une solution : avance deux fois (jusqu'en A3), tourne à droite, puis avance jusqu'en E3. Tu passes au-dessus des cases grises."),
+
+  // =======================================================================
+  // LOT 2 — completer, reproduire, refaire de memoire, equerre, symetrie
+  // =======================================================================
+  // MA.GEO.CONSTRUIRE : completer un sommet manquant (3 coins donnes)
+  comp("geo-con-n2-comp-carre", 2, "Il manque un coin à ce carré. Touche le nœud qui complète le carré.",
+    { t: "rect", w: 3, h: 3 }, 6, 6, [[0, 0], [3, 0], [3, 3]], [[0, 0], [3, 0], [3, 3], [0, 3]],
+    "Le quatrième coin ferme le carré. Place-le en face, pour que les quatre côtés soient égaux."),
+  comp("geo-con-n3-comp-rect", 3, "Il manque un coin à ce rectangle. Touche le nœud qui complète le rectangle.",
+    { t: "rect", w: 4, h: 2 }, 6, 5, [[0, 0], [4, 0], [4, 2]], [[0, 0], [4, 0], [4, 2], [0, 2]],
+    "Le quatrième coin est en face. Les côtés opposés d'un rectangle ont la même longueur."),
+  // MA.GEO.CONSTRUIRE : reproduire une figure (N3)
+  rep("geo-rep-n3-rect", 3, "Regarde le modèle. Reproduis la même figure sur le quadrillage, de nœud en nœud.",
+    [[0, 0], [4, 0], [4, 2], [0, 2]], 6, 4, [[1, 1], [5, 1], [5, 3], [1, 3]],
+    "Compte les carreaux de chaque côté comme sur le modèle. Tu peux la tracer un peu plus loin, c'est la même figure."),
+  rep("geo-rep-n3-ell", 3, "Regarde le modèle. Reproduis la même figure sur le quadrillage, de nœud en nœud.",
+    [[0, 0], [3, 0], [3, 1], [1, 1], [1, 2], [0, 2]], 5, 4, [[1, 1], [4, 1], [4, 2], [2, 2], [2, 3], [1, 3]],
+    "Suis le contour du modèle, un nœud après l'autre. Compte bien les carreaux à chaque coin."),
+  // MA.GEO.CONSTRUIRE : refaire de mémoire (N4) — le modèle se cache après 3 secondes
+  rep("geo-rep-n4-mem-rect", 4, "Observe bien ce rectangle. Il va se cacher. Refais-le ensuite de mémoire sur le quadrillage.",
+    [[0, 0], [3, 0], [3, 2], [0, 2]], 5, 4, [[2, 1], [5, 1], [5, 3], [2, 3]],
+    "C'est un rectangle de trois carreaux sur deux. Tu peux le tracer n'importe où, c'est la même figure.", true),
+  rep("geo-rep-n4-mem-tri", 4, "Observe bien ce triangle. Il va se cacher. Refais-le ensuite de mémoire sur le quadrillage.",
+    [[0, 0], [3, 0], [0, 2]], 5, 4, [[1, 1], [4, 1], [1, 3]],
+    "C'est un triangle rectangle : un côté de trois carreaux, un côté de deux carreaux, et un angle droit entre les deux.", true),
+
+  // MA.GEO.VOCABULAIRE : équerre — toucher TOUS les angles droits (sélection multiple)
+  { cle: "geo-voc-n3-equerre", competence: "MA.GEO.VOCABULAIRE", niveau: 3, format: "grille", interact: "multi",
+    consigne: "Touche tous les coins de cette figure qui sont des angles droits, comme le coin d'une feuille.",
+    attendu: canonCells(["A", "B"]),
+    figure: shapes(
+      { kind: "segment", pts: [[20, 80], [20, 25]] }, { kind: "segment", pts: [[20, 25], [75, 25]] },
+      { kind: "segment", pts: [[75, 25], [60, 80]] }, { kind: "segment", pts: [[60, 80], [20, 80]] },
+      dot(20, 80, { name: "A", label: "A" }), dot(20, 25, { name: "B", label: "B" }),
+      dot(75, 25, { name: "C", label: "C" }), dot(60, 80, { name: "D", label: "D" })),
+    explication: "Les coins A et B sont bien carrés : ce sont des angles droits. Les coins C et D sont penchés, ce ne sont pas des angles droits." },
+  { cle: "geo-voc-n4-equerre", competence: "MA.GEO.VOCABULAIRE", niveau: 4, format: "grille", interact: "multi",
+    consigne: "Touche tous les coins de cette figure qui sont des angles droits.",
+    attendu: canonCells(["A", "E"]),
+    figure: shapes(
+      { kind: "segment", pts: [[25, 80], [25, 40]] }, { kind: "segment", pts: [[25, 40], [50, 22]] },
+      { kind: "segment", pts: [[50, 22], [75, 40]] }, { kind: "segment", pts: [[75, 40], [75, 80]] },
+      { kind: "segment", pts: [[75, 80], [25, 80]] },
+      dot(25, 80, { name: "A", label: "A" }), dot(25, 40, { name: "B", label: "B" }),
+      dot(50, 22, { name: "C", label: "C" }), dot(75, 40, { name: "D", label: "D" }), dot(75, 80, { name: "E", label: "E" })),
+    explication: "Les coins A et E, en bas, sont bien carrés : ce sont des angles droits. Le toit (B, C, D) est penché, ce ne sont pas des angles droits." },
+
+  // MA.GEO.SYMETRIE : complétion par symétrie plus grande (N4, remontée)
+  { cle: "geo-sym-n4-c", competence: "MA.GEO.SYMETRIE", niveau: 4, format: "grille", interact: "color",
+    consigne: "Colorie les cases du haut pour compléter la figure par symétrie sur le trait du milieu.",
+    attendu: canonCells(["A5", "B6", "C5", "D6", "E5"]),
+    figure: grid({ cols: 5, rows: 6, axis: { dir: "h", at: 4 }, fill: ["A4", "B3", "C4", "D3", "E4"] }),
+    explication: "On plie sur le trait du milieu : chaque case du bas a sa jumelle en haut, à la même distance. On colorie A5, B6, C5, D6 et E5." },
 ];
 
 // Competences par sous-matiere (ordre d'affichage = ordre du referentiel).
@@ -725,6 +838,13 @@ export function estJusteGeometrie(cle: string, saisie: string): boolean {
   if (item.format === "programme") {
     try {
       return verifProgramme(item.spec as ProgrammeSpec, JSON.parse(saisie) as ProgToken[]);
+    } catch {
+      return false;
+    }
+  }
+  if (item.format === "reproduire") {
+    try {
+      return verifReproduire(item.spec as ReproduireSpec, JSON.parse(saisie) as Pt[]);
     } catch {
       return false;
     }

@@ -34,7 +34,11 @@
     "consigne:touche-les-noeuds": "Touche les nœuds du quadrillage pour placer les coins.",
     "consigne:construis-la-figure": "Construis la figure demandée sur le quadrillage.",
     "consigne:assemble-le-programme": "Assemble les cartes pour amener le robot jusqu'à la case verte.",
-    "consigne:clique-case-arrivee": "Clique sur la case où le robot arrive."
+    "consigne:clique-case-arrivee": "Clique sur la case où le robot arrive.",
+    "consigne:reproduis-la-figure": "Reproduis la même figure sur le quadrillage, de nœud en nœud.",
+    "consigne:refais-de-memoire": "Observe bien la figure. Elle va se cacher. Refais-la ensuite de mémoire.",
+    "consigne:complete-le-sommet": "Il manque un coin. Touche le nœud qui complète la figure.",
+    "consigne:touche-angles-droits": "Touche tous les coins qui sont des angles droits."
   },
   "message": {
     "msg:bravo": "Bravo ! C'est la bonne réponse.",
@@ -56,7 +60,9 @@
     "msg:grammaire-regarde": "Ce n'est pas tout à fait ça. Regarde la réponse.",
     "msg:construis-compte-carreaux": "Pour construire ta figure, compte bien les carreaux sur chaque côté. Dans un carré, tous les côtés ont le même nombre de carreaux.",
     "msg:robot-avance-case": "Le robot avance d'une seule case à la fois, tout droit, du côté où il regarde. Quand il tourne, il change de direction mais il reste sur sa case.",
-    "msg:programme-eviter-obstacles": "Regarde bien où sont les cases grises. Fais passer le robot à côté, jamais dessus, pour arriver jusqu'à la case verte."
+    "msg:programme-eviter-obstacles": "Regarde bien où sont les cases grises. Fais passer le robot à côté, jamais dessus, pour arriver jusqu'à la case verte.",
+    "msg:reproduis-compte-carreaux": "Pour reproduire la figure, compte les carreaux de chaque côté comme sur le modèle. Tu peux la tracer un peu plus loin, c'est la même figure.",
+    "msg:angle-droit-equerre": "Un angle droit est bien carré, comme le coin d'une feuille. Pose le coin de ton équerre dessus pour vérifier."
   },
   "indice": {
     "_commentaire": "Indices du bouton Indice (niveaux 1 et 2). Un par competence. Textes identiques a frontend/src/domain/indices.ts. Aucun audio genere pour l'instant.",

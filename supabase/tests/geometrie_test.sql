@@ -27,8 +27,8 @@ DECLARE
     n   integer;
 BEGIN
     SELECT count(*) INTO n FROM public.geometrie_item;
-    IF n <> 76 THEN
-        RAISE EXCEPTION 'geometrie_item : 76 items attendus, obtenu %', n;
+    IF n <> 85 THEN
+        RAISE EXCEPTION 'geometrie_item : 85 items attendus, obtenu %', n;
     END IF;
 
     -- Couverture : chaque competence a au moins un item a chaque niveau 1..4
@@ -67,7 +67,7 @@ BEGIN
                 r.cle, r.format || '|' || r.attendu, got;
         END IF;
     END LOOP;
-    RAISE NOTICE 'table geometrie_item (76 + couverture + spot) : OK';
+    RAISE NOTICE 'table geometrie_item (85 + couverture + spot) : OK';
 END $$;
 
 -- ===========================================================================
@@ -108,7 +108,26 @@ BEGIN
     IF     public.verif_geo('geo-prog-n3-a','rien')                                                    THEN RAISE EXCEPTION 'programme json invalide accepte'; END IF;
     IF NOT public.verif_geo('geo-prog-n4-a','["avance","avance","avance","avance","droite","avance","avance","avance","avance"]') THEN RAISE EXCEPTION 'programme obstacles solution refusee'; END IF;
 
-    RAISE NOTICE 'verif_geo (dont construire / programme) : OK';
+    -- REPRODUIRE (egalite a translation pres) : meme figure, translatee / autre depart / sens inverse.
+    IF NOT public.verif_geo('geo-rep-n3-rect','[[0,0],[4,0],[4,2],[0,2]]') THEN RAISE EXCEPTION 'reproduire modele exact refuse'; END IF;
+    IF NOT public.verif_geo('geo-rep-n3-rect','[[2,1],[6,1],[6,3],[2,3]]') THEN RAISE EXCEPTION 'reproduire translate refuse'; END IF;
+    IF NOT public.verif_geo('geo-rep-n3-rect','[[0,2],[0,0],[4,0],[4,2]]') THEN RAISE EXCEPTION 'reproduire autre depart refuse'; END IF;
+    IF     public.verif_geo('geo-rep-n3-rect','[[0,0],[3,0],[3,2],[0,2]]') THEN RAISE EXCEPTION 'reproduire mauvaise taille acceptee'; END IF;
+    IF     public.verif_geo('geo-rep-n3-rect','pas du json')               THEN RAISE EXCEPTION 'reproduire json invalide accepte'; END IF;
+    IF NOT public.verif_geo('geo-rep-n3-ell','[[0,0],[3,0],[3,1],[1,1],[1,2],[0,2]]') THEN RAISE EXCEPTION 'reproduire L refuse'; END IF;
+
+    -- COMPLETER un sommet (jugee comme une construction rectangle).
+    IF NOT public.verif_geo('geo-con-n2-comp-carre','[[0,0],[3,0],[3,3],[0,3]]') THEN RAISE EXCEPTION 'completer carre juste refuse'; END IF;
+    IF     public.verif_geo('geo-con-n2-comp-carre','[[0,0],[3,0],[3,3],[1,3]]') THEN RAISE EXCEPTION 'completer carre mauvais coin accepte'; END IF;
+
+    -- EQUERRE (grille, ensemble de sommets) : ordre et casse indifferents.
+    -- Le client envoie TOUJOURS l'ensemble canonique (trie, canonCells) ; le
+    -- serveur tolere la casse mais pas un ordre non canonique.
+    IF NOT public.verif_geo('geo-voc-n3-equerre','A;B')  THEN RAISE EXCEPTION 'equerre bonne selection refusee'; END IF;
+    IF NOT public.verif_geo('geo-voc-n3-equerre','a;b')  THEN RAISE EXCEPTION 'equerre casse KO'; END IF;
+    IF     public.verif_geo('geo-voc-n3-equerre','A;B;C') THEN RAISE EXCEPTION 'equerre selection en trop acceptee'; END IF;
+
+    RAISE NOTICE 'verif_geo (dont construire / programme / reproduire / equerre) : OK';
 END $$;
 
 -- ===========================================================================
@@ -219,6 +238,30 @@ BEGIN
         'geo-prog-n3-a', NULL, 'seance', '["avance","avance"]', NULL);
     IF (v ->> 'correct')::boolean IS NOT FALSE THEN
         RAISE EXCEPTION 'programme rate devrait etre faux : %', v;
+    END IF;
+END $$;
+
+-- 3c-quater. REPRODUIRE (MA.GEO.CONSTRUIRE N3) : figure translatee juste, mauvaise taille fausse.
+DO $$
+DECLARE v jsonb; v_id uuid := gen_random_uuid();
+BEGIN
+    v := public.enregistrer_reponse(
+        v_id, 'a0000001-0000-0000-0000-000000000000'::uuid, NULL, 'MA.GEO.CONSTRUIRE', NULL, 3, 'van_hiele',
+        'geo', 0, 0, 0, NULL, 1, 3000, false, false, false, now(),
+        'geo-rep-n3-rect', NULL, 'seance', '[[2,1],[6,1],[6,3],[2,3]]', NULL);
+    IF (v ->> 'correct')::boolean IS NOT TRUE THEN
+        RAISE EXCEPTION 'reproduire translate devrait etre juste : %', v;
+    END IF;
+END $$;
+DO $$
+DECLARE v jsonb; v_id uuid := gen_random_uuid();
+BEGIN
+    v := public.enregistrer_reponse(
+        v_id, 'a0000001-0000-0000-0000-000000000000'::uuid, NULL, 'MA.GEO.VOCABULAIRE', NULL, 3, 'van_hiele',
+        'geo', 0, 0, 0, NULL, 1, 3000, false, false, false, now(),
+        'geo-voc-n3-equerre', NULL, 'seance', 'A;B', NULL);
+    IF (v ->> 'correct')::boolean IS NOT TRUE THEN
+        RAISE EXCEPTION 'equerre A;B devrait etre juste : %', v;
     END IF;
 END $$;
 

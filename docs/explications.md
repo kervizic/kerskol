@@ -572,9 +572,32 @@ sont **entières** (nœuds), donc la vérification est en arithmétique exacte. 
 miroir client (`verifConstruire`, `verifProgramme`, `simulerProgramme`) sert au mode
 démo et aux tests golden ; le **serveur reste seul juge**.
 
-Le lot 2 (prévu) ajoutera : reproduire une figure (égalité à translation près),
-compléter (sommet manquant, moitié symétrique), équerre virtuelle (toucher tous les
-angles droits), refaire une figure de mémoire, et remontera la symétrie d'un cran.
+### Refonte CE2 géométrie, lot 2 (migration 0048)
+
+Sur les compétences existantes (aucune nouvelle compétence, migration additive) :
+
+- **Reproduire une figure** (`MA.GEO.CONSTRUIRE`, format `reproduire`) : un modèle
+  est montré, l'enfant le retrace de nœud en nœud. Le serveur vérifie l'**égalité à
+  translation près** (`verif_geo_reproduire` : même ensemble d'arêtes après recalage
+  sur le coin bas-gauche, indépendant du sommet de départ et du sens de parcours).
+- **Refaire de mémoire** (N4) : même vérification, le modèle se **cache après 3
+  secondes** côté client (`memoire: true`).
+- **Compléter un sommet manquant** (format `construire` avec sommets pré-placés) :
+  trois coins sont donnés, l'enfant pose le quatrième ; la figure complète doit être
+  le rectangle/carré attendu.
+- **Équerre / toucher tous les angles droits** (`MA.GEO.VOCABULAIRE`, format
+  `grille`, sélection **multiple** de sommets) : l'enfant touche les coins qui sont
+  des angles droits ; le serveur compare l'**ensemble canonique** de sommets.
+- **Symétrie** : ajout d'un item de complétion plus grand au N4 (la symétrie était
+  déjà au bon niveau en N3/N4, on confirme et on remonte le plafond).
+
+Nouveau format `reproduire` ajouté au contrat `spec` jsonb ; fonctions
+`verif_geo_edges` (arêtes normalisées) et `verif_geo_reproduire`, miroir client
+`verifReproduire`. Le **serveur reste seul juge**.
+
+La partie 2 (prévue, non faite) ajoutera : règle graduée virtuelle (mesurer, tracer
+7 cm, milieu, alignement), compas simplifié (centre, rayon), solides 3D manipulables
+et patrons du cube.
 
 ## Sous-matière « Tableaux et graphiques » (maths, phase 4)
 

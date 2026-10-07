@@ -16,13 +16,14 @@ import {
   canonCells,
   verifConstruire,
   verifProgramme,
+  verifReproduire,
   simulerProgramme,
 } from "./geometrie";
-import type { ConstruireSpec, ProgrammeSpec } from "./geometrie";
+import type { ConstruireSpec, ProgrammeSpec, ReproduireSpec } from "./geometrie";
 import { generateExercise } from "../calcul/generator";
 import type { ExCalcul } from "../calcul/generator";
 
-const NB_ITEMS_GOLDEN = 76;
+const NB_ITEMS_GOLDEN = 85;
 
 function source(competence: string, niveau: number): ExCalcul {
   return {
@@ -83,10 +84,10 @@ describe("banque de geometrie : structure et couverture", () => {
     expect(itemsGeoDe("MA.GEO.FIGURES", 1).every((i) => i.format === "qcm")).toBe(true);
   });
 
-  it("MA.GEO.CONSTRUIRE = tous 'construire' ; MA.REPERE.PROGRAMMER = lire (clic) puis ecrire (programme)", () => {
+  it("MA.GEO.CONSTRUIRE = construire ou reproduire ; MA.REPERE.PROGRAMMER = lire (clic) puis ecrire (programme)", () => {
     expect(itemsGeoDe("MA.GEO.CONSTRUIRE", 1).length).toBeGreaterThan(0);
     for (const i of BANQUE_GEOMETRIE.filter((x) => x.competence === "MA.GEO.CONSTRUIRE")) {
-      expect(i.format, i.cle).toBe("construire");
+      expect(["construire", "reproduire"], i.cle).toContain(i.format);
     }
     for (const i of BANQUE_GEOMETRIE.filter((x) => x.competence === "MA.REPERE.PROGRAMMER")) {
       expect(i.niveau <= 2 ? "clic" : "programme", i.cle).toBe(i.format);
@@ -160,6 +161,27 @@ describe("verification par proprietes : programme (simulation)", () => {
   });
 });
 
+describe("verification par proprietes : reproduire (translation)", () => {
+  const spec: ReproduireSpec = { model: [[0, 0], [4, 0], [4, 2], [0, 2]] };
+  it("meme figure translatee : accepte", () => {
+    expect(verifReproduire(spec, [[0, 0], [4, 0], [4, 2], [0, 2]])).toBe(true);
+    expect(verifReproduire(spec, [[2, 1], [6, 1], [6, 3], [2, 3]])).toBe(true);
+  });
+  it("sommet de depart et sens de parcours differents : accepte", () => {
+    expect(verifReproduire(spec, [[0, 2], [0, 0], [4, 0], [4, 2]])).toBe(true); // rotation de depart
+    expect(verifReproduire(spec, [[0, 0], [0, 2], [4, 2], [4, 0]])).toBe(true); // sens inverse
+  });
+  it("mauvaise taille / mauvais nombre de sommets : refuse", () => {
+    expect(verifReproduire(spec, [[0, 0], [3, 0], [3, 2], [0, 2]])).toBe(false);
+    expect(verifReproduire(spec, [[0, 0], [4, 0], [4, 2]])).toBe(false);
+  });
+  it("figure non rectangulaire (L) reproduite fidelement", () => {
+    const l: ReproduireSpec = { model: [[0, 0], [3, 0], [3, 1], [1, 1], [1, 2], [0, 2]] };
+    expect(verifReproduire(l, [[1, 1], [4, 1], [4, 2], [2, 2], [2, 3], [1, 3]])).toBe(true);
+    expect(verifReproduire(l, [[0, 0], [3, 0], [3, 2], [0, 2]])).toBe(false);
+  });
+});
+
 describe("items de programmation : l'arrivee a lire est coherente", () => {
   it("chaque item 'lire un programme' pointe l'arrivee simulee", () => {
     for (const i of BANQUE_GEOMETRIE.filter((x) => x.competence === "MA.REPERE.PROGRAMMER" && x.format === "clic")) {
@@ -182,6 +204,16 @@ describe("items de programmation : l'arrivee a lire est coherente", () => {
     for (const i of BANQUE_GEOMETRIE.filter((x) => x.format === "construire")) {
       expect(estJusteGeometrie(i.cle, i.attendu), i.cle).toBe(true);
     }
+  });
+  it("chaque item 'reproduire' a un exemple de solution valide (translation)", () => {
+    for (const i of BANQUE_GEOMETRIE.filter((x) => x.format === "reproduire")) {
+      expect(estJusteGeometrie(i.cle, i.attendu), i.cle).toBe(true);
+    }
+  });
+  it("equerre : la bonne selection de sommets est acceptee, une mauvaise refusee", () => {
+    expect(estJusteGeometrie("geo-voc-n3-equerre", "A;B")).toBe(true);
+    expect(estJusteGeometrie("geo-voc-n3-equerre", canonCells(["B", "A"]))).toBe(true);
+    expect(estJusteGeometrie("geo-voc-n3-equerre", "A;B;C")).toBe(false);
   });
 });
 

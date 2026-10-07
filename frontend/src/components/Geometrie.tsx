@@ -15,9 +15,9 @@
 // construire/programme la saisie est un JSON (sommets / cartes) juge par
 // proprietes/simulation. Feedback TOUJOURS valorisant.
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Check, RotateCcw, Undo2, Play } from "lucide-react";
-import type { GeoRender, GeoShape, GeoGridSpec, SolidName, Dir, ProgToken } from "../domain/geometrie/geometrie";
+import type { GeoRender, GeoShape, GeoGridSpec, SolidName, Dir, ProgToken, Pt } from "../domain/geometrie/geometrie";
 import { canonCells, comparerGeometrie, simulerProgramme } from "../domain/geometrie/geometrie";
 
 interface Props {
@@ -345,9 +345,14 @@ function GridView({
 // deux sommets, un trait en pointilles ferme la figure.
 // --------------------------------------------------------------------------
 function BuildView({
-  cols, rows, vertices, onPick, locked,
+  cols, rows, placed, prefillCount, model, modelVisible, onPick, locked,
 }: {
-  cols: number; rows: number; vertices: Array<[number, number]>; onPick: (p: [number, number]) => void; locked: boolean;
+  cols: number; rows: number;
+  placed: Pt[]; // sommets dessines = prefill (verrouilles) + ceux de l'enfant
+  prefillCount: number; // nombre de sommets verrouilles au debut de `placed`
+  model?: Pt[]; // figure de reference (reproduire)
+  modelVisible: boolean; // false => masquee (memoire)
+  onPick: (p: Pt) => void; locked: boolean;
 }) {
   const U = 12;
   const P = 10;
@@ -364,17 +369,20 @@ function BuildView({
     lines.push(<line key={`hy${y}`} x1={sx(0)} y1={sy(y)} x2={sx(cols)} y2={sy(y)} stroke="var(--kk-border)" strokeWidth={0.8} />);
   }
 
-  const poly = vertices.map(([x, y]) => `${sx(x)},${sy(y)}`).join(" ");
+  const poly = placed.map(([x, y]) => `${sx(x)},${sy(y)}`).join(" ");
+  const modelPoly = (model ?? []).map(([x, y]) => `${sx(x)},${sy(y)}`).join(" ");
 
   const nodeEls: React.ReactNode[] = [];
   for (let x = 0; x <= cols; x++) {
     for (let y = 0; y <= rows; y++) {
-      const idx = vertices.findIndex(([vx, vy]) => vx === x && vy === y);
-      const placed = idx >= 0;
+      const idx = placed.findIndex(([vx, vy]) => vx === x && vy === y);
+      const isPlaced = idx >= 0;
+      const isPrefill = isPlaced && idx < prefillCount;
       nodeEls.push(
         <g key={`n${x}-${y}`} style={locked ? undefined : { cursor: "pointer" }} onClick={locked ? undefined : () => onPick([x, y])}>
           <circle cx={sx(x)} cy={sy(y)} r={U * 0.5} fill="transparent" />
-          <circle cx={sx(x)} cy={sy(y)} r={placed ? U * 0.26 : U * 0.14} fill={placed ? "var(--kk-accent)" : "var(--kk-border)"} />
+          <circle cx={sx(x)} cy={sy(y)} r={isPlaced ? U * 0.26 : U * 0.14}
+            fill={isPrefill ? "var(--kk-text)" : isPlaced ? "var(--kk-accent)" : "var(--kk-border)"} />
         </g>
       );
     }
@@ -385,10 +393,13 @@ function BuildView({
     <div className="kk-support kk-geo__grid">
       <svg width="100%" style={{ maxWidth: px }} viewBox={`0 0 ${Wv} ${Hv}`} role="img" aria-label="quadrillage à construire">
         {lines}
-        {vertices.length >= 3 && (
+        {model && modelVisible && model.length >= 2 && (
+          <polygon points={modelPoly} fill="#16a34a" fillOpacity={0.12} stroke="#16a34a" strokeWidth={2} strokeDasharray="4 2" />
+        )}
+        {placed.length >= 3 && (
           <polygon points={poly} fill="var(--kk-accent)" fillOpacity={0.14} stroke="var(--kk-accent)" strokeWidth={2} />
         )}
-        {vertices.length === 2 && (
+        {placed.length === 2 && (
           <polyline points={poly} fill="none" stroke="var(--kk-accent)" strokeWidth={2} strokeLinecap="round" />
         )}
         {nodeEls}
@@ -401,30 +412,50 @@ export default function Geometrie({ item, onSoumettre, onContinuer }: Props) {
   const [choix, setChoix] = useState<string | null>(null); // qcm / clic / point
   const [colored, setColored] = useState<string[]>([]); // grille color
   const [saisie, setSaisie] = useState(""); // texte
-  const [vertices, setVertices] = useState<Array<[number, number]>>([]); // construire
+  const [vertices, setVertices] = useState<Pt[]>([]); // sommets ajoutes par l'enfant (construire / reproduire)
   const [tokens, setTokens] = useState<ProgToken[]>([]); // programme
+  const [multiSel, setMultiSel] = useState<string[]>([]); // selection multiple (equerre)
   const [robotCell, setRobotCell] = useState<string | null>(null); // apercu du robot
+  const [modelVisible, setModelVisible] = useState(true); // modele a reproduire (memoire)
   const [busy, setBusy] = useState(false);
   const [res, setRes] = useState<{ correct: boolean } | null>(null);
   const [erreurReseau, setErreurReseau] = useState(false);
 
   const isColor = item.format === "grille" && item.interact === "color";
   const isPoint = item.format === "grille" && item.interact === "point";
+  const isMulti = item.format === "grille" && item.interact === "multi";
   const gridClic = item.format === "clic" && item.figure.kind === "grid";
   const isConstruire = item.format === "construire" && item.figure.kind === "build";
+  const isReproduire = item.format === "reproduire" && item.figure.kind === "build";
+  const isBuild = isConstruire || isReproduire;
   const isProgramme = item.format === "programme" && item.figure.kind === "grid";
   const grid = item.figure.kind === "grid" ? item.figure.grid : null;
+  const buildFig = item.figure.kind === "build" ? item.figure : null;
+  const prefill = buildFig?.prefill ?? [];
   const programAffiche = grid?.program ?? null; // programme a LIRE (clic)
+
+  // « Refaire de memoire » : le modele reste visible 3 s puis se cache.
+  const memoire = Boolean(buildFig?.memoire);
+  useEffect(() => {
+    if (!memoire) return;
+    setModelVisible(true);
+    const t = setTimeout(() => setModelVisible(false), 3000);
+    return () => clearTimeout(t);
+  }, [memoire, item.cle]);
+
+  // Sommets dessines = prefill (verrouilles) + ceux de l'enfant.
+  const placed = useMemo(() => [...prefill, ...vertices], [prefill, vertices]);
 
   // Reponse courante (texte envoye au serveur) selon le format.
   const reponse = useMemo(() => {
     if (item.format === "qcm") return choix ?? "";
     if (item.format === "texte") return saisie;
     if (isColor) return canonCells(colored);
-    if (isConstruire) return vertices.length >= 2 ? JSON.stringify(vertices) : "";
+    if (isMulti) return canonCells(multiSel);
+    if (isBuild) return placed.length >= 2 ? JSON.stringify(placed) : "";
     if (isProgramme) return tokens.length >= 1 ? JSON.stringify(tokens) : "";
     return choix ?? ""; // clic (figure ou grille) / point
-  }, [item.format, isColor, isConstruire, isProgramme, choix, saisie, colored, vertices, tokens]);
+  }, [item.format, isColor, isMulti, isBuild, isProgramme, choix, saisie, colored, multiSel, placed, tokens]);
 
   const peutValider = reponse.trim().length > 0 && !res && !busy;
 
@@ -447,10 +478,20 @@ export default function Geometrie({ item, onSoumettre, onContinuer }: Props) {
     setColored((prev) => (prev.includes(code) ? prev.filter((c) => c !== code) : [...prev, code]));
   };
 
-  const pickNode = (p: [number, number]) => {
+  const pickNode = (p: Pt) => {
     if (res) return;
     setVertices((prev) => [...prev, p]);
   };
+
+  const toggleMulti = (name: string) => {
+    if (res) return;
+    setMultiSel((prev) => (prev.includes(name) ? prev.filter((n) => n !== name) : [...prev, name]));
+  };
+  // Sommets « angle droit » attendus (equerre), pour le surlignage apres coup.
+  const attenduMultiSet = useMemo(
+    () => new Set(item.attendu.toUpperCase().split(";").filter(Boolean)),
+    [item.attendu],
+  );
 
   const addToken = (t: ProgToken) => {
     if (res) return;
@@ -500,20 +541,38 @@ export default function Geometrie({ item, onSoumettre, onContinuer }: Props) {
       {fig.kind === "shapes" && (
         <div className="kk-support kk-geo__figure">
           <svg width="100%" style={{ maxWidth: 320 }} viewBox="0 0 100 100" role="img" aria-label="figure">
-            {fig.shapes.map((s, i) => (
-              <ShapeEl
-                key={i}
-                s={res ? { ...s, hi: s.name != null && comparerGeometrie("clic", s.name, item.attendu) } : s}
-                clickable={item.format === "clic" && !res}
-                selected={item.format === "clic" && choix != null && s.name === choix}
-                onPick={() => !res && s.name && setChoix(s.name)}
-              />
-            ))}
+            {fig.shapes.map((s, i) => {
+              const hiAfter = res && s.name != null
+                && (isMulti ? attenduMultiSet.has(s.name.toUpperCase()) : comparerGeometrie("clic", s.name, item.attendu));
+              const sel = isMulti
+                ? s.name != null && multiSel.includes(s.name)
+                : item.format === "clic" && choix != null && s.name === choix;
+              return (
+                <ShapeEl
+                  key={i}
+                  s={res ? { ...s, hi: Boolean(hiAfter) } : s}
+                  clickable={(item.format === "clic" || isMulti) && !res}
+                  selected={Boolean(sel)}
+                  onPick={() => {
+                    if (res || !s.name) return;
+                    if (isMulti) toggleMulti(s.name);
+                    else setChoix(s.name);
+                  }}
+                />
+              );
+            })}
           </svg>
         </div>
       )}
       {fig.kind === "build" && (
-        <BuildView cols={fig.cols} rows={fig.rows} vertices={vertices} onPick={pickNode} locked={Boolean(res)} />
+        <BuildView
+          cols={fig.cols} rows={fig.rows} placed={placed} prefillCount={prefill.length}
+          model={fig.model} modelVisible={memoire ? modelVisible : true}
+          onPick={pickNode} locked={Boolean(res)}
+        />
+      )}
+      {memoire && !modelVisible && !res && (
+        <p className="kk-lead" style={{ textAlign: "center", margin: 0 }}>Le modèle est caché. À toi de le refaire&nbsp;!</p>
       )}
       {fig.kind === "grid" && (
         <GridView
@@ -530,8 +589,8 @@ export default function Geometrie({ item, onSoumettre, onContinuer }: Props) {
         />
       )}
 
-      {/* CONSTRUIRE : commandes annuler / effacer. */}
-      {isConstruire && !res && (
+      {/* CONSTRUIRE / REPRODUIRE : commandes annuler / effacer. */}
+      {isBuild && !res && (
         <div className="kk-row" style={{ justifyContent: "center", flexWrap: "wrap" }}>
           <button type="button" className="kk-btn" disabled={vertices.length === 0} onClick={() => setVertices((p) => p.slice(0, -1))}>
             <Undo2 size={18} aria-hidden="true" /> Annuler le dernier point
