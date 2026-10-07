@@ -37,6 +37,7 @@ export const MATIERES: MatiereDef[] = [
       { domaine: "fractions", libelle: "Fractions" },
       { domaine: "geometrie", libelle: "Géométrie" },
       { domaine: "repere", libelle: "Se repérer" },
+      { domaine: "donnees", libelle: "Tableaux et graphiques" },
     ],
   },
   {

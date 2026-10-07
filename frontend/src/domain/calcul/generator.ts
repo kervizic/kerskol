@@ -24,6 +24,8 @@ import { enLettresFr } from "../diagnostic/lettres";
 import { buildFrancaisConjugaison, buildFrancaisDictee, buildFrancaisPasseCompose, buildFrancaisGrammaire, buildFrancaisLexique } from "../francais/generator";
 import { buildGeometrie } from "../geometrie/geometrie";
 import type { GeoFigure, GeoFormat, GeoInteract } from "../geometrie/geometrie";
+import { buildDonnees } from "../donnees/donnees";
+import type { DonFigure, DonFormat, DonInteract } from "../donnees/donnees";
 import type { Temps, Personne } from "../francais/conjugaison";
 import type { Genre } from "../francais/passe-compose";
 
@@ -43,7 +45,8 @@ export type Forme =
   | "conjugaison" // francais : conjuguer un verbe (present / futur / imparfait)
   | "dictee" // francais : dictee detective (trouver / corriger des erreurs)
   | "grammaire" // francais : grammaire (nature, sujet/verbe, types, ponctuation, GN)
-  | "geometrie"; // maths : geometrie et reperage (figures, solides, symetrie, quadrillage, plan)
+  | "geometrie" // maths : geometrie et reperage (figures, solides, symetrie, quadrillage, plan)
+  | "donnees"; // maths : tableaux et graphiques (tableau, barres, pictogramme, comparer)
 
 export type Support = "rectangle" | "droite" | "aucun" | null;
 
@@ -83,7 +86,11 @@ export type Saisie =
   // geometrie -> composant autonome <Geometrie> : figure SVG tactile (figures
   // planes, solides, quadrillage), QCM / clic / saisie libre / coloriage de
   // cases. Le serveur (verif_geo, op 'geo') reste seul juge via la cle.
-  | "geometrie";
+  | "geometrie"
+  // donnees -> composant autonome <Donnees> : tableau / diagramme en barres /
+  // pictogramme tactile, QCM / clic / saisie libre / reglage d'une barre. Le
+  // serveur (verif_donnees, op 'don') reste seul juge via la cle.
+  | "donnees";
 
 // Enonce normalise envoye au serveur pour revalidation. L'operation porte sur
 // deux operandes et son resultat est la reponse attendue :
@@ -114,7 +121,7 @@ export type Saisie =
 // `lex` : vocabulaire / mots a savoir (phase 2). Meme principe que `gram` : la
 // reponse est du TEXTE (reponse_texte), `cle` porte l'item (p_op2) ; la
 // verification reelle est serveur (verif_lexique) / client (lexique.ts).
-export type VerifOp = "add" | "sub" | "mul" | "div" | "cmp" | "val" | "lettres" | "conj" | "dictee" | "gram" | "lex" | "geo";
+export type VerifOp = "add" | "sub" | "mul" | "div" | "cmp" | "val" | "lettres" | "conj" | "dictee" | "gram" | "lex" | "geo" | "don";
 export type VerifOp2 = "add" | "sub" | "mul" | "div" | "rsub";
 export interface Verif {
   op: VerifOp;
@@ -162,6 +169,10 @@ function applyOp(op: VerifOp, a: number, b: number): { answer: number; reste: nu
     case "geo":
       // Geometrie / reperage : la reponse est du TEXTE (p_reponse_texte) ;
       // a = 0 (invariant answer=a). Verification serveur (verif_geo) via la cle.
+      return { answer: a, reste: null };
+    case "don":
+      // Tableaux et graphiques : la reponse est du TEXTE (p_reponse_texte) ;
+      // a = 0 (invariant answer=a). Verification serveur (verif_donnees) via la cle.
       return { answer: a, reste: null };
   }
 }
@@ -391,6 +402,20 @@ export interface GeneratedExercise {
     figure: GeoFigure;
     interact?: GeoInteract;
   };
+  // Tableaux et graphiques : item choisi par le generateur (reproductible via la
+  // graine). Le composant <Donnees> le rend (tableau / barres / pictogramme +
+  // QCM / clic / texte / reglage d'une barre) ; le serveur (verif_donnees, op
+  // 'don') juge via `cle`. `attendu` sert au feedback local et au mode demo.
+  don?: {
+    cle: string;
+    format: DonFormat;
+    consigne: string;
+    options?: string[];
+    attendu: string;
+    explication: string;
+    figure: DonFigure;
+    interact?: DonInteract;
+  };
   poseData?: PoseData; // mode pose
   chiffresData?: ChiffresData; // mode chiffres (decomposition)
   droiteData?: DroiteData; // mode droite
@@ -540,6 +565,10 @@ function buildExercise(
   // --- Maths : geometrie + reperage (phase 3) ---------------------------
   if (src.competence.startsWith("MA.GEO.") || src.competence.startsWith("MA.REPERE.")) {
     return buildGeometrie(src, rng, base);
+  }
+  // --- Maths : tableaux et graphiques (phase 4) -------------------------
+  if (src.competence.startsWith("MA.DONNEES.")) {
+    return buildDonnees(src, rng, base);
   }
   // --- Numeration : lire/ecrire, decomposer, comparer, suite ------------
   if (src.competence.startsWith("MA.NUM.")) {

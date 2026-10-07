@@ -23,7 +23,11 @@
     "consigne:c-est-parti": "C'est parti !",
     "consigne:reflechis-bien": "Réfléchis bien.",
     "consigne:recommence": "On recommence.",
-    "consigne:pause": "Pause !"
+    "consigne:pause": "Pause !",
+    "consigne:regarde-le-tableau": "Regarde bien le tableau.",
+    "consigne:regarde-le-diagramme": "Regarde bien le diagramme.",
+    "consigne:clique-sur-la-barre-la-plus-haute": "Clique sur la barre la plus haute.",
+    "consigne:regle-la-barre": "Touche la bonne hauteur au-dessus de la barre."
   },
   "message": {
     "msg:bravo": "Bravo ! C'est la bonne réponse.",
@@ -34,6 +38,9 @@
     "msg:encore-un-effort": "Encore un petit effort, tu y es presque !",
     "msg:verifie-ta-reponse": "Vérifie bien ta réponse avant de valider.",
     "msg:convertis-avant": "N'oublie pas de convertir avant de calculer.",
+    "msg:croise-ligne-colonne": "Pour lire une case, croise la ligne et la colonne. L'endroit où elles se rejoignent donne le nombre.",
+    "msg:lis-la-hauteur-barre": "La hauteur d'une barre se lit en face du trait tout en haut. Par exemple, la barre des pommes monte jusqu'à six.",
+    "msg:image-vaut-plusieurs": "Dans un pictogramme, une image peut valoir plusieurs objets. Si une image vaut deux, trois images font six.",
     "msg:passe-compose-etre": "Avec être, le participe s'accorde avec le sujet.",
     "msg:accord-etre-fille": "Avec est, on ajoute un e à la fin pour une fille : elle est allée.",
     "msg:accord-sont-plusieurs": "Avec sont, on ajoute un s à la fin pour plusieurs : ils sont allés.",
@@ -88,7 +95,12 @@
     "indice:ma-geo-symetrie": "Imagine que tu plies la figure sur le trait du milieu. Si les deux moitiés se posent l'une sur l'autre, il y a un axe de symétrie.",
     "indice:ma-repere-quadrillage": "Pour trouver une case, lis d'abord la lettre de la colonne, puis le numéro de la ligne. La lettre d'abord, le chiffre ensuite.",
     "indice:ma-repere-deplacements": "Avance une case à la fois. Vers la droite, tu changes de colonne. Vers le haut, tu changes de ligne et tu montes.",
-    "indice:ma-repere-plan": "Place-toi à côté de l'objet. Ce qui est du côté de la main qui écrit est à droite, l'autre côté est à gauche."
+    "indice:ma-repere-plan": "Place-toi à côté de l'objet. Ce qui est du côté de la main qui écrit est à droite, l'autre côté est à gauche.",
+    "indice:ma-donnees-tableau": "Pour lire une case, suis d'abord la ligne, puis descends dans la bonne colonne. L'endroit où la ligne et la colonne se croisent donne le nombre.",
+    "indice:ma-donnees-completer": "Regarde le total. Additionne les nombres que tu connais, puis cherche ce qu'il manque pour arriver jusqu'au total.",
+    "indice:ma-donnees-barres": "Suis la barre jusqu'en haut, puis regarde le trait en face. Le nombre à côté de ce trait donne la hauteur de la barre.",
+    "indice:ma-donnees-pictogramme": "Compte les images d'une ligne. Si chaque image vaut deux objets, ajoute deux pour chaque image, comme deux et deux et deux.",
+    "indice:ma-donnees-comparer": "Lis d'abord les deux nombres. Pour savoir combien il y en a de plus, enlève le plus petit nombre du plus grand."
   },
   "titre": {
     "titre:tables-addition": "Tables d'addition",

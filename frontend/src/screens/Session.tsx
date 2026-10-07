@@ -25,6 +25,7 @@ import {
   getExercicesCalcul,
   getFrancais,
   getGeometrie,
+  getDonnees,
   getDicteeTextes,
   getDicteeContexte,
   enregistrerDictee,
@@ -38,6 +39,7 @@ import {
 import DicteeDetective from "../components/DicteeDetective";
 import Grammaire from "../components/Grammaire";
 import Geometrie from "../components/Geometrie";
+import Donnees from "../components/Donnees";
 import type { DicteeTexte, DicteeReponse, DicteeResultat } from "../domain/francais/dictee";
 import type { ContexteDictee } from "../domain/francais/selection-dictee";
 import { enqueueReponse, flushReponses } from "../lib/reponseQueue";
@@ -1241,20 +1243,23 @@ export function Session({
         // active (matieres_actives) : les profils existants (['MA']) sont inchanges.
         const francaisActif = (profil.matieres_actives ?? []).includes("FR");
         const mathsActif = (profil.matieres_actives ?? []).includes("MA");
-        const [progress_, sources, fr, geo] = await Promise.all([
+        const [progress_, sources, fr, geo, don] = await Promise.all([
           getProgressionDetail(profil.id),
           getExercicesCalcul(),
           francaisActif ? getFrancais() : Promise.resolve({ competences: [], sources: [] }),
           // Geometrie / reperage : sources d'exercices (matiere MA). Les
           // competences MA.GEO.* / MA.REPERE.* sont deja dans referentiel.competences.
           mathsActif ? getGeometrie() : Promise.resolve([]),
+          // Tableaux et graphiques (phase 4) : sources d'exercices (matiere MA).
+          // Les competences MA.DONNEES.* sont deja dans referentiel.competences.
+          mathsActif ? getDonnees() : Promise.resolve([]),
         ]);
         const ctx = { hero: profil.surnom, univers: profil.univers };
         const plan = composeSession({
           competences: [...referentiel.competences, ...fr.competences],
           prerequis: referentiel.prerequis,
           progress: progress_,
-          sources: [...sources, ...geo, ...fr.sources],
+          sources: [...sources, ...geo, ...don, ...fr.sources],
           seed: (Date.now() ^ 0x9e3779b9) >>> 0,
           now: Date.now(),
           classe: profil.classe,
@@ -1486,10 +1491,11 @@ export function Session({
     [ex, slot, profil, relire, onProfilChange]
   );
 
-  // GRAMMAIRE (op 'gram'), VOCABULAIRE/MOTS (op 'lex') et GEOMETRIE (op 'geo') :
-  // les composants <Grammaire> et <Geometrie> soumettent la cle de l'item et la
-  // saisie (mot/case/figure cliquee, choix QCM, texte libre, coloriage). Le
-  // serveur (verif_grammaire / verif_lexique / verif_geo) est seul juge. L'op
+  // GRAMMAIRE (op 'gram'), VOCABULAIRE/MOTS (op 'lex'), GEOMETRIE (op 'geo') et
+  // TABLEAUX/GRAPHIQUES (op 'don') : les composants <Grammaire>, <Geometrie> et
+  // <Donnees> soumettent la cle de l'item et la saisie (mot/case/figure cliquee,
+  // choix QCM, texte libre, coloriage, reglage d'une barre). Le serveur
+  // (verif_grammaire / verif_lexique / verif_geo / verif_donnees) est seul juge. L'op
   // vient de l'enonce normalise (ex.verif.op), si bien que cette fonction est
   // partagee. Memes garde-fous que la dictee (plafond -> pause, hors-ligne ->
   // file + credit optimiste gere par le serveur au rejeu).
@@ -1908,6 +1914,13 @@ export function Session({
           <Geometrie
             key={ex.key}
             item={ex.geo}
+            onSoumettre={soumettreGrammaire}
+            onContinuer={(correct) => advance(correct, true)}
+          />
+        ) : ex.saisie === "donnees" && ex.don ? (
+          <Donnees
+            key={ex.key}
+            item={ex.don}
             onSoumettre={soumettreGrammaire}
             onContinuer={(correct) => advance(correct, true)}
           />

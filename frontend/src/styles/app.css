@@ -458,3 +458,36 @@ p.kk-lead { color: var(--kk-text-2); max-width: 52ch; }
 .kk-geo__grid svg { height: auto; touch-action: manipulation; }
 .kk-geo__grid rect, .kk-geo__grid circle { touch-action: manipulation; }
 .kk-geo__expl { color: var(--kk-text); }
+
+/* Tableaux et graphiques (phase 4) : tableau lisible, lignes cliquables larges,
+   pictogramme en lignes d'images. Cibles tactiles >=44px. */
+.kk-don { gap: 12px; }
+.kk-don__table-wrap { display: flex; justify-content: center; margin: 6px 0; width: 100%; }
+.kk-don__table { border-collapse: collapse; font-size: 1.05rem; min-width: 220px; }
+.kk-don__table th, .kk-don__table td {
+  border: 1px solid var(--kk-border); padding: 10px 14px; text-align: center; min-height: 44px;
+}
+.kk-don__table thead th { background: var(--kk-border); color: var(--kk-text); font-weight: 700; }
+.kk-don__table th[scope="row"] { font-weight: 600; text-align: left; }
+.kk-don__blank { background: var(--kk-accent); color: var(--kk-on-accent); font-weight: 700; }
+.kk-don__row--sel td, .kk-don__row--sel th { background: var(--kk-accent); color: var(--kk-on-accent); }
+.kk-don__row--ok td, .kk-don__row--ok th { background: #16a34a; color: #fff; }
+.kk-don__rowbtn {
+  border: none; background: transparent; color: inherit; font: inherit; font-weight: 600;
+  cursor: pointer; width: 100%; min-height: 44px; text-align: left; padding: 0;
+}
+.kk-don__chart svg { height: auto; touch-action: manipulation; }
+.kk-don__chart rect { touch-action: manipulation; }
+.kk-don__picto { display: flex; justify-content: center; margin: 6px 0; width: 100%; }
+.kk-don__picto-inner { display: flex; flex-direction: column; gap: 8px; max-width: 360px; width: 100%; }
+.kk-don__picto-legend { margin: 0 0 2px; font-size: 0.95rem; color: var(--kk-text); text-align: center; }
+.kk-don__picto-row {
+  display: flex; align-items: center; gap: 10px; padding: 8px 10px; min-height: 44px;
+  border: 2px solid var(--kk-border); border-radius: 12px; background: transparent;
+  color: var(--kk-text); font: inherit; text-align: left; width: 100%;
+}
+button.kk-don__picto-row { cursor: pointer; }
+.kk-don__picto-row--sel { border-color: var(--kk-accent); background: var(--kk-accent); color: var(--kk-on-accent); }
+.kk-don__picto-row--ok { border-color: #16a34a; background: #16a34a; color: #fff; }
+.kk-don__picto-label { min-width: 72px; font-weight: 600; }
+.kk-don__picto-imgs { display: flex; flex-wrap: wrap; gap: 4px; }

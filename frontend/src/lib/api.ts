@@ -10,6 +10,7 @@ import { PC_CODE } from "../domain/francais/passe-compose";
 import type { DicteeTexte, DicteeReponse, DicteeResultat } from "../domain/francais/dictee";
 import { estJusteGrammaire } from "../domain/francais/grammaire";
 import { estJusteGeometrie } from "../domain/geometrie/geometrie";
+import { estJusteDonnees } from "../domain/donnees/donnees";
 import {
   isDemo,
   DEMO_COMPETENCES,
@@ -557,6 +558,37 @@ export async function getGeometrie(): Promise<ExCalcul[]> {
   }
 }
 
+// Catalogue des exercices « TABLEAUX ET GRAPHIQUES » (matiere MA, type 'donnees',
+// phase 4). Comme la geometrie, la GENERATION est faite cote client (banque
+// donnees.ts) ; les lignes `exercices` ne fournissent que l'identite (exercice_id
+// deterministe, competence, niveau, methode). L'op de verification serveur est
+// 'don'. Les competences (MA.DONNEES.*) sont deja chargees par getReferentiel
+// (matiere MA). Repli silencieux : [] si lecture impossible.
+export async function getDonnees(): Promise<ExCalcul[]> {
+  if (isDemo()) return [];
+  try {
+    const { data, error } = await supabase()
+      .from("exercices")
+      .select("id, competence, niveau, methode")
+      .eq("type", "donnees")
+      .eq("actif", true);
+    if (error) throw error;
+    return (data ?? []).map((e): ExCalcul => ({
+      exerciceId: e.id as string,
+      competence: e.competence as string,
+      niveau: e.niveau as number,
+      methode: (e.methode as string | null) ?? null,
+      operation: "don",
+      forme: "donnees" as Forme,
+      params: {},
+      support: null,
+      correctionStrategie: null,
+    }));
+  } catch {
+    return [];
+  }
+}
+
 // Banque de textes de la DICTEE DETECTIVE (dictee_charger_tous). Le serveur ne
 // renvoie que les MOTS AFFICHES et le NOMBRE d'erreurs : jamais les positions,
 // corrections ou types (qui ne sont reveles qu'apres validation). Charge une
@@ -731,6 +763,8 @@ export async function insertReponse(row: ReponseInsert): Promise<ReponseResult> 
         ? estJusteGrammaire(row.cle ?? "", row.reponse_texte ?? "")
         : row.op === "geo"
         ? estJusteGeometrie(row.cle ?? "", row.reponse_texte ?? "")
+        : row.op === "don"
+        ? estJusteDonnees(row.cle ?? "", row.reponse_texte ?? "")
         : row.op === "lettres"
         ? estJuste(row.a, row.reponse_texte ?? "")
         : row.op === "conj"

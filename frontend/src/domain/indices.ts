@@ -83,6 +83,18 @@ export const INDICES: Record<string, string> = {
   "MA.REPERE.PLAN":
     "Place-toi à côté de l'objet. Ce qui est de ton côté de la main qui écrit est à droite, l'autre côté est à gauche.",
 
+  // --- Tableaux et graphiques (indices aux niveaux 1 et 2 seulement) --------
+  "MA.DONNEES.TABLEAU":
+    "Pour lire une case, suis d'abord la ligne, puis descends dans la bonne colonne. L'endroit où la ligne et la colonne se croisent donne le nombre.",
+  "MA.DONNEES.COMPLETER":
+    "Regarde le total. Additionne les nombres que tu connais, puis cherche ce qu'il manque pour arriver jusqu'au total.",
+  "MA.DONNEES.BARRES":
+    "Suis la barre jusqu'en haut, puis regarde le trait en face. Le nombre à côté de ce trait donne la hauteur de la barre.",
+  "MA.DONNEES.PICTOGRAMME":
+    "Compte les images d'une ligne. Si chaque image vaut deux objets, ajoute deux pour chaque image, comme deux et deux et deux.",
+  "MA.DONNEES.COMPARER":
+    "Lis d'abord les deux nombres. Pour savoir combien il y en a de plus, enlève le plus petit nombre du plus grand.",
+
   // --- Fractions ------------------------------------------------------------
   "MA.FRAC.SIMPLES":
     "Le chiffre du bas dit en combien de parts on coupe. Le chiffre du haut dit combien de parts on prend.",

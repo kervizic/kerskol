@@ -520,3 +520,28 @@ Le **serveur reste seul juge** (op `geo`, fonction `verif_geo`) ; la comparaison
 suit le format : QCM accents gardés et casse ignorée, texte et clic accents exigés,
 grille (liste de cases) comparaison stricte. Les figures sont **déterministes**
 (données fixes) pour les tests golden.
+
+## Sous-matière « Tableaux et graphiques » (maths, phase 4)
+
+Sous-matière de maths (CE2, cycle 2 révisé 2024), migration 0044, composant SVG
+tactile `frontend/src/components/Donnees.tsx`, banque
+`frontend/src/domain/donnees/donnees.ts` (miroir de `public.donnees_item`).
+
+**Tableaux et graphiques** (domaine `donnees`) : lire un tableau simple puis à
+double entrée (`MA.DONNEES.TABLEAU`), compléter un tableau avec un total
+(`MA.DONNEES.COMPLETER`), lire un diagramme en barres et régler/compléter une
+barre (`MA.DONNEES.BARRES`), lire un pictogramme où une image vaut `n` objets
+(`MA.DONNEES.PICTOGRAMME`), comparer à partir des données — combien de plus, de
+moins, lequel le plus (`MA.DONNEES.COMPARER`). On **extrait une information**
+d'une représentation affichée : pas de doublon avec « Problèmes » (aucune
+mascotte ni histoire). Les thèmes sont le quotidien d'un enfant (fruits de la
+classe, animaux, billes, livres lus…), **jamais de calendrier**.
+
+Le repérage ligne / colonne du tableau reprend le principe du **quadrillage de la
+phase 3** (lire d'abord la ligne, puis la colonne). Progression des formats :
+**N1 QCM** ; N2/N3 QCM ou **clic** (toucher une ligne, une barre) ou **grille**
+(régler une barre en touchant la bonne hauteur) ; **N4 réponse libre** (taper le
+nombre lu ou calculé). Le **serveur reste seul juge** (op `don`, fonction
+`verif_donnees`) ; la comparaison suit le format : QCM accents gardés et casse
+ignorée, texte et clic accents exigés, grille (hauteur) comparaison stricte. Les
+représentations sont **déterministes** (données fixes) pour les tests golden.
