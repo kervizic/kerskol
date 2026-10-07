@@ -43,11 +43,16 @@ import type { Base, GeneratedExercise, ExCalcul } from "../calcul/generator";
 // --------------------------------------------------------------------------
 // Schema d'une figure (dessinee par le composant <Geometrie>, viewBox 0..100).
 // --------------------------------------------------------------------------
-export type GeoFormat = "qcm" | "clic" | "texte" | "grille" | "construire" | "programme" | "reproduire";
+export type GeoFormat =
+  | "qcm" | "clic" | "texte" | "grille" | "construire" | "programme" | "reproduire"
+  | "regle" | "cercle" | "patron"; // partie 2 : regle graduee, compas, patrons de cube
 export type GeoInteract = "color" | "point" | "multi"; // mode d'un exercice « grille » (multi = selection de sommets)
 export type Pt = [number, number]; // coordonnees entieres d'un noeud
+export type Cell = [number, number]; // case d'un patron (colonne, ligne), entiers
 
 export type SolidName = "cube" | "pave" | "cylindre" | "sphere" | "pyramide" | "cone";
+// Solides dessines en 3D « tournable au doigt » (projection maison, sans librairie).
+export const SOLIDES_3D: SolidName[] = ["cube", "pave", "pyramide"];
 
 // Orientation (programmation de deplacement type Blue-Bot) : Nord (haut), Est
 // (droite), Sud (bas), Ouest (gauche). Decrite ORALEMENT dans la consigne.
@@ -73,6 +78,46 @@ export interface ReproduireSpec {
   model: Pt[];
   memoire?: boolean;
 }
+
+// -------------------------------------------------------------------------
+// Partie 2 : regle graduee, compas, patrons. Tout en MILLIMETRES ENTIERS
+// (1 cm = 10 mm). La surface aimante au centimetre -> toute saisie tombe sur
+// la grille, donc l'arithmetique reste exacte (aucun flottant), comme 0047.
+// La tolerance `tol` (en mm, defaut 2) est portee par le `spec` : elle exprime
+// le « ±2 mm a l'echelle affichee » demande, et protege les comparaisons.
+// -------------------------------------------------------------------------
+export const TOL_MM = 2; // tolerance par defaut (± 2 mm)
+
+// Regle graduee (1D, le long de la regle). Reponse = un entier en mm.
+//   mesurer : longueur lue d'un segment pose sur la regle ;
+//   tracer  : longueur d'un trait trace (« trace un trait de 7 cm ») ;
+//   milieu  : position du milieu d'un segment [a, b] (en mm).
+export type RegleSpec =
+  | { t: "mesurer"; len: number; tol: number }
+  | { t: "tracer"; len: number; tol: number }
+  | { t: "milieu"; mid: number; tol: number };
+
+// Compas (2D, surface au cm). Reponse = [[cx, cy], [px, py]] en mm : la pointe
+// (centre) et un point du cercle (l'ecartement). Le rayon = distance des deux.
+//   r      : rayon attendu (mm) ;
+//   cx, cy : centre impose (mm) quand il est donne (« centre O qui passe par A »,
+//            « reporte la longueur a partir de O ») ; absent => centre libre.
+export interface CercleSpec {
+  t: "cercle";
+  r: number;
+  cx?: number;
+  cy?: number;
+  tol: number;
+}
+
+// Patron de cube.
+//   plie : la reponse est la liste des cases du patron CHOISI -> le serveur
+//          verifie par pliage qu'il se referme en cube ;
+//   juge : le patron est donne (spec.cells) et l'enfant dit oui / non -> le
+//          serveur calcule la validite et la compare a la reponse.
+export type PatronSpec =
+  | { t: "plie" }
+  | { t: "juge"; cells: Cell[] };
 
 export interface GeoShape {
   kind: "polygon" | "circle" | "segment" | "dot" | "right";
@@ -101,11 +146,36 @@ export interface GeoGridSpec {
   marks?: Array<{ cell: string; text: string }>; // objets d'un plan / etiquettes
 }
 
+// Regle graduee 1D : `maxCm` graduations (0..maxCm cm). `seg` = segment deja
+// pose sur la regle (en cm) pour mesurer / trouver le milieu. `task` pilote
+// l'interaction du composant.
+export interface GeoRuleSpec {
+  maxCm: number;
+  task: "mesurer" | "tracer" | "milieu";
+  seg?: { a: number; b: number }; // bornes du segment pose (cm)
+}
+// Compas : surface au cm (`wCm` x `hCm`), avec des points reperes (cm) dessines
+// (centre O impose, point A a atteindre...). L'enfant pose centre puis ecartement.
+export interface GeoCompassSpec {
+  wCm: number;
+  hCm: number;
+  points?: Array<{ x: number; y: number; label?: string }>; // reperes (cm)
+  centerFixed?: { x: number; y: number }; // la pointe est imposee sur ce repere (cm)
+}
+// Patron : soit un patron unique a juger (`cells`), soit un choix de patrons.
+export interface GeoNetSpec {
+  cells?: Cell[]; // patron unique (format patron / juge)
+  choices?: Array<{ id: string; cells: Cell[] }>; // plusieurs patrons (format patron / plie)
+}
+
 export type GeoFigure =
   | { kind: "shapes"; shapes: GeoShape[] }
   | { kind: "solid"; solid: SolidName }
   | { kind: "grid"; grid: GeoGridSpec }
   | { kind: "build"; cols: number; rows: number; model?: Pt[]; prefill?: Pt[]; memoire?: boolean } // quadrillage de noeuds aimante
+  | { kind: "rule"; rule: GeoRuleSpec }       // regle graduee (partie 2)
+  | { kind: "compass"; compass: GeoCompassSpec } // compas (partie 2)
+  | { kind: "net"; net: GeoNetSpec }          // patron(s) de cube (partie 2)
   | { kind: "none" };
 
 export interface GeoItem {
@@ -119,7 +189,7 @@ export interface GeoItem {
   explication: string; // correction courte et valorisante, avec un exemple
   figure: GeoFigure; // schema dessine par le composant
   interact?: GeoInteract; // mode « grille » : colorier (symetrie), placer un point, selection multiple
-  spec?: ConstruireSpec | ProgrammeSpec | ReproduireSpec; // contrat de verification par proprietes
+  spec?: ConstruireSpec | ProgrammeSpec | ReproduireSpec | RegleSpec | CercleSpec | PatronSpec; // contrat de verification par proprietes
 }
 
 // Donnees de RENDU (ce que l'exercice porte et que <Geometrie> affiche) : tout
@@ -263,6 +333,99 @@ export function verifReproduire(spec: ReproduireSpec, drawn: Pt[]): boolean {
 }
 
 // --------------------------------------------------------------------------
+// Partie 2 : regle, compas, patrons (miroir EXACT du serveur). Tout en mm
+// entiers -> comparaisons exactes. `|valeur - attendu| <= tol`.
+// --------------------------------------------------------------------------
+
+// Regle graduee : la saisie est un entier (mm). mesurer / tracer -> longueur ;
+// milieu -> position du milieu.
+export function verifRegle(spec: RegleSpec, mm: number): boolean {
+  if (!Number.isFinite(mm)) return false;
+  const cible = spec.t === "milieu" ? spec.mid : spec.len;
+  return Math.abs(mm - cible) <= spec.tol;
+}
+
+// Compas : la saisie est [[cx, cy], [px, py]] en mm (pointe + point du cercle).
+// Le rayon trace = distance des deux points. On compare le rayon (au carre, pour
+// rester exact) et, si un centre est impose, la position de la pointe.
+export function verifCercle(spec: CercleSpec, pts: Pt[]): boolean {
+  if (!Array.isArray(pts) || pts.length !== 2) return false;
+  const [[cx, cy], [px, py]] = pts;
+  if (![cx, cy, px, py].every((v) => Number.isFinite(v))) return false;
+  if (spec.cx != null && spec.cy != null) {
+    const dc = (cx - spec.cx) ** 2 + (cy - spec.cy) ** 2;
+    if (dc > spec.tol * spec.tol) return false;
+  }
+  const r2 = (px - cx) ** 2 + (py - cy) ** 2;
+  const lo = Math.max(0, spec.r - spec.tol);
+  const hi = spec.r + spec.tol;
+  return r2 >= lo * lo && r2 <= hi * hi;
+}
+
+// Patron de cube : simulation de PLIAGE (roulement d'un cube sur le patron). Un
+// hexomino se referme en cube si, et seulement si, ses 6 cases se posent sur 6
+// faces DISTINCTES du cube. On roule un cube de case en case (parcours en
+// largeur) en suivant l'orientation ; la face « dessous » peint la case.
+type DieOri = { U: string; D: string; N: string; S: string; E: string; W: string };
+const DIE_ID: DieOri = { U: "U", D: "D", N: "N", S: "S", E: "E", W: "W" };
+function rollDie(o: DieOri, dir: "E" | "W" | "N" | "S"): DieOri {
+  if (dir === "E") return { U: o.W, E: o.U, D: o.E, W: o.D, N: o.N, S: o.S };
+  if (dir === "W") return { U: o.E, W: o.U, D: o.W, E: o.D, N: o.N, S: o.S };
+  if (dir === "N") return { U: o.S, N: o.U, D: o.N, S: o.D, E: o.E, W: o.W };
+  return { U: o.N, S: o.U, D: o.S, N: o.D, E: o.E, W: o.W }; // "S"
+}
+export function verifPatronCube(cells: Cell[]): boolean {
+  if (!Array.isArray(cells) || cells.length !== 6) return false;
+  const key = (c: Cell) => `${c[0]},${c[1]}`;
+  const set = new Map<string, Cell>();
+  for (const c of cells) {
+    if (!Array.isArray(c) || c.length !== 2 || !Number.isInteger(c[0]) || !Number.isInteger(c[1])) return false;
+    set.set(key(c), c);
+  }
+  if (set.size !== 6) return false; // cases en double
+  // Parcours en largeur : chaque case recoit la face « dessous » du cube roule.
+  const start = cells[0];
+  const faceOf = new Map<string, string>();
+  const oriOf = new Map<string, DieOri>();
+  faceOf.set(key(start), DIE_ID.D);
+  oriOf.set(key(start), DIE_ID);
+  const file: Cell[] = [start];
+  const dirs: Array<{ d: "E" | "W" | "N" | "S"; dx: number; dy: number }> = [
+    { d: "E", dx: 1, dy: 0 }, { d: "W", dx: -1, dy: 0 },
+    { d: "N", dx: 0, dy: 1 }, { d: "S", dx: 0, dy: -1 },
+  ];
+  while (file.length > 0) {
+    const cur = file.shift()!;
+    const ori = oriOf.get(key(cur))!;
+    for (const { d, dx, dy } of dirs) {
+      const nb: Cell = [cur[0] + dx, cur[1] + dy];
+      const k = key(nb);
+      if (!set.has(k) || faceOf.has(k)) continue;
+      const no = rollDie(ori, d);
+      faceOf.set(k, no.D);
+      oriOf.set(k, no);
+      file.push(nb);
+    }
+  }
+  if (faceOf.size !== 6) return false; // patron non connexe
+  return new Set(faceOf.values()).size === 6; // 6 faces distinctes = se referme en cube
+}
+
+// Patron : juge (oui/non) ou choix du patron qui se replie en cube.
+export function verifPatron(spec: PatronSpec, saisie: string): boolean {
+  if (spec.t === "plie") {
+    try {
+      return verifPatronCube(JSON.parse(saisie) as Cell[]);
+    } catch {
+      return false;
+    }
+  }
+  const rep = normaliser(saisie);
+  if (rep !== "oui" && rep !== "non") return false;
+  return rep === (verifPatronCube(spec.cells) ? "oui" : "non");
+}
+
+// --------------------------------------------------------------------------
 // Helpers de construction des figures (gardent la banque lisible).
 // --------------------------------------------------------------------------
 function square(cx: number, cy: number, s: number, extra: Partial<GeoShape> = {}): GeoShape {
@@ -368,6 +531,76 @@ function rep(
     figure: { kind: "build", cols, rows, model, ...(memoire ? { memoire: true } : {}) },
   };
 }
+
+// --------------------------------------------------------------------------
+// Partie 2 : constructeurs d'items regle / compas / patron. Tout en cm cote
+// figure (affichage), en mm cote `spec` (1 cm = 10 mm, arithmetique exacte).
+// --------------------------------------------------------------------------
+// Mesurer / placer le milieu d'un segment pose sur la regle (bornes a, b en cm).
+function mesurer(cle: string, niveau: number, consigne: string, maxCm: number, a: number, b: number, explication: string): GeoItem {
+  const len = Math.abs(b - a) * 10;
+  return {
+    cle, competence: "MA.GEO.MESURER_TRACER", niveau, format: "regle", consigne,
+    attendu: String(len), explication, spec: { t: "mesurer", len, tol: TOL_MM },
+    figure: { kind: "rule", rule: { maxCm, task: "mesurer", seg: { a, b } } },
+  };
+}
+function tracer(cle: string, niveau: number, consigne: string, maxCm: number, targetCm: number, explication: string): GeoItem {
+  const len = targetCm * 10;
+  return {
+    cle, competence: "MA.GEO.MESURER_TRACER", niveau, format: "regle", consigne,
+    attendu: String(len), explication, spec: { t: "tracer", len, tol: TOL_MM },
+    figure: { kind: "rule", rule: { maxCm, task: "tracer" } },
+  };
+}
+function milieu(cle: string, niveau: number, consigne: string, maxCm: number, a: number, b: number, explication: string): GeoItem {
+  const mid = Math.round(((a + b) / 2) * 10);
+  return {
+    cle, competence: "MA.GEO.MESURER_TRACER", niveau, format: "regle", consigne,
+    attendu: String(mid), explication, spec: { t: "milieu", mid, tol: TOL_MM },
+    figure: { kind: "rule", rule: { maxCm, task: "milieu", seg: { a, b } } },
+  };
+}
+// Compas : `fig` decrit la surface (cm) et les reperes ; `sp` le rayon/centre
+// attendu (cm, converti en mm) ; `sample` un trace valide (mm) pour le test croise.
+function cercle(
+  cle: string, niveau: number, consigne: string,
+  fig: GeoCompassSpec, sp: { rCm: number; cCm?: { x: number; y: number } },
+  sample: Pt[], explication: string,
+): GeoItem {
+  const spec: CercleSpec = {
+    t: "cercle", r: sp.rCm * 10, tol: TOL_MM,
+    ...(sp.cCm ? { cx: sp.cCm.x * 10, cy: sp.cCm.y * 10 } : {}),
+  };
+  return {
+    cle, competence: "MA.GEO.CERCLE", niveau, format: "cercle", consigne,
+    attendu: JSON.stringify(sample), explication, spec, figure: { kind: "compass", compass: fig },
+  };
+}
+// Patron : choisir celui qui se replie en cube (plie) ou juger un patron (juge).
+function patronPlie(cle: string, niveau: number, consigne: string, choices: Array<{ id: string; cells: Cell[] }>, bonId: string, explication: string): GeoItem {
+  const bon = choices.find((c) => c.id === bonId)!;
+  return {
+    cle, competence: "MA.GEO.PATRONS", niveau, format: "patron", consigne,
+    attendu: JSON.stringify(bon.cells), explication, spec: { t: "plie" },
+    figure: { kind: "net", net: { choices } },
+  };
+}
+function patronJuge(cle: string, niveau: number, consigne: string, cells: Cell[], explication: string): GeoItem {
+  return {
+    cle, competence: "MA.GEO.PATRONS", niveau, format: "patron", consigne,
+    attendu: verifPatronCube(cells) ? "oui" : "non", explication, spec: { t: "juge", cells },
+    figure: { kind: "net", net: { cells } },
+  };
+}
+
+// Patrons de reference (col, row). Croix latine = se replie ; tout patron qui
+// contient un carre 2x2 ne se replie pas (deux faces se superposent).
+const NET_CROIX: Cell[] = [[1, 0], [1, 1], [1, 2], [1, 3], [0, 2], [2, 2]];
+const NET_T: Cell[] = [[1, 0], [1, 1], [1, 2], [1, 3], [0, 1], [2, 1]];
+const NET_ESCALIER: Cell[] = [[0, 0], [1, 0], [2, 0], [2, 1], [3, 1], [4, 1]];
+const NET_BLOC_2x3: Cell[] = [[0, 0], [1, 0], [0, 1], [1, 1], [0, 2], [1, 2]]; // carre 2x2 -> invalide
+const NET_L_2x2: Cell[] = [[0, 0], [1, 0], [0, 1], [1, 1], [1, 2], [1, 3]];     // carre 2x2 -> invalide
 
 // ==========================================================================
 // BANQUE
@@ -799,6 +1032,105 @@ export const BANQUE_GEOMETRIE: GeoItem[] = [
     attendu: canonCells(["A5", "B6", "C5", "D6", "E5"]),
     figure: grid({ cols: 5, rows: 6, axis: { dir: "h", at: 4 }, fill: ["A4", "B3", "C4", "D3", "E4"] }),
     explication: "On plie sur le trait du milieu : chaque case du bas a sa jumelle en haut, à la même distance. On colorie A5, B6, C5, D6 et E5." },
+
+  // =======================================================================
+  // PARTIE 2 — regle graduee, compas, patrons de cube.
+  // =======================================================================
+  // MA.GEO.SOLIDES — compter faces / aretes / sommets en reponse libre (N3/N4)
+  { cle: "geo-sol-n3-aretes-cube", competence: "MA.GEO.SOLIDES", niveau: 3, format: "texte",
+    consigne: "Tu peux tourner le cube avec le doigt. Écris combien d'arêtes il a.", attendu: "12",
+    figure: solid("cube"), explication: "Une arête, c'est le trait où deux faces se rejoignent. Le cube a douze arêtes." },
+  { cle: "geo-sol-n3-sommets-pave", competence: "MA.GEO.SOLIDES", niveau: 3, format: "texte",
+    consigne: "Tu peux tourner le pavé avec le doigt. Écris combien de sommets il a.", attendu: "8",
+    figure: solid("pave"), explication: "Un sommet, c'est un coin. Le pavé droit a huit coins, tout comme le cube." },
+  { cle: "geo-sol-n4-faces-pyramide", competence: "MA.GEO.SOLIDES", niveau: 4, format: "texte",
+    consigne: "Tu peux tourner la pyramide avec le doigt. Écris combien de faces elle a.", attendu: "5",
+    figure: solid("pyramide"), explication: "Il y a le carré du dessous et quatre triangles sur les côtés : cela fait cinq faces." },
+  { cle: "geo-sol-n4-aretes-cube", competence: "MA.GEO.SOLIDES", niveau: 4, format: "texte",
+    consigne: "Tu peux tourner le cube avec le doigt. Écris combien d'arêtes il a.", attendu: "12",
+    figure: solid("cube"), explication: "Le cube a douze arêtes : quatre en haut, quatre en bas, et quatre debout." },
+
+  // MA.GEO.MESURER_TRACER — regle graduee : mesurer, tracer, milieu, aligner
+  mesurer("geo-mtr-n1-a", 1, "Ce trait est posé sur la règle. Touche ses deux bouts pour le mesurer.", 10, 0, 6,
+    "Le trait va de 0 à 6 : il mesure 6 centimètres. Pour lire la règle, on regarde où commence et où finit le trait."),
+  mesurer("geo-mtr-n1-b", 1, "Ce trait est posé sur la règle. Touche ses deux bouts pour le mesurer.", 10, 0, 4,
+    "Le trait va de 0 à 4 : il mesure 4 centimètres."),
+  mesurer("geo-mtr-n2-mes", 2, "Attention, ce trait ne commence pas à 0 ! Touche ses deux bouts pour le mesurer.", 12, 2, 9,
+    "Le trait va de 2 à 9. On fait 9 moins 2, ce qui donne 7 : il mesure 7 centimètres."),
+  tracer("geo-mtr-n2-tra", 2, "Trace un trait de 5 centimètres. Touche le début puis la fin de ton trait sur la règle.", 10, 5,
+    "Entre le début et la fin, il faut 5 centimètres. Par exemple de 0 à 5, ou de 2 à 7."),
+  tracer("geo-mtr-n3-tra", 3, "Trace un trait de 7 centimètres. Touche le début puis la fin de ton trait sur la règle.", 12, 7,
+    "Il faut 7 centimètres entre les deux bouts. Par exemple de 0 à 7."),
+  milieu("geo-mtr-n3-mil-a", 3, "Voici un trait de 0 à 6. Touche la graduation qui est juste au milieu.", 10, 0, 6,
+    "Le milieu est à la même distance des deux bouts. Entre 0 et 6, le milieu est à 3 centimètres."),
+  milieu("geo-mtr-n3-mil-b", 3, "Voici un trait de 2 à 8. Touche la graduation qui est juste au milieu.", 10, 2, 8,
+    "Entre 2 et 8, le milieu est à 5 centimètres : il est à la même distance de 2 et de 8."),
+  { cle: "geo-mtr-n4-align-oui", competence: "MA.GEO.MESURER_TRACER", niveau: 4, format: "qcm",
+    consigne: "Regarde ces trois points. Sont-ils alignés, c'est-à-dire tous sur une même ligne droite ?",
+    options: ["oui", "non"], attendu: "oui",
+    figure: shapes(dot(18, 50, { label: "A" }), dot(50, 50, { label: "B" }), dot(82, 50, { label: "C" })),
+    explication: "Si on pose la règle, elle touche les trois points en même temps : ils sont alignés." },
+  { cle: "geo-mtr-n4-align-non", competence: "MA.GEO.MESURER_TRACER", niveau: 4, format: "qcm",
+    consigne: "Regarde ces trois points. Sont-ils alignés, c'est-à-dire tous sur une même ligne droite ?",
+    options: ["non", "oui"], attendu: "non",
+    figure: shapes(dot(18, 68, { label: "A" }), dot(50, 44, { label: "B" }), dot(82, 60, { label: "C" })),
+    explication: "La règle ne peut pas toucher les trois points à la fois : ils ne sont pas alignés." },
+
+  // MA.GEO.CERCLE — compas : vocabulaire (centre, rayon) puis tracer
+  { cle: "geo-cer-n1-centre", competence: "MA.GEO.CERCLE", niveau: 1, format: "qcm",
+    consigne: "Dans un cercle, comment s'appelle le point du milieu, à la même distance de tout le bord ?",
+    options: ["le centre", "le rayon", "le sommet"], attendu: "le centre",
+    figure: shapes({ kind: "circle", cx: 50, cy: 50, r: 32 }, dot(50, 50, { hi: true, label: "O" })),
+    explication: "Le point du milieu du cercle s'appelle le centre. On le marque souvent avec la lettre O." },
+  { cle: "geo-cer-n1-rayon", competence: "MA.GEO.CERCLE", niveau: 1, format: "qcm",
+    consigne: "Le trait qui va du centre jusqu'au bord du cercle, comment s'appelle-t-il ?",
+    options: ["le rayon", "le centre", "le côté"], attendu: "le rayon",
+    figure: shapes({ kind: "circle", cx: 50, cy: 50, r: 32 }, { kind: "segment", pts: [[50, 50], [82, 50]] }, dot(50, 50, {})),
+    explication: "Le trait du centre jusqu'au bord s'appelle le rayon. Tous les rayons d'un cercle ont la même longueur." },
+  cercle("geo-cer-n2-r3", 2, "Trace un cercle de rayon 3 centimètres. Pose d'abord la pointe, puis écarte le compas de 3 cm.",
+    { wCm: 10, hCm: 8 }, { rCm: 3 }, [[50, 40], [80, 40]],
+    "Le rayon, c'est l'écartement du compas : ici 3 centimètres du centre jusqu'au bord."),
+  cercle("geo-cer-n2-r2", 2, "Trace un cercle de rayon 2 centimètres. Pose d'abord la pointe, puis écarte le compas de 2 cm.",
+    { wCm: 10, hCm: 8 }, { rCm: 2 }, [[50, 40], [70, 40]],
+    "On écarte le compas de 2 centimètres, puis on tourne : tout le bord est à 2 cm du centre."),
+  cercle("geo-cer-n3-passe", 3, "Trace un cercle qui a pour centre le point O et qui passe par le point A. Pose la pointe sur O, écarte jusqu'à A.",
+    { wCm: 10, hCm: 8, points: [{ x: 3, y: 4, label: "O" }, { x: 7, y: 4, label: "A" }], centerFixed: { x: 3, y: 4 } },
+    { rCm: 4, cCm: { x: 3, y: 4 } }, [[30, 40], [70, 40]],
+    "La pointe est sur O. On écarte le compas jusqu'à A : le cercle passe alors juste par A."),
+  cercle("geo-cer-n3-report", 3, "Voici le point O. Reporte une longueur de 4 centimètres à partir de O : pose la pointe sur O et place un point à 4 cm.",
+    { wCm: 10, hCm: 8, points: [{ x: 2, y: 4, label: "O" }], centerFixed: { x: 2, y: 4 } },
+    { rCm: 4, cCm: { x: 2, y: 4 } }, [[20, 40], [60, 40]],
+    "On garde l'écartement de 4 cm et on reporte cette longueur à partir de O : le nouveau point est à 4 cm de O."),
+  cercle("geo-cer-n4-passe", 4, "Trace un cercle de centre O qui passe par le point A, même si A est en biais.",
+    { wCm: 9, hCm: 9, points: [{ x: 3, y: 3, label: "O" }, { x: 6, y: 7, label: "A" }], centerFixed: { x: 3, y: 3 } },
+    { rCm: 5, cCm: { x: 3, y: 3 } }, [[30, 30], [60, 70]],
+    "La pointe reste sur O et le compas s'écarte jusqu'à A. Le cercle passe par A, même quand A est en biais."),
+  cercle("geo-cer-n4-r5", 4, "Trace un cercle de rayon 5 centimètres. Pose la pointe, puis écarte le compas de 5 cm.",
+    { wCm: 12, hCm: 10 }, { rCm: 5 }, [[60, 50], [110, 50]],
+    "On écarte le compas de 5 centimètres. Tout le bord du cercle est alors à 5 cm du centre."),
+
+  // MA.GEO.PATRONS — patrons de cube
+  { cle: "geo-pat-n1-faces", competence: "MA.GEO.PATRONS", niveau: 1, format: "qcm",
+    consigne: "Un cube a six faces carrées. Combien de carrés faut-il donc pour faire son patron ?",
+    options: ["6", "4", "8"], attendu: "6", figure: solid("cube"),
+    explication: "Un cube a six faces. Son patron est fait de six carrés, un pour chaque face." },
+  { cle: "geo-pat-n1-quoi", competence: "MA.GEO.PATRONS", niveau: 1, format: "qcm",
+    consigne: "Qu'est-ce que le patron d'un cube ?",
+    options: ["un dessin à plat qui se replie en cube", "le cube dessiné en volume", "la boîte qui contient le cube"],
+    attendu: "un dessin à plat qui se replie en cube", figure: solid("cube"),
+    explication: "Un patron, c'est le cube déplié à plat. Quand on le replie, il redonne le cube." },
+  patronPlie("geo-pat-n2-choix", 2, "Un seul de ces deux dessins se replie pour faire un cube. Touche le bon patron.",
+    [{ id: "a", cells: NET_CROIX }, { id: "b", cells: NET_BLOC_2x3 }], "a",
+    "Le premier se replie bien en cube. Le deuxième a quatre cases en carré : deux faces se poseraient l'une sur l'autre."),
+  patronPlie("geo-pat-n3-choix", 3, "Parmi ces trois dessins, un seul se replie en cube. Touche le bon patron.",
+    [{ id: "a", cells: NET_T }, { id: "b", cells: NET_BLOC_2x3 }, { id: "c", cells: NET_L_2x2 }], "a",
+    "Seul le premier se replie en cube. Les deux autres ont un carré de quatre cases qui se superposeraient."),
+  patronJuge("geo-pat-n4-oui", 4, "Regarde bien ce dessin. Si on le replie, fait-il un cube ? Réponds oui ou non.",
+    NET_ESCALIER,
+    "Oui ! En repliant les carrés un par un, on referme bien un cube. Chaque carré devient une face."),
+  patronJuge("geo-pat-n4-non", 4, "Regarde bien ce dessin. Si on le replie, fait-il un cube ? Réponds oui ou non.",
+    NET_BLOC_2x3,
+    "Non. Deux carrés se poseraient sur la même face et il resterait un trou : ce n'est pas un patron de cube."),
 ];
 
 // Competences par sous-matiere (ordre d'affichage = ordre du referentiel).
@@ -808,6 +1140,9 @@ export const COMPETENCES_GEOMETRIE = [
   "MA.GEO.SOLIDES",
   "MA.GEO.SYMETRIE",
   "MA.GEO.CONSTRUIRE",
+  "MA.GEO.MESURER_TRACER",
+  "MA.GEO.CERCLE",
+  "MA.GEO.PATRONS",
 ] as const;
 export const COMPETENCES_REPERE = [
   "MA.REPERE.QUADRILLAGE",
@@ -848,6 +1183,20 @@ export function estJusteGeometrie(cle: string, saisie: string): boolean {
     } catch {
       return false;
     }
+  }
+  if (item.format === "regle") {
+    const n = Number(saisie);
+    return verifRegle(item.spec as RegleSpec, n);
+  }
+  if (item.format === "cercle") {
+    try {
+      return verifCercle(item.spec as CercleSpec, JSON.parse(saisie) as Pt[]);
+    } catch {
+      return false;
+    }
+  }
+  if (item.format === "patron") {
+    return verifPatron(item.spec as PatronSpec, saisie);
   }
   return comparerGeometrie(item.format, saisie, item.attendu);
 }

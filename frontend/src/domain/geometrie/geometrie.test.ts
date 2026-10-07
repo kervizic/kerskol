@@ -17,13 +17,17 @@ import {
   verifConstruire,
   verifProgramme,
   verifReproduire,
+  verifRegle,
+  verifCercle,
+  verifPatronCube,
+  verifPatron,
   simulerProgramme,
 } from "./geometrie";
-import type { ConstruireSpec, ProgrammeSpec, ReproduireSpec } from "./geometrie";
+import type { ConstruireSpec, ProgrammeSpec, ReproduireSpec, RegleSpec, CercleSpec, Cell } from "./geometrie";
 import { generateExercise } from "../calcul/generator";
 import type { ExCalcul } from "../calcul/generator";
 
-const NB_ITEMS_GOLDEN = 85;
+const NB_ITEMS_GOLDEN = 112;
 
 function source(competence: string, niveau: number): ExCalcul {
   return {
@@ -70,7 +74,7 @@ describe("banque de geometrie : structure et couverture", () => {
         expect(i.options, `${i.cle} doit avoir des options`).toBeTruthy();
         expect(i.options).toContain(i.attendu);
       }
-      if (i.format === "construire" || i.format === "programme") {
+      if (["construire", "programme", "reproduire", "regle", "cercle", "patron"].includes(i.format)) {
         expect(i.spec, `${i.cle} doit porter un spec`).toBeTruthy();
       }
     }
@@ -214,6 +218,85 @@ describe("items de programmation : l'arrivee a lire est coherente", () => {
     expect(estJusteGeometrie("geo-voc-n3-equerre", "A;B")).toBe(true);
     expect(estJusteGeometrie("geo-voc-n3-equerre", canonCells(["B", "A"]))).toBe(true);
     expect(estJusteGeometrie("geo-voc-n3-equerre", "A;B;C")).toBe(false);
+  });
+});
+
+describe("partie 2 : regle graduee (mm, tolerance)", () => {
+  it("mesurer / tracer : longueur a +/- 2 mm", () => {
+    const spec: RegleSpec = { t: "mesurer", len: 70, tol: 2 };
+    expect(verifRegle(spec, 70)).toBe(true);
+    expect(verifRegle(spec, 68)).toBe(true);
+    expect(verifRegle(spec, 72)).toBe(true);
+    expect(verifRegle(spec, 60)).toBe(false);
+  });
+  it("milieu : position du milieu a +/- 2 mm", () => {
+    const spec: RegleSpec = { t: "milieu", mid: 30, tol: 2 };
+    expect(verifRegle(spec, 30)).toBe(true);
+    expect(verifRegle(spec, 50)).toBe(false);
+  });
+  it("items regle : l'exemple attendu est accepte", () => {
+    for (const i of BANQUE_GEOMETRIE.filter((x) => x.format === "regle")) {
+      expect(estJusteGeometrie(i.cle, i.attendu), i.cle).toBe(true);
+    }
+  });
+});
+
+describe("partie 2 : compas (centre + rayon, tolerance)", () => {
+  it("rayon libre : accepte tout centre, rayon a +/- 2 mm", () => {
+    const spec: CercleSpec = { t: "cercle", r: 30, tol: 2 };
+    expect(verifCercle(spec, [[0, 0], [30, 0]])).toBe(true);
+    expect(verifCercle(spec, [[50, 50], [50, 80]])).toBe(true); // ailleurs, meme rayon
+    expect(verifCercle(spec, [[0, 0], [40, 0]])).toBe(false); // mauvais rayon
+  });
+  it("centre impose : la pointe doit etre sur O", () => {
+    const spec: CercleSpec = { t: "cercle", r: 40, cx: 30, cy: 40, tol: 2 };
+    expect(verifCercle(spec, [[30, 40], [70, 40]])).toBe(true);
+    expect(verifCercle(spec, [[30, 40], [30, 80]])).toBe(true); // meme rayon, autre direction
+    expect(verifCercle(spec, [[0, 0], [40, 0]])).toBe(false); // pointe loin de O
+  });
+  it("rayon oblique 3-4-5 : 50 mm accepte", () => {
+    const spec: CercleSpec = { t: "cercle", r: 50, cx: 30, cy: 30, tol: 2 };
+    expect(verifCercle(spec, [[30, 30], [60, 70]])).toBe(true); // 30-40-50
+  });
+  it("items cercle : l'exemple attendu est accepte", () => {
+    for (const i of BANQUE_GEOMETRIE.filter((x) => x.format === "cercle")) {
+      expect(estJusteGeometrie(i.cle, i.attendu), i.cle).toBe(true);
+    }
+  });
+});
+
+describe("partie 2 : patrons de cube (pliage)", () => {
+  const CROIX: Cell[] = [[1, 0], [1, 1], [1, 2], [1, 3], [0, 2], [2, 2]];
+  const T: Cell[] = [[1, 0], [1, 1], [1, 2], [1, 3], [0, 1], [2, 1]];
+  const ESCALIER: Cell[] = [[0, 0], [1, 0], [2, 0], [2, 1], [3, 1], [4, 1]];
+  const BLOC: Cell[] = [[0, 0], [1, 0], [0, 1], [1, 1], [0, 2], [1, 2]];
+  const L2x2: Cell[] = [[0, 0], [1, 0], [0, 1], [1, 1], [1, 2], [1, 3]];
+  it("patrons valides se replient en cube", () => {
+    expect(verifPatronCube(CROIX)).toBe(true);
+    expect(verifPatronCube(T)).toBe(true);
+    expect(verifPatronCube(ESCALIER)).toBe(true);
+  });
+  it("un carre 2x2 interdit le pliage", () => {
+    expect(verifPatronCube(BLOC)).toBe(false);
+    expect(verifPatronCube(L2x2)).toBe(false);
+  });
+  it("mauvais nombre de cases ou cases en double : refuse", () => {
+    expect(verifPatronCube([[0, 0], [1, 0], [2, 0]])).toBe(false);
+    expect(verifPatronCube([[0, 0], [0, 0], [1, 0], [1, 1], [0, 1], [2, 0]])).toBe(false);
+  });
+  it("juge : la bonne reponse oui/non suit le pliage", () => {
+    expect(verifPatron({ t: "juge", cells: CROIX }, "oui")).toBe(true);
+    expect(verifPatron({ t: "juge", cells: CROIX }, "non")).toBe(false);
+    expect(verifPatron({ t: "juge", cells: BLOC }, "non")).toBe(true);
+  });
+  it("plie : seule une liste de cases qui se replie est acceptee", () => {
+    expect(verifPatron({ t: "plie" }, JSON.stringify(CROIX))).toBe(true);
+    expect(verifPatron({ t: "plie" }, JSON.stringify(BLOC))).toBe(false);
+  });
+  it("items patron : l'exemple attendu est accepte", () => {
+    for (const i of BANQUE_GEOMETRIE.filter((x) => x.format === "patron")) {
+      expect(estJusteGeometrie(i.cle, i.attendu), i.cle).toBe(true);
+    }
   });
 });
 

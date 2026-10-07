@@ -595,9 +595,50 @@ Nouveau format `reproduire` ajouté au contrat `spec` jsonb ; fonctions
 `verif_geo_edges` (arêtes normalisées) et `verif_geo_reproduire`, miroir client
 `verifReproduire`. Le **serveur reste seul juge**.
 
-La partie 2 (prévue, non faite) ajoutera : règle graduée virtuelle (mesurer, tracer
-7 cm, milieu, alignement), compas simplifié (centre, rayon), solides 3D manipulables
-et patrons du cube.
+### Refonte CE2 géométrie, partie 2 (migration 0050)
+
+Trois nouveaux outils, sur le domaine `geometrie` déjà actif (trois nouvelles
+compétences, migration **additive et idempotente**, aucun reset des niveaux d'Iris).
+**Unités : millimètres entiers** (1 cm = 10 mm). La surface est aimantée au
+centimètre, donc la vérification reste en **arithmétique exacte** (comme 0047) ; la
+tolérance `tol` (mm, portée par `spec`, défaut **2 mm**) exprime le « ± 2 mm à
+l'échelle affichée ». Le **serveur reste seul juge**.
+
+- **Règle graduée** (`MA.GEO.MESURER_TRACER`, format `regle`) : **mesurer** un segment
+  posé sur la règle (N1 commence à 0, N2 ne commence pas à 0 → il faut soustraire),
+  **tracer** un trait d'une longueur donnée (« trace un trait de 7 cm »), placer le
+  **milieu** d'un segment (N3), et dire si **trois points sont alignés** (N4, QCM). La
+  réponse envoyée est un **entier en mm** ; `verif_geo_regle` vérifie
+  `|valeur − cible| ≤ tol`. Lien avec « Mesures » **sans doublon** : la mesure de
+  longueurs reste `MA.MES.LONGUEURS` ; ici c'est l'**usage de la règle** (lire la
+  graduation, tracer, milieu, alignement). *La règle est présentée alignée
+  horizontalement ; la rotation d'une règle sur un segment oblique relève du cycle 3
+  et n'est pas demandée à ces tâches CE2 (choix assumé).*
+- **Compas** (`MA.GEO.CERCLE`, format `cercle`) : vocabulaire **centre / rayon** (N1),
+  puis **tracer un cercle de rayon donné** (centre libre), **de centre O passant par
+  A** (centre imposé), et **reporter une longueur** à partir de O. L'enfant pose la
+  pointe (centre) puis l'écartement (un point du cercle) ; la réponse est
+  `[[cx,cy],[px,py]]` en mm. `verif_geo_cercle` compare le **rayon** (au carré, exact)
+  et, si le centre est imposé, la **position de la pointe**, à `tol` près.
+- **Patrons du cube** (`MA.GEO.PATRONS`, format `patron`) : **choisir** le patron qui
+  se replie en cube parmi plusieurs (N2/N3), et **juger** si un patron donné en est un
+  (N4, oui/non). Le serveur juge **par propriétés** : `verif_patron_cube` **simule le
+  pliage** (on roule un cube de case en case ; le patron se referme en cube **ssi** ses
+  6 cases se posent sur **6 faces distinctes**). Un patron qui contient un carré de
+  quatre cases ne se replie jamais. Une **petite animation de pliage** accompagne la
+  correction (CSS, légère).
+- **Solides 3D manipulables** (`MA.GEO.SOLIDES`) : le cube, le pavé et la pyramide sont
+  dessinés par un **projecteur 3D maison** (sommets/arêtes projetés, sans librairie) et
+  se **tournent au doigt** (glisser). Quatre items en **réponse libre** (N3/N4) font
+  **compter faces, arêtes et sommets**.
+
+Formats `regle`, `cercle`, `patron` ajoutés au contrat `spec` jsonb ; fonctions
+serveur `verif_geo_regle`, `verif_geo_cercle`, `verif_patron_cube` (+ `verif_geo_roll`)
+et `verif_geo_patron`, miroirs client `verifRegle`, `verifCercle`, `verifPatronCube`,
+`verifPatron`. Cibles tactiles : appui au point/graduation le **plus proche** (zone de
+sélection large) ; règle et surface **défilent** si besoin. Précision tactile : sur
+petit écran la graduation fait ~40 px (limite connue, atténuée par l'appui au plus
+proche et la tolérance).
 
 ## Sous-matière « Tableaux et graphiques » (maths, phase 4)
 

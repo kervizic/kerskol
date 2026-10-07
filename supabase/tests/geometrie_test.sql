@@ -4,7 +4,7 @@
 --
 -- Couvre :
 --   * la table de reference public.geometrie_item contient EXACTEMENT les memes
---     items que le front (66 lignes ; couverture 7 competences x 4 niveaux ;
+--     items que le front (112 lignes ; couverture 12 competences x 4 niveaux ;
 --     spot check) : TEST CROISE avec le golden vitest
 --     (frontend/.../geometrie/geometrie.test.ts) ;
 --   * verif_geo : bonne reponse acceptee, mauvaise refusee, accents EXIGES
@@ -27,16 +27,17 @@ DECLARE
     n   integer;
 BEGIN
     SELECT count(*) INTO n FROM public.geometrie_item;
-    IF n <> 85 THEN
-        RAISE EXCEPTION 'geometrie_item : 85 items attendus, obtenu %', n;
+    IF n <> 112 THEN
+        RAISE EXCEPTION 'geometrie_item : 112 items attendus, obtenu %', n;
     END IF;
 
     -- Couverture : chaque competence a au moins un item a chaque niveau 1..4
-    -- (dont les deux nouvelles competences du lot 1).
+    -- (dont les competences de la partie 2 : regle, compas, patrons).
     FOR r IN SELECT c AS competence, nv AS niveau
                FROM unnest(ARRAY['MA.GEO.FIGURES','MA.GEO.VOCABULAIRE','MA.GEO.SOLIDES',
                     'MA.GEO.SYMETRIE','MA.GEO.CONSTRUIRE','MA.REPERE.QUADRILLAGE',
-                    'MA.REPERE.DEPLACEMENTS','MA.REPERE.PLAN','MA.REPERE.PROGRAMMER']) AS c,
+                    'MA.REPERE.DEPLACEMENTS','MA.REPERE.PLAN','MA.REPERE.PROGRAMMER',
+                    'MA.GEO.MESURER_TRACER','MA.GEO.CERCLE','MA.GEO.PATRONS']) AS c,
                     generate_series(1,4) AS nv
     LOOP
         IF NOT EXISTS (SELECT 1 FROM public.geometrie_item
@@ -58,7 +59,13 @@ BEGIN
         ('geo-prog-n3-a','MA.REPERE.PROGRAMMER',3,'programme','["avance","avance","droite","avance","avance"]'),
         ('geo-quad-n1-a','MA.REPERE.QUADRILLAGE',1,'qcm','B3'),
         ('geo-dep-n3-a','MA.REPERE.DEPLACEMENTS',3,'clic','C3'),
-        ('geo-plan-n2-a','MA.REPERE.PLAN',2,'qcm','devant')
+        ('geo-plan-n2-a','MA.REPERE.PLAN',2,'qcm','devant'),
+        -- partie 2 (regle / compas / patrons)
+        ('geo-mtr-n2-mes','MA.GEO.MESURER_TRACER',2,'regle','70'),
+        ('geo-mtr-n3-mil-a','MA.GEO.MESURER_TRACER',3,'regle','30'),
+        ('geo-cer-n3-passe','MA.GEO.CERCLE',3,'cercle','[[30,40],[70,40]]'),
+        ('geo-pat-n4-non','MA.GEO.PATRONS',4,'patron','non'),
+        ('geo-sol-n3-aretes-cube','MA.GEO.SOLIDES',3,'texte','12')
     ) AS t(cle, competence, niveau, format, attendu)
     LOOP
         SELECT format || '|' || attendu INTO got FROM public.geometrie_item WHERE cle = r.cle;
@@ -67,7 +74,7 @@ BEGIN
                 r.cle, r.format || '|' || r.attendu, got;
         END IF;
     END LOOP;
-    RAISE NOTICE 'table geometrie_item (85 + couverture + spot) : OK';
+    RAISE NOTICE 'table geometrie_item (112 + couverture + spot) : OK';
 END $$;
 
 -- ===========================================================================
@@ -127,7 +134,32 @@ BEGIN
     IF NOT public.verif_geo('geo-voc-n3-equerre','a;b')  THEN RAISE EXCEPTION 'equerre casse KO'; END IF;
     IF     public.verif_geo('geo-voc-n3-equerre','A;B;C') THEN RAISE EXCEPTION 'equerre selection en trop acceptee'; END IF;
 
-    RAISE NOTICE 'verif_geo (dont construire / programme / reproduire / equerre) : OK';
+    -- REGLE (mm, tolerance +/- 2) : mesurer, tracer, milieu.
+    IF NOT public.verif_geo('geo-mtr-n2-mes','70')   THEN RAISE EXCEPTION 'regle mesurer 70 refuse'; END IF;
+    IF NOT public.verif_geo('geo-mtr-n2-mes','68')   THEN RAISE EXCEPTION 'regle tolerance -2mm refusee'; END IF;
+    IF     public.verif_geo('geo-mtr-n2-mes','60')   THEN RAISE EXCEPTION 'regle 60 (faux) accepte'; END IF;
+    IF NOT public.verif_geo('geo-mtr-n3-mil-a','30') THEN RAISE EXCEPTION 'regle milieu 30 refuse'; END IF;
+    IF     public.verif_geo('geo-mtr-n3-mil-a','50') THEN RAISE EXCEPTION 'regle milieu 50 (faux) accepte'; END IF;
+    IF     public.verif_geo('geo-mtr-n2-mes','abc')  THEN RAISE EXCEPTION 'regle non numerique accepte'; END IF;
+
+    -- CERCLE (centre/rayon, tolerance) : rayon libre, centre impose, oblique 3-4-5.
+    IF NOT public.verif_geo('geo-cer-n2-r3','[[50,40],[80,40]]') THEN RAISE EXCEPTION 'cercle rayon 3 refuse'; END IF;
+    IF NOT public.verif_geo('geo-cer-n2-r3','[[0,0],[0,30]]')    THEN RAISE EXCEPTION 'cercle rayon 3 ailleurs refuse'; END IF;
+    IF     public.verif_geo('geo-cer-n2-r3','[[0,0],[40,0]]')    THEN RAISE EXCEPTION 'cercle mauvais rayon accepte'; END IF;
+    IF NOT public.verif_geo('geo-cer-n3-passe','[[30,40],[70,40]]') THEN RAISE EXCEPTION 'cercle centre O refuse'; END IF;
+    IF     public.verif_geo('geo-cer-n3-passe','[[0,0],[40,0]]')    THEN RAISE EXCEPTION 'cercle pointe hors O acceptee'; END IF;
+    IF NOT public.verif_geo('geo-cer-n4-passe','[[30,30],[60,70]]') THEN RAISE EXCEPTION 'cercle oblique 3-4-5 refuse'; END IF;
+
+    -- PATRON de cube (pliage) : choix (plie) et jugement (oui/non).
+    IF NOT public.verif_geo('geo-pat-n2-choix','[[1,0],[1,1],[1,2],[1,3],[0,2],[2,2]]') THEN RAISE EXCEPTION 'patron croix refuse'; END IF;
+    IF     public.verif_geo('geo-pat-n2-choix','[[0,0],[1,0],[0,1],[1,1],[0,2],[1,2]]') THEN RAISE EXCEPTION 'patron 2x3 accepte a tort'; END IF;
+    IF NOT public.verif_geo('geo-pat-n3-choix','[[1,0],[1,1],[1,2],[1,3],[0,1],[2,1]]') THEN RAISE EXCEPTION 'patron T refuse'; END IF;
+    IF NOT public.verif_geo('geo-pat-n4-oui','oui') THEN RAISE EXCEPTION 'patron escalier (oui) refuse'; END IF;
+    IF     public.verif_geo('geo-pat-n4-oui','non') THEN RAISE EXCEPTION 'patron escalier : non accepte a tort'; END IF;
+    IF NOT public.verif_geo('geo-pat-n4-non','non') THEN RAISE EXCEPTION 'patron 2x3 (non) refuse'; END IF;
+    IF     public.verif_patron_cube('[[0,0],[1,0],[0,1],[1,1],[1,2],[1,3]]'::jsonb) THEN RAISE EXCEPTION 'patron avec carre 2x2 accepte'; END IF;
+
+    RAISE NOTICE 'verif_geo (dont regle / compas / patrons) : OK';
 END $$;
 
 -- ===========================================================================
@@ -262,6 +294,32 @@ BEGIN
         'geo-voc-n3-equerre', NULL, 'seance', 'A;B', NULL);
     IF (v ->> 'correct')::boolean IS NOT TRUE THEN
         RAISE EXCEPTION 'equerre A;B devrait etre juste : %', v;
+    END IF;
+END $$;
+
+-- 3c-quinquies. REGLE (MA.GEO.MESURER_TRACER N2) : mesure 70 mm juste, 60 faux.
+DO $$
+DECLARE v jsonb; v_id uuid := gen_random_uuid();
+BEGIN
+    v := public.enregistrer_reponse(
+        v_id, 'a0000001-0000-0000-0000-000000000000'::uuid, NULL, 'MA.GEO.MESURER_TRACER', NULL, 2, 'van_hiele',
+        'geo', 0, 0, 0, NULL, 1, 3000, false, false, false, now(),
+        'geo-mtr-n2-mes', NULL, 'seance', '70', NULL);
+    IF (v ->> 'correct')::boolean IS NOT TRUE THEN
+        RAISE EXCEPTION 'regle 70 mm devrait etre juste : %', v;
+    END IF;
+END $$;
+
+-- 3c-sexies. PATRON (MA.GEO.PATRONS N4) : patron qui se replie -> oui.
+DO $$
+DECLARE v jsonb; v_id uuid := gen_random_uuid();
+BEGIN
+    v := public.enregistrer_reponse(
+        v_id, 'a0000001-0000-0000-0000-000000000000'::uuid, NULL, 'MA.GEO.PATRONS', NULL, 4, 'van_hiele',
+        'geo', 0, 0, 0, NULL, 1, 3000, false, false, false, now(),
+        'geo-pat-n4-oui', NULL, 'seance', 'oui', NULL);
+    IF (v ->> 'correct')::boolean IS NOT TRUE THEN
+        RAISE EXCEPTION 'patron escalier (oui) devrait etre juste : %', v;
     END IF;
 END $$;
 

@@ -15,10 +15,13 @@
 // construire/programme la saisie est un JSON (sommets / cartes) juge par
 // proprietes/simulation. Feedback TOUJOURS valorisant.
 
-import { useEffect, useMemo, useState } from "react";
-import { Check, RotateCcw, Undo2, Play } from "lucide-react";
-import type { GeoRender, GeoShape, GeoGridSpec, SolidName, Dir, ProgToken, Pt } from "../domain/geometrie/geometrie";
-import { canonCells, comparerGeometrie, simulerProgramme } from "../domain/geometrie/geometrie";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { Check, RotateCcw, Undo2, Play, Move3d } from "lucide-react";
+import type {
+  GeoRender, GeoShape, GeoGridSpec, SolidName, Dir, ProgToken, Pt,
+  GeoRuleSpec, GeoCompassSpec, GeoNetSpec, Cell,
+} from "../domain/geometrie/geometrie";
+import { canonCells, comparerGeometrie, simulerProgramme, SOLIDES_3D } from "../domain/geometrie/geometrie";
 
 interface Props {
   item: GeoRender;
@@ -408,6 +411,274 @@ function BuildView({
   );
 }
 
+// --------------------------------------------------------------------------
+// Solide 3D « tournable au doigt » : projection orthographique maison (aucune
+// librairie). Sommets definis en 3D, tournes par glisser, faces triees par
+// profondeur (peintre) puis aretes par-dessus.
+// --------------------------------------------------------------------------
+type V3 = [number, number, number];
+interface Solid3D { verts: V3[]; faces: number[][]; }
+const SOLID3D: Record<string, Solid3D> = {
+  cube: {
+    verts: [[-1, -1, -1], [1, -1, -1], [1, 1, -1], [-1, 1, -1], [-1, -1, 1], [1, -1, 1], [1, 1, 1], [-1, 1, 1]],
+    faces: [[0, 1, 2, 3], [4, 5, 6, 7], [0, 1, 5, 4], [2, 3, 7, 6], [1, 2, 6, 5], [0, 3, 7, 4]],
+  },
+  pave: {
+    verts: [[-1.5, -0.9, -0.7], [1.5, -0.9, -0.7], [1.5, 0.9, -0.7], [-1.5, 0.9, -0.7], [-1.5, -0.9, 0.7], [1.5, -0.9, 0.7], [1.5, 0.9, 0.7], [-1.5, 0.9, 0.7]],
+    faces: [[0, 1, 2, 3], [4, 5, 6, 7], [0, 1, 5, 4], [2, 3, 7, 6], [1, 2, 6, 5], [0, 3, 7, 4]],
+  },
+  pyramide: {
+    verts: [[-1, -1, -1], [1, -1, -1], [1, -1, 1], [-1, -1, 1], [0, 1.4, 0]],
+    faces: [[0, 1, 2, 3], [0, 1, 4], [1, 2, 4], [2, 3, 4], [3, 0, 4]],
+  },
+};
+
+function Solid3DView({ solid }: { solid: SolidName }) {
+  const def = SOLID3D[solid];
+  const [yaw, setYaw] = useState(-0.6);
+  const [pitch, setPitch] = useState(-0.5);
+  const drag = useRef<{ x: number; y: number } | null>(null);
+
+  const onDown = (e: React.PointerEvent) => {
+    (e.target as Element).setPointerCapture?.(e.pointerId);
+    drag.current = { x: e.clientX, y: e.clientY };
+  };
+  const onMove = (e: React.PointerEvent) => {
+    if (!drag.current) return;
+    const dx = e.clientX - drag.current.x;
+    const dy = e.clientY - drag.current.y;
+    drag.current = { x: e.clientX, y: e.clientY };
+    setYaw((y) => y + dx * 0.012);
+    setPitch((p) => Math.max(-1.3, Math.min(1.3, p + dy * 0.012)));
+  };
+  const onUp = () => { drag.current = null; };
+
+  const project = (v: V3): { x: number; y: number; z: number } => {
+    const [x, y, z] = v;
+    const x1 = x * Math.cos(yaw) + z * Math.sin(yaw);
+    const z1 = -x * Math.sin(yaw) + z * Math.cos(yaw);
+    const y2 = y * Math.cos(pitch) - z1 * Math.sin(pitch);
+    const z2 = y * Math.sin(pitch) + z1 * Math.cos(pitch);
+    const sc = 24;
+    return { x: 50 + x1 * sc, y: 50 - y2 * sc, z: z2 };
+  };
+  const pv = def.verts.map(project);
+  const faces = def.faces
+    .map((f, i) => ({ f, i, z: f.reduce((s, k) => s + pv[k].z, 0) / f.length }))
+    .sort((a, b) => a.z - b.z); // du plus loin au plus proche
+  const txt = "var(--kk-text)";
+  const acc = "var(--kk-accent)";
+
+  return (
+    <div className="kk-support kk-geo__figure">
+      <svg
+        width="100%" style={{ maxWidth: 240, touchAction: "none", cursor: "grab" }}
+        viewBox="0 0 100 100" role="img" aria-label={`solide à tourner : ${solid}`}
+        onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerLeave={onUp}
+      >
+        {faces.map(({ f, i, z }) => {
+          const pts = f.map((k) => `${pv[k].x.toFixed(1)},${pv[k].y.toFixed(1)}`).join(" ");
+          const op = 0.12 + Math.max(0, Math.min(1, (z + 2) / 4)) * 0.3; // plus proche = plus visible
+          return <polygon key={`f${i}`} points={pts} fill={acc} fillOpacity={op} stroke={txt} strokeWidth={1.6} strokeLinejoin="round" />;
+        })}
+      </svg>
+      <p className="kk-hint" style={{ textAlign: "center", margin: "4px 0 0", opacity: 0.8 }}>
+        <Move3d size={14} aria-hidden="true" /> tourne-le avec le doigt
+      </p>
+    </div>
+  );
+}
+
+// --------------------------------------------------------------------------
+// Regle graduee 1D (format 'regle'). Graduations en cm ; appui a la graduation
+// la plus proche (cible large, regle defilante si besoin). mesurer/tracer = deux
+// appuis (longueur) ; milieu = un appui (position du milieu).
+// --------------------------------------------------------------------------
+const CMPX = 42; // pixels par centimetre (cible tactile confortable)
+function RuleView({ rule, taps, onTap, locked, attenduMm }: {
+  rule: GeoRuleSpec; taps: number[]; onTap: (cm: number) => void; locked: boolean; attenduMm: number | null;
+}) {
+  const { maxCm, task, seg } = rule;
+  const PAD = 24;
+  const W = maxCm * CMPX + 2 * PAD;
+  const H = 96;
+  const xOf = (cm: number) => PAD + cm * CMPX;
+  const yRule = 54;
+
+  const pick = (e: React.PointerEvent<SVGSVGElement>) => {
+    if (locked) return;
+    const svg = e.currentTarget;
+    const r = svg.getBoundingClientRect();
+    const xClient = (e.clientX - r.left) * (W / r.width);
+    const cm = Math.round((xClient - PAD) / CMPX);
+    if (cm >= 0 && cm <= maxCm) onTap(cm);
+  };
+
+  const ticks: React.ReactNode[] = [];
+  for (let c = 0; c <= maxCm; c++) {
+    const x = xOf(c);
+    ticks.push(<line key={`t${c}`} x1={x} y1={yRule} x2={x} y2={yRule + 16} stroke="var(--kk-text)" strokeWidth={1.4} />);
+    ticks.push(<text key={`n${c}`} x={x} y={yRule + 30} textAnchor="middle" fontSize={11} fill="var(--kk-text)">{c}</text>);
+    if (c < maxCm) {
+      const xh = x + CMPX / 2;
+      ticks.push(<line key={`h${c}`} x1={xh} y1={yRule} x2={xh} y2={yRule + 9} stroke="var(--kk-border)" strokeWidth={1.1} />);
+    }
+  }
+
+  return (
+    <div className="kk-support kk-geo__grid" style={{ overflowX: "auto" }}>
+      <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label="règle graduée"
+        style={{ touchAction: "none", maxWidth: "none" }} onPointerDown={pick}>
+        {/* corps de la regle */}
+        <rect x={PAD} y={yRule} width={maxCm * CMPX} height={20} fill="var(--kk-support-bg, #fff8e1)" stroke="var(--kk-text)" strokeWidth={1.4} />
+        {ticks}
+        {/* segment pose (mesurer / milieu) */}
+        {seg && (
+          <line x1={xOf(seg.a)} y1={yRule - 14} x2={xOf(seg.b)} y2={yRule - 14} stroke="var(--kk-accent)" strokeWidth={5} strokeLinecap="round" />
+        )}
+        {seg && [seg.a, seg.b].map((c, i) => (
+          <line key={`cap${i}`} x1={xOf(c)} y1={yRule - 20} x2={xOf(c)} y2={yRule - 8} stroke="var(--kk-accent)" strokeWidth={2} />
+        ))}
+        {/* appuis de l'enfant */}
+        {taps.map((c, i) => (
+          <g key={`tap${i}`}>
+            <line x1={xOf(c)} y1={yRule - 24} x2={xOf(c)} y2={yRule + 18} stroke="#E06A00" strokeWidth={2.4} />
+            <circle cx={xOf(c)} cy={yRule - 24} r={5} fill="#E06A00" />
+          </g>
+        ))}
+        {/* trait trace entre deux appuis */}
+        {task !== "milieu" && taps.length >= 2 && (
+          <line x1={xOf(taps[0])} y1={yRule - 14} x2={xOf(taps[1])} y2={yRule - 14} stroke="#16a34a" strokeWidth={5} strokeLinecap="round" />
+        )}
+        {/* correction : milieu attendu */}
+        {locked && task === "milieu" && attenduMm != null && (
+          <circle cx={xOf(attenduMm / 10)} cy={yRule - 14} r={6} fill="#16a34a" />
+        )}
+      </svg>
+    </div>
+  );
+}
+
+// --------------------------------------------------------------------------
+// Compas 2D (format 'cercle'). Surface au cm, appui au noeud le plus proche.
+// Premier appui = pointe (centre), sauf centre impose ; deuxieme = ecartement.
+// --------------------------------------------------------------------------
+function CompassView({ compass, taps, onTap, locked }: {
+  compass: GeoCompassSpec; taps: Pt[]; onTap: (p: Pt) => void; locked: boolean;
+}) {
+  const { wCm, hCm, points = [], centerFixed } = compass;
+  const px = Math.min(44, Math.floor(340 / wCm)); // px par cm
+  const PAD = 20;
+  const W = wCm * px + 2 * PAD;
+  const H = hCm * px + 2 * PAD;
+  const sx = (cm: number) => PAD + cm * px;
+  const sy = (cm: number) => PAD + (hCm - cm) * px; // y vers le haut
+
+  const centerMm: Pt | null = centerFixed ? [centerFixed.x * 10, centerFixed.y * 10] : taps.length >= 1 ? taps[0] : null;
+  const edgeMm: Pt | null = centerFixed ? (taps[0] ?? null) : (taps[1] ?? null);
+  const rPx = centerMm && edgeMm ? Math.hypot((edgeMm[0] - centerMm[0]) / 10, (edgeMm[1] - centerMm[1]) / 10) * px : 0;
+
+  const pick = (e: React.PointerEvent<SVGSVGElement>) => {
+    if (locked) return;
+    const svg = e.currentTarget;
+    const r = svg.getBoundingClientRect();
+    const xc = (e.clientX - r.left) * (W / r.width);
+    const yc = (e.clientY - r.top) * (H / r.height);
+    const col = Math.round((xc - PAD) / px);
+    const row = Math.round((hCm - (yc - PAD) / px));
+    if (col < 0 || col > wCm || row < 0 || row > hCm) return;
+    onTap([col * 10, row * 10]);
+  };
+
+  const dots: React.ReactNode[] = [];
+  for (let c = 0; c <= wCm; c++) for (let r = 0; r <= hCm; r++) {
+    dots.push(<circle key={`d${c}-${r}`} cx={sx(c)} cy={sy(r)} r={1.4} fill="var(--kk-border)" />);
+  }
+
+  return (
+    <div className="kk-support kk-geo__grid" style={{ overflow: "auto" }}>
+      <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label="surface pour le compas"
+        style={{ touchAction: "none", maxWidth: "100%" }} onPointerDown={pick}>
+        {dots}
+        {/* reperes donnes (O, A...) */}
+        {points.map((p, i) => (
+          <g key={`p${i}`}>
+            <circle cx={sx(p.x)} cy={sy(p.y)} r={4} fill="var(--kk-text)" />
+            {p.label && <text x={sx(p.x) + 6} y={sy(p.y) - 6} fontSize={13} fontWeight={700} fill="var(--kk-text)">{p.label}</text>}
+          </g>
+        ))}
+        {/* cercle trace */}
+        {centerMm && edgeMm && rPx > 0 && (
+          <circle cx={sx(centerMm[0] / 10)} cy={sy(centerMm[1] / 10)} r={rPx} fill="var(--kk-accent)" fillOpacity={0.12} stroke="var(--kk-accent)" strokeWidth={2.2} />
+        )}
+        {/* pointe (centre) */}
+        {centerMm && <circle cx={sx(centerMm[0] / 10)} cy={sy(centerMm[1] / 10)} r={4.5} fill="#E06A00" />}
+        {/* point du cercle (ecartement) */}
+        {edgeMm && <circle cx={sx(edgeMm[0] / 10)} cy={sy(edgeMm[1] / 10)} r={4.5} fill="#16a34a" />}
+      </svg>
+    </div>
+  );
+}
+
+// --------------------------------------------------------------------------
+// Patron(s) de cube (format 'patron'). Dessine un ou plusieurs patrons (cases) ;
+// pour le choix, chaque patron est une grande cible ; a la correction, petite
+// animation : le bon patron se « replie » (fondu vers un cube).
+// --------------------------------------------------------------------------
+function NetDrawing({ cells, size = 26, color = "var(--kk-accent)" }: { cells: Cell[]; size?: number; color?: string }) {
+  const minC = Math.min(...cells.map((c) => c[0]));
+  const minR = Math.min(...cells.map((c) => c[1]));
+  const maxC = Math.max(...cells.map((c) => c[0]));
+  const maxR = Math.max(...cells.map((c) => c[1]));
+  const W = (maxC - minC + 1) * size;
+  const H = (maxR - minR + 1) * size;
+  return (
+    <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label="patron">
+      {cells.map((c, i) => (
+        <rect key={i} x={(c[0] - minC) * size} y={(maxR - c[1]) * size} width={size} height={size}
+          fill={color} fillOpacity={0.3} stroke="var(--kk-text)" strokeWidth={1.6} />
+      ))}
+    </svg>
+  );
+}
+
+function NetView({ net, choice, onChoose, locked, bonId }: {
+  net: GeoNetSpec; choice: string | null; onChoose: (id: string) => void; locked: boolean; bonId: string | null;
+}) {
+  if (net.choices) {
+    return (
+      <div className="kk-row" style={{ justifyContent: "center", flexWrap: "wrap", gap: 12 }}>
+        {net.choices.map((ch) => {
+          const sel = choice === ch.id;
+          const bon = locked && bonId === ch.id;
+          return (
+            <button key={ch.id} type="button" disabled={locked}
+              onClick={() => onChoose(ch.id)}
+              className="kk-btn"
+              style={{
+                padding: 10, minHeight: 44,
+                outline: sel ? "3px solid var(--kk-accent)" : bon ? "3px solid #16a34a" : "2px solid var(--kk-border)",
+                background: bon ? "rgba(22,163,74,0.08)" : undefined,
+                animation: bon ? "kk-fold 1.2s ease-in-out" : undefined,
+              }}
+              aria-pressed={sel} aria-label={`patron ${ch.id}`}>
+              <NetDrawing cells={ch.cells} color={bon ? "#16a34a" : "var(--kk-accent)"} />
+            </button>
+          );
+        })}
+      </div>
+    );
+  }
+  // patron unique (juge) : le dessin se replie a la correction
+  return (
+    <div className="kk-support kk-geo__figure" style={{ display: "flex", justifyContent: "center" }}>
+      <div style={{ animation: locked ? "kk-fold 1.2s ease-in-out" : undefined }}>
+        <NetDrawing cells={net.cells ?? []} size={30} />
+      </div>
+    </div>
+  );
+}
+
 export default function Geometrie({ item, onSoumettre, onContinuer }: Props) {
   const [choix, setChoix] = useState<string | null>(null); // qcm / clic / point
   const [colored, setColored] = useState<string[]>([]); // grille color
@@ -417,6 +688,10 @@ export default function Geometrie({ item, onSoumettre, onContinuer }: Props) {
   const [multiSel, setMultiSel] = useState<string[]>([]); // selection multiple (equerre)
   const [robotCell, setRobotCell] = useState<string | null>(null); // apercu du robot
   const [modelVisible, setModelVisible] = useState(true); // modele a reproduire (memoire)
+  const [ruleTaps, setRuleTaps] = useState<number[]>([]); // appuis sur la regle (cm)
+  const [compassTaps, setCompassTaps] = useState<Pt[]>([]); // appuis du compas (mm)
+  const [netChoice, setNetChoice] = useState<string | null>(null); // patron choisi (id)
+  const [netJuge, setNetJuge] = useState<"oui" | "non" | null>(null); // reponse oui/non (patron juge)
   const [busy, setBusy] = useState(false);
   const [res, setRes] = useState<{ correct: boolean } | null>(null);
   const [erreurReseau, setErreurReseau] = useState(false);
@@ -434,6 +709,15 @@ export default function Geometrie({ item, onSoumettre, onContinuer }: Props) {
   const prefill = buildFig?.prefill ?? [];
   const programAffiche = grid?.program ?? null; // programme a LIRE (clic)
 
+  // Partie 2 : regle, compas, patrons.
+  const ruleFig = item.format === "regle" && item.figure.kind === "rule" ? item.figure.rule : null;
+  const compassFig = item.format === "cercle" && item.figure.kind === "compass" ? item.figure.compass : null;
+  const netFig = item.format === "patron" && item.figure.kind === "net" ? item.figure.net : null;
+  const isPatronChoix = Boolean(netFig?.choices);
+  const isPatronJuge = Boolean(netFig && !netFig.choices);
+  // Patron a surligner a la correction (choix) : celui dont les cases == attendu.
+  const bonNetId = netFig?.choices?.find((c) => JSON.stringify(c.cells) === item.attendu)?.id ?? null;
+
   // « Refaire de memoire » : le modele reste visible 3 s puis se cache.
   const memoire = Boolean(buildFig?.memoire);
   useEffect(() => {
@@ -446,6 +730,16 @@ export default function Geometrie({ item, onSoumettre, onContinuer }: Props) {
   // Sommets dessines = prefill (verrouilles) + ceux de l'enfant.
   const placed = useMemo(() => [...prefill, ...vertices], [prefill, vertices]);
 
+  // Points du compas : [pointe, point du cercle]. Pointe imposee si centerFixed.
+  const compassPts = useMemo((): Pt[] | null => {
+    if (!compassFig) return null;
+    if (compassFig.centerFixed) {
+      const c: Pt = [compassFig.centerFixed.x * 10, compassFig.centerFixed.y * 10];
+      return compassTaps.length >= 1 ? [c, compassTaps[0]] : null;
+    }
+    return compassTaps.length >= 2 ? [compassTaps[0], compassTaps[1]] : null;
+  }, [compassFig, compassTaps]);
+
   // Reponse courante (texte envoye au serveur) selon le format.
   const reponse = useMemo(() => {
     if (item.format === "qcm") return choix ?? "";
@@ -454,8 +748,19 @@ export default function Geometrie({ item, onSoumettre, onContinuer }: Props) {
     if (isMulti) return canonCells(multiSel);
     if (isBuild) return placed.length >= 2 ? JSON.stringify(placed) : "";
     if (isProgramme) return tokens.length >= 1 ? JSON.stringify(tokens) : "";
+    if (ruleFig) {
+      if (ruleFig.task === "milieu") return ruleTaps.length >= 1 ? String(ruleTaps[0] * 10) : "";
+      return ruleTaps.length >= 2 ? String(Math.abs(ruleTaps[1] - ruleTaps[0]) * 10) : "";
+    }
+    if (compassFig) return compassPts ? JSON.stringify(compassPts) : "";
+    if (isPatronChoix) {
+      const ch = netFig?.choices?.find((c) => c.id === netChoice);
+      return ch ? JSON.stringify(ch.cells) : "";
+    }
+    if (isPatronJuge) return netJuge ?? "";
     return choix ?? ""; // clic (figure ou grille) / point
-  }, [item.format, isColor, isMulti, isBuild, isProgramme, choix, saisie, colored, multiSel, placed, tokens]);
+  }, [item.format, isColor, isMulti, isBuild, isProgramme, choix, saisie, colored, multiSel, placed, tokens,
+    ruleFig, ruleTaps, compassFig, compassPts, isPatronChoix, isPatronJuge, netFig, netChoice, netJuge]);
 
   const peutValider = reponse.trim().length > 0 && !res && !busy;
 
@@ -537,7 +842,7 @@ export default function Geometrie({ item, onSoumettre, onContinuer }: Props) {
       )}
 
       {/* Figure */}
-      {fig.kind === "solid" && <SolidView solid={fig.solid} />}
+      {fig.kind === "solid" && (SOLIDES_3D.includes(fig.solid) ? <Solid3DView solid={fig.solid} /> : <SolidView solid={fig.solid} />)}
       {fig.kind === "shapes" && (
         <div className="kk-support kk-geo__figure">
           <svg width="100%" style={{ maxWidth: 320 }} viewBox="0 0 100 100" role="img" aria-label="figure">
@@ -587,6 +892,69 @@ export default function Geometrie({ item, onSoumettre, onContinuer }: Props) {
           onPickCell={(c) => !res && setChoix(c)}
           onPickNode={(c) => !res && setChoix(c)}
         />
+      )}
+
+      {/* REGLE graduee (mesurer / tracer / milieu). */}
+      {ruleFig && (
+        <>
+          <RuleView
+            rule={ruleFig} taps={ruleTaps} locked={Boolean(res)}
+            attenduMm={res ? Number(item.attendu) : null}
+            onTap={(cm) => {
+              if (res) return;
+              setRuleTaps((prev) => {
+                if (ruleFig.task === "milieu") return [cm];
+                if (prev.length >= 2) return [cm];
+                return [...prev, cm];
+              });
+            }}
+          />
+          {!res && ruleTaps.length > 0 && (
+            <div className="kk-row" style={{ justifyContent: "center" }}>
+              <button type="button" className="kk-btn" onClick={() => setRuleTaps([])}>
+                <RotateCcw size={18} aria-hidden="true" /> Effacer
+              </button>
+            </div>
+          )}
+        </>
+      )}
+
+      {/* COMPAS (tracer un cercle). */}
+      {compassFig && (
+        <>
+          <CompassView
+            compass={compassFig} taps={compassTaps} locked={Boolean(res)}
+            onTap={(p) => {
+              if (res) return;
+              const max = compassFig.centerFixed ? 1 : 2;
+              setCompassTaps((prev) => (prev.length >= max ? [p] : [...prev, p]));
+            }}
+          />
+          {!res && compassTaps.length > 0 && (
+            <div className="kk-row" style={{ justifyContent: "center" }}>
+              <button type="button" className="kk-btn" onClick={() => setCompassTaps([])}>
+                <RotateCcw size={18} aria-hidden="true" /> Effacer
+              </button>
+            </div>
+          )}
+        </>
+      )}
+
+      {/* PATRON de cube. */}
+      {netFig && (
+        <NetView net={netFig} choice={netChoice} locked={Boolean(res)} bonId={bonNetId}
+          onChoose={(id) => { if (!res) setNetChoice(id); }} />
+      )}
+      {isPatronJuge && !res && (
+        <div className="kk-row" style={{ justifyContent: "center" }}>
+          {(["oui", "non"] as const).map((v) => (
+            <button key={v} type="button"
+              className={`kk-btn kk-btn--accent${netJuge === v ? " kk-qcm__opt--active" : ""}`}
+              aria-pressed={netJuge === v} onClick={() => setNetJuge(v)}>
+              {v}
+            </button>
+          ))}
+        </div>
       )}
 
       {/* CONSTRUIRE / REPRODUIRE : commandes annuler / effacer. */}
