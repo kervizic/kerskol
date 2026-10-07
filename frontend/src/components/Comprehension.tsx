@@ -257,7 +257,11 @@ export default function Comprehension({ item, indice, onSoumettre, onContinuer }
         <div className={`kk-banner ${res.correct ? "kk-banner--ok" : ""}`}>
           <span className="kk-banner__title">
             {res.correct ? <Check size={22} aria-hidden="true" /> : null}{" "}
-            {res.correct ? "Bravo ! C'est la bonne réponse." : "Ce n'est pas tout à fait ça. Regarde la réponse."}
+            {res.correct
+              ? "Bravo ! C'est la bonne réponse."
+              : item.preuve
+                ? `Relis cette phrase : ${item.preuve}`
+                : "Ce n'est pas tout à fait ça. Regarde la réponse."}
           </span>
           <p className="kk-geo__expl" aria-live="polite" style={{ margin: "8px 0" }}>{item.explication}</p>
           <button className="kk-btn kk-btn--accent kk-btn--block" onClick={() => onContinuer(res.correct)}>

@@ -14,6 +14,8 @@ import {
   itemCompParCle,
   estJusteComprehension,
   comparerComprehension,
+  PREUVE_PAR_CLE,
+  preuvePour,
 } from "./comprehension";
 import { normaliserMot } from "./dictee";
 import { generateExercise } from "../calcul/generator";
@@ -94,6 +96,19 @@ describe("banque de comprehension : structure et couverture", () => {
     }
   });
 
+  it("preuve (correctif phase 5) : chaque item a une preuve = phrase EXACTE du texte", () => {
+    for (const i of BANQUE_COMPREHENSION) {
+      const preuve = PREUVE_PAR_CLE[i.cle];
+      expect(preuve, `${i.cle} doit avoir une preuve`).toBeTruthy();
+      expect(i.texte, `${i.cle} : preuve absente du texte`).toContain(preuve);
+    }
+  });
+
+  it("preuvePour : repli sur la 1re phrase si la cle est inconnue", () => {
+    expect(preuvePour("lec-info-n1-a")).toBe("Le chat s'appelle Mistigri.");
+    expect(preuvePour("cle-inexistante")).toBe("");
+  });
+
   it("au moins 30 textes differents (banque riche)", () => {
     const textes = new Set(BANQUE_COMPREHENSION.map((i) => i.texte.join(" ")));
     expect(textes.size).toBeGreaterThanOrEqual(30);
@@ -163,6 +178,7 @@ describe("generateur de comprehension", () => {
         expect(item!.competence).toBe(c);
         expect(item!.niveau).toBe(n);
         expect(ex.verif.cle).toBe(ex.comp!.cle);
+        expect(item!.texte, `${c} N${n} preuve`).toContain(ex.comp!.preuve);
       }
     }
   });

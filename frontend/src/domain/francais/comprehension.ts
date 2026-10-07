@@ -60,10 +60,13 @@ export interface CompItem {
 }
 
 // Donnees de RENDU (ce que l'exercice porte et que <Comprehension> affiche).
+// `preuve` = la phrase EXACTE du texte qui justifie la reponse ; elle est citee
+// en cas d'erreur (« Relis cette phrase : ... ») a la place du message generique
+// (correctif phase 5). Elle n'est PAS jugee par le serveur (affichage seulement).
 export type CompRender = Pick<
   CompItem,
   "cle" | "format" | "texte" | "consigne" | "options" | "evenements" | "attendu" | "explication"
->;
+> & { preuve: string };
 
 // --------------------------------------------------------------------------
 // Comparaison MIROIR du serveur (verif_comprehension) :
@@ -380,6 +383,67 @@ export function itemCompParCle(cle: string): CompItem | undefined {
   return BANQUE_COMPREHENSION.find((i) => i.cle === cle);
 }
 
+// --------------------------------------------------------------------------
+// PREUVE par item (correctif phase 5). Chaque valeur est une phrase EXACTE du
+// `texte` de l'item : en cas d'erreur, on cite cette phrase (« Relis cette
+// phrase : ... ») au lieu du message generique. Un test croise verifie que
+// chaque cle est couverte ET que la preuve est bien une ligne du texte.
+// --------------------------------------------------------------------------
+export const PREUVE_PAR_CLE: Record<string, string> = {
+  // FR.LECTURE.INFO
+  "lec-info-n1-a": "Le chat s'appelle Mistigri.",
+  "lec-info-n1-b": "Le ballon est sous l'arbre.",
+  "lec-info-n2-a": "Ses trois petits restent cachés dans le terrier.",
+  "lec-info-n2-b": "Puis tu verses la pâte dans un moule.",
+  "lec-info-n3-a": "Sa queue touffue l'aide à garder l'équilibre.",
+  "lec-info-n3-b": "Elle met ses livres sur l'étagère et ses jouets dans le grand coffre.",
+  "lec-info-n4-a": "Dans le jardin, sa tortue Carapouce mange de la salade.",
+  "lec-info-n4-b": "Au bord de la mare, une grenouille verte attend sans bouger.",
+  // FR.LECTURE.INFERENCE
+  "lec-inf-n1-a": "Il saute partout et montre sa médaille à tout le monde.",
+  "lec-inf-n1-b": "Il pleut très fort et elle ne peut pas aller jouer dehors.",
+  "lec-inf-n2-a": "Son maître vient de rentrer à la maison.",
+  "lec-inf-n2-b": "Il n'a rien mangé et il attend le repas avec impatience.",
+  "lec-inf-n3-a": "La maîtresse éteint la lumière de la classe et ferme la porte à clé.",
+  "lec-inf-n3-b": "Dehors, les flaques brillent sur le trottoir.",
+  "lec-inf-n4-a": "Ses poils sont tout hérissés et il crache.",
+  "lec-inf-n4-b": "Elle la lit et un grand sourire apparaît sur son visage.",
+  // FR.LECTURE.ORDRE
+  "lec-ord-n1-a": "Papa casse les œufs dans un bol.",
+  "lec-ord-n1-b": "Plus tard, une petite fleur pousse.",
+  "lec-ord-n2-a": "D'abord, Sacha met son manteau.",
+  "lec-ord-n2-b": "Pour préparer un jus d'orange, tu coupes l'orange en deux.",
+  "lec-ord-n3-a": "D'abord, il met ses cahiers.",
+  "lec-ord-n3-b": "La chenille mange beaucoup de feuilles.",
+  "lec-ord-n4-a": "Pour faire pousser des lentilles, pose du coton au fond d'un pot.",
+  "lec-ord-n4-b": "Il décide de partir explorer la forêt.",
+  // FR.LECTURE.VRAIFAUX
+  "lec-vf-n1-a": "Il donne de la lumière et de la chaleur.",
+  "lec-vf-n1-b": "Il ne sait pas voler, mais il nage très bien.",
+  "lec-vf-n2-a": "Elle vit dans une ruche avec des milliers d'autres abeilles.",
+  "lec-vf-n2-b": "Les tomates deviennent rouges et bien mûres.",
+  "lec-vf-n3-a": "Ce n'est pas un poisson : c'est un mammifère.",
+  "lec-vf-n3-b": "La chouette dort le jour et chasse pendant la nuit.",
+  "lec-vf-n4-a": "Il peut changer de couleur pour se cacher.",
+  "lec-vf-n4-b": "Toutes ensemble, elles construisent une grande fourmilière sous la terre.",
+  // FR.LECTURE.SENS_MOT
+  "lec-sens-n1-a": "Le vieux coffre était rempli de pièces d'or.",
+  "lec-sens-n1-b": "Le petit ruisseau coule entre les cailloux.",
+  "lec-sens-n2-a": "Après la longue marche en montagne, les randonneurs étaient épuisés.",
+  "lec-sens-n2-b": "Le chat guette la souris sans bouger une oreille.",
+  "lec-sens-n3-a": "La route était glissante à cause du verglas.",
+  "lec-sens-n3-b": "Léo alluma vite sa lampe pour y voir quelque chose.",
+  "lec-sens-n4-a": "Dehors, les branches pliaient sous la tempête.",
+  "lec-sens-n4-b": "Les enfants se régalèrent et vidèrent toute leur assiette.",
+};
+
+// Preuve d'un item (repli sur sa 1re phrase si la cle est inconnue).
+export function preuvePour(cle: string): string {
+  if (PREUVE_PAR_CLE[cle]) return PREUVE_PAR_CLE[cle];
+  const item = itemCompParCle(cle);
+  return item?.texte[0] ?? "";
+}
+
 // ==========================================================================
 // GENERATEUR : choisit un ITEM de la banque pour la competence et le niveau, de
 // facon reproductible (graine). Le composant <Comprehension> l'affiche (texte
@@ -421,6 +485,7 @@ export function buildComprehension(src: ExCalcul, rng: Rng, base: Base): Generat
       evenements: item.evenements,
       attendu: item.attendu,
       explication: item.explication,
+      preuve: preuvePour(item.cle),
     },
     verif: { op: "lire", a: 0, b: 0, cle: item.cle },
     correction: item.explication,

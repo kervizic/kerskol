@@ -442,6 +442,7 @@ export interface GeneratedExercise {
     evenements?: string[];
     attendu: string;
     explication: string;
+    preuve: string; // phrase du texte citee en cas d'erreur (correctif phase 5)
   };
   poseData?: PoseData; // mode pose
   chiffresData?: ChiffresData; // mode chiffres (decomposition)
