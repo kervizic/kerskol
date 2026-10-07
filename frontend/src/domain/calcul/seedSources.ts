@@ -124,6 +124,20 @@ const PB: Row[] = [
   ["MA.PB.DEUX_ETAPES", 4, "probleme", "probleme", "probleme_dabord", "aucun", "schema_barres", { types: ["mul_add", "mul_sub", "add_div", "mul_rsub", "add_rsub"], tables: [2, 3, 4, 5, 6, 7, 8, 9], qmax: 10, mag: 100 }],
 ];
 
+// --- Problemes de MESURES (domaine problemes) : grandeurs a 1-2 etapes ---
+// QCM aux niveaux faciles (1-2), saisie libre ensuite. La conversion est
+// embarquee dans l'operande (contrat 1 operation) ; diagnostic par pieges.
+const PBM: Row[] = [
+  ["MA.PB.MESURES", 1, "probleme", "probleme", "cpa_barres", "aucun", "mesures_conversion",
+    { grandeurs: ["longueur", "masse"], structures: ["conversion"], saisie: "qcm" }],
+  ["MA.PB.MESURES", 2, "probleme", "probleme", "exemples_estompes", "aucun", "mesures_conversion_ajout",
+    { grandeurs: ["longueur", "masse", "duree", "monnaie"], structures: ["conversion", "ajout"], saisie: "qcm" }],
+  ["MA.PB.MESURES", 3, "probleme", "probleme", "variation", "aucun", "mesures_ajout_retrait",
+    { grandeurs: ["longueur", "masse", "duree", "monnaie"], structures: ["conversion", "ajout", "retrait"] }],
+  ["MA.PB.MESURES", 4, "probleme", "probleme", "probleme_dabord", "aucun", "mesures_mixte",
+    { grandeurs: ["longueur", "masse", "duree", "monnaie"], structures: ["ajout", "retrait", "produit", "conversion"] }],
+];
+
 // --- Mesures (domaine mesures) : heure, durees ---
 const MES: Row[] = [
   ["MA.MES.HEURE", 1, "heure", "mesure", "cpa_barres", "aucun", "lire_horloge", { types: ["lire"], minuteStep: 30, saisie: "qcm" }],
@@ -200,4 +214,4 @@ function toSource(r: Row): ExCalcul {
   };
 }
 
-export const SEED_SOURCES: ExCalcul[] = [...CM, ...tableRows(), ...NUM, ...POSE, ...PB, ...MES, ...FRAC].map(toSource);
+export const SEED_SOURCES: ExCalcul[] = [...CM, ...tableRows(), ...NUM, ...POSE, ...PB, ...PBM, ...MES, ...FRAC].map(toSource);

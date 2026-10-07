@@ -18,7 +18,7 @@
 // La correction porte un SCHEMA EN BARRES (modele tout/parties ou comparaison),
 // disponible aussi comme aide optionnelle pendant la recherche.
 
-import { intBetween, pick, type Rng } from "./rng";
+import { intBetween, pick, shuffle, type Rng } from "./rng";
 import type {
   BarCell,
   BarModel,
@@ -27,6 +27,7 @@ import type {
   GeneratedExercise,
   MoneyData,
   ProblemContext,
+  QcmOption,
   Verif,
   VerifOp2,
 } from "./generator";
@@ -104,6 +105,12 @@ export interface Vars {
   paid: string; // montant paye (rendre) formate
   px: string; // prix X (comparer)
   py: string; // prix Y (comparer)
+  // Problemes de MESURES (grandeurs) : morceaux de texte DEJA formates avec
+  // leur unite (« 2 m », « 1 h 30 », « 300 g »). Le calcul reste porte par verif.
+  q1: string; // 1re quantite formatee
+  q2: string; // 2e quantite formatee
+  uu: string; // unite attendue dans la reponse (« cm », « min », « g », « € »)
+  conv: string; // rappel de conversion (« 1 m = 100 cm ») ou ""
 }
 export interface Gabarit {
   type: string;
@@ -213,11 +220,41 @@ function cFrom(v: Vars): number {
   return (v as unknown as { _c: number })._c;
 }
 
+// MESURES : problemes de grandeurs (longueurs, masses, durees, monnaie). Les
+// gabarits sont GRANDEUR-AGNOSTIQUES : l'unite est deja dans q1/q2/uu/conv. Un
+// enonce peut demander une conversion avant de calculer (« deux etapes »
+// pedagogiques), mais la normalisation reste UNE operation (l'operande converti
+// est calcule cote client, le serveur recalcule op(a,b), comme tous les autres
+// problemes).
+const MESURES_BANK: Gabarit[] = [
+  // conversion (val)
+  { type: "conversion", t: (v) => `${v.hero} mesure ${v.q1}. Combien cela fait-il en ${v.uu} ? (${v.conv})` },
+  { type: "conversion", t: (v) => `Convertis ${v.q1} en ${v.uu}. (${v.conv})` },
+  { type: "conversion", t: (v) => `${v.q1}, c'est combien de ${v.uu} ? (${v.conv})` },
+  { type: "conversion", t: (v) => `${v.hero} veut écrire ${v.q1} en ${v.uu}. Quel nombre doit-il écrire ? (${v.conv})` },
+  // ajout (add, souvent apres conversion)
+  { type: "ajout", t: (v) => `${v.hero} a ${v.q1} et ${v.q2}. Combien cela fait-il en tout, en ${v.uu} ? (${v.conv})` },
+  { type: "ajout", t: (v) => `Un bout de ${v.q1} et un bout de ${v.q2} mis ensemble. Combien en ${v.uu} ? (${v.conv})` },
+  { type: "ajout", t: (v) => `${v.hero} ajoute ${v.q2} à ${v.q1}. Combien en ${v.uu} ? (${v.conv})` },
+  { type: "ajout", t: (v) => `Le matin ${v.q1}, l'après-midi ${v.q2}. Total en ${v.uu} ? (${v.conv})` },
+  // retrait (sub, souvent apres conversion)
+  { type: "retrait", t: (v) => `Il y a ${v.q1}. ${v.hero} enlève ${v.q2}. Combien reste-t-il, en ${v.uu} ? (${v.conv})` },
+  { type: "retrait", t: (v) => `${v.hero} a ${v.q1} et en utilise ${v.q2}. Combien reste-t-il, en ${v.uu} ? (${v.conv})` },
+  { type: "retrait", t: (v) => `D'un ruban de ${v.q1}, ${v.hero} coupe ${v.q2}. Combien reste-t-il, en ${v.uu} ? (${v.conv})` },
+  { type: "retrait", t: (v) => `${v.q1} au départ, ${v.q2} en moins. Combien reste-t-il, en ${v.uu} ? (${v.conv})` },
+  // produit (mul)
+  { type: "produit", t: (v) => `${v.hero} achète ${v.q1} à ${v.q2} chacun. Combien en tout, en ${v.uu} ?` },
+  { type: "produit", t: (v) => `${v.q1}, chacun de ${v.q2}. Combien en tout, en ${v.uu} ?` },
+  { type: "produit", t: (v) => `${v.hero} prépare ${v.q1} de ${v.q2}. Combien en tout, en ${v.uu} ?` },
+  { type: "produit", t: (v) => `Il y a ${v.q1}. Chaque part fait ${v.q2}. Combien en tout, en ${v.uu} ?` },
+];
+
 const BANK: Record<string, Gabarit[]> = {
   "MA.PB.ADD_SUB": ADD_SUB_BANK,
   "MA.PB.MULT_DIV": MULT_DIV_BANK,
   "MA.PB.MONNAIE": MONNAIE_BANK,
   "MA.PB.DEUX_ETAPES": DEUX_ETAPES_BANK,
+  "MA.PB.MESURES": MESURES_BANK,
 };
 
 // Expose le nombre de gabarits par competence (test : >= 15).
@@ -247,6 +284,7 @@ function baseVars(hero: string, friend: string, obj: string, grp: string): Vars 
     item: "", item2: "",
     n1: 0, n2: 0, res: 0,
     sum: "", price: "", paid: "", px: "", py: "",
+    q1: "", q2: "", uu: "", conv: "",
   };
 }
 
@@ -264,6 +302,7 @@ export function buildProbleme(
   if (comp.endsWith("ADD_SUB")) return buildAddSub(comp, rng, base, ctx, p);
   if (comp.endsWith("MULT_DIV")) return buildMultDiv(comp, rng, base, ctx, p);
   if (comp.endsWith("MONNAIE")) return buildMonnaie(comp, rng, base, ctx, p);
+  if (comp.endsWith("MESURES")) return buildMesuresProbleme(comp, rng, base, ctx, p);
   return buildDeuxEtapes(comp, rng, base, ctx, p);
 }
 
@@ -628,5 +667,163 @@ function buildDeuxEtapes(
     verif,
     barres,
     correction,
+  };
+}
+
+// =========================================================================
+// MESURES : problemes de grandeurs (longueurs, masses, durees, monnaie).
+// Une ou deux etapes PEDAGOGIQUES (convertir puis calculer), mais la
+// normalisation reste UNE operation : l'operande converti est calcule cote
+// client et le serveur recalcule op(a,b) (meme contrat que les autres
+// problemes). Diagnostic deterministe par PIEGES (oubli de conversion, mauvaise
+// unite, mauvaise operation) ; repli ERREUR_CALCUL. Le serveur reste seul juge.
+// =========================================================================
+type Grandeur = "longueur" | "masse" | "duree" | "monnaie";
+
+interface Conversion {
+  grand: string; // unite « grande » (m, kg, h, €)
+  petit: string; // unite « petite » (cm, g, min, c)
+  facteur: number; // 1 grand = facteur petit
+  conv: string; // rappel affiche (« 1 m = 100 cm »)
+  faux: number; // facteur FAUX frequent (piege « mauvaise unite »)
+}
+const CONVERSIONS: Record<Grandeur, Conversion[]> = {
+  longueur: [
+    { grand: "m", petit: "cm", facteur: 100, conv: "1 m = 100 cm", faux: 10 },
+    { grand: "km", petit: "m", facteur: 1000, conv: "1 km = 1 000 m", faux: 100 },
+  ],
+  masse: [{ grand: "kg", petit: "g", facteur: 1000, conv: "1 kg = 1 000 g", faux: 100 }],
+  duree: [{ grand: "h", petit: "min", facteur: 60, conv: "1 h = 60 min", faux: 100 }],
+  monnaie: [{ grand: "€", petit: "c", facteur: 100, conv: "1 € = 100 c", faux: 10 }],
+};
+const PRODUIT_OBJ = ["paquets", "sachets", "boîtes", "rubans", "sacs", "bocaux"];
+const PRODUIT_MONNAIE = ["pommes", "cahiers", "jouets", "gâteaux", "cartes"];
+
+function qte(valeur: number, unite: string): string {
+  return `${fmt(valeur)} ${unite}`;
+}
+
+interface MesureProb {
+  structure: string;
+  v: Vars;
+  answer: number;
+  verif: Verif;
+  correction: string;
+  pieges: { answer: number; type: string }[];
+}
+
+function genererMesure(rng: Rng, grandeur: Grandeur, structure: string, hero: string): MesureProb {
+  const c = pick(rng, CONVERSIONS[grandeur]);
+  const v = baseVars(hero, hero, "", "");
+  v.conv = c.conv;
+
+  if (structure === "produit") {
+    // N objets de P (petites) unites : total = N x P (aucune conversion).
+    const n = intBetween(rng, 2, 6);
+    const per = intBetween(rng, 2, 9);
+    const answer = n * per;
+    const estMonnaie = grandeur === "monnaie";
+    const unite = estMonnaie ? c.grand : c.petit;
+    const obj = estMonnaie ? pick(rng, PRODUIT_MONNAIE) : pick(rng, PRODUIT_OBJ);
+    v.q1 = `${fmt(n)} ${obj}`;
+    v.q2 = qte(per, unite);
+    v.uu = unite;
+    v.conv = "";
+    return {
+      structure, v, answer,
+      verif: { op: "mul", a: n, b: per },
+      correction: `Je multiplie : ${fmt(n)} × ${fmt(per)} = ${fmt(answer)} ${unite}.`,
+      pieges: [{ answer: n + per, type: "MAUVAISE_OP" }],
+    };
+  }
+
+  if (structure === "conversion") {
+    const n = intBetween(rng, 2, 9);
+    const answer = n * c.facteur;
+    v.q1 = qte(n, c.grand);
+    v.uu = c.petit;
+    return {
+      structure, v, answer,
+      verif: { op: "val", a: answer, b: 0 },
+      correction: `${c.conv}, donc ${fmt(n)} ${c.grand} = ${fmt(n)} × ${fmt(c.facteur)} = ${fmt(answer)} ${c.petit}.`,
+      pieges: [
+        { answer: n, type: "OUBLI_CONVERSION" },
+        { answer: n * c.faux, type: "MAUVAISE_UNITE" },
+      ],
+    };
+  }
+
+  // ajout / retrait : un grand (a convertir) + un petit, dans la petite unite.
+  const g = intBetween(rng, structure === "retrait" ? 2 : 1, 5);
+  const a = g * c.facteur;
+  const b = intBetween(rng, 5, Math.max(6, c.facteur - 1));
+  v.q1 = qte(g, c.grand);
+  v.q2 = qte(b, c.petit);
+  v.uu = c.petit;
+
+  if (structure === "retrait") {
+    const answer = a - b; // a = g x facteur >= facteur > b, donc > 0
+    return {
+      structure, v, answer,
+      verif: { op: "sub", a, b },
+      correction: `${c.conv}, donc ${fmt(g)} ${c.grand} = ${fmt(a)} ${c.petit}. Puis ${fmt(a)} − ${fmt(b)} = ${fmt(answer)} ${c.petit}.`,
+      pieges: [{ answer: a + b, type: "MAUVAISE_OP" }],
+    };
+  }
+  // ajout
+  const answer = a + b;
+  return {
+    structure, v, answer,
+    verif: { op: "add", a, b },
+    correction: `${c.conv}, donc ${fmt(g)} ${c.grand} = ${fmt(a)} ${c.petit}. Puis ${fmt(a)} + ${fmt(b)} = ${fmt(answer)} ${c.petit}.`,
+    pieges: [
+      { answer: g + b, type: "OUBLI_CONVERSION" },
+      { answer: a - b, type: "MAUVAISE_OP" },
+    ],
+  };
+}
+
+function buildMesuresProbleme(
+  comp: string, rng: Rng, base: Base, ctx: ProblemContext | undefined,
+  p: Record<string, unknown>
+): GeneratedExercise {
+  const grandeurs = strList(p.grandeurs, ["longueur", "masse"]) as Grandeur[];
+  const structures = strList(p.structures, ["conversion"]);
+  const grandeur = pick(rng, grandeurs);
+  const structure = pick(rng, structures);
+  const hero = heroOf(rng, ctx);
+  const r = genererMesure(rng, grandeur, structure, hero);
+
+  // Pieges valides : positifs, distincts de la bonne reponse.
+  const pieges = r.pieges.filter((x) => x.answer >= 0 && x.answer !== r.answer);
+
+  const qcm = p.saisie === "qcm";
+  let options: QcmOption[] | undefined;
+  if (qcm) {
+    const vals = new Set<number>([r.answer]);
+    const opts: QcmOption[] = [{ label: fmt(r.answer), value: r.answer }];
+    for (const pg of pieges) {
+      if (!vals.has(pg.answer)) { vals.add(pg.answer); opts.push({ label: fmt(pg.answer), value: pg.answer }); }
+    }
+    // Complete jusqu'a 3 options avec des valeurs plausibles distinctes.
+    let pad = 1;
+    while (opts.length < 3 && pad <= 50) {
+      const cand = r.answer + (pad % 2 === 0 ? -pad : pad) * 10;
+      if (cand >= 0 && !vals.has(cand)) { vals.add(cand); opts.push({ label: fmt(cand), value: cand }); }
+      pad++;
+    }
+    options = shuffle(rng, opts);
+  }
+
+  return {
+    ...base,
+    prompt: renderGabarit(rng, comp, r.structure, r.v),
+    answer: r.answer,
+    verif: r.verif,
+    saisie: qcm ? "qcm" : "clavier",
+    options,
+    diagPieges: pieges,
+    diagFallback: "ERREUR_CALCUL",
+    correction: r.correction,
   };
 }

@@ -157,6 +157,21 @@ de l'enfant (mascotte) et son univers.
 | `MA.PB.MULT_DIV` | Problèmes multiplicatifs à une étape | groupement / partage (tables 2-5) | « fois plus » / groupement | les 3 structures (tables 2-9) | partage / fois plus / groupement (tables 2-9) |
 | `MA.PB.MONNAIE` | Billets et pièces (euros) | composer une somme (€ entiers) | comparer des prix / rendre la monnaie | composer avec des centimes | rendre la monnaie / comparer |
 | `MA.PB.DEUX_ETAPES` | Problèmes à deux étapes (MIXTES) | n×p puis ±c | n×p puis ±c (tables 2-5) | (a+b)÷c, (a+b)−c | les combinaisons (tables 2-9) |
+| `MA.PB.MESURES` | Problèmes de mesures (longueurs, masses, durées, monnaie) | conversion simple (QCM) | conversion + ajout (QCM) | conversion + ajout/retrait (saisie) | mélange + produit (saisie) |
+
+**Problèmes de mesures (`MA.PB.MESURES`, migration 0038).** Problèmes à **une ou
+deux étapes** portant sur des grandeurs : longueurs (m, cm, km), masses (g, kg),
+durées (h, min), monnaie (€, c). Les conversions du programme CE2 (1 m = 100 cm,
+1 km = 1 000 m, 1 kg = 1 000 g, 1 h = 60 min, 1 € = 100 c) sont **intégrées dans
+l'opérande** : un problème « deux étapes » (convertir puis calculer) reste
+normalisé en **une seule opération** (`val`/`add`/`sub`/`mul`), comme tous les
+autres problèmes — le serveur recalcule `op(a,b)`, **aucun `op2`** (réservé à
+`MA.PB.DEUX_ETAPES`). Réponse en **entiers** dans l'unité demandée. **QCM** aux
+niveaux 1-2, **saisie libre** aux niveaux 3-4. Diagnostic déterministe par
+**pièges** (`diagPieges`) : `OUBLI_CONVERSION`, `MAUVAISE_UNITE`, `MAUVAISE_OP`,
+repli `ERREUR_CALCUL` ; `type_faute` indicatif enregistré. Messages enfant dans
+`docs/explications.md`. Banque de gabarits grandeur-agnostiques (`MESURES_BANK`,
+≥ 15).
 
 Chaque problème se normalise en `verif` : `add`/`sub`/`mul`/`div` (additif,
 multiplicatif, rendre la monnaie), `cmp` (comparer des prix), `val` (composer une
@@ -320,6 +335,7 @@ Un prérequis doit être atteint au **niveau 2** pour débloquer la compétence.
 | `MA.PB.MULT_DIV` | TABLES.2, TABLES.5 |
 | `MA.PB.MONNAIE` | SOMMES_DIFF, NUM.LIRE_ECRIRE |
 | `MA.PB.DEUX_ETAPES` | PB.ADD_SUB, PB.MULT_DIV |
+| `MA.PB.MESURES` | MES.LONGUEURS, MES.MASSES_CONTENANCES, MES.DUREES, PB.MONNAIE |
 | `MA.MES.HEURE` | aucun |
 | `MA.MES.DUREES` | MES.HEURE, SOMMES_DIFF |
 | `MA.MES.LONGUEURS` | X10_X100 |
