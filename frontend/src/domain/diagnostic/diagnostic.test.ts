@@ -177,15 +177,16 @@ describe("diagnostiquer : saisie tapee -> type de faute", () => {
     const d = diagnostiquer(42, "beaucoup");
     expect(d.fautes[0].type).toBe("INCONNU");
     expect(d.fautes[0].message).toBe(
-      "Presque ! Regarde bien : on écrit « quarante-deux ».",
+      "Presque ! Regarde bien. On écrit : quarante-deux.",
     );
   });
-  it("message TRAIT_UNION : seulement l'exemple, plus de phrase generale", () => {
+  it("message TRAIT_UNION : oral, avec exemple, sans fleche ni guillemet", () => {
     const d = diagnostiquer(52, "cinquante deux");
     expect(d.fautes[0].type).toBe("TRAIT_UNION");
     expect(d.fautes[0].message).toBe(
-      "cinquante-deux → on relie les deux mots avec un petit trait.",
+      "On relie les deux mots avec un petit trait. Par exemple, on écrit cinquante-deux avec un trait entre cinquante et deux.",
     );
-    expect(d.fautes[0].message).not.toContain("Les mots d'un nombre");
+    expect(d.fautes[0].message).not.toContain("→");
+    expect(d.fautes[0].message).not.toContain("«");
   });
 });

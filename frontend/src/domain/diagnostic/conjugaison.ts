@@ -39,30 +39,31 @@ function prefixeCommun(a: string, b: string): number {
   return i;
 }
 
-// --- Messages (style enfant, toujours un exemple concret) --------------------
+// --- Messages (style enfant, rediges POUR L'ORAL : phrases parlees courtes,
+//     un exemple juste ET un exemple pas juste, aucun symbole ni fleche) -------
 function msgAccent(bonne: string): string {
-  return `N'oublie pas l'accent : « ${bonne} ». vous êtes → avec un accent sur le e. / vous etes → pas juste.`;
+  return `N'oublie pas l'accent. On écrit : ${bonne}. On écrit êtes avec un accent sur le e, pas êtes sans accent.`;
 }
 function msgMauvaisePersonne(p: Personne, bonne: string): string {
-  return `Attention à la personne : avec ${pronom(p, bonne)}, on écrit « ${bonne} ». tu chantes → avec un s. / il chante → pas de s.`;
+  return `Attention à la personne. Avec ${pronom(p, bonne)}, on écrit : ${bonne}. On dit tu chantes avec un s, mais il chante sans s.`;
 }
 // Repere temporel concret pour l'enfant (pas de grammaire abstraite).
 const REPERE_TEMPS: Record<Temps, string> = {
   present: "maintenant",
   futur: "demain",
-  imparfait: "avant / hier",
+  imparfait: "avant, hier",
 };
 function msgMauvaisTemps(temps: Temps, bonne: string): string {
-  return `Attention au temps : ici c'est ${TEMPS_LIBELLE[temps]} (${REPERE_TEMPS[temps]}). On écrit « ${bonne} ». hier je chantais / demain je chanterai.`;
+  return `Attention au temps. Ici c'est ${TEMPS_LIBELLE[temps]}, ${REPERE_TEMPS[temps]}. On écrit : ${bonne}. On dit hier je chantais, et demain je chanterai.`;
 }
 function msgTerminaison(p: Personne, bonne: string): string {
-  return `Bon début, mauvaise fin : avec ${pronom(p, bonne)}, on écrit « ${bonne} ». tu joues → un s à la fin. / il joue → pas de s.`;
+  return `Bon début, mauvaise fin. Avec ${pronom(p, bonne)}, on écrit : ${bonne}. On dit tu joues avec un s à la fin, mais il joue sans s.`;
 }
 function msgOrthoRadical(bonne: string): string {
-  return `Regarde bien les lettres : on écrit « ${bonne} ».`;
+  return `Regarde bien les lettres. On écrit : ${bonne}.`;
 }
 function msgInconnu(bonne: string): string {
-  return `Presque ! Regarde bien : on écrit « ${bonne} ».`;
+  return `Presque ! Regarde bien. On écrit : ${bonne}.`;
 }
 
 // Fragment a surligner = la fin qui change (TERMINAISON), sinon toute la forme.
@@ -169,13 +170,13 @@ export function phraseAttendue(verbe: string, temps: Temps, personne: Personne):
 // entre accolades : {forme} = forme attendue, {pronom} = sujet, {temps} = temps.
 export const MESSAGES_CONJUGAISON: Record<string, string> = {
   JUSTE: "Bravo ! C'est la bonne forme.",
-  ACCENT: "N'oublie pas l'accent : « {forme} ». vous êtes → avec un accent sur le e. / vous etes → pas juste.",
+  ACCENT: "N'oublie pas l'accent. On écrit : {forme}. On écrit êtes avec un accent sur le e, pas êtes sans accent.",
   MAUVAISE_PERSONNE:
-    "Attention à la personne : avec {pronom}, on écrit « {forme} ». tu chantes → avec un s. / il chante → pas de s.",
+    "Attention à la personne. Avec {pronom}, on écrit : {forme}. On dit tu chantes avec un s, mais il chante sans s.",
   MAUVAIS_TEMPS:
-    "Attention au temps : ici c'est {temps} ({repère}). On écrit « {forme} ». hier je chantais / demain je chanterai.",
+    "Attention au temps. Ici c'est {temps}, {repère}. On écrit : {forme}. On dit hier je chantais, et demain je chanterai.",
   TERMINAISON:
-    "Bon début, mauvaise fin : avec {pronom}, on écrit « {forme} ». tu joues → un s à la fin. / il joue → pas de s.",
-  ORTHO_RADICAL: "Regarde bien les lettres : on écrit « {forme} ».",
-  INCONNU: "Presque ! Regarde bien : on écrit « {forme} ».",
+    "Bon début, mauvaise fin. Avec {pronom}, on écrit : {forme}. On dit tu joues avec un s à la fin, mais il joue sans s.",
+  ORTHO_RADICAL: "Regarde bien les lettres. On écrit : {forme}.",
+  INCONNU: "Presque ! Regarde bien. On écrit : {forme}.",
 };

@@ -350,7 +350,7 @@ function buildAddSub(
     verif = { op: "add", a, b };
     v.n1 = a; v.n2 = b;
     barres = comparaison(cell(answer, false), cell(a, true), cell(b, true));
-    correction = `« de plus » : j'ajoute. ${fmt(a)} + ${fmt(b)} = ${fmt(answer)}.`;
+    correction = `Quand il y a de plus, j'ajoute. ${fmt(a)} + ${fmt(b)} = ${fmt(answer)}.`;
   } else if (type === "de_moins") {
     const a = intBetween(rng, Math.max(4, Math.floor(mag * 0.4)), mag);
     const b = intBetween(rng, 1, Math.max(1, Math.min(a - 1, Math.floor(mag * 0.5))));
@@ -358,7 +358,7 @@ function buildAddSub(
     verif = { op: "sub", a, b };
     v.n1 = a; v.n2 = b;
     barres = comparaison(cell(a, true), cell(answer, false), cell(b, true));
-    correction = `« de moins » : je retire. ${fmt(a)} − ${fmt(b)} = ${fmt(answer)}.`;
+    correction = `Quand il y a de moins, je retire. ${fmt(a)} − ${fmt(b)} = ${fmt(answer)}.`;
   } else if (type === "etat_recu") {
     // avant + recu = total ; on cherche avant = total - recu.
     const total = intBetween(rng, Math.max(6, Math.floor(mag * 0.5)), mag);

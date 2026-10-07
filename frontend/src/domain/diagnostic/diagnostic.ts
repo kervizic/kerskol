@@ -148,34 +148,35 @@ function arraysEqual(a: string[], b: string[]): boolean {
   return a.length === b.length && a.every((x, i) => x === b[i]);
 }
 
-// --- Messages (style « enfant de 8 ans », toujours un exemple concret) --------
+// --- Messages (style « enfant de 8 ans », rediges POUR L'ORAL : phrases
+//     parlees courtes, un exemple concret, aucun symbole ni fleche) -----------
 function msgTraitUnion(): string {
-  return `cinquante-deux → on relie les deux mots avec un petit trait.`;
+  return `On relie les deux mots avec un petit trait. Par exemple, on écrit cinquante-deux avec un trait entre cinquante et deux.`;
 }
 function msgSVingtCent(word: "vingt" | "cent", sens: "manquant" | "en trop"): string {
   if (word === "vingt") {
     return sens === "manquant"
-      ? `Ici « quatre-vingts » prend un s : rien après. quatre-vingts → avec un s. / quatre-vingt-deux → pas de s : un nombre vient après.`
-      : `Ici « quatre-vingt » ne prend pas de s : un nombre vient après. quatre-vingt-deux → pas de s. / quatre-vingts → avec un s : rien après.`;
+      ? `Le mot quatre-vingts prend un s quand il n'y a rien après. On écrit quatre-vingts avec un s, mais quatre-vingt-deux sans s, car un nombre vient après.`
+      : `Le mot quatre-vingt ne prend pas de s quand un nombre vient après. On écrit quatre-vingt-deux sans s, mais quatre-vingts avec un s quand il n'y a rien après.`;
   }
   return sens === "manquant"
-    ? `Ici « cents » prend un s : plusieurs centaines, rien après. deux cents → avec un s. / deux cent trois → pas de s : un nombre vient après.`
-    : `Ici « cent » ne prend pas de s : un nombre vient après. deux cent trois → pas de s. / deux cents → avec un s : rien après.`;
+    ? `Le mot cent prend un s quand il y a plusieurs centaines et rien après. On écrit deux cents avec un s, mais deux cent trois sans s, car un nombre vient après.`
+    : `Le mot cent ne prend pas de s quand un nombre vient après. On écrit deux cent trois sans s, mais deux cents avec un s quand il n'y a rien après.`;
 }
 function msgSMille(): string {
-  return `Jamais de s à « mille ». Mille ne change jamais. trois mille → jamais de s.`;
+  return `Le mot mille ne prend jamais de s. Mille ne change jamais. On écrit trois mille sans s.`;
 }
 function msgEtUn(): string {
-  return `On dit vingt et un, trente et un… pas vingt-un. On met « et » devant un et onze.`;
+  return `On dit vingt et un, trente et un, et pas vingt-un. On met et devant un et devant onze.`;
 }
 function msgOrtho(correct: string): string {
-  return `Ce mot s'écrit « ${correct} ». Regarde bien les lettres.`;
+  return `Ce mot s'écrit : ${correct}. Regarde bien les lettres.`;
 }
 function msgMauvaisNombre(rang: string, bonne: string): string {
-  return `Ce n'est pas le bon nombre : regarde ${rang}. On écrit « ${bonne} ».`;
+  return `Ce n'est pas le bon nombre. Regarde ${rang}. On écrit : ${bonne}.`;
 }
 function msgInconnu(bonne: string): string {
-  return `Presque ! Regarde bien : on écrit « ${bonne} ».`;
+  return `Presque ! Regarde bien. On écrit : ${bonne}.`;
 }
 
 // --- Detecteurs de fautes « cosmetiques » (memes mots-nombres) ----------------
@@ -295,12 +296,12 @@ type FauteLettres =
   | "MAUVAIS_NOMBRE" | "INCONNU";
 export const MESSAGES_CATALOGUE: Record<FauteLettres | "JUSTE", string> = {
   JUSTE: "Bravo ! C'est la bonne écriture.",
-  TRAIT_UNION: "cinquante-deux → on relie les deux mots avec un petit trait.",
+  TRAIT_UNION: "On relie les deux mots avec un petit trait. Par exemple, on écrit cinquante-deux avec un trait entre cinquante et deux.",
   S_VINGT_CENT:
-    "cents : deux cents → avec un s (rien après) / deux cent trois → pas de s (un nombre vient après). vingts : quatre-vingts → avec un s / quatre-vingt-deux → pas de s.",
-  S_MILLE: "Jamais de s à « mille ». Mille ne change jamais. trois mille → jamais de s.",
-  ET_UN: "On dit vingt et un, trente et un… pas vingt-un. On met « et » devant un et onze.",
-  ORTHO_MOT: "Ce mot s'écrit « {mot} ». Regarde bien les lettres.",
-  MAUVAIS_NOMBRE: "Ce n'est pas le bon nombre : regarde {rang}. On écrit « {nombre} ».",
-  INCONNU: "Presque ! Regarde bien : on écrit « {nombre} ».",
+    "Le mot cent prend un s quand il y a plusieurs centaines et rien après. On écrit deux cents avec un s, mais deux cent trois sans s. Le mot quatre-vingts prend un s quand il n'y a rien après, mais quatre-vingt-deux sans s.",
+  S_MILLE: "Le mot mille ne prend jamais de s. Mille ne change jamais. On écrit trois mille sans s.",
+  ET_UN: "On dit vingt et un, trente et un, et pas vingt-un. On met et devant un et devant onze.",
+  ORTHO_MOT: "Ce mot s'écrit : {mot}. Regarde bien les lettres.",
+  MAUVAIS_NOMBRE: "Ce n'est pas le bon nombre. Regarde {rang}. On écrit : {nombre}.",
+  INCONNU: "Presque ! Regarde bien. On écrit : {nombre}.",
 };

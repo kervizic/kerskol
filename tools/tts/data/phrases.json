@@ -1,0 +1,95 @@
+{
+  "_commentaire": "Phrases statiques a synthetiser. cle logique -> texte affiche (nettoye a la generation). Les nombres et les dictees sont generes par code (nombres_fr.py, dictees.py).",
+
+  "operateur": {
+    "op:plus": "plus",
+    "op:moins": "moins",
+    "op:fois": "fois",
+    "op:multiplie": "multiplié par",
+    "op:divise": "divisé par",
+    "op:egale": "égale",
+    "amorce:combien-font": "Combien font",
+    "amorce:combien-de-fois": "Combien de fois",
+    "amorce:le-double-de": "Le double de",
+    "amorce:la-moitie-de": "La moitié de",
+    "amorce:complete": "Complète",
+    "amorce:ecris-en-lettres": "Écris en lettres le nombre",
+    "amorce:comment-se-lit": "Comment se lit le nombre"
+  },
+
+  "consigne": {
+    "consigne:ecoute-bien": "Écoute bien.",
+    "consigne:a-toi-de-jouer": "À toi de jouer.",
+    "consigne:lis-la-consigne": "Lis bien la consigne.",
+    "consigne:prends-ton-temps": "Prends ton temps.",
+    "consigne:c-est-parti": "C'est parti !",
+    "consigne:reflechis-bien": "Réfléchis bien.",
+    "consigne:recommence": "On recommence.",
+    "consigne:pause": "Pause !"
+  },
+
+  "message": {
+    "msg:bravo": "Bravo ! C'est la bonne réponse.",
+    "msg:presque": "Ce n'est pas tout à fait ça. Regarde bien et essaie encore.",
+    "msg:detective-tout-trouve": "Super détective ! Tu as trouvé tous les mots piégés.",
+    "msg:mille-invariable": "Jamais de s à mille. Mille ne change jamais.",
+    "msg:trait-union": "N'oublie pas les traits d'union entre les nombres.",
+    "msg:encore-un-effort": "Encore un petit effort, tu y es presque !",
+    "msg:verifie-ta-reponse": "Vérifie bien ta réponse avant de valider.",
+    "msg:convertis-avant": "N'oublie pas de convertir avant de calculer.",
+    "msg:passe-compose-etre": "Avec être, le participe s'accorde avec le sujet.",
+    "msg:accord-etre-fille": "Avec est, on ajoute un e à la fin pour une fille : elle est allée.",
+    "msg:accord-sont-plusieurs": "Avec sont, on ajoute un s à la fin pour plusieurs : ils sont allés.",
+    "msg:auxiliaire-etre-exemple": "On dit : il est allé. On ne dit pas : il a allé.",
+    "msg:metre-cent-centimetres": "Attention, un mètre, c'est cent centimètres. Donc trois mètres, c'est trois cents centimètres."
+  },
+
+  "indice": {
+    "_commentaire": "Indices du bouton Indice (niveaux 1 et 2). Un par competence. Textes identiques a frontend/src/domain/indices.ts. Aucun audio genere pour l'instant.",
+    "indice:fr-conj-present": "Le présent, c'est maintenant. Regarde bien le petit mot devant le verbe. Avec nous, le verbe finit souvent par ons. Avec vous, il finit souvent par ez.",
+    "indice:fr-conj-futur": "Le futur, c'est demain. Souvent, on entend le son r juste avant la fin, comme dans je chanterai.",
+    "indice:fr-conj-imparfait": "L'imparfait, c'est avant, autrefois. Souvent le verbe se termine par ais, ait ou aient.",
+    "indice:fr-conj-passe-compose": "Le passé composé, c'est deux mots. D'abord avoir ou être, puis le verbe. Avec être, pense à accorder avec le sujet.",
+    "indice:fr-ortho-detective": "Lis la phrase tout doucement dans ta tête. Cherche les petits mots qui se ressemblent et qui se cachent.",
+    "indice:ma-cm-addition": "Tu peux passer par un nombre rond, comme dix ou vingt, pour aller plus vite.",
+    "indice:ma-cm-compl-sup": "Demande-toi combien il manque pour arriver jusqu'au nombre.",
+    "indice:ma-cm-div-reste": "Cherche combien de fois le petit nombre entre dans le grand. Ce qui dépasse, c'est le reste.",
+    "indice:ma-cm-doubles": "Le double, c'est deux fois le même nombre. Tu l'ajoutes avec lui-même.",
+    "indice:ma-cm-moities": "La moitié, c'est partager le nombre en deux parts égales.",
+    "indice:ma-cm-sommes-diff": "Tu peux passer par un nombre rond pour calculer plus facilement.",
+    "indice:ma-frac-simples": "Le chiffre du bas dit en combien de parts on coupe. Le chiffre du haut dit combien de parts on prend.",
+    "indice:ma-mes-durees": "Pense à tout mettre dans la même unité. Une heure, c'est soixante minutes.",
+    "indice:ma-mes-heure": "Regarde d'abord la petite aiguille pour les heures, puis la grande aiguille pour les minutes.",
+    "indice:ma-mes-longueurs": "Pense à tout mettre dans la même unité. Un mètre, c'est cent centimètres.",
+    "indice:ma-mes-masses-contenances": "Pense à tout mettre dans la même unité. Un kilo, c'est mille grammes. Un litre, c'est mille millilitres.",
+    "indice:ma-num-comparer": "Regarde d'abord lequel a le plus de chiffres. S'ils en ont autant, compare les chiffres un par un en partant de la gauche.",
+    "indice:ma-num-decomposer": "Coupe le nombre en tranches : les milliers, les centaines, les dizaines et les unités.",
+    "indice:ma-num-lire-ecrire": "Coupe le nombre en tranches : d'abord les milliers, puis les centaines, puis le reste.",
+    "indice:ma-num-suite": "Regarde de combien on avance à chaque fois entre deux nombres.",
+    "indice:ma-pb-add-sub": "Demande-toi si on met ensemble ou si on enlève.",
+    "indice:ma-pb-deux-etapes": "Fais une étape à la fois. Trouve d'abord le premier résultat, puis sers-t'en pour la suite.",
+    "indice:ma-pb-mesures": "Pense à tout mettre dans la même unité avant de calculer.",
+    "indice:ma-pb-monnaie": "Compte d'abord les grosses pièces, puis ajoute les petites.",
+    "indice:ma-pb-mult-div": "Demande-toi si on partage en parts égales ou si on groupe par paquets.",
+    "indice:ma-pose-addition": "Commence par les unités, à droite. Quand tu dépasses neuf, tu poses une retenue.",
+    "indice:ma-pose-soustraction": "Commence par les unités, à droite. Si le chiffre du haut est trop petit, tu empruntes une dizaine à côté.",
+    "indice:ma-pose-multiplication": "Commence par les unités, à droite, et n'oublie pas les retenues."
+  },
+
+  "titre": {
+    "titre:tables-addition": "Tables d'addition",
+    "titre:doubles": "Les doubles",
+    "titre:moities": "Les moitiés",
+    "titre:division-reste": "Division avec reste",
+    "titre:nombres-10000": "Lire et écrire les nombres jusqu'à dix mille",
+    "titre:addition-posee": "Addition posée",
+    "titre:soustraction-posee": "Soustraction posée",
+    "titre:multiplication-posee": "Multiplication posée",
+    "titre:problemes-add-sous": "Problèmes, additions et soustractions",
+    "titre:lire-heure": "Lire et écrire l'heure",
+    "titre:fractions-simples": "Fractions simples",
+    "titre:dictee-detective": "Dictée détective",
+    "titre:conjugaison-passe-compose": "Conjuguer au passé composé",
+    "titre:problemes-mesures": "Problèmes de mesures"
+  }
+}

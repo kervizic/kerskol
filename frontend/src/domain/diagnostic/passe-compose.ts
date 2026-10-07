@@ -42,26 +42,31 @@ function decouper(saisie: string): { aux: string; part: string } {
   return { aux: toks[0] ?? "", part: toks.slice(1).join(" ") };
 }
 
-// --- Messages (style enfant, toujours un exemple juste / pas juste) ----------
+// --- Messages (style enfant, rediges POUR L'ORAL : phrases parlees courtes, un
+//     exemple juste ET un exemple pas juste, aucun symbole ni fleche) ----------
 function msgAccent(bonne: string): string {
-  return `N'oublie pas l'accent : « ${bonne} ». il a mangé → avec un accent. / il a mange → pas juste.`;
+  return `N'oublie pas l'accent. On écrit : ${bonne}. On écrit il a mangé avec un accent, pas il a mange sans accent.`;
 }
 function msgAuxiliaire(verbe: string, bonne: string): string {
   return accordeAvecEtre(verbe)
-    ? `Ce verbe se dit avec « être » : « ${bonne} ». il est allé → avec être. / il a allé → pas juste.`
-    : `Ce verbe se dit avec « avoir » : « ${bonne} ». il a mangé → avec avoir. / il est mangé → pas juste.`;
+    ? `Ce verbe se dit avec être. On écrit : ${bonne}. On dit : il est allé. On ne dit pas : il a allé.`
+    : `Ce verbe se dit avec avoir. On écrit : ${bonne}. On dit : il a mangé. On ne dit pas : il est mangé.`;
 }
-function msgAccord(bonne: string): string {
-  return `Avec « être », le participe s'accorde : « ${bonne} ». elle est allée → avec un e. / elle est allé → pas juste.`;
+// Accord avec etre : un e pour une fille (singulier), un s pour plusieurs
+// (pluriel). Formulations validees par Manu.
+function msgAccord(personne: Personne, bonne: string): string {
+  return personne >= 4
+    ? `Avec sont, on ajoute un s à la fin pour plusieurs : ils sont allés. On écrit : ${bonne}.`
+    : `Avec est, on ajoute un e à la fin pour une fille : elle est allée. On écrit : ${bonne}.`;
 }
 function msgParticipe(bonne: string): string {
-  return `Ce n'est pas le bon participe : on écrit « ${bonne} ». il a pris → pris. / il a prendu → pas juste.`;
+  return `Ce n'est pas le bon participe. On écrit : ${bonne}. On dit : il a pris. On ne dit pas : il a prendu.`;
 }
 function msgMauvaisTemps(bonne: string): string {
-  return `Ici c'est le passé composé (c'est déjà fait). On écrit « ${bonne} ». hier il a mangé. / il mangeait → autre temps.`;
+  return `Ici c'est le passé composé, c'est déjà fait. On écrit : ${bonne}. On dit : hier il a mangé. On ne dit pas : il mangeait.`;
 }
 function msgInconnu(bonne: string): string {
-  return `Presque ! Regarde bien : on écrit « ${bonne} ».`;
+  return `Presque ! Regarde bien. On écrit : ${bonne}.`;
 }
 
 // Genres acceptes pour cette question. null => genre libre (m ET f acceptes) ;
@@ -136,7 +141,7 @@ export function diagnostiquerPasseCompose(
     const base = partBase; // ex. « venu »
     const estVarianteAccord = part === base || part === base + "e" || part === base + "s" || part === base + "es";
     if (estVarianteAccord) {
-      return faire({ type: "ACCORD", message: msgAccord(attendu), surligne: [attendu] });
+      return faire({ type: "ACCORD", message: msgAccord(personne, attendu), surligne: [attendu] });
     }
   }
 
@@ -164,16 +169,18 @@ export function estJustePasseCompose(
 // ecriture attendue (auxiliaire + participe accorde).
 export const MESSAGES_PASSE_COMPOSE: Record<string, string> = {
   JUSTE: "Bravo ! C'est le bon passé composé.",
-  ACCENT: "N'oublie pas l'accent : « {forme} ». il a mangé → avec un accent. / il a mange → pas juste.",
+  ACCENT: "N'oublie pas l'accent. On écrit : {forme}. On écrit il a mangé avec un accent, pas il a mange sans accent.",
   AUXILIAIRE_ETRE:
-    "Ce verbe se dit avec « être » : « {forme} ». il est allé → avec être. / il a allé → pas juste.",
+    "Ce verbe se dit avec être. On écrit : {forme}. On dit : il est allé. On ne dit pas : il a allé.",
   AUXILIAIRE_AVOIR:
-    "Ce verbe se dit avec « avoir » : « {forme} ». il a mangé → avec avoir. / il est mangé → pas juste.",
+    "Ce verbe se dit avec avoir. On écrit : {forme}. On dit : il a mangé. On ne dit pas : il est mangé.",
   ACCORD:
-    "Avec « être », le participe s'accorde : « {forme} ». elle est allée → avec un e. / elle est allé → pas juste.",
+    "Avec est, on ajoute un e à la fin pour une fille : elle est allée. On écrit : {forme}.",
+  ACCORD_PLURIEL:
+    "Avec sont, on ajoute un s à la fin pour plusieurs : ils sont allés. On écrit : {forme}.",
   PARTICIPE:
-    "Ce n'est pas le bon participe : on écrit « {forme} ». il a pris → pris. / il a prendu → pas juste.",
+    "Ce n'est pas le bon participe. On écrit : {forme}. On dit : il a pris. On ne dit pas : il a prendu.",
   MAUVAIS_TEMPS:
-    "Ici c'est le passé composé (c'est déjà fait). On écrit « {forme} ». hier il a mangé. / il mangeait → autre temps.",
-  INCONNU: "Presque ! Regarde bien : on écrit « {forme} ».",
+    "Ici c'est le passé composé, c'est déjà fait. On écrit : {forme}. On dit : hier il a mangé. On ne dit pas : il mangeait.",
+  INCONNU: "Presque ! Regarde bien. On écrit : {forme}.",
 };

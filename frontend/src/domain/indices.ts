@@ -1,0 +1,90 @@
+// Indices (bouton « Indice », icone Lucide Lightbulb) affiches aux NIVEAUX 1 et 2
+// SEULEMENT, sur la page d'exercice. Un indice aide l'enfant SANS donner la
+// reponse : il rappelle la methode ou le piege, en une ou deux phrases COURTES
+// redigees POUR L'ORAL (pas de « / », pas de fleche, pas de symbole, pas
+// d'abreviation, pas de guillemet decoratif). L'utilisation d'un indice n'est
+// JAMAIS enregistree : l'escalier des niveaux suffit (au niveau 3 il n'y a plus
+// d'indice ; si l'enfant echoue il redescend au niveau 2).
+//
+// Un indice par competence (les codes sont ceux du referentiel). Les memes
+// textes sont verses au catalogue voix (tools/tts/data/phrases.json, cle
+// « indice:<competence> ») pour une future synthese audio.
+
+export const INDICES: Record<string, string> = {
+  // --- Francais -------------------------------------------------------------
+  "FR.CONJ.PRESENT":
+    "Le présent, c'est maintenant. Regarde bien le petit mot devant le verbe. Avec nous, le verbe finit souvent par ons. Avec vous, il finit souvent par ez.",
+  "FR.CONJ.FUTUR":
+    "Le futur, c'est demain. Souvent, on entend le son r juste avant la fin, comme dans je chanterai.",
+  "FR.CONJ.IMPARFAIT":
+    "L'imparfait, c'est avant, autrefois. Souvent le verbe se termine par ais, ait ou aient.",
+  "FR.CONJ.PASSE_COMPOSE":
+    "Le passé composé, c'est deux mots. D'abord avoir ou être, puis le verbe. Avec être, pense à accorder avec le sujet.",
+  "FR.ORTHO.DETECTIVE":
+    "Lis la phrase tout doucement dans ta tête. Cherche les petits mots qui se ressemblent et qui se cachent.",
+
+  // --- Calcul mental --------------------------------------------------------
+  "MA.CM.ADDITION":
+    "Tu peux passer par un nombre rond, comme dix ou vingt, pour aller plus vite.",
+  "MA.CM.COMPL_SUP":
+    "Demande-toi combien il manque pour arriver jusqu'au nombre.",
+  "MA.CM.DIV_RESTE":
+    "Cherche combien de fois le petit nombre entre dans le grand. Ce qui dépasse, c'est le reste.",
+  "MA.CM.DOUBLES":
+    "Le double, c'est deux fois le même nombre. Tu l'ajoutes avec lui-même.",
+  "MA.CM.MOITIES":
+    "La moitié, c'est partager le nombre en deux parts égales.",
+  "MA.CM.SOMMES_DIFF":
+    "Tu peux passer par un nombre rond pour calculer plus facilement.",
+
+  // --- Fractions ------------------------------------------------------------
+  "MA.FRAC.SIMPLES":
+    "Le chiffre du bas dit en combien de parts on coupe. Le chiffre du haut dit combien de parts on prend.",
+
+  // --- Mesures --------------------------------------------------------------
+  "MA.MES.DUREES":
+    "Pense à tout mettre dans la même unité. Une heure, c'est soixante minutes.",
+  "MA.MES.HEURE":
+    "Regarde d'abord la petite aiguille pour les heures, puis la grande aiguille pour les minutes.",
+  "MA.MES.LONGUEURS":
+    "Pense à tout mettre dans la même unité. Un mètre, c'est cent centimètres.",
+  "MA.MES.MASSES_CONTENANCES":
+    "Pense à tout mettre dans la même unité. Un kilo, c'est mille grammes. Un litre, c'est mille millilitres.",
+
+  // --- Numeration -----------------------------------------------------------
+  "MA.NUM.COMPARER":
+    "Regarde d'abord lequel a le plus de chiffres. S'ils en ont autant, compare les chiffres un par un en partant de la gauche.",
+  "MA.NUM.DECOMPOSER":
+    "Coupe le nombre en tranches : les milliers, les centaines, les dizaines et les unités.",
+  "MA.NUM.LIRE_ECRIRE":
+    "Coupe le nombre en tranches : d'abord les milliers, puis les centaines, puis le reste.",
+  "MA.NUM.SUITE":
+    "Regarde de combien on avance à chaque fois entre deux nombres.",
+
+  // --- Problemes ------------------------------------------------------------
+  "MA.PB.ADD_SUB":
+    "Demande-toi si on met ensemble ou si on enlève.",
+  "MA.PB.DEUX_ETAPES":
+    "Fais une étape à la fois. Trouve d'abord le premier résultat, puis sers-t'en pour la suite.",
+  "MA.PB.MESURES":
+    "Pense à tout mettre dans la même unité avant de calculer.",
+  "MA.PB.MONNAIE":
+    "Compte d'abord les grosses pièces, puis ajoute les petites.",
+  "MA.PB.MULT_DIV":
+    "Demande-toi si on partage en parts égales ou si on groupe par paquets.",
+
+  // --- Calcul pose ----------------------------------------------------------
+  "MA.POSE.ADDITION":
+    "Commence par les unités, à droite. Quand tu dépasses neuf, tu poses une retenue.",
+  "MA.POSE.SOUSTRACTION":
+    "Commence par les unités, à droite. Si le chiffre du haut est trop petit, tu empruntes une dizaine à côté.",
+  "MA.POSE.MULTIPLICATION":
+    "Commence par les unités, à droite, et n'oublie pas les retenues.",
+};
+
+// Indice d'une competence, UNIQUEMENT aux niveaux 1 et 2 (sinon null : plus
+// d'indice au niveau 3 et au-dela, l'escalier des niveaux prend le relais).
+export function indicePour(competence: string, niveau: number): string | null {
+  if (niveau > 2) return null;
+  return INDICES[competence] ?? null;
+}

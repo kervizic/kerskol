@@ -7,7 +7,7 @@ Un clip = {key, text, cat}. La cle logique (key) est ce que le front interroge
 clip est le hash du texte nettoye + version de voix (nettoyage.clip_id) : deux
 cles de meme texte nettoye partagent le meme fichier (dedup naturel).
 
-Categories : nombre, operateur, consigne, message, titre, dictee.
+Categories : nombre, operateur, consigne, message, titre, indice, dictee.
 
 Usage :
   python catalogue.py            # catalogue complet : comptes par categorie
@@ -58,6 +58,7 @@ def construire(pilot: bool = False) -> list[dict]:
     _ajouter("message", PILOT_MESSAGES if pilot else None)
     if not pilot:
         _ajouter("titre", None)
+        _ajouter("indice", None)
 
     # 3) dictees (version CORRIGEE, une phrase = un clip)
     dictees = charger_dictees()

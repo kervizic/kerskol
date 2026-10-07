@@ -146,19 +146,22 @@ describe("diagnostiquerConjugaison : saisie -> type de faute", () => {
     expect(d.fautes[0].message.toLowerCase()).toContain("chante");
   });
 
-  it("message MAUVAIS_TEMPS : repere temporel concret, plus de « bon moment »", () => {
+  it("message MAUVAIS_TEMPS : repere temporel concret, oral (sans symbole ni fleche)", () => {
     const present = diagnostiquerConjugaison("chanter", "present", 1, "chanterai");
     expect(present.fautes[0].type).toBe("MAUVAIS_TEMPS");
     expect(present.fautes[0].message).toBe(
-      "Attention au temps : ici c'est le présent (maintenant). On écrit « chante ». hier je chantais / demain je chanterai.",
+      "Attention au temps. Ici c'est le présent, maintenant. On écrit : chante. On dit hier je chantais, et demain je chanterai.",
     );
     expect(present.fautes[0].message).not.toContain("bon moment");
+    // Rediges pour l'oral : plus de fleche, plus de barre, plus de guillemet.
+    expect(present.fautes[0].message).not.toContain("→");
+    expect(present.fautes[0].message).not.toContain("«");
 
     const futur = diagnostiquerConjugaison("chanter", "futur", 1, "chante");
-    expect(futur.fautes[0].message).toContain("le futur (demain)");
+    expect(futur.fautes[0].message).toContain("le futur, demain");
 
     const imparfait = diagnostiquerConjugaison("chanter", "imparfait", 1, "chante");
-    expect(imparfait.fautes[0].message).toContain("l'imparfait (avant / hier)");
+    expect(imparfait.fautes[0].message).toContain("l'imparfait, avant, hier");
   });
 });
 

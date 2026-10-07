@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Check, Delete, Grid3x3, Info, Keyboard, RotateCcw } from "lucide-react";
+import { Check, Delete, Grid3x3, Info, Keyboard, Lightbulb, RotateCcw } from "lucide-react";
 import { Spinner } from "../components/ui";
 import { ThemeToggle } from "../components/ThemeToggle";
 import { SpeakerButton } from "../components/SpeakerButton";
@@ -67,6 +67,7 @@ import {
 import { wrapHour, wrapMinute, startHour, START_MINUTE } from "../domain/calcul/horloge";
 import { moneyAsset } from "../domain/calcul/moneyAssets";
 import { diagnostiquer, diagnostiquerConjugaison, diagnostiquerPasseCompose, type Diagnostic, type Faute } from "../domain/diagnostic";
+import { indicePour } from "../domain/indices";
 
 function uuid(): string {
   try {
@@ -1189,6 +1190,7 @@ export function Session({
   const [digits, setDigits] = useState<string[]>([]);
   const [cell, setCell] = useState(0);
   const [showSchema, setShowSchema] = useState(false);
+  const [showIndice, setShowIndice] = useState(false);
   const [monnaie, setMonnaie] = useState(profil.monnaie);
   const [lastGain, setLastGain] = useState(0);
   const [done, setDone] = useState(false);
@@ -1314,6 +1316,7 @@ export function Session({
     setTexte("");
     setDiag(null);
     setShowSchema(false);
+    setShowIndice(false);
     if (ex?.saisie === "pose" && ex.poseData) {
       setDigits(Array(ex.poseData.answerDigits).fill(""));
       setCell(ex.poseData.answerDigits - 1); // saisie de DROITE a GAUCHE
@@ -1772,6 +1775,9 @@ export function Session({
   }
 
   const hint = hintForCurrent(engine);
+  // Indice (niveaux 1 et 2 seulement) : aide sans donner la reponse. Jamais
+  // enregistre (l'escalier des niveaux suffit).
+  const indice = ex ? indicePour(ex.competence, ex.niveau) : null;
 
   return (
     <div className="kk-seance">
@@ -1925,6 +1931,24 @@ export function Session({
           <p className="kk-muted" style={{ textAlign: "center" }}>
             <Info size={16} aria-hidden="true" /> Prends ton temps, tu peux t'aider de ta methode.
           </p>
+        )}
+
+        {/* Indice (niveaux 1 et 2 uniquement) : aide SANS donner la reponse.
+            Aucune utilisation n'est enregistree. */}
+        {indice && (phase === "answering" || phase === "sure") && (
+          <div className="kk-stack kk-indice" style={{ textAlign: "center" }}>
+            <button
+              type="button"
+              className="kk-btn"
+              aria-expanded={showIndice}
+              onClick={() => setShowIndice((v) => !v)}
+            >
+              <Lightbulb size={16} aria-hidden="true" /> Indice
+            </button>
+            {showIndice && (
+              <p className="kk-indice__texte kk-muted" aria-live="polite">{indice}</p>
+            )}
+          </div>
         )}
 
         {phase === "answering" || phase === "sure" ? (
