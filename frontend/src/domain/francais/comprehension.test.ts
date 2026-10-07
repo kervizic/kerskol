@@ -21,7 +21,7 @@ import { normaliserMot } from "./dictee";
 import { generateExercise } from "../calcul/generator";
 import type { ExCalcul } from "../calcul/generator";
 
-const NB_ITEMS_GOLDEN = 40;
+const NB_ITEMS_GOLDEN = 42;
 
 function source(competence: string, niveau: number): ExCalcul {
   return {
@@ -158,7 +158,7 @@ describe("comparaison miroir du serveur", () => {
   });
   it("estJusteComprehension : miroir local pour quelques items", () => {
     expect(estJusteComprehension("lec-info-n1-a", "Mistigri")).toBe(true);
-    expect(estJusteComprehension("lec-info-n4-b", "verte")).toBe(true);
+    expect(estJusteComprehension("lec-info-n4-b", "Biscuit")).toBe(true);
     expect(estJusteComprehension("lec-vf-n1-b", "faux")).toBe(true);
     expect(estJusteComprehension("lec-sens-n4-a", "tempête")).toBe(true);
     expect(estJusteComprehension("cle-bidon", "x")).toBe(false);

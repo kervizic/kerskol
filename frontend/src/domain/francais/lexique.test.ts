@@ -22,7 +22,7 @@ import { normaliserMot } from "./dictee";
 import { generateExercise } from "../calcul/generator";
 import type { ExCalcul } from "../calcul/generator";
 
-const NB_ITEMS_GOLDEN = 120;
+const NB_ITEMS_GOLDEN = 140;
 const COMPS = [...COMPETENCES_VOCABULAIRE, ...COMPETENCES_MOTS];
 
 function source(competence: string, niveau: number): ExCalcul {
@@ -118,7 +118,7 @@ describe("estJusteLexique : le juge local (miroir du serveur)", () => {
   });
 
   it("tolere la casse et les espaces", () => {
-    expect(estJusteLexique("voc-alpha-n2-1", "  Arbre ")).toBe(true);
+    expect(estJusteLexique("voc-alpha-n2-1", "  Chat ")).toBe(true);
     expect(estJusteLexique("mots-n1-beaucoup", "BEAUCOUP")).toBe(true);
   });
 

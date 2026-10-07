@@ -28,8 +28,8 @@ DECLARE
     n   integer;
 BEGIN
     SELECT count(*) INTO n FROM public.comprehension_item;
-    IF n <> 40 THEN
-        RAISE EXCEPTION 'comprehension_item : 40 items attendus, obtenu %', n;
+    IF n <> 42 THEN
+        RAISE EXCEPTION 'comprehension_item : 42 items attendus, obtenu %', n;
     END IF;
 
     -- Couverture : chaque competence a au moins un item a chaque niveau 1..4.
@@ -48,12 +48,13 @@ BEGIN
     FOR r IN SELECT * FROM (VALUES
         ('lec-info-n1-a','FR.LECTURE.INFO',1,'qcm','Mistigri'),
         ('lec-info-n3-b','FR.LECTURE.INFO',3,'clic','coffre'),
-        ('lec-info-n4-b','FR.LECTURE.INFO',4,'texte','verte'),
-        ('lec-inf-n4-a','FR.LECTURE.INFERENCE',4,'clic','hérissés'),
+        ('lec-info-n4-b','FR.LECTURE.INFO',4,'texte','Biscuit'),
+        ('lec-inf-n4-a','FR.LECTURE.INFERENCE',4,'clic','chien'),
+        ('lec-inf-n4-c','FR.LECTURE.INFERENCE',4,'texte','peur'),
         ('lec-ord-n2-a','FR.LECTURE.ORDRE',2,'ordre','Sacha met son manteau|Sacha part à l''école'),
         ('lec-ord-n3-b','FR.LECTURE.ORDRE',3,'ordre','la chenille mange des feuilles|elle se transforme en chrysalide|un papillon s''envole'),
         ('lec-vf-n1-b','FR.LECTURE.VRAIFAUX',1,'qcm','faux'),
-        ('lec-vf-n4-a','FR.LECTURE.VRAIFAUX',4,'clic','couleur'),
+        ('lec-vf-n4-a','FR.LECTURE.VRAIFAUX',4,'texte','faux'),
         ('lec-sens-n3-a','FR.LECTURE.SENS_MOT',3,'qcm','où l''on glisse facilement'),
         ('lec-sens-n4-a','FR.LECTURE.SENS_MOT',4,'clic','tempête')
     ) AS t(cle, competence, niveau, format, attendu)
@@ -82,8 +83,8 @@ BEGIN
     IF NOT public.verif_comprehension('lec-sens-n4-a','tempête')     THEN RAISE EXCEPTION 'clic juste refuse (tempête)'; END IF;
     IF public.verif_comprehension('lec-sens-n4-a','tempete')         THEN RAISE EXCEPTION 'accent non exige : tempete'; END IF;
     -- TEXTE : mot exact, accents exiges.
-    IF NOT public.verif_comprehension('lec-info-n4-b','verte')       THEN RAISE EXCEPTION 'texte juste refuse : verte'; END IF;
-    IF public.verif_comprehension('lec-info-n4-b','vert')            THEN RAISE EXCEPTION 'texte mauvais accepte : vert'; END IF;
+    IF NOT public.verif_comprehension('lec-info-n4-b','Biscuit')     THEN RAISE EXCEPTION 'texte juste refuse : Biscuit'; END IF;
+    IF public.verif_comprehension('lec-info-n4-b','chat')            THEN RAISE EXCEPTION 'texte mauvais accepte : chat'; END IF;
     -- ORDRE : espaces ignores, suite exacte.
     IF NOT public.verif_comprehension('lec-ord-n2-a','Sacha met son manteau | Sacha part à l''école') THEN RAISE EXCEPTION 'ordre juste (espaces) refuse'; END IF;
     IF public.verif_comprehension('lec-ord-n2-a','Sacha part à l''école|Sacha met son manteau')       THEN RAISE EXCEPTION 'ordre inverse accepte'; END IF;

@@ -26,8 +26,8 @@ DECLARE
     n   integer;
 BEGIN
     SELECT count(*) INTO n FROM public.grammaire_item;
-    IF n <> 55 THEN
-        RAISE EXCEPTION 'grammaire_item : 55 items attendus, obtenu %', n;
+    IF n <> 78 THEN
+        RAISE EXCEPTION 'grammaire_item : 78 items attendus, obtenu %', n;
     END IF;
 
     -- Couverture : chaque competence a au moins un item a chaque niveau 1..4.

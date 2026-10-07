@@ -727,3 +727,75 @@ l'instant ; les mots épelés dépendent du foyer et ne sont pas catalogables).
 texte est déjà prévu pour être pré-rempli) ; le mode optionnel **« dictée avec
 papa ou maman »** (le parent lit le texte à voix haute, l'enfant tape tout le
 texte, correction par le serveur avec le diagnostic existant).
+
+---
+
+# Audit de niveau CE2 et corrections (migration 0049)
+
+Après la refonte de la géométrie (0047-0048, qui était restée au niveau
+maternelle/CP), **toutes** les banques d'exercices ont été relues par rapport aux
+**attendus de fin de CE2** (cycle 2 révisé 2024). Verdict : les banques plus
+anciennes de maths (nombres jusqu'à 10 000, tables jusqu'à 9, calcul posé,
+mesures, heure, fractions) et de français (conjugaison aux quatre temps, dictée
+détective) sont **bien calibrées CE2**. Quatre banques récentes avaient soit des
+items trop faciles, soit des attendus de fin de CE2 manquants ; elles sont
+corrigées par la migration **additive** `0049` (aucune progression d'Iris n'est
+réinitialisée).
+
+## Grammaire (`grammaire_item`, 55 → 78 items)
+
+Banque jugée trop petite et à laquelle manquaient des attendus de fin de CE2.
+Ajouts : **sujet inversé** (« Au loin brille une étoile. »), **verbe à un temps
+composé** à reconnaître (« Léa a mangé une pomme. »), **phrase négative** avec
+`ne…jamais` / `ne…plus` / `ne…rien` (avant : seulement `ne…pas`), **complément du
+nom** (« le livre de Paul »), pronoms et déterminants variés (N3-N4), majuscule
+d'un nom de pays, virgule de liste. Un seul item vraiment trop facile remonté
+(`gn-n1-singulier` : on passe de « un chat » à « le tapis », où le nombre ne se lit
+pas sur le nom).
+
+## Vocabulaire (`lexique_item`, 120 → 140 items)
+
+- **Ordre alphabétique jusqu'à la 2e / 3e lettre** : les 10 items ALPHABET des
+  niveaux 2 et 4 ne portaient que sur la **1re lettre** (niveau CP/CE1). Ils
+  comparent désormais des mots qui commencent pareil (chat / cheval / chien →
+  deuxième lettre).
+- **Nouvelle compétence `FR.VOC.SENS`** (« Le sens d'un mot selon le contexte ») :
+  la polysémie, attendu CE2 jusque-là absent. Un mot (glace, souris, feuille,
+  orange, carte, pièce, bouton, règle, tour) a deux sens ; l'enfant choisit le bon
+  selon la phrase, puis au N4 retrouve le mot qui complète deux phrases.
+
+## Lecture / comprendre un texte (`comprehension_item`, 40 → 42 items)
+
+Les questions N4 étaient du **copier-coller** d'un mot visible (niveau CE1) et les
+textes étaient tous très courts (2 à 5 lignes). Correction : les 7 items N4 des
+compétences INFO, INFERENCE et VRAIFAUX deviennent de **vraies inférences**
+(référent d'un pronom : « le » = le chien ; ressenti implicite non écrit : froid,
+peur ; jugement vrai/faux qui demande un raisonnement) sur des **textes de 8 à 12
+lignes**. Deux inférences ajoutées (N3 référent de pronom, N4 sentiment).
+
+## Tableaux et graphiques (`donnees_item`, 40 items, 3 modifiés)
+
+La banque savait **lire** un tableau à double entrée mais ne demandait jamais de
+**calculer** à partir des données (attendu CE2). Trois items de tableau à double
+entrée passent de la lecture d'une case au **calcul d'un total** de ligne ou de
+colonne (« combien de billes a Nadia en tout ? » = 40 + 50), avec des nombres CE2
+(dizaines / centaines).
+
+## Changements de difficulté pour Iris
+
+- `FR.VOC.SENS` est une **nouvelle** compétence : Iris la démarre au niveau 1.
+- L'ordre alphabétique (ALPHABET N2 / N4) et les trois items de tableau devenus des
+  calculs sont **plus exigeants** qu'avant (toujours dans les attendus CE2).
+
+## Pistes restant à améliorer (hors 0049, banques déjà de niveau CE2)
+
+- **Mots de la maîtresse** (générateurs 0046) : les exercices de *production*
+  (mémoriser puis écrire, mot à trou en saisie libre, dictée détective) sont bien
+  CE2 ; les deux générateurs d'*entrée* (QCM de reconnaissance d'une graphie, clic
+  sur un mot) restent au ras du CE1. Les faire évoluer (lettres manquantes à
+  compléter, anagramme, ordre alphabétique de la liste) demande une refonte du
+  composant `MaitresseExo.tsx` : à traiter dans un lot dédié.
+- **Numération** : la *droite graduée* (`MA.NUM.SUITE` N3) plafonne à 1000 alors
+  que le reste de la numération va jusqu'à 10 000 ; à relever (paramètre de seed).
+- **Conjugaison** : ajouter `finir` (verbe modèle du 2e groupe) aux temps simples.
+- **Dictée** : ajouter les homophones `la/là` et `ou/où`.

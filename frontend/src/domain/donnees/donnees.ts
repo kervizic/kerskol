@@ -159,28 +159,28 @@ export const BANQUE_DONNEES: DonItem[] = [
     options: ["3", "5", "6"], attendu: "3",
     figure: table(["Léa", "Tom"], [["billes rouges", "3", "5"], ["billes bleues", "6", "2"]]),
     explication: "On croise la ligne des billes rouges et la colonne de Léa : elle a 3 billes rouges." },
-  // N3 : QCM — lire une case d'un tableau a double entree
+  // N3 : QCM — CALCULER a partir d'un tableau a double entree (somme colonne / ligne)
   { cle: "don-tab-n3-a", competence: "MA.DONNEES.TABLEAU", niveau: 3, format: "qcm",
-    consigne: "Dans ce tableau, combien d'oiseaux a Nadia ?",
-    options: ["4", "2", "1"], attendu: "4",
-    figure: table(["Nadia", "Hugo"], [["chats", "2", "1"], ["chiens", "1", "3"], ["oiseaux", "4", "2"]]),
-    explication: "On croise la ligne des oiseaux et la colonne de Nadia : elle a 4 oiseaux." },
+    consigne: "Dans ce tableau, combien de billes a Nadia en tout ?",
+    options: ["90", "70", "60"], attendu: "90",
+    figure: table(["Nadia", "Hugo"], [["rouges", "40", "20"], ["bleues", "50", "30"]]),
+    explication: "On additionne la colonne de Nadia : 40 et 50 font 90 billes en tout." },
   { cle: "don-tab-n3-b", competence: "MA.DONNEES.TABLEAU", niveau: 3, format: "qcm",
-    consigne: "Dans ce tableau, combien de gommes a la classe B ?",
-    options: ["6", "3", "5"], attendu: "6",
-    figure: table(["Classe A", "Classe B"], [["crayons", "8", "5"], ["gommes", "3", "6"]]),
-    explication: "On croise la ligne des gommes et la colonne de la classe B : elle a 6 gommes." },
-  // N4 : reponse libre — lire une case d'un tableau a double entree
+    consigne: "Dans ce tableau, combien de crayons ont les deux classes en tout ?",
+    options: ["130", "80", "50"], attendu: "130",
+    figure: table(["Classe A", "Classe B"], [["crayons", "80", "50"], ["gommes", "30", "60"]]),
+    explication: "On additionne la ligne des crayons : 80 et 50 font 130 crayons." },
+  // N4 : reponse libre — lire une case puis CALCULER le total d'une ligne (double entree)
   { cle: "don-tab-n4-a", competence: "MA.DONNEES.TABLEAU", niveau: 4, format: "texte",
     consigne: "Dans ce tableau, écris combien de poires a Sacha.",
     attendu: "2",
     figure: table(["Emma", "Sacha"], [["pommes", "4", "7"], ["poires", "5", "2"]]),
     explication: "On croise la ligne des poires et la colonne de Sacha : il a 2 poires." },
   { cle: "don-tab-n4-b", competence: "MA.DONNEES.TABLEAU", niveau: 4, format: "texte",
-    consigne: "Dans ce tableau, écris combien il y a de carrés bleus.",
-    attendu: "8",
-    figure: table(["Rouge", "Bleu"], [["ronds", "6", "4"], ["carrés", "3", "8"]]),
-    explication: "On croise la ligne des carrés et la colonne Bleu : il y a 8 carrés bleus." },
+    consigne: "Dans ce tableau, écris combien il y a de carrés en tout.",
+    attendu: "110",
+    figure: table(["Rouge", "Bleu"], [["ronds", "60", "40"], ["carrés", "30", "80"]]),
+    explication: "On additionne la ligne des carrés : 30 et 80 font 110 carrés en tout." },
 
   // =======================================================================
   // MA.DONNEES.COMPLETER — completer un tableau (case manquante, total)

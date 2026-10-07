@@ -26,15 +26,15 @@ DECLARE
     n   integer;
 BEGIN
     SELECT count(*) INTO n FROM public.lexique_item;
-    IF n <> 120 THEN
-        RAISE EXCEPTION 'lexique_item : 120 items attendus, obtenu %', n;
+    IF n <> 140 THEN
+        RAISE EXCEPTION 'lexique_item : 140 items attendus, obtenu %', n;
     END IF;
 
     -- Couverture : chaque competence a au moins un item a chaque niveau 1..4.
     FOR r IN SELECT c AS competence, nv AS niveau
                FROM unnest(ARRAY['FR.VOC.ALPHABET','FR.VOC.FAMILLES',
                     'FR.VOC.SYN_CONTRAIRES','FR.VOC.PREFIXE_SUFFIXE',
-                    'FR.VOC.CATEGORIES','FR.MOTS.INVARIABLES']) AS c,
+                    'FR.VOC.CATEGORIES','FR.VOC.SENS','FR.MOTS.INVARIABLES']) AS c,
                     generate_series(1,4) AS nv
     LOOP
         IF NOT EXISTS (SELECT 1 FROM public.lexique_item
@@ -45,8 +45,10 @@ BEGIN
 
     -- Spot check (miroir exact du front).
     FOR r IN SELECT * FROM (VALUES
-        ('voc-alpha-n2-1','FR.VOC.ALPHABET',2,'clic','arbre'),
-        ('voc-alpha-n4-2','FR.VOC.ALPHABET',4,'texte','auto'),
+        ('voc-alpha-n2-1','FR.VOC.ALPHABET',2,'clic','chat'),
+        ('voc-alpha-n4-2','FR.VOC.ALPHABET',4,'texte','fraise'),
+        ('voc-sens-n3-1','FR.VOC.SENS',3,'qcm','la phrase B'),
+        ('voc-sens-n4-2','FR.VOC.SENS',4,'texte','souris'),
         ('voc-fam-n3-1','FR.VOC.FAMILLES',3,'clic','voiture'),
         ('voc-syn-n3-1','FR.VOC.SYN_CONTRAIRES',3,'qcm','malheureux'),
         ('voc-ps-n1-5','FR.VOC.PREFIXE_SUFFIXE',1,'qcm','chanteur'),
@@ -71,11 +73,11 @@ END $$;
 DO $$
 BEGIN
     -- Bonnes reponses.
-    IF NOT public.verif_lexique('voc-alpha-n2-1','arbre')        THEN RAISE EXCEPTION 'juste refuse : arbre'; END IF;
+    IF NOT public.verif_lexique('voc-alpha-n2-1','chat')         THEN RAISE EXCEPTION 'juste refuse : chat'; END IF;
     IF NOT public.verif_lexique('mots-n1-beaucoup','beaucoup')   THEN RAISE EXCEPTION 'juste refuse : beaucoup'; END IF;
     IF NOT public.verif_lexique('voc-syn-n3-1','malheureux')     THEN RAISE EXCEPTION 'juste refuse : malheureux'; END IF;
     -- Tolerance casse / espaces (clic : « Arbre » = « arbre »).
-    IF NOT public.verif_lexique('voc-alpha-n2-1','  Arbre ')     THEN RAISE EXCEPTION 'tolerance casse/espaces KO'; END IF;
+    IF NOT public.verif_lexique('voc-alpha-n2-1','  Chat ')      THEN RAISE EXCEPTION 'tolerance casse/espaces KO'; END IF;
     -- QCM : la casse ne compte pas.
     IF NOT public.verif_lexique('mots-n1-beaucoup','BEAUCOUP')   THEN RAISE EXCEPTION 'qcm casse KO'; END IF;
     -- Accents EXIGES.
@@ -194,9 +196,9 @@ BEGIN
     v := public.enregistrer_reponse(
         v_id, 'a0000001-0000-0000-0000-000000000000'::uuid, NULL, 'FR.VOC.ALPHABET', NULL, 2, 'vocabulaire',
         'lex', 0, 0, 0, NULL, 1, 3000, false, false, false, now(),
-        'voc-alpha-n2-1', NULL, 'seance', 'arbre', NULL);
+        'voc-alpha-n2-1', NULL, 'seance', 'chat', NULL);
     IF (v ->> 'correct')::boolean IS NOT TRUE THEN
-        RAISE EXCEPTION 'lex « arbre » devrait etre juste : %', v;
+        RAISE EXCEPTION 'lex « chat » devrait etre juste : %', v;
     END IF;
 END $$;
 
