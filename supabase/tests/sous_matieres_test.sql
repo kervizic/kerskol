@@ -151,6 +151,12 @@ EXCEPTION WHEN OTHERS THEN
 END $$;
 RESET ROLE;
 
+-- Les RPC ci-dessus ont pose le marqueur transactionnel kerskol.calcul ('on',
+-- local a la transaction). Comme TOUT ce test tient dans une seule transaction,
+-- on le remet a 'off' pour simuler une transaction normale (en prod, chaque
+-- appel PostgREST est une transaction distincte ou le marqueur n'est pas pose).
+SELECT set_config('kerskol.calcul', 'off', true);
+
 -- ===========================================================================
 -- TEST 9 : l'UPDATE DIRECT par l'enfant des nouvelles colonnes est bloque
 -- ===========================================================================
