@@ -50,19 +50,45 @@ Soit 19 verbes × 3 temps × 6 personnes = **342 formes** de référence.
 L'**élision « j' »** est gérée à l'affichage (« j'ai », « j'étais ») : la forme
 comparée reste la forme verbale seule.
 
+### Format « phrase à compléter » (validé par Manu, octobre 2025)
+
+Les phrases à trous « . . . » n'étaient pas compréhensibles pour un enfant de
+8 ans. Nouveau format commun aux quatre temps :
+
+1. **Titre-consigne** : « Conjugue le verbe ÊTRE … » (verbe à l'infinitif **EN
+   MAJUSCULES**).
+2. **Indication du temps selon le niveau** (ci-dessous).
+3. La phrase avec une **CASE visible** à la place des « … » (plus de points) ;
+   le **sujet est mis en couleur** (c'est lui qui décide de la forme).
+4. **Propositions en gros boutons empilés** (l'un sous l'autre), grande zone
+   tactile — aux niveaux 1 à 3.
+5. Après la réponse, la **phrase COMPLÈTE** s'affiche avec la bonne forme dans
+   la case (c'est cette phrase que la voix lira plus tard : clé voix prévue,
+   `conjPhrase.voixCle` ; **aucun audio n'est généré** pour l'instant).
+
+Repères en mots d'enfant : présent = aujourd'hui / en ce moment ; futur =
+demain ; imparfait = avant / autrefois ; passé composé = hier / c'est déjà fait.
+
 ### Progression par niveau (décisions pédagogiques)
 
-- **N1** — QCM : choisir la bonne forme parmi 3 ; être/avoir + 1er groupe
-  régulier ; personnes je/tu/il.
-- **N2** — QCM avec distracteurs plus fins (une mauvaise personne ET une forme
-  d'un autre temps) ; toutes les personnes.
-- **N3** — **saisie libre** ; 1er groupe + être/avoir (+ manger/placer) ; toutes
-  les personnes.
-- **N4** — **saisie libre** ; tous les verbes (irréguliers inclus) ; **sujet
-  nominal** pour les 3e personnes (« Les enfants … (jouer) »).
+- **N1** — propositions ; titre « … au <temps> » **+ repère en mots d'enfant
+  sous le titre** ; être/avoir + 1er groupe régulier ; personnes je/tu/il.
+- **N2** — propositions (distracteurs plus fins : mauvaise personne ET forme
+  d'un autre temps) ; **nom du temps seul**, sans repère ; toutes les personnes.
+- **N3** — propositions ; **aucun temps indiqué**, mais la phrase contient
+  **toujours un mot repère** (« En ce moment, … », « Demain, … »,
+  « Autrefois, … », « Hier, … ») ; les propositions **mélangent des formes de
+  temps DIFFÉRENTS** du même verbe et de la même personne (ex. est / sera /
+  était / a été) pour que le repère serve vraiment ; être/avoir + 1er groupe
+  (+ manger/placer) ; toutes les personnes.
+- **N4** — comme N3 mais **réponse LIBRE** saisie dans la case (pas de
+  propositions) ; tous les verbes (irréguliers inclus) ; **sujet nominal** pour
+  les 3e personnes (« Hier, les enfants … »).
 
 Un QCM envoie la **valeur** (la forme) choisie, jamais un index ; une saisie à
-boutons ou au clavier = réponse libre.
+boutons ou au clavier = réponse libre. La **vérification SERVEUR est inchangée**
+(op 'conj') : le mot repère et le mélange des temps ne vivent que côté client
+(génération + diagnostic).
 
 ### Vérification SERVEUR
 
@@ -128,12 +154,19 @@ CE2.
 
 ### Progression par niveau
 
-- **N1** — QCM ; 1er groupe + aller ; personnes je/tu/il.
-- **N2** — QCM (distracteurs : mauvais auxiliaire, mauvais temps, mauvais
-  accord) ; toutes les personnes ; + venir, être, avoir.
-- **N3** — **saisie libre** ; 1er groupe + être/avoir + aller/venir + faire/dire.
-- **N4** — **saisie libre** ; **tous** les verbes (participes irréguliers) ;
-  sujet nominal genré pour il/ils.
+Même format « phrase à compléter » que les temps simples (titre-consigne, case,
+propositions empilées, phrase complète après réponse).
+
+- **N1** — propositions ; « … au passé composé » + repère (hier / c'est déjà
+  fait) ; 1er groupe + aller ; personnes je/tu/il.
+- **N2** — propositions (distracteurs : mauvais auxiliaire, mauvais temps,
+  mauvais accord) ; nom du temps seul ; toutes les personnes ; + venir, être,
+  avoir.
+- **N3** — propositions ; aucun temps indiqué, phrase avec « Hier, … » ; les
+  propositions **mélangent les temps** (ex. va / ira / allait / est allée) ;
+  1er groupe + être/avoir + aller/venir + faire/dire.
+- **N4** — **saisie libre** (phrase avec « Hier, … ») ; **tous** les verbes
+  (participes irréguliers) ; sujet nominal genré pour il/ils.
 
 ### Vérification SERVEUR
 
