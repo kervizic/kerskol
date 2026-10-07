@@ -598,3 +598,71 @@ textes et les réponses sont **déterministes** (données fixes) pour les tests
 golden. **On ne pénalise pas la lenteur** : seul l'anti-« trop rapide » global
 (réponse en moins de 1,5 s = 0 monnaie) s'applique ; la progression ne regarde que
 juste / faux.
+
+## Sous-matière « Les mots de la maîtresse » (français, phase 6)
+
+Sous-matière de français (CE2), migration 0046, domaine dédié `mots-maitresse`,
+composant `frontend/src/components/MaitresseExo.tsx`, helpers
+`frontend/src/domain/francais/maitresse.ts`. **Le PARENT** saisit, dans l'espace
+parent (jamais l'enfant), des **listes de mots à apprendre** et/ou des **textes de
+dictée** donnés par la maîtresse ; ils deviennent des exercices pour l'enfant.
+
+**Données parent** : table `public.maitresse_liste` **liée au foyer** (RLS stricte
+`est_parent_du_foyer` : un foyer ne voit que les siennes) ; titre, liste de mots,
+texte, date d'ajout, actif oui/non, édition, suppression, aperçu avant activation.
+Les CRUD passent par des RPC `SECURITY DEFINER` (`maitresse_upsert`,
+`maitresse_activer`, `maitresse_supprimer`). **Garde-fous** : titre 1 à 60
+caractères ; 0 ou 3 à 20 mots (au moins 3 quand il y a des mots), chaque mot ≤ 30
+lettres ; texte ≤ 600 caractères ; au moins un contenu jouable (≥ 3 mots **ou** un
+texte) ; au plus 10 listes actives par foyer ; **aucun chevron `<` `>`**
+(anti-injection HTML). L'enfant lit les listes actives via la RPC
+`SECURITY DEFINER maitresse_charger` (jamais d'accès direct).
+
+**Voix** : aucune synthèse à la volée (la voix Naf est pré-générée). Les exercices
+marchent **sans audio** :
+
+- **mémoriser puis écrire** (N3-N4) : le mot s'affiche quelques secondes, se
+  cache, l'enfant l'écrit (op serveur `mmots`) ;
+- **QCM orthographe** (N1-N2) : le bon mot parmi des **formes erronées générées de
+  façon déterministe** (lettre doublée / manquante, accent oublié, lettre muette,
+  double consonne simplifiée — `formesErronees`) (op `mmots`) ;
+- **mot à trou** dans une phrase du texte : QCM (N1-N2) ou saisie libre (N3-N4),
+  on cache en priorité un mot de la liste à apprendre (op `mtrou`) ;
+- **dictée détective** sur le texte de la maîtresse : erreurs **injectées de façon
+  déterministe** côté serveur (`_maitresse_injecter` : homophones est/sont/ont/à/
+  ses, et `m` devant `m`/`b`/`p` comme tambour → tanbour), en **réutilisant le
+  moteur existant** (`<DicteeDetective>` + cœur partagé `_verif_dictee_core`, op
+  `mdictee`). Le client ne reçoit que les mots **affichés** (déjà fautifs) et le
+  **nombre** d'erreurs ; positions, corrections et types restent serveur.
+
+Le **serveur reste seul juge** (ops `mmots` / `mtrou` / `mdictee`,
+`enregistrer_reponse`, migration 0046) ; il compare la saisie normalisée
+(`normaliser_mot`, accents exigés) au mot stocké, ou applique le moteur de dictée.
+
+**Visibilité** : le domaine `mots-maitresse` est **actif par défaut** mais le
+moteur ne le propose que s'il existe **au moins une liste active** (filtrage côté
+client dans `Session.tsx` : le domaine est retiré des domaines effectifs quand la
+banque du foyer est vide). Il n'est **pas compté** dans le garde-fou « au moins une
+sous-matière jouable » (`trg_profils_domaines_valides` l'exclut) et
+`regler_matieres` le **ré-ajoute toujours** (sa visibilité dépend du contenu, pas
+d'un interrupteur ; il n'apparaît donc pas dans les réglages matières).
+
+**Messages de correction** (toujours valorisants, rédigés pour l'oral) :
+
+- **Bonne réponse** : « Bravo ! C'est le bon mot. »
+- **Réponse fausse (mots / mot à trou)** : on **épelle** le mot correct, les accents
+  **décrits** (`messageMotCorrect` / `epeler`), par exemple « C'est presque ça. Le
+  mot s'écrit : maison. On l'épelle : m, a, i, s, o, n. » (pour un mot accentué :
+  « e accent aigu, l, e accent grave, v, e »).
+- **Dictée détective** : réutilise le diagnostic existant (`MESSAGES_DICTEE`,
+  décrit la lettre fautive, par exemple « Devant les lettres m, b et p, on écrit un
+  m à la place du n. »).
+
+Les consignes, indices (N1-N2) et messages fixes sont au catalogue voix
+(`tools/tts/data/phrases.json`, section `maitresse`, aucun audio généré pour
+l'instant ; les mots épelés dépendent du foyer et ne sont pas catalogables).
+
+**Reste à faire** (hors périmètre phase 6) : la **saisie par photo** (le champ
+texte est déjà prévu pour être pré-rempli) ; le mode optionnel **« dictée avec
+papa ou maman »** (le parent lit le texte à voix haute, l'enfant tape tout le
+texte, correction par le serveur avec le diagnostic existant).

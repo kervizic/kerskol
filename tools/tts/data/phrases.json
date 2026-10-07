@@ -124,7 +124,21 @@
     "titre:fractions-simples": "Fractions simples",
     "titre:dictee-detective": "Dictée détective",
     "titre:conjugaison-passe-compose": "Conjuguer au passé composé",
-    "titre:problemes-mesures": "Problèmes de mesures"
+    "titre:problemes-mesures": "Problèmes de mesures",
+    "titre:mots-maitresse": "Les mots de la maîtresse"
+  },
+  "maitresse": {
+    "_commentaire": "Les mots de la maitresse (migration 0046, phase 6). Le parent saisit les listes/textes ; les exercices marchent SANS audio (voix Naf pre-generee). Consignes, indices et messages fixes ; aucun audio genere pour l'instant. Les mots a epeler sont propres au foyer (non catalogables).",
+    "consigne:quel-mot-est-bien-ecrit": "Quel mot est bien écrit ?",
+    "consigne:regarde-bien-ce-mot-tu-vas-l-ecrire": "Regarde bien ce mot, tu vas l'écrire.",
+    "consigne:ecris-le-mot-que-tu-as-vu": "Écris le mot que tu as vu.",
+    "consigne:quel-mot-manque-dans-la-phrase": "Quel mot manque dans la phrase ?",
+    "consigne:ecris-le-mot-qui-manque-dans-la-phrase": "Écris le mot qui manque dans la phrase.",
+    "indice:fr-maitresse-mots": "Regarde bien chaque lettre. Écoute les lettres de la fin qu'on n'entend pas, et pense aux accents.",
+    "indice:fr-maitresse-dictee": "Lis la phrase tout doucement dans ta tête. Cherche le mot qui manque ou le mot piégé qui se cache.",
+    "msg:maitresse-bon-mot": "Bravo ! C'est le bon mot.",
+    "msg:maitresse-presque": "C'est presque ça. Regarde bien le mot, on va l'épeler lettre par lettre.",
+    "msg:maitresse-indispo": "Les mots de la maîtresse ne sont pas prêts pour l'instant."
   },
   "grammaire": {
     "_commentaire": "Grammaire (migration 0041). Consignes distinctes et explications de correction par item (cle = grammaire.ts / public.grammaire_item). Textes lus a l'oral ; aucun audio genere pour l'instant.",
