@@ -34,6 +34,15 @@ export type TypeFaute =
   | "MAUVAIS_TEMPS"
   | "TERMINAISON"
   | "ORTHO_RADICAL"
+  // Passe compose (francais)
+  | "AUXILIAIRE"
+  | "PARTICIPE"
+  | "ACCORD"
+  // Problemes de mesures (maths)
+  | "OUBLI_CONVERSION"
+  | "MAUVAISE_UNITE"
+  | "MAUVAISE_OP"
+  | "ERREUR_CALCUL"
   // Repli commun
   | "INCONNU";
 

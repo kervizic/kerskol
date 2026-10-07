@@ -22,6 +22,12 @@ export {
   MESSAGES_CONJUGAISON,
 } from "./conjugaison";
 export {
+  diagnostiquerPasseCompose,
+  estJustePasseCompose,
+  MESSAGES_PASSE_COMPOSE,
+  type OptionsPC,
+} from "./passe-compose";
+export {
   messageErreur,
   messageFausseAlerte,
   messageBilan,

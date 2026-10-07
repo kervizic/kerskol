@@ -65,7 +65,7 @@ import {
 } from "../domain/calcul/engine";
 import { wrapHour, wrapMinute, startHour, START_MINUTE } from "../domain/calcul/horloge";
 import { moneyAsset } from "../domain/calcul/moneyAssets";
-import { diagnostiquer, diagnostiquerConjugaison, type Diagnostic, type Faute } from "../domain/diagnostic";
+import { diagnostiquer, diagnostiquerConjugaison, diagnostiquerPasseCompose, type Diagnostic, type Faute } from "../domain/diagnostic";
 
 function uuid(): string {
   try {
@@ -1444,9 +1444,11 @@ export function Session({
     // Saisie TEXTE (ecriture en lettres ou conjugaison) : jugee par le diagnostic
     // approprie. La conjugaison porte ex.conj (verbe/temps/personne).
     if (ex.saisie === "lettres" || ex.saisie === "qcm_texte") {
-      return ex.conj
-        ? diagnostiquerConjugaison(ex.conj.verbe, ex.conj.temps, ex.conj.personne, texte).juste
-        : diagnostiquer(ex.answer, texte).juste;
+      return ex.conjPC
+        ? diagnostiquerPasseCompose(ex.conjPC.verbe, ex.conjPC.personne, texte, { genre: ex.conjPC.genre }).juste
+        : ex.conj
+          ? diagnostiquerConjugaison(ex.conj.verbe, ex.conj.temps, ex.conj.personne, texte).juste
+          : diagnostiquer(ex.answer, texte).juste;
     }
     if (ex.fields === 2) {
       return Number(value.q) === ex.answer && Number(value.r) === (ex.reste ?? -1);
@@ -1467,9 +1469,11 @@ export function Session({
     // Ecriture en toutes lettres : le diagnostic local sert au feedback et
     // enregistre le type de faute (indicatif) ; le serveur reste seul juge.
     if (ex.saisie === "lettres" || ex.saisie === "qcm_texte") {
-      const d = ex.conj
-        ? diagnostiquerConjugaison(ex.conj.verbe, ex.conj.temps, ex.conj.personne, texte)
-        : diagnostiquer(ex.answer, texte);
+      const d = ex.conjPC
+        ? diagnostiquerPasseCompose(ex.conjPC.verbe, ex.conjPC.personne, texte, { genre: ex.conjPC.genre })
+        : ex.conj
+          ? diagnostiquerConjugaison(ex.conj.verbe, ex.conj.temps, ex.conj.personne, texte)
+          : diagnostiquer(ex.answer, texte);
       setDiag(d);
       submitted.current = {
         reponse: ex.answer,
@@ -1489,11 +1493,20 @@ export function Session({
     }
     // Capture la saisie brute (envoyee au serveur pour revalidation), valable
     // aussi pour le chemin "faux" (envoye apres lecture de la correction).
+    const correct = isCorrect();
+    // Diagnostic deterministe des problemes de mesures : si la reponse fausse
+    // correspond a un piege connu (oubli de conversion, mauvaise unite, mauvaise
+    // operation), on enregistre son type_faute ; sinon ERREUR_CALCUL. Indicatif.
+    let typeFaute: string | null = null;
+    if (!correct && ex.diagPieges) {
+      const piege = ex.diagPieges.find((p) => p.answer === Number(value.q));
+      typeFaute = piege ? piege.type : (ex.diagFallback ?? "ERREUR_CALCUL");
+    }
     submitted.current = {
       reponse: Number(value.q),
       reste: ex.fields === 2 ? Number(value.r) : null,
+      typeFaute,
     };
-    const correct = isCorrect();
     if (correct) {
       const temps = Date.now() - questionStart.current;
       setLastGain(temps < 1500 ? 0 : ex.rattrapage ? 3 : 2); // meme bareme que le trigger

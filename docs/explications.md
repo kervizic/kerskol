@@ -127,6 +127,100 @@ Source : `frontend/src/domain/diagnostic/conjugaison.ts` (`diagnostiquerConjugai
 
 ---
 
+# Messages de correction - passé composé (français)
+
+Liste **complète** des explications affichées quand l'enfant conjugue au **passé
+composé** (compétence `FR.CONJ.PASSE_COMPOSE`, niveau 4 en saisie libre ; QCM aux
+niveaux 1-3). Même style « enfant de 8 ans » : phrases très courtes, toujours un
+exemple concret juste / pas juste, jamais de grammaire abstraite. La bonne forme
+(auxiliaire + participe) est affichée. **Les accents sont exigés** (le serveur
+`verif_passe_compose` reste seul juge ; le type de faute est indicatif et
+enregistré dans `reponses.type_faute`).
+
+Source : `frontend/src/domain/diagnostic/passe-compose.ts`
+(`diagnostiquerPasseCompose`, `MESSAGES_PASSE_COMPOSE`). `{forme}` = la forme
+attendue (ex. « est allée »).
+
+Décision pédagogique (CE2) : seuls **aller** et **venir** (auxiliaire être)
+s'accordent. Pour lever l'ambiguïté, le **genre est imposé** aux 3e personnes
+(sujet « il/elle », « ils/elles » ou nominal) ; pour je/tu/nous/vous, les **deux
+écritures m/f sont acceptées** (« je suis allé » comme « je suis allée »).
+
+## Bonne réponse (JUSTE)
+
+- « Bravo ! C'est le bon passé composé. »
+
+## ACCENT - un accent manquant
+
+- « N'oublie pas l'accent : « {forme} ». il a mangé → avec un accent. / il a
+  mange → pas juste. »
+
+## AUXILIAIRE - le mauvais petit mot (avoir / être)
+
+- Verbe avec **être** : « Ce verbe se dit avec « être » : « {forme} ». il est
+  allé → avec être. / il a allé → pas juste. »
+- Verbe avec **avoir** : « Ce verbe se dit avec « avoir » : « {forme} ». il a
+  mangé → avec avoir. / il est mangé → pas juste. »
+
+## ACCORD - l'accord avec être oublié
+
+- « Avec « être », le participe s'accorde : « {forme} ». elle est allée → avec un
+  e. / elle est allé → pas juste. »
+
+## PARTICIPE - le participe mal formé
+
+- « Ce n'est pas le bon participe : on écrit « {forme} ». il a pris → pris. / il
+  a prendu → pas juste. »
+
+## MAUVAIS_TEMPS - un temps simple au lieu du passé composé
+
+- « Ici c'est le passé composé (c'est déjà fait). On écrit « {forme} ». hier il a
+  mangé. / il mangeait → autre temps. »
+
+## INCONNU - repli
+
+- « Presque ! Regarde bien : on écrit « {forme} ». »
+- Utilisé quand la saisie ne correspond à aucune règle. Enregistré aussi.
+
+
+---
+
+# Messages de correction - problèmes de mesures (maths)
+
+Liste **complète** des types de faute du diagnostic déterministe des **problèmes
+de mesures** (compétence `MA.PB.MESURES` : longueurs, masses, durées, monnaie).
+Le serveur (`verif_calcul`) reste seul juge du juste/faux ; le `type_faute` est
+**indicatif** (enregistré dans `reponses.type_faute` pour reproposer plus tard un
+exercice ciblé sur la même difficulté). Au moment de l'erreur, l'enfant voit la
+**correction expliquée** (conversion puis calcul). Les pièges sont attachés à
+l'exercice (`diagPieges`, `frontend/src/domain/calcul/problemes.ts`).
+
+Style « enfant de 8 ans », exemple concret. `{forme}`/valeurs variables selon
+l'énoncé.
+
+## OUBLI_CONVERSION - conversion oubliée
+
+- « N'oublie pas de convertir avant de calculer. 1 m = 100 cm, donc 3 m = 300 cm.
+  / 3 → pas juste. »
+
+## MAUVAISE_UNITE - mauvaise conversion d'unité
+
+- « Regarde bien l'unité : 1 m = 100 cm (pas 10). 3 m = 300 cm → juste. / 30 →
+  pas juste. »
+
+## MAUVAISE_OP - mauvaise opération
+
+- « Relis l'énoncé : ici il faut enlever (−), pas ajouter (+). / le contraire →
+  pas juste. »
+
+## ERREUR_CALCUL - erreur de calcul (repli)
+
+- « Presque ! Refais le calcul doucement : la bonne réponse est {forme}. »
+- Utilisé quand la réponse fausse ne correspond à aucun piège connu.
+
+
+---
+
 # Messages de correction - dictée détective (français)
 
 Liste **complète** des messages de la « dictée détective » (compétence

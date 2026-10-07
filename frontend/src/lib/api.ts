@@ -4,8 +4,9 @@
 import { supabase } from "./supabase";
 import { purgeKerskolStorage } from "./authReset";
 import { computeVerif, type VerifOp, type VerifOp2 } from "../domain/calcul/generator";
-import { estJuste, estJusteConjugaison } from "../domain/diagnostic";
+import { estJuste, estJusteConjugaison, estJustePasseCompose } from "../domain/diagnostic";
 import { TEMPS_PAR_CODE, type Personne } from "../domain/francais/conjugaison";
+import { PC_CODE } from "../domain/francais/passe-compose";
 import type { DicteeTexte, DicteeReponse, DicteeResultat } from "../domain/francais/dictee";
 import {
   isDemo,
@@ -653,9 +654,16 @@ export async function insertReponse(row: ReponseInsert): Promise<ReponseResult> 
       row.op === "lettres"
         ? estJuste(row.a, row.reponse_texte ?? "")
         : row.op === "conj"
-          ? estJusteConjugaison(
-              row.cle ?? "", TEMPS_PAR_CODE[row.a], row.b as Personne, row.reponse_texte ?? ""
-            )
+          ? row.a === PC_CODE
+            ? estJustePasseCompose(
+                row.cle ?? "",
+                row.b as Personne,
+                row.c == null ? null : row.c === 1 ? "f" : "m",
+                row.reponse_texte ?? ""
+              )
+            : estJusteConjugaison(
+                row.cle ?? "", TEMPS_PAR_CODE[row.a], row.b as Personne, row.reponse_texte ?? ""
+              )
           : row.reponse === answer && (row.fields < 2 || row.reste === reste);
     const p = DEMO_PROFILS.find((x) => x.id === row.profil_id);
     if (p) {

@@ -21,8 +21,9 @@ import { buildProbleme } from "./problemes";
 import { buildMesure } from "./measures";
 import { buildFraction } from "./fractions";
 import { enLettresFr } from "../diagnostic/lettres";
-import { buildFrancaisConjugaison, buildFrancaisDictee } from "../francais/generator";
+import { buildFrancaisConjugaison, buildFrancaisDictee, buildFrancaisPasseCompose } from "../francais/generator";
 import type { Temps, Personne } from "../francais/conjugaison";
+import type { Genre } from "../francais/passe-compose";
 
 export type Forme =
   | "resultat"
@@ -307,6 +308,15 @@ export interface GeneratedExercise {
   options?: QcmOption[]; // mode qcm (valeurs numeriques)
   optionsTexte?: string[]; // mode qcm_texte (propositions TEXTE : conjugaison)
   conj?: { verbe: string; temps: Temps; personne: Personne }; // diagnostic conjugaison
+  // Passe compose : diagnostic dedie (auxiliaire + participe + accord etre).
+  // `genre` = genre impose par le sujet (3e personne) ; null = genre libre (m/f
+  // acceptes). `cle`/verif.a=4 portent le verbe/temps cote serveur.
+  conjPC?: { verbe: string; personne: Personne; genre: Genre | null };
+  // Pieges de diagnostic pour une reponse NUMERIQUE (problemes de mesures) :
+  // si la saisie fausse egale un piege, on enregistre son type_faute ; sinon on
+  // enregistre le `diagFallback` (ex. ERREUR_CALCUL). Indicatif, serveur juge.
+  diagPieges?: { answer: number; type: string }[];
+  diagFallback?: string;
   dictee?: { niveau: number }; // dictee detective : le texte est choisi a l'affichage (serveur)
   poseData?: PoseData; // mode pose
   chiffresData?: ChiffresData; // mode chiffres (decomposition)
@@ -436,9 +446,11 @@ function buildExercise(
     seed,
   };
 
-  // --- Francais : conjugaison -------------------------------------------
+  // --- Francais : conjugaison (temps simples + passe compose) -----------
   if (src.competence.startsWith("FR.CONJ.")) {
-    return buildFrancaisConjugaison(src, rng, base);
+    return src.competence.endsWith("PASSE_COMPOSE")
+      ? buildFrancaisPasseCompose(src, rng, base)
+      : buildFrancaisConjugaison(src, rng, base);
   }
   // --- Francais : dictee detective --------------------------------------
   if (src.competence.startsWith("FR.ORTHO.")) {
