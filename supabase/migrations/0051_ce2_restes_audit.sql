@@ -41,12 +41,19 @@ END $num$;
 -- =========================================================================
 -- 3. DICTEE DETECTIVE : homophones la / la et ou / ou.
 -- =========================================================================
--- 3a. Autoriser les deux nouveaux types d'erreur.
+-- 3a. Autoriser les deux nouveaux types d'erreur et les deux nouvelles notions.
 ALTER TABLE public.dictee_erreur DROP CONSTRAINT IF EXISTS dictee_erreur_type_chk;
 ALTER TABLE public.dictee_erreur ADD CONSTRAINT dictee_erreur_type_chk CHECK (type IN (
     'a_a','et_est','son_sont','on_ont','ces_ses','ce_se',
     'pluriel','pluriel_al_aux','accord','verbe_ent','m_mbp','e_er_ez',
     'la_la','ou_ou'));
+
+ALTER TABLE public.dictee_texte DROP CONSTRAINT IF EXISTS dictee_texte_notion_chk;
+ALTER TABLE public.dictee_texte ADD CONSTRAINT dictee_texte_notion_chk CHECK (
+    notion IS NULL OR notion IN (
+        'a_a','et_est','son_sont','on_ont','ces_ses','ce_se',
+        'pluriel','pluriel_al_aux','accord','verbe_ent','m_mbp','e_er_ez',
+        'revision','la_la','ou_ou'));
 
 -- 3b. Deux nouvelles notions, a la suite de la progression.
 INSERT INTO public.dictee_notion (code, ordre, prerequis, libelle) VALUES
