@@ -40,6 +40,7 @@ import type { ContexteDictee } from "../domain/francais/selection-dictee";
 import { enqueueReponse, flushReponses } from "../lib/reponseQueue";
 import { composeSession } from "../domain/calcul/composer";
 import type {
+  GeneratedExercise,
   SupportData,
   DroiteData,
   PoseData,
@@ -326,6 +327,41 @@ function QcmTexte({
           {o}
         </button>
       ))}
+    </div>
+  );
+}
+
+// --- Conjugaison (nouveau format « phrase a completer ») -------------------
+// Titre-consigne (verbe a l'infinitif en MAJUSCULES) ; repere en mots d'enfant
+// au N1 ; la phrase avec une CASE bien visible a la place des « … » et le SUJET
+// mis en couleur (c'est lui qui decide de la forme). Apres la reponse (`revele`),
+// la phrase COMPLETE s'affiche avec la bonne forme dans la case.
+function ConjugaisonView({
+  phrase,
+  valeur,
+  revele,
+}: {
+  phrase: NonNullable<GeneratedExercise["conjPhrase"]>;
+  valeur: string;
+  revele: boolean;
+}) {
+  const box = revele ? phrase.bonneForme : valeur || "?";
+  return (
+    <div className="kk-conj">
+      <h2 className="kk-consigne">{phrase.consigne}</h2>
+      {phrase.repere && <p className="kk-repere">{phrase.repere}</p>}
+      <p className="kk-phrase" aria-label={phrase.complete}>
+        {phrase.prefixe}
+        <span className="kk-sujet">{phrase.sujet}</span>
+        {phrase.colle ? "" : " "}
+        <span
+          className={`kk-answer__box kk-conj__box${revele ? " kk-conj__box--ok" : ""}`}
+          aria-label="la case à compléter"
+        >
+          {box}
+        </span>
+        {phrase.apres}
+      </p>
     </div>
   );
 }
@@ -1792,17 +1828,25 @@ export function Session({
         <>
         {ex.support !== "aucun" && ex.supportData && <SupportView data={ex.supportData} />}
 
-        <EquationView
-          prompt={ex.prompt}
-          f1={f1}
-          f2={f2}
-          active={active}
-          inputMode={inputMode}
-          onPick={(n) => {
-            setActive(n);
-            touchAnswerZone();
-          }}
-        />
+        {ex.conjPhrase ? (
+          <ConjugaisonView
+            phrase={ex.conjPhrase}
+            valeur={texte}
+            revele={phase === "correct" || phase === "wrong"}
+          />
+        ) : (
+          <EquationView
+            prompt={ex.prompt}
+            f1={f1}
+            f2={f2}
+            active={active}
+            inputMode={inputMode}
+            onPick={(n) => {
+              setActive(n);
+              touchAnswerZone();
+            }}
+          />
+        )}
 
         {ex.horlogeData && <HorlogeView data={ex.horlogeData} />}
         {ex.regleData && <RegleView data={ex.regleData} />}

@@ -281,6 +281,19 @@ p.kk-lead { color: var(--kk-text-2); max-width: 52ch; }
 .kk-qcm__opt { font-size: 1.3rem; min-height: 60px; text-transform: none; }
 .kk-qcm__opt--active { background: var(--kk-accent); color: var(--kk-on-accent); border-color: transparent; }
 
+/* ---- Conjugaison : phrase a completer (nouveau format) ---- */
+.kk-conj { display: flex; flex-direction: column; align-items: center; gap: 10px; margin: 6px 0; text-align: center; }
+.kk-consigne { font-size: clamp(1.3rem, 5vw, 1.8rem); font-weight: 800; color: var(--kk-text); margin: 0; }
+.kk-repere { font-size: 1rem; color: var(--kk-text-2); margin: 0; font-style: italic; }
+.kk-phrase {
+  font-size: clamp(1.6rem, 6vw, 2.4rem); font-weight: 700; color: var(--kk-text);
+  margin: 6px 0; line-height: 1.5; display: inline-flex; flex-wrap: wrap;
+  align-items: center; justify-content: center; gap: 6px;
+}
+.kk-sujet { color: var(--kk-accent); font-weight: 800; }
+.kk-conj__box { min-width: 120px; min-height: 60px; font-size: inherit; }
+.kk-conj__box--ok { border-color: var(--kk-success-text); background: var(--kk-success-bg); color: var(--kk-success-text); }
+
 /* ---- Decomposition : cases par rang ---- */
 .kk-cells { display: flex; gap: 14px; justify-content: center; align-items: flex-start; flex-wrap: wrap; margin: 10px 0; }
 .kk-cells__item { display: flex; flex-direction: column; align-items: center; gap: 4px; }

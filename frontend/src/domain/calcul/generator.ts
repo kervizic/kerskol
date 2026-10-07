@@ -308,6 +308,22 @@ export interface GeneratedExercise {
   options?: QcmOption[]; // mode qcm (valeurs numeriques)
   optionsTexte?: string[]; // mode qcm_texte (propositions TEXTE : conjugaison)
   conj?: { verbe: string; temps: Temps; personne: Personne }; // diagnostic conjugaison
+  // Nouveau format « phrase a completer » (conjugaison) : un titre-consigne, un
+  // eventuel repere en mots d'enfant (N1), et une phrase avec une CASE visible a
+  // la place des « … » (le sujet est mis en couleur). Apres la reponse, la phrase
+  // COMPLETE s'affiche avec la bonne forme dans la case (c'est cette phrase que la
+  // voix lira plus tard : `voixCle` est prevue, aucun audio n'est genere ici).
+  conjPhrase?: {
+    consigne: string; // titre-consigne (« Conjugue le verbe ÊTRE au présent »)
+    repere: string | null; // repere en mots d'enfant, sous le titre (N1 seulement)
+    prefixe: string; // mot repere en debut de phrase (N3/N4) ou "" ; ex. « Hier, »
+    sujet: string; // sujet affiche, mis en couleur (decide de la forme)
+    colle: boolean; // true => pas d'espace entre le sujet et la case (elision « j' »)
+    apres: string; // texte apres la case (ex. « . »)
+    bonneForme: string; // bonne forme a afficher dans la case apres la reponse
+    complete: string; // phrase complete (aria + reference pour la voix future)
+    voixCle: string; // clef voix de la phrase complete (aucun audio genere ici)
+  };
   // Passe compose : diagnostic dedie (auxiliaire + participe + accord etre).
   // `genre` = genre impose par le sujet (3e personne) ; null = genre libre (m/f
   // acceptes). `cle`/verif.a=4 portent le verbe/temps cote serveur.
