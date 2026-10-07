@@ -12,10 +12,10 @@ import {
 
 // --- Integrite de la table (source de verite partagee avec le SQL) ----------
 describe("table de conjugaison", () => {
-  it("19 verbes, 3 temps, 6 personnes = 342 formes non vides", () => {
+  it("20 verbes, 3 temps, 6 personnes = 360 formes non vides", () => {
     const g = conjGolden();
-    expect(Object.keys(CONJ)).toHaveLength(19);
-    expect(g).toHaveLength(19 * 3 * 6);
+    expect(Object.keys(CONJ)).toHaveLength(20);
+    expect(g).toHaveLength(20 * 3 * 6);
     for (const r of g) {
       expect(r.forme.length).toBeGreaterThan(0);
       expect([1, 2, 3]).toContain(r.temps);
@@ -42,6 +42,11 @@ describe("table de conjugaison", () => {
     expect(forme("prendre", "present", 6)).toBe("prennent");
     expect(forme("vouloir", "present", 1)).toBe("veux");
     expect(forme("voir", "imparfait", 4)).toBe("voyions");
+    // 2e groupe : finir (-iss- au pluriel du present et a l'imparfait).
+    expect(forme("finir", "present", 3)).toBe("finit");
+    expect(forme("finir", "present", 4)).toBe("finissons");
+    expect(forme("finir", "futur", 1)).toBe("finirai");
+    expect(forme("finir", "imparfait", 6)).toBe("finissaient");
   });
 
   it("elision j' selon la forme", () => {
