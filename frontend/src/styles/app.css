@@ -491,3 +491,43 @@ button.kk-don__picto-row { cursor: pointer; }
 .kk-don__picto-row--ok { border-color: #16a34a; background: #16a34a; color: #fff; }
 .kk-don__picto-label { min-width: 72px; font-weight: 600; }
 .kk-don__picto-imgs { display: flex; flex-wrap: wrap; gap: 4px; }
+
+/* Comprendre un texte (phase 5) : bloc de lecture SILENCIEUSE + mots cliquables. */
+.kk-lecture { gap: 12px; }
+.kk-lecture__texte {
+  display: block;
+  width: 100%;
+  max-width: 52ch;
+  margin: 2px auto;
+  padding: 14px 16px;
+  background: var(--kk-surface, #fff);
+  border: 1px solid var(--kk-border);
+  border-radius: 12px;
+  text-align: left;
+}
+.kk-lecture__p { margin: 0 0 8px; font-size: 1.2rem; line-height: 1.7; color: var(--kk-text); }
+.kk-lecture__p:last-child { margin-bottom: 0; }
+.kk-lecture__mot {
+  display: inline;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  padding: 2px 3px;
+  margin: 0;
+  cursor: pointer;
+  text-transform: none;
+}
+.kk-lecture__mot:hover { background: var(--kk-border); }
+.kk-lecture__mot--sel { background: var(--kk-accent); color: var(--kk-on-accent); }
+.kk-lecture__mot--ok { background: #16a34a; color: #fff; }
+.kk-lecture__mot--ko { background: #dc2626; color: #fff; }
+.kk-lecture__ordre { gap: 8px; }
+.kk-lecture__rang {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.4em;
+  font-weight: 700;
+}

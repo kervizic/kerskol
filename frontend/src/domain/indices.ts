@@ -51,6 +51,18 @@ export const INDICES: Record<string, string> = {
   "FR.MOTS.INVARIABLES":
     "Ces petits mots ne changent jamais. Écoute bien les lettres de la fin qu'on n'entend pas, comme le s de toujours ou le p de beaucoup.",
 
+  // --- Comprendre un texte (indices aux niveaux 1 et 2 seulement) -----------
+  "FR.LECTURE.INFO":
+    "Relis le texte tout doucement. La réponse est écrite dans le texte. Cherche le mot ou le petit groupe de mots qui répond à la question.",
+  "FR.LECTURE.INFERENCE":
+    "Le texte ne dit pas tout. Regarde ce que fait le personnage ou ce qui se passe, et devine. Par exemple, s'il saute de joie, c'est qu'il est content.",
+  "FR.LECTURE.ORDRE":
+    "Cherche ce qui se passe en premier, puis ensuite, puis à la fin. Les petits mots comme d'abord, puis et enfin t'aident à trouver l'ordre.",
+  "FR.LECTURE.VRAIFAUX":
+    "Relis la phrase, puis cherche dans le texte si c'est pareil. Si le texte dit la même chose, c'est vrai. Si le texte dit le contraire, c'est faux.",
+  "FR.LECTURE.SENS_MOT":
+    "Relis toute la phrase où se trouve le mot. Les autres mots autour t'aident à deviner ce qu'il veut dire.",
+
   // --- Calcul mental --------------------------------------------------------
   "MA.CM.ADDITION":
     "Tu peux passer par un nombre rond, comme dix ou vingt, pour aller plus vite.",

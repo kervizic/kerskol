@@ -27,7 +27,10 @@
     "consigne:regarde-le-tableau": "Regarde bien le tableau.",
     "consigne:regarde-le-diagramme": "Regarde bien le diagramme.",
     "consigne:clique-sur-la-barre-la-plus-haute": "Clique sur la barre la plus haute.",
-    "consigne:regle-la-barre": "Touche la bonne hauteur au-dessus de la barre."
+    "consigne:regle-la-barre": "Touche la bonne hauteur au-dessus de la barre.",
+    "consigne:lis-le-texte": "Lis bien le texte dans ta tête.",
+    "consigne:clique-sur-le-mot": "Clique dans le texte sur le bon mot.",
+    "consigne:range-dans-lordre": "Range les moments de l'histoire dans l'ordre."
   },
   "message": {
     "msg:bravo": "Bravo ! C'est la bonne réponse.",
@@ -100,7 +103,12 @@
     "indice:ma-donnees-completer": "Regarde le total. Additionne les nombres que tu connais, puis cherche ce qu'il manque pour arriver jusqu'au total.",
     "indice:ma-donnees-barres": "Suis la barre jusqu'en haut, puis regarde le trait en face. Le nombre à côté de ce trait donne la hauteur de la barre.",
     "indice:ma-donnees-pictogramme": "Compte les images d'une ligne. Si chaque image vaut deux objets, ajoute deux pour chaque image, comme deux et deux et deux.",
-    "indice:ma-donnees-comparer": "Lis d'abord les deux nombres. Pour savoir combien il y en a de plus, enlève le plus petit nombre du plus grand."
+    "indice:ma-donnees-comparer": "Lis d'abord les deux nombres. Pour savoir combien il y en a de plus, enlève le plus petit nombre du plus grand.",
+    "indice:fr-lecture-info": "Relis le texte tout doucement. La réponse est écrite dans le texte. Cherche le mot ou le petit groupe de mots qui répond à la question.",
+    "indice:fr-lecture-inference": "Le texte ne dit pas tout. Regarde ce que fait le personnage ou ce qui se passe, et devine. Par exemple, s'il saute de joie, c'est qu'il est content.",
+    "indice:fr-lecture-ordre": "Cherche ce qui se passe en premier, puis ensuite, puis à la fin. Les petits mots comme d'abord, puis et enfin t'aident à trouver l'ordre.",
+    "indice:fr-lecture-vraifaux": "Relis la phrase, puis cherche dans le texte si c'est pareil. Si le texte dit la même chose, c'est vrai. Si le texte dit le contraire, c'est faux.",
+    "indice:fr-lecture-sens-mot": "Relis toute la phrase où se trouve le mot. Les autres mots autour t'aident à deviner ce qu'il veut dire."
   },
   "titre": {
     "titre:tables-addition": "Tables d'addition",

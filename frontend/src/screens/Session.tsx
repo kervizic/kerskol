@@ -40,6 +40,7 @@ import DicteeDetective from "../components/DicteeDetective";
 import Grammaire from "../components/Grammaire";
 import Geometrie from "../components/Geometrie";
 import Donnees from "../components/Donnees";
+import Comprehension from "../components/Comprehension";
 import type { DicteeTexte, DicteeReponse, DicteeResultat } from "../domain/francais/dictee";
 import type { ContexteDictee } from "../domain/francais/selection-dictee";
 import { enqueueReponse, flushReponses } from "../lib/reponseQueue";
@@ -1921,6 +1922,14 @@ export function Session({
           <Donnees
             key={ex.key}
             item={ex.don}
+            onSoumettre={soumettreGrammaire}
+            onContinuer={(correct) => advance(correct, true)}
+          />
+        ) : ex.saisie === "comprehension" && ex.comp ? (
+          <Comprehension
+            key={ex.key}
+            item={ex.comp}
+            indice={indice}
             onSoumettre={soumettreGrammaire}
             onContinuer={(correct) => advance(correct, true)}
           />

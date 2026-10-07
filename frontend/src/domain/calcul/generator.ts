@@ -26,6 +26,8 @@ import { buildGeometrie } from "../geometrie/geometrie";
 import type { GeoFigure, GeoFormat, GeoInteract } from "../geometrie/geometrie";
 import { buildDonnees } from "../donnees/donnees";
 import type { DonFigure, DonFormat, DonInteract } from "../donnees/donnees";
+import { buildComprehension } from "../francais/comprehension";
+import type { CompFormat } from "../francais/comprehension";
 import type { Temps, Personne } from "../francais/conjugaison";
 import type { Genre } from "../francais/passe-compose";
 
@@ -46,7 +48,8 @@ export type Forme =
   | "dictee" // francais : dictee detective (trouver / corriger des erreurs)
   | "grammaire" // francais : grammaire (nature, sujet/verbe, types, ponctuation, GN)
   | "geometrie" // maths : geometrie et reperage (figures, solides, symetrie, quadrillage, plan)
-  | "donnees"; // maths : tableaux et graphiques (tableau, barres, pictogramme, comparer)
+  | "donnees" // maths : tableaux et graphiques (tableau, barres, pictogramme, comparer)
+  | "comprehension"; // francais : comprendre un texte (info, inference, ordre, vrai/faux, sens d'un mot)
 
 export type Support = "rectangle" | "droite" | "aucun" | null;
 
@@ -90,7 +93,12 @@ export type Saisie =
   // donnees -> composant autonome <Donnees> : tableau / diagramme en barres /
   // pictogramme tactile, QCM / clic / saisie libre / reglage d'une barre. Le
   // serveur (verif_donnees, op 'don') reste seul juge via la cle.
-  | "donnees";
+  | "donnees"
+  // comprehension -> composant autonome <Comprehension> : un texte affiche en
+  // LECTURE SILENCIEUSE (aucun audio), puis une question (QCM / clic sur un mot
+  // du texte / saisie libre / remise d'evenements dans l'ordre). Le serveur
+  // (verif_comprehension, op 'lire') reste seul juge via la cle.
+  | "comprehension";
 
 // Enonce normalise envoye au serveur pour revalidation. L'operation porte sur
 // deux operandes et son resultat est la reponse attendue :
@@ -121,7 +129,7 @@ export type Saisie =
 // `lex` : vocabulaire / mots a savoir (phase 2). Meme principe que `gram` : la
 // reponse est du TEXTE (reponse_texte), `cle` porte l'item (p_op2) ; la
 // verification reelle est serveur (verif_lexique) / client (lexique.ts).
-export type VerifOp = "add" | "sub" | "mul" | "div" | "cmp" | "val" | "lettres" | "conj" | "dictee" | "gram" | "lex" | "geo" | "don";
+export type VerifOp = "add" | "sub" | "mul" | "div" | "cmp" | "val" | "lettres" | "conj" | "dictee" | "gram" | "lex" | "geo" | "don" | "lire";
 export type VerifOp2 = "add" | "sub" | "mul" | "div" | "rsub";
 export interface Verif {
   op: VerifOp;
@@ -173,6 +181,10 @@ function applyOp(op: VerifOp, a: number, b: number): { answer: number; reste: nu
     case "don":
       // Tableaux et graphiques : la reponse est du TEXTE (p_reponse_texte) ;
       // a = 0 (invariant answer=a). Verification serveur (verif_donnees) via la cle.
+      return { answer: a, reste: null };
+    case "lire":
+      // Comprehension de texte : la reponse est du TEXTE (p_reponse_texte) ;
+      // a = 0 (invariant answer=a). Verification serveur (verif_comprehension) via la cle.
       return { answer: a, reste: null };
   }
 }
@@ -416,6 +428,21 @@ export interface GeneratedExercise {
     figure: DonFigure;
     interact?: DonInteract;
   };
+  // Comprendre un texte : item choisi par le generateur (reproductible via la
+  // graine). Le composant <Comprehension> l'affiche (texte en lecture SILENCIEUSE
+  // puis question) ; le serveur (verif_comprehension, op 'lire') juge via `cle`.
+  // `attendu` sert au feedback local et au mode demo (le serveur reste la source
+  // de verite).
+  comp?: {
+    cle: string;
+    format: CompFormat;
+    texte: string[];
+    consigne: string;
+    options?: string[];
+    evenements?: string[];
+    attendu: string;
+    explication: string;
+  };
   poseData?: PoseData; // mode pose
   chiffresData?: ChiffresData; // mode chiffres (decomposition)
   droiteData?: DroiteData; // mode droite
@@ -561,6 +588,10 @@ function buildExercise(
   // --- Francais : vocabulaire + mots a savoir (phase 2) -----------------
   if (src.competence.startsWith("FR.VOC.") || src.competence.startsWith("FR.MOTS.")) {
     return buildFrancaisLexique(src, rng, base);
+  }
+  // --- Francais : comprendre un texte (phase 5) -------------------------
+  if (src.competence.startsWith("FR.LECTURE.")) {
+    return buildComprehension(src, rng, base);
   }
   // --- Maths : geometrie + reperage (phase 3) ---------------------------
   if (src.competence.startsWith("MA.GEO.") || src.competence.startsWith("MA.REPERE.")) {

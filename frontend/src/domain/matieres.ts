@@ -49,6 +49,7 @@ export const MATIERES: MatiereDef[] = [
       { domaine: "mots-invariables", libelle: "Mots à savoir" },
       { domaine: "conjugaison", libelle: "Conjugaison" },
       { domaine: "orthographe", libelle: "Dictée détective" },
+      { domaine: "lecture", libelle: "Comprendre un texte" },
     ],
   },
 ];

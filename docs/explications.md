@@ -491,6 +491,23 @@ l'instant).
   changes de colonne. Vers le haut, tu changes de ligne et tu montes. »
 - **MA.REPERE.PLAN** : « Place-toi à côté de l'objet. Ce qui est du côté de la main
   qui écrit est à droite, l'autre côté est à gauche. »
+- **FR.LECTURE.INFO** : « Relis le texte tout doucement. La réponse est écrite dans
+  le texte. Cherche le mot ou le petit groupe de mots qui répond à la question. »
+- **FR.LECTURE.INFERENCE** : « Le texte ne dit pas tout. Regarde ce que fait le
+  personnage ou ce qui se passe, et devine. Par exemple, s'il saute de joie, c'est
+  qu'il est content. »
+- **FR.LECTURE.ORDRE** : « Cherche ce qui se passe en premier, puis ensuite, puis à
+  la fin. Les petits mots comme d'abord, puis et enfin t'aident à trouver
+  l'ordre. »
+- **FR.LECTURE.VRAIFAUX** : « Relis la phrase, puis cherche dans le texte si c'est
+  pareil. Si le texte dit la même chose, c'est vrai. Si le texte dit le contraire,
+  c'est faux. »
+- **FR.LECTURE.SENS_MOT** : « Relis toute la phrase où se trouve le mot. Les autres
+  mots autour t'aident à deviner ce qu'il veut dire. »
+
+> Note : le bouton **Indice** de la page d'exercice est désormais aussi proposé
+> dans le composant **Comprendre un texte** (niveaux 1 et 2), en plus des
+> exercices à saisie numérique.
 
 ## Sous-matières « Géométrie » et « Se repérer » (maths, phase 3)
 
@@ -545,3 +562,39 @@ nombre lu ou calculé). Le **serveur reste seul juge** (op `don`, fonction
 `verif_donnees`) ; la comparaison suit le format : QCM accents gardés et casse
 ignorée, texte et clic accents exigés, grille (hauteur) comparaison stricte. Les
 représentations sont **déterministes** (données fixes) pour les tests golden.
+
+## Sous-matière « Comprendre un texte » (français, phase 5)
+
+Sous-matière de français (CE2, cycle 2 révisé 2024), migration 0045, composant
+`frontend/src/components/Comprehension.tsx`, banque
+`frontend/src/domain/francais/comprehension.ts` (miroir de
+`public.comprehension_item`).
+
+**Décision Manu : lecture SILENCIEUSE uniquement.** Le texte est **affiché** et lu
+en silence par l'enfant : **aucun bouton « écouter le texte », aucun karaoké,
+aucune lecture à voix haute du texte**. Seules les consignes et les indices courts
+peuvent avoir une voix plus tard (aucun audio généré ici).
+
+**Comprendre un texte** (domaine `lecture`) : retrouver une information écrite —
+qui, où, quoi (`FR.LECTURE.INFO`), comprendre ce qui n'est pas dit — pourquoi, ce
+que ressent le personnage (`FR.LECTURE.INFERENCE`), remettre 2 à 3 événements dans
+l'ordre (`FR.LECTURE.ORDRE`), dire si une phrase est vraie ou fausse d'après le
+texte (`FR.LECTURE.VRAIFAUX`), trouver le sens d'un mot grâce à la phrase
+(`FR.LECTURE.SENS_MOT`). Les textes sont **originaux** et courts (3 à 6 phrases aux
+N1-N2, jusqu'à 8-10 au N4), du quotidien d'un enfant (histoires, petits
+documentaires sur les animaux et la nature, recettes, règles de jeu),
+**jamais de calendrier** (ni date, ni jour de la semaine, ni mois). Un texte par
+item ; banque riche (40 textes).
+
+Progression des formats : **N1 QCM** ; N2/N3 QCM, **clic** (toucher dans le texte
+le mot qui prouve la réponse) ou **ordre** (ranger des événements) ; **N4 réponse
+libre** (taper un mot, cliquer le mot qui prouve, ou remettre dans l'ordre). Le
+« clic sur le mot qui prouve » (N3-N4) réutilise le principe des mots cliquables :
+chaque mot du texte devient une cible tactile. Le **serveur reste seul juge** (op
+`lire`, fonction `verif_comprehension`) ; la comparaison suit le format : QCM
+accents gardés et casse ignorée, **texte et clic accents exigés** (fidèle aux
+accents), ordre (suite des événements) comparaison stricte espaces ignorés. Les
+textes et les réponses sont **déterministes** (données fixes) pour les tests
+golden. **On ne pénalise pas la lenteur** : seul l'anti-« trop rapide » global
+(réponse en moins de 1,5 s = 0 monnaie) s'applique ; la progression ne regarde que
+juste / faux.
