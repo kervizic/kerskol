@@ -58,7 +58,12 @@ BEGIN
     PERFORM public.regler_matieres('c1000000-0000-0000-0000-00000000000a', ARRAY['MA'], ARRAY[]::text[]);
     PERFORM _rec('2_vide_refuse', false, 'accepte a tort');
 EXCEPTION WHEN OTHERS THEN
-    PERFORM _rec('2_vide_refuse', SQLERRM LIKE '%domaines_actifs_vide%', SQLERRM);
+    -- Depuis la phase 6, regler_matieres re-ajoute toujours 'mots-maitresse' : un
+    -- domaines vide devient ['mots-maitresse'], exclu du garde-fou -> refuse via
+    -- aucune_sous_matiere_active (au lieu de domaines_actifs_vide). Toujours refuse.
+    PERFORM _rec('2_vide_refuse',
+                 SQLERRM LIKE '%domaines_actifs_vide%' OR SQLERRM LIKE '%aucune_sous_matiere_active%',
+                 SQLERRM);
 END $$;
 RESET ROLE;
 
