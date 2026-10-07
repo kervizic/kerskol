@@ -95,6 +95,11 @@ calendrier. Le moteur ne raisonne que sur la **notion** et le **niveau**.
 | P5 | 28 | Accord (dernière révision) | `accord` | On accorde toujours avec le nom le plus proche, même séparé par « et ». |
 | P5 | 29 | Verbe au pluriel (dernière révision) | `verbe_ent` | repart**ent**, s'install**ent**, rest**ent** : toujours **-ent** avec ils/elles. |
 | P5 | 30 | Grande révision finale (tout mélangé) | `revision` | On relit toute la phrase : homophones, pluriels, accords, verbes en -ent. |
+| P5 | 31 | Homophones **la / là** | `la_la` | *là* = l'endroit (ici, là-bas) ; *la* = article (« la chatte »). « Pose-le **là** » (l'endroit), « **la** chatte dort ». |
+| P5 | 32 | Homophones **ou / où** | `ou_ou` | *où* = le lieu (ou le moment) ; *ou* = ou bien (un choix). « Dis-moi **où** tu vas », « une pomme **ou** une poire ». |
+
+> Ajout **migration 0051** : notions `la_la` (ordre 13) et `ou_ou` (ordre 14),
+> chacune avec 2 textes originaux et une faute plantée sur l'homophone.
 
 ## Mots fréquents à savoir écrire, par bloc
 

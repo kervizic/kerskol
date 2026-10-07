@@ -30,7 +30,7 @@ import { pick, shuffle } from "../calcul/rng";
 import type { Base, GeneratedExercise, ExCalcul } from "../calcul/generator";
 import {
   CONJ, TEMPS, TEMPS_CODE, forme, commenceParVoyelle, infinitifAffiche,
-  VERBES_ETRE_AVOIR, VERBES_1ER, VERBES_1ER_HAUT, VERBES_IRREGULIERS,
+  VERBES_ETRE_AVOIR, VERBES_1ER, VERBES_2E, VERBES_1ER_HAUT, VERBES_IRREGULIERS,
   type Temps, type Personne,
 } from "./conjugaison";
 import {
@@ -169,8 +169,9 @@ function construirePhrase(args: {
 // Verbes disponibles selon le niveau (temps simples).
 function verbesDe(niveau: number): string[] {
   if (niveau <= 2) return [...VERBES_ETRE_AVOIR, ...VERBES_1ER];
-  if (niveau === 3) return [...VERBES_ETRE_AVOIR, ...VERBES_1ER_HAUT];
-  return [...VERBES_ETRE_AVOIR, ...VERBES_1ER_HAUT, ...VERBES_IRREGULIERS];
+  // 2e groupe (finir) introduit a partir du N3.
+  if (niveau === 3) return [...VERBES_ETRE_AVOIR, ...VERBES_1ER_HAUT, ...VERBES_2E];
+  return [...VERBES_ETRE_AVOIR, ...VERBES_1ER_HAUT, ...VERBES_2E, ...VERBES_IRREGULIERS];
 }
 function personnesDe(niveau: number): Personne[] {
   return niveau === 1 ? [1, 2, 3] : [1, 2, 3, 4, 5, 6];

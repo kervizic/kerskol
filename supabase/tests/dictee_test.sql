@@ -74,10 +74,11 @@ BEGIN
         END IF;
     END LOOP;
 
-    -- Les 12 notions ordonnees doivent exister et chacune porter des textes.
+    -- Les 14 notions ordonnees doivent exister et chacune porter des textes
+    -- (12 d'origine + la_la et ou_ou, migration 0051).
     SELECT count(*) INTO n_notions FROM public.dictee_notion;
-    IF n_notions <> 12 THEN
-        RAISE EXCEPTION 'dictee_notion : 12 notions attendues, obtenu %', n_notions;
+    IF n_notions <> 14 THEN
+        RAISE EXCEPTION 'dictee_notion : 14 notions attendues, obtenu %', n_notions;
     END IF;
     IF EXISTS (
         SELECT 1 FROM public.dictee_notion dn
@@ -99,6 +100,14 @@ BEGIN
     SELECT count(*) INTO n_al_aux FROM public.dictee_erreur WHERE type = 'pluriel_al_aux';
     IF n_al_aux < 1 THEN
         RAISE EXCEPTION 'dictee : aucun exemple du type pluriel_al_aux';
+    END IF;
+
+    -- Homophones la/là et ou/où (migration 0051) effectivement plantés.
+    IF NOT EXISTS (SELECT 1 FROM public.dictee_erreur WHERE type = 'la_la') THEN
+        RAISE EXCEPTION 'dictee : aucun exemple du type la_la';
+    END IF;
+    IF NOT EXISTS (SELECT 1 FROM public.dictee_erreur WHERE type = 'ou_ou') THEN
+        RAISE EXCEPTION 'dictee : aucun exemple du type ou_ou';
     END IF;
 
     RAISE NOTICE 'progression dictee (% notions, chacune >= 2 textes, al/aux x%) : OK',

@@ -90,6 +90,10 @@ const PAIRES: [RegExp, string[]][] = [
   [/^ses$/, ["ses", "ces"]],
   [/^ce$/, ["ce", "se"]],
   [/^se$/, ["se", "ce"]],
+  [/^la$/, ["la", "là"]],
+  [/^là$/, ["là", "la"]],
+  [/^ou$/, ["ou", "où"]],
+  [/^où$/, ["où", "ou"]],
 ];
 
 // Propositions de correction (QCM niveau 2) derivees du MOT VISIBLE. Renvoie au

@@ -77,6 +77,12 @@ export const CONJ: Record<string, Conjugaison> = {
     futur: ["aurai", "auras", "aura", "aurons", "aurez", "auront"],
     imparfait: ["avais", "avais", "avait", "avions", "aviez", "avaient"],
   },
+  // --- 2e groupe (radical + -iss- au pluriel du present et a l'imparfait) ---
+  finir: {
+    present: ["finis", "finis", "finit", "finissons", "finissez", "finissent"],
+    futur: ["finirai", "finiras", "finira", "finirons", "finirez", "finiront"],
+    imparfait: ["finissais", "finissais", "finissait", "finissions", "finissiez", "finissaient"],
+  },
   // --- cas orthographiques -ger / -cer (niveau haut) -----------------------
   manger: {
     present: ["mange", "manges", "mange", "mangeons", "mangez", "mangent"],
@@ -135,6 +141,7 @@ for (const inf of REGULIERS) CONJ[inf] = regulier1er(inf);
 // Classement des verbes par difficulte (utilise par le generateur).
 export const VERBES_ETRE_AVOIR = ["etre", "avoir"];
 export const VERBES_1ER = [...REGULIERS];
+export const VERBES_2E = ["finir"]; // 2e groupe (temps simples)
 export const VERBES_1ER_HAUT = [...REGULIERS, "manger", "placer"];
 export const VERBES_IRREGULIERS = [
   "aller", "dire", "faire", "pouvoir", "prendre", "venir", "voir", "vouloir",

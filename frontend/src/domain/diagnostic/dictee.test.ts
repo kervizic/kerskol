@@ -144,6 +144,10 @@ describe("propositionsDictee : QCM leakless", () => {
     expect(propositionsDictee("ont")).toEqual(expect.arrayContaining(["on", "ont"]));
     expect(propositionsDictee("ces")).toEqual(expect.arrayContaining(["ces", "ses"]));
     expect(propositionsDictee("se")).toEqual(expect.arrayContaining(["ce", "se"]));
+    expect(propositionsDictee("la")).toEqual(expect.arrayContaining(["la", "là"]));
+    expect(propositionsDictee("là")).toEqual(expect.arrayContaining(["la", "là"]));
+    expect(propositionsDictee("ou")).toEqual(expect.arrayContaining(["ou", "où"]));
+    expect(propositionsDictee("où")).toEqual(expect.arrayContaining(["ou", "où"]));
   });
   it("le mot touche figure TOUJOURS dans les options (pas de fuite)", () => {
     expect(propositionsDictee("chat")).toContain("chat");

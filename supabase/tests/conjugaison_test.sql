@@ -24,8 +24,8 @@ DECLARE
     n   integer;
 BEGIN
     SELECT count(*) INTO n FROM public.conjugaison;
-    IF n <> 342 THEN
-        RAISE EXCEPTION 'conjugaison : 342 formes attendues, obtenu %', n;
+    IF n <> 360 THEN
+        RAISE EXCEPTION 'conjugaison : 360 formes attendues, obtenu %', n;
     END IF;
     FOR r IN SELECT * FROM (VALUES
         ('chanter',1,3,'chante'),('chanter',2,1,'chanterai'),('chanter',3,3,'chantait'),
@@ -33,7 +33,10 @@ BEGIN
         ('manger',1,4,'mangeons'),('placer',3,1,'plaçais'),('placer',1,4,'plaçons'),
         ('aller',2,1,'irai'),('faire',1,5,'faites'),('prendre',1,6,'prennent'),
         ('vouloir',1,1,'veux'),('voir',3,4,'voyions'),('dire',1,5,'dites'),
-        ('venir',1,6,'viennent'),('pouvoir',1,6,'peuvent'),('jouer',2,6,'joueront')
+        ('venir',1,6,'viennent'),('pouvoir',1,6,'peuvent'),('jouer',2,6,'joueront'),
+        -- 2e groupe : finir (present pluriel en -iss-, futur sur l'infinitif)
+        ('finir',1,3,'finit'),('finir',1,4,'finissons'),('finir',2,1,'finirai'),
+        ('finir',3,6,'finissaient')
     ) AS t(verbe, temps, personne, forme)
     LOOP
         SELECT forme INTO got FROM public.conjugaison
@@ -43,7 +46,7 @@ BEGIN
                 r.verbe, r.temps, r.personne, r.forme, got;
         END IF;
     END LOOP;
-    RAISE NOTICE 'table conjugaison (342 + spot) : OK';
+    RAISE NOTICE 'table conjugaison (360 + spot) : OK';
 END $$;
 
 -- ===========================================================================

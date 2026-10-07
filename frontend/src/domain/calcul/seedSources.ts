@@ -80,7 +80,7 @@ const NUM: Row[] = [
   ["MA.NUM.SUITE", 1, "encadrer", "encadrement", "cpa_barres", "aucun", "voisins", { type: "voisins", max: 1000 }],
   ["MA.NUM.SUITE", 2, "encadrer", "encadrement", "exemples_estompes", "aucun", "bonds", { type: "bond", pas: [10, 100], max: 9999 }],
   ["MA.NUM.SUITE", 3, "encadrer", "encadrement", "plateau_lineaire", "aucun", "droite_graduee", { type: "droite", step: 100, intervalles: 10, max: 1000 }],
-  ["MA.NUM.SUITE", 4, "encadrer", "encadrement", "probleme_dabord", "aucun", "bonds", { type: "bond", pas: [1, 10, 100, 1000], max: 10000 }],
+  ["MA.NUM.SUITE", 4, "encadrer", "encadrement", "plateau_lineaire", "aucun", "droite_graduee", { type: "droite", step: 1000, intervalles: 10, max: 10000 }],
 ];
 
 // --- Calculs poses (domaine calcul_pose) ---

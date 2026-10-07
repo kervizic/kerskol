@@ -836,7 +836,16 @@ colonne (« combien de billes a Nadia en tout ? » = 40 + 50), avec des nombres 
   sur un mot) restent au ras du CE1. Les faire évoluer (lettres manquantes à
   compléter, anagramme, ordre alphabétique de la liste) demande une refonte du
   composant `MaitresseExo.tsx` : à traiter dans un lot dédié.
-- **Numération** : la *droite graduée* (`MA.NUM.SUITE` N3) plafonne à 1000 alors
-  que le reste de la numération va jusqu'à 10 000 ; à relever (paramètre de seed).
-- **Conjugaison** : ajouter `finir` (verbe modèle du 2e groupe) aux temps simples.
-- **Dictée** : ajouter les homophones `la/là` et `ou/où`.
+- **Mots de la maîtresse** (suite) : voir ci-dessus, refonte `MaitresseExo.tsx` à part.
+
+### Petits restes de l'audit traités (migration 0051)
+
+- **Numération** : la *droite graduée* monte désormais jusqu'à **10 000**. N3 garde
+  la droite de 0 à 1000 (pas de 100) ; **N4** de `MA.NUM.SUITE` devient une droite
+  graduée de 0 à 10 000 (pas de 1000). Les « bonds » restent présents au N2.
+- **Conjugaison** : ajout de **`finir`** (verbe modèle du 2e groupe) aux temps
+  simples (présent avec le `-iss-` au pluriel, futur sur l'infinitif, imparfait).
+  Introduit à partir du **N3** (`VERBES_2E`). 18 formes seedées, miroir SQL.
+- **Dictée détective** : deux notions d'homophones ajoutées, **`la / là`** et
+  **`ou / où`** (ordre 13 et 14), avec 2 textes chacune et la faute plantée sur
+  l'homophone ; familles `PAIRES` étendues côté client (QCM N2).
