@@ -498,15 +498,18 @@ export async function getFrancais(): Promise<{ competences: Competence[]; source
     sb
       .from("exercices")
       .select("id, competence, niveau, methode, type")
-      .in("type", ["conjugaison", "dictee", "grammaire"])
+      .in("type", ["conjugaison", "dictee", "grammaire", "vocabulaire", "mots_invariables"])
       .eq("actif", true),
   ]);
   if (comp.error) throw comp.error;
   if (ex.error) throw ex.error;
   const sources = (ex.data ?? []).map((e): ExCalcul => {
     const type = e.type as string;
-    const operation = type === "dictee" ? "dictee" : type === "grammaire" ? "gram" : "conj";
-    const forme = (type === "dictee" ? "dictee" : type === "grammaire" ? "grammaire" : "conjugaison") as Forme;
+    // vocabulaire / mots_invariables (phase 2) : rendu identique a la grammaire
+    // (composant <Grammaire>, forme "grammaire"), verification serveur op 'lex'.
+    const lex = type === "vocabulaire" || type === "mots_invariables";
+    const operation = type === "dictee" ? "dictee" : type === "grammaire" ? "gram" : lex ? "lex" : "conj";
+    const forme = (type === "dictee" ? "dictee" : type === "grammaire" || lex ? "grammaire" : "conjugaison") as Forme;
     return {
       exerciceId: e.id as string,
       competence: e.competence as string,

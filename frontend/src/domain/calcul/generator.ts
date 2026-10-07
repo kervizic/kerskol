@@ -21,7 +21,7 @@ import { buildProbleme } from "./problemes";
 import { buildMesure } from "./measures";
 import { buildFraction } from "./fractions";
 import { enLettresFr } from "../diagnostic/lettres";
-import { buildFrancaisConjugaison, buildFrancaisDictee, buildFrancaisPasseCompose, buildFrancaisGrammaire } from "../francais/generator";
+import { buildFrancaisConjugaison, buildFrancaisDictee, buildFrancaisPasseCompose, buildFrancaisGrammaire, buildFrancaisLexique } from "../francais/generator";
 import type { Temps, Personne } from "../francais/conjugaison";
 import type { Genre } from "../francais/passe-compose";
 
@@ -104,7 +104,10 @@ export type Saisie =
 // `gram` : grammaire. La reponse est du TEXTE (reponse_texte) ; `cle` porte
 // l'identifiant de l'item (p_op2). computeVerif renvoie a (invariant), la
 // verification reelle est serveur (verif_grammaire) / client (grammaire.ts).
-export type VerifOp = "add" | "sub" | "mul" | "div" | "cmp" | "val" | "lettres" | "conj" | "dictee" | "gram";
+// `lex` : vocabulaire / mots a savoir (phase 2). Meme principe que `gram` : la
+// reponse est du TEXTE (reponse_texte), `cle` porte l'item (p_op2) ; la
+// verification reelle est serveur (verif_lexique) / client (lexique.ts).
+export type VerifOp = "add" | "sub" | "mul" | "div" | "cmp" | "val" | "lettres" | "conj" | "dictee" | "gram" | "lex";
 export type VerifOp2 = "add" | "sub" | "mul" | "div" | "rsub";
 export interface Verif {
   op: VerifOp;
@@ -144,6 +147,10 @@ function applyOp(op: VerifOp, a: number, b: number): { answer: number; reste: nu
     case "gram":
       // Grammaire : la reponse est du TEXTE (p_reponse_texte) ; a = 0 (invariant
       // answer=a). La verification reelle est serveur (verif_grammaire).
+      return { answer: a, reste: null };
+    case "lex":
+      // Vocabulaire / mots a savoir : idem gram, verification serveur
+      // (verif_lexique) via la cle de l'item.
       return { answer: a, reste: null };
   }
 }
@@ -500,6 +507,10 @@ function buildExercise(
   // --- Francais : grammaire ---------------------------------------------
   if (src.competence.startsWith("FR.GRAM.")) {
     return buildFrancaisGrammaire(src, rng, base);
+  }
+  // --- Francais : vocabulaire + mots a savoir (phase 2) -----------------
+  if (src.competence.startsWith("FR.VOC.") || src.competence.startsWith("FR.MOTS.")) {
+    return buildFrancaisLexique(src, rng, base);
   }
   // --- Numeration : lire/ecrire, decomposer, comparer, suite ------------
   if (src.competence.startsWith("MA.NUM.")) {

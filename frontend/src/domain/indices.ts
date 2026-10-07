@@ -35,6 +35,22 @@ export const INDICES: Record<string, string> = {
   "FR.GRAM.GROUPE_NOMINAL":
     "Regarde le petit mot du début. Le mot les montre qu'il y a plusieurs choses, c'est le pluriel. Le nom dit la chose, l'adjectif la décrit.",
 
+  // --- Vocabulaire (indices aux niveaux 1 et 2 seulement) -------------------
+  "FR.VOC.ALPHABET":
+    "Dans le dictionnaire, les mots sont rangés par la première lettre. Si deux mots commencent par la même lettre, on regarde la lettre d'après.",
+  "FR.VOC.FAMILLES":
+    "Les mots d'une même famille se ressemblent au début et parlent de la même chose. Cherche le petit morceau qu'ils ont en commun, comme dent dans dentiste.",
+  "FR.VOC.SYN_CONTRAIRES":
+    "Un synonyme veut dire presque la même chose. Un contraire veut dire le contraire. Parfois on ajoute un petit mot devant pour dire le contraire, comme mal ou dé.",
+  "FR.VOC.PREFIXE_SUFFIXE":
+    "Un préfixe se met au début du mot, comme re qui veut dire encore. Un petit bout à la fin, comme eur, montre la personne qui fait l'action.",
+  "FR.VOC.CATEGORIES":
+    "Cherche le mot général qui regroupe tous les autres. Le chien et le chat sont des animaux.",
+
+  // --- Mots a savoir (indices aux niveaux 1 et 2 seulement) -----------------
+  "FR.MOTS.INVARIABLES":
+    "Ces petits mots ne changent jamais. Écoute bien les lettres de la fin qu'on n'entend pas, comme le s de toujours ou le p de beaucoup.",
+
   // --- Calcul mental --------------------------------------------------------
   "MA.CM.ADDITION":
     "Tu peux passer par un nombre rond, comme dix ou vingt, pour aller plus vite.",

@@ -1495,7 +1495,9 @@ export function Session({
         exercice_id: slot.source.exerciceId,
         niveau: ex.niveau,
         methode: ex.methode,
-        op: "gram",
+        // 'gram' (grammaire) ou 'lex' (vocabulaire / mots a savoir) : meme
+        // composant <Grammaire>, l'op vient de l'enonce normalise.
+        op: ex.verif.op,
         a: 0,
         b: 0,
         op2: null,

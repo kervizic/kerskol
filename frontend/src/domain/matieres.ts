@@ -42,6 +42,8 @@ export const MATIERES: MatiereDef[] = [
     libelle: "Français",
     sousMatieres: [
       { domaine: "grammaire", libelle: "Grammaire" },
+      { domaine: "vocabulaire", libelle: "Vocabulaire" },
+      { domaine: "mots-invariables", libelle: "Mots à savoir" },
       { domaine: "conjugaison", libelle: "Conjugaison" },
       { domaine: "orthographe", libelle: "Dictée détective" },
     ],

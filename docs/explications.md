@@ -333,6 +333,65 @@ l'instant).
 
 ---
 
+# Messages de correction - vocabulaire et mots à savoir (français)
+
+Phase 2 (migration 0042). **Deux nouvelles sous-matières** français, bâties sur
+l'architecture de la grammaire (même format d'item `qcm`/`clic`/`texte`, même
+composant `<Grammaire>`, même principe « le serveur est seul juge ») :
+
+- **Vocabulaire** (domaine `vocabulaire`), cinq compétences :
+  - `FR.VOC.ALPHABET` — ordre alphabétique et usage du dictionnaire (ranger des
+    mots, trouver entre quels mots repères se place un mot) ;
+  - `FR.VOC.FAMILLES` — familles de mots (le mot de la même famille, l'intrus) ;
+  - `FR.VOC.SYN_CONTRAIRES` — synonymes et contraires (y compris les contraires
+    par préfixe : heureux / malheureux, faire / défaire) ;
+  - `FR.VOC.PREFIXE_SUFFIXE` — préfixes et suffixes simples (re-, dé-, in-, -eur,
+    -ette) ;
+  - `FR.VOC.CATEGORIES` — catégories et mot générique.
+- **Mots à savoir** (domaine `mots-invariables`), une compétence :
+  - `FR.MOTS.INVARIABLES` — mots invariables CE2 (toujours, beaucoup, maintenant,
+    aujourd'hui, pendant, avec, dans, aussi, encore, souvent, jamais, depuis,
+    ensuite, déjà, bientôt, assez, trop…). **N1** choisir la bonne orthographe
+    parmi des propositions (les mauvaises formes sont crédibles mais le message
+    **décrit la lettre** manquante) ; jusqu'au **N4** écrire le mot dans une
+    phrase à trou (le mot est amené par un indice de sens, jamais épelé dans la
+    consigne ; la clé voix `mot:<mot>` est prête pour une future dictée orale).
+
+Le **serveur** est seul juge (`verif_lexique`, op `lex`) : il compare la saisie
+normalisée (qcm → `normaliser_lettres` ; clic/texte → `normaliser_mot` ; **accents
+exigés**) à la réponse attendue de `public.lexique_item` (miroir de
+`frontend/src/domain/francais/lexique.ts`, test croisé `lexique_test.sql` +
+golden vitest `lexique.test.ts`, 120 items).
+
+Progression des formats (identique à la grammaire) : **N1** QCM, **N2** clic ou
+QCM, **N3** clic ou QCM (plus de distracteurs), **N4** réponse **libre** tapée.
+Escalier + EMA comme les autres compétences.
+
+## Deux messages de situation (affichage toujours valorisant)
+
+- **Bonne réponse** : « Bravo ! C'est la bonne réponse. »
+- **Réponse fausse** : « Ce n'est pas tout à fait ça. Regarde la réponse. »
+
+La bonne réponse est montrée avec une **explication courte et concrète** (champ
+`explication`), rédigée **pour l'oral** (aucun symbole, un exemple à chaque fois,
+jamais deux formes homophones opposées). Exemples :
+
+- **ordre alphabétique** : « a vient avant c et avant p, donc arbre est le
+  premier. »
+- **familles de mots** : « La famille de dent parle des dents. dentiste est de la
+  même famille, c'est la personne qui soigne les dents. »
+- **contraire par préfixe** : « On ajoute mal devant heureux pour dire le
+  contraire : malheureux. »
+- **mot invariable (lettre décrite)** : « Dans beaucoup, on écrit b, e, a, u, puis
+  coup avec un p à la fin qu'on n'entend pas. » ; « À la fin de toujours, il y a un
+  s qu'on n'entend pas. »
+
+Les consignes, explications et mots dictés (N4) sont au catalogue voix
+(`tools/tts/data/phrases.json`, section `lexique`, aucun audio généré pour
+l'instant).
+
+---
+
 # Indices (bouton « Indice », niveaux 1 et 2)
 
 Bouton **Indice** (icône Lucide Lightbulb) affiché **aux niveaux 1 et 2

@@ -39,6 +39,7 @@ import {
 } from "./passe-compose";
 import { normaliser } from "../diagnostic/lettres";
 import { itemsDe } from "./grammaire";
+import { itemsLexiqueDe } from "./lexique";
 
 // Temps « etendu » : les 3 temps simples + le passe compose.
 type Temps4 = Temps | "pc";
@@ -271,20 +272,25 @@ export function buildFrancaisDictee(src: ExCalcul, base: Base): GeneratedExercis
 // <Grammaire> rend l'item (QCM / clic / texte) ; le serveur (verif_grammaire)
 // est seul juge via la cle de l'item. Repli robuste si aucun item (ne devrait
 // pas arriver, le referentiel ne cree l'exercice que si des items existent).
-export function buildFrancaisGrammaire(src: ExCalcul, rng: Rng, base: Base): GeneratedExercise {
-  const choix = itemsDe(src.competence, src.niveau);
-  const item = choix.length > 0 ? pick(rng, choix) : null;
+// Construit un exercice a partir d'un item (grammaire OU lexique) : meme rendu
+// (QCM / clic / texte via le composant <Grammaire>, champ `gram`), seul l'op de
+// verification serveur change ('gram' pour la grammaire, 'lex' pour le lexique).
+// Factorise pour ne pas dupliquer la logique entre grammaire et lexique.
+function buildFromItem(
+  items: GramLike[], op: "gram" | "lex", repli: string, rng: Rng, base: Base
+): GeneratedExercise {
+  const item = items.length > 0 ? pick(rng, items) : null;
   if (!item) {
     return {
       ...base,
       forme: "grammaire",
       support: "aucun",
       saisie: "grammaire",
-      prompt: "Grammaire",
+      prompt: repli,
       answer: 0,
       reste: null,
       fields: 1,
-      verif: { op: "gram", a: 0, b: 0, cle: "" },
+      verif: { op, a: 0, b: 0, cle: "" },
       correction: "",
     };
   }
@@ -306,9 +312,28 @@ export function buildFrancaisGrammaire(src: ExCalcul, rng: Rng, base: Base): Gen
       attendu: item.attendu,
       explication: item.explication,
     },
-    verif: { op: "gram", a: 0, b: 0, cle: item.cle },
+    verif: { op, a: 0, b: 0, cle: item.cle },
     correction: item.explication,
   };
+}
+
+// Forme minimale partagee par un item de grammaire et de lexique.
+type GramLike = {
+  cle: string; format: "qcm" | "clic" | "texte"; consigne: string; phrase: string;
+  options?: string[]; attendu: string; explication: string;
+};
+
+export function buildFrancaisGrammaire(src: ExCalcul, rng: Rng, base: Base): GeneratedExercise {
+  return buildFromItem(itemsDe(src.competence, src.niveau), "gram", "Grammaire", rng, base);
+}
+
+// =========================================================================
+// VOCABULAIRE et MOTS A SAVOIR (phase 2) : meme principe que la grammaire, mais
+// op de verification 'lex' (table public.lexique_item, competences FR.VOC.* et
+// FR.MOTS.*). Le composant <Grammaire> est reutilise tel quel.
+// =========================================================================
+export function buildFrancaisLexique(src: ExCalcul, rng: Rng, base: Base): GeneratedExercise {
+  return buildFromItem(itemsLexiqueDe(src.competence, src.niveau), "lex", "Vocabulaire", rng, base);
 }
 
 // =========================================================================
