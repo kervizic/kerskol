@@ -1,6 +1,7 @@
 // Generateur d'exercices de MESURES (TS pur, sans effet de bord).
 //
-// Couvre les competences CE2 du domaine `mesures` :
+// Couvre les competences CE2 des domaines `heure` (heure, durees) et `mesures`
+// (longueurs, masses, contenances) :
 //   * MA.MES.HEURE   : lire l'heure sur une horloge a aiguilles, l'ecrire en
 //                      chiffres, correspondance matin / apres-midi (24 h -> 12 h).
 //   * MA.MES.DUREES  : conversions h <-> min, de quelle heure a quelle heure,

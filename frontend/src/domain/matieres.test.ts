@@ -20,7 +20,18 @@ describe("catalogue matieres / sous-matieres", () => {
   it("matiereDe retrouve la matiere d'un domaine", () => {
     expect(matiereDe("conjugaison")).toBe("FR");
     expect(matiereDe("mesures")).toBe("MA");
+    expect(matiereDe("heure")).toBe("MA");
     expect(matiereDe("inconnu")).toBeUndefined();
+  });
+
+  it("« Mesures » et « Lire l'heure » sont deux sous-matieres MA distinctes", () => {
+    const ma = MATIERES.find((m) => m.code === "MA")!;
+    const mesures = ma.sousMatieres.find((s) => s.domaine === "mesures");
+    const heure = ma.sousMatieres.find((s) => s.domaine === "heure");
+    expect(mesures?.libelle).toBe("Mesures");
+    expect(heure?.libelle).toBe("Lire l'heure");
+    expect(TOUS_DOMAINES).toContain("mesures");
+    expect(TOUS_DOMAINES).toContain("heure");
   });
 });
 

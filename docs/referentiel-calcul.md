@@ -233,10 +233,15 @@ toutes lettres, vérifié par le serveur `verif_lettres` trad + 1990), `fraction
 d'une fraction : numérateur et dénominateur en deux cases séparées par une barre,
 envoie le code `num × 100 + den`). Seule la saisie finale (un entier) est envoyée.
 
-## Mesures (domaine `mesures`, migration 0027)
+## Mesures et lecture de l'heure (domaines `mesures` et `heure`, migrations 0027/0028/0040)
 
-Deux compétences, alignées sur le programme CE2 (Éduscol / programmes 2024 cycle 2 :
-lire l'heure, résoudre des problèmes de durées). **Normalisation en entiers** : une
+Depuis la migration **0040**, ces compétences sont réparties en **deux sous-matières
+réglables** : **« Lire l'heure »** (domaine `heure` : `MA.MES.HEURE`, `MA.MES.DUREES`)
+et **« Mesures »** (domaine `mesures` : `MA.MES.LONGUEURS`, `MA.MES.MASSES_CONTENANCES`).
+Les problèmes de grandeurs `MA.PB.MESURES` restent dans « Problèmes » (domaine
+`problemes`). Les compétences du tableau ci-dessous sont alignées sur le programme
+CE2 (Éduscol / programmes 2024 cycle 2 : lire l'heure, résoudre des problèmes de
+durées). **Normalisation en entiers** : une
 **heure de la journée** est normalisée en **minutes depuis minuit** (`h × 60 + m`),
 une **durée** en **minutes**. Toutes les réponses se ramènent donc aux opérations
 existantes (aucune nouvelle opération serveur).

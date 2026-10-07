@@ -7,8 +7,10 @@
 // Une competence est jouable SSI sa matiere est active ET son domaine est actif.
 // Au moins une sous-matiere doit rester active (verifie aussi cote serveur).
 //
-// Les libelles collent au programme reel : « heure » vit dans le domaine
-// `mesures`, « monnaie » dans le domaine `problemes` (cf. public.competences).
+// Les libelles collent au programme reel : « heure » et « durees » vivent dans
+// le domaine `heure` (sous-matiere « Lire l'heure »), les grandeurs (longueurs,
+// masses, contenances) dans `mesures`, et « monnaie » dans le domaine
+// `problemes` (cf. public.competences).
 
 export interface SousMatiere {
   domaine: string; // = public.competences.domaine
@@ -30,7 +32,8 @@ export const MATIERES: MatiereDef[] = [
       { domaine: "tables_multiplication", libelle: "Tables de multiplication" },
       { domaine: "calcul_pose", libelle: "Calcul posé" },
       { domaine: "problemes", libelle: "Problèmes et monnaie" },
-      { domaine: "mesures", libelle: "Mesures et heure" },
+      { domaine: "mesures", libelle: "Mesures" },
+      { domaine: "heure", libelle: "Lire l'heure" },
       { domaine: "fractions", libelle: "Fractions" },
     ],
   },
