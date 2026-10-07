@@ -314,8 +314,8 @@ BEGIN
             RAISE EXCEPTION 'dictee_contexte expose une clef interdite : %', k;
         END IF;
     END LOOP;
-    IF jsonb_array_length(v->'ordre') <> 12 THEN
-        RAISE EXCEPTION 'contexte : ordre des notions attendu 12, obtenu %', v->'ordre';
+    IF jsonb_array_length(v->'ordre') <> 14 THEN
+        RAISE EXCEPTION 'contexte : ordre des notions attendu 14, obtenu %', v->'ordre';
     END IF;
     IF (v->'ordre'->>0) <> 'pluriel' THEN
         RAISE EXCEPTION 'contexte : 1re notion attendue pluriel, obtenu %', v->'ordre'->>0;
