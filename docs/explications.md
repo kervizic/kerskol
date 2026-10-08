@@ -1170,6 +1170,34 @@ doux » du Papillon) est traité au N2. **Huit textes écartés** par le garde-f
 bienveillance (mot sensible dans le corps : « Le Loup et le Chien », « Le Cygne »,
 « Le Chêne et le Roseau »…) ne sont volontairement pas intégrés.
 
+### Lot 0065 : 3 fables récupérées (décision Manu)
+
+Parmi ces huit textes écartés, **trois sont récupérés** à la demande de Manu, avec
+un **extrait coupé aux limites de phrase** pour retirer le mot sensible (le
+garde-fou bienveillance passe désormais sur le texte affiché) :
+
+- **« Le Chêne et le Roseau »** : on s'arrête sur « L'arbre tient bon ; le roseau
+  plie. », avant le dernier vers (« …l'empire des morts »).
+- **« La Laitière et le Pot au lait »** : on s'arrête sur « Le lait tombe ; adieu
+  veau, vache, cochon, couvée. », **avant** les vers sur le mari (« En grand
+  danger d'être battue ») : aucune allusion à de la violence.
+- **« L'Ours et les deux Compagnons »** : on garde la présentation (vendre la peau
+  de l'ours avant de l'avoir) et la morale, la scène du milieu (« fait le mort »)
+  est coupée. Le verbe « tueraient » du vers de présentation est verbatim de la
+  source et n'est pas capté par le garde-fou ; il est conservé par fidélité au
+  texte du domaine public (signalé à Manu).
+
+Chaque texte reçoit **3 à 4 questions** de compréhension (mêmes règles que le lot
+0062), miroir SQL `public.comprehension_item` via la migration `0065`
+(golden 192 → 203). Les **cinq autres** textes écartés restent retirés (« Le Loup
+et le Chien », « La Souris », « Le Cygne », « Le petit nigaud et les animaux »,
+« Les Canards »).
+
+**Mots de la maîtresse (retouche lot 0).** Le gabarit de phrase N3
+« La maîtresse écrit ___ au tableau. » (univers classe) est remplacé par
+« Papa a écrit ___ sur la liste des courses. » (univers « à la maison »,
+bienveillant).
+
 ## Dictée : extraits inspirés de la bibliothèque (lot 0061)
 
 La dictée détective reçoit dix extraits courts (2 à 4 phrases, **orthographe
