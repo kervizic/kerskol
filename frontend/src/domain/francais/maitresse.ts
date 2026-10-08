@@ -208,7 +208,7 @@ export function segmenterSyllabes(mot: string): string[] {
 // mot : des porteurs neutres et valorisants.
 // --------------------------------------------------------------------------
 const GABARITS_PHRASE: string[] = [
-  "La maîtresse écrit ___ au tableau.",
+  "Papa a écrit ___ sur la liste des courses.",
   "Dans ma dictée, il y a le mot ___.",
   "Je sais écrire ___ sans me tromper.",
   "Papa ou maman me dicte le mot ___.",

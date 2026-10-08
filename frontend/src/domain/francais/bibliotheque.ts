@@ -1149,6 +1149,84 @@ export const BIBLIOTHEQUE: BiblioTexte[] = [
       { mot: "le chaume", sens: "la paille qui sert de toit à certaines maisons." },
     ],
   },
+  {
+    // LOT 0 : texte récupéré (décision Manu). Extrait COUPÉ à la limite de phrase
+    // AVANT le dernier vers (« …l'empire des morts ») pour la bienveillance :
+    // on s'arrête sur « L'arbre tient bon ; le roseau plie. ». Le corps affiché
+    // ne contient plus aucun mot interdit (garde-fou bienveillance).
+    id: "c2-050",
+    classe: "CE2",
+    titre: "Le Chêne et le Roseau",
+    oeuvre: "Fables, Livre I, 22 - Le Chêne et le Roseau",
+    auteur: "Jean de La Fontaine",
+    auteurDeces: "1695",
+    url: "https://fr.wikisource.org/wiki/Fables_de_La_Fontaine_(éd._1874)/Le_Chêne_et_le_Roseau",
+    librivoxUrl: "",
+    theme: "nature, sagesse",
+    corps: [
+      "Le chêne un jour dit au roseau :\nVous avez bien sujet d'accuser la nature ;\nUn roitelet pour vous est un pesant fardeau :\nLe moindre vent qui d'aventure\nFait rider la face de l'eau,\nVous oblige à baisser la tête ;\nCependant que mon front, au Caucase pareil,\nNon content d'arrêter les rayons du soleil,\nBrave l'effort de la tempête.\nTout vous est aquilon, tout me semble zéphyr.\nEncor si vous naissiez à l'abri du feuillage\nDont je couvre le voisinage,\nVous n'auriez pas tant à souffrir,\nJe vous défendrais de l'orage :\nMais vous naissez le plus souvent\nSur les humides bords des royaumes du vent.\nLa nature envers vous me semble bien injuste.",
+      "Votre compassion, lui répondit l'arbuste,\nPart d'un bon naturel ; mais quittez ce souci :\nLes vents me sont moins qu'à vous redoutables ;\nJe plie et ne romps pas. Vous avez jusqu'ici\nContre leurs coups épouvantables\nRésisté sans courber le dos ;\nMais attendons la fin. Comme il disait ces mots,\nDu bout de l'horizon accourt avec furie\nLe plus terrible des enfants\nQue le Nord eût portés jusque-là dans ses flancs.\nL'arbre tient bon ; le roseau plie.",
+    ],
+    glossaire: [
+      { mot: "un roitelet", sens: "un tout petit oiseau ; ici, une bien petite charge." },
+      { mot: "un fardeau", sens: "une charge lourde à porter." },
+      { mot: "l'aquilon", sens: "un vent froid et fort qui vient du nord." },
+      { mot: "le zéphyr", sens: "un vent doux et léger." },
+      { mot: "la compassion", sens: "le fait de plaindre quelqu'un, d'avoir de la peine pour lui." },
+      { mot: "plier et ne pas rompre", sens: "se courber sans se casser." },
+    ],
+  },
+  {
+    // LOT 0 : texte récupéré (décision Manu). Extrait ARRÊTÉ à la limite de phrase
+    // AVANT les vers sur le mari (« En grand danger d'être battue »), donc aucune
+    // allusion à de la violence. On s'arrête sur « Le lait tombe ; adieu veau,
+    // vache, cochon, couvée. ». Corps affiché sans mot interdit.
+    id: "c2-026",
+    classe: "CE2",
+    titre: "La Laitière et le Pot au lait",
+    oeuvre: "Fables, Livre VII, 9 - La Laitière et le Pot au lait",
+    auteur: "Jean de La Fontaine",
+    auteurDeces: "1695",
+    url: "https://fr.wikisource.org/wiki/Fables_de_La_Fontaine_(éd._1874)/La_Laitière_et_le_Pot_au_lait",
+    librivoxUrl: "",
+    theme: "rêve, nature",
+    corps: [
+      "Perrette, sur sa tête ayant un pot au lait\nBien posé sur un coussinet,\nPrétendait arriver sans encombre à la ville.\nLégère et court vêtue, elle allait à grands pas,\nAyant mis ce jour-là, pour être plus agile,\nCotillon simple et souliers plats.\nNotre laitière ainsi troussée\nComptait déjà dans sa pensée\nTout le prix de son lait ; en employait l'argent ;\nAchetait un cent d'œufs ; faisait triple couvée :\nLa chose allait à bien par son soin diligent.",
+      "Il m'est, disait-elle, facile\nD'élever des poulets autour de ma maison ;\nLe renard sera bien habile\nS'il ne m'en laisse assez pour avoir un cochon.\nLe porc à s'engraisser coûtera peu de son ;\nIl était, quand je l'eus, de grosseur raisonnable :\nJ'aurai, le revendant, de l'argent bel et bon.\nEt qui m'empêchera de mettre en notre étable,\nVu le prix dont il est, une vache et son veau,\nQue je verrai sauter au milieu du troupeau ?\nPerrette là-dessus saute aussi, transportée :\nLe lait tombe ; adieu veau, vache, cochon, couvée.",
+    ],
+    glossaire: [
+      { mot: "une laitière", sens: "une femme qui vend du lait." },
+      { mot: "un coussinet", sens: "un petit coussin posé sur la tête pour porter le pot." },
+      { mot: "un cotillon", sens: "un jupon, une jupe simple d'autrefois." },
+      { mot: "troussée", sens: "habillée de façon légère et pratique pour marcher." },
+      { mot: "une couvée", sens: "tous les poussins qui naissent en même temps des œufs d'une poule." },
+    ],
+  },
+  {
+    // LOT 0 : texte récupéré (décision Manu). Extrait ARRÊTÉ aux limites de phrase :
+    // on garde la présentation (vendre la peau de l'ours avant de l'avoir) et la
+    // morale, mais on coupe la scène du milieu (« fait le mort ») pour que le
+    // corps affiché ne contienne aucun mot interdit (garde-fou bienveillance).
+    id: "c2-075",
+    classe: "CE2",
+    titre: "L'Ours et les deux Compagnons",
+    oeuvre: "Fables, Livre V, 20 - L'Ours et les deux Compagnons",
+    auteur: "Jean de La Fontaine",
+    auteurDeces: "1695",
+    url: "https://fr.wikisource.org/wiki/Fables_de_La_Fontaine_(éd._1874)/L’Ours_et_les_deux_Compagnons",
+    librivoxUrl: "",
+    theme: "humour, sagesse",
+    corps: [
+      "Deux compagnons, pressés d'argent,\nÀ leur voisin fourreur vendirent\nLa peau d'un ours encor vivant,\nMais qu'ils tueraient bientôt, du moins à ce qu'ils dirent.\nC'était le roi des ours au compte de ces gens.",
+      "Trouvent l'ours qui s'avance et vient vers eux au trot,\nVoilà mes gens frappés comme d'un coup de foudre.\nL'un des deux compagnons grimpe au faîte d'un arbre.",
+      "Il m'a dit qu'il ne faut jamais\nVendre la peau de l'ours qu'on ne l'ait mis par terre.",
+    ],
+    glossaire: [
+      { mot: "un fourreur", sens: "un marchand qui vend des peaux et des fourrures pour se tenir chaud." },
+      { mot: "le faîte", sens: "le sommet, le point le plus haut (ici, le haut de l'arbre)." },
+      { mot: "un compagnon", sens: "une personne avec qui on fait quelque chose, un camarade." },
+    ],
+  },
 ];
 
 // Auteurs dans l'ordre d'affichage (regroupement de la page Bibliothèque).
