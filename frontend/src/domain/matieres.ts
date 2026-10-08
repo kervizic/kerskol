@@ -52,6 +52,15 @@ export const MATIERES: MatiereDef[] = [
       { domaine: "lecture", libelle: "Comprendre un texte" },
     ],
   },
+  {
+    // Sous-matieres ajoutees au fur et a mesure des lots (chaque `domaine` doit
+    // exister dans public.competences, sinon regler_matieres refuse l'enregistrement).
+    code: "QM",
+    libelle: "Questionner le monde",
+    sousMatieres: [
+      { domaine: "vivant", libelle: "Le vivant" },
+    ],
+  },
 ];
 
 // Tous les codes matieres / tous les domaines connus (defauts « tout actif »).

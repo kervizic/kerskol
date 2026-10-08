@@ -160,6 +160,20 @@ export const INDICES: Record<string, string> = {
     "Commence par les unités, à droite. Si le chiffre du haut est trop petit, tu empruntes une dizaine à côté.",
   "MA.POSE.MULTIPLICATION":
     "Commence par les unités, à droite, et n'oublie pas les retenues.",
+
+  // --- Questionner le monde : Le vivant -------------------------------------
+  "QM.VIVANT.CARACTERISTIQUES":
+    "Un être vivant naît, grandit, mange et aura des petits. Une chose qui ne grandit pas et ne mange pas n'est pas vivante.",
+  "QM.VIVANT.CYCLES":
+    "Cherche d'abord le tout début, par exemple l'œuf ou la graine. Puis suis ce qui grandit, étape par étape.",
+  "QM.VIVANT.CHAINES":
+    "Commence toujours par la plante. Ensuite, c'est l'animal qui la mange, puis l'animal plus grand qui mange le premier.",
+  "QM.VIVANT.PLANTES":
+    "Pense à ce qui tombe du ciel et à ce qui brille le jour. Une plante a besoin d'eau et de lumière.",
+  "QM.VIVANT.CORPS":
+    "Chaque partie du corps a un rôle. Les yeux voient, les oreilles entendent, les os tiennent le corps debout.",
+  "QM.VIVANT.HYGIENE":
+    "Pour être en forme, on mange des fruits et des légumes, on bouge, on dort assez et on se brosse les dents.",
 };
 
 // Indice d'une competence, UNIQUEMENT aux niveaux 1 et 2 (sinon null : plus

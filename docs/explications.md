@@ -849,3 +849,47 @@ colonne (« combien de billes a Nadia en tout ? » = 40 + 50), avec des nombres 
 - **Dictée détective** : deux notions d'homophones ajoutées, **`la / là`** et
   **`ou / où`** (ordre 13 et 14), avec 2 textes chacune et la faute plantée sur
   l'homophone ; familles `PAIRES` étendues côté client (QCM N2).
+
+# Nouvelle matière « Questionner le monde » (QM)
+
+Troisième matière, à côté de Maths (MA) et Français (FR), réglable dans « Mes
+matières » (enfant) et l'espace parent. Code matière `QM`. Interactions variées
+(pas seulement QCM) : `qcm`, `texte` (réponse libre, N4), `ordre` (ranger des
+étapes : cycles de vie, chaînes alimentaires, frise), `tri` (classer : vivant /
+non vivant, régimes alimentaires, solide/liquide/gaz…), `clic` (toucher une zone
+d'une scène SVG maison : corps, planisphère, circuit, calendrier).
+
+Architecture identique à « Tableaux et graphiques » (0044) : table serveur
+`public.qm_item (cle, competence, niveau, format, attendu)`, fonction `verif_qm`,
+op dédiée `qm` dans `enregistrer_reponse`. Le serveur reste SEUL JUGE. Banque
+cliente dans `frontend/src/domain/qm/` (une banque par sous-matière), composant
+`QuestionnerLeMonde.tsx`. Test croisé front↔SQL (`qm.test.ts` + `qm_test.sql`).
+
+Normalisation (miroir client/serveur) : `qcm` → `normaliser_lettres` (accents
+gardés, casse ignorée) ; `ordre`/`tri` → comparaison structurelle (minuscule,
+espaces retirés, séparateurs `>` `=` `;` gardés) ; `clic`/`texte` →
+`normaliser_mot` (accents EXIGÉS). L'attendu d'un `ordre` = les étapes jointes
+par `>` ; celui d'un `tri` = `item=catégorie` pour chaque item, joints par `;`.
+
+## Sous-matière « Le vivant » (migration 0052)
+
+Domaine `vivant`, 6 compétences × 4 niveaux × 2 items = 48 items.
+
+- `QM.VIVANT.CARACTERISTIQUES` — vivant / non vivant, les signes du vivant
+  (naître, grandir, se nourrir, se reproduire, mourir). N1-N3 qcm/tri, N4 texte.
+- `QM.VIVANT.CYCLES` — ranger les étapes d'un cycle de vie (poule, grenouille,
+  papillon, plante à graine). N1 qcm, N2-N4 `ordre` (3 à 5 étapes).
+- `QM.VIVANT.CHAINES` — régimes (herbivore/carnivore/omnivore) et chaînes
+  alimentaires simples (qui est mangé par qui, en commençant par la plante).
+- `QM.VIVANT.PLANTES` — besoins des plantes (eau, lumière, air, terre ; racines,
+  soleil). qcm/tri puis texte au N4.
+- `QM.VIVANT.CORPS` — squelette, muscles, articulations, les 5 sens.
+- `QM.VIVANT.HYGIENE` — alimentation équilibrée, sommeil, brossage des dents,
+  activité physique. tri « bon / pas bon pour la santé » + texte au N4.
+
+Activation : matière QM et sous-matière `vivant` ajoutées ACTIVES au défaut des
+profils (`matieres_actives` défaut `{MA,QM}`) et à tous les profils existants
+(Iris incluse). Garde-fou « au moins une sous-matière jouable » intact (MA reste
+active). Les sous-matières QM suivantes (matière, objets, espace, temps) seront
+ajoutées à `matieres.ts` au fur et à mesure de leurs lots (chaque `domaine` doit
+exister en base avant d'être proposé au réglage).

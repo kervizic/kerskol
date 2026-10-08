@@ -508,6 +508,39 @@ button.kk-don__picto-row { cursor: pointer; }
 .kk-don__picto-label { min-width: 72px; font-weight: 600; }
 .kk-don__picto-imgs { display: flex; flex-wrap: wrap; gap: 4px; }
 
+/* Questionner le monde (QM) : ordre (ranger), tri (classer), scene SVG (clic). */
+.kk-qm { gap: 12px; }
+.kk-qm__scene { display: flex; justify-content: center; margin: 6px 0; width: 100%; }
+.kk-qm__scene svg { height: auto; touch-action: manipulation; }
+.kk-qm__ordre { display: flex; flex-direction: column; gap: 10px; max-width: 420px; margin: 0 auto; width: 100%; }
+.kk-qm__seq { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; min-height: 48px; }
+.kk-qm__seqitem {
+  display: flex; align-items: center; gap: 10px; min-height: 48px;
+  padding: 8px 12px; border: 2px solid var(--kk-border); border-radius: 12px;
+  background: var(--kk-surface, #fff); font-size: 1.15rem; font-weight: 600;
+}
+.kk-qm__seqitem--ok { border-color: #16a34a; }
+.kk-qm__seqitem--ko { border-color: #dc2626; }
+.kk-qm__seqvide { color: var(--kk-text); opacity: 0.7; font-style: italic; padding: 8px 2px; }
+.kk-qm__rank {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 28px; height: 28px; border-radius: 50%;
+  background: var(--kk-accent); color: var(--kk-on-accent); font-weight: 700;
+}
+.kk-qm__pool { gap: 10px; }
+.kk-qm__undo {
+  align-self: center; min-height: 44px; display: inline-flex; align-items: center; gap: 6px;
+}
+.kk-qm__tri { display: flex; flex-direction: column; gap: 10px; max-width: 460px; margin: 0 auto; width: 100%; }
+.kk-qm__trirow {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;
+  padding: 8px 12px; border: 1px solid var(--kk-border); border-radius: 12px;
+  background: var(--kk-surface, #fff);
+}
+.kk-qm__triitem { font-size: 1.1rem; font-weight: 600; flex: 1 1 40%; min-width: 120px; }
+.kk-qm__tribins { display: flex; gap: 8px; flex-wrap: wrap; }
+.kk-qm__binbtn { min-height: 44px; font-size: 1rem; text-transform: none; }
+
 /* Comprendre un texte (phase 5) : bloc de lecture SILENCIEUSE + mots cliquables. */
 .kk-lecture { gap: 12px; }
 .kk-lecture__texte {

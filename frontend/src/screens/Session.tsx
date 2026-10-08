@@ -26,6 +26,7 @@ import {
   getFrancais,
   getGeometrie,
   getDonnees,
+  getQM,
   getDicteeTextes,
   getDicteeContexte,
   enregistrerDictee,
@@ -42,6 +43,7 @@ import Grammaire from "../components/Grammaire";
 import Geometrie from "../components/Geometrie";
 import Donnees from "../components/Donnees";
 import Comprehension from "../components/Comprehension";
+import QuestionnerLeMonde from "../components/QuestionnerLeMonde";
 import MaitresseExo, { type MaitresseSubmit } from "../components/MaitresseExo";
 import type { MaitresseListe } from "../domain/francais/maitresse";
 import type { DicteeTexte, DicteeReponse, DicteeResultat } from "../domain/francais/dictee";
@@ -1248,7 +1250,8 @@ export function Session({
         // active (matieres_actives) : les profils existants (['MA']) sont inchanges.
         const francaisActif = (profil.matieres_actives ?? []).includes("FR");
         const mathsActif = (profil.matieres_actives ?? []).includes("MA");
-        const [progress_, sources, fr, geo, don, maitresse] = await Promise.all([
+        const qmActif = (profil.matieres_actives ?? []).includes("QM");
+        const [progress_, sources, fr, geo, don, qm, maitresse] = await Promise.all([
           getProgressionDetail(profil.id),
           getExercicesCalcul(),
           francaisActif ? getFrancais() : Promise.resolve({ competences: [], sources: [] }),
@@ -1258,6 +1261,9 @@ export function Session({
           // Tableaux et graphiques (phase 4) : sources d'exercices (matiere MA).
           // Les competences MA.DONNEES.* sont deja dans referentiel.competences.
           mathsActif ? getDonnees() : Promise.resolve([]),
+          // Questionner le monde : sources d'exercices (matiere QM). Les
+          // competences QM.* sont deja dans referentiel.competences (MA + QM).
+          qmActif ? getQM() : Promise.resolve([]),
           // Les mots de la maitresse (phase 6) : listes actives du foyer.
           francaisActif ? getMaitresse(profil.id) : Promise.resolve([]),
         ]);
@@ -1273,7 +1279,7 @@ export function Session({
           competences: [...referentiel.competences, ...fr.competences],
           prerequis: referentiel.prerequis,
           progress: progress_,
-          sources: [...sources, ...geo, ...don, ...fr.sources],
+          sources: [...sources, ...geo, ...don, ...qm, ...fr.sources],
           seed: (Date.now() ^ 0x9e3779b9) >>> 0,
           now: Date.now(),
           classe: profil.classe,
@@ -1990,6 +1996,13 @@ export function Session({
           <Donnees
             key={ex.key}
             item={ex.don}
+            onSoumettre={soumettreGrammaire}
+            onContinuer={(correct) => advance(correct, true)}
+          />
+        ) : ex.saisie === "qm" && ex.qm ? (
+          <QuestionnerLeMonde
+            key={ex.key}
+            item={ex.qm}
             onSoumettre={soumettreGrammaire}
             onContinuer={(correct) => advance(correct, true)}
           />

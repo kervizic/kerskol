@@ -25,6 +25,8 @@ import { buildFrancaisConjugaison, buildFrancaisDictee, buildFrancaisPasseCompos
 import { buildGeometrie } from "../geometrie/geometrie";
 import type { GeoFigure, GeoFormat, GeoInteract } from "../geometrie/geometrie";
 import { buildDonnees } from "../donnees/donnees";
+import { buildQm } from "../qm";
+import type { QmFormat, QmFigure } from "../qm/types";
 import type { DonFigure, DonFormat, DonInteract } from "../donnees/donnees";
 import { buildComprehension } from "../francais/comprehension";
 import type { CompFormat } from "../francais/comprehension";
@@ -50,7 +52,8 @@ export type Forme =
   | "geometrie" // maths : geometrie et reperage (figures, solides, symetrie, quadrillage, plan)
   | "donnees" // maths : tableaux et graphiques (tableau, barres, pictogramme, comparer)
   | "comprehension" // francais : comprendre un texte (info, inference, ordre, vrai/faux, sens d'un mot)
-  | "maitresse"; // francais : les mots de la maitresse (listes/textes saisis par le parent)
+  | "maitresse" // francais : les mots de la maitresse (listes/textes saisis par le parent)
+  | "qm"; // questionner le monde (vivant, matiere, objets, espace, temps)
 
 export type Support = "rectangle" | "droite" | "aucun" | null;
 
@@ -104,7 +107,11 @@ export type Saisie =
   // orthographe / memoriser puis ecrire), mot a trou, et dictee detective sur le
   // texte du foyer (reutilise <DicteeDetective>). Contenu saisi par le parent ;
   // le serveur (ops 'mmots' / 'mtrou' / 'mdictee') reste seul juge.
-  | "maitresse";
+  | "maitresse"
+  // qm -> composant autonome <QuestionnerLeMonde> : QCM, saisie libre, RANGER
+  // des etapes (ordre), CLASSER (tri), ou TOUCHER une zone d'une scene SVG
+  // maison (clic). Le serveur (verif_qm, op 'qm') reste seul juge via la cle.
+  | "qm";
 
 // Enonce normalise envoye au serveur pour revalidation. L'operation porte sur
 // deux operandes et son resultat est la reponse attendue :
@@ -139,7 +146,7 @@ export type Saisie =
 // reponse est du TEXTE (mot a apprendre, mot a trou) ou une liste de positions
 // (dictee) ; `cle` porte l'id de la liste du foyer (p_op2), `a` l'index 1-base
 // du mot (mmots / mtrou). Verification serveur uniquement (ops dediees).
-export type VerifOp = "add" | "sub" | "mul" | "div" | "cmp" | "val" | "lettres" | "conj" | "dictee" | "gram" | "lex" | "geo" | "don" | "lire" | "mmots" | "mtrou" | "mdictee";
+export type VerifOp = "add" | "sub" | "mul" | "div" | "cmp" | "val" | "lettres" | "conj" | "dictee" | "gram" | "lex" | "geo" | "don" | "lire" | "mmots" | "mtrou" | "mdictee" | "qm";
 export type VerifOp2 = "add" | "sub" | "mul" | "div" | "rsub";
 export interface Verif {
   op: VerifOp;
@@ -195,6 +202,10 @@ function applyOp(op: VerifOp, a: number, b: number): { answer: number; reste: nu
     case "lire":
       // Comprehension de texte : la reponse est du TEXTE (p_reponse_texte) ;
       // a = 0 (invariant answer=a). Verification serveur (verif_comprehension) via la cle.
+      return { answer: a, reste: null };
+    case "qm":
+      // Questionner le monde : la reponse est du TEXTE (p_reponse_texte) ;
+      // a = 0 (invariant answer=a). Verification serveur (verif_qm) via la cle.
       return { answer: a, reste: null };
     case "mmots":
     case "mtrou":
@@ -467,6 +478,20 @@ export interface GeneratedExercise {
     niveau: number;
     kind: "mots" | "dictee"; // FR.MAITRESSE.MOTS vs FR.MAITRESSE.DICTEE
   };
+  // Questionner le monde : item choisi par le generateur (reproductible via la
+  // graine). Le composant <QuestionnerLeMonde> le rend (QCM / texte / ordre /
+  // tri / clic sur une scene SVG) ; le serveur (verif_qm, op 'qm') juge via
+  // `cle`. `attendu` sert au feedback local et au mode demo.
+  qm?: {
+    cle: string;
+    format: QmFormat;
+    consigne: string;
+    options?: string[];
+    bins?: string[];
+    attendu: string;
+    explication: string;
+    figure?: QmFigure;
+  };
   poseData?: PoseData; // mode pose
   chiffresData?: ChiffresData; // mode chiffres (decomposition)
   droiteData?: DroiteData; // mode droite
@@ -628,6 +653,10 @@ function buildExercise(
   // --- Maths : tableaux et graphiques (phase 4) -------------------------
   if (src.competence.startsWith("MA.DONNEES.")) {
     return buildDonnees(src, rng, base);
+  }
+  // --- Questionner le monde (vivant, matiere, objets, espace, temps) ----
+  if (src.competence.startsWith("QM.")) {
+    return buildQm(src, rng, base);
   }
   // --- Numeration : lire/ecrire, decomposer, comparer, suite ------------
   if (src.competence.startsWith("MA.NUM.")) {

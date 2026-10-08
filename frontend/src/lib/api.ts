@@ -12,6 +12,7 @@ import type { MaitresseListe } from "../domain/francais/maitresse";
 import { estJusteGrammaire } from "../domain/francais/grammaire";
 import { estJusteGeometrie } from "../domain/geometrie/geometrie";
 import { estJusteDonnees } from "../domain/donnees/donnees";
+import { estJusteQm } from "../domain/qm";
 import {
   isDemo,
   DEMO_COMPETENCES,
@@ -387,7 +388,7 @@ export async function getReferentiel(): Promise<Referentiel> {
     sb
       .from("competences")
       .select("code, matiere, domaine, libelle, ordre, nb_niveaux, actif")
-      .eq("matiere", "MA")
+      .in("matiere", ["MA", "QM"])
       .order("ordre", { ascending: true }),
     sb.from("competence_prerequis").select("competence, prerequis, niveau_min"),
   ]);
@@ -597,6 +598,37 @@ export async function getDonnees(): Promise<ExCalcul[]> {
       methode: (e.methode as string | null) ?? null,
       operation: "don",
       forme: "donnees" as Forme,
+      params: {},
+      support: null,
+      correctionStrategie: null,
+    }));
+  } catch {
+    return [];
+  }
+}
+
+// Catalogue des exercices « QUESTIONNER LE MONDE » (matiere QM, type 'qm').
+// Comme la geometrie / les donnees, la GENERATION est faite cote client (banque
+// domain/qm) ; les lignes `exercices` ne fournissent que l'identite (exercice_id
+// deterministe, competence, niveau, methode). L'op de verification serveur est
+// 'qm'. Les competences (QM.*) sont deja chargees par getReferentiel (MA + QM).
+// Repli silencieux : [] si lecture impossible.
+export async function getQM(): Promise<ExCalcul[]> {
+  if (isDemo()) return [];
+  try {
+    const { data, error } = await supabase()
+      .from("exercices")
+      .select("id, competence, niveau, methode")
+      .eq("type", "qm")
+      .eq("actif", true);
+    if (error) throw error;
+    return (data ?? []).map((e): ExCalcul => ({
+      exerciceId: e.id as string,
+      competence: e.competence as string,
+      niveau: e.niveau as number,
+      methode: (e.methode as string | null) ?? null,
+      operation: "qm",
+      forme: "qm" as Forme,
       params: {},
       support: null,
       correctionStrategie: null,
@@ -871,6 +903,8 @@ export async function insertReponse(row: ReponseInsert): Promise<ReponseResult> 
         ? estJusteGeometrie(row.cle ?? "", row.reponse_texte ?? "")
         : row.op === "don"
         ? estJusteDonnees(row.cle ?? "", row.reponse_texte ?? "")
+        : row.op === "qm"
+        ? estJusteQm(row.cle ?? "", row.reponse_texte ?? "")
         : row.op === "lettres"
         ? estJuste(row.a, row.reponse_texte ?? "")
         : row.op === "conj"
