@@ -9,6 +9,7 @@ import { BANQUE_VIVANT, COMPETENCES_VIVANT } from "./vivant";
 import { BANQUE_MATIERE, COMPETENCES_MATIERE } from "./matiere";
 import { BANQUE_OBJETS, COMPETENCES_OBJETS } from "./objets";
 import { BANQUE_ESPACE, COMPETENCES_ESPACE } from "./espace";
+import { BANQUE_TEMPS, COMPETENCES_TEMPS } from "./temps";
 
 export * from "./types";
 
@@ -18,6 +19,7 @@ export const BANQUE_QM: QmItem[] = [
   ...BANQUE_MATIERE,
   ...BANQUE_OBJETS,
   ...BANQUE_ESPACE,
+  ...BANQUE_TEMPS,
 ];
 
 // Competences QM, dans l'ordre d'affichage du referentiel.
@@ -26,6 +28,7 @@ export const COMPETENCES_QM = [
   ...COMPETENCES_MATIERE,
   ...COMPETENCES_OBJETS,
   ...COMPETENCES_ESPACE,
+  ...COMPETENCES_TEMPS,
 ] as const;
 
 // Items jouables pour une competence et un niveau donnes.

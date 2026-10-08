@@ -67,7 +67,12 @@ BEGIN
         ('qm-esp-pla-n2-a','QM.ESPACE.PLANETE',2,'clic','l''Afrique'),
         ('qm-esp-car-n2-a','QM.ESPACE.CARDINAUX',2,'clic','le nord'),
         ('qm-esp-pay-n2-a','QM.ESPACE.PAYSAGES',2,'tri','beaucoup d''immeubles=la ville;des champs=la campagne;beaucoup de voitures=la ville;des vaches dans un pré=la campagne'),
-        ('qm-esp-fra-n4-a','QM.ESPACE.FRANCE',4,'texte','Paris')
+        ('qm-esp-fra-n4-a','QM.ESPACE.FRANCE',4,'texte','Paris'),
+        ('qm-tps-cal-n2-a','QM.TEMPS.CALENDRIER',2,'clic','mercredi'),
+        ('qm-tps-fri-n4-a','QM.TEMPS.FRISE',4,'ordre','le printemps>l''été>l''automne>l''hiver'),
+        ('qm-tps-gen-n2-a','QM.TEMPS.GENERATIONS',2,'ordre','le grand-père>le père>l''enfant'),
+        ('qm-tps-aut-n2-a','QM.TEMPS.AUTREFOIS',2,'tri','la plume et l''encre=autrefois;l''ordinateur=aujourd''hui;la bougie=autrefois;la lampe électrique=aujourd''hui'),
+        ('qm-tps-jou-n4-b','QM.TEMPS.JOURNUIT',4,'texte','tourne')
     ) AS t(cle, competence, niveau, format, attendu)
     LOOP
         SELECT format || '|' || attendu INTO got FROM public.qm_item WHERE cle = r.cle;

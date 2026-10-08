@@ -1,0 +1,207 @@
+// Banque « LE TEMPS » (Questionner le monde, CE2, cycle 2). Sous-matiere,
+// domaine dedie `temps` :
+//   QM.TEMPS.CALENDRIER   jours, semaines, mois, saisons, lire un calendrier ;
+//   QM.TEMPS.FRISE        frise chronologique (placer, avant/apres) ;
+//   QM.TEMPS.GENERATIONS  generations, arbre genealogique simple ;
+//   QM.TEMPS.AUTREFOIS    autrefois et aujourd'hui (objets, modes de vie, ecole) ;
+//   QM.TEMPS.JOURNUIT     alternance jour / nuit.
+//
+// NB : calendrier, saisons, frise chronologique sont ICI autorises et attendus
+// (consigne « jamais de calendrier » ANNULEE par Manu pour ce chantier).
+//
+// Scene SVG maison : monthScene (clic sur une colonne de jour du calendrier).
+// Frises = format `ordre`. Progression : N1 QCM ; N2/N3 QCM, CLIC, ORDRE ou TRI ;
+// N4 reponse LIBRE (texte) ou manipulation.
+
+import { type QmItem, ordre, tri } from "./types";
+import { monthScene } from "./scenes";
+
+export const BANQUE_TEMPS: QmItem[] = [
+  // =======================================================================
+  // QM.TEMPS.CALENDRIER — jours, semaines, mois, saisons, lire un calendrier
+  // =======================================================================
+  { cle: "qm-tps-cal-n1-a", competence: "QM.TEMPS.CALENDRIER", niveau: 1, format: "qcm",
+    consigne: "Combien y a-t-il de jours dans une semaine ?",
+    options: ["7", "5", "10"], attendu: "7",
+    explication: "Une semaine a 7 jours, de lundi à dimanche." },
+  { cle: "qm-tps-cal-n1-b", competence: "QM.TEMPS.CALENDRIER", niveau: 1, format: "qcm",
+    consigne: "Quel jour vient juste après le lundi ?",
+    options: ["mardi", "dimanche", "jeudi"], attendu: "mardi",
+    explication: "Après lundi vient mardi." },
+  { cle: "qm-tps-cal-n2-a", competence: "QM.TEMPS.CALENDRIER", niveau: 2, format: "clic",
+    consigne: "Sur le calendrier, clique sur la colonne du mercredi.",
+    attendu: "mercredi", figure: monthScene({ withDayZones: true }),
+    explication: "Mercredi est le troisième jour de la semaine, après lundi et mardi." },
+  { cle: "qm-tps-cal-n2-b", competence: "QM.TEMPS.CALENDRIER", niveau: 2, format: "qcm",
+    consigne: "Combien y a-t-il de mois dans une année ?",
+    options: ["12", "7", "30"], attendu: "12",
+    explication: "Une année a 12 mois, de janvier à décembre." },
+  { cle: "qm-tps-cal-n3-a", competence: "QM.TEMPS.CALENDRIER", niveau: 3, format: "qcm",
+    consigne: "Le 1er du mois est un lundi. Quel jour sera le 8 ?",
+    options: ["lundi", "mardi", "dimanche"], attendu: "lundi",
+    explication: "Le 8, c'est 7 jours après le 1er : une semaine entière plus tard, donc encore un lundi." },
+  { cle: "qm-tps-cal-n3-b", competence: "QM.TEMPS.CALENDRIER", niveau: 3, format: "clic",
+    consigne: "Sur le calendrier, clique sur la colonne du samedi.",
+    attendu: "samedi", figure: monthScene({ withDayZones: true }),
+    explication: "Samedi est juste avant dimanche : c'est le week-end." },
+  { cle: "qm-tps-cal-n4-a", competence: "QM.TEMPS.CALENDRIER", niveau: 4, format: "texte",
+    consigne: "La saison la plus froide, avec parfois de la neige, s'appelle l'... Écris le mot.",
+    attendu: "hiver",
+    explication: "L'hiver est la saison la plus froide de l'année." },
+  { cle: "qm-tps-cal-n4-b", competence: "QM.TEMPS.CALENDRIER", niveau: 4, format: "texte",
+    consigne: "Le premier mois de l'année s'appelle... Écris le mot.",
+    attendu: "janvier",
+    explication: "L'année commence par le mois de janvier." },
+
+  // =======================================================================
+  // QM.TEMPS.FRISE — avant / après, ranger dans l'ordre du temps
+  // =======================================================================
+  { cle: "qm-tps-fri-n1-a", competence: "QM.TEMPS.FRISE", niveau: 1, format: "qcm",
+    consigne: "Qu'est-ce qui vient avant dans la journée ?",
+    options: ["le matin", "le soir"], attendu: "le matin",
+    explication: "Dans la journée, le matin vient avant le soir." },
+  { cle: "qm-tps-fri-n1-b", competence: "QM.TEMPS.FRISE", niveau: 1, format: "qcm",
+    consigne: "Hier et demain : lequel est déjà passé ?",
+    options: ["hier", "demain"], attendu: "hier",
+    explication: "Hier est déjà passé. Demain n'est pas encore arrivé." },
+  { cle: "qm-tps-fri-n2-a", competence: "QM.TEMPS.FRISE", niveau: 2, format: "ordre",
+    consigne: "Range les moments de la journée dans l'ordre.",
+    ...ordre(["le matin", "le midi", "le soir"]),
+    explication: "D'abord le matin, puis le midi, puis le soir." },
+  { cle: "qm-tps-fri-n2-b", competence: "QM.TEMPS.FRISE", niveau: 2, format: "ordre",
+    consigne: "Range ces trois mots dans l'ordre du temps.",
+    ...ordre(["hier", "aujourd'hui", "demain"]),
+    explication: "Hier est passé, aujourd'hui c'est maintenant, demain n'est pas encore là." },
+  { cle: "qm-tps-fri-n3-a", competence: "QM.TEMPS.FRISE", niveau: 3, format: "ordre",
+    consigne: "Range dans l'ordre les étapes pour faire un gâteau.",
+    ...ordre(["on prépare la pâte", "on fait cuire au four", "on mange le gâteau"]),
+    explication: "D'abord on prépare la pâte, puis on fait cuire au four, puis on mange." },
+  { cle: "qm-tps-fri-n3-b", competence: "QM.TEMPS.FRISE", niveau: 3, format: "ordre",
+    consigne: "Range ces moments d'une journée d'école dans l'ordre.",
+    ...ordre(["le réveil", "l'école", "le coucher"]),
+    explication: "Le matin le réveil, puis l'école dans la journée, puis le coucher le soir." },
+  { cle: "qm-tps-fri-n4-a", competence: "QM.TEMPS.FRISE", niveau: 4, format: "ordre",
+    consigne: "Range les saisons dans l'ordre de l'année.",
+    ...ordre(["le printemps", "l'été", "l'automne", "l'hiver"]),
+    explication: "L'année suit les saisons : le printemps, l'été, l'automne, puis l'hiver." },
+  { cle: "qm-tps-fri-n4-b", competence: "QM.TEMPS.FRISE", niveau: 4, format: "ordre",
+    consigne: "Range les âges de la vie dans l'ordre.",
+    ...ordre(["le bébé", "l'enfant", "l'adolescent", "l'adulte"]),
+    explication: "On grandit : d'abord bébé, puis enfant, puis adolescent, puis adulte." },
+
+  // =======================================================================
+  // QM.TEMPS.GENERATIONS — generations, arbre genealogique
+  // =======================================================================
+  { cle: "qm-tps-gen-n1-a", competence: "QM.TEMPS.GENERATIONS", niveau: 1, format: "qcm",
+    consigne: "Qui est le plus âgé dans une famille ?",
+    options: ["le grand-père", "l'enfant", "le bébé"], attendu: "le grand-père",
+    explication: "Le grand-père est le plus âgé : c'est le papa du papa ou de la maman." },
+  { cle: "qm-tps-gen-n1-b", competence: "QM.TEMPS.GENERATIONS", niveau: 1, format: "qcm",
+    consigne: "Le papa de ton papa, c'est ton...",
+    options: ["grand-père", "frère", "cousin"], attendu: "grand-père",
+    explication: "Le papa de ton papa (ou de ta maman) est ton grand-père." },
+  { cle: "qm-tps-gen-n2-a", competence: "QM.TEMPS.GENERATIONS", niveau: 2, format: "ordre",
+    consigne: "Range la famille du plus âgé au plus jeune.",
+    ...ordre(["le grand-père", "le père", "l'enfant"]),
+    explication: "Le grand-père, puis le père, puis l'enfant : trois générations." },
+  { cle: "qm-tps-gen-n2-b", competence: "QM.TEMPS.GENERATIONS", niveau: 2, format: "qcm",
+    consigne: "La maman de ta maman, c'est ta...",
+    options: ["grand-mère", "sœur", "tante"], attendu: "grand-mère",
+    explication: "La maman de ta maman (ou de ton papa) est ta grand-mère." },
+  { cle: "qm-tps-gen-n3-a", competence: "QM.TEMPS.GENERATIONS", niveau: 3, format: "qcm",
+    consigne: "Les parents de tes parents sont tes...",
+    options: ["grands-parents", "cousins", "voisins"], attendu: "grands-parents",
+    explication: "Les parents de tes parents sont tes grands-parents." },
+  { cle: "qm-tps-gen-n3-b", competence: "QM.TEMPS.GENERATIONS", niveau: 3, format: "ordre",
+    consigne: "Range les générations, de la plus ancienne à la plus récente.",
+    ...ordre(["les grands-parents", "les parents", "les enfants"]),
+    explication: "Les grands-parents sont nés avant les parents, qui sont nés avant les enfants." },
+  { cle: "qm-tps-gen-n4-a", competence: "QM.TEMPS.GENERATIONS", niveau: 4, format: "texte",
+    consigne: "Les parents de tes parents sont tes grands-... Écris le mot.",
+    attendu: "parents",
+    explication: "Les parents de tes parents sont tes grands-parents." },
+  { cle: "qm-tps-gen-n4-b", competence: "QM.TEMPS.GENERATIONS", niveau: 4, format: "texte",
+    consigne: "Le frère de ton papa ou de ta maman est ton... Écris le mot.",
+    attendu: "oncle",
+    explication: "Le frère de ton papa ou de ta maman est ton oncle." },
+
+  // =======================================================================
+  // QM.TEMPS.AUTREFOIS — autrefois et aujourd'hui
+  // =======================================================================
+  { cle: "qm-tps-aut-n1-a", competence: "QM.TEMPS.AUTREFOIS", niveau: 1, format: "qcm",
+    consigne: "Avec quoi écrivait-on à l'école autrefois, avant le stylo ?",
+    options: ["une plume", "un ordinateur", "un téléphone"], attendu: "une plume",
+    explication: "Autrefois, à l'école, on écrivait avec une plume trempée dans l'encre." },
+  { cle: "qm-tps-aut-n1-b", competence: "QM.TEMPS.AUTREFOIS", niveau: 1, format: "qcm",
+    consigne: "Autrefois, avant l'électricité, avec quoi s'éclairait-on ?",
+    options: ["une bougie", "une lampe électrique", "une télé"], attendu: "une bougie",
+    explication: "Avant l'électricité, on s'éclairait avec des bougies ou des lampes à huile." },
+  { cle: "qm-tps-aut-n2-a", competence: "QM.TEMPS.AUTREFOIS", niveau: 2, format: "tri",
+    consigne: "Classe chaque objet : autrefois ou aujourd'hui ?",
+    ...tri(["autrefois", "aujourd'hui"], [["la plume et l'encre", "autrefois"], ["l'ordinateur", "aujourd'hui"], ["la bougie", "autrefois"], ["la lampe électrique", "aujourd'hui"]]),
+    explication: "La plume et la bougie, c'est autrefois. L'ordinateur et la lampe électrique, c'est aujourd'hui." },
+  { cle: "qm-tps-aut-n2-b", competence: "QM.TEMPS.AUTREFOIS", niveau: 2, format: "qcm",
+    consigne: "Autrefois, pour laver le linge, où allait-on ?",
+    options: ["au lavoir", "au supermarché", "au cinéma"], attendu: "au lavoir",
+    explication: "Autrefois, on lavait le linge à la main au lavoir, près de la rivière." },
+  { cle: "qm-tps-aut-n3-a", competence: "QM.TEMPS.AUTREFOIS", niveau: 3, format: "tri",
+    consigne: "Classe chaque chose : autrefois ou aujourd'hui ?",
+    ...tri(["autrefois", "aujourd'hui"], [["le cheval pour voyager", "autrefois"], ["la voiture", "aujourd'hui"], ["la lettre par la poste", "autrefois"], ["le message sur un écran", "aujourd'hui"]]),
+    explication: "Le cheval et la lettre, c'est plutôt autrefois. La voiture et le message sur écran, c'est aujourd'hui." },
+  { cle: "qm-tps-aut-n3-b", competence: "QM.TEMPS.AUTREFOIS", niveau: 3, format: "qcm",
+    consigne: "Dans l'école d'autrefois, sur quoi les élèves écrivaient-ils ?",
+    options: ["une ardoise", "une tablette tactile", "une télévision"], attendu: "une ardoise",
+    explication: "Autrefois, les élèves écrivaient à la craie sur une ardoise." },
+  { cle: "qm-tps-aut-n4-a", competence: "QM.TEMPS.AUTREFOIS", niveau: 4, format: "texte",
+    consigne: "Autrefois, à l'école, on écrivait sur l'ardoise avec de la... Écris le mot.",
+    attendu: "craie",
+    explication: "On écrivait à la craie sur l'ardoise, puis on effaçait pour recommencer." },
+  { cle: "qm-tps-aut-n4-b", competence: "QM.TEMPS.AUTREFOIS", niveau: 4, format: "texte",
+    consigne: "Avant l'électricité, on s'éclairait avec une... Écris le mot.",
+    attendu: "bougie",
+    explication: "Avant l'électricité, la bougie donnait de la lumière." },
+
+  // =======================================================================
+  // QM.TEMPS.JOURNUIT — alternance jour / nuit
+  // =======================================================================
+  { cle: "qm-tps-jou-n1-a", competence: "QM.TEMPS.JOURNUIT", niveau: 1, format: "qcm",
+    consigne: "Qu'est-ce qui éclaire le ciel le jour ?",
+    options: ["le soleil", "la lune", "une bougie"], attendu: "le soleil",
+    explication: "Le jour, c'est le soleil qui éclaire le ciel." },
+  { cle: "qm-tps-jou-n1-b", competence: "QM.TEMPS.JOURNUIT", niveau: 1, format: "qcm",
+    consigne: "Qu'est-ce qu'on voit souvent dans le ciel la nuit ?",
+    options: ["la lune", "le soleil", "l'arc-en-ciel"], attendu: "la lune",
+    explication: "La nuit, on voit souvent la lune et les étoiles." },
+  { cle: "qm-tps-jou-n2-a", competence: "QM.TEMPS.JOURNUIT", niveau: 2, format: "qcm",
+    consigne: "Pourquoi fait-il jour puis nuit ?",
+    options: ["parce que la Terre tourne", "parce que le soleil s'éteint", "parce qu'on dort"], attendu: "parce que la Terre tourne",
+    explication: "La Terre tourne sur elle-même : le côté face au soleil a le jour, l'autre a la nuit." },
+  { cle: "qm-tps-jou-n2-b", competence: "QM.TEMPS.JOURNUIT", niveau: 2, format: "qcm",
+    consigne: "Quand il fait nuit chez nous, de l'autre côté de la Terre, il fait...",
+    options: ["jour", "nuit aussi", "toujours froid"], attendu: "jour",
+    explication: "Pendant qu'il fait nuit chez nous, il fait jour de l'autre côté de la Terre." },
+  { cle: "qm-tps-jou-n3-a", competence: "QM.TEMPS.JOURNUIT", niveau: 3, format: "ordre",
+    consigne: "Range dans l'ordre les moments d'une journée.",
+    ...ordre(["le lever du soleil", "le midi", "le coucher du soleil", "la nuit"]),
+    explication: "Le soleil se lève, puis c'est le midi, puis il se couche, puis vient la nuit." },
+  { cle: "qm-tps-jou-n3-b", competence: "QM.TEMPS.JOURNUIT", niveau: 3, format: "qcm",
+    consigne: "Combien de temps durent ensemble un jour et une nuit ?",
+    options: ["24 heures", "10 heures", "1 heure"], attendu: "24 heures",
+    explication: "Un jour et une nuit durent ensemble 24 heures." },
+  { cle: "qm-tps-jou-n4-a", competence: "QM.TEMPS.JOURNUIT", niveau: 4, format: "texte",
+    consigne: "L'astre qui éclaire la Terre le jour s'appelle le... Écris le mot.",
+    attendu: "soleil",
+    explication: "Le soleil éclaire la Terre le jour." },
+  { cle: "qm-tps-jou-n4-b", competence: "QM.TEMPS.JOURNUIT", niveau: 4, format: "texte",
+    consigne: "Il fait jour puis nuit parce que la Terre... sur elle-même. Écris le mot.",
+    attendu: "tourne",
+    explication: "La Terre tourne sur elle-même, ce qui fait se succéder le jour et la nuit." },
+];
+
+export const COMPETENCES_TEMPS = [
+  "QM.TEMPS.CALENDRIER",
+  "QM.TEMPS.FRISE",
+  "QM.TEMPS.GENERATIONS",
+  "QM.TEMPS.AUTREFOIS",
+  "QM.TEMPS.JOURNUIT",
+] as const;

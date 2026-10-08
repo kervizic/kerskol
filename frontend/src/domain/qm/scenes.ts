@@ -114,3 +114,36 @@ export function roseVentsScene(opts: { withZones?: boolean } = {}): QmScene {
     : [];
   return { kind: "scene", viewBox: "0 0 100 100", els, zones };
 }
+
+// --------------------------------------------------------------------------
+// Calendrier d'un mois (grille 7 colonnes = jours de la semaine). En-tete avec
+// les jours abreges, puis les numeros 1..days (debut lundi). Zones cliquables :
+// chaque COLONNE est un jour de la semaine (clic « clique sur le mercredi »).
+// --------------------------------------------------------------------------
+const JOURS_ABR = ["lun", "mar", "mer", "jeu", "ven", "sam", "dim"];
+const JOURS = ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"];
+export function monthScene(opts: { days?: number; withDayZones?: boolean } = {}): QmScene {
+  const days = opts.days ?? 28;
+  const COLW = 24;
+  const HEADH = 16;
+  const ROWH = 20;
+  const rows = Math.ceil(days / 7);
+  const H = HEADH + rows * ROWH;
+  const els: QmSceneEl[] = [];
+  for (let i = 0; i < 7; i++) {
+    els.push({ t: "rect", x: i * COLW, y: 0, w: COLW, h: HEADH, fill: "var(--kk-border)", stroke: "var(--kk-text)", sw: 0.8 });
+    els.push({ t: "text", x: i * COLW + COLW / 2, y: HEADH / 2 + 3, text: JOURS_ABR[i], fontSize: 7, fill: "var(--kk-text)" });
+  }
+  for (let d = 1; d <= days; d++) {
+    const col = (d - 1) % 7;
+    const row = Math.floor((d - 1) / 7);
+    const x = col * COLW;
+    const y = HEADH + row * ROWH;
+    els.push({ t: "rect", x, y, w: COLW, h: ROWH, fill: "none", stroke: "var(--kk-border)", sw: 0.8 });
+    els.push({ t: "text", x: x + COLW / 2, y: y + ROWH / 2 + 3, text: String(d), fontSize: 8, fill: "var(--kk-text)" });
+  }
+  const zones: QmZone[] = opts.withDayZones
+    ? JOURS.map((j, i) => ({ label: j, shape: "rect" as const, x: i * COLW, y: 0, w: COLW, h: H }))
+    : [];
+  return { kind: "scene", viewBox: `0 0 ${7 * COLW} ${H}`, els, zones };
+}

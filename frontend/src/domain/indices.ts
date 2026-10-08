@@ -206,6 +206,18 @@ export const INDICES: Record<string, string> = {
     "Le soleil se lève à l'est et se couche à l'ouest. Sur une carte, le nord est en haut.",
   "QM.ESPACE.PAYSAGES":
     "La ville a des immeubles, la campagne des champs, la montagne de hauts sommets, le littoral le bord de la mer.",
+
+  // --- Questionner le monde : Le temps --------------------------------------
+  "QM.TEMPS.CALENDRIER":
+    "Une semaine a 7 jours, une année a 12 mois. Après lundi vient mardi. Le même jour revient chaque 7 jours.",
+  "QM.TEMPS.FRISE":
+    "Cherche ce qui se passe en premier, puis ensuite. Le matin vient avant le soir, hier avant demain.",
+  "QM.TEMPS.GENERATIONS":
+    "Les grands-parents sont nés avant les parents, et les parents avant les enfants. Le plus âgé, c'est le grand-parent.",
+  "QM.TEMPS.AUTREFOIS":
+    "Autrefois, c'était il y a longtemps : la plume, la bougie, l'ardoise. Aujourd'hui : l'ordinateur, l'électricité.",
+  "QM.TEMPS.JOURNUIT":
+    "Le jour, le soleil éclaire. La nuit, on voit la lune. Il fait jour puis nuit parce que la Terre tourne.",
 };
 
 // Indice d'une competence, UNIQUEMENT aux niveaux 1 et 2 (sinon null : plus

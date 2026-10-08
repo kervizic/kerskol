@@ -19,6 +19,7 @@ import {
 import { COMPETENCES_MATIERE } from "./matiere";
 import { COMPETENCES_OBJETS } from "./objets";
 import { COMPETENCES_ESPACE } from "./espace";
+import { COMPETENCES_TEMPS } from "./temps";
 
 describe("banque QM — Le vivant", () => {
   it("48 items (6 competences x 4 niveaux x 2), cles uniques", () => {
@@ -115,6 +116,33 @@ describe("banque QM — L'espace", () => {
   });
 });
 
+describe("banque QM — Le temps", () => {
+  it("40 items (5 competences x 4 niveaux x 2)", () => {
+    const tps = BANQUE_QM.filter((i) => i.competence.startsWith("QM.TEMPS."));
+    expect(tps.length).toBe(40);
+  });
+  it("couverture des 5 competences temps x niveaux", () => {
+    for (const c of COMPETENCES_TEMPS) {
+      for (let n = 1; n <= 4; n++) expect(itemsQmDe(c, n).length, `${c} N${n}`).toBeGreaterThanOrEqual(1);
+    }
+  });
+  it("le calendrier porte une scene SVG (clic sur un jour) et la frise un ordre", () => {
+    const cal = itemQmParCle("qm-tps-cal-n2-a")!;
+    expect(cal.format).toBe("clic");
+    expect(cal.figure?.kind).toBe("scene");
+    expect(estJusteQm("qm-tps-cal-n2-a", "mercredi")).toBe(true);
+    expect(estJusteQm("qm-tps-cal-n2-a", "lundi")).toBe(false);
+    expect(estJusteQm("qm-tps-fri-n4-a", "le printemps>l'été>l'automne>l'hiver")).toBe(true);
+  });
+});
+
+describe("banque QM — totaux", () => {
+  it("192 items au total (24 competences x 8)", () => {
+    expect(BANQUE_QM.length).toBe(192);
+    expect(COMPETENCES_QM.length).toBe(24);
+  });
+});
+
 describe("comparerQm — miroir du serveur", () => {
   it("qcm : casse ignoree, accents gardes", () => {
     expect(comparerQm("qcm", "un chat", "un chat")).toBe(true);
@@ -193,6 +221,11 @@ describe("spot-check croise front <-> SQL", () => {
     ["qm-esp-car-n2-a", "clic", "le nord"],
     ["qm-esp-pay-n2-a", "tri", "beaucoup d'immeubles=la ville;des champs=la campagne;beaucoup de voitures=la ville;des vaches dans un pré=la campagne"],
     ["qm-esp-fra-n4-a", "texte", "Paris"],
+    ["qm-tps-cal-n2-a", "clic", "mercredi"],
+    ["qm-tps-fri-n4-a", "ordre", "le printemps>l'été>l'automne>l'hiver"],
+    ["qm-tps-gen-n2-a", "ordre", "le grand-père>le père>l'enfant"],
+    ["qm-tps-aut-n2-a", "tri", "la plume et l'encre=autrefois;l'ordinateur=aujourd'hui;la bougie=autrefois;la lampe électrique=aujourd'hui"],
+    ["qm-tps-jou-n4-b", "texte", "tourne"],
   ];
   it("chaque triplet correspond a la banque", () => {
     for (const [cle, format, attendu] of SPOT) {

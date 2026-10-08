@@ -945,3 +945,22 @@ Domaine `espace`, 5 compétences × 4 niveaux × 2 = 40 items.
 - `QM.ESPACE.PAYSAGES` — ville, campagne, montagne, littoral (tri).
 
 Domaine `espace` actif au défaut et sur tous les profils (Iris incluse).
+
+## Sous-matière « Le temps » (migration 0056)
+
+Domaine `temps`, 5 compétences × 4 niveaux × 2 = 40 items. (Calendrier, saisons
+et frise chronologique sont ICI autorisés et attendus.)
+
+- `QM.TEMPS.CALENDRIER` — jours, semaines, mois, saisons. Scène SVG maison
+  `monthScene` : grille d'un mois, clic sur la colonne d'un jour.
+- `QM.TEMPS.FRISE` — avant/après, ranger dans l'ordre (`ordre`) : moments de la
+  journée, étapes d'une action, saisons, âges de la vie.
+- `QM.TEMPS.GENERATIONS` — grands-parents/parents/enfants, oncle, ranger les
+  générations de la plus ancienne à la plus récente.
+- `QM.TEMPS.AUTREFOIS` — autrefois vs aujourd'hui (plume, bougie, ardoise, lavoir
+  vs ordinateur, électricité) ; tri.
+- `QM.TEMPS.JOURNUIT` — soleil/lune, la Terre tourne, 24 heures, ordre des
+  moments du jour.
+
+Domaine `temps` actif au défaut et sur tous les profils (Iris incluse). **Fin du
+socle QM : 5 sous-matières, 24 compétences, 192 items.**

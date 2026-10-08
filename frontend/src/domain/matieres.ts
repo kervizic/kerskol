@@ -62,6 +62,7 @@ export const MATIERES: MatiereDef[] = [
       { domaine: "matiere", libelle: "La matière" },
       { domaine: "objets", libelle: "Les objets" },
       { domaine: "espace", libelle: "L'espace" },
+      { domaine: "temps", libelle: "Le temps" },
     ],
   },
 ];
