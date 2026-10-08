@@ -227,44 +227,9 @@ END $$;
 RESET ROLE;
 
 -- ===========================================================================
--- 4. Garde-fou >= 1 sous-matiere jouable (via regler_matieres / trigger 0039)
--- ===========================================================================
-SET ROLE authenticated;
-SET request.jwt.claims = :'claimsA';
-
--- 4a. EMC + respect seul -> accepte (une competence EMC.RESPECT.* est jouable).
-DO $$
-BEGIN
-    PERFORM public.regler_matieres('a0000001-0000-0000-0000-000000000000'::uuid,
-        ARRAY['EMC']::text[], ARRAY['respect']::text[]);
-    IF NOT EXISTS (SELECT 1 FROM public.profils
-                    WHERE id = 'a0000001-0000-0000-0000-000000000000'
-                      AND 'respect' = ANY (domaines_actifs)
-                      AND 'EMC' = ANY (matieres_actives)) THEN
-        RAISE EXCEPTION 'EMC + respect auraient du etre actifs';
-    END IF;
-    RAISE NOTICE 'regler_matieres EMC+respect : OK';
-END $$;
-
--- 4b. MA actif mais seul le domaine respect actif -> AUCUNE sous-matiere jouable
---     (MA n'a pas de competence domaine respect) -> refuse.
-DO $$
-BEGIN
-    PERFORM public.regler_matieres('a0000001-0000-0000-0000-000000000000'::uuid,
-        ARRAY['MA']::text[], ARRAY['respect']::text[]);
-    RAISE EXCEPTION 'un reglage sans sous-matiere jouable aurait du etre refuse';
-EXCEPTION
-    WHEN others THEN
-        IF SQLERRM NOT LIKE '%aucune_sous_matiere%' THEN
-            RAISE EXCEPTION 'erreur inattendue (attendu aucune_sous_matiere_active) : %', SQLERRM;
-        END IF;
-END $$;
-
-RESET ROLE;
-
--- ===========================================================================
--- 5. Iris : la migration a bien ajoute la matiere EMC et les 4 sous-matieres a
---    TOUS les profils (mecanisme d'ajout aux profils existants).
+-- 4. Iris : la migration a bien ajoute la matiere EMC et les 4 sous-matieres a
+--    TOUS les profils (mecanisme d'ajout aux profils existants). VERIFIE AVANT
+--    tout regler_matieres (la section 5 mute volontairement un profil de test).
 -- ===========================================================================
 DO $$
 DECLARE n integer; d text;
@@ -281,5 +246,43 @@ BEGIN
     END IF;
     RAISE NOTICE 'matiere EMC + 4 sous-matieres actives pour tous les profils : OK';
 END $$;
+
+-- ===========================================================================
+-- 5. Garde-fou >= 1 sous-matiere jouable (via regler_matieres / trigger 0039).
+--    NB : mute le profil de test A (domaines = ['respect']) -> doit rester APRES
+--    la verification « tous les profils » de la section 4.
+-- ===========================================================================
+SET ROLE authenticated;
+SET request.jwt.claims = :'claimsA';
+
+-- 5a. EMC + respect seul -> accepte (une competence EMC.RESPECT.* est jouable).
+DO $$
+BEGIN
+    PERFORM public.regler_matieres('a0000001-0000-0000-0000-000000000000'::uuid,
+        ARRAY['EMC']::text[], ARRAY['respect']::text[]);
+    IF NOT EXISTS (SELECT 1 FROM public.profils
+                    WHERE id = 'a0000001-0000-0000-0000-000000000000'
+                      AND 'respect' = ANY (domaines_actifs)
+                      AND 'EMC' = ANY (matieres_actives)) THEN
+        RAISE EXCEPTION 'EMC + respect auraient du etre actifs';
+    END IF;
+    RAISE NOTICE 'regler_matieres EMC+respect : OK';
+END $$;
+
+-- 5b. MA actif mais seul le domaine respect actif -> AUCUNE sous-matiere jouable
+--     (MA n'a pas de competence domaine respect) -> refuse.
+DO $$
+BEGIN
+    PERFORM public.regler_matieres('a0000001-0000-0000-0000-000000000000'::uuid,
+        ARRAY['MA']::text[], ARRAY['respect']::text[]);
+    RAISE EXCEPTION 'un reglage sans sous-matiere jouable aurait du etre refuse';
+EXCEPTION
+    WHEN others THEN
+        IF SQLERRM NOT LIKE '%aucune_sous_matiere%' THEN
+            RAISE EXCEPTION 'erreur inattendue (attendu aucune_sous_matiere_active) : %', SQLERRM;
+        END IF;
+END $$;
+
+RESET ROLE;
 
 ROLLBACK;
