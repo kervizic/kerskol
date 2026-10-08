@@ -59,6 +59,7 @@ export const MATIERES: MatiereDef[] = [
     libelle: "Questionner le monde",
     sousMatieres: [
       { domaine: "vivant", libelle: "Le vivant" },
+      { domaine: "matiere", libelle: "La matière" },
     ],
   },
 ];

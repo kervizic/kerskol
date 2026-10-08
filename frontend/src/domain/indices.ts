@@ -174,6 +174,16 @@ export const INDICES: Record<string, string> = {
     "Chaque partie du corps a un rôle. Les yeux voient, les oreilles entendent, les os tiennent le corps debout.",
   "QM.VIVANT.HYGIENE":
     "Pour être en forme, on mange des fruits et des légumes, on bouge, on dort assez et on se brosse les dents.",
+
+  // --- Questionner le monde : La matière ------------------------------------
+  "QM.MATIERE.ETATS":
+    "Un solide garde sa forme, comme un caillou. Un liquide coule et prend la forme du verre. Un gaz, comme l'air, est partout et invisible.",
+  "QM.MATIERE.EAU":
+    "Le froid rend l'eau dure, c'est la glace. La chaleur la change en vapeur. Pense à ce que fait le froid et ce que fait le chaud.",
+  "QM.MATIERE.MELANGES":
+    "Le sucre se cache dans l'eau, il se dissout. Le sable, lui, tombe au fond. Demande-toi si on voit encore ce qu'on a ajouté.",
+  "QM.MATIERE.AIR":
+    "On ne voit pas l'air, mais il prend de la place : il gonfle un ballon. Quand il bouge, c'est le vent.",
 };
 
 // Indice d'une competence, UNIQUEMENT aux niveaux 1 et 2 (sinon null : plus

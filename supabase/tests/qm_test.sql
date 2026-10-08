@@ -25,16 +25,19 @@ DECLARE
     r record;
     got text;
     n   integer;
+    attendu_n integer;
 BEGIN
+    -- Comptage auto-echelonne : chaque competence QM porte 8 items (4 niveaux x 2).
     SELECT count(*) INTO n FROM public.qm_item;
-    IF n <> 48 THEN
-        RAISE EXCEPTION 'qm_item : 48 items attendus, obtenu %', n;
+    SELECT count(*) * 8 INTO attendu_n FROM public.competences WHERE matiere = 'QM';
+    IF n <> attendu_n THEN
+        RAISE EXCEPTION 'qm_item : % items attendus (8 par competence QM), obtenu %', attendu_n, n;
     END IF;
 
-    FOR r IN SELECT c AS competence, nv AS niveau
-               FROM unnest(ARRAY['QM.VIVANT.CARACTERISTIQUES','QM.VIVANT.CYCLES','QM.VIVANT.CHAINES',
-                    'QM.VIVANT.PLANTES','QM.VIVANT.CORPS','QM.VIVANT.HYGIENE']) AS c,
-                    generate_series(1,4) AS nv
+    -- Couverture : chaque competence QM a au moins un item a chaque niveau 1..4.
+    FOR r IN SELECT c.code AS competence, nv AS niveau
+               FROM public.competences c, generate_series(1,4) AS nv
+              WHERE c.matiere = 'QM'
     LOOP
         IF NOT EXISTS (SELECT 1 FROM public.qm_item
                         WHERE competence = r.competence AND niveau = r.niveau) THEN
@@ -52,7 +55,11 @@ BEGIN
         ('qm-viv-cha-n3-a','QM.VIVANT.CHAINES',3,'ordre','l''herbe>le lapin>le renard'),
         ('qm-viv-pla-n4-b','QM.VIVANT.PLANTES',4,'texte','racines'),
         ('qm-viv-cor-n4-b','QM.VIVANT.CORPS',4,'texte','squelette'),
-        ('qm-viv-hyg-n4-a','QM.VIVANT.HYGIENE',4,'texte','légumes')
+        ('qm-viv-hyg-n4-a','QM.VIVANT.HYGIENE',4,'texte','légumes'),
+        ('qm-mat-eta-n3-a','QM.MATIERE.ETATS',3,'tri','le bois=solide;l''eau=liquide;l''air=gaz'),
+        ('qm-mat-eau-n4-b','QM.MATIERE.EAU',4,'ordre','la glace>l''eau liquide>la vapeur'),
+        ('qm-mat-mel-n2-a','QM.MATIERE.MELANGES',2,'tri','le sucre=se dissout;le sel=se dissout;le sable=ne se dissout pas;l''huile=ne se dissout pas'),
+        ('qm-mat-air-n4-b','QM.MATIERE.AIR',4,'texte','vent')
     ) AS t(cle, competence, niveau, format, attendu)
     LOOP
         SELECT format || '|' || attendu INTO got FROM public.qm_item WHERE cle = r.cle;

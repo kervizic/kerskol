@@ -893,3 +893,21 @@ profils (`matieres_actives` défaut `{MA,QM}`) et à tous les profils existants
 active). Les sous-matières QM suivantes (matière, objets, espace, temps) seront
 ajoutées à `matieres.ts` au fur et à mesure de leurs lots (chaque `domaine` doit
 exister en base avant d'être proposé au réglage).
+
+## Sous-matière « La matière » (migration 0053)
+
+Domaine `matiere`, 4 compétences × 4 niveaux × 2 = 32 items.
+
+- `QM.MATIERE.ETATS` — reconnaître et trier solide / liquide / gaz.
+- `QM.MATIERE.EAU` — états de l'eau et changements d'état : fusion (solide→liquide),
+  solidification (liquide→solide), évaporation (liquide→gaz), condensation
+  (gaz→liquide). N4 `ordre` : ranger du plus froid (glace) au plus chaud (vapeur).
+- `QM.MATIERE.MELANGES` — se dissout ou non (sucre/sel vs sable/huile), solution,
+  filtration pour séparer.
+- `QM.MATIERE.AIR` — l'air existe, prend de la place (ballon), le vent est de
+  l'air en mouvement.
+
+Activation : domaine `matiere` ajouté actif au défaut et à tous les profils
+(Iris incluse). La matière QM était déjà active (0052). Sous-matière ajoutée à
+`matieres.ts`. Aucun changement serveur autre que les données (réutilise `qm_item`,
+`verif_qm`, op `qm`).

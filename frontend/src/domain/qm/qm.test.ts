@@ -16,7 +16,7 @@ import {
   ordre,
   tri,
 } from "./index";
-import { COMPETENCES_VIVANT } from "./vivant";
+import { COMPETENCES_MATIERE } from "./matiere";
 
 describe("banque QM — Le vivant", () => {
   it("48 items (6 competences x 4 niveaux x 2), cles uniques", () => {
@@ -27,7 +27,7 @@ describe("banque QM — Le vivant", () => {
   });
 
   it("chaque competence a au moins un item a chaque niveau 1..4", () => {
-    for (const c of COMPETENCES_VIVANT) {
+    for (const c of COMPETENCES_QM) {
       for (let n = 1; n <= 4; n++) {
         expect(itemsQmDe(c, n).length, `${c} N${n}`).toBeGreaterThanOrEqual(1);
       }
@@ -55,6 +55,18 @@ describe("banque QM — Le vivant", () => {
   it("qcm : l'attendu est une des options", () => {
     for (const i of BANQUE_QM.filter((x) => x.format === "qcm")) {
       expect(i.options).toContain(i.attendu);
+    }
+  });
+});
+
+describe("banque QM — La matière", () => {
+  it("32 items (4 competences x 4 niveaux x 2)", () => {
+    const mat = BANQUE_QM.filter((i) => i.competence.startsWith("QM.MATIERE."));
+    expect(mat.length).toBe(32);
+  });
+  it("couverture des 4 competences matiere x niveaux", () => {
+    for (const c of COMPETENCES_MATIERE) {
+      for (let n = 1; n <= 4; n++) expect(itemsQmDe(c, n).length, `${c} N${n}`).toBeGreaterThanOrEqual(1);
     }
   });
 });
@@ -125,6 +137,10 @@ describe("spot-check croise front <-> SQL", () => {
     ["qm-viv-pla-n4-b", "texte", "racines"],
     ["qm-viv-cor-n4-b", "texte", "squelette"],
     ["qm-viv-hyg-n4-a", "texte", "légumes"],
+    ["qm-mat-eta-n3-a", "tri", "le bois=solide;l'eau=liquide;l'air=gaz"],
+    ["qm-mat-eau-n4-b", "ordre", "la glace>l'eau liquide>la vapeur"],
+    ["qm-mat-mel-n2-a", "tri", "le sucre=se dissout;le sel=se dissout;le sable=ne se dissout pas;l'huile=ne se dissout pas"],
+    ["qm-mat-air-n4-b", "texte", "vent"],
   ];
   it("chaque triplet correspond a la banque", () => {
     for (const [cle, format, attendu] of SPOT) {
