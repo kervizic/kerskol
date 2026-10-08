@@ -455,7 +455,7 @@ export const BANQUE_COMPREHENSION: CompItem[] = [
     texte: ["Comme je tenais ma perche de ligne tendue, un martin-pêcheur est venu s'y poser.",
             "Nous n'avons pas d'oiseau plus éclatant."],
     consigne: "Sur quoi le martin-pêcheur est-il venu se poser ?",
-    options: ["sur la perche de la ligne", "sur une fleur", "sur une branche morte"],
+    options: ["sur la perche de la ligne", "sur une fleur", "sur une grande branche"],
     attendu: "sur la perche de la ligne",
     explication: "Le texte dit que l'oiseau vient se poser sur la perche de la ligne que le pêcheur tenait.",
     glossaire: [
