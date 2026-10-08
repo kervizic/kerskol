@@ -1027,3 +1027,47 @@ Sous-matières et compétences (15 compétences × 4 niveaux × 2 = **120 items*
 - **Bien utiliser les écrans et Internet** (`ecrans`) : `TEMPS` (temps d'écran),
   `DONNEES` (ne pas donner ses infos, demander à un adulte), `POLITESSE` (être
   poli en ligne), `ESPRITCRITIQUE` (ne pas tout croire, vérifier).
+
+# Règle de bienveillance (décision de Manu, absolue)
+
+**TOUS les contenus montrés à l'enfant doivent être OPTIMISTES et PLEINS DE
+BIENVEILLANCE.** Rien de dramatique ni de cruel :
+
+- pas de mort (humain ou animal), pas d'animal dévoré ou tué ;
+- pas de violence, pas de peur forte, pas de sang, pas de blessure décrite ;
+- pas d'enfant malheureux, abandonné, puni durement ou moqué ;
+- pas de catastrophe.
+
+**Faits scientifiques.** Les faits nécessaires au programme restent possibles
+s'ils sont dits **avec douceur** :
+
+- Chaîne alimentaire : « le renard mange des souris pour se nourrir » est
+  acceptable, sans détail cruel (jamais « dévore », « tue », « déchiquette »).
+- Cycle de vie : on évite « mourir » au profit de « la plante se fane et laisse
+  des graines » quand c'est possible.
+- Si le programme exige « mourir » comme **caractéristique du vivant** (naître,
+  grandir, se nourrir, se reproduire, mourir), on le dit calmement (« la
+  dernière étape de la vie »), sans exemple triste, sans animal ni enfant. Seul
+  l'item `qm-viv-car-n4-a` conserve ce mot, volontairement.
+
+**Vivre ensemble (EMC).** Les situations de moquerie / harcèlement gardent leur
+message utile (apprendre à réagir) mais **sans scène cruelle décrite**, toujours
+avec une **issue positive** et le réflexe « **en parler à un adulte de
+confiance** ». De même, « blesser » n'est employé que pour les sentiments (on
+s'excuse quand on a blessé un ami), jamais une blessure physique.
+
+**Garde-fous automatiques.** Une liste de mots/expressions interdits est vérifiée
+à chaque build :
+
+- côté frontend : `frontend/src/domain/bienveillance.test.ts` (banques statiques
+  lecture / QM / EMC / grammaire / vocabulaire / données / géométrie, indices,
+  messages de correction, et énoncés de maths GÉNÉRÉS) ;
+- côté serveur : `supabase/tests/bienveillance_test.sql` (textes de la dictée
+  détective et réponses attendues de référence).
+
+La liste blanche (whitelist) est explicite et commentée dans ces deux fichiers
+(les seuls cas pédagogiques nécessaires : `qm-viv-car-n4-a` pour « mourir », le
+domaine `EMC.*` pour « moquerie » / « blesser (les sentiments) »). Les mots
+isolés de vocabulaire (« triste », « méchant », antonymes) ne sont pas interdits :
+la règle vise les **scènes**, pas le lexique nécessaire ; leur usage reste
+surveillé par la revue éditoriale.

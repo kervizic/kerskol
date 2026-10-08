@@ -5,6 +5,17 @@ sur quoi la recherche s'accorde, ce que Kerskol en retient concrètement, et les
 méthodes retenues matière par matière. Les chiffres cités renvoient tous à une
 source vérifiable listée en fin de document ; aucun n'a été estimé.
 
+## Règle de rédaction : bienveillance (décision de Manu, absolue)
+
+Tous les contenus montrés à l'enfant sont **optimistes et pleins de
+bienveillance** : pas de mort, pas de violence, pas de peur forte, pas d'enfant
+malheureux / abandonné / puni / moqué, pas de catastrophe. Les faits
+scientifiques du programme restent possibles s'ils sont dits avec douceur (voir
+le détail, la liste de mots interdits et la liste blanche dans
+`docs/explications.md`, section « Règle de bienveillance »). Cette règle est
+vérifiée automatiquement à chaque build (`bienveillance.test.ts` côté frontend,
+`bienveillance_test.sql` côté serveur).
+
 ## Principes transverses
 
 Deux techniques d'apprentissage ressortent avec une utilité forte dans la revue
