@@ -8,7 +8,7 @@
 import { describe, it, expect } from "vitest";
 import { readFileSync, existsSync, statSync } from "node:fs";
 import { resolve } from "node:path";
-import { IMAGES, ILLUSTRATIONS, illustrationPourCle, imagesCreditees } from "./images";
+import { IMAGES, ILLUSTRATIONS, illustrationPourCle, illustrationPourEnonce, imagesCreditees } from "./images";
 import { BANQUE_QM } from "./qm";
 import { BANQUE_EMC } from "./emc";
 import { BANQUE_GEOMETRIE } from "./geometrie/geometrie";
@@ -93,8 +93,19 @@ describe("illustrations libres de droit", () => {
     expect(illustrationPourCle("geo-sol-n2-ballon")?.src).toBe("/img/emoji/ballon-foot.svg");
   });
 
-  it("toutes les sources de ce lot restent du Fluent Emoji MIT (style homogene)", () => {
-    for (const info of imagesCreditees()) {
+  it("illustrationPourEnonce reconnait l'objet du probleme, sans nombre ni reponse", () => {
+    expect(illustrationPourEnonce("Maya cueille 12 pommes puis 7 pommes.")?.src).toBe("/img/emoji/pomme.svg");
+    expect(illustrationPourEnonce("Tom achète 3 livres à 4 € chacun.")?.src).toBe("/img/emoji/livre.svg");
+    expect(illustrationPourEnonce("Lila range 24 crayons dans 4 trousses.")?.src).toBe("/img/emoji/crayon.svg");
+    expect(illustrationPourEnonce("Noé a un casse-tête de 500 pièces.")?.src).toBe("/img/emoji/cassetete.svg");
+    // Equation pure (sans objet) : aucune image.
+    expect(illustrationPourEnonce("2 + 5 = [q]")).toBeNull();
+    // Pas de faux positif sur un mot plus long (« planter »).
+    expect(illustrationPourEnonce("Il va planter demain à 8 h.")).toBeNull();
+  });
+
+  it("toutes les images du registre restent du Fluent Emoji MIT (style homogene)", () => {
+    for (const info of Object.values(IMAGES)) {
       expect(info.licence, `${info.src} doit rester MIT`).toBe("MIT");
       expect(info.source.includes("Fluent"), `${info.src} doit etre du Fluent Emoji`).toBe(true);
     }

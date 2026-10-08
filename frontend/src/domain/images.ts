@@ -71,6 +71,15 @@ export const IMAGES: Record<string, ImageInfo> = {
   de:         fluent("Game die", "de.svg", "Un dé à jouer."),
   boite:      fluent("Package", "boite.svg", "Une boîte en carton."),
   ballonFoot: fluent("Soccer ball", "ballon-foot.svg", "Un ballon de football."),
+  // Problemes et monnaie — objets des enonces (MA.PB.*).
+  pomme:      fluent("Red apple", "pomme.svg", "Une pomme rouge."),
+  livre:      fluent("Closed book", "livre.svg", "Un livre fermé."),
+  crayon:     fluent("Crayon", "crayon.svg", "Un crayon de couleur."),
+  coquillage: fluent("Spiral shell", "coquillage.svg", "Un coquillage en spirale."),
+  cadeau:     fluent("Wrapped gift", "cadeau.svg", "Un cadeau emballé."),
+  jouet:      fluent("Teddy bear", "jouet.svg", "Un ours en peluche, un jouet."),
+  cahier:     fluent("Notebook", "cahier.svg", "Un cahier."),
+  cassetete:  fluent("Puzzle piece", "cassetete.svg", "Une pièce de casse-tête."),
 };
 
 // Association CLE d'item -> image. Seules ces cles affichent une illustration.
@@ -116,6 +125,51 @@ export const ILLUSTRATIONS: Record<string, string> = {
 export function illustrationPourCle(cle: string): ImageInfo | null {
   const key = ILLUSTRATIONS[cle];
   return key ? (IMAGES[key] ?? null) : null;
+}
+
+// --- Problemes et monnaie : illustration par OBJET de l'enonce --------------
+// Les problemes sont GENERES (l'objet est tire au hasard), donc l'association
+// ne se fait pas par cle d'item mais par le NOM de l'objet present dans le
+// texte. C'est purement decoratif : l'image montre l'objet, jamais un nombre
+// ni la reponse (le serveur reste seul juge, les nombres sont inchanges).
+const ENONCE_OBJETS: Array<{ mots: string[]; image: string }> = [
+  { mots: ["pomme", "pommes"], image: "pomme" },
+  { mots: ["gâteau", "gâteaux", "gateau", "gateaux"], image: "gateau" },
+  { mots: ["livre", "livres"], image: "livre" },
+  { mots: ["crayon", "crayons"], image: "crayon" },
+  { mots: ["coquillage", "coquillages"], image: "coquillage" },
+  { mots: ["cadeau", "cadeaux"], image: "cadeau" },
+  { mots: ["jouet", "jouets"], image: "jouet" },
+  { mots: ["cahier", "cahiers"], image: "cahier" },
+  { mots: ["ballon", "ballons"], image: "ballonFoot" },
+  { mots: ["casse-tête", "casse-têtes"], image: "cassetete" },
+  { mots: ["plante", "plantes"], image: "plante" },
+];
+
+// Vrai si `mot` apparait dans `texte` (deja en minuscules) comme MOT entier.
+// Bornes manuelles : on evite \b (mal defini avec les accents en JS).
+function contientMot(texte: string, mot: string): boolean {
+  let from = 0;
+  for (;;) {
+    const i = texte.indexOf(mot, from);
+    if (i < 0) return false;
+    const avant = i === 0 ? " " : texte[i - 1];
+    const apres = i + mot.length >= texte.length ? " " : texte[i + mot.length];
+    const estLettre = (c: string) => /[a-zàâäéèêëïîôöùûüçœ]/i.test(c);
+    if (!estLettre(avant) && !estLettre(apres)) return true;
+    from = i + 1;
+  }
+}
+
+// Illustration d'un enonce de probleme (ou null). Utilise par la vue calcul.
+export function illustrationPourEnonce(enonce: string): ImageInfo | null {
+  const t = enonce.toLowerCase();
+  for (const { mots, image } of ENONCE_OBJETS) {
+    for (const m of mots) {
+      if (contientMot(t, m)) return IMAGES[image] ?? null;
+    }
+  }
+  return null;
 }
 
 // Liste des images effectivement utilisees, pour la page /credits (dedupliquee).

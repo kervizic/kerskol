@@ -59,6 +59,26 @@ consigne, jamais le nom du solide attendu.
 | `img/emoji/boite.svg` | Package | solide : une boîte → pavé (Géométrie) | Une boîte en carton. |
 | `img/emoji/ballon-foot.svg` | Soccer ball | solide : un ballon → boule (Géométrie) | Un ballon de football. |
 
+## Lot 5 — Problèmes et monnaie (toujours Microsoft Fluent Emoji, MIT)
+
+Objets des énoncés affichés à côté du problème (fruits, livres, jouets…). Les
+problèmes sont générés : l'image est choisie d'après le NOM de l'objet présent
+dans l'énoncé (fonction `illustrationPourEnonce`). L'image ne montre jamais de
+nombre et ne change rien au calcul (serveur seul juge, nombres inchangés).
+
+| Fichier (dans le dépôt) | Emoji Fluent d'origine | Utilisé pour | Texte alternatif |
+| --- | --- | --- | --- |
+| `img/emoji/pomme.svg` | Red apple | énoncés avec des pommes (Problèmes) | Une pomme rouge. |
+| `img/emoji/livre.svg` | Closed book | énoncés avec des livres (Problèmes) | Un livre fermé. |
+| `img/emoji/crayon.svg` | Crayon | énoncés avec des crayons (Problèmes) | Un crayon de couleur. |
+| `img/emoji/coquillage.svg` | Spiral shell | énoncés avec des coquillages (Problèmes) | Un coquillage en spirale. |
+| `img/emoji/cadeau.svg` | Wrapped gift | énoncés avec des cadeaux (Problèmes) | Un cadeau emballé. |
+| `img/emoji/jouet.svg` | Teddy bear | énoncés avec des jouets (Problèmes/Monnaie) | Un ours en peluche, un jouet. |
+| `img/emoji/cahier.svg` | Notebook | énoncés avec des cahiers (Monnaie) | Un cahier. |
+| `img/emoji/cassetete.svg` | Puzzle piece | énoncés avec un casse-tête (Problèmes) | Une pièce de casse-tête. |
+
+(Les énoncés avec gâteaux et ballons réutilisent `gateau.svg` et `ballon-foot.svg`.)
+
 L'URL exacte de chaque emoji est reconstruite dans `images.ts`
 (`https://github.com/microsoft/fluentui-emoji/tree/main/assets/<Nom>/Flat`).
 

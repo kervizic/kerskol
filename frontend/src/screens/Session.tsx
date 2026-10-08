@@ -17,6 +17,7 @@ import {
 } from "../lib/inputMode";
 import { AvatarView } from "../domain/avatars";
 import { universDef } from "../domain/univers";
+import { illustrationPourEnonce } from "../domain/images";
 import type { Profil } from "../lib/types";
 import type { Referentiel } from "../lib/api";
 import {
@@ -502,15 +503,35 @@ function EquationView({
   inputMode: InputMode;
   onPick: (n: 1 | 2) => void;
 }) {
+  // Illustration libre de droit de l'OBJET de l'enonce (fruits, livres, jouets...).
+  // Purement decorative : elle ne montre aucun nombre, ne change pas l'enonce et
+  // n'influence pas la correction (serveur seul juge).
+  const illus = illustrationPourEnonce(prompt);
+  const illusImg = illus ? (
+    <img
+      className="kk-qm__illus"
+      src={illus.src}
+      alt={illus.alt}
+      width={64}
+      height={64}
+      loading="lazy"
+      style={{ display: "block", margin: "0 auto 8px", width: 64, height: 64 }}
+    />
+  ) : null;
   if (!prompt.includes("[q]") && !prompt.includes("[r]")) {
     return (
-      <div className="kk-enonce" aria-live="polite">
-        {prompt}
-      </div>
+      <>
+        {illusImg}
+        <div className="kk-enonce" aria-live="polite">
+          {prompt}
+        </div>
+      </>
     );
   }
   const parts = prompt.split(/(\[q\]|\[r\])/).filter((p) => p !== "");
   return (
+    <>
+    {illusImg}
     <div className="kk-enonce kk-eq" aria-live="polite">
       {parts.map((p, i) => {
         if (p === "[q]" || p === "[r]") {
@@ -534,6 +555,7 @@ function EquationView({
         return <span key={i}>{p}</span>;
       })}
     </div>
+    </>
   );
 }
 
