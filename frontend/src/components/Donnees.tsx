@@ -14,6 +14,7 @@
 import { useMemo, useState } from "react";
 import { Check } from "lucide-react";
 import type { DonRender, DonTable, DonBars, DonPicto } from "../domain/donnees/donnees";
+import { imagePourSymbole } from "../domain/images";
 import { comparerDonnees } from "../domain/donnees/donnees";
 
 interface Props {
@@ -219,6 +220,8 @@ function PictoView({
   onPick: (label: string) => void;
   correctLabel: string | null;
 }) {
+  // Emoji coherent avec le theme du pictogramme (ou null -> dessin generique).
+  const pictoImg = imagePourSymbole(fig.symbol);
   return (
     <div className="kk-support kk-don__picto">
       <div className="kk-don__picto-inner">
@@ -233,11 +236,24 @@ function PictoView({
             <>
               <span className="kk-don__picto-label">{cat.label}</span>
               <span className="kk-don__picto-imgs" aria-label={`${cat.count} images`}>
-                {Array.from({ length: cat.count }).map((_, k) => (
-                  <svg key={k} width={22} height={22} viewBox="0 0 22 22" aria-hidden="true">
-                    <circle cx={11} cy={11} r={8} fill="var(--kk-accent)" stroke="var(--kk-text)" strokeWidth={1} />
-                  </svg>
-                ))}
+                {Array.from({ length: cat.count }).map((_, k) =>
+                  pictoImg ? (
+                    <img
+                      key={k}
+                      src={pictoImg.src}
+                      alt=""
+                      aria-hidden="true"
+                      width={22}
+                      height={22}
+                      loading="lazy"
+                      style={{ width: 22, height: 22 }}
+                    />
+                  ) : (
+                    <svg key={k} width={22} height={22} viewBox="0 0 22 22" aria-hidden="true">
+                      <circle cx={11} cy={11} r={8} fill="var(--kk-accent)" stroke="var(--kk-text)" strokeWidth={1} />
+                    </svg>
+                  ),
+                )}
               </span>
             </>
           );

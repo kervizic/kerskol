@@ -80,6 +80,10 @@ export const IMAGES: Record<string, ImageInfo> = {
   jouet:      fluent("Teddy bear", "jouet.svg", "Un ours en peluche, un jouet."),
   cahier:     fluent("Notebook", "cahier.svg", "Un cahier."),
   cassetete:  fluent("Puzzle piece", "cassetete.svg", "Une pièce de casse-tête."),
+  // Tableaux et graphiques — pictogrammes (MA.DONNEES.PICTOGRAMME).
+  fleur:      fluent("Cherry blossom", "fleur.svg", "Une fleur."),
+  glace:      fluent("Soft ice cream", "glace.svg", "Une glace en cornet."),
+  etoile:     fluent("Star", "etoile.svg", "Une étoile."),
 };
 
 // Association CLE d'item -> image. Seules ces cles affichent une illustration.
@@ -170,6 +174,25 @@ export function illustrationPourEnonce(enonce: string): ImageInfo | null {
     }
   }
   return null;
+}
+
+// --- Tableaux et graphiques : pictogrammes coherents -----------------------
+// Chaque pictogramme (DonPicto.symbol) est illustre par un emoji coherent. Quand
+// aucun emoji homogene n'existe (bille, autocollant), la vue garde son dessin
+// generique. L'image REMPLACE le symbole decoratif : elle ne change ni les
+// comptes, ni la valeur d'une image, ni la reponse (serveur seul juge).
+const SYMBOLE_IMAGES: Record<string, string> = {
+  pomme: "pomme",
+  ballon: "ballon",
+  fleur: "fleur",
+  glace: "glace",
+  "étoile": "etoile",
+  animal: "chat",
+};
+
+export function imagePourSymbole(symbol: string): ImageInfo | null {
+  const key = SYMBOLE_IMAGES[symbol];
+  return key ? (IMAGES[key] ?? null) : null;
 }
 
 // Liste des images effectivement utilisees, pour la page /credits (dedupliquee).

@@ -79,6 +79,22 @@ nombre et ne change rien au calcul (serveur seul juge, nombres inchangés).
 
 (Les énoncés avec gâteaux et ballons réutilisent `gateau.svg` et `ballon-foot.svg`.)
 
+## Lot 6 — Tableaux et graphiques : pictogrammes (toujours Microsoft Fluent Emoji, MIT)
+
+Chaque pictogramme d'un diagramme (une image vaut n objets) est dessiné avec un
+emoji cohérent avec le thème. L'image remplace seulement le symbole décoratif :
+elle ne change ni les comptes, ni la valeur d'une image, ni la réponse. Les
+symboles sans emoji homogène (billes, autocollants) gardent le dessin générique.
+
+| Fichier (dans le dépôt) | Emoji Fluent d'origine | Utilisé pour | Texte alternatif |
+| --- | --- | --- | --- |
+| `img/emoji/fleur.svg` | Cherry blossom | pictogramme « fleurs » (Données) | Une fleur. |
+| `img/emoji/glace.svg` | Soft ice cream | pictogramme « glaces » (Données) | Une glace en cornet. |
+| `img/emoji/etoile.svg` | Star | pictogramme « étoiles » (Données) | Une étoile. |
+
+(Les pictogrammes « pommes », « ballons » et « animaux » réutilisent
+`pomme.svg`, `ballon.svg` et `chat.svg`.)
+
 L'URL exacte de chaque emoji est reconstruite dans `images.ts`
 (`https://github.com/microsoft/fluentui-emoji/tree/main/assets/<Nom>/Flat`).
 

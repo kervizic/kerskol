@@ -8,7 +8,7 @@
 import { describe, it, expect } from "vitest";
 import { readFileSync, existsSync, statSync } from "node:fs";
 import { resolve } from "node:path";
-import { IMAGES, ILLUSTRATIONS, illustrationPourCle, illustrationPourEnonce, imagesCreditees } from "./images";
+import { IMAGES, ILLUSTRATIONS, illustrationPourCle, illustrationPourEnonce, imagePourSymbole, imagesCreditees } from "./images";
 import { BANQUE_QM } from "./qm";
 import { BANQUE_EMC } from "./emc";
 import { BANQUE_GEOMETRIE } from "./geometrie/geometrie";
@@ -102,6 +102,17 @@ describe("illustrations libres de droit", () => {
     expect(illustrationPourEnonce("2 + 5 = [q]")).toBeNull();
     // Pas de faux positif sur un mot plus long (« planter »).
     expect(illustrationPourEnonce("Il va planter demain à 8 h.")).toBeNull();
+  });
+
+  it("imagePourSymbole illustre les pictogrammes coherents, sinon null", () => {
+    expect(imagePourSymbole("pomme")?.src).toBe("/img/emoji/pomme.svg");
+    expect(imagePourSymbole("fleur")?.src).toBe("/img/emoji/fleur.svg");
+    expect(imagePourSymbole("glace")?.src).toBe("/img/emoji/glace.svg");
+    expect(imagePourSymbole("étoile")?.src).toBe("/img/emoji/etoile.svg");
+    expect(imagePourSymbole("animal")?.src).toBe("/img/emoji/chat.svg");
+    // Symboles sans emoji homogene : la vue garde son dessin generique.
+    expect(imagePourSymbole("bille")).toBeNull();
+    expect(imagePourSymbole("autocollant")).toBeNull();
   });
 
   it("toutes les images du registre restent du Fluent Emoji MIT (style homogene)", () => {
