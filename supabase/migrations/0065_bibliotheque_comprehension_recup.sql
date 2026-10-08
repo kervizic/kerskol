@@ -33,3 +33,8 @@ ON CONFLICT (cle) DO UPDATE SET
     niveau     = EXCLUDED.niveau,
     format     = EXCLUDED.format,
     attendu    = EXCLUDED.attendu;
+
+-- Enregistrement de la migration.
+INSERT INTO public.schema_migrations (version)
+VALUES ('0065_bibliotheque_comprehension_recup')
+ON CONFLICT (version) DO NOTHING;
