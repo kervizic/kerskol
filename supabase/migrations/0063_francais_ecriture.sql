@@ -599,7 +599,8 @@ ALTER TABLE public.profils
         'numeration','calcul_mental','tables_multiplication','calcul_pose',
         'problemes','mesures','heure','fractions','geometrie','repere','donnees',
         'grammaire','vocabulaire','mots-invariables','conjugaison','orthographe',
-        'lecture','ecriture'
+        'lecture','mots-maitresse','vivant','matiere','objets','espace','temps',
+        'respect','emotions','republique','ecrans','ecriture'
     ]::text[];
 
 UPDATE public.profils
