@@ -1,0 +1,1571 @@
+{
+  "id": "c2-027",
+  "outil": "aeneas (forced alignment, espeak-ng, CPU)",
+  "audio": {
+    "opus": "c2-027.opus",
+    "m4a": "c2-027.m4a",
+    "duree_ms": 142386
+  },
+  "mots": [
+    {
+      "mot": "Un",
+      "debut_ms": 150,
+      "fin_ms": 710,
+      "index": 0
+    },
+    {
+      "mot": "jour",
+      "debut_ms": 710,
+      "fin_ms": 1350,
+      "index": 1
+    },
+    {
+      "mot": "sur",
+      "debut_ms": 1350,
+      "fin_ms": 2470,
+      "index": 2
+    },
+    {
+      "mot": "ses",
+      "debut_ms": 2470,
+      "fin_ms": 3910,
+      "index": 3
+    },
+    {
+      "mot": "longs",
+      "debut_ms": 3910,
+      "fin_ms": 6390,
+      "index": 4
+    },
+    {
+      "mot": "pieds",
+      "debut_ms": 6390,
+      "fin_ms": 7070,
+      "index": 5
+    },
+    {
+      "mot": "allait",
+      "debut_ms": 7070,
+      "fin_ms": 7750,
+      "index": 6
+    },
+    {
+      "mot": "je",
+      "debut_ms": 7750,
+      "fin_ms": 8430,
+      "index": 7
+    },
+    {
+      "mot": "ne",
+      "debut_ms": 8430,
+      "fin_ms": 9110,
+      "index": 8
+    },
+    {
+      "mot": "sais",
+      "debut_ms": 9110,
+      "fin_ms": 9470,
+      "index": 9
+    },
+    {
+      "mot": "où",
+      "debut_ms": 9470,
+      "fin_ms": 9950,
+      "index": 10
+    },
+    {
+      "mot": "Le",
+      "debut_ms": 9950,
+      "fin_ms": 10350,
+      "index": 11
+    },
+    {
+      "mot": "héron",
+      "debut_ms": 10350,
+      "fin_ms": 10590,
+      "index": 12
+    },
+    {
+      "mot": "au",
+      "debut_ms": 10590,
+      "fin_ms": 11070,
+      "index": 13
+    },
+    {
+      "mot": "long",
+      "debut_ms": 11070,
+      "fin_ms": 11150,
+      "index": 14
+    },
+    {
+      "mot": "bec",
+      "debut_ms": 11150,
+      "fin_ms": 11550,
+      "index": 15
+    },
+    {
+      "mot": "emmanché",
+      "debut_ms": 11550,
+      "fin_ms": 12190,
+      "index": 16
+    },
+    {
+      "mot": "d’un",
+      "debut_ms": 12190,
+      "fin_ms": 12390,
+      "index": 17
+    },
+    {
+      "mot": "long",
+      "debut_ms": 12390,
+      "fin_ms": 12590,
+      "index": 18
+    },
+    {
+      "mot": "cou",
+      "debut_ms": 12590,
+      "fin_ms": 14030,
+      "index": 19
+    },
+    {
+      "mot": "Il",
+      "debut_ms": 14030,
+      "fin_ms": 14230,
+      "index": 20
+    },
+    {
+      "mot": "côtoyait",
+      "debut_ms": 14230,
+      "fin_ms": 14790,
+      "index": 21
+    },
+    {
+      "mot": "une",
+      "debut_ms": 14790,
+      "fin_ms": 14830,
+      "index": 22
+    },
+    {
+      "mot": "rivière",
+      "debut_ms": 14830,
+      "fin_ms": 16390,
+      "index": 23
+    },
+    {
+      "mot": "L’onde",
+      "debut_ms": 16390,
+      "fin_ms": 16790,
+      "index": 24
+    },
+    {
+      "mot": "était",
+      "debut_ms": 16790,
+      "fin_ms": 17070,
+      "index": 25
+    },
+    {
+      "mot": "transparente",
+      "debut_ms": 17070,
+      "fin_ms": 18470,
+      "index": 26
+    },
+    {
+      "mot": "ainsi",
+      "debut_ms": 18470,
+      "fin_ms": 18750,
+      "index": 27
+    },
+    {
+      "mot": "qu’aux",
+      "debut_ms": 18750,
+      "fin_ms": 18910,
+      "index": 28
+    },
+    {
+      "mot": "plus",
+      "debut_ms": 18910,
+      "fin_ms": 19110,
+      "index": 29
+    },
+    {
+      "mot": "beaux",
+      "debut_ms": 19110,
+      "fin_ms": 19270,
+      "index": 30
+    },
+    {
+      "mot": "jours",
+      "debut_ms": 19270,
+      "fin_ms": 20590,
+      "index": 31
+    },
+    {
+      "mot": "Ma",
+      "debut_ms": 20590,
+      "fin_ms": 20710,
+      "index": 32
+    },
+    {
+      "mot": "commère",
+      "debut_ms": 20710,
+      "fin_ms": 21070,
+      "index": 33
+    },
+    {
+      "mot": "la",
+      "debut_ms": 21070,
+      "fin_ms": 21190,
+      "index": 34
+    },
+    {
+      "mot": "carpe",
+      "debut_ms": 21190,
+      "fin_ms": 21630,
+      "index": 35
+    },
+    {
+      "mot": "y",
+      "debut_ms": 21630,
+      "fin_ms": 21710,
+      "index": 36
+    },
+    {
+      "mot": "faisait",
+      "debut_ms": 21710,
+      "fin_ms": 22030,
+      "index": 37
+    },
+    {
+      "mot": "mille",
+      "debut_ms": 22030,
+      "fin_ms": 22230,
+      "index": 38
+    },
+    {
+      "mot": "tours",
+      "debut_ms": 22230,
+      "fin_ms": 22910,
+      "index": 39
+    },
+    {
+      "mot": "Avec",
+      "debut_ms": 22910,
+      "fin_ms": 23190,
+      "index": 40
+    },
+    {
+      "mot": "le",
+      "debut_ms": 23190,
+      "fin_ms": 23310,
+      "index": 41
+    },
+    {
+      "mot": "brochet",
+      "debut_ms": 23310,
+      "fin_ms": 24030,
+      "index": 42
+    },
+    {
+      "mot": "son",
+      "debut_ms": 24030,
+      "fin_ms": 24270,
+      "index": 43
+    },
+    {
+      "mot": "compère",
+      "debut_ms": 24270,
+      "fin_ms": 25630,
+      "index": 44
+    },
+    {
+      "mot": "Le",
+      "debut_ms": 25630,
+      "fin_ms": 25710,
+      "index": 45
+    },
+    {
+      "mot": "héron",
+      "debut_ms": 25710,
+      "fin_ms": 26590,
+      "index": 46
+    },
+    {
+      "mot": "en",
+      "debut_ms": 26590,
+      "fin_ms": 26790,
+      "index": 47
+    },
+    {
+      "mot": "eût",
+      "debut_ms": 26790,
+      "fin_ms": 26870,
+      "index": 48
+    },
+    {
+      "mot": "fait",
+      "debut_ms": 26870,
+      "fin_ms": 27190,
+      "index": 49
+    },
+    {
+      "mot": "aisément",
+      "debut_ms": 27190,
+      "fin_ms": 27670,
+      "index": 50
+    },
+    {
+      "mot": "son",
+      "debut_ms": 27670,
+      "fin_ms": 27910,
+      "index": 51
+    },
+    {
+      "mot": "profit",
+      "debut_ms": 27910,
+      "fin_ms": 28430,
+      "index": 52
+    },
+    {
+      "mot": "Tous",
+      "debut_ms": 28430,
+      "fin_ms": 30070,
+      "index": 53
+    },
+    {
+      "mot": "approchaient",
+      "debut_ms": 30070,
+      "fin_ms": 30510,
+      "index": 54
+    },
+    {
+      "mot": "du",
+      "debut_ms": 30510,
+      "fin_ms": 30630,
+      "index": 55
+    },
+    {
+      "mot": "bord",
+      "debut_ms": 30630,
+      "fin_ms": 31670,
+      "index": 56
+    },
+    {
+      "mot": "l’oiseau",
+      "debut_ms": 31670,
+      "fin_ms": 32550,
+      "index": 57
+    },
+    {
+      "mot": "n’avait",
+      "debut_ms": 32550,
+      "fin_ms": 32910,
+      "index": 58
+    },
+    {
+      "mot": "qu’à",
+      "debut_ms": 32910,
+      "fin_ms": 33070,
+      "index": 59
+    },
+    {
+      "mot": "prendre",
+      "debut_ms": 33070,
+      "fin_ms": 33550,
+      "index": 60
+    },
+    {
+      "mot": "Mais",
+      "debut_ms": 33550,
+      "fin_ms": 34630,
+      "index": 61
+    },
+    {
+      "mot": "il",
+      "debut_ms": 34630,
+      "fin_ms": 34870,
+      "index": 62
+    },
+    {
+      "mot": "crut",
+      "debut_ms": 34870,
+      "fin_ms": 34910,
+      "index": 63
+    },
+    {
+      "mot": "mieux",
+      "debut_ms": 34910,
+      "fin_ms": 35310,
+      "index": 64
+    },
+    {
+      "mot": "faire",
+      "debut_ms": 35310,
+      "fin_ms": 35910,
+      "index": 65
+    },
+    {
+      "mot": "d’attendre",
+      "debut_ms": 35910,
+      "fin_ms": 36390,
+      "index": 66
+    },
+    {
+      "mot": "Qu’il",
+      "debut_ms": 36390,
+      "fin_ms": 36670,
+      "index": 67
+    },
+    {
+      "mot": "eût",
+      "debut_ms": 36670,
+      "fin_ms": 37070,
+      "index": 68
+    },
+    {
+      "mot": "un",
+      "debut_ms": 37070,
+      "fin_ms": 37190,
+      "index": 69
+    },
+    {
+      "mot": "peu",
+      "debut_ms": 37190,
+      "fin_ms": 37310,
+      "index": 70
+    },
+    {
+      "mot": "plus",
+      "debut_ms": 37310,
+      "fin_ms": 37670,
+      "index": 71
+    },
+    {
+      "mot": "d’appétit",
+      "debut_ms": 37670,
+      "fin_ms": 37990,
+      "index": 72
+    },
+    {
+      "mot": "Il",
+      "debut_ms": 37990,
+      "fin_ms": 38950,
+      "index": 73
+    },
+    {
+      "mot": "vivait",
+      "debut_ms": 38950,
+      "fin_ms": 39590,
+      "index": 74
+    },
+    {
+      "mot": "de",
+      "debut_ms": 39590,
+      "fin_ms": 39710,
+      "index": 75
+    },
+    {
+      "mot": "régime",
+      "debut_ms": 39710,
+      "fin_ms": 40510,
+      "index": 76
+    },
+    {
+      "mot": "et",
+      "debut_ms": 40510,
+      "fin_ms": 40670,
+      "index": 77
+    },
+    {
+      "mot": "mangeait",
+      "debut_ms": 40670,
+      "fin_ms": 41350,
+      "index": 78
+    },
+    {
+      "mot": "à",
+      "debut_ms": 41350,
+      "fin_ms": 42150,
+      "index": 79
+    },
+    {
+      "mot": "ses",
+      "debut_ms": 42150,
+      "fin_ms": 43630,
+      "index": 80
+    },
+    {
+      "mot": "heures",
+      "debut_ms": 43630,
+      "fin_ms": 43750,
+      "index": 81
+    },
+    {
+      "mot": "Après",
+      "debut_ms": 43750,
+      "fin_ms": 44150,
+      "index": 82
+    },
+    {
+      "mot": "quelques",
+      "debut_ms": 44150,
+      "fin_ms": 44390,
+      "index": 83
+    },
+    {
+      "mot": "moments",
+      "debut_ms": 44390,
+      "fin_ms": 45230,
+      "index": 84
+    },
+    {
+      "mot": "l’appétit",
+      "debut_ms": 45230,
+      "fin_ms": 45870,
+      "index": 85
+    },
+    {
+      "mot": "vint",
+      "debut_ms": 45870,
+      "fin_ms": 46110,
+      "index": 86
+    },
+    {
+      "mot": "l’oiseau",
+      "debut_ms": 46110,
+      "fin_ms": 47470,
+      "index": 87
+    },
+    {
+      "mot": "S’approchant",
+      "debut_ms": 47470,
+      "fin_ms": 48150,
+      "index": 88
+    },
+    {
+      "mot": "du",
+      "debut_ms": 48150,
+      "fin_ms": 48350,
+      "index": 89
+    },
+    {
+      "mot": "bord",
+      "debut_ms": 48350,
+      "fin_ms": 48830,
+      "index": 90
+    },
+    {
+      "mot": "vit",
+      "debut_ms": 48830,
+      "fin_ms": 48870,
+      "index": 91
+    },
+    {
+      "mot": "sur",
+      "debut_ms": 48870,
+      "fin_ms": 49470,
+      "index": 92
+    },
+    {
+      "mot": "l’eau",
+      "debut_ms": 49470,
+      "fin_ms": 49870,
+      "index": 93
+    },
+    {
+      "mot": "Des",
+      "debut_ms": 49870,
+      "fin_ms": 50270,
+      "index": 94
+    },
+    {
+      "mot": "tanches",
+      "debut_ms": 50270,
+      "fin_ms": 50870,
+      "index": 95
+    },
+    {
+      "mot": "qui",
+      "debut_ms": 50870,
+      "fin_ms": 51030,
+      "index": 96
+    },
+    {
+      "mot": "sortaient",
+      "debut_ms": 51030,
+      "fin_ms": 51710,
+      "index": 97
+    },
+    {
+      "mot": "du",
+      "debut_ms": 51710,
+      "fin_ms": 51910,
+      "index": 98
+    },
+    {
+      "mot": "fond",
+      "debut_ms": 51910,
+      "fin_ms": 52390,
+      "index": 99
+    },
+    {
+      "mot": "de",
+      "debut_ms": 52390,
+      "fin_ms": 52470,
+      "index": 100
+    },
+    {
+      "mot": "ces",
+      "debut_ms": 52470,
+      "fin_ms": 52710,
+      "index": 101
+    },
+    {
+      "mot": "demeures",
+      "debut_ms": 52710,
+      "fin_ms": 53310,
+      "index": 102
+    },
+    {
+      "mot": "Le",
+      "debut_ms": 53310,
+      "fin_ms": 54230,
+      "index": 103
+    },
+    {
+      "mot": "mets",
+      "debut_ms": 54230,
+      "fin_ms": 54830,
+      "index": 104
+    },
+    {
+      "mot": "ne",
+      "debut_ms": 54830,
+      "fin_ms": 55150,
+      "index": 105
+    },
+    {
+      "mot": "lui",
+      "debut_ms": 55150,
+      "fin_ms": 55270,
+      "index": 106
+    },
+    {
+      "mot": "plut",
+      "debut_ms": 55270,
+      "fin_ms": 55550,
+      "index": 107
+    },
+    {
+      "mot": "pas",
+      "debut_ms": 55550,
+      "fin_ms": 55910,
+      "index": 108
+    },
+    {
+      "mot": "il",
+      "debut_ms": 55910,
+      "fin_ms": 56470,
+      "index": 109
+    },
+    {
+      "mot": "s’attendait",
+      "debut_ms": 56470,
+      "fin_ms": 57030,
+      "index": 110
+    },
+    {
+      "mot": "à",
+      "debut_ms": 57030,
+      "fin_ms": 57350,
+      "index": 111
+    },
+    {
+      "mot": "mieux",
+      "debut_ms": 57350,
+      "fin_ms": 57710,
+      "index": 112
+    },
+    {
+      "mot": "Et",
+      "debut_ms": 57710,
+      "fin_ms": 58390,
+      "index": 113
+    },
+    {
+      "mot": "montrait",
+      "debut_ms": 58390,
+      "fin_ms": 59030,
+      "index": 114
+    },
+    {
+      "mot": "un",
+      "debut_ms": 59030,
+      "fin_ms": 59270,
+      "index": 115
+    },
+    {
+      "mot": "goût",
+      "debut_ms": 59270,
+      "fin_ms": 59390,
+      "index": 116
+    },
+    {
+      "mot": "dédaigneux",
+      "debut_ms": 59390,
+      "fin_ms": 59870,
+      "index": 117
+    },
+    {
+      "mot": "Comme",
+      "debut_ms": 59870,
+      "fin_ms": 60550,
+      "index": 118
+    },
+    {
+      "mot": "le",
+      "debut_ms": 60550,
+      "fin_ms": 60710,
+      "index": 119
+    },
+    {
+      "mot": "rat",
+      "debut_ms": 60710,
+      "fin_ms": 61190,
+      "index": 120
+    },
+    {
+      "mot": "du",
+      "debut_ms": 61190,
+      "fin_ms": 61390,
+      "index": 121
+    },
+    {
+      "mot": "bon",
+      "debut_ms": 61390,
+      "fin_ms": 61510,
+      "index": 122
+    },
+    {
+      "mot": "Horace",
+      "debut_ms": 61510,
+      "fin_ms": 62110,
+      "index": 123
+    },
+    {
+      "mot": "Moi",
+      "debut_ms": 62110,
+      "fin_ms": 63590,
+      "index": 124
+    },
+    {
+      "mot": "des",
+      "debut_ms": 63590,
+      "fin_ms": 63750,
+      "index": 125
+    },
+    {
+      "mot": "tanches",
+      "debut_ms": 63750,
+      "fin_ms": 64310,
+      "index": 126
+    },
+    {
+      "mot": "dit-il",
+      "debut_ms": 64310,
+      "fin_ms": 65310,
+      "index": 127
+    },
+    {
+      "mot": "moi",
+      "debut_ms": 65310,
+      "fin_ms": 66510,
+      "index": 128
+    },
+    {
+      "mot": "héron",
+      "debut_ms": 66510,
+      "fin_ms": 67270,
+      "index": 129
+    },
+    {
+      "mot": "que",
+      "debut_ms": 67270,
+      "fin_ms": 67310,
+      "index": 130
+    },
+    {
+      "mot": "je",
+      "debut_ms": 67310,
+      "fin_ms": 67630,
+      "index": 131
+    },
+    {
+      "mot": "fasse",
+      "debut_ms": 67630,
+      "fin_ms": 68270,
+      "index": 132
+    },
+    {
+      "mot": "Une",
+      "debut_ms": 68270,
+      "fin_ms": 68350,
+      "index": 133
+    },
+    {
+      "mot": "si",
+      "debut_ms": 68350,
+      "fin_ms": 68670,
+      "index": 134
+    },
+    {
+      "mot": "pauvre",
+      "debut_ms": 68670,
+      "fin_ms": 69030,
+      "index": 135
+    },
+    {
+      "mot": "chère",
+      "debut_ms": 69030,
+      "fin_ms": 69670,
+      "index": 136
+    },
+    {
+      "mot": "Et",
+      "debut_ms": 69670,
+      "fin_ms": 70470,
+      "index": 137
+    },
+    {
+      "mot": "pour",
+      "debut_ms": 70470,
+      "fin_ms": 70670,
+      "index": 138
+    },
+    {
+      "mot": "qui",
+      "debut_ms": 70670,
+      "fin_ms": 70990,
+      "index": 139
+    },
+    {
+      "mot": "me",
+      "debut_ms": 70990,
+      "fin_ms": 71150,
+      "index": 140
+    },
+    {
+      "mot": "prend-on",
+      "debut_ms": 71150,
+      "fin_ms": 71830,
+      "index": 141
+    },
+    {
+      "mot": "La",
+      "debut_ms": 71830,
+      "fin_ms": 73470,
+      "index": 142
+    },
+    {
+      "mot": "tanche",
+      "debut_ms": 73470,
+      "fin_ms": 73950,
+      "index": 143
+    },
+    {
+      "mot": "rebutée",
+      "debut_ms": 73950,
+      "fin_ms": 74550,
+      "index": 144
+    },
+    {
+      "mot": "il",
+      "debut_ms": 74550,
+      "fin_ms": 75310,
+      "index": 145
+    },
+    {
+      "mot": "trouva",
+      "debut_ms": 75310,
+      "fin_ms": 75830,
+      "index": 146
+    },
+    {
+      "mot": "du",
+      "debut_ms": 75830,
+      "fin_ms": 76030,
+      "index": 147
+    },
+    {
+      "mot": "goujon",
+      "debut_ms": 76030,
+      "fin_ms": 76470,
+      "index": 148
+    },
+    {
+      "mot": "Du",
+      "debut_ms": 76470,
+      "fin_ms": 78030,
+      "index": 149
+    },
+    {
+      "mot": "goujon",
+      "debut_ms": 78030,
+      "fin_ms": 78590,
+      "index": 150
+    },
+    {
+      "mot": "c’est",
+      "debut_ms": 78590,
+      "fin_ms": 79430,
+      "index": 151
+    },
+    {
+      "mot": "bien",
+      "debut_ms": 79430,
+      "fin_ms": 80070,
+      "index": 152
+    },
+    {
+      "mot": "là",
+      "debut_ms": 80070,
+      "fin_ms": 80230,
+      "index": 153
+    },
+    {
+      "mot": "le",
+      "debut_ms": 80230,
+      "fin_ms": 80270,
+      "index": 154
+    },
+    {
+      "mot": "dîner",
+      "debut_ms": 80270,
+      "fin_ms": 80510,
+      "index": 155
+    },
+    {
+      "mot": "d’un",
+      "debut_ms": 80510,
+      "fin_ms": 80670,
+      "index": 156
+    },
+    {
+      "mot": "héron",
+      "debut_ms": 80670,
+      "fin_ms": 81190,
+      "index": 157
+    },
+    {
+      "mot": "J’ouvrirais",
+      "debut_ms": 81190,
+      "fin_ms": 82830,
+      "index": 158
+    },
+    {
+      "mot": "pour",
+      "debut_ms": 82830,
+      "fin_ms": 83150,
+      "index": 159
+    },
+    {
+      "mot": "si",
+      "debut_ms": 83150,
+      "fin_ms": 83470,
+      "index": 160
+    },
+    {
+      "mot": "peu",
+      "debut_ms": 83470,
+      "fin_ms": 83670,
+      "index": 161
+    },
+    {
+      "mot": "le",
+      "debut_ms": 83670,
+      "fin_ms": 83790,
+      "index": 162
+    },
+    {
+      "mot": "bec",
+      "debut_ms": 83790,
+      "fin_ms": 84110,
+      "index": 163
+    },
+    {
+      "mot": "aux",
+      "debut_ms": 84110,
+      "fin_ms": 85230,
+      "index": 164
+    },
+    {
+      "mot": "dieux",
+      "debut_ms": 85230,
+      "fin_ms": 85590,
+      "index": 165
+    },
+    {
+      "mot": "ne",
+      "debut_ms": 85590,
+      "fin_ms": 85630,
+      "index": 166
+    },
+    {
+      "mot": "plaise",
+      "debut_ms": 85630,
+      "fin_ms": 86270,
+      "index": 167
+    },
+    {
+      "mot": "Il",
+      "debut_ms": 86270,
+      "fin_ms": 88110,
+      "index": 168
+    },
+    {
+      "mot": "l’ouvrit",
+      "debut_ms": 88110,
+      "fin_ms": 88590,
+      "index": 169
+    },
+    {
+      "mot": "pour",
+      "debut_ms": 88590,
+      "fin_ms": 88830,
+      "index": 170
+    },
+    {
+      "mot": "bien",
+      "debut_ms": 88830,
+      "fin_ms": 89030,
+      "index": 171
+    },
+    {
+      "mot": "moins",
+      "debut_ms": 89030,
+      "fin_ms": 89350,
+      "index": 172
+    },
+    {
+      "mot": "tout",
+      "debut_ms": 89350,
+      "fin_ms": 90390,
+      "index": 173
+    },
+    {
+      "mot": "alla",
+      "debut_ms": 90390,
+      "fin_ms": 90750,
+      "index": 174
+    },
+    {
+      "mot": "de",
+      "debut_ms": 90750,
+      "fin_ms": 90950,
+      "index": 175
+    },
+    {
+      "mot": "façon",
+      "debut_ms": 90950,
+      "fin_ms": 91550,
+      "index": 176
+    },
+    {
+      "mot": "Qu’il",
+      "debut_ms": 91550,
+      "fin_ms": 91750,
+      "index": 177
+    },
+    {
+      "mot": "ne",
+      "debut_ms": 91750,
+      "fin_ms": 91790,
+      "index": 178
+    },
+    {
+      "mot": "vit",
+      "debut_ms": 91790,
+      "fin_ms": 92030,
+      "index": 179
+    },
+    {
+      "mot": "plus",
+      "debut_ms": 92030,
+      "fin_ms": 92590,
+      "index": 180
+    },
+    {
+      "mot": "aucun",
+      "debut_ms": 92590,
+      "fin_ms": 92990,
+      "index": 181
+    },
+    {
+      "mot": "poisson",
+      "debut_ms": 92990,
+      "fin_ms": 93470,
+      "index": 182
+    },
+    {
+      "mot": "La",
+      "debut_ms": 93470,
+      "fin_ms": 94550,
+      "index": 183
+    },
+    {
+      "mot": "faim",
+      "debut_ms": 94550,
+      "fin_ms": 94790,
+      "index": 184
+    },
+    {
+      "mot": "le",
+      "debut_ms": 94790,
+      "fin_ms": 94990,
+      "index": 185
+    },
+    {
+      "mot": "prit",
+      "debut_ms": 94990,
+      "fin_ms": 95430,
+      "index": 186
+    },
+    {
+      "mot": "il",
+      "debut_ms": 95430,
+      "fin_ms": 96030,
+      "index": 187
+    },
+    {
+      "mot": "fut",
+      "debut_ms": 96030,
+      "fin_ms": 96790,
+      "index": 188
+    },
+    {
+      "mot": "tout",
+      "debut_ms": 96790,
+      "fin_ms": 96830,
+      "index": 189
+    },
+    {
+      "mot": "heureux",
+      "debut_ms": 96830,
+      "fin_ms": 97230,
+      "index": 190
+    },
+    {
+      "mot": "et",
+      "debut_ms": 97230,
+      "fin_ms": 97550,
+      "index": 191
+    },
+    {
+      "mot": "tout",
+      "debut_ms": 97550,
+      "fin_ms": 97710,
+      "index": 192
+    },
+    {
+      "mot": "aise",
+      "debut_ms": 97710,
+      "fin_ms": 98470,
+      "index": 193
+    },
+    {
+      "mot": "De",
+      "debut_ms": 98470,
+      "fin_ms": 98590,
+      "index": 194
+    },
+    {
+      "mot": "rencontrer",
+      "debut_ms": 98590,
+      "fin_ms": 99390,
+      "index": 195
+    },
+    {
+      "mot": "un",
+      "debut_ms": 99390,
+      "fin_ms": 99590,
+      "index": 196
+    },
+    {
+      "mot": "limaçon",
+      "debut_ms": 99590,
+      "fin_ms": 100150,
+      "index": 197
+    },
+    {
+      "mot": "Ne",
+      "debut_ms": 100150,
+      "fin_ms": 101910,
+      "index": 198
+    },
+    {
+      "mot": "soyons",
+      "debut_ms": 101910,
+      "fin_ms": 102430,
+      "index": 199
+    },
+    {
+      "mot": "pas",
+      "debut_ms": 102430,
+      "fin_ms": 102590,
+      "index": 200
+    },
+    {
+      "mot": "si",
+      "debut_ms": 102590,
+      "fin_ms": 102870,
+      "index": 201
+    },
+    {
+      "mot": "difficiles",
+      "debut_ms": 102870,
+      "fin_ms": 103670,
+      "index": 202
+    },
+    {
+      "mot": "Les",
+      "debut_ms": 103670,
+      "fin_ms": 104230,
+      "index": 203
+    },
+    {
+      "mot": "plus",
+      "debut_ms": 104230,
+      "fin_ms": 104670,
+      "index": 204
+    },
+    {
+      "mot": "accommodants",
+      "debut_ms": 104670,
+      "fin_ms": 105270,
+      "index": 205
+    },
+    {
+      "mot": "ce",
+      "debut_ms": 105270,
+      "fin_ms": 105670,
+      "index": 206
+    },
+    {
+      "mot": "sont",
+      "debut_ms": 105670,
+      "fin_ms": 105950,
+      "index": 207
+    },
+    {
+      "mot": "les",
+      "debut_ms": 105950,
+      "fin_ms": 106190,
+      "index": 208
+    },
+    {
+      "mot": "plus",
+      "debut_ms": 106190,
+      "fin_ms": 106550,
+      "index": 209
+    },
+    {
+      "mot": "habiles",
+      "debut_ms": 106550,
+      "fin_ms": 107030,
+      "index": 210
+    },
+    {
+      "mot": "On",
+      "debut_ms": 107030,
+      "fin_ms": 107830,
+      "index": 211
+    },
+    {
+      "mot": "hasarde",
+      "debut_ms": 107830,
+      "fin_ms": 108390,
+      "index": 212
+    },
+    {
+      "mot": "de",
+      "debut_ms": 108390,
+      "fin_ms": 108550,
+      "index": 213
+    },
+    {
+      "mot": "perdre",
+      "debut_ms": 108550,
+      "fin_ms": 108910,
+      "index": 214
+    },
+    {
+      "mot": "en",
+      "debut_ms": 108910,
+      "fin_ms": 109070,
+      "index": 215
+    },
+    {
+      "mot": "voulant",
+      "debut_ms": 109070,
+      "fin_ms": 109550,
+      "index": 216
+    },
+    {
+      "mot": "trop",
+      "debut_ms": 109550,
+      "fin_ms": 109750,
+      "index": 217
+    },
+    {
+      "mot": "gagner",
+      "debut_ms": 109750,
+      "fin_ms": 110230,
+      "index": 218
+    },
+    {
+      "mot": "Gardez-vous",
+      "debut_ms": 110230,
+      "fin_ms": 111750,
+      "index": 219
+    },
+    {
+      "mot": "de",
+      "debut_ms": 111750,
+      "fin_ms": 111790,
+      "index": 220
+    },
+    {
+      "mot": "rien",
+      "debut_ms": 111790,
+      "fin_ms": 112350,
+      "index": 221
+    },
+    {
+      "mot": "dédaigner",
+      "debut_ms": 112350,
+      "fin_ms": 112950,
+      "index": 222
+    },
+    {
+      "mot": "Surtout",
+      "debut_ms": 112950,
+      "fin_ms": 113950,
+      "index": 223
+    },
+    {
+      "mot": "quand",
+      "debut_ms": 113950,
+      "fin_ms": 114430,
+      "index": 224
+    },
+    {
+      "mot": "vous",
+      "debut_ms": 114430,
+      "fin_ms": 114910,
+      "index": 225
+    },
+    {
+      "mot": "avez",
+      "debut_ms": 114910,
+      "fin_ms": 115790,
+      "index": 226
+    },
+    {
+      "mot": "à",
+      "debut_ms": 115790,
+      "fin_ms": 118790,
+      "index": 227
+    },
+    {
+      "mot": "peu",
+      "debut_ms": 118790,
+      "fin_ms": 119150,
+      "index": 228
+    },
+    {
+      "mot": "près",
+      "debut_ms": 119150,
+      "fin_ms": 120190,
+      "index": 229
+    },
+    {
+      "mot": "votre",
+      "debut_ms": 120190,
+      "fin_ms": 120910,
+      "index": 230
+    },
+    {
+      "mot": "compte",
+      "debut_ms": 120910,
+      "fin_ms": 121230,
+      "index": 231
+    },
+    {
+      "mot": "Bien",
+      "debut_ms": 121230,
+      "fin_ms": 121710,
+      "index": 232
+    },
+    {
+      "mot": "des",
+      "debut_ms": 121710,
+      "fin_ms": 123710,
+      "index": 233
+    },
+    {
+      "mot": "gens",
+      "debut_ms": 123710,
+      "fin_ms": 124990,
+      "index": 234
+    },
+    {
+      "mot": "y",
+      "debut_ms": 124990,
+      "fin_ms": 126750,
+      "index": 235
+    },
+    {
+      "mot": "sont",
+      "debut_ms": 126750,
+      "fin_ms": 127150,
+      "index": 236
+    },
+    {
+      "mot": "pris",
+      "debut_ms": 127150,
+      "fin_ms": 129190,
+      "index": 237
+    },
+    {
+      "mot": "Ce",
+      "debut_ms": 129190,
+      "fin_ms": 131870,
+      "index": 238
+    },
+    {
+      "mot": "n’est",
+      "debut_ms": 131870,
+      "fin_ms": 132630,
+      "index": 239
+    },
+    {
+      "mot": "pas",
+      "debut_ms": 132630,
+      "fin_ms": 133750,
+      "index": 240
+    },
+    {
+      "mot": "aux",
+      "debut_ms": 133750,
+      "fin_ms": 133990,
+      "index": 241
+    },
+    {
+      "mot": "hérons",
+      "debut_ms": 133990,
+      "fin_ms": 134310,
+      "index": 242
+    },
+    {
+      "mot": "Que",
+      "debut_ms": 134310,
+      "fin_ms": 134350,
+      "index": 243
+    },
+    {
+      "mot": "je",
+      "debut_ms": 134350,
+      "fin_ms": 134550,
+      "index": 244
+    },
+    {
+      "mot": "parle",
+      "debut_ms": 134550,
+      "fin_ms": 134750,
+      "index": 245
+    },
+    {
+      "mot": "écoutez",
+      "debut_ms": 134750,
+      "fin_ms": 135750,
+      "index": 246
+    },
+    {
+      "mot": "humains",
+      "debut_ms": 135750,
+      "fin_ms": 135950,
+      "index": 247
+    },
+    {
+      "mot": "un",
+      "debut_ms": 135950,
+      "fin_ms": 135990,
+      "index": 248
+    },
+    {
+      "mot": "autre",
+      "debut_ms": 135990,
+      "fin_ms": 136910,
+      "index": 249
+    },
+    {
+      "mot": "conte",
+      "debut_ms": 136910,
+      "fin_ms": 137350,
+      "index": 250
+    },
+    {
+      "mot": "Vous",
+      "debut_ms": 137350,
+      "fin_ms": 137390,
+      "index": 251
+    },
+    {
+      "mot": "verrez",
+      "debut_ms": 137390,
+      "fin_ms": 137790,
+      "index": 252
+    },
+    {
+      "mot": "que",
+      "debut_ms": 137790,
+      "fin_ms": 139070,
+      "index": 253
+    },
+    {
+      "mot": "chez",
+      "debut_ms": 139070,
+      "fin_ms": 139590,
+      "index": 254
+    },
+    {
+      "mot": "vous",
+      "debut_ms": 139590,
+      "fin_ms": 139790,
+      "index": 255
+    },
+    {
+      "mot": "j’ai",
+      "debut_ms": 139790,
+      "fin_ms": 140430,
+      "index": 256
+    },
+    {
+      "mot": "puisé",
+      "debut_ms": 140430,
+      "fin_ms": 140950,
+      "index": 257
+    },
+    {
+      "mot": "ces",
+      "debut_ms": 140950,
+      "fin_ms": 141670,
+      "index": 258
+    },
+    {
+      "mot": "leçons",
+      "debut_ms": 141670,
+      "fin_ms": 142230,
+      "index": 259
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "_doc": "Sources LibriVox (domaine public) par texte. Pour les fables, une piste = une fable : on garde la piste ENTIERE (pas de debut_s/fin_s) et aeneas coupe l'annonce de titre en tete et l'outro en queue automatiquement. Lecteur Jean Lambert (initiales jl).",
+  "c2-011": {
+    "url": "https://archive.org/download/fables_de_la_fontaine_01_jl_0809_librivox/fables01_02_lafontaine_jl.mp3",
+    "lecteur": "Jean Lambert",
+    "fable": "Livre I, 2 - Le Corbeau et le Renard"
+  },
+  "c2-013": {
+    "url": "https://archive.org/download/fables_de_la_fontaine_01_jl_0809_librivox/fables01_09_lafontaine_jl.mp3",
+    "lecteur": "Jean Lambert",
+    "fable": "Livre I, 9 - Le Rat de ville et le Rat des champs"
+  },
+  "c2-022": {
+    "url": "https://archive.org/download/fables_de_la_fontaine_01_jl_0809_librivox/fables01_18_lafontaine_jl.mp3",
+    "lecteur": "Jean Lambert",
+    "fable": "Livre I, 18 - Le Renard et la Cigogne"
+  },
+  "c2-012": {
+    "url": "https://archive.org/download/fables_de_la_fontaine_06_jl_librivox/fables06_10_lafontaine.mp3",
+    "lecteur": "Jean Lambert",
+    "fable": "Livre VI, 10 - Le Lievre et la Tortue"
+  },
+  "c2-027": {
+    "url": "https://archive.org/download/fables_de_la_fontaine_07_jl_librivox/fables07_04_lafontaine.mp3",
+    "lecteur": "Jean Lambert",
+    "fable": "Livre VII, 4 - Le Heron"
+  },
+  "c2-028": {
+    "url": "https://archive.org/download/fables_de_la_fontaine_07_jl_librivox/fables07_09_lafontaine.mp3",
+    "lecteur": "Jean Lambert",
+    "fable": "Livre VII, 9 - Le Coche et la Mouche"
+  }
+}

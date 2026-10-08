@@ -43,11 +43,15 @@ def telecharger(url, dest):
 
 
 def rogner(src, debut_s, fin_s, dest_wav):
-    duree = max(0.0, float(fin_s) - float(debut_s))
-    sh([
-        "ffmpeg", "-y", "-ss", str(debut_s), "-t", str(duree), "-i", src,
-        "-ac", "1", "-ar", "16000", dest_wav,
-    ])
+    # debut_s/fin_s optionnels : si absents, on garde la PISTE ENTIERE (cas des
+    # fables = une piste par fable ; aeneas coupe tete/queue automatiquement).
+    cmd = ["ffmpeg", "-y"]
+    if debut_s is not None:
+        cmd += ["-ss", str(debut_s)]
+        if fin_s is not None:
+            cmd += ["-t", str(max(0.0, float(fin_s) - float(debut_s)))]
+    cmd += ["-i", src, "-ac", "1", "-ar", "16000", dest_wav]
+    sh(cmd)
 
 
 def main():
@@ -69,7 +73,7 @@ def main():
             print(f"[{tid}] absent de trims.json"); continue
         brut = os.path.join(SOURCES, f"{tid}.src")
         telecharger(t["url"], brut)
-        rogner(brut, t["debut_s"], t["fin_s"], os.path.join(SOURCES, f"{tid}.wav"))
+        rogner(brut, t.get("debut_s"), t.get("fin_s"), os.path.join(SOURCES, f"{tid}.wav"))
         os.remove(brut)
         print(f"[{tid}] clip pret : sources/{tid}.wav")
 

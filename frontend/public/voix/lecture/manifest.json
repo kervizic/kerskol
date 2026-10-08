@@ -1,4 +1,11 @@
 {
-  "_doc": "Liste des textes de la Bibliotheque disposant d'un audio + timings valides (QC passe). Rempli par tools/lecture/aligner.py. Le bouton Ecouter n'apparait que pour ces ids.",
-  "textes": []
+  "textes": [
+    "c2-011",
+    "c2-012",
+    "c2-013",
+    "c2-022",
+    "c2-027",
+    "c2-028"
+  ],
+  "_doc": "Textes de la Bibliotheque disposant d'un audio + timings valides (QC passe). Genere par tools/lecture/aligner.py. Le bouton Ecouter n'apparait que pour ces ids."
 }

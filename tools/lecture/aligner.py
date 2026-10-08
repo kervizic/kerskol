@@ -77,8 +77,33 @@ def ecrire_mots(mots, chemin):
 
 
 def run_aeneas(wav, mots_txt, sortie_json):
-    conf = "task_language=fra|is_text_type=plain|os_task_file_format=json"
+    # Detection automatique de la tete (annonce « ... LibriVox / titre ») et de
+    # la queue (outro) non couvertes par notre texte : aeneas les ignore. Evite
+    # d'avoir a renseigner des offsets manuels par texte.
+    conf = (
+        "task_language=fra|is_text_type=plain|os_task_file_format=json"
+        "|is_audio_file_detect_head_max=12.000|is_audio_file_detect_tail_max=18.000"
+    )
     sh([sys.executable, "-m", "aeneas.tools.execute_task", wav, mots_txt, conf, sortie_json])
+
+
+def lisser(timings):
+    """Plancher de duree (40 ms) + monotonie stricte (pas de chevauchement).
+
+    aeneas colle parfois deux mots (duree 0) ou produit une micro-duree. On
+    etend alors la fin a debut+40 ms et on repousse le debut du mot suivant si
+    besoin. Ajustements de quelques ms, bornes dans le texte : la lecture par
+    GROUPE (bornes = min debut / max fin du groupe) n'en souffre pas.
+    """
+    MIN = 40
+    for i, t in enumerate(timings):
+        if t["fin_ms"] < t["debut_ms"]:
+            t["fin_ms"] = t["debut_ms"]
+        if t["fin_ms"] - t["debut_ms"] < MIN:
+            t["fin_ms"] = t["debut_ms"] + MIN
+        if i + 1 < len(timings) and timings[i + 1]["debut_ms"] < t["fin_ms"]:
+            timings[i + 1]["debut_ms"] = t["fin_ms"]
+    return timings
 
 
 def parse_aeneas(sortie_json, mots):
@@ -123,14 +148,17 @@ def controle_qualite(timings, mots):
     return problemes
 
 
-def encoder_diffusion(src, out_dir, tid):
+def encoder_diffusion(src, out_dir, tid, debut_s, duree_s):
     opus = os.path.join(out_dir, f"{tid}.opus")
     m4a = os.path.join(out_dir, f"{tid}.m4a")
+    # On n'encode QUE notre passage [debut_s, debut_s+duree_s] : l'annonce
+    # LibriVox / le titre en tete et l'outro en queue sont coupes. -ss/-t APRES
+    # -i (seek precis car on reencode).
+    base = ["ffmpeg", "-y", "-i", src, "-ss", f"{debut_s:.3f}", "-t", f"{duree_s:.3f}", "-ac", "1"]
     # Opus/OGG mono ~32 kb/s (parole, tres compact)
-    sh(["ffmpeg", "-y", "-i", src, "-ac", "1", "-c:a", "libopus", "-b:a", "32k",
-        "-application", "voip", opus])
+    sh(base + ["-c:a", "libopus", "-b:a", "32k", "-application", "voip", opus])
     # Repli AAC/M4A pour Safari iOS (Opus non lu dans <audio>)
-    sh(["ffmpeg", "-y", "-i", src, "-ac", "1", "-c:a", "aac", "-b:a", "48k", m4a])
+    sh(base + ["-c:a", "aac", "-b:a", "48k", m4a])
     return opus, m4a
 
 
@@ -179,14 +207,24 @@ def traiter(extrait, sources_dir, out_dir):
         vers_wav(src, wav)
         ecrire_mots(mots, mots_txt)
         run_aeneas(wav, mots_txt, aj)
-        timings = parse_aeneas(aj, mots)
+        timings = lisser(parse_aeneas(aj, mots))
         problemes = controle_qualite(timings, mots)
         if problemes:
             print(f"[{tid}] REJETE ({len(problemes)} pb) :")
             for p in problemes[:12]:
                 print("   -", p)
             return False
-        opus, m4a = encoder_diffusion(src, out_dir, tid)
+        # Decoupe serree : on garde [1er mot - PAD, dernier mot + PAD] et on
+        # rebase les timings a 0 (titre/outro coupes, fichiers plus petits).
+        PAD = 150
+        debut_ms = max(0, timings[0]["debut_ms"] - PAD)
+        fin_ms = timings[-1]["fin_ms"] + PAD
+        for t in timings:
+            t["debut_ms"] -= debut_ms
+            t["fin_ms"] -= debut_ms
+        opus, m4a = encoder_diffusion(
+            src, out_dir, tid, debut_ms / 1000.0, (fin_ms - debut_ms) / 1000.0
+        )
         meta = {
             "id": tid,
             "outil": "aeneas (forced alignment, espeak-ng, CPU)",

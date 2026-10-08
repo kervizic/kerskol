@@ -16,8 +16,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       wget ca-certificates \
  && rm -rf /var/lib/apt/lists/*
 
-# numpy epingle (compat aeneas 1.7.3) + lxml (dep aeneas) + aeneas.
-RUN pip install --no-cache-dir "numpy==1.26.4" "lxml>=4.9" "aeneas==1.7.3.0"
+# aeneas (2017) compile des extensions C via numpy.distutils : incompatible avec
+# setuptools>=60 et numpy>=1.22. On FIGE des versions compatibles et on force
+# setuptools a utiliser le distutils de la stdlib (Python 3.9). numpy doit etre
+# present AVANT aeneas (ses extensions en dependent) -> --no-build-isolation.
+ENV SETUPTOOLS_USE_DISTUTILS=stdlib
+RUN pip install --no-cache-dir "setuptools==59.8.0" "wheel==0.38.4" \
+ && pip install --no-cache-dir "numpy==1.21.6" "lxml>=4.9,<5" "beautifulsoup4>=4.9"
+RUN pip install --no-cache-dir --no-build-isolation "aeneas==1.7.3.0"
 
 WORKDIR /work
 CMD ["python3", "tools/lecture/aligner.py", "--all"]
