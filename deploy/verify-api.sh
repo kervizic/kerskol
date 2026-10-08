@@ -6,7 +6,9 @@
 #   * Avec l'ANON_KEY : l'acces a /rest/v1/competences doit etre REFUSE
 #     (anon n'a aucun droit) => code HTTP != 200.
 #   * Avec un JWT authenticated signe LOCALEMENT (JWT_SECRET, jamais affiche) :
-#     acces autorise => 200 et 16 competences.
+#     acces autorise => 200 et autant de competences que le referentiel en
+#     contient (compte lu en base, pas une valeur figee : le referentiel grandit
+#     a chaque lot pedagogique).
 #
 # Aucun secret n'est affiche. A lancer sur le VPS.
 set -euo pipefail
@@ -61,13 +63,17 @@ else
   echo "FAIL anon devrait etre refuse (HTTP 200)"; status=1
 fi
 
-# --- 2. authenticated : 200 + 16 competences ------------------------------
+# --- 2. authenticated : 200 + autant de competences que le referentiel --------
+# Nombre attendu = compte reel en base (le referentiel grandit a chaque lot).
+EXPECTED="$(docker compose -p "$PROJECT" --env-file "$ENV_FILE" exec -T \
+  -e PGPASSWORD="$POSTGRES_PASSWORD" "$DB_SERVICE" \
+  psql -tAq -U postgres -d postgres -c "SELECT count(*) FROM public.competences" | tr -d '[:space:]')"
 CODE_AUTH="$(curl_code "$JWT")"
 NB="$(grep -o '"code"' /tmp/verify_body | wc -l | tr -d ' ')"
-if [ "$CODE_AUTH" = "200" ] && [ "$NB" = "16" ]; then
+if [ "$CODE_AUTH" = "200" ] && [ "$NB" = "$EXPECTED" ]; then
   echo "PASS authenticated : HTTP 200, ${NB} competences"
 else
-  echo "FAIL authenticated : HTTP ${CODE_AUTH}, ${NB} competences (attendu 200/16)"; status=1
+  echo "FAIL authenticated : HTTP ${CODE_AUTH}, ${NB} competences (attendu 200/${EXPECTED})"; status=1
 fi
 
 rm -f /tmp/verify_body
