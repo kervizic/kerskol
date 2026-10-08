@@ -1117,3 +1117,14 @@ belles choses pour tromper »). Chaque item cite sa source (auteur + œuvre).
 `BIBLIOTHEQUE` ; `bienveillance_test.sql` scanne toutes les réponses de référence
 `comprehension_item` (dont les nouveaux items). Les définitions du glossaire sont
 adoucies si besoin (ex. « façon amicale et familière » au lieu de « moqueuse »).
+
+## Dictée : extraits inspirés de la bibliothèque (lot 0061)
+
+La dictée détective reçoit dix extraits courts (2 à 4 phrases, **orthographe
+actuelle**, aucun mot trop ancien), inspirés des textes de la bibliothèque (même
+vocabulaire et mêmes thèmes : la ferme, le chaton, le train, les agneaux, le feu…).
+Chaque extrait est rattaché à une **notion existante** (migrations 0033-0035) et
+porte une erreur injectée déterministe : `a_a`, `et_est`, `pluriel`, `son_sont`,
+`on_ont`, `verbe_ent`, `accord`, `ces_ses`, `e_er_ez`, `m_mbp` (ids 201 à 210).
+On ne force aucune notion absente du texte. Le serveur (`verif_dictee`) reste seul
+juge ; `bienveillance_test.sql` scanne tous ces textes.
