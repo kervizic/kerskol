@@ -7,6 +7,13 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
+  // En build « lib », Vite ne definit pas process.env : React (qui lit
+  // process.env.NODE_ENV) planterait dans le navigateur. On force la version de
+  // production et on neutralise process.env.
+  define: {
+    "process.env.NODE_ENV": JSON.stringify("production"),
+    "process.env": "{}",
+  },
   build: {
     outDir: "stories-dist",
     emptyOutDir: true,
