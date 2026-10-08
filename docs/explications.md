@@ -1363,6 +1363,28 @@ apparaissent **en avance** à un CE2 qui a acquis la lecture de données CE2
 front (`donnees.ts`, 56 items au total) ↔ SQL (`donnees_item`), vérifié par le
 golden vitest `donnees.test.ts` et le test croisé `donnees_test.sql`.
 
+## Livré : « Problèmes à plusieurs étapes » + « Pensée informatique » (migration 0071, lot 8)
+
+Lot **réutilisant à l'identique** deux moteurs existants (aucune nouvelle UI,
+aucun changement du cœur « serveur seul juge ») ; on **élargit seulement la
+portée** des deux compétences de CE2 à **CM1..CM2** (`classe_min` inchangée) et
+on les ajoute au **cœur du plan de classe CM1** (`classes.ts`) :
+- **MA.PB.DEUX_ETAPES** (0024/0025) - **problèmes à deux étapes** : `op` puis
+  `op2` (dont le **rendu de monnaie**, `rsub` : on paie, on rend). `op2` reste
+  réservé à cette compétence dans `verif_calcul` (recalcul serveur). Le contenu
+  existant (achats en euros, reste/rendu) correspond déjà au niveau CM1.
+- **MA.REPERE.PROGRAMMER** (0047) - **programmer un déplacement** (robot type
+  Blue-Bot) : assembler / lire un programme sur un quadrillage avec obstacles.
+  Le serveur **simule** le déplacement (`verif_geo_programme`) et accepte **toute**
+  suite d'instructions atteignant la cible.
+
+**Boucles « répète 3 fois »** : le moteur serveur **s'y prête déjà** (il simule
+une liste **plate** d'instructions ; une boucle se développe côté client en
+instructions répétées). Mais **proposer** une boucle à l'enfant demande un
+**éditeur de boucle** (nouvelle UI) : c'est **reporté au lot d'UI**, ce lot-ci
+étant « sans nouvelle UI ». Aucun item ajouté → aucun golden modifié ; test de
+non-régression : `0071` vérifie la portée CM2 des deux compétences.
+
 ## Reste à livrer pour le CM1 (maths)
 
 Chaque point suit le même patron (nouvelle compétence `classe_min = 'CM1'`,
@@ -1375,12 +1397,12 @@ tests golden) :
   étendre le moteur `MA.POSE.*`.
 - **Calcul mental et en ligne** CM1 (grands nombres, multiples).
 - **Proportionnalité** (sous-matière nouvelle, visible CM1 seulement).
-- **Problèmes en plusieurs étapes** (étendre `MA.PB.DEUX_ETAPES`).
 - **Grandeurs et mesures** : périmètre, aire (comptage puis formules
   carré/rectangle), durées, angles (droit/aigu/obtus).
 - **Espace et géométrie** : perpendiculaires, parallèles, cercle, programme de
   construction, symétrie axiale (réutiliser règle/équerre/compas existants).
-- **Pensée informatique** : programmer un déplacement (réutiliser l'existant).
+- **Boucles de programmation** (« répète 3 fois ») : éditeur de boucle (UI) pour
+  `MA.REPERE.PROGRAMMER` — nécessite une nouvelle UI (lot d'UI).
 
 Et pour les autres matières CM1 : **français, sciences, histoire-géographie,
 EMC** (non traités dans ce lot).

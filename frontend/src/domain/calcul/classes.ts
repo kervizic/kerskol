@@ -43,7 +43,8 @@ const CE2: ClassPlan = {
 // CM1 : demarrage par classe. Revision = coeur du CE2 (presume acquis),
 // coeur = grands nombres + fractions CM1 (droite graduee, comparer, egalites,
 // quantite) + donnees / probabilites CM1 (lire un tableau ou un graphique « a la
-// maison », vocabulaire du hasard). Les autres sous-matieres CM1 restent a
+// maison », vocabulaire du hasard) + problemes a deux etapes et programmation
+// d'un deplacement (pensee informatique). Les autres sous-matieres CM1 restent a
 // livrer (cf. docs/explications.md).
 const CM1: ClassPlan = {
   revision: {
@@ -59,6 +60,8 @@ const CM1: ClassPlan = {
     "MA.FRAC.QUANTITE": 1,
     "MA.DONNEES.LIRE_CM1": 1,
     "MA.DONNEES.HASARD": 1,
+    "MA.PB.DEUX_ETAPES": 1,
+    "MA.REPERE.PROGRAMMER": 1,
   },
 };
 
