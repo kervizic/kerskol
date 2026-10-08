@@ -17,7 +17,6 @@ import { Check, Eye, EyeOff, Lightbulb, RotateCcw } from "lucide-react";
 import { IMAGES } from "../domain/images";
 import {
   comparerEcriture,
-  verifieCheck,
   diagnostiquerCopie,
   VERBES_LIBRE,
   type EcrFormat,
