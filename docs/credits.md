@@ -69,6 +69,14 @@ Fichiers : `frontend/public/monnaie/`.
 **Lucide** (`lucide-react`), sous
 [licence ISC](https://opensource.org/license/isc-license-txt).
 
+## Illustrations des exercices
+
+Petites images illustrant certains exercices (émotions de « Vivre ensemble »,
+animaux et plantes de « Questionner le monde ») : **Microsoft Fluent Emoji**
+(style Flat), [licence MIT](https://opensource.org/license/mit), auto-hébergées
+(`frontend/public/img/emoji/`). Détail fichier par fichier dans
+[`docs/credits-images.md`](credits-images.md).
+
 ## Avatars
 
 Générés localement dans le navigateur avec **DiceBear**

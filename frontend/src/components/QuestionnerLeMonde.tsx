@@ -15,6 +15,7 @@ import { useMemo, useState } from "react";
 import { Check, Undo2 } from "lucide-react";
 import type { QmRender, QmScene, QmSceneEl } from "../domain/qm/types";
 import { comparerQm } from "../domain/qm/types";
+import { illustrationPourCle } from "../domain/images";
 
 interface Props {
   item: QmRender;
@@ -176,9 +177,25 @@ export default function QuestionnerLeMonde({ item, onSoumettre, onContinuer }: P
     }
   };
 
+  // Illustration libre de droit (lot 2), associee a la cle de l'item. Purement
+  // pedagogique : n'intervient JAMAIS dans le jugement (serveur seul juge).
+  const illus = illustrationPourCle(item.cle);
+
   return (
     <div className="kk-stack kk-geo kk-qm">
       <p className="kk-lead" style={{ textAlign: "center", margin: "0 auto" }}>{item.consigne}</p>
+
+      {illus && (
+        <img
+          className="kk-qm__illus"
+          src={illus.src}
+          alt={illus.alt}
+          width={72}
+          height={72}
+          loading="lazy"
+          style={{ display: "block", margin: "0 auto", width: 72, height: 72 }}
+        />
+      )}
 
       {/* Scene SVG (format clic). */}
       {scene && (
