@@ -1272,3 +1272,58 @@ compétence un peu en avance DANS une sous-matière déjà visible (marge d'un a
 **Tests.** `composer.test.ts` (candidature ±1 an, Iris CE2 inchangée),
 `matieres.test.ts`, et `classe_test.sql` (portée par défaut CE2, 4 rappels CE1,
 contrainte d'ordre `classe_min <= classe_max`).
+
+# CM1 - Mathématiques (lot 2)
+
+Attendus vérifiés sur les programmes officiels (cycle 3, actualisé 2025) :
+- Eduscol, « Mathématiques CM1 - Attendus de fin d'année » :
+  https://eduscol.education.fr/document/13990/download
+- Programme de mathématiques du cycle 3 (décembre 2024, applicable 2025) :
+  https://eduscol.education.gouv.fr/sites/default/files/document/programmedemaths-volet3aucycle3527161pdf-78786.pdf
+- Exemples de mise en œuvre CM1 2025 :
+  https://eduscol.education.gouv.fr/sites/default/files/document/exemplesmiseenoeuvrecm1mathspdf-111543.pdf
+
+## Livré : « Les grands nombres » (migration 0067)
+
+Nouvelle compétence **MA.NUM.GRANDS** (sous-matière « Les nombres »/numération,
+**portée CM1..CM2**) : **comparer** et **ranger** les grands nombres **jusqu'au
+million**. On **réutilise le moteur de numération** (types `comparer` et
+`ranger`, qui n'affichent que des chiffres : aucune écriture en lettres, pas de
+borne à 9 999) en **changeant la banque** (`ex_calcul`). Niveaux : N1 comparer
+(≥ 1 000), N2 ranger le plus grand (dizaines de milliers), N3 comparer (centaines
+de milliers), N4 ranger (jusqu'au million).
+
+**Serveur seul juge** : `verif_calcul` étendu (ops `cmp`/`val` pour cette
+compétence ; borne portée à **1 000 000 pour MA.NUM.GRANDS uniquement**, les
+autres `MA.NUM.*` restent bornées à 10 000). Plan de classe **CM1**
+(`classes.ts`) : révision du cœur CE2 + cœur « grands nombres ». Tests :
+`generator.test.ts` (déterminisme, bornes), `composer.test.ts` (1re séance CM1),
+`cm1_grands_nombres_test.sql` (jugement serveur + non-régression des autres
+`MA.NUM.*`).
+
+## Reste à livrer pour le CM1 (maths)
+
+Chaque point suit le même patron (nouvelle compétence `classe_min = 'CM1'`,
+banque `ex_calcul`, extension de `verif_calcul` ou nouveau juge, plan de classe,
+tests golden) :
+- **Fractions** : fractions simples (dénominateur ≤ 20), fractions décimales
+  (1/10, 1/100), sur une droite graduée, égalités, comparaison (moteur
+  `MA.FRAC.*` à étendre).
+- **Nombres décimaux** : dixièmes, centièmes, lien fractions décimales ↔ écriture
+  à virgule, comparer/ranger/encadrer. **Nécessite un pavé numérique avec
+  virgule** (nouvelle saisie) et un juge décimal (non encore présent).
+- **Quatre opérations** dont **division posée** (diviseur à 1 puis 2 chiffres) :
+  étendre le moteur `MA.POSE.*`.
+- **Calcul mental et en ligne** CM1 (grands nombres, multiples).
+- **Proportionnalité** (sous-matière nouvelle, visible CM1 seulement).
+- **Problèmes en plusieurs étapes** (étendre `MA.PB.DEUX_ETAPES`).
+- **Grandeurs et mesures** : périmètre, aire (comptage puis formules
+  carré/rectangle), durées, angles (droit/aigu/obtus).
+- **Espace et géométrie** : perpendiculaires, parallèles, cercle, programme de
+  construction, symétrie axiale (réutiliser règle/équerre/compas existants).
+- **Données et probabilités** : tableaux, diagrammes, vocabulaire du hasard
+  (possible / impossible / certain) — QCM déterministe, sous-matière nouvelle.
+- **Pensée informatique** : programmer un déplacement (réutiliser l'existant).
+
+Et pour les autres matières CM1 : **français, sciences, histoire-géographie,
+EMC** (non traités dans ce lot).
