@@ -29,6 +29,24 @@ consigne, mais le serveur reste seul juge (aucune réponse ne dépend d'une imag
 | `img/emoji/plante.svg` | Seedling | besoins des plantes (QM) | Une petite plante verte qui pousse. |
 | `img/emoji/carotte.svg` | Carrot | alimentation, un légume (QM) | Une carotte orange, un légume. |
 
+## Lot 3 — extension Questionner le monde (toujours Microsoft Fluent Emoji, MIT)
+
+Même source, même style « Flat », même licence MIT (fichier de licence déjà inclus :
+`frontend/public/img/emoji/LICENSE-fluentui-emoji.txt`). Ces images illustrent le
+**sujet** de la consigne, jamais la réponse (le serveur reste seul juge).
+
+| Fichier (dans le dépôt) | Emoji Fluent d'origine | Utilisé pour | Texte alternatif |
+| --- | --- | --- | --- |
+| `img/emoji/lapin.svg` | Rabbit face | chaîne alimentaire : le lapin (QM, Le vivant) | Un lapin avec de grandes oreilles. |
+| `img/emoji/lion.svg` | Lion | chaîne alimentaire : le lion (QM, Le vivant) | Un lion avec sa crinière. |
+| `img/emoji/poule.svg` | Chicken | cycle de vie de la poule (QM, Le vivant) | Une poule. |
+| `img/emoji/glacon.svg` | Ice | états de la matière : un glaçon (QM, La matière) | Un glaçon bien froid. |
+| `img/emoji/ballon.svg` | Balloon | l'air : un ballon gonflé (QM, La matière) | Un ballon de baudruche gonflé. |
+| `img/emoji/parapluie.svg` | Umbrella | objets et fonctions : le parapluie (QM, Les objets) | Un parapluie ouvert. |
+| `img/emoji/ciseaux.svg` | Scissors | objets et fonctions : les ciseaux (QM, Les objets) | Une paire de ciseaux. |
+| `img/emoji/soleil.svg` | Sun | points cardinaux : le soleil (QM, L'espace) | Le soleil qui brille. |
+| `img/emoji/gateau.svg` | Birthday cake | frise : préparer un gâteau (QM, Le temps) | Un gâteau avec des bougies. |
+
 L'URL exacte de chaque emoji est reconstruite dans `images.ts`
 (`https://github.com/microsoft/fluentui-emoji/tree/main/assets/<Nom>/Flat`).
 

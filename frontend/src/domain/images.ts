@@ -54,6 +54,19 @@ export const IMAGES: Record<string, ImageInfo> = {
   grenouille: fluent("Frog", "grenouille.svg", "Une grenouille verte."),
   plante:     fluent("Seedling", "plante.svg", "Une petite plante verte qui pousse."),
   carotte:    fluent("Carrot", "carotte.svg", "Une carotte orange, un légume."),
+  // Vivant — chaines alimentaires (QM « Le vivant »).
+  lapin:      fluent("Rabbit face", "lapin.svg", "Un lapin avec de grandes oreilles."),
+  lion:       fluent("Lion", "lion.svg", "Un lion avec sa crinière."),
+  poule:      fluent("Chicken", "poule.svg", "Une poule."),
+  // Matiere (QM « La matiere »).
+  glacon:     fluent("Ice", "glacon.svg", "Un glaçon bien froid."),
+  ballon:     fluent("Balloon", "ballon.svg", "Un ballon de baudruche gonflé."),
+  // Objets (QM « Les objets »).
+  parapluie:  fluent("Umbrella", "parapluie.svg", "Un parapluie ouvert."),
+  ciseaux:    fluent("Scissors", "ciseaux.svg", "Une paire de ciseaux."),
+  // Espace et temps (QM « L'espace », « Le temps »).
+  soleil:     fluent("Sun", "soleil.svg", "Le soleil qui brille."),
+  gateau:     fluent("Birthday cake", "gateau.svg", "Un gâteau avec des bougies."),
 };
 
 // Association CLE d'item -> image. Seules ces cles affichent une illustration.
@@ -70,10 +83,25 @@ export const ILLUSTRATIONS: Record<string, string> = {
   "emc-emo-emp-n1-b": "joie",
   // QM — Le vivant (retrofit 0052).
   "qm-viv-car-n1-a": "chat",
+  "qm-viv-cyc-n1-b": "grenouille", // « ou grandit le tetard » : illustre la grenouille (sujet), pas la reponse (l'eau)
+  "qm-viv-cyc-n2-a": "poule", // ordre « vie de la poule » : illustre la poule, l'ordre reste a trouver
   "qm-viv-cyc-n2-b": "grenouille",
   "qm-viv-cyc-n3-a": "papillon",
+  "qm-viv-cha-n1-a": "lapin", // « le lapin mange... » : illustre le lapin (sujet), pas « des plantes »
+  "qm-viv-cha-n1-b": "lion", // « le lion mange... » : illustre le lion, pas « de la viande »
   "qm-viv-pla-n1-a": "plante",
   "qm-viv-hyg-n4-a": "carotte",
+  // QM — La matiere (0053).
+  "qm-mat-eta-n1-b": "glacon", // « un glacon, qu'est-ce que c'est ? » : illustre le glacon, pas « un solide »
+  "qm-mat-air-n1-a": "ballon", // « ballon de baudruche gonfle » : illustre le ballon, pas « de l'air »
+  // QM — Les objets (0054).
+  "qm-obj-fon-n1-a": "parapluie", // « a quoi sert un parapluie ? » : illustre l'objet, pas sa fonction
+  "qm-obj-fon-n1-b": "ciseaux", // « a quoi sert une paire de ciseaux ? » : illustre l'objet, pas « a couper »
+  // QM — L'espace (0055).
+  "qm-esp-car-n1-a": "soleil", // « ou se leve le soleil ? » : illustre le soleil, pas « a l'est »
+  "qm-esp-car-n4-b": "soleil", // « le soleil se leve a l'... » : illustre le soleil, pas « est »
+  // QM — Le temps (0056).
+  "qm-tps-fri-n3-a": "gateau", // ordre « faire un gateau » : illustre le gateau, l'ordre reste a trouver
 };
 
 // Illustration d'un item (ou null). Utilise par <QuestionnerLeMonde>.

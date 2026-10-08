@@ -66,4 +66,30 @@ describe("illustrations libres de droit", () => {
     const srcs = creds.map((c) => c.src);
     expect(new Set(srcs).size).toBe(srcs.length);
   });
+
+  it("le lot QM (matiere, objets, espace, temps, vivant) ajoute ses illustrations", () => {
+    const attendues: Record<string, string> = {
+      "qm-viv-cha-n1-a": "/img/emoji/lapin.svg",
+      "qm-viv-cha-n1-b": "/img/emoji/lion.svg",
+      "qm-viv-cyc-n2-a": "/img/emoji/poule.svg",
+      "qm-viv-cyc-n1-b": "/img/emoji/grenouille.svg",
+      "qm-mat-eta-n1-b": "/img/emoji/glacon.svg",
+      "qm-mat-air-n1-a": "/img/emoji/ballon.svg",
+      "qm-obj-fon-n1-a": "/img/emoji/parapluie.svg",
+      "qm-obj-fon-n1-b": "/img/emoji/ciseaux.svg",
+      "qm-esp-car-n1-a": "/img/emoji/soleil.svg",
+      "qm-esp-car-n4-b": "/img/emoji/soleil.svg",
+      "qm-tps-fri-n3-a": "/img/emoji/gateau.svg",
+    };
+    for (const [cle, src] of Object.entries(attendues)) {
+      expect(illustrationPourCle(cle)?.src, `illustration manquante pour ${cle}`).toBe(src);
+    }
+  });
+
+  it("toutes les sources de ce lot restent du Fluent Emoji MIT (style homogene)", () => {
+    for (const info of imagesCreditees()) {
+      expect(info.licence, `${info.src} doit rester MIT`).toBe("MIT");
+      expect(info.source.includes("Fluent"), `${info.src} doit etre du Fluent Emoji`).toBe(true);
+    }
+  });
 });
