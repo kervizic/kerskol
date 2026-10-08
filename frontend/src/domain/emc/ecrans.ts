@@ -11,7 +11,7 @@
 // utiliser et a demander a un adulte en cas de doute. Le SERVEUR (verif_qm, op
 // 'qm') reste seul juge via la cle.
 
-import { type QmItem, ordre, tri } from "../qm/types";
+import { type QmItem, tri } from "../qm/types";
 
 export const BANQUE_ECRANS: QmItem[] = [
   // =======================================================================
