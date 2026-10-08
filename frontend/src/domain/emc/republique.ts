@@ -18,7 +18,7 @@ export const BANQUE_REPUBLIQUE: QmItem[] = [
   // =======================================================================
   { cle: "emc-rep-dro-n1-a", competence: "EMC.REPUBLIQUE.DROITS", niveau: 1, format: "qcm",
     consigne: "Tous les enfants ont le droit d'aller à...",
-    options: ["l'école", "la guerre"], attendu: "l'école",
+    options: ["l'école", "au travail"], attendu: "l'école",
     explication: "Tous les enfants ont le droit d'aller à l'école pour apprendre." },
   { cle: "emc-rep-dro-n1-b", competence: "EMC.REPUBLIQUE.DROITS", niveau: 1, format: "qcm",
     consigne: "À l'école, c'est un devoir de...",

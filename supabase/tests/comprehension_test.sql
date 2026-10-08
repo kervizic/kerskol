@@ -50,7 +50,7 @@ BEGIN
         ('lec-info-n3-b','FR.LECTURE.INFO',3,'clic','coffre'),
         ('lec-info-n4-b','FR.LECTURE.INFO',4,'texte','Biscuit'),
         ('lec-inf-n4-a','FR.LECTURE.INFERENCE',4,'clic','chien'),
-        ('lec-inf-n4-c','FR.LECTURE.INFERENCE',4,'texte','peur'),
+        ('lec-inf-n4-c','FR.LECTURE.INFERENCE',4,'texte','impatiente'),
         ('lec-ord-n2-a','FR.LECTURE.ORDRE',2,'ordre','Sacha met son manteau|Sacha part à l''école'),
         ('lec-ord-n3-b','FR.LECTURE.ORDRE',3,'ordre','la chenille mange des feuilles|elle se transforme en chrysalide|un papillon s''envole'),
         ('lec-vf-n1-b','FR.LECTURE.VRAIFAUX',1,'qcm','faux'),

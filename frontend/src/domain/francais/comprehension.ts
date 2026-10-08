@@ -239,15 +239,15 @@ export const BANQUE_COMPREHENSION: CompItem[] = [
   { cle: "lec-inf-n4-c", competence: "FR.LECTURE.INFERENCE", niveau: 4, format: "texte",
     texte: ["C'est le jour du spectacle de l'école.",
             "Jade doit réciter un poème devant tous les parents.",
-            "Dans les coulisses, elle serre très fort les mains de son amie.",
-            "Son cœur bat vite et elle a la gorge toute serrée.",
+            "Dans les coulisses, elle n'arrête pas de bouger sur place.",
+            "Son cœur bat vite et elle regarde sans cesse vers la salle.",
             "Elle répète son texte tout bas, encore et encore.",
-            "Quand le rideau s'ouvre, ses jambes tremblent un peu.",
-            "Mais dès les premiers mots, sa voix devient plus sûre.",
+            "Quand le rideau s'ouvre, elle fait un grand sourire.",
+            "Dès les premiers mots, sa voix devient toute joyeuse.",
             "À la fin, tout le monde applaudit très fort."],
     consigne: "Écris en un seul mot ce que ressent Jade avant de monter sur scène.",
-    attendu: "peur",
-    explication: "Le cœur qui bat vite, la gorge serrée et les jambes qui tremblent montrent que Jade a peur, même si le mot peur n'est pas écrit." },
+    attendu: "impatiente",
+    explication: "Le cœur qui bat vite, Jade qui bouge sans arrêt et regarde la salle montrent qu'elle est impatiente, même si le mot impatiente n'est pas écrit." },
 
   // =======================================================================
   // FR.LECTURE.ORDRE — remettre 2 a 3 evenements dans l'ordre
@@ -474,7 +474,7 @@ export const PREUVE_PAR_CLE: Record<string, string> = {
   "lec-inf-n3-c": "Quand elle est bien dorée, ils la sortent du four.",
   "lec-inf-n4-a": "Camille voudrait le garder, mais ses parents disent non.",
   "lec-inf-n4-b": "Il serre les bras contre son corps et ses dents claquent.",
-  "lec-inf-n4-c": "Son cœur bat vite et elle a la gorge toute serrée.",
+  "lec-inf-n4-c": "Son cœur bat vite et elle regarde sans cesse vers la salle.",
   // FR.LECTURE.ORDRE
   "lec-ord-n1-a": "Papa casse les œufs dans un bol.",
   "lec-ord-n1-b": "Plus tard, une petite fleur pousse.",

@@ -297,9 +297,9 @@ export const BANQUE_GRAMMAIRE: GramItem[] = [
     options: [".", "?", "!"], attendu: ".",
     explication: "Cette phrase raconte quelque chose. On met un point à la fin." },
   { cle: "ponct-n4-exclam", competence: "FR.GRAM.PONCTUATION", niveau: 4, format: "qcm",
-    consigne: "Quelle est la bonne fin pour cette phrase ?", phrase: "Attention, tu vas tomber",
+    consigne: "Quelle est la bonne fin pour cette phrase ?", phrase: "Vite, le spectacle va commencer",
     options: ["!", ".", "?"], attendu: "!",
-    explication: "Cette phrase lance un avertissement fort. On met un point d'exclamation à la fin." },
+    explication: "Cette phrase est pressante et forte. On met un point d'exclamation à la fin." },
 
   // =========================================================================
   // FR.GRAM.GROUPE_NOMINAL — determinant + nom + adjectif, genre et nombre
@@ -361,7 +361,7 @@ export const BANQUE_GRAMMAIRE: GramItem[] = [
     attendu: "ces",
     explication: "Le déterminant est devant le nom. Ici, c'est ces, devant oiseaux." },
   { cle: "nature-n4-determinant", competence: "FR.GRAM.NATURE", niveau: 4, format: "texte",
-    consigne: "Écris le déterminant de la phrase.", phrase: "Ton vélo est cassé.",
+    consigne: "Écris le déterminant de la phrase.", phrase: "Ton vélo est tout neuf.",
     attendu: "ton",
     explication: "Le déterminant est le petit mot placé devant le nom. Ici, c'est ton, devant vélo." },
   { cle: "nature-n4-pronom", competence: "FR.GRAM.NATURE", niveau: 4, format: "texte",
