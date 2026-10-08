@@ -42,6 +42,13 @@ import type { Base, GeneratedExercise, ExCalcul } from "../calcul/generator";
 // --------------------------------------------------------------------------
 export type CompFormat = "qcm" | "clic" | "texte" | "ordre";
 
+// Un mot difficile (vieux mot ou mot rare d'un texte d'auteur) et son sens, montre
+// au survol / au toucher (petit glossaire). AFFICHAGE seulement : jamais juge.
+export interface CompGlose {
+  mot: string;
+  sens: string;
+}
+
 // Separateur des evenements d'un exercice « ordre » (la reponse est la suite des
 // evenements remis dans le bon ordre, jointe par ce caractere).
 export const SEP_ORDRE = "|";
@@ -57,6 +64,8 @@ export interface CompItem {
   evenements?: string[]; // mode ordre : evenements AFFICHES (dans le desordre)
   attendu: string; // reponse attendue (comparee normalisee)
   explication: string; // correction courte et valorisante, avec un exemple
+  glossaire?: CompGlose[]; // vieux mots expliques (survol/toucher) ; affichage seul
+  source?: string; // texte d'origine (domaine public) : « Auteur, Titre »
 }
 
 // Donnees de RENDU (ce que l'exercice porte et que <Comprehension> affiche).
@@ -65,7 +74,7 @@ export interface CompItem {
 // (correctif phase 5). Elle n'est PAS jugee par le serveur (affichage seulement).
 export type CompRender = Pick<
   CompItem,
-  "cle" | "format" | "texte" | "consigne" | "options" | "evenements" | "attendu" | "explication"
+  "cle" | "format" | "texte" | "consigne" | "options" | "evenements" | "attendu" | "explication" | "glossaire" | "source"
 > & { preuve: string };
 
 // --------------------------------------------------------------------------
@@ -90,8 +99,9 @@ function ordre(correct: string[], display: string[]): Pick<CompItem, "evenements
 }
 
 // ==========================================================================
-// BANQUE (42 items : 5 competences x 4 niveaux ; textes originaux ; lot 0049 :
-// inferences et textes longs 8-12 lignes au N4).
+// BANQUE (55 items : 5 competences x 4 niveaux ; textes originaux ; lot 0049 :
+// inferences et textes longs 8-12 lignes au N4 ; lot 0060 : 13 items batis sur
+// des textes de la bibliotheque domaine public, avec glossaire des vieux mots).
 // ==========================================================================
 export const BANQUE_COMPREHENSION: CompItem[] = [
   // =======================================================================
@@ -420,6 +430,152 @@ export const BANQUE_COMPREHENSION: CompItem[] = [
     consigne: "Clique dans le texte sur le mot qui aide à comprendre que délicieux veut dire très bon.",
     attendu: "régalèrent",
     explication: "Les enfants se régalèrent : ce mot montre que le repas était délicieux, c'est-à-dire très bon." },
+
+  // =======================================================================
+  // TEXTES DE LA BIBLIOTHEQUE (domaine public verifie, lot 0060). Questions
+  // ORIGINALES ecrites pour le CE2 ; le `texte` reprend les mots exacts de
+  // l'auteur (coupe aux limites de phrase). Un petit glossaire explique les
+  // vieux mots. `source` cite l'auteur et l'oeuvre (page /credits, Bibliotheque).
+  // =======================================================================
+  // --- Jules Renard, « Le Papillon » (Histoires naturelles) ---
+  { cle: "lec-bib-papillon-sens-n1", competence: "FR.LECTURE.SENS_MOT", niveau: 1, format: "qcm",
+    texte: ["Ce billet doux plié en deux cherche une adresse de fleur."],
+    consigne: "Dans ce texte, que veut dire un billet doux ?",
+    options: ["une petite lettre d'amour", "un ticket de train", "un oiseau"],
+    attendu: "une petite lettre d'amour",
+    explication: "Un billet doux est une petite lettre d'amour. Le papillon, plié en deux, ressemble à une lettre qui vole vers une fleur.",
+    glossaire: [
+      { mot: "un billet doux", sens: "une petite lettre d'amour." },
+      { mot: "une adresse", sens: "l'endroit où l'on envoie une lettre ; ici, la fleur." },
+    ],
+    source: "Jules Renard, « Le Papillon »" },
+
+  // --- Jules Renard, « Le Martin-pêcheur » (Histoires naturelles) ---
+  { cle: "lec-bib-martin-info-n2", competence: "FR.LECTURE.INFO", niveau: 2, format: "qcm",
+    texte: ["Comme je tenais ma perche de ligne tendue, un martin-pêcheur est venu s'y poser.",
+            "Nous n'avons pas d'oiseau plus éclatant."],
+    consigne: "Sur quoi le martin-pêcheur est-il venu se poser ?",
+    options: ["sur la perche de la ligne", "sur une fleur", "sur une branche morte"],
+    attendu: "sur la perche de la ligne",
+    explication: "Le texte dit que l'oiseau vient se poser sur la perche de la ligne que le pêcheur tenait.",
+    glossaire: [
+      { mot: "une perche", sens: "la grande canne du pêcheur, un long bâton." },
+      { mot: "éclatant", sens: "aux couleurs très vives, qui brillent." },
+    ],
+    source: "Jules Renard, « Le Martin-pêcheur »" },
+  { cle: "lec-bib-martin-sens-n2", competence: "FR.LECTURE.SENS_MOT", niveau: 2, format: "qcm",
+    texte: ["Nous n'avons pas d'oiseau plus éclatant."],
+    consigne: "Dans ce texte, que veut dire éclatant ?",
+    options: ["aux couleurs très vives", "très grand", "très bruyant"],
+    attendu: "aux couleurs très vives",
+    explication: "Un oiseau éclatant a des couleurs très vives, qui brillent. Le martin-pêcheur est tout bleu et magnifique.",
+    source: "Jules Renard, « Le Martin-pêcheur »" },
+  { cle: "lec-bib-martin-inf-n3", competence: "FR.LECTURE.INFERENCE", niveau: 3, format: "qcm",
+    texte: ["Il semblait une grosse fleur bleue au bout d'une longue tige.",
+            "La perche pliait sous le poids.",
+            "Je ne respirais plus, tout fier d'être pris pour un arbre par un martin-pêcheur."],
+    consigne: "Pourquoi le pêcheur ne respire-t-il plus ?",
+    options: ["pour ne pas faire fuir l'oiseau", "parce qu'il est très fatigué", "parce qu'il a froid"],
+    attendu: "pour ne pas faire fuir l'oiseau",
+    explication: "Le pêcheur reste immobile et retient son souffle pour ne pas faire fuir le bel oiseau posé tout près de lui.",
+    source: "Jules Renard, « Le Martin-pêcheur »" },
+  { cle: "lec-bib-martin-inf-n4", competence: "FR.LECTURE.INFERENCE", niveau: 4, format: "texte",
+    texte: ["Il semblait une grosse fleur bleue au bout d'une longue tige.",
+            "La perche pliait sous le poids.",
+            "Je ne respirais plus, tout fier d'être pris pour un arbre par un martin-pêcheur."],
+    consigne: "Le martin-pêcheur s'est posé sur le pêcheur. Écris en un seul mot ce que l'oiseau a cru que le pêcheur était.",
+    attendu: "arbre",
+    explication: "Le pêcheur reste si immobile que l'oiseau le prend pour un arbre et se pose sur sa perche. On devine le mot arbre.",
+    source: "Jules Renard, « Le Martin-pêcheur »" },
+  { cle: "lec-bib-martin-info-n4", competence: "FR.LECTURE.INFO", niveau: 4, format: "clic",
+    texte: ["Comme je tenais ma perche de ligne tendue, un martin-pêcheur est venu s'y poser.",
+            "Nous n'avons pas d'oiseau plus éclatant."],
+    consigne: "Clique dans le texte sur le nom de l'oiseau qui vient se poser sur la perche.",
+    attendu: "martin-pêcheur",
+    explication: "Le martin-pêcheur est l'oiseau bleu qui s'est posé sur la perche du pêcheur.",
+    source: "Jules Renard, « Le Martin-pêcheur »" },
+
+  // --- Jean de La Fontaine, « Le Corbeau et le Renard » ---
+  { cle: "lec-bib-corbeau-ord-n3", competence: "FR.LECTURE.ORDRE", niveau: 3, format: "ordre",
+    texte: ["Maître corbeau, sur un arbre perché,", "Tenait en son bec un fromage.",
+            "Hé ! bonjour, monsieur du corbeau.", "Il ouvre un large bec, laisse tomber sa proie.",
+            "Le renard s'en saisit, et dit : Mon bon monsieur,"],
+    consigne: "Range les moments de l'histoire dans l'ordre.",
+    ...ordre(
+      ["le renard dit bonjour et flatte le corbeau", "le corbeau ouvre son bec pour chanter", "le renard attrape le fromage tombé"],
+      ["le renard attrape le fromage tombé", "le renard dit bonjour et flatte le corbeau", "le corbeau ouvre son bec pour chanter"]),
+    explication: "Le renard flatte le corbeau, le corbeau ouvre le bec pour chanter, et le fromage tombe : le renard l'attrape.",
+    glossaire: [
+      { mot: "perché", sens: "posé en haut, tout en hauteur." },
+      { mot: "sa proie", sens: "ce qu'il tient pour manger ; ici, le fromage." },
+    ],
+    source: "Jean de La Fontaine, « Le Corbeau et le Renard »" },
+  { cle: "lec-bib-corbeau-sens-n3", competence: "FR.LECTURE.SENS_MOT", niveau: 3, format: "clic",
+    texte: ["Le renard dit de belles choses au corbeau pour avoir son fromage.",
+            "Apprenez que tout flatteur", "Vit aux dépens de celui qui l'écoute."],
+    consigne: "Clique dans le texte sur le mot qui désigne celui qui dit de belles choses pour tromper.",
+    attendu: "flatteur",
+    explication: "Un flatteur dit de belles choses pour tromper. Le renard flatte le corbeau pour lui prendre son fromage.",
+    glossaire: [
+      { mot: "un flatteur", sens: "une personne qui dit de belles choses pour tromper les autres." },
+      { mot: "vivre aux dépens de", sens: "profiter de quelqu'un." },
+    ],
+    source: "Jean de La Fontaine, « Le Corbeau et le Renard »" },
+
+  // --- Jean de La Fontaine, « Le Lièvre et la Tortue » ---
+  { cle: "lec-bib-lievre-info-n1", competence: "FR.LECTURE.INFO", niveau: 1, format: "qcm",
+    texte: ["Rien ne sert de courir ; il faut partir à point.",
+            "Il partit comme un trait ; mais les élans qu'il fit Furent vains : la tortue arriva la première."],
+    consigne: "Qui arrive le premier au bout de la course ?",
+    options: ["la tortue", "le lièvre", "le juge"],
+    attendu: "la tortue",
+    explication: "Le texte dit que la tortue arriva la première. Elle a gagné en avançant sans jamais s'arrêter.",
+    source: "Jean de La Fontaine, « Le Lièvre et la Tortue »" },
+  { cle: "lec-bib-lievre-vf-n2", competence: "FR.LECTURE.VRAIFAUX", niveau: 2, format: "qcm",
+    texte: ["Lui cependant méprise une telle victoire, tient la gageure à peu de gloire.",
+            "Il broute, il se repose ; Il s'amuse à toute autre chose Qu'à la gageure."],
+    consigne: "Le lièvre part tout de suite et court sans s'arrêter. Est-ce vrai ou faux ?",
+    options: ["vrai", "faux"],
+    attendu: "faux",
+    explication: "Le lièvre broute, se repose et s'amuse au lieu de courir : il ne part pas tout de suite, donc c'est faux.",
+    glossaire: [
+      { mot: "la gageure", sens: "le pari ; ici, la course entre le lièvre et la tortue." },
+      { mot: "il broute", sens: "il mange l'herbe." },
+    ],
+    source: "Jean de La Fontaine, « Le Lièvre et la Tortue »" },
+
+  // --- Colette, « Le jeune chat » ---
+  { cle: "lec-bib-chat-info-n2", competence: "FR.LECTURE.INFO", niveau: 2, format: "qcm",
+    texte: ["Il est déjà ravissant, et nous essayons de le nommer Kamaralzaman.",
+            "La cuisinière et la femme de chambre traduisent Kamaralzaman par Moumou."],
+    consigne: "Comment la cuisinière appelle-t-elle le petit chat ?",
+    options: ["Moumou", "Kamaralzaman", "Minou"],
+    attendu: "Moumou",
+    explication: "Le texte dit que la cuisinière traduit Kamaralzaman par Moumou : elle l'appelle Moumou.",
+    glossaire: [
+      { mot: "ravissant", sens: "très joli, très mignon." },
+    ],
+    source: "Colette, « Le jeune chat »" },
+  { cle: "lec-bib-chat-sens-n2", competence: "FR.LECTURE.SENS_MOT", niveau: 2, format: "qcm",
+    texte: ["Il est un jeune chat, gracieux à toute heure."],
+    consigne: "Dans ce texte, que veut dire gracieux ?",
+    options: ["joli et mignon dans ses gestes", "très méchant", "très gros"],
+    attendu: "joli et mignon dans ses gestes",
+    explication: "Gracieux veut dire joli et mignon dans ses gestes. Le petit chat est charmant à regarder.",
+    source: "Colette, « Le jeune chat »" },
+
+  // --- Jules Renard, « L'Écureuil » (Histoires naturelles) ---
+  { cle: "lec-bib-ecureuil-sens-n3", competence: "FR.LECTURE.SENS_MOT", niveau: 3, format: "qcm",
+    texte: ["Leste allumeur de l'automne, il passe et repasse sous les feuilles la petite torche de sa queue."],
+    consigne: "Dans ce texte, que veut dire leste ?",
+    options: ["vif et rapide", "lourd et lent", "tout triste"],
+    attendu: "vif et rapide",
+    explication: "Leste veut dire vif et rapide. L'écureuil bouge sans arrêt sous les feuilles, avec sa belle queue rousse.",
+    glossaire: [
+      { mot: "leste", sens: "vif et rapide dans ses mouvements." },
+      { mot: "une torche", sens: "une flamme que l'on tient à la main ; ici, la queue rousse de l'écureuil." },
+    ],
+    source: "Jules Renard, « L'Écureuil »" },
 ];
 
 // Competences de la sous-matiere (ordre d'affichage = ordre du referentiel).
@@ -502,6 +658,20 @@ export const PREUVE_PAR_CLE: Record<string, string> = {
   "lec-sens-n3-b": "Léo alluma vite sa lampe pour y voir quelque chose.",
   "lec-sens-n4-a": "Dehors, les branches pliaient sous la tempête.",
   "lec-sens-n4-b": "Les enfants se régalèrent et vidèrent toute leur assiette.",
+  // Textes de la bibliotheque (domaine public, lot 0060)
+  "lec-bib-papillon-sens-n1": "Ce billet doux plié en deux cherche une adresse de fleur.",
+  "lec-bib-martin-info-n2": "Comme je tenais ma perche de ligne tendue, un martin-pêcheur est venu s'y poser.",
+  "lec-bib-martin-sens-n2": "Nous n'avons pas d'oiseau plus éclatant.",
+  "lec-bib-martin-inf-n3": "Je ne respirais plus, tout fier d'être pris pour un arbre par un martin-pêcheur.",
+  "lec-bib-martin-inf-n4": "Je ne respirais plus, tout fier d'être pris pour un arbre par un martin-pêcheur.",
+  "lec-bib-martin-info-n4": "Comme je tenais ma perche de ligne tendue, un martin-pêcheur est venu s'y poser.",
+  "lec-bib-corbeau-ord-n3": "Il ouvre un large bec, laisse tomber sa proie.",
+  "lec-bib-corbeau-sens-n3": "Apprenez que tout flatteur",
+  "lec-bib-lievre-info-n1": "Il partit comme un trait ; mais les élans qu'il fit Furent vains : la tortue arriva la première.",
+  "lec-bib-lievre-vf-n2": "Il broute, il se repose ; Il s'amuse à toute autre chose Qu'à la gageure.",
+  "lec-bib-chat-info-n2": "La cuisinière et la femme de chambre traduisent Kamaralzaman par Moumou.",
+  "lec-bib-chat-sens-n2": "Il est un jeune chat, gracieux à toute heure.",
+  "lec-bib-ecureuil-sens-n3": "Leste allumeur de l'automne, il passe et repasse sous les feuilles la petite torche de sa queue.",
 };
 
 // Preuve d'un item (repli sur sa 1re phrase si la cle est inconnue).
@@ -552,6 +722,8 @@ export function buildComprehension(src: ExCalcul, rng: Rng, base: Base): Generat
       evenements: item.evenements,
       attendu: item.attendu,
       explication: item.explication,
+      glossaire: item.glossaire,
+      source: item.source,
       preuve: preuvePour(item.cle),
     },
     verif: { op: "lire", a: 0, b: 0, cle: item.cle },

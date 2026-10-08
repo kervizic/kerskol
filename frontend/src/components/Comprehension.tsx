@@ -143,6 +143,27 @@ export default function Comprehension({ item, indice, onSoumettre, onContinuer }
         corrige={Boolean(res) && clickableTexte}
       />
 
+      {/* Petit glossaire des vieux mots (survol/toucher). Affichage seulement. */}
+      {item.glossaire && item.glossaire.length > 0 && (
+        <details className="kk-lecture__gloss">
+          <summary className="kk-btn">Mots difficiles</summary>
+          <ul className="kk-lecture__gloss-list">
+            {item.glossaire.map((g, i) => (
+              <li key={i}>
+                <strong>{g.mot}</strong> : {g.sens}
+              </li>
+            ))}
+          </ul>
+        </details>
+      )}
+
+      {/* Credit : auteur et oeuvre (domaine public). */}
+      {item.source && (
+        <p className="kk-lecture__source kk-muted" style={{ textAlign: "center", fontSize: "0.85rem", margin: 0 }}>
+          {item.source} — domaine public
+        </p>
+      )}
+
       {/* Question (consigne). */}
       <p className="kk-lead" style={{ textAlign: "center", margin: "0 auto" }}>{item.consigne}</p>
 

@@ -471,6 +471,8 @@ export interface GeneratedExercise {
     evenements?: string[];
     attendu: string;
     explication: string;
+    glossaire?: { mot: string; sens: string }[]; // vieux mots expliques (survol/toucher)
+    source?: string; // texte d'origine (domaine public) : « Auteur, Titre »
     preuve: string; // phrase du texte citee en cas d'erreur (correctif phase 5)
   };
   // Les mots de la maitresse (phase 6) : marqueur. Le composant <MaitresseExo>

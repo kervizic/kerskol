@@ -28,8 +28,8 @@ DECLARE
     n   integer;
 BEGIN
     SELECT count(*) INTO n FROM public.comprehension_item;
-    IF n <> 42 THEN
-        RAISE EXCEPTION 'comprehension_item : 42 items attendus, obtenu %', n;
+    IF n <> 55 THEN
+        RAISE EXCEPTION 'comprehension_item : 55 items attendus, obtenu %', n;
     END IF;
 
     -- Couverture : chaque competence a au moins un item a chaque niveau 1..4.
@@ -56,7 +56,12 @@ BEGIN
         ('lec-vf-n1-b','FR.LECTURE.VRAIFAUX',1,'qcm','faux'),
         ('lec-vf-n4-a','FR.LECTURE.VRAIFAUX',4,'texte','faux'),
         ('lec-sens-n3-a','FR.LECTURE.SENS_MOT',3,'qcm','où l''on glisse facilement'),
-        ('lec-sens-n4-a','FR.LECTURE.SENS_MOT',4,'clic','tempête')
+        ('lec-sens-n4-a','FR.LECTURE.SENS_MOT',4,'clic','tempête'),
+        -- Textes de la bibliotheque (domaine public, lot 0060)
+        ('lec-bib-papillon-sens-n1','FR.LECTURE.SENS_MOT',1,'qcm','une petite lettre d''amour'),
+        ('lec-bib-martin-info-n4','FR.LECTURE.INFO',4,'clic','martin-pêcheur'),
+        ('lec-bib-corbeau-ord-n3','FR.LECTURE.ORDRE',3,'ordre','le renard dit bonjour et flatte le corbeau|le corbeau ouvre son bec pour chanter|le renard attrape le fromage tombé'),
+        ('lec-bib-lievre-info-n1','FR.LECTURE.INFO',1,'qcm','la tortue')
     ) AS t(cle, competence, niveau, format, attendu)
     LOOP
         SELECT format || '|' || attendu INTO got FROM public.comprehension_item WHERE cle = r.cle;
@@ -65,7 +70,7 @@ BEGIN
                 r.cle, r.format || '|' || r.attendu, got;
         END IF;
     END LOOP;
-    RAISE NOTICE 'table comprehension_item (40 + couverture + spot) : OK';
+    RAISE NOTICE 'table comprehension_item (55 + couverture + spot) : OK';
 END $$;
 
 -- ===========================================================================

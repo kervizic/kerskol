@@ -99,6 +99,11 @@ BEGIN
     IF NOT EXISTS (SELECT 1 FROM public.comprehension_item WHERE cle = 'lec-inf-n4-c' AND attendu = 'impatiente') THEN
         RAISE EXCEPTION 'lec-inf-n4-c : attendu « impatiente » absent';
     END IF;
+    -- Lot 0060 (bibliotheque domaine public) : un item de reference est bien en base.
+    IF NOT EXISTS (SELECT 1 FROM public.comprehension_item
+                    WHERE cle = 'lec-bib-papillon-sens-n1' AND attendu = 'une petite lettre d''amour') THEN
+        RAISE EXCEPTION 'lec-bib-papillon-sens-n1 : item bibliotheque (0060) absent';
+    END IF;
 
     RAISE NOTICE 'bienveillance (dictee + attendus de reference) : OK';
 END $$;
