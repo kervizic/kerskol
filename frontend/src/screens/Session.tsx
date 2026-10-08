@@ -27,6 +27,7 @@ import {
   getGeometrie,
   getDonnees,
   getQM,
+  getEMC,
   getDicteeTextes,
   getDicteeContexte,
   enregistrerDictee,
@@ -1251,7 +1252,8 @@ export function Session({
         const francaisActif = (profil.matieres_actives ?? []).includes("FR");
         const mathsActif = (profil.matieres_actives ?? []).includes("MA");
         const qmActif = (profil.matieres_actives ?? []).includes("QM");
-        const [progress_, sources, fr, geo, don, qm, maitresse] = await Promise.all([
+        const emcActif = (profil.matieres_actives ?? []).includes("EMC");
+        const [progress_, sources, fr, geo, don, qm, emc, maitresse] = await Promise.all([
           getProgressionDetail(profil.id),
           getExercicesCalcul(),
           francaisActif ? getFrancais() : Promise.resolve({ competences: [], sources: [] }),
@@ -1264,6 +1266,9 @@ export function Session({
           // Questionner le monde : sources d'exercices (matiere QM). Les
           // competences QM.* sont deja dans referentiel.competences (MA + QM).
           qmActif ? getQM() : Promise.resolve([]),
+          // Vivre ensemble / EMC : sources d'exercices (matiere EMC, type 'emc').
+          // Les competences EMC.* sont deja dans referentiel.competences.
+          emcActif ? getEMC() : Promise.resolve([]),
           // Les mots de la maitresse (phase 6) : listes actives du foyer.
           francaisActif ? getMaitresse(profil.id) : Promise.resolve([]),
         ]);
@@ -1279,7 +1284,7 @@ export function Session({
           competences: [...referentiel.competences, ...fr.competences],
           prerequis: referentiel.prerequis,
           progress: progress_,
-          sources: [...sources, ...geo, ...don, ...qm, ...fr.sources],
+          sources: [...sources, ...geo, ...don, ...qm, ...emc, ...fr.sources],
           seed: (Date.now() ^ 0x9e3779b9) >>> 0,
           now: Date.now(),
           classe: profil.classe,

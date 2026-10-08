@@ -65,6 +65,18 @@ export const MATIERES: MatiereDef[] = [
       { domaine: "temps", libelle: "Le temps" },
     ],
   },
+  {
+    // « Vivre ensemble » (EMC). Situations concretes du quotidien ; reutilise
+    // le rendu de Questionner le monde (QCM, tri, ordre, saisie libre).
+    code: "EMC",
+    libelle: "Vivre ensemble",
+    sousMatieres: [
+      { domaine: "respect", libelle: "Respecter les autres" },
+      { domaine: "emotions", libelle: "Mes émotions" },
+      { domaine: "republique", libelle: "Droits et République" },
+      { domaine: "ecrans", libelle: "Les écrans et Internet" },
+    ],
+  },
 ];
 
 // Tous les codes matieres / tous les domaines connus (defauts « tout actif »).

@@ -218,6 +218,38 @@ export const INDICES: Record<string, string> = {
     "Autrefois, c'était il y a longtemps : la plume, la bougie, l'ardoise. Aujourd'hui : l'ordinateur, l'électricité.",
   "QM.TEMPS.JOURNUIT":
     "Le jour, le soleil éclaire. La nuit, on voit la lune. Il fait jour puis nuit parce que la Terre tourne.",
+
+  // --- Vivre ensemble / EMC (indices aux niveaux 1 et 2 seulement) ----------
+  "EMC.RESPECT.REGLES":
+    "Pense à la règle qui aide tout le monde. En classe, on lève le doigt pour parler et on écoute les autres.",
+  "EMC.RESPECT.POLITESSE":
+    "Les mots gentils font du bien. On dit bonjour, merci, s'il te plaît et pardon.",
+  "EMC.RESPECT.DIFFERENCES":
+    "Chacun est différent et c'est très bien. Les filles et les garçons ont les mêmes droits et peuvent tout faire.",
+  "EMC.RESPECT.MOQUERIE":
+    "On ne rit jamais méchamment de quelqu'un. Si on t'embête ou si tu vois une moquerie, parle à un adulte de confiance.",
+  "EMC.EMOTIONS.RECONNAITRE":
+    "Écoute ton corps. La joie fait sourire, la peur fait battre le cœur, la colère donne chaud, la tristesse donne envie de pleurer.",
+  "EMC.EMOTIONS.CALME":
+    "Quand une émotion est forte, on s'arrête et on respire doucement. On utilise des mots, jamais les mains.",
+  "EMC.EMOTIONS.EMPATHIE":
+    "Imagine ce que l'autre ressent. S'il est triste, on le console. S'il a besoin d'aide, on l'aide.",
+  "EMC.REPUBLIQUE.DROITS":
+    "Les enfants ont des droits, comme aller à l'école. À l'école, ils ont aussi des devoirs, comme écouter et respecter les autres.",
+  "EMC.REPUBLIQUE.SYMBOLES":
+    "Pense à ce qu'on voit sur la mairie. Le drapeau est bleu, blanc, rouge. Le chant de la France est la Marseillaise.",
+  "EMC.REPUBLIQUE.COMMUNE":
+    "La commune, c'est ton village ou ta ville. La personne qui la dirige est le maire, et il travaille à la mairie.",
+  "EMC.REPUBLIQUE.VOTER":
+    "Pour choisir sans se disputer, on vote. Chacun a une voix, et celui qui a le plus de voix est élu.",
+  "EMC.ECRANS.TEMPS":
+    "Les écrans, c'est bien mais pas trop longtemps. On fait des pauses, on bouge, et on les éteint avant de dormir.",
+  "EMC.ECRANS.DONNEES":
+    "Ton adresse et ton mot de passe restent secrets. Si on te demande tes informations, préviens un adulte.",
+  "EMC.ECRANS.POLITESSE":
+    "Derrière l'écran, il y a une vraie personne. On reste poli dans les messages, comme quand on se parle en vrai.",
+  "EMC.ECRANS.ESPRITCRITIQUE":
+    "Sur Internet, tout n'est pas vrai. Avant de croire une chose, on réfléchit et on vérifie avec un adulte.",
 };
 
 // Indice d'une competence, UNIQUEMENT aux niveaux 1 et 2 (sinon null : plus

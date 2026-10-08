@@ -1,0 +1,199 @@
+// Banque « RESPECTER LES AUTRES ET LES REGLES » (Vivre ensemble / EMC, CE2,
+// cycle 2). Sous-matiere, domaine dedie `respect` :
+//   EMC.RESPECT.REGLES       regles de vie de la classe et de l'ecole ;
+//   EMC.RESPECT.POLITESSE    la politesse (bonjour, merci, s'il te plait, pardon) ;
+//   EMC.RESPECT.DIFFERENCES  respecter les differences, egalite filles-garcons ;
+//   EMC.RESPECT.MOQUERIE     refuser la moquerie et le harcelement, en parler a
+//                            un adulte de confiance.
+//
+// FORMAT : petites SITUATIONS concretes du quotidien. L'enfant choisit la bonne
+// conduite (qcm), classe (tri), range (ordre) ou ecrit un mot (texte, N4). Le
+// ton est TOUJOURS bienveillant, jamais moralisateur ni culpabilisant ; la
+// correction valorise la bonne conduite et rappelle, pour le harcelement, qu'on
+// en parle a un adulte de confiance. Le SERVEUR (verif_qm, op 'qm') reste seul
+// juge via la cle.
+
+import { type QmItem, ordre, tri } from "../qm/types";
+
+export const BANQUE_RESPECT: QmItem[] = [
+  // =======================================================================
+  // EMC.RESPECT.REGLES — les regles de vie de la classe et de l'ecole
+  // =======================================================================
+  { cle: "emc-res-reg-n1-a", competence: "EMC.RESPECT.REGLES", niveau: 1, format: "qcm",
+    consigne: "En classe, tu veux dire quelque chose à la maîtresse. Que fais-tu ?",
+    options: ["je lève le doigt", "je crie très fort"], attendu: "je lève le doigt",
+    explication: "On lève le doigt et on attend son tour : comme ça, chacun peut parler tranquillement." },
+  { cle: "emc-res-reg-n1-b", competence: "EMC.RESPECT.REGLES", niveau: 1, format: "qcm",
+    consigne: "Dans le couloir de l'école, comment se déplace-t-on ?",
+    options: ["on marche doucement", "on court en poussant"], attendu: "on marche doucement",
+    explication: "On marche doucement dans le couloir : personne ne tombe et ne se fait mal." },
+  { cle: "emc-res-reg-n2-a", competence: "EMC.RESPECT.REGLES", niveau: 2, format: "qcm",
+    consigne: "Léo a fini son travail avant les autres. Que peut-il faire sans déranger ?",
+    options: ["lire un livre tranquillement", "parler fort à son voisin", "courir dans la classe"],
+    attendu: "lire un livre tranquillement",
+    explication: "Lire sans bruit laisse les autres finir. C'est une belle idée pour patienter." },
+  { cle: "emc-res-reg-n2-b", competence: "EMC.RESPECT.REGLES", niveau: 2, format: "tri",
+    consigne: "Classe chaque action : on le fait en classe, ou on ne le fait pas ?",
+    ...tri(["on le fait", "on ne le fait pas"], [
+      ["ranger son matériel", "on le fait"],
+      ["écouter la maîtresse", "on le fait"],
+      ["se moquer d'un camarade", "on ne le fait pas"],
+      ["jeter du papier par terre", "on ne le fait pas"],
+    ]),
+    explication: "Ranger et écouter aident toute la classe. Se moquer ou salir, non : on évite." },
+  { cle: "emc-res-reg-n3-a", competence: "EMC.RESPECT.REGLES", niveau: 3, format: "qcm",
+    consigne: "Pourquoi y a-t-il des règles dans la classe ?",
+    options: ["pour que tout le monde se sente bien", "pour embêter les enfants", "pour faire plaisir à une seule personne"],
+    attendu: "pour que tout le monde se sente bien",
+    explication: "Les règles protègent chacun : on travaille et on joue mieux quand tout le monde les respecte." },
+  { cle: "emc-res-reg-n3-b", competence: "EMC.RESPECT.REGLES", niveau: 3, format: "qcm",
+    consigne: "Tu n'es pas d'accord avec une règle de la classe. Que peux-tu faire ?",
+    options: ["en parler calmement avec la maîtresse", "ne plus jamais respecter les règles", "me fâcher et crier"],
+    attendu: "en parler calmement avec la maîtresse",
+    explication: "On peut discuter calmement d'une règle. Parler, c'est mieux que se fâcher." },
+  { cle: "emc-res-reg-n4-a", competence: "EMC.RESPECT.REGLES", niveau: 4, format: "texte",
+    consigne: "Avant de parler en classe, on lève le... Écris le mot.",
+    attendu: "doigt",
+    explication: "On lève le doigt et on attend son tour pour parler : chacun est écouté." },
+  { cle: "emc-res-reg-n4-b", competence: "EMC.RESPECT.REGLES", niveau: 4, format: "texte",
+    consigne: "Les règles de la classe sont faites pour que tout le monde se sente... Écris le mot (bien).",
+    attendu: "bien",
+    explication: "Les règles aident chacun à se sentir bien et en sécurité à l'école." },
+
+  // =======================================================================
+  // EMC.RESPECT.POLITESSE — bonjour, merci, s'il te plaît, pardon
+  // =======================================================================
+  { cle: "emc-res-pol-n1-a", competence: "EMC.RESPECT.POLITESSE", niveau: 1, format: "qcm",
+    consigne: "Le matin, en arrivant dans la classe, que dis-tu ?",
+    options: ["bonjour", "rien du tout"], attendu: "bonjour",
+    explication: "On dit bonjour en arrivant : c'est une façon gentille de saluer les autres." },
+  { cle: "emc-res-pol-n1-b", competence: "EMC.RESPECT.POLITESSE", niveau: 1, format: "qcm",
+    consigne: "Un camarade te prête son crayon. Que dis-tu ?",
+    options: ["merci", "donne encore"], attendu: "merci",
+    explication: "On dit merci quand on nous rend service : ça fait plaisir à l'autre." },
+  { cle: "emc-res-pol-n2-a", competence: "EMC.RESPECT.POLITESSE", niveau: 2, format: "qcm",
+    consigne: "Tu veux emprunter la gomme de Sami. Comment le demandes-tu ?",
+    options: ["Tu me prêtes ta gomme, s'il te plaît ?", "Donne ta gomme !", "Je prends ta gomme."],
+    attendu: "Tu me prêtes ta gomme, s'il te plaît ?",
+    explication: "On demande gentiment avec « s'il te plaît ». C'est plus agréable que d'exiger." },
+  { cle: "emc-res-pol-n2-b", competence: "EMC.RESPECT.POLITESSE", niveau: 2, format: "tri",
+    consigne: "Classe chaque mot : mot poli, ou pas poli ?",
+    ...tri(["mot poli", "pas poli"], [
+      ["merci", "mot poli"],
+      ["s'il te plaît", "mot poli"],
+      ["pardon", "mot poli"],
+      ["tais-toi", "pas poli"],
+    ]),
+    explication: "Merci, s'il te plaît et pardon sont des mots polis. « Tais-toi » fait de la peine." },
+  { cle: "emc-res-pol-n3-a", competence: "EMC.RESPECT.POLITESSE", niveau: 3, format: "qcm",
+    consigne: "Sans le vouloir, tu bouscules quelqu'un dans la cour. Que dis-tu ?",
+    options: ["pardon", "c'est pas moi", "tant pis pour toi"], attendu: "pardon",
+    explication: "On dit pardon quand on bouscule quelqu'un, même sans le faire exprès." },
+  { cle: "emc-res-pol-n3-b", competence: "EMC.RESPECT.POLITESSE", niveau: 3, format: "ordre",
+    consigne: "Range cette petite scène polie dans l'ordre.",
+    ...ordre(["tu demandes de l'aide, s'il te plaît", "on t'aide", "tu dis merci"]),
+    explication: "On demande poliment, on reçoit de l'aide, puis on dit merci. C'est complet et gentil." },
+  { cle: "emc-res-pol-n4-a", competence: "EMC.RESPECT.POLITESSE", niveau: 4, format: "texte",
+    consigne: "Quand on te rend service, tu dis... Écris le mot.",
+    attendu: "merci",
+    explication: "On dit merci : ça montre qu'on apprécie le geste de l'autre." },
+  { cle: "emc-res-pol-n4-b", competence: "EMC.RESPECT.POLITESSE", niveau: 4, format: "texte",
+    consigne: "Quand tu bouscules quelqu'un sans le vouloir, tu dis... Écris le mot.",
+    attendu: "pardon",
+    explication: "On dit pardon : on reconnaît gentiment qu'on a gêné l'autre." },
+
+  // =======================================================================
+  // EMC.RESPECT.DIFFERENCES — respecter les differences, egalite filles-garcons
+  // =======================================================================
+  { cle: "emc-res-dif-n1-a", competence: "EMC.RESPECT.DIFFERENCES", niveau: 1, format: "qcm",
+    consigne: "Un nouvel élève ne parle pas encore bien français. Que fais-tu ?",
+    options: ["je l'aide gentiment", "je me moque de lui"], attendu: "je l'aide gentiment",
+    explication: "On aide celui qui apprend : chacun a le droit d'être bien accueilli." },
+  { cle: "emc-res-dif-n1-b", competence: "EMC.RESPECT.DIFFERENCES", niveau: 1, format: "qcm",
+    consigne: "Le foot, c'est pour qui ?",
+    options: ["pour les filles et les garçons", "pour les garçons seulement"], attendu: "pour les filles et les garçons",
+    explication: "Les jeux et les sports sont pour les filles comme pour les garçons." },
+  { cle: "emc-res-dif-n2-a", competence: "EMC.RESPECT.DIFFERENCES", niveau: 2, format: "qcm",
+    consigne: "Une camarade est en fauteuil roulant. Comment joues-tu avec elle ?",
+    options: ["je choisis un jeu qu'on peut faire ensemble", "je joue sans elle", "je lui dis de regarder"],
+    attendu: "je choisis un jeu qu'on peut faire ensemble",
+    explication: "On trouve un jeu pour tout le monde : chacun a sa place dans le groupe." },
+  { cle: "emc-res-dif-n2-b", competence: "EMC.RESPECT.DIFFERENCES", niveau: 2, format: "tri",
+    consigne: "Qui peut faire ces métiers ? Classe chaque phrase.",
+    ...tri(["vrai", "faux"], [
+      ["une fille peut être pompière", "vrai"],
+      ["un garçon peut être infirmier", "vrai"],
+      ["seuls les garçons peuvent être médecins", "faux"],
+      ["seules les filles peuvent cuisiner", "faux"],
+    ]),
+    explication: "Tous les métiers sont ouverts aux filles et aux garçons. Chacun choisit ce qu'il aime." },
+  { cle: "emc-res-dif-n3-a", competence: "EMC.RESPECT.DIFFERENCES", niveau: 3, format: "qcm",
+    consigne: "Deux camarades n'ont pas la même religion que toi. Que penses-tu ?",
+    options: ["on peut être amis quand même", "on ne peut pas être amis", "il faut qu'ils changent"],
+    attendu: "on peut être amis quand même",
+    explication: "On peut être amis même si on est différents : nos différences nous rendent plus riches." },
+  { cle: "emc-res-dif-n3-b", competence: "EMC.RESPECT.DIFFERENCES", niveau: 3, format: "qcm",
+    consigne: "Pour ranger la classe, qui peut porter les chaises ?",
+    options: ["les filles et les garçons, chacun son tour", "seulement les garçons, car ils sont forts"],
+    attendu: "les filles et les garçons, chacun son tour",
+    explication: "Filles et garçons sont égaux : chacun aide à son tour, sans différence." },
+  { cle: "emc-res-dif-n4-a", competence: "EMC.RESPECT.DIFFERENCES", niveau: 4, format: "texte",
+    consigne: "Les filles et les garçons ont les mêmes droits : ils sont... Écris le mot (égaux).",
+    attendu: "égaux",
+    explication: "Filles et garçons sont égaux : ils ont les mêmes droits et peuvent faire les mêmes choses." },
+  { cle: "emc-res-dif-n4-b", competence: "EMC.RESPECT.DIFFERENCES", niveau: 4, format: "texte",
+    consigne: "Accepter que les autres soient différents, c'est les... Écris le mot (respecter).",
+    attendu: "respecter",
+    explication: "Respecter les autres, c'est accepter leurs différences avec gentillesse." },
+
+  // =======================================================================
+  // EMC.RESPECT.MOQUERIE — refuser la moquerie et le harcelement, en parler
+  // =======================================================================
+  { cle: "emc-res-moq-n1-a", competence: "EMC.RESPECT.MOQUERIE", niveau: 1, format: "qcm",
+    consigne: "Des enfants se moquent des lunettes de Sami. Que fais-tu ?",
+    options: ["je ne ris pas et je le console", "je ris avec eux"], attendu: "je ne ris pas et je le console",
+    explication: "On ne rit pas de quelqu'un : on le console. Tu peux aussi en parler à un adulte." },
+  { cle: "emc-res-moq-n1-b", competence: "EMC.RESPECT.MOQUERIE", niveau: 1, format: "qcm",
+    consigne: "Quelqu'un t'embête souvent et ça te fait de la peine. À qui en parles-tu ?",
+    options: ["à un adulte de confiance", "à personne"], attendu: "à un adulte de confiance",
+    explication: "On en parle à un adulte de confiance : un parent, la maîtresse. Il est là pour t'aider." },
+  { cle: "emc-res-moq-n2-a", competence: "EMC.RESPECT.MOQUERIE", niveau: 2, format: "qcm",
+    consigne: "Léo se moque de Sami parce qu'il porte de vieilles chaussures. Que peux-tu faire ?",
+    options: ["défendre Sami et prévenir un adulte", "rigoler avec Léo", "ne rien dire et partir"],
+    attendu: "défendre Sami et prévenir un adulte",
+    explication: "On défend celui qu'on embête et on prévient un adulte de confiance. Tu n'es pas tout seul." },
+  { cle: "emc-res-moq-n2-b", competence: "EMC.RESPECT.MOQUERIE", niveau: 2, format: "tri",
+    consigne: "Classe chaque phrase : elle fait du bien, ou elle fait de la peine ?",
+    ...tri(["fait du bien", "fait de la peine"], [
+      ["tu joues très bien", "fait du bien"],
+      ["viens jouer avec nous", "fait du bien"],
+      ["tu es nul", "fait de la peine"],
+      ["on ne veut pas de toi", "fait de la peine"],
+    ]),
+    explication: "Les mots gentils font du bien. Les moqueries font de la peine : on les évite." },
+  { cle: "emc-res-moq-n3-a", competence: "EMC.RESPECT.MOQUERIE", niveau: 3, format: "qcm",
+    consigne: "On t'embête tous les jours à la récré et tu as peur d'en parler. Que faire ?",
+    options: ["en parler quand même à un adulte de confiance", "garder le secret", "se venger tout seul"],
+    attendu: "en parler quand même à un adulte de confiance",
+    explication: "Quand ça se répète, c'est du harcèlement. On en parle à un adulte de confiance : ce n'est pas rapporter, c'est se protéger." },
+  { cle: "emc-res-moq-n3-b", competence: "EMC.RESPECT.MOQUERIE", niveau: 3, format: "qcm",
+    consigne: "Un camarade est tout seul et triste à la récré. Que peux-tu faire ?",
+    options: ["l'inviter à jouer avec toi", "le laisser tout seul", "me moquer de lui"],
+    attendu: "l'inviter à jouer avec toi",
+    explication: "Inviter quelqu'un à jouer, c'est un beau geste. Personne ne doit rester seul contre son gré." },
+  { cle: "emc-res-moq-n4-a", competence: "EMC.RESPECT.MOQUERIE", niveau: 4, format: "texte",
+    consigne: "Quand on t'embête souvent, tu en parles à un... de confiance. Écris le mot.",
+    attendu: "adulte",
+    explication: "On en parle à un adulte de confiance : un parent, la maîtresse. Il est là pour t'aider." },
+  { cle: "emc-res-moq-n4-b", competence: "EMC.RESPECT.MOQUERIE", niveau: 4, format: "texte",
+    consigne: "Rire méchamment de quelqu'un, c'est se... de lui. Écris le mot (moquer).",
+    attendu: "moquer",
+    explication: "Se moquer fait de la peine. On préfère des mots gentils, et on prévient un adulte si ça continue." },
+];
+
+export const COMPETENCES_RESPECT = [
+  "EMC.RESPECT.REGLES",
+  "EMC.RESPECT.POLITESSE",
+  "EMC.RESPECT.DIFFERENCES",
+  "EMC.RESPECT.MOQUERIE",
+] as const;

@@ -26,6 +26,7 @@ import { buildGeometrie } from "../geometrie/geometrie";
 import type { GeoFigure, GeoFormat, GeoInteract } from "../geometrie/geometrie";
 import { buildDonnees } from "../donnees/donnees";
 import { buildQm } from "../qm";
+import { buildEmc } from "../emc";
 import type { QmFormat, QmFigure } from "../qm/types";
 import type { DonFigure, DonFormat, DonInteract } from "../donnees/donnees";
 import { buildComprehension } from "../francais/comprehension";
@@ -657,6 +658,11 @@ function buildExercise(
   // --- Questionner le monde (vivant, matiere, objets, espace, temps) ----
   if (src.competence.startsWith("QM.")) {
     return buildQm(src, rng, base);
+  }
+  // --- Vivre ensemble / EMC (respect, emotions, republique, ecrans) -----
+  // Reutilise l'infra « situation » de QM (forme / saisie / op 'qm').
+  if (src.competence.startsWith("EMC.")) {
+    return buildEmc(src, rng, base);
   }
   // --- Numeration : lire/ecrire, decomposer, comparer, suite ------------
   if (src.competence.startsWith("MA.NUM.")) {

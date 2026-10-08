@@ -388,7 +388,7 @@ export async function getReferentiel(): Promise<Referentiel> {
     sb
       .from("competences")
       .select("code, matiere, domaine, libelle, ordre, nb_niveaux, actif")
-      .in("matiere", ["MA", "QM"])
+      .in("matiere", ["MA", "QM", "EMC"])
       .order("ordre", { ascending: true }),
     sb.from("competence_prerequis").select("competence, prerequis, niveau_min"),
   ]);
@@ -620,6 +620,37 @@ export async function getQM(): Promise<ExCalcul[]> {
       .from("exercices")
       .select("id, competence, niveau, methode")
       .eq("type", "qm")
+      .eq("actif", true);
+    if (error) throw error;
+    return (data ?? []).map((e): ExCalcul => ({
+      exerciceId: e.id as string,
+      competence: e.competence as string,
+      niveau: e.niveau as number,
+      methode: (e.methode as string | null) ?? null,
+      operation: "qm",
+      forme: "qm" as Forme,
+      params: {},
+      support: null,
+      correctionStrategie: null,
+    }));
+  } catch {
+    return [];
+  }
+}
+
+// Catalogue des exercices « VIVRE ENSEMBLE » (matiere EMC, type 'emc'). Comme
+// Questionner le monde, la GENERATION est faite cote client (banque domain/emc)
+// et le rendu reutilise <QuestionnerLeMonde> (forme / saisie 'qm'). L'op de
+// verification serveur est 'qm' (table public.qm_item generalisee). Les
+// competences (EMC.*) sont deja chargees par getReferentiel (MA + QM + EMC).
+// Repli silencieux : [] si lecture impossible.
+export async function getEMC(): Promise<ExCalcul[]> {
+  if (isDemo()) return [];
+  try {
+    const { data, error } = await supabase()
+      .from("exercices")
+      .select("id, competence, niveau, methode")
+      .eq("type", "emc")
       .eq("actif", true);
     if (error) throw error;
     return (data ?? []).map((e): ExCalcul => ({

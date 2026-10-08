@@ -984,3 +984,46 @@ Le serveur juge déjà l'op `div` pour `MA.PB.MULT_DIV` (verif_calcul inchangé)
 Les deux sens de la division sont désormais couverts, avec quotient (problèmes)
 et quotient + reste (calcul). Test `problemes.test.ts` : les deux sens
 apparaissent bien (partage + quotition).
+
+## Nouvelle matière « Vivre ensemble » (EMC, migration 0058)
+
+Quatrième matière, à côté de Maths, Français et Questionner le monde :
+l'**enseignement moral et civique** (CE2, cycle 2). Même modèle d'activation que
+QM : la matière `EMC` et ses 4 sous-matières (`respect`, `emotions`,
+`republique`, `ecrans`) sont **actives au défaut et sur tous les profils
+existants (Iris incluse)**. Garde-fou « au moins une sous-matière jouable »
+intact (MA reste toujours active).
+
+**Réutilisation (pas de duplication)** : EMC partage l'infrastructure
+« situation » de QM — même table serveur `public.qm_item` (contrainte élargie à
+`EMC.%`), même fonction `verif_qm`, même op `qm` dans `enregistrer_reponse`
+(branche élargie à `EMC.%`), même composant de rendu `<QuestionnerLeMonde>`
+(formats `qcm` / `tri` / `ordre` / `texte`). Seuls changent le **catalogue**
+d'exercices (`exercices.type = 'emc'`, méthode `vivre_ensemble`) et le
+**contenu** (banque `frontend/src/domain/emc`, miroir de `qm_item`). Test croisé
+front ↔ SQL : `emc.test.ts` + `emc_test.sql`.
+
+**Format pédagogique** : petites SITUATIONS concrètes du quotidien d'un enfant
+(« Léo se moque de Sami… Que peux-tu faire ? ») avec choix de la bonne conduite
+et justification (champ `explication`). Ton **toujours bienveillant**, jamais
+moralisateur ni culpabilisant ; plusieurs bonnes conduites valorisées. Pour le
+harcèlement : on rappelle toujours d'**en parler à un adulte de confiance**.
+Contenus **neutres politiquement** (seulement les institutions et valeurs
+officielles du programme). Progression : N1 rappel léger (QCM), N2-N3 cœur CE2
+(QCM, tri, ranger), N4 réponse libre écrite.
+
+Sous-matières et compétences (15 compétences × 4 niveaux × 2 = **120 items**) :
+
+- **Respecter les autres et les règles** (`respect`) : `REGLES` (règles de vie
+  de classe/école), `POLITESSE` (bonjour, merci, s'il te plaît, pardon),
+  `DIFFERENCES` (respect des différences, égalité filles-garçons), `MOQUERIE`
+  (refuser la moquerie et le harcèlement, en parler à un adulte).
+- **Mes émotions** (`emotions`) : `RECONNAITRE` (joie, colère, peur, tristesse,
+  surprise), `CALME` (réagir calmement), `EMPATHIE` (se mettre à la place de
+  l'autre).
+- **Droits et devoirs, la République** (`republique`) : `DROITS` (droits de
+  l'enfant, devoirs à l'école), `SYMBOLES` (drapeau, Marianne, devise, hymne,
+  14 juillet), `COMMUNE` (la commune et le maire), `VOTER` (élire des délégués).
+- **Bien utiliser les écrans et Internet** (`ecrans`) : `TEMPS` (temps d'écran),
+  `DONNEES` (ne pas donner ses infos, demander à un adulte), `POLITESSE` (être
+  poli en ligne), `ESPRITCRITIQUE` (ne pas tout croire, vérifier).
