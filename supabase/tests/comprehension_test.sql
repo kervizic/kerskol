@@ -4,7 +4,7 @@
 --
 -- Couvre :
 --   * la table de reference public.comprehension_item contient EXACTEMENT les
---     memes items que le front (40 lignes ; couverture 5 competences x 4 niveaux ;
+--     memes items que le front (192 lignes ; couverture 5 competences x 4 niveaux ;
 --     spot check) : TEST CROISE avec le golden vitest
 --     (frontend/.../francais/comprehension.test.ts) ;
 --   * verif_comprehension : bonne reponse acceptee, mauvaise refusee, accents
@@ -19,7 +19,7 @@
 BEGIN;
 
 -- ===========================================================================
--- 1. Table de reference : 40 items, couverture complete + spot check (front==SQL)
+-- 1. Table de reference : 192 items, couverture complete + spot check (front==SQL)
 -- ===========================================================================
 DO $$
 DECLARE
@@ -28,8 +28,8 @@ DECLARE
     n   integer;
 BEGIN
     SELECT count(*) INTO n FROM public.comprehension_item;
-    IF n <> 55 THEN
-        RAISE EXCEPTION 'comprehension_item : 55 items attendus, obtenu %', n;
+    IF n <> 192 THEN
+        RAISE EXCEPTION 'comprehension_item : 192 items attendus, obtenu %', n;
     END IF;
 
     -- Couverture : chaque competence a au moins un item a chaque niveau 1..4.
@@ -61,7 +61,17 @@ BEGIN
         ('lec-bib-papillon-sens-n1','FR.LECTURE.SENS_MOT',1,'qcm','une petite lettre d''amour'),
         ('lec-bib-martin-info-n4','FR.LECTURE.INFO',4,'clic','martin-pêcheur'),
         ('lec-bib-corbeau-ord-n3','FR.LECTURE.ORDRE',3,'ordre','le renard dit bonjour et flatte le corbeau|le corbeau ouvre son bec pour chanter|le renard attrape le fromage tombé'),
-        ('lec-bib-lievre-info-n1','FR.LECTURE.INFO',1,'qcm','la tortue')
+        ('lec-bib-lievre-info-n1','FR.LECTURE.INFO',1,'qcm','la tortue'),
+        -- Textes de la bibliotheque completes (lot 0062) : spot check par format
+        ('lec-bib-cendrillon-info-n4','FR.LECTURE.INFO',4,'clic','citrouille'),
+        ('lec-bib-hareng-ord-n3','FR.LECTURE.ORDRE',3,'ordre','l''homme monte à l''échelle|il plante le clou dans le mur|il redescend de l''échelle'),
+        ('lec-bib-orge-ord-n4','FR.LECTURE.ORDRE',4,'ordre','la femme va voir la sorcière|la sorcière donne un grain d''orge|la femme plante le grain'),
+        ('lec-bib-clopinet-info-n4','FR.LECTURE.INFO',4,'texte','pomme'),
+        ('lec-bib-paon-info-n4','FR.LECTURE.INFO',4,'texte','demain'),
+        ('lec-bib-cigogne-info-n4','FR.LECTURE.INFO',4,'clic','vase'),
+        ('lec-bib-camille-sens-n4','FR.LECTURE.SENS_MOT',4,'clic','attachement'),
+        ('lec-bib-noel-info-n1','FR.LECTURE.INFO',1,'qcm','blanche'),
+        ('lec-bib-serpent-sens-n2','FR.LECTURE.SENS_MOT',2,'qcm','un animal long et sans pattes')
     ) AS t(cle, competence, niveau, format, attendu)
     LOOP
         SELECT format || '|' || attendu INTO got FROM public.comprehension_item WHERE cle = r.cle;
@@ -70,7 +80,7 @@ BEGIN
                 r.cle, r.format || '|' || r.attendu, got;
         END IF;
     END LOOP;
-    RAISE NOTICE 'table comprehension_item (55 + couverture + spot) : OK';
+    RAISE NOTICE 'table comprehension_item (192 + couverture + spot) : OK';
 END $$;
 
 -- ===========================================================================

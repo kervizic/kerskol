@@ -1118,6 +1118,20 @@ belles choses pour tromper »). Chaque item cite sa source (auteur + œuvre).
 `comprehension_item` (dont les nouveaux items). Les définitions du glossaire sont
 adoucies si besoin (ex. « façon amicale et familière » au lieu de « moqueuse »).
 
+### Complément : une question sur chaque texte (lot 0062)
+
+Le lot 0060 ne couvrait que 6 textes (13 questions). Le lot 0062 (migration
+`0062_bibliotheque_comprehension_complet`) ajoute **137 questions originales**
+pour couvrir **chaque texte de la page Bibliothèque** qui n'en avait pas encore
+(41 textes, 3 à 4 questions chacun), soit **≈ 150 questions bibliothèque** au
+total (golden : 192 items dans `comprehension_item`). Même patron (N1 info
+explicite QCM → N4 réponse libre : clic, texte ou remise en ordre), même
+glossaire des vieux mots, même source citée. Les questions N1 restent des
+repérages d'information explicite ; le vocabulaire en contexte (ex. le « billet
+doux » du Papillon) est traité au N2. **Huit textes écartés** par le garde-fou
+bienveillance (mot sensible dans le corps : « Le Loup et le Chien », « Le Cygne »,
+« Le Chêne et le Roseau »…) ne sont volontairement pas intégrés.
+
 ## Dictée : extraits inspirés de la bibliothèque (lot 0061)
 
 La dictée détective reçoit dix extraits courts (2 à 4 phrases, **orthographe
