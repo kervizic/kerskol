@@ -81,6 +81,13 @@ const NUM: Row[] = [
   ["MA.NUM.SUITE", 2, "encadrer", "encadrement", "exemples_estompes", "aucun", "bonds", { type: "bond", pas: [10, 100], max: 9999 }],
   ["MA.NUM.SUITE", 3, "encadrer", "encadrement", "plateau_lineaire", "aucun", "droite_graduee", { type: "droite", step: 100, intervalles: 10, max: 1000 }],
   ["MA.NUM.SUITE", 4, "encadrer", "encadrement", "plateau_lineaire", "aucun", "droite_graduee", { type: "droite", step: 1000, intervalles: 10, max: 10000 }],
+
+  // CM1 (lot 2) : grands nombres (comparer / ranger). Chiffres seuls (aucune
+  // ecriture en lettres), jusqu'au million. Portee CM1..CM2 (classe_min=CM1).
+  ["MA.NUM.GRANDS", 1, "comparer", "comparaison", "cpa_barres", "aucun", "comparer_signes", { type: "comparer", min: 1000, max: 99999 }],
+  ["MA.NUM.GRANDS", 2, "comparer", "comparaison", "exemples_estompes", "aucun", "ranger", { type: "ranger", min: 10000, max: 99999, n: 3 }],
+  ["MA.NUM.GRANDS", 3, "comparer", "comparaison", "variation", "aucun", "comparer_signes", { type: "comparer", min: 10000, max: 999999 }],
+  ["MA.NUM.GRANDS", 4, "comparer", "comparaison", "probleme_dabord", "aucun", "ranger", { type: "ranger", min: 100000, max: 1000000, n: 3 }],
 ];
 
 // --- Calculs poses (domaine calcul_pose) ---

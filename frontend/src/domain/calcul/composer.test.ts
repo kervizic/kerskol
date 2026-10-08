@@ -382,3 +382,30 @@ describe("composeSession : filtre de candidature par classe", () => {
     expect(plan.length).toBeGreaterThan(0);
   });
 });
+
+describe("composeSession : 1re seance CM1 (lot 2 - grands nombres)", () => {
+  const COMP_CM1: Competence[] = [
+    { code: "MA.NUM.GRANDS", matiere: "MA", domaine: "numeration", libelle: "grands", ordre: 340, nb_niveaux: 4, actif: true, classe_min: "CM1", classe_max: "CM2" },
+    { code: "MA.NUM.COMPARER", matiere: "MA", domaine: "numeration", libelle: "comparer", ordre: 320, nb_niveaux: 4, actif: true, classe_min: "CE2", classe_max: "CE2" },
+    { code: "MA.TABLES.5", matiere: "MA", domaine: "tables_multiplication", libelle: "t5", ordre: 110, nb_niveaux: 4, actif: true, classe_min: "CE2", classe_max: "CE2" },
+  ];
+  it("un CM1 recoit les grands nombres (coeur) des la 1re seance", () => {
+    const plan = composeSession({
+      competences: COMP_CM1, prerequis: [], progress: [],
+      sources: SEED_SOURCES, seed: 5, now: NOW, classe: "CM1",
+    });
+    const codes = new Set(plan.map((p) => p.exercise.competence));
+    expect(codes.has("MA.NUM.GRANDS")).toBe(true);
+  });
+  it("un CE2 ne recoit PAS les grands nombres en 1re seance (pas dans le plan CE2)", () => {
+    // Le CM1 (classe_min) reste dans la marge d'un CE2, mais le plan de 1re
+    // seance du CE2 ne contient pas MA.NUM.GRANDS -> absent tant qu'il n'y a
+    // aucune progression. (Il pourra apparaitre « en avance » plus tard.)
+    const plan = composeSession({
+      competences: COMP_CM1, prerequis: [], progress: [],
+      sources: SEED_SOURCES, seed: 5, now: NOW, classe: "CE2",
+    });
+    const codes = new Set(plan.map((p) => p.exercise.competence));
+    expect(codes.has("MA.NUM.GRANDS")).toBe(false);
+  });
+});

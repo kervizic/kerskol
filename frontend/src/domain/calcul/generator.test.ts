@@ -240,6 +240,31 @@ describe("numeration & calcul pose : saisie et verif normalise", () => {
       expect(computeVerif(g.verif).answer).toBe(g.answer);
     }
   });
+  it("CM1 grands nombres : comparer deux grands nombres (cmp, chiffres seuls)", () => {
+    const src = SEED_SOURCES.find((s) => s.competence === "MA.NUM.GRANDS" && s.niveau === 3)!;
+    for (let s = 1; s <= 40; s++) {
+      const g = generateExercise(src, s * 71 + 3);
+      expect(g.saisie).toBe("compare");
+      expect(g.verif.op).toBe("cmp");
+      expect([0, 1, 2]).toContain(g.answer);
+      expect(computeVerif(g.verif).answer).toBe(g.answer);
+      // chiffres seuls : jamais d'ecriture en lettres dans l'enonce.
+      expect(/mille|million|cent|vingt/.test(g.prompt)).toBe(false);
+      expect(g.verif.a).toBeLessThanOrEqual(1000000);
+      expect(g.verif.b).toBeLessThanOrEqual(1000000);
+    }
+  });
+  it("CM1 grands nombres : ranger (plus grand) jusqu'au million (val, borne 1e6)", () => {
+    const src = SEED_SOURCES.find((s) => s.competence === "MA.NUM.GRANDS" && s.niveau === 4)!;
+    for (let s = 1; s <= 40; s++) {
+      const g = generateExercise(src, s * 83 + 4);
+      expect(g.verif.op).toBe("val");
+      expect(g.verif.b).toBe(0);
+      expect(g.answer).toBeLessThanOrEqual(1000000);
+      expect(g.answer).toBeGreaterThanOrEqual(100000);
+      expect(computeVerif(g.verif).answer).toBe(g.answer);
+    }
+  });
   it("addition posee : concatenation des chiffres du resultat = somme des termes", () => {
     const src = SEED_SOURCES.find((s) => s.competence === "MA.POSE.ADDITION" && s.niveau === 4)!;
     for (let s = 1; s <= 30; s++) {

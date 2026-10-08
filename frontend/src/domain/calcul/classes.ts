@@ -40,7 +40,20 @@ const CE2: ClassPlan = {
   },
 };
 
-const PLANS: Partial<Record<Classe, ClassPlan>> = { CE2 };
+// CM1 (lot 2) : demarrage par classe. Revision = coeur du CE2 (presume acquis),
+// coeur = grands nombres (seul contenu CM1 disponible pour l'instant ; les
+// autres sous-matieres CM1 restent a livrer, cf. docs/explications.md).
+const CM1: ClassPlan = {
+  revision: {
+    "MA.NUM.COMPARER": 3,
+    "MA.TABLES.5": 3,
+  },
+  coeur: {
+    "MA.NUM.GRANDS": 1,
+  },
+};
+
+const PLANS: Partial<Record<Classe, ClassPlan>> = { CE2, CM1 };
 
 // Repli sur CE2 tant que les autres programmes ne sont pas definis.
 export function classPlan(classe: Classe): ClassPlan {
