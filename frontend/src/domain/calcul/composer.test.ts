@@ -363,8 +363,10 @@ describe("composeSession : filtre de candidature par classe", () => {
     expect(plan.length).toBe(0);
   });
   it("un CM1 recoit cette meme competence CM2 (avance, dans la marge)", () => {
+    // Seance NON-premiere (progression existante) pour exercer le filtre de
+    // candidature par classe, independamment du plan de 1re seance.
     const plan = composeSession({
-      competences: uneCM2, prerequis: [], progress: [],
+      competences: uneCM2, prerequis: [], progress: [prog("MA.CM.ADDITION")],
       sources: SEED_SOURCES, seed: 1, now: NOW, classe: "CM1",
     });
     expect(plan.length).toBeGreaterThan(0);
