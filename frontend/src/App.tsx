@@ -342,7 +342,9 @@ export function App() {
       if (m[2] === "bibliotheque") {
         return (
           <ChildTheme couleur={couleur}>
-            <Bibliotheque onExit={() => navigate(`/enfant/${prof.id}/village`)} />
+            {/* Profil enfant passe au lecteur rythme : classe + reglages memorises
+                par profil (sinon le lecteur tournerait en mode « invite »). */}
+            <Bibliotheque profil={prof} onExit={() => navigate(`/enfant/${prof.id}/village`)} />
           </ChildTheme>
         );
       }
