@@ -174,6 +174,30 @@ const FRAC: Row[] = [
   ["MA.FRAC.SIMPLES", 2, "fraction", "fraction", "exemples_estompes", "aucun", "colorier_parts", { types: ["colorier", "nommer"], dens: [2, 3, 4, 5] }],
   ["MA.FRAC.SIMPLES", 3, "fraction", "fraction", "variation", "aucun", "comparer_a_1", { types: ["comparer_1", "nommer"], dens: [2, 3, 4, 5, 10] }],
   ["MA.FRAC.SIMPLES", 4, "fraction", "fraction", "probleme_dabord", "aucun", "fraction_quantite", { types: ["quantite"], dens: [2, 3, 4, 5, 10] }],
+
+  // CM1 : fractions sur une bande graduee de 0 a 1 (lire / ecrire).
+  ["MA.FRAC.DROITE", 1, "fraction", "fraction", "cpa_barres", "aucun", "nommer_fraction", { types: ["droite"], dens: [2, 3, 4] }],
+  ["MA.FRAC.DROITE", 2, "fraction", "fraction", "exemples_estompes", "aucun", "nommer_fraction", { types: ["droite"], dens: [2, 3, 4, 5, 6] }],
+  ["MA.FRAC.DROITE", 3, "fraction", "fraction", "variation", "aucun", "nommer_fraction", { types: ["droite"], dens: [2, 3, 4, 5, 6, 8, 10] }],
+  ["MA.FRAC.DROITE", 4, "fraction", "fraction", "probleme_dabord", "aucun", "nommer_fraction", { types: ["droite"], dens: [3, 4, 5, 6, 8, 10] }],
+
+  // CM1 : comparer deux fractions.
+  ["MA.FRAC.COMPARER", 1, "fraction", "fraction", "cpa_barres", "aucun", "comparer_a_1", { types: ["comparer_frac"], subtypes: ["meme_den"], dens: [3, 4, 5, 6] }],
+  ["MA.FRAC.COMPARER", 2, "fraction", "fraction", "exemples_estompes", "aucun", "comparer_a_1", { types: ["comparer_frac"], subtypes: ["meme_den", "meme_num"], dens: [2, 3, 4, 5, 6] }],
+  ["MA.FRAC.COMPARER", 3, "fraction", "fraction", "variation", "aucun", "comparer_a_1", { types: ["comparer_frac"], subtypes: ["a_demi", "meme_num"], dens: [4, 6, 8, 10] }],
+  ["MA.FRAC.COMPARER", 4, "fraction", "fraction", "probleme_dabord", "aucun", "comparer_a_1", { types: ["comparer_frac"], subtypes: ["quelconque", "meme_num", "a_demi"], dens: [2, 3, 4, 5, 6, 8] }],
+
+  // CM1 : fractions egales (equivalences ; familles decimales au niveau 4).
+  ["MA.FRAC.EGALITES", 1, "fraction", "fraction", "cpa_barres", "aucun", "nommer_fraction", { types: ["egalites"], bases: [2, 3, 4], facteurs: [2] }],
+  ["MA.FRAC.EGALITES", 2, "fraction", "fraction", "exemples_estompes", "aucun", "nommer_fraction", { types: ["egalites"], bases: [2, 3, 4, 5], facteurs: [2, 3] }],
+  ["MA.FRAC.EGALITES", 3, "fraction", "fraction", "variation", "aucun", "nommer_fraction", { types: ["egalites"], bases: [2, 3, 4, 5], facteurs: [2, 3, 4] }],
+  ["MA.FRAC.EGALITES", 4, "fraction", "fraction", "probleme_dabord", "aucun", "nommer_fraction", { types: ["egalites"], bases: [2, 5, 10], facteurs: [2, 5, 10] }],
+
+  // CM1 : fraction d'une quantite (unitaire puis non unitaire).
+  ["MA.FRAC.QUANTITE", 1, "fraction", "fraction", "cpa_barres", "aucun", "fraction_quantite", { types: ["quantite_cm1"], dens: [2, 3, 4] }],
+  ["MA.FRAC.QUANTITE", 2, "fraction", "fraction", "exemples_estompes", "aucun", "fraction_quantite", { types: ["quantite_cm1"], dens: [2, 3, 4, 5, 10] }],
+  ["MA.FRAC.QUANTITE", 3, "fraction", "fraction", "variation", "aucun", "fraction_quantite", { types: ["quantite_cm1"], dens: [3, 4, 5] }],
+  ["MA.FRAC.QUANTITE", 4, "fraction", "fraction", "probleme_dabord", "aucun", "fraction_quantite", { types: ["quantite_cm1"], dens: [3, 4, 5, 6, 8] }],
 ];
 
 const TABLE_STRATS: Record<number, string> = {

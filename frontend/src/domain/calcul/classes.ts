@@ -40,16 +40,22 @@ const CE2: ClassPlan = {
   },
 };
 
-// CM1 (lot 2) : demarrage par classe. Revision = coeur du CE2 (presume acquis),
-// coeur = grands nombres (seul contenu CM1 disponible pour l'instant ; les
-// autres sous-matieres CM1 restent a livrer, cf. docs/explications.md).
+// CM1 : demarrage par classe. Revision = coeur du CE2 (presume acquis),
+// coeur = grands nombres + fractions CM1 (droite graduee, comparer, egalites,
+// quantite). Les autres sous-matieres CM1 restent a livrer (cf.
+// docs/explications.md).
 const CM1: ClassPlan = {
   revision: {
     "MA.NUM.COMPARER": 3,
     "MA.TABLES.5": 3,
+    "MA.FRAC.SIMPLES": 2,
   },
   coeur: {
     "MA.NUM.GRANDS": 1,
+    "MA.FRAC.DROITE": 1,
+    "MA.FRAC.COMPARER": 1,
+    "MA.FRAC.EGALITES": 1,
+    "MA.FRAC.QUANTITE": 1,
   },
 };
 

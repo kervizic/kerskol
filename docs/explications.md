@@ -1315,14 +1315,37 @@ autres `MA.NUM.*` restent bornées à 10 000). Plan de classe **CM1**
 `cm1_grands_nombres_test.sql` (jugement serveur + non-régression des autres
 `MA.NUM.*`).
 
+## Livré : « Fractions » (migration 0069)
+
+Quatre nouvelles compétences **portée CM1..CM2**, domaine `fractions`, qui
+**réutilisent le moteur de fractions** (`buildFraction`, forme `fraction`) en
+ajoutant seulement des **types** d'exercices (aucune nouvelle UI) :
+- **MA.FRAC.DROITE** - lire/écrire une fraction sur une **bande graduée de 0 à 1**
+  (portion de droite graduée ; N1 QCM, N2-4 saisie libre du numérateur et du
+  dénominateur). Op serveur `val` (code `num*100+den`).
+- **MA.FRAC.COMPARER** - **comparer deux fractions** (même dénominateur, même
+  numérateur, à 1/2, puis quelconques). Op serveur `cmp` : on recompose
+  `a = n1·d2`, `b = n2·d1` et on compare (produits ≤ 2000).
+- **MA.FRAC.EGALITES** - **fractions égales** (équivalences `n/d = n·f/d·f`) ;
+  familles **décimales** au niveau 4 (`×10`, `×100`). N1 QCM, N2-4 saisie. Op `val`.
+- **MA.FRAC.QUANTITE** - **fraction d'une quantité** : unitaire (`1/d de q`, op
+  `div`) aux N1-2, non unitaire (`num/d de q`) aux N3-4. Op `div`/`val`.
+
+« Fractions simples » et « fraction d'une quantité (unitaire) » restent portées
+par **MA.FRAC.SIMPLES** (CE2), reprise en **révision** par la marge de classe du
+CM1. **Serveur seul juge** : `verif_calcul` étendu (ajout des 4 compétences au
+tableau des ops ; bornes famille `MA.FRAC.%` déjà à 2000). Plan de classe **CM1**
+(`classes.ts`) : révision `MA.FRAC.SIMPLES` + cœur des 4 compétences. Ces
+exercices apparaissent au CM1 et **en avance** à un CE2 qui a validé
+`MA.FRAC.SIMPLES` au niveau 2 (prérequis). Tests : `generator.test.ts` et
+`composer.test.ts` (invariants golden sur toutes les sources), `cm1_fractions_test.sql`
+(jugement serveur + bornes + portée + non-régression `MA.FRAC.SIMPLES`).
+
 ## Reste à livrer pour le CM1 (maths)
 
 Chaque point suit le même patron (nouvelle compétence `classe_min = 'CM1'`,
 banque `ex_calcul`, extension de `verif_calcul` ou nouveau juge, plan de classe,
 tests golden) :
-- **Fractions** : fractions simples (dénominateur ≤ 20), fractions décimales
-  (1/10, 1/100), sur une droite graduée, égalités, comparaison (moteur
-  `MA.FRAC.*` à étendre).
 - **Nombres décimaux** : dixièmes, centièmes, lien fractions décimales ↔ écriture
   à virgule, comparer/ranger/encadrer. **Nécessite un pavé numérique avec
   virgule** (nouvelle saisie) et un juge décimal (non encore présent).
