@@ -47,6 +47,18 @@ Même source, même style « Flat », même licence MIT (fichier de licence déj
 | `img/emoji/soleil.svg` | Sun | points cardinaux : le soleil (QM, L'espace) | Le soleil qui brille. |
 | `img/emoji/gateau.svg` | Birthday cake | frise : préparer un gâteau (QM, Le temps) | Un gâteau avec des bougies. |
 
+## Lot 4 — Géométrie / solides (toujours Microsoft Fluent Emoji, MIT)
+
+Objets du quotidien affichés à côté des exercices « quel solide ? » (niveau 2),
+pour relier chaque solide à un objet connu. L'image montre l'objet nommé dans la
+consigne, jamais le nom du solide attendu.
+
+| Fichier (dans le dépôt) | Emoji Fluent d'origine | Utilisé pour | Texte alternatif |
+| --- | --- | --- | --- |
+| `img/emoji/de.svg` | Game die | solide : un dé → cube (Géométrie) | Un dé à jouer. |
+| `img/emoji/boite.svg` | Package | solide : une boîte → pavé (Géométrie) | Une boîte en carton. |
+| `img/emoji/ballon-foot.svg` | Soccer ball | solide : un ballon → boule (Géométrie) | Un ballon de football. |
+
 L'URL exacte de chaque emoji est reconstruite dans `images.ts`
 (`https://github.com/microsoft/fluentui-emoji/tree/main/assets/<Nom>/Flat`).
 

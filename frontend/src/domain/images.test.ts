@@ -11,8 +11,9 @@ import { resolve } from "node:path";
 import { IMAGES, ILLUSTRATIONS, illustrationPourCle, imagesCreditees } from "./images";
 import { BANQUE_QM } from "./qm";
 import { BANQUE_EMC } from "./emc";
+import { BANQUE_GEOMETRIE } from "./geometrie/geometrie";
 
-const CLES = new Set([...BANQUE_QM, ...BANQUE_EMC].map((i) => i.cle));
+const CLES = new Set([...BANQUE_QM, ...BANQUE_EMC, ...BANQUE_GEOMETRIE].map((i) => i.cle));
 const MAX = 50 * 1024; // 50 Ko
 
 describe("illustrations libres de droit", () => {
@@ -84,6 +85,12 @@ describe("illustrations libres de droit", () => {
     for (const [cle, src] of Object.entries(attendues)) {
       expect(illustrationPourCle(cle)?.src, `illustration manquante pour ${cle}`).toBe(src);
     }
+  });
+
+  it("le lot Geometrie associe un objet du quotidien aux solides (N2)", () => {
+    expect(illustrationPourCle("geo-sol-n2-de")?.src).toBe("/img/emoji/de.svg");
+    expect(illustrationPourCle("geo-sol-n2-boite")?.src).toBe("/img/emoji/boite.svg");
+    expect(illustrationPourCle("geo-sol-n2-ballon")?.src).toBe("/img/emoji/ballon-foot.svg");
   });
 
   it("toutes les sources de ce lot restent du Fluent Emoji MIT (style homogene)", () => {

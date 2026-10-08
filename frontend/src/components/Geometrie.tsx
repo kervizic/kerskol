@@ -22,6 +22,7 @@ import type {
   GeoRuleSpec, GeoCompassSpec, GeoNetSpec, Cell,
 } from "../domain/geometrie/geometrie";
 import { canonCells, comparerGeometrie, simulerProgramme, SOLIDES_3D } from "../domain/geometrie/geometrie";
+import { illustrationPourCle } from "../domain/images";
 
 interface Props {
   item: GeoRender;
@@ -831,6 +832,21 @@ export default function Geometrie({ item, onSoumettre, onContinuer }: Props) {
   return (
     <div className="kk-stack kk-geo">
       <p className="kk-lead" style={{ textAlign: "center", margin: "0 auto" }}>{item.consigne}</p>
+
+      {/* Illustration libre de droit (objet du quotidien) : purement pedagogique,
+          elle montre l'OBJET nomme dans la consigne, jamais le nom du solide
+          (serveur seul juge). */}
+      {illustrationPourCle(item.cle) && (
+        <img
+          className="kk-qm__illus"
+          src={illustrationPourCle(item.cle)!.src}
+          alt={illustrationPourCle(item.cle)!.alt}
+          width={72}
+          height={72}
+          loading="lazy"
+          style={{ display: "block", margin: "0 auto", width: 72, height: 72 }}
+        />
+      )}
 
       {/* Programme a LIRE : cartes affichees en toutes lettres. */}
       {programAffiche && (

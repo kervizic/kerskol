@@ -67,6 +67,10 @@ export const IMAGES: Record<string, ImageInfo> = {
   // Espace et temps (QM « L'espace », « Le temps »).
   soleil:     fluent("Sun", "soleil.svg", "Le soleil qui brille."),
   gateau:     fluent("Birthday cake", "gateau.svg", "Un gâteau avec des bougies."),
+  // Geometrie — objets du quotidien pour reconnaitre les solides (MA.GEO.SOLIDES).
+  de:         fluent("Game die", "de.svg", "Un dé à jouer."),
+  boite:      fluent("Package", "boite.svg", "Une boîte en carton."),
+  ballonFoot: fluent("Soccer ball", "ballon-foot.svg", "Un ballon de football."),
 };
 
 // Association CLE d'item -> image. Seules ces cles affichent une illustration.
@@ -102,6 +106,10 @@ export const ILLUSTRATIONS: Record<string, string> = {
   "qm-esp-car-n4-b": "soleil", // « le soleil se leve a l'... » : illustre le soleil, pas « est »
   // QM — Le temps (0056).
   "qm-tps-fri-n3-a": "gateau", // ordre « faire un gateau » : illustre le gateau, l'ordre reste a trouver
+  // Geometrie — MA.GEO.SOLIDES, items N2 (objet du quotidien nomme dans la consigne).
+  "geo-sol-n2-de": "de", // « un de a jouer... » : illustre le de, pas « un cube »
+  "geo-sol-n2-boite": "boite", // « une boite a chaussures... » : illustre la boite, pas « un pave »
+  "geo-sol-n2-ballon": "ballonFoot", // « un ballon de foot... » : illustre le ballon, pas « une boule »
 };
 
 // Illustration d'un item (ou null). Utilise par <QuestionnerLeMonde>.
