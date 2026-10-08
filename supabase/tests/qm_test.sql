@@ -28,7 +28,9 @@ DECLARE
     attendu_n integer;
 BEGIN
     -- Comptage auto-echelonne : chaque competence QM porte 8 items (4 niveaux x 2).
-    SELECT count(*) INTO n FROM public.qm_item;
+    -- NB : la table qm_item est partagee avec « Vivre ensemble » (EMC.%, 0058) ;
+    -- on ne compte donc QUE les items QM.%.
+    SELECT count(*) INTO n FROM public.qm_item WHERE competence LIKE 'QM.%';
     SELECT count(*) * 8 INTO attendu_n FROM public.competences WHERE matiere = 'QM';
     IF n <> attendu_n THEN
         RAISE EXCEPTION 'qm_item : % items attendus (8 par competence QM), obtenu %', attendu_n, n;
