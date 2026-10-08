@@ -14,6 +14,33 @@ describe("problemes : banque de gabarits", () => {
   });
 });
 
+// DIVISION CE2 : MA.PB.MULT_DIV doit couvrir les DEUX sens de la division :
+//   - PARTAGE / partition (« ... par ami / par part / par boîte / chacun ») ;
+//   - QUOTITION / groupement (« combien de paquets / de sachets / de rangées »).
+// Les deux se normalisent en op 'div' (quotient exact).
+describe("problemes : division, sens partage ET sens groupement (quotition)", () => {
+  it("MULT_DIV genere des problemes de division (op div) aux deux sens", () => {
+    const srcs = PB_SOURCES.filter((s) => s.competence === "MA.PB.MULT_DIV");
+    let sawDiv = false;
+    let sawPartage = false;
+    let sawQuotition = false;
+    for (const src of srcs) {
+      for (let seed = 1; seed <= 400; seed++) {
+        const g = generateExercise(src, seed * 101 + src.niveau);
+        if (g.verif.op === "div") {
+          sawDiv = true;
+          const p = g.prompt.toLowerCase();
+          if (/par ami|par part|chacun|par boîte|par tas|dans chaque|reçoit/.test(p)) sawPartage = true;
+          if (/paquet|sachet|rangées|rangde|de \d/.test(p) && /combien de (paquet|sachet|rang)/.test(p)) sawQuotition = true;
+        }
+      }
+    }
+    expect(sawDiv).toBe(true);
+    expect(sawPartage).toBe(true);
+    expect(sawQuotition).toBe(true);
+  });
+});
+
 // INVARIANT DE SECURITE : l'enonce normalise verif (op,a,b [,op2,c]) reproduit
 // EXACTEMENT la reponse attendue, sur des milliers de tirages par gabarit, en
 // mode normal ET rattrapage, avec et sans contexte (mascotte).

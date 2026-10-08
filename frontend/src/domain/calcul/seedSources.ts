@@ -109,9 +109,9 @@ const PB: Row[] = [
   ["MA.PB.ADD_SUB", 4, "probleme", "probleme", "probleme_dabord", "aucun", "schema_barres", { types: ["etat_recu", "etat_don", "de_plus", "de_moins"], mag: 1000 }],
 
   ["MA.PB.MULT_DIV", 1, "probleme", "probleme", "cpa_barres", "aucun", "schema_barres", { types: ["groupement", "partage"], tables: [2, 3, 4, 5], qmax: 10 }],
-  ["MA.PB.MULT_DIV", 2, "probleme", "probleme", "exemples_estompes", "aucun", "schema_barres", { types: ["fois_plus", "groupement"], tables: [2, 3, 4, 5], qmax: 10 }],
-  ["MA.PB.MULT_DIV", 3, "probleme", "probleme", "variation", "aucun", "schema_barres", { types: ["groupement", "partage", "fois_plus"], tables: [2, 3, 4, 5, 6, 7, 8, 9], qmax: 10 }],
-  ["MA.PB.MULT_DIV", 4, "probleme", "probleme", "probleme_dabord", "aucun", "schema_barres", { types: ["partage", "fois_plus", "groupement"], tables: [2, 3, 4, 5, 6, 7, 8, 9], qmax: 10 }],
+  ["MA.PB.MULT_DIV", 2, "probleme", "probleme", "exemples_estompes", "aucun", "schema_barres", { types: ["groupement", "partage", "quotition"], tables: [2, 3, 4, 5], qmax: 10 }],
+  ["MA.PB.MULT_DIV", 3, "probleme", "probleme", "variation", "aucun", "schema_barres", { types: ["partage", "quotition", "groupement", "fois_plus"], tables: [2, 3, 4, 5, 6, 7, 8, 9], qmax: 10 }],
+  ["MA.PB.MULT_DIV", 4, "probleme", "probleme", "probleme_dabord", "aucun", "schema_barres", { types: ["partage", "quotition", "fois_plus", "groupement"], tables: [2, 3, 4, 5, 6, 7, 8, 9], qmax: 10 }],
 
   ["MA.PB.MONNAIE", 1, "probleme", "probleme", "cpa_barres", "aucun", "schema_barres", { types: ["composer"], mag: 50 }],
   ["MA.PB.MONNAIE", 2, "probleme", "probleme", "exemples_estompes", "aucun", "schema_barres", { types: ["comparer", "rendre"], mag: 100 }],

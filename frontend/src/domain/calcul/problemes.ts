@@ -4,8 +4,11 @@
 //   * MA.PB.ADD_SUB    : problemes additifs a une etape (reunion, ajout/retrait,
 //                        comparaison « de plus / de moins », recherche de l'etat
 //                        initial) ;
-//   * MA.PB.MULT_DIV   : problemes multiplicatifs a une etape (groupements,
-//                        partages equitables, « fois plus ») ;
+//   * MA.PB.MULT_DIV   : problemes multiplicatifs a une etape. DEUX sens de la
+//                        division : PARTAGE / partition (« N objets en D parts
+//                        egales, combien par part ? ») et QUOTITION / groupement
+//                        (« N objets par paquets de P, combien de paquets ? »),
+//                        plus groupement multiplicatif et « fois plus » ;
 //   * MA.PB.MONNAIE    : billets et pieces en euros (composer une somme, rendre
 //                        la monnaie, comparer des prix) ;
 //   * MA.PB.DEUX_ETAPES: problemes a deux etapes (premiers exercices MIXTES).
@@ -157,6 +160,12 @@ const MULT_DIV_BANK: Gabarit[] = [
   { type: "partage", t: (v) => `${fmt(v.n1)} ${v.obj} à partager équitablement entre ${fmt(v.n2)} boîtes. Combien par boîte ?` },
   { type: "fois_plus", t: (v) => `${v.hero} a ${fmt(v.n1)} ${v.obj}. Il veut en avoir ${fmt(v.n2)} fois plus. Combien lui en faudra-t-il ?` },
   { type: "groupement", t: (v) => `Dans le jardin, ${fmt(v.n1)} rangs de ${fmt(v.n2)} ${v.obj}. Combien de ${v.obj} en tout ?` },
+  // QUOTITION (sens GROUPEMENT de la division) : on connait le CONTENU d'un
+  // paquet (n2) et le TOTAL (n1) ; on cherche le NOMBRE de paquets (n1 ÷ n2).
+  { type: "quotition", t: (v) => `${v.hero} range ${fmt(v.n1)} ${v.obj} par paquets de ${fmt(v.n2)}. Combien de paquets peut-il faire ?` },
+  { type: "quotition", t: (v) => `On met ${fmt(v.n1)} ${v.obj} dans des ${v.grp} de ${fmt(v.n2)} ${v.obj} chacun. Combien de ${v.grp} faut-il ?` },
+  { type: "quotition", t: (v) => `Avec ${fmt(v.n1)} ${v.obj}, combien de rangées de ${fmt(v.n2)} peut-on faire ?` },
+  { type: "quotition", t: (v) => `${v.hero} a ${fmt(v.n1)} ${v.obj}. Il en met ${fmt(v.n2)} dans chaque sachet. Combien de sachets remplit-il ?` },
 ];
 
 // MONNAIE : composer / rendre / comparer
@@ -396,7 +405,7 @@ function buildMultDiv(
 ): GeneratedExercise {
   const tables = numList(p.tables, [2, 3, 4, 5]);
   const qmax = Number(p.qmax ?? 10);
-  const types = strList(p.types, ["groupement", "partage"]);
+  const types = strList(p.types, ["groupement", "partage", "quotition"]);
   const type = pick(rng, types);
   const hero = heroOf(rng, ctx);
   const friend = otherThan(rng, hero);
@@ -432,6 +441,20 @@ function buildMultDiv(
       Array.from({ length: Math.min(divisor, 10) }, () => cell(quotient, false))
     );
     correction = `Je partage ${fmt(total)} en ${fmt(divisor)} parts égales : ${fmt(total)} ÷ ${fmt(divisor)} = ${fmt(quotient)}.`;
+  } else if (type === "quotition") {
+    // Division SENS GROUPEMENT : on connait le contenu d'un paquet (per) et le
+    // total ; la reponse est le NOMBRE de paquets. Division exacte (reste 0).
+    const per = pick(rng, tables); // contenu d'un paquet (table connue)
+    const groups = intBetween(rng, 2, qmax); // nombre de paquets (reponse)
+    const total = per * groups;
+    answer = groups;
+    verif = { op: "div", a: total, b: per };
+    v.n1 = total; v.n2 = per;
+    barres = toutParties(
+      cell(total, true),
+      Array.from({ length: Math.min(groups, 10) }, () => cell(per, false))
+    );
+    correction = `Je cherche combien de paquets de ${fmt(per)} dans ${fmt(total)} : ${fmt(total)} ÷ ${fmt(per)} = ${fmt(groups)} paquets.`;
   } else {
     // fois_plus
     const a = intBetween(rng, 2, Math.min(10, qmax));

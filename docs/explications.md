@@ -964,3 +964,23 @@ et frise chronologique sont ICI autorisés et attendus.)
 
 Domaine `temps` actif au défaut et sur tous les profils (Iris incluse). **Fin du
 socle QM : 5 sous-matières, 24 compétences, 192 items.**
+
+## Audit de la division CE2 (migration 0057)
+
+État constaté : la division était déjà travaillée en CALCUL (`MA.CM.DIV_RESTE` :
+quotient ET reste, division exacte par les tables puis avec reste, division en
+contexte) et en PROBLÈMES (`MA.PB.MULT_DIV`, sens PARTAGE / partition :
+« N objets en D parts égales, combien par part ? »). **Manquait** le sens
+GROUPEMENT / quotition de la division (« combien de paquets de P dans N ? »),
+et le niveau 2 de MULT_DIV ne proposait pas de division du tout.
+
+Ajout ADDITIF :
+- nouveau type de problème `quotition` dans `domain/calcul/problemes.ts`
+  (division exacte, op `div`, 4 gabarits : paquets, sachets, rangées) ;
+- paramètres `ex_calcul` de `MA.PB.MULT_DIV` mis à jour (migration 0057) :
+  division-partage réintroduite au N2, quotition ajoutée aux N2/N3/N4.
+
+Le serveur juge déjà l'op `div` pour `MA.PB.MULT_DIV` (verif_calcul inchangé).
+Les deux sens de la division sont désormais couverts, avec quotient (problèmes)
+et quotient + reste (calcul). Test `problemes.test.ts` : les deux sens
+apparaissent bien (partage + quotition).
