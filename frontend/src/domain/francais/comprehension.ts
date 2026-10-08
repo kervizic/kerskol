@@ -1620,87 +1620,6 @@ export const BANQUE_COMPREHENSION: CompItem[] = [
     explication: "L'âne et le bœuf soufflent pour réchauffer le petit enfant. Il fait froid, mais ils le gardent au chaud.",
     glossaire: [{ mot: "une crèche", sens: "la mangeoire des animaux où l'on a couché l'enfant." }],
     source: "Théophile Gautier, « Noël »" },
-
-  // =======================================================================
-  // BIBLIOTHEQUE, lot 0065 : 3 fables RÉCUPÉRÉES (décision Manu, extraits coupés
-  // pour la bienveillance). Mêmes règles que 0062 (N1 info -> N4 réponse libre).
-  // Le `texte` reprend les mots exacts de l'extrait AFFICHÉ (aucun mot interdit).
-  // =======================================================================
-
-  // --- Jean de La Fontaine, « Le Chêne et le Roseau » ---
-  { cle: "lec-bib-chene-info-n1", competence: "FR.LECTURE.INFO", niveau: 1, format: "qcm",
-    texte: ["Le chêne un jour dit au roseau : Vous avez bien sujet d'accuser la nature."],
-    consigne: "À qui le chêne parle-t-il ?",
-    options: ["au roseau", "à l'oiseau", "au vent"], attendu: "au roseau",
-    explication: "Le texte le dit : le chêne parle au roseau. Le roseau est une petite plante qui pousse au bord de l'eau.",
-    source: "Jean de La Fontaine, « Le Chêne et le Roseau »" },
-  { cle: "lec-bib-chene-sens-n2", competence: "FR.LECTURE.SENS_MOT", niveau: 2, format: "qcm",
-    texte: ["Tout vous est aquilon, tout me semble zéphyr."],
-    consigne: "Dans ce texte, qu'est-ce que le zéphyr ?",
-    options: ["un vent doux et léger", "un gros nuage", "un oiseau"], attendu: "un vent doux et léger",
-    explication: "Le zéphyr est un vent doux et léger. C'est le petit vent agréable qui caresse la joue en été.",
-    glossaire: [{ mot: "le zéphyr", sens: "un vent doux et léger." }],
-    source: "Jean de La Fontaine, « Le Chêne et le Roseau »" },
-  { cle: "lec-bib-chene-inf-n3", competence: "FR.LECTURE.INFERENCE", niveau: 3, format: "qcm",
-    texte: ["Je plie et ne romps pas."],
-    consigne: "Pourquoi le roseau préfère-t-il plier ?",
-    options: ["pour ne pas se casser", "pour dormir", "pour grandir plus vite"], attendu: "pour ne pas se casser",
-    explication: "Le roseau plie pour ne pas se casser. Comme une herbe souple : elle se courbe dans le vent, puis se relève.",
-    source: "Jean de La Fontaine, « Le Chêne et le Roseau »" },
-  { cle: "lec-bib-chene-clic-n4", competence: "FR.LECTURE.INFO", niveau: 4, format: "clic",
-    texte: ["L'arbre tient bon ; le roseau plie."],
-    consigne: "Clique dans le texte sur le mot qui désigne la plante souple qui plie.",
-    attendu: "roseau",
-    explication: "C'est le roseau qui plie. Le mot roseau désigne cette plante souple du bord de l'eau.",
-    source: "Jean de La Fontaine, « Le Chêne et le Roseau »" },
-
-  // --- Jean de La Fontaine, « La Laitière et le Pot au lait » ---
-  { cle: "lec-bib-laitiere-info-n1", competence: "FR.LECTURE.INFO", niveau: 1, format: "qcm",
-    texte: ["Perrette, sur sa tête ayant un pot au lait, allait à grands pas."],
-    consigne: "Que porte Perrette sur sa tête ?",
-    options: ["un pot au lait", "un panier de pommes", "un chapeau"], attendu: "un pot au lait",
-    explication: "Le texte le dit : Perrette porte un pot au lait sur sa tête, bien posé sur un petit coussin.",
-    source: "Jean de La Fontaine, « La Laitière et le Pot au lait »" },
-  { cle: "lec-bib-laitiere-sens-n2", competence: "FR.LECTURE.SENS_MOT", niveau: 2, format: "qcm",
-    texte: ["Achetait un cent d'œufs ; faisait triple couvée."],
-    consigne: "Dans ce texte, qu'est-ce qu'une couvée ?",
-    options: ["tous les poussins nés des œufs d'une poule", "un grand panier", "une sorte de gâteau"], attendu: "tous les poussins nés des œufs d'une poule",
-    explication: "Une couvée, c'est tous les poussins qui naissent en même temps des œufs d'une poule.",
-    glossaire: [{ mot: "une couvée", sens: "tous les poussins qui naissent en même temps des œufs d'une poule." }],
-    source: "Jean de La Fontaine, « La Laitière et le Pot au lait »" },
-  { cle: "lec-bib-laitiere-inf-n3", competence: "FR.LECTURE.INFERENCE", niveau: 3, format: "qcm",
-    texte: ["Perrette là-dessus saute aussi, transportée : Le lait tombe."],
-    consigne: "Pourquoi le lait tombe-t-il ?",
-    options: ["parce que Perrette saute de joie", "parce qu'il pleut", "parce qu'un chien la pousse"], attendu: "parce que Perrette saute de joie",
-    explication: "Perrette rêve tellement qu'elle saute de joie : en bougeant, elle fait tomber le pot. On la comprend, elle rêvait trop vite !",
-    source: "Jean de La Fontaine, « La Laitière et le Pot au lait »" },
-  { cle: "lec-bib-laitiere-clic-n4", competence: "FR.LECTURE.INFO", niveau: 4, format: "clic",
-    texte: ["Le lait tombe ; adieu veau, vache, cochon, couvée."],
-    consigne: "Clique dans le texte sur le mot qui dit ce qui tombe du pot.",
-    attendu: "lait",
-    explication: "C'est le lait qui tombe du pot. Le mot lait est celui qu'on cherche.",
-    source: "Jean de La Fontaine, « La Laitière et le Pot au lait »" },
-
-  // --- Jean de La Fontaine, « L'Ours et les deux Compagnons » ---
-  { cle: "lec-bib-ours-info-n1", competence: "FR.LECTURE.INFO", niveau: 1, format: "qcm",
-    texte: ["Deux compagnons vendirent la peau d'un ours encor vivant."],
-    consigne: "Qu'est-ce que les deux compagnons ont vendu ?",
-    options: ["la peau d'un ours", "un grand chapeau", "un pot de miel"], attendu: "la peau d'un ours",
-    explication: "Le texte le dit : ils ont vendu la peau d'un ours... qu'ils n'avaient même pas encore attrapé !",
-    source: "Jean de La Fontaine, « L'Ours et les deux Compagnons »" },
-  { cle: "lec-bib-ours-sens-n2", competence: "FR.LECTURE.SENS_MOT", niveau: 2, format: "qcm",
-    texte: ["L'un des deux compagnons grimpe au faîte d'un arbre."],
-    consigne: "Dans ce texte, qu'est-ce que le faîte d'un arbre ?",
-    options: ["le point le plus haut", "les racines", "l'écorce"], attendu: "le point le plus haut",
-    explication: "Le faîte, c'est le point le plus haut. Le compagnon grimpe tout en haut de l'arbre.",
-    glossaire: [{ mot: "le faîte", sens: "le sommet, le point le plus haut." }],
-    source: "Jean de La Fontaine, « L'Ours et les deux Compagnons »" },
-  { cle: "lec-bib-ours-inf-n3", competence: "FR.LECTURE.INFERENCE", niveau: 3, format: "qcm",
-    texte: ["Il ne faut jamais vendre la peau de l'ours qu'on ne l'ait mis par terre."],
-    consigne: "Que veut nous apprendre cette phrase ?",
-    options: ["il ne faut pas vendre une chose qu'on n'a pas encore", "il faut courir très vite", "il faut dormir tôt"], attendu: "il ne faut pas vendre une chose qu'on n'a pas encore",
-    explication: "La fable nous apprend à ne pas se vanter d'une chose avant qu'elle soit vraiment faite. On attend d'avoir réussi pour l'annoncer.",
-    source: "Jean de La Fontaine, « L'Ours et les deux Compagnons »" },
 ];
 
 // Competences de la sous-matiere (ordre d'affichage = ordre du referentiel).
@@ -1935,18 +1854,6 @@ export const PREUVE_PAR_CLE: Record<string, string> = {
   "lec-bib-noel-info-n1": "Le ciel est noir, la terre est blanche.",
   "lec-bib-noel-sens-n2": "Cloches, carillonnez gaîment !",
   "lec-bib-noel-inf-n3": "Pour l'échauffer dans sa crèche L'âne et le bœuf soufflent dessus.",
-  // Lot 0065 : 3 fables récupérées (preuve = phrase EXACTE affichée).
-  "lec-bib-chene-info-n1": "Le chêne un jour dit au roseau : Vous avez bien sujet d'accuser la nature.",
-  "lec-bib-chene-sens-n2": "Tout vous est aquilon, tout me semble zéphyr.",
-  "lec-bib-chene-inf-n3": "Je plie et ne romps pas.",
-  "lec-bib-chene-clic-n4": "L'arbre tient bon ; le roseau plie.",
-  "lec-bib-laitiere-info-n1": "Perrette, sur sa tête ayant un pot au lait, allait à grands pas.",
-  "lec-bib-laitiere-sens-n2": "Achetait un cent d'œufs ; faisait triple couvée.",
-  "lec-bib-laitiere-inf-n3": "Perrette là-dessus saute aussi, transportée : Le lait tombe.",
-  "lec-bib-laitiere-clic-n4": "Le lait tombe ; adieu veau, vache, cochon, couvée.",
-  "lec-bib-ours-info-n1": "Deux compagnons vendirent la peau d'un ours encor vivant.",
-  "lec-bib-ours-sens-n2": "L'un des deux compagnons grimpe au faîte d'un arbre.",
-  "lec-bib-ours-inf-n3": "Il ne faut jamais vendre la peau de l'ours qu'on ne l'ait mis par terre.",
 };
 
 // Preuve d'un item (repli sur sa 1re phrase si la cle est inconnue).

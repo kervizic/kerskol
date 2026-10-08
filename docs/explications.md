@@ -1076,6 +1076,12 @@ BIENVEILLANCE.** Rien de dramatique ni de cruel :
 - pas d'enfant malheureux, abandonné, puni durement ou moqué ;
 - pas de catastrophe.
 
+**On ne coupe JAMAIS un texte pour le rendre acceptable (décision de Manu,
+9 octobre 2026).** Si un passage ne respecte pas ces critères, le **texte entier
+est retiré** : pas d'extrait tronqué « pour enlever un mot », pas de champ ni de
+note de coupe. Le garde-fou `bibliotheque.test.ts` vérifie qu'aucun texte de la
+Bibliothèque ni aucun item de compréhension ne porte de marqueur de coupe.
+
 **Faits scientifiques.** Les faits nécessaires au programme restent possibles
 s'ils sont dits **avec douceur** :
 
@@ -1123,9 +1129,12 @@ phrase).
 **Sélection.** On ne retient que les textes cycle 2 (CE1/CE2), marqués
 `utilisable = oui` et `ton = garde` dans le catalogue de la bibliothèque, et dont
 le **corps** ne contient aucun mot de la liste bienveillance. Les textes signalés
-par Manu (Musiciens de Brême, Conquérants, Lièvre et Grenouilles, Renart et les
-anguilles, Maître Pathelin, « Feu ! » de Verne, Le Mendiant de Hugo, Une souris
-verte, Le ciel est par-dessus le toit) sont **exclus**.
+par Manu (Musiciens de Brême, Conquérants, Lièvre et Grenouilles, Maître
+Pathelin, « Feu ! » de Verne, Le Mendiant de Hugo, Une souris verte, Le ciel est
+par-dessus le toit) sont **exclus**. **« Renart et les anguilles »** (cycle 3)
+est au contraire **gardé** dans le kit (décision explicite de Manu : texte sur la
+ruse, la menace n'est pas suivie d'effet) ; il n'apparaît pas dans l'application,
+qui ne porte que du CE1/CE2.
 
 **Source de vérité.** `frontend/src/domain/francais/bibliotheque.ts` (fichier
 généré) porte, pour chaque texte : auteur, œuvre, titre, classe, URL de source,
@@ -1170,28 +1179,33 @@ doux » du Papillon) est traité au N2. **Huit textes écartés** par le garde-f
 bienveillance (mot sensible dans le corps : « Le Loup et le Chien », « Le Cygne »,
 « Le Chêne et le Roseau »…) ne sont volontairement pas intégrés.
 
-### Lot 0065 : 3 fables récupérées (décision Manu)
+### Lot 0068 : retrait des 3 fables coupées (correction d'une décision de Manu)
 
-Parmi ces huit textes écartés, **trois sont récupérés** à la demande de Manu, avec
-un **extrait coupé aux limites de phrase** pour retirer le mot sensible (le
-garde-fou bienveillance passe désormais sur le texte affiché) :
+**Règle de contenu (décision de Manu, 9 octobre 2026) : on ne COUPE JAMAIS un
+texte pour le rendre acceptable.** Si un passage ne respecte pas les critères de
+bienveillance, le **texte entier est retiré** (jamais d'extrait tronqué « pour
+retirer un mot »). Les 3 fables ajoutées au lot 0065 avaient précisément été
+« récupérées » en coupant leur corps : elles violent la nouvelle règle et sont
+donc **retirées entièrement** :
 
-- **« Le Chêne et le Roseau »** : on s'arrête sur « L'arbre tient bon ; le roseau
-  plie. », avant le dernier vers (« …l'empire des morts »).
-- **« La Laitière et le Pot au lait »** : on s'arrête sur « Le lait tombe ; adieu
-  veau, vache, cochon, couvée. », **avant** les vers sur le mari (« En grand
-  danger d'être battue ») : aucune allusion à de la violence.
-- **« L'Ours et les deux Compagnons »** : on garde la présentation (vendre la peau
-  de l'ours avant de l'avoir) et la morale, la scène du milieu (« fait le mort »)
-  est coupée. Le verbe « tueraient » du vers de présentation est verbatim de la
-  source et n'est pas capté par le garde-fou ; il est conservé par fidélité au
-  texte du domaine public (signalé à Manu).
+- **« Le Chêne et le Roseau »** (`c2-050`),
+- **« La Laitière et le Pot au lait »** (`c2-026`),
+- **« L'Ours et les deux Compagnons »** (`c2-075`).
 
-Chaque texte reçoit **3 à 4 questions** de compréhension (mêmes règles que le lot
-0062), miroir SQL `public.comprehension_item` via la migration `0065`
-(golden 192 → 203). Les **cinq autres** textes écartés restent retirés (« Le Loup
-et le Chien », « La Souris », « Le Cygne », « Le petit nigaud et les animaux »,
-« Les Canards »).
+La migration `0068_bibliotheque_retrait_textes_coupes` **supprime** leurs 11 items
+de `comprehension_item` (golden 203 → 192) ; les objets correspondants sont
+retirés de `bibliotheque.ts` et de `comprehension.ts`. Aucune clé étrangère ne
+pointe vers `comprehension_item`, l'EMA est porté par (compétence, niveau) : rien
+n'est cassé pour Iris. Un **garde-fou** (`bibliotheque.test.ts`) vérifie désormais
+qu'aucun texte de la Bibliothèque ni aucun item de compréhension n'est un extrait
+« coupé pour la bienveillance » (marqueur de coupe interdit dans la source).
+
+**« Renart et les anguilles »** (`c3-033`, kit, cycle 3) reste **gardé** (décision
+explicite de Manu : texte sur la ruse, la menace n'est pas suivie d'effet).
+**« Une souris verte »** (kit `c1-001` MS + `c2-001` CP) est **retiré
+entièrement** (ni MS ni CP ne l'utilisent ; l'application ne porte de toute façon
+que du CE1/CE2). Côté kit, le pourcentage de textes écartés passe de **25,1 %** à
+**27,3 %** (63 `ton = retire` sur 231 fiches).
 
 **Mots de la maîtresse (retouche lot 0).** Le gabarit de phrase N3
 « La maîtresse écrit ___ au tableau. » (univers classe) est remplacé par

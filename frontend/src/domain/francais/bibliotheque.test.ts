@@ -2,8 +2,24 @@
 // Verifie que chaque texte integre porte bien son auteur, son oeuvre, sa source
 // de verification (domaine public), un corps non vide et un glossaire propre.
 
+import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
 import { describe, it, expect } from "vitest";
 import { BIBLIOTHEQUE, BIBLIO_AUTEURS } from "./bibliotheque";
+
+// Regle de contenu (decision Manu, 9 octobre 2026) : on ne COUPE JAMAIS un texte
+// pour le rendre acceptable. Si un passage ne respecte pas les criteres de
+// bienveillance, le texte ENTIER est retire (pas d'extrait tronque « pour
+// retirer un mot »). Ce garde-fou verifie qu'aucun texte de la Bibliotheque ni
+// aucun item de comprehension n'est un extrait « coupe pour la bienveillance ».
+const MARQUEURS_COUPE = [
+  /extraits?\s+coup[ée]/i, // « extrait coupé », « extraits coupés »
+  /extraits?\s+arr[êe]t[ée]/i, // « extrait arrêté à la limite… »
+  /textes?\s+r[ée]cup[ée]r[ée]/i, // « texte récupéré (décision Manu) »
+  /fables?\s+r[ée]cup[ée]r[ée]/i, // « 3 fables récupérées »
+  /on\s+coupe\s+la\s+sc[èe]ne/i,
+  /garde-fou\s+bienveillance\s+passe/i,
+];
 
 describe("bibliotheque : textes du domaine public", () => {
   it("contient des textes (au moins 40) et des identifiants uniques", () => {
@@ -31,6 +47,21 @@ describe("bibliotheque : textes du domaine public", () => {
       for (const g of t.glossaire) {
         expect(g.mot.trim().length, `${t.id} glose mot`).toBeGreaterThan(0);
         expect(g.sens.trim().length, `${t.id} glose sens`).toBeGreaterThan(0);
+      }
+    }
+  });
+
+  it("garde-fou : aucun texte n'est un extrait « coupé pour la bienveillance »", () => {
+    const ici = fileURLToPath(new URL(".", import.meta.url));
+    const sources = ["bibliotheque.ts", "comprehension.ts"].map((f) =>
+      readFileSync(ici + f, "utf-8"),
+    );
+    for (const [i, src] of sources.entries()) {
+      for (const marqueur of MARQUEURS_COUPE) {
+        expect(
+          marqueur.test(src),
+          `marqueur de coupe interdit (${marqueur}) dans ${["bibliotheque.ts", "comprehension.ts"][i]}`,
+        ).toBe(false);
       }
     }
   });

@@ -9,7 +9,9 @@ source vérifiable listée en fin de document ; aucun n'a été estimé.
 
 Tous les contenus montrés à l'enfant sont **optimistes et pleins de
 bienveillance** : pas de mort, pas de violence, pas de peur forte, pas d'enfant
-malheureux / abandonné / puni / moqué, pas de catastrophe. Les faits
+malheureux / abandonné / puni / moqué, pas de catastrophe. **On ne coupe jamais
+un texte pour le rendre acceptable : si un passage pose problème, le texte entier
+est retiré** (décision de Manu, 9 octobre 2026). Les faits
 scientifiques du programme restent possibles s'ils sont dits avec douceur (voir
 le détail, la liste de mots interdits et la liste blanche dans
 `docs/explications.md`, section « Règle de bienveillance »). Cette règle est
