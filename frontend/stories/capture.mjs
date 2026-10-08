@@ -36,10 +36,18 @@ let count = 0;
 try {
   for (const { tag, w } of WIDTHS) {
     const page = await browser.newPage({ viewport: { width: w, height: 900 }, deviceScaleFactor: 2 });
+    page.on("console", (m) => console.log(`  [page ${tag}] ${m.type()}: ${m.text()}`));
+    page.on("pageerror", (e) => console.log(`  [page ${tag}] ERROR: ${e.message}`));
     await page.setContent('<!doctype html><html><head><meta charset="utf-8"></head><body><div id="app"></div></body></html>', { waitUntil: "load" });
     await page.addStyleTag({ content: css });
     await page.addScriptTag({ content: js });
-    await page.waitForSelector("[data-story]");
+    try {
+      await page.waitForSelector("[data-story]", { timeout: 8000 });
+    } catch (e) {
+      const html = await page.evaluate(() => document.getElementById("app")?.innerHTML ?? "(#app absent)");
+      console.log(`  [page ${tag}] #app innerHTML: ${html.slice(0, 400)}`);
+      throw e;
+    }
     const sections = await page.$$("[data-story]");
     for (const s of sections) {
       const id = await s.getAttribute("data-story");
