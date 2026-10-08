@@ -11,7 +11,9 @@ import { Check, X } from "lucide-react";
 import {
   MATIERES,
   auMoinsUneSousMatiere,
+  sousMatieresVisibles,
 } from "../domain/matieres";
+import type { Classe } from "../lib/types";
 
 function Interrupteur({
   actif,
@@ -77,10 +79,12 @@ function Interrupteur({
 export function MatieresEditor({
   matieresActives,
   domainesActifs,
+  classe,
   onChange,
 }: {
   matieresActives: string[];
   domainesActifs: string[];
+  classe: Classe;
   onChange: (matieres: string[], domaines: string[]) => void;
 }) {
   const [mat, setMat] = useState<string[]>(matieresActives);
@@ -107,8 +111,10 @@ export function MatieresEditor({
     if (mat.includes(code)) {
       applique(mat.filter((c) => c !== code), dom);
     } else {
-      // Reactiver une matiere reactive aussi ses sous-matieres (sinon rien a jouer).
-      const def = MATIERES.find((m) => m.code === code)?.sousMatieres.map((s) => s.domaine) ?? [];
+      // Reactiver une matiere reactive aussi ses sous-matieres VISIBLES pour la
+      // classe (sinon rien a jouer).
+      const m = MATIERES.find((mm) => mm.code === code);
+      const def = m ? sousMatieresVisibles(m, classe).map((s) => s.domaine) : [];
       applique([...mat, code], Array.from(new Set([...dom, ...def])));
     }
   }
@@ -132,7 +138,7 @@ export function MatieresEditor({
             />
             {matActif && (
               <div style={{ paddingLeft: 16 }}>
-                {m.sousMatieres.map((s) => (
+                {sousMatieresVisibles(m, classe).map((s) => (
                   <Interrupteur
                     key={s.domaine}
                     actif={dom.includes(s.domaine)}

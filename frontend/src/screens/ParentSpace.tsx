@@ -222,7 +222,7 @@ function ProfilEditor({
         <p className="kk-muted" style={{ fontSize: "0.85rem", margin: "0 0 4px" }}>
           Active ou désactive ce que {profil.surnom} travaille. Au moins une sous-matière doit rester active.
         </p>
-        <MatieresEditor matieresActives={mat} domainesActifs={dom} onChange={changeMatieres} />
+        <MatieresEditor matieresActives={mat} domainesActifs={dom} classe={classe} onChange={changeMatieres} />
         {matErr && (
           <p className="kk-muted" role="alert">Échec de l’enregistrement des matières. Réessaie.</p>
         )}

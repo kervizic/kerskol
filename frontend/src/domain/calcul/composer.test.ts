@@ -312,3 +312,73 @@ describe("composeSession : filtre par sous-matieres (domaines)", () => {
     expect(plan.length).toBe(0);
   });
 });
+
+// ==========================================================================
+// LOT 1 : socle multi-classes (portee par classe, marge d'un an).
+// ==========================================================================
+import { classeDansMarge, classeDansPortee } from "../../lib/types";
+
+describe("classeDansMarge : candidature competence a +/- 1 an", () => {
+  it("sans portee declaree -> toujours candidate (demo / ancien referentiel)", () => {
+    expect(classeDansMarge(undefined, undefined, "CE2")).toBe(true);
+  });
+  it("CE2 : revision CE1 et avance CM1 candidates, CM2 et CP exclus", () => {
+    expect(classeDansMarge("CE1", "CE1", "CE2")).toBe(true); // revision
+    expect(classeDansMarge("CE2", "CE2", "CE2")).toBe(true); // coeur
+    expect(classeDansMarge("CM1", "CM1", "CE2")).toBe(true); // avance
+    expect(classeDansMarge("CM2", "CM2", "CE2")).toBe(false);
+    expect(classeDansMarge("CP", "CP", "CE2")).toBe(false);
+  });
+  it("CM1 : CE2 (revision), CM1 (coeur), CM2 (avance) candidates ; CE1 exclu", () => {
+    expect(classeDansMarge("CE2", "CE2", "CM1")).toBe(true);
+    expect(classeDansMarge("CM1", "CM1", "CM1")).toBe(true);
+    expect(classeDansMarge("CM2", "CM2", "CM1")).toBe(true);
+    expect(classeDansMarge("CE1", "CE1", "CM1")).toBe(false);
+  });
+});
+
+describe("classeDansPortee : visibilite stricte d'une sous-matiere", () => {
+  it("une sous-matiere CM1 est masquee pour un CE2 mais visible pour un CM1", () => {
+    expect(classeDansPortee("CM1", "CM2", "CE2")).toBe(false);
+    expect(classeDansPortee("CM1", "CM2", "CM1")).toBe(true);
+  });
+  it("sans portee -> visible partout", () => {
+    expect(classeDansPortee(undefined, undefined, "CE2")).toBe(true);
+    expect(classeDansPortee(undefined, undefined, "CM1")).toBe(true);
+  });
+});
+
+describe("composeSession : filtre de candidature par classe", () => {
+  // Une seule competence, forcee hors de portee CE2 (CM2 only) mais a portee CM1.
+  const uneCM2: Competence[] = [{
+    code: "MA.CM.ADDITION", matiere: "MA", domaine: "calcul_mental",
+    libelle: "add", ordre: 10, nb_niveaux: 4, actif: true,
+    classe_min: "CM2", classe_max: "CM2",
+  }];
+  it("un CE2 ne recoit pas une competence CM2 (hors marge)", () => {
+    const plan = composeSession({
+      competences: uneCM2, prerequis: [], progress: [],
+      sources: SEED_SOURCES, seed: 1, now: NOW, classe: "CE2",
+    });
+    expect(plan.length).toBe(0);
+  });
+  it("un CM1 recoit cette meme competence CM2 (avance, dans la marge)", () => {
+    const plan = composeSession({
+      competences: uneCM2, prerequis: [], progress: [],
+      sources: SEED_SOURCES, seed: 1, now: NOW, classe: "CM1",
+    });
+    expect(plan.length).toBeGreaterThan(0);
+  });
+  it("Iris en CE2 : les competences CE2 (portee par defaut) restent candidates", () => {
+    const ce2: Competence[] = CODES.map((code) => ({
+      code, matiere: "MA", domaine: "calcul_mental", libelle: code,
+      ordre: ORDRE[code] ?? 999, nb_niveaux: 4, actif: true,
+      classe_min: "CE2" as const, classe_max: "CE2" as const,
+    }));
+    const plan = composeSession({
+      competences: ce2, prerequis: PREREQUIS, progress: [],
+      sources: SEED_SOURCES, seed: 42, now: NOW, classe: "CE2",
+    });
+    expect(plan.length).toBeGreaterThan(0);
+  });
+});

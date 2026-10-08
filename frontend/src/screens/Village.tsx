@@ -206,6 +206,7 @@ export function Village({
               <MatieresEditor
                 matieresActives={profil.matieres_actives ?? ["MA"]}
                 domainesActifs={profil.domaines_actifs ?? TOUS_DOMAINES}
+                classe={profil.classe}
                 onChange={changeMatieres}
               />
             </>

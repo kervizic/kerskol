@@ -51,6 +51,31 @@ SELECT _rec('4_classe_maj_le_pose',
               WHERE id = 'c0000001-0000-0000-0000-000000000000'),
             'classe_maj_le renseigne apres changement');
 
+-- TEST 5 : portee par classe (lot 1 / migration 0066) : colonnes presentes,
+-- competences existantes par defaut en CE2.
+SELECT _rec('5_competences_classe_defaut_CE2',
+            (SELECT count(*) FROM competences WHERE classe_min = 'CE2' AND classe_max = 'CE2') > 0,
+            'competences CE2 par defaut = ' || (SELECT count(*) FROM competences WHERE classe_min='CE2' AND classe_max='CE2'));
+
+-- TEST 6 : rappels CE1 evidents marques classe_min = CE1.
+SELECT _rec('6_rappels_CE1_marques',
+            (SELECT count(*) FROM competences
+              WHERE code IN ('MA.CM.ADDITION','MA.CM.DOUBLES','MA.CM.MOITIES','MA.CM.COMPL_SUP')
+                AND classe_min = 'CE1') = 4,
+            'rappels CE1 = ' || (SELECT count(*) FROM competences
+              WHERE code IN ('MA.CM.ADDITION','MA.CM.DOUBLES','MA.CM.MOITIES','MA.CM.COMPL_SUP')
+                AND classe_min = 'CE1'));
+
+-- TEST 7 : la contrainte d'ordre rejette classe_min > classe_max.
+DO $$
+BEGIN
+    UPDATE competences SET classe_min = 'CM2', classe_max = 'CP'
+     WHERE code = 'MA.CM.ADDITION';
+    PERFORM _rec('7_check_classe_ordre', false, 'ordre incoherent accepte a tort');
+EXCEPTION WHEN check_violation THEN
+    PERFORM _rec('7_check_classe_ordre', true, 'refus attendu : ' || SQLERRM);
+END $$;
+
 -- Rapport
 SELECT id, CASE WHEN ok THEN 'PASS' ELSE 'FAIL' END AS resultat, nom, detail FROM _res ORDER BY id;
 DO $$

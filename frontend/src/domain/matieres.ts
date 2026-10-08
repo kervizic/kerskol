@@ -12,9 +12,16 @@
 // masses, contenances) dans `mesures`, et « monnaie » dans le domaine
 // `problemes` (cf. public.competences).
 
+import type { Classe } from "../lib/types";
+import { classeDansPortee } from "../lib/types";
+
 export interface SousMatiere {
   domaine: string; // = public.competences.domaine
   libelle: string;
+  // Portee par classe (lot 1). Absent = visible partout (CP..CM2). Une
+  // sous-matiere propre au CM1 (lot 2) porte classeMin='CM1'.
+  classeMin?: Classe;
+  classeMax?: Classe;
 }
 export interface MatiereDef {
   code: string; // = public.competences.matiere (MA, FR)
@@ -91,6 +98,25 @@ export function matiereDe(domaine: string): string | undefined {
     if (m.sousMatieres.some((s) => s.domaine === domaine)) return m.code;
   }
   return undefined;
+}
+
+// Une sous-matiere est-elle VISIBLE pour cette classe (lot 1) ? Visibilite
+// stricte : classeMin <= classe <= classeMax (defaut CP..CM2). Les sous-matieres
+// propres au CM1 sont donc masquees pour un CE2 dans les reglages ; le moteur,
+// lui, peut proposer une competence un peu en avance DANS une sous-matiere deja
+// visible (marge d'un an, composeSession).
+export function sousMatiereVisible(s: SousMatiere, classe: Classe): boolean {
+  return classeDansPortee(s.classeMin, s.classeMax, classe);
+}
+
+// Sous-matieres visibles d'une matiere pour une classe donnee.
+export function sousMatieresVisibles(m: MatiereDef, classe: Classe): SousMatiere[] {
+  return m.sousMatieres.filter((s) => sousMatiereVisible(s, classe));
+}
+
+// Domaines visibles pour une classe (toutes matieres confondues).
+export function domainesVisibles(classe: Classe): string[] {
+  return MATIERES.flatMap((m) => sousMatieresVisibles(m, classe).map((s) => s.domaine));
 }
 
 // Une competence (matiere, domaine) est-elle jouable, selon les reglages du

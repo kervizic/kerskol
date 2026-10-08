@@ -10,6 +10,7 @@
 //   * 1re seance (aucune reponse encore) = competences SANS prerequis.
 
 import { isUnlocked } from "../buildings";
+import { classeDansMarge } from "../../lib/types";
 import type { Classe, Competence, Prerequis, ProgressionDetail } from "../../lib/types";
 import { generateExercise, type ExCalcul, type GeneratedExercise, type ProblemContext } from "./generator";
 import { classPlan, classUnlocks } from "./classes";
@@ -119,11 +120,17 @@ export function composeSession(input: ComposeInput): PlannedItem[] {
   // = ['MA'] + toutes les sous-matieres). Absent = toutes (aucune restriction).
   const mats = input.matieres;
   const doms = input.domaines;
+  // Portee par classe (lot 1) : une competence est candidate si sa portee
+  // [classe_min, classe_max] chevauche la classe de l'enfant a +/- 1 an
+  // (revision de la classe d'avant, un peu d'avance si elle est acquise). Une
+  // competence sans portee declaree (demo / ancien referentiel) n'est pas
+  // restreinte.
   const active = competences.filter(
     (c) =>
       c.actif !== false &&
       (!mats || mats.includes(c.matiere)) &&
-      (!doms || doms.includes(c.domaine))
+      (!doms || doms.includes(c.domaine)) &&
+      classeDansMarge(c.classe_min, c.classe_max, classe)
   );
   // Une progression sert de reference "deja debloque". Une competence est
   // retenue si ses prerequis sont atteints OU si la classe la presume debloquee

@@ -21,6 +21,40 @@ export const CLASSES: Classe[] = ["CP", "CE1", "CE2", "CM1", "CM2"];
 // Seul le programme de CE2 est disponible pour l'instant (contenu de calcul).
 export const CLASSE_DISPONIBLE: Classe = "CE2";
 
+// Rang scolaire d'une classe (CP=0 .. CM2=4). Sert aux comparaisons de portee.
+export function classeRang(c: Classe): number {
+  return CLASSES.indexOf(c);
+}
+
+// La portee [min, max] d'une competence/sous-matiere chevauche-t-elle la classe
+// de l'enfant avec une MARGE (defaut 1 an) ? Sert au moteur : revision de la
+// classe d'avant (C-1) et un peu d'avance (C+1).
+export function classeDansMarge(
+  min: Classe | undefined,
+  max: Classe | undefined,
+  classe: Classe,
+  marge = 1,
+): boolean {
+  if (!min && !max) return true; // aucune portee declaree -> pas de restriction
+  const lo = classeRang(min ?? "CP");
+  const hi = classeRang(max ?? "CM2");
+  const c = classeRang(classe);
+  return lo <= c + marge && hi >= c - marge;
+}
+
+// Une sous-matiere/competence de portee [min, max] est-elle VISIBLE pour cette
+// classe ? Visibilite STRICTE (sans marge) : min <= classe <= max.
+export function classeDansPortee(
+  min: Classe | undefined,
+  max: Classe | undefined,
+  classe: Classe,
+): boolean {
+  const lo = classeRang(min ?? "CP");
+  const hi = classeRang(max ?? "CM2");
+  const c = classeRang(classe);
+  return lo <= c && c <= hi;
+}
+
 export interface Profil {
   id: string;
   foyer_id: string;
@@ -64,6 +98,10 @@ export interface Competence {
   ordre: number;
   nb_niveaux: number;
   actif: boolean;
+  // Portee de la competence par classe (lot 1 / migration 0066). Optionnel :
+  // absent en mode demo / anciens referentiels -> aucune restriction de classe.
+  classe_min?: Classe;
+  classe_max?: Classe;
 }
 
 export interface Prerequis {

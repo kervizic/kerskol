@@ -387,7 +387,7 @@ export async function getReferentiel(): Promise<Referentiel> {
     sb.from("matieres").select("code, libelle"),
     sb
       .from("competences")
-      .select("code, matiere, domaine, libelle, ordre, nb_niveaux, actif")
+      .select("code, matiere, domaine, libelle, ordre, nb_niveaux, actif, classe_min, classe_max")
       .in("matiere", ["MA", "QM", "EMC"])
       .order("ordre", { ascending: true }),
     sb.from("competence_prerequis").select("competence, prerequis, niveau_min"),
@@ -495,7 +495,7 @@ export async function getFrancais(): Promise<{ competences: Competence[]; source
   const [comp, ex] = await Promise.all([
     sb
       .from("competences")
-      .select("code, matiere, domaine, libelle, ordre, nb_niveaux, actif")
+      .select("code, matiere, domaine, libelle, ordre, nb_niveaux, actif, classe_min, classe_max")
       .eq("matiere", "FR")
       .eq("actif", true)
       .order("ordre", { ascending: true }),
