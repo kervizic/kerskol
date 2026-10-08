@@ -573,6 +573,11 @@ button.kk-don__picto-row { cursor: pointer; }
 .kk-lecture__mot--ok { background: #16a34a; color: #fff; }
 .kk-lecture__mot--ko { background: #dc2626; color: #fff; }
 .kk-lecture__ordre { gap: 8px; }
+.kk-lecture__gloss { margin: 0 auto; max-width: 520px; width: 100%; }
+.kk-lecture__gloss > summary { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; list-style: none; min-height: 44px; }
+.kk-lecture__gloss > summary::-webkit-details-marker { display: none; }
+.kk-lecture__gloss-list { margin: 10px 4px 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; }
+.kk-lecture__gloss-list li { font-size: 1rem; line-height: 1.5; color: var(--kk-text); }
 .kk-lecture__rang {
   display: inline-flex;
   align-items: center;
@@ -580,3 +585,31 @@ button.kk-don__picto-row { cursor: pointer; }
   min-width: 1.4em;
   font-weight: 700;
 }
+
+/* --- Bibliothèque (textes du domaine public, lot 0060) ------------------- */
+.kk-biblio { max-width: 720px; display: flex; flex-direction: column; gap: 14px; }
+.kk-biblio__back { display: inline-flex; align-items: center; gap: 6px; align-self: flex-start; min-height: 44px; }
+.kk-biblio__titre { color: var(--kk-accent); font-size: clamp(1.6rem, 5vw, 2.2rem); margin: 0; }
+.kk-biblio__head { display: flex; flex-direction: column; gap: 4px; }
+.kk-biblio__credit { font-size: 1rem; margin: 0; }
+.kk-biblio__dp { font-size: 0.85rem; margin: 0; text-transform: uppercase; letter-spacing: 0.04em; }
+.kk-biblio__auteur { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+.kk-biblio__auteur-nom { font-size: 1.15rem; color: var(--kk-text); margin: 0; }
+.kk-biblio__liste { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.kk-biblio__item { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; text-align: left; min-height: 44px; }
+.kk-biblio__item-titre { font-weight: 700; }
+.kk-biblio__item-oeuvre { font-size: 0.85rem; }
+.kk-biblio__texte {
+  background: var(--kk-surface); border: 1px solid var(--kk-border);
+  border-radius: var(--kk-radius); padding: clamp(18px, 4vw, 28px);
+}
+.kk-biblio__para {
+  font-size: clamp(1.15rem, 3.4vw, 1.4rem); line-height: 1.9; color: var(--kk-text);
+  white-space: pre-line; margin: 0 0 14px;
+}
+.kk-biblio__para:last-child { margin-bottom: 0; }
+.kk-biblio__gloss > summary { display: inline-flex; align-items: center; cursor: pointer; list-style: none; min-height: 44px; }
+.kk-biblio__gloss > summary::-webkit-details-marker { display: none; }
+.kk-biblio__gloss-list { margin: 10px 4px 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; }
+.kk-biblio__gloss-list li { font-size: 1.05rem; line-height: 1.6; }
+.kk-biblio__source { font-size: 0.85rem; margin: 0; }

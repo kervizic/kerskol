@@ -8,6 +8,7 @@ import { ParentSpace } from "./screens/ParentSpace";
 import { Session } from "./screens/Session";
 import { DefiChrono } from "./screens/DefiChrono";
 import { LinkCode } from "./screens/LinkCode";
+import { Bibliotheque } from "./screens/Bibliotheque";
 import { ChildTheme } from "./components/ChildTheme";
 import {
   ensureFoyer,
@@ -38,7 +39,7 @@ function currentPath(): string {
     return "/";
   }
 }
-const CHILD_RE = /^\/enfant\/([^/]+)\/(village|seance|defi)$/;
+const CHILD_RE = /^\/enfant\/([^/]+)\/(village|seance|defi|bibliotheque)$/;
 
 export function App() {
   const [ready, setReady] = useState(false);
@@ -305,9 +306,15 @@ export function App() {
           onProfilChange={upsertProfil}
           onAddChild={() => navigate("/creer-profil")}
           onExit={() => navigate("/")}
+          onBiblio={() => navigate("/bibliotheque")}
           onFoyerDeleted={() => void handleFoyerDeleted()}
         />
       );
+    }
+
+    // Bibliotheque (espace parent) : accessible depuis les reglages.
+    if (path === "/bibliotheque") {
+      return <Bibliotheque onExit={() => navigate("/reglages")} />;
     }
 
     const m = path.match(CHILD_RE);
@@ -324,8 +331,16 @@ export function App() {
               onExit={() => navigate("/")}
               onStart={() => navigate(`/enfant/${prof.id}/seance`)}
               onDefi={() => navigate(`/enfant/${prof.id}/defi`)}
+              onBiblio={() => navigate(`/enfant/${prof.id}/bibliotheque`)}
               onProfilChange={upsertProfil}
             />
+          </ChildTheme>
+        );
+      }
+      if (m[2] === "bibliotheque") {
+        return (
+          <ChildTheme couleur={couleur}>
+            <Bibliotheque onExit={() => navigate(`/enfant/${prof.id}/village`)} />
           </ChildTheme>
         );
       }

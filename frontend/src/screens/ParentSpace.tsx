@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, BookOpen } from "lucide-react";
 import { AvatarView } from "../domain/avatars";
 import { Feedback, Spinner } from "../components/ui";
 import {
@@ -576,6 +576,7 @@ export function ParentSpace({
   onProfilChange,
   onAddChild,
   onExit,
+  onBiblio,
   onFoyerDeleted,
 }: {
   foyerId: string;
@@ -583,6 +584,7 @@ export function ParentSpace({
   onProfilChange: (p: Profil) => void;
   onAddChild: () => void;
   onExit: () => void;
+  onBiblio: () => void;
   onFoyerDeleted: () => void;
 }) {
   const [journal, setJournal] = useState<JournalReglage[] | null>(null);
@@ -685,6 +687,10 @@ export function ParentSpace({
             <DefiSummary profilId={p.id} />
           </div>
         ))}
+
+        <button className="kk-btn kk-btn--block" onClick={onBiblio} style={{ marginBottom: 16 }}>
+          <BookOpen size={18} aria-hidden="true" /> Bibliothèque
+        </button>
 
         <button className="kk-btn kk-btn--accent kk-btn--block" onClick={onAddChild}>
           + Ajouter un enfant

@@ -34,6 +34,7 @@
 
 import { describe, it, expect } from "vitest";
 import { BANQUE_COMPREHENSION } from "./francais/comprehension";
+import { BIBLIOTHEQUE } from "./francais/bibliotheque";
 import { BANQUE_QM } from "./qm";
 import { BANQUE_EMC } from "./emc";
 import { BANQUE_GRAMMAIRE } from "./francais/grammaire";
@@ -122,6 +123,7 @@ describe("bienveillance : aucun contenu enfant ne contient de mot interdit", () 
   it("banques statiques (lecture, QM, EMC, grammaire, vocabulaire, donnees, geometrie)", () => {
     const acc: Violation[] = [];
     scanBanque("comprehension", BANQUE_COMPREHENSION, acc);
+    scanBanque("bibliotheque", BIBLIOTHEQUE, acc);
     scanBanque("qm", BANQUE_QM, acc);
     scanBanque("emc", BANQUE_EMC, acc);
     scanBanque("grammaire", BANQUE_GRAMMAIRE, acc);

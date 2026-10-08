@@ -1071,3 +1071,49 @@ domaine `EMC.*` pour « moquerie » / « blesser (les sentiments) »). Les mots
 isolés de vocabulaire (« triste », « méchant », antonymes) ne sont pas interdits :
 la règle vise les **scènes**, pas le lexique nécessaire ; leur usage reste
 surveillé par la revue éditoriale.
+
+# Bibliothèque de textes du domaine public (lot 0060)
+
+Kerskol intègre une **bibliothèque de textes du domaine public** (fables de La
+Fontaine et de Florian, *Histoires naturelles* de Jules Renard, contes d'Andersen,
+Perrault, Mme d'Aulnoy, récits de la Comtesse de Ségur, Colette, George Sand,
+Anatole France, poésies de Gautier, Cros, Desbordes-Valmore). Tous les auteurs
+sont disparus depuis plus de 70 ans ; les textes sont recopiés fidèlement d'après
+Wikisource (seuls de courts extraits sont parfois utilisés, coupés aux limites de
+phrase).
+
+**Sélection.** On ne retient que les textes cycle 2 (CE1/CE2), marqués
+`utilisable = oui` et `ton = garde` dans le catalogue de la bibliothèque, et dont
+le **corps** ne contient aucun mot de la liste bienveillance. Les textes signalés
+par Manu (Musiciens de Brême, Conquérants, Lièvre et Grenouilles, Renart et les
+anguilles, Maître Pathelin, « Feu ! » de Verne, Le Mendiant de Hugo, Une souris
+verte, Le ciel est par-dessus le toit) sont **exclus**.
+
+**Source de vérité.** `frontend/src/domain/francais/bibliotheque.ts` (fichier
+généré) porte, pour chaque texte : auteur, œuvre, titre, classe, URL de source,
+corps (paragraphes/strophes), glossaire « mots difficiles » et un champ
+`librivoxUrl` **réservé** à la future voix (aucun audio pour l'instant). La page
+Bibliothèque (`frontend/src/screens/Bibliotheque.tsx`) est accessible depuis
+l'accueil enfant (village) et l'espace parent : lecture **silencieuse**, gros
+caractères, interligne large, crédit auteur/œuvre + « domaine public ». Le bouton
+« Écouter » est présent dans le DOM mais **désactivé et masqué**.
+
+## Compréhension : items bâtis sur la bibliothèque
+
+La banque « Comprendre un texte » (`comprehension.ts`, table miroir
+`public.comprehension_item`, migration 0060) reçoit des **questions originales**
+(écrites pour le CE2) dont seul le **texte lu** reprend les mots de l'auteur :
+
+- **N1** repérer une information explicite (QCM) ;
+- **N2** qui / où / quoi + sens d'un mot en contexte ;
+- **N3** inférence simple, ordre des événements, à qui renvoie un petit mot ;
+- **N4** réponse libre courte (taper un mot, cliquer le mot qui prouve).
+
+Les **vieux mots** sont expliqués par un petit glossaire au survol/toucher
+(`glossaire` de l'item ; par exemple « un flatteur = une personne qui dit de
+belles choses pour tromper »). Chaque item cite sa source (auteur + œuvre).
+
+**Bienveillance.** Le garde-fou `bienveillance.test.ts` scanne désormais aussi
+`BIBLIOTHEQUE` ; `bienveillance_test.sql` scanne toutes les réponses de référence
+`comprehension_item` (dont les nouveaux items). Les définitions du glossaire sont
+adoucies si besoin (ex. « façon amicale et familière » au lieu de « moqueuse »).

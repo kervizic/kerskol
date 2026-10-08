@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Settings, Timer } from "lucide-react";
+import { BookOpen, Settings, Timer } from "lucide-react";
 import { AvatarView } from "../domain/avatars";
 import {
   AVATAR_COLORS,
@@ -38,6 +38,7 @@ export function Village({
   onExit,
   onStart,
   onDefi,
+  onBiblio,
   onProfilChange,
 }: {
   profil: Profil;
@@ -45,6 +46,7 @@ export function Village({
   onExit: () => void;
   onStart: () => void;
   onDefi: () => void;
+  onBiblio: () => void;
   onProfilChange: (p: Profil) => void;
 }) {
   const [progression, setProgression] = useState<Progression[] | null>(null);
@@ -246,6 +248,13 @@ export function Village({
           title="Un jeu de rapidité, sur ce que tu maîtrises déjà"
         >
           <Timer size={20} aria-hidden="true" /> Défi chrono
+        </button>
+        <button
+          className="kk-btn kk-btn--block"
+          onClick={onBiblio}
+          title="Des histoires, des fables et des poésies à lire"
+        >
+          <BookOpen size={20} aria-hidden="true" /> Bibliothèque
         </button>
       </div>
     </div>
