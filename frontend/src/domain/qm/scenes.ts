@@ -1,0 +1,63 @@
+// Scenes SVG maison pour « Questionner le monde » (format clic / illustration).
+// Primitives simples, couleurs de theme (var(--kk-*)). Aucune image protegee.
+// Chaque scene est DETERMINISTE (tests golden stables).
+
+import type { QmScene, QmSceneEl, QmZone } from "./types";
+
+const WIRE = "var(--kk-text)";
+
+// --------------------------------------------------------------------------
+// Circuit electrique simple (pile, ampoule, fils, interrupteur). Boucle
+// rectangulaire ; ampoule en haut, pile en bas, interrupteur a droite.
+//   closed   : interrupteur ferme (levier vertical) ou ouvert (levier releve) ;
+//   broken   : un fil est coupe (petite coupure en bas a gauche) ;
+//   withZones: ajoute 3 zones cliquables (l'ampoule, l'interrupteur, la pile).
+// L'ampoule s'allume SSI closed ET non broken (simulation simple cote serveur
+// via l'attendu de l'item).
+// --------------------------------------------------------------------------
+export function circuitScene(opts: { closed: boolean; broken?: boolean; withZones?: boolean }): QmScene {
+  const broken = opts.broken ?? false;
+  const lit = opts.closed && !broken;
+  const els: QmSceneEl[] = [
+    // Fil gauche + haut + droite (avec coupures pour les composants).
+    { t: "line", x1: 24, y1: 24, x2: 24, y2: 78, stroke: WIRE, sw: 2 }, // gauche
+    { t: "line", x1: 24, y1: 24, x2: 51, y2: 24, stroke: WIRE, sw: 2 }, // haut-gauche
+    { t: "line", x1: 69, y1: 24, x2: 96, y2: 24, stroke: WIRE, sw: 2 }, // haut-droite
+    { t: "line", x1: 96, y1: 24, x2: 96, y2: 42, stroke: WIRE, sw: 2 }, // droite-haut
+    { t: "line", x1: 96, y1: 58, x2: 96, y2: 78, stroke: WIRE, sw: 2 }, // droite-bas
+    { t: "line", x1: 68, y1: 78, x2: 96, y2: 78, stroke: WIRE, sw: 2 }, // bas-droite
+    // Ampoule (cercle + filament en croix). Allumee -> halo jaune.
+    ...(lit
+      ? [{ t: "circle" as const, cx: 60, cy: 24, r: 13, fill: "#fde047", stroke: "none", opacity: 0.6 }]
+      : []),
+    { t: "circle", cx: 60, cy: 24, r: 9, stroke: WIRE, sw: 2, fill: "none" },
+    { t: "line", x1: 54, y1: 19, x2: 66, y2: 29, stroke: WIRE, sw: 1.2 },
+    { t: "line", x1: 54, y1: 29, x2: 66, y2: 19, stroke: WIRE, sw: 1.2 },
+    // Pile (deux plaques : longue = +, courte epaisse = -).
+    { t: "line", x1: 57, y1: 71, x2: 57, y2: 85, stroke: WIRE, sw: 1.2 },
+    { t: "line", x1: 63, y1: 74, x2: 63, y2: 82, stroke: WIRE, sw: 3 },
+    // Interrupteur (contact haut + pivot bas + levier).
+    { t: "circle", cx: 96, cy: 42, r: 2, fill: WIRE, stroke: "none" },
+    { t: "circle", cx: 96, cy: 58, r: 2, fill: WIRE, stroke: "none" },
+    opts.closed
+      ? { t: "line", x1: 96, y1: 58, x2: 96, y2: 42, stroke: WIRE, sw: 2 }
+      : { t: "line", x1: 96, y1: 58, x2: 86, y2: 44, stroke: WIRE, sw: 2 },
+  ];
+  // Fil du bas gauche : entier ou coupe.
+  if (broken) {
+    els.push({ t: "line", x1: 24, y1: 78, x2: 36, y2: 78, stroke: WIRE, sw: 2 });
+    els.push({ t: "line", x1: 44, y1: 78, x2: 52, y2: 78, stroke: WIRE, sw: 2 });
+    els.push({ t: "line", x1: 37, y1: 74, x2: 41, y2: 82, stroke: WIRE, sw: 1.2 });
+    els.push({ t: "line", x1: 43, y1: 74, x2: 39, y2: 82, stroke: WIRE, sw: 1.2 });
+  } else {
+    els.push({ t: "line", x1: 24, y1: 78, x2: 52, y2: 78, stroke: WIRE, sw: 2 });
+  }
+  const zones: QmZone[] = opts.withZones
+    ? [
+        { label: "l'ampoule", shape: "rect", x: 50, y: 13, w: 20, h: 20 },
+        { label: "l'interrupteur", shape: "rect", x: 84, y: 36, w: 22, h: 28 },
+        { label: "la pile", shape: "rect", x: 50, y: 69, w: 22, h: 20 },
+      ]
+    : [];
+  return { kind: "scene", viewBox: "0 0 120 96", els, zones };
+}

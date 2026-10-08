@@ -60,6 +60,7 @@ export const MATIERES: MatiereDef[] = [
     sousMatieres: [
       { domaine: "vivant", libelle: "Le vivant" },
       { domaine: "matiere", libelle: "La matière" },
+      { domaine: "objets", libelle: "Les objets" },
     ],
   },
 ];

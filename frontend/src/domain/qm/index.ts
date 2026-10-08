@@ -7,14 +7,19 @@ import type { Base, GeneratedExercise, ExCalcul } from "../calcul/generator";
 import { type QmItem, comparerQm } from "./types";
 import { BANQUE_VIVANT, COMPETENCES_VIVANT } from "./vivant";
 import { BANQUE_MATIERE, COMPETENCES_MATIERE } from "./matiere";
+import { BANQUE_OBJETS, COMPETENCES_OBJETS } from "./objets";
 
 export * from "./types";
 
 // Banque complete (toutes sous-matieres QM actives dans le build courant).
-export const BANQUE_QM: QmItem[] = [...BANQUE_VIVANT, ...BANQUE_MATIERE];
+export const BANQUE_QM: QmItem[] = [...BANQUE_VIVANT, ...BANQUE_MATIERE, ...BANQUE_OBJETS];
 
 // Competences QM, dans l'ordre d'affichage du referentiel.
-export const COMPETENCES_QM = [...COMPETENCES_VIVANT, ...COMPETENCES_MATIERE] as const;
+export const COMPETENCES_QM = [
+  ...COMPETENCES_VIVANT,
+  ...COMPETENCES_MATIERE,
+  ...COMPETENCES_OBJETS,
+] as const;
 
 // Items jouables pour une competence et un niveau donnes.
 export function itemsQmDe(competence: string, niveau: number): QmItem[] {

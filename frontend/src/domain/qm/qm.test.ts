@@ -17,6 +17,7 @@ import {
   tri,
 } from "./index";
 import { COMPETENCES_MATIERE } from "./matiere";
+import { COMPETENCES_OBJETS } from "./objets";
 
 describe("banque QM — Le vivant", () => {
   it("48 items (6 competences x 4 niveaux x 2), cles uniques", () => {
@@ -68,6 +69,28 @@ describe("banque QM — La matière", () => {
     for (const c of COMPETENCES_MATIERE) {
       for (let n = 1; n <= 4; n++) expect(itemsQmDe(c, n).length, `${c} N${n}`).toBeGreaterThanOrEqual(1);
     }
+  });
+});
+
+describe("banque QM — Les objets", () => {
+  it("32 items (4 competences x 4 niveaux x 2)", () => {
+    const obj = BANQUE_QM.filter((i) => i.competence.startsWith("QM.OBJETS."));
+    expect(obj.length).toBe(32);
+  });
+  it("couverture des 4 competences objets x niveaux", () => {
+    for (const c of COMPETENCES_OBJETS) {
+      for (let n = 1; n <= 4; n++) expect(itemsQmDe(c, n).length, `${c} N${n}`).toBeGreaterThanOrEqual(1);
+    }
+  });
+  it("le circuit porte une scene SVG (clic) + simulation simple (s'allume)", () => {
+    const clic = itemQmParCle("qm-obj-cir-n2-a")!;
+    expect(clic.format).toBe("clic");
+    expect(clic.figure?.kind).toBe("scene");
+    expect(estJusteQm("qm-obj-cir-n2-a", "l'interrupteur")).toBe(true);
+    expect(estJusteQm("qm-obj-cir-n2-a", "la pile")).toBe(false);
+    // Circuit ferme -> s'allume (oui) ; ouvert -> non.
+    expect(estJusteQm("qm-obj-cir-n1-a", "oui")).toBe(true);
+    expect(estJusteQm("qm-obj-cir-n1-b", "non")).toBe(true);
   });
 });
 
@@ -141,6 +164,10 @@ describe("spot-check croise front <-> SQL", () => {
     ["qm-mat-eau-n4-b", "ordre", "la glace>l'eau liquide>la vapeur"],
     ["qm-mat-mel-n2-a", "tri", "le sucre=se dissout;le sel=se dissout;le sable=ne se dissout pas;l'huile=ne se dissout pas"],
     ["qm-mat-air-n4-b", "texte", "vent"],
+    ["qm-obj-cir-n1-a", "qcm", "oui"],
+    ["qm-obj-cir-n2-a", "clic", "l'interrupteur"],
+    ["qm-obj-fon-n2-a", "tri", "le stylo=pour écrire;le couteau=pour couper;la fourchette=pour manger"],
+    ["qm-obj-lev-n4-b", "texte", "levier"],
   ];
   it("chaque triplet correspond a la banque", () => {
     for (const [cle, format, attendu] of SPOT) {

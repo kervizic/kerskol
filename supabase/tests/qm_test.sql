@@ -59,7 +59,11 @@ BEGIN
         ('qm-mat-eta-n3-a','QM.MATIERE.ETATS',3,'tri','le bois=solide;l''eau=liquide;l''air=gaz'),
         ('qm-mat-eau-n4-b','QM.MATIERE.EAU',4,'ordre','la glace>l''eau liquide>la vapeur'),
         ('qm-mat-mel-n2-a','QM.MATIERE.MELANGES',2,'tri','le sucre=se dissout;le sel=se dissout;le sable=ne se dissout pas;l''huile=ne se dissout pas'),
-        ('qm-mat-air-n4-b','QM.MATIERE.AIR',4,'texte','vent')
+        ('qm-mat-air-n4-b','QM.MATIERE.AIR',4,'texte','vent'),
+        ('qm-obj-cir-n1-a','QM.OBJETS.CIRCUIT',1,'qcm','oui'),
+        ('qm-obj-cir-n2-a','QM.OBJETS.CIRCUIT',2,'clic','l''interrupteur'),
+        ('qm-obj-fon-n2-a','QM.OBJETS.FONCTIONS',2,'tri','le stylo=pour écrire;le couteau=pour couper;la fourchette=pour manger'),
+        ('qm-obj-lev-n4-b','QM.OBJETS.LEVIERS',4,'texte','levier')
     ) AS t(cle, competence, niveau, format, attendu)
     LOOP
         SELECT format || '|' || attendu INTO got FROM public.qm_item WHERE cle = r.cle;
@@ -68,7 +72,7 @@ BEGIN
                 r.cle, r.format || '|' || r.attendu, got;
         END IF;
     END LOOP;
-    RAISE NOTICE 'table qm_item (48 + couverture + spot) : OK';
+    RAISE NOTICE 'table qm_item (% items, couverture + spot) : OK', n;
 END $$;
 
 -- ===========================================================================

@@ -911,3 +911,21 @@ Activation : domaine `matiere` ajouté actif au défaut et à tous les profils
 (Iris incluse). La matière QM était déjà active (0052). Sous-matière ajoutée à
 `matieres.ts`. Aucun changement serveur autre que les données (réutilise `qm_item`,
 `verif_qm`, op `qm`).
+
+## Sous-matière « Les objets » (migration 0054)
+
+Domaine `objets`, 4 compétences × 4 niveaux × 2 = 32 items.
+
+- `QM.OBJETS.CIRCUIT` — circuit électrique simple. Scène SVG maison
+  (`scenes.ts : circuitScene`) : pile, ampoule, fils, interrupteur. « L'ampoule
+  s'allume ? » = **simulation simple** : l'attendu vaut « oui » si l'interrupteur
+  est fermé ET aucun fil coupé, « non » sinon. Un `clic` fait toucher un composant
+  (l'interrupteur, la pile). N4 : dangers de l'électricité (prise).
+- `QM.OBJETS.FONCTIONS` — associer objet et fonction (tri/qcm).
+- `QM.OBJETS.LEVIERS` — balances (le plus lourd descend, équilibre) et leviers.
+- `QM.OBJETS.NUMERIQUE` — usage responsable des écrans (pauses, demander à un
+  adulte, ne pas parler à un inconnu, tout n'est pas vrai sur Internet).
+
+Premier usage du format `clic` avec scène SVG (zones cliquables dans
+`QuestionnerLeMonde.tsx`). Domaine `objets` actif au défaut et sur tous les
+profils (Iris incluse).

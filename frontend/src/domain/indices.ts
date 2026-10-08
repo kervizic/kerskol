@@ -184,6 +184,16 @@ export const INDICES: Record<string, string> = {
     "Le sucre se cache dans l'eau, il se dissout. Le sable, lui, tombe au fond. Demande-toi si on voit encore ce qu'on a ajouté.",
   "QM.MATIERE.AIR":
     "On ne voit pas l'air, mais il prend de la place : il gonfle un ballon. Quand il bouge, c'est le vent.",
+
+  // --- Questionner le monde : Les objets ------------------------------------
+  "QM.OBJETS.CIRCUIT":
+    "L'ampoule s'allume seulement si le chemin fait une boucle complète. Si l'interrupteur est ouvert ou si un fil est coupé, le courant ne passe pas.",
+  "QM.OBJETS.FONCTIONS":
+    "Demande-toi à quoi sert l'objet, ce qu'on fait avec. Les ciseaux coupent, le stylo écrit, la montre donne l'heure.",
+  "QM.OBJETS.LEVIERS":
+    "Sur une balance, le côté le plus lourd descend. Elle est équilibrée quand les deux côtés ont le même poids.",
+  "QM.OBJETS.NUMERIQUE":
+    "Devant un écran, on demande à un adulte, on fait des pauses pour les yeux, et on ne parle jamais à un inconnu.",
 };
 
 // Indice d'une competence, UNIQUEMENT aux niveaux 1 et 2 (sinon null : plus
