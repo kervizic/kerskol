@@ -194,6 +194,18 @@ export const INDICES: Record<string, string> = {
     "Sur une balance, le côté le plus lourd descend. Elle est équilibrée quand les deux côtés ont le même poids.",
   "QM.OBJETS.NUMERIQUE":
     "Devant un écran, on demande à un adulte, on fait des pauses pour les yeux, et on ne parle jamais à un inconnu.",
+
+  // --- Questionner le monde : L'espace --------------------------------------
+  "QM.ESPACE.SEREPERER":
+    "Un plan montre les lieux vus d'en haut, comme si on volait. La maquette est un petit modèle en volume.",
+  "QM.ESPACE.PLANETE":
+    "La Terre est une boule. Les grands morceaux de terre sont les continents, les grandes étendues d'eau sont les océans.",
+  "QM.ESPACE.FRANCE":
+    "Nous habitons en France. Sa capitale est Paris, et la Seine traverse Paris.",
+  "QM.ESPACE.CARDINAUX":
+    "Le soleil se lève à l'est et se couche à l'ouest. Sur une carte, le nord est en haut.",
+  "QM.ESPACE.PAYSAGES":
+    "La ville a des immeubles, la campagne des champs, la montagne de hauts sommets, le littoral le bord de la mer.",
 };
 
 // Indice d'une competence, UNIQUEMENT aux niveaux 1 et 2 (sinon null : plus

@@ -63,7 +63,11 @@ BEGIN
         ('qm-obj-cir-n1-a','QM.OBJETS.CIRCUIT',1,'qcm','oui'),
         ('qm-obj-cir-n2-a','QM.OBJETS.CIRCUIT',2,'clic','l''interrupteur'),
         ('qm-obj-fon-n2-a','QM.OBJETS.FONCTIONS',2,'tri','le stylo=pour écrire;le couteau=pour couper;la fourchette=pour manger'),
-        ('qm-obj-lev-n4-b','QM.OBJETS.LEVIERS',4,'texte','levier')
+        ('qm-obj-lev-n4-b','QM.OBJETS.LEVIERS',4,'texte','levier'),
+        ('qm-esp-pla-n2-a','QM.ESPACE.PLANETE',2,'clic','l''Afrique'),
+        ('qm-esp-car-n2-a','QM.ESPACE.CARDINAUX',2,'clic','le nord'),
+        ('qm-esp-pay-n2-a','QM.ESPACE.PAYSAGES',2,'tri','beaucoup d''immeubles=la ville;des champs=la campagne;beaucoup de voitures=la ville;des vaches dans un pré=la campagne'),
+        ('qm-esp-fra-n4-a','QM.ESPACE.FRANCE',4,'texte','Paris')
     ) AS t(cle, competence, niveau, format, attendu)
     LOOP
         SELECT format || '|' || attendu INTO got FROM public.qm_item WHERE cle = r.cle;

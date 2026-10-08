@@ -18,6 +18,7 @@ import {
 } from "./index";
 import { COMPETENCES_MATIERE } from "./matiere";
 import { COMPETENCES_OBJETS } from "./objets";
+import { COMPETENCES_ESPACE } from "./espace";
 
 describe("banque QM — Le vivant", () => {
   it("48 items (6 competences x 4 niveaux x 2), cles uniques", () => {
@@ -91,6 +92,26 @@ describe("banque QM — Les objets", () => {
     // Circuit ferme -> s'allume (oui) ; ouvert -> non.
     expect(estJusteQm("qm-obj-cir-n1-a", "oui")).toBe(true);
     expect(estJusteQm("qm-obj-cir-n1-b", "non")).toBe(true);
+  });
+});
+
+describe("banque QM — L'espace", () => {
+  it("40 items (5 competences x 4 niveaux x 2)", () => {
+    const esp = BANQUE_QM.filter((i) => i.competence.startsWith("QM.ESPACE."));
+    expect(esp.length).toBe(40);
+  });
+  it("couverture des 5 competences espace x niveaux", () => {
+    for (const c of COMPETENCES_ESPACE) {
+      for (let n = 1; n <= 4; n++) expect(itemsQmDe(c, n).length, `${c} N${n}`).toBeGreaterThanOrEqual(1);
+    }
+  });
+  it("planisphere et rose des vents portent une scene SVG (clic)", () => {
+    const afrique = itemQmParCle("qm-esp-pla-n2-a")!;
+    expect(afrique.format).toBe("clic");
+    expect(afrique.figure?.kind).toBe("scene");
+    expect(estJusteQm("qm-esp-pla-n2-a", "l'Afrique")).toBe(true);
+    expect(estJusteQm("qm-esp-pla-n2-a", "l'Asie")).toBe(false);
+    expect(estJusteQm("qm-esp-car-n2-a", "le nord")).toBe(true);
   });
 });
 
@@ -168,6 +189,10 @@ describe("spot-check croise front <-> SQL", () => {
     ["qm-obj-cir-n2-a", "clic", "l'interrupteur"],
     ["qm-obj-fon-n2-a", "tri", "le stylo=pour écrire;le couteau=pour couper;la fourchette=pour manger"],
     ["qm-obj-lev-n4-b", "texte", "levier"],
+    ["qm-esp-pla-n2-a", "clic", "l'Afrique"],
+    ["qm-esp-car-n2-a", "clic", "le nord"],
+    ["qm-esp-pay-n2-a", "tri", "beaucoup d'immeubles=la ville;des champs=la campagne;beaucoup de voitures=la ville;des vaches dans un pré=la campagne"],
+    ["qm-esp-fra-n4-a", "texte", "Paris"],
   ];
   it("chaque triplet correspond a la banque", () => {
     for (const [cle, format, attendu] of SPOT) {

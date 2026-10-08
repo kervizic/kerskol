@@ -1,0 +1,206 @@
+// Banque « L'ESPACE » (Questionner le monde, CE2, cycle 2). Sous-matiere,
+// domaine dedie `espace` :
+//   QM.ESPACE.SEREPERER  se situer (plan, carte, maquette, photo aerienne) ;
+//   QM.ESPACE.PLANETE    globe et planisphere, continents et oceans ;
+//   QM.ESPACE.FRANCE     la France (contour, grandes villes, fleuves) ;
+//   QM.ESPACE.CARDINAUX  les points cardinaux (nord, sud, est, ouest) ;
+//   QM.ESPACE.PAYSAGES   paysages (ville, campagne, montagne, littoral).
+//
+// Scenes SVG maison : planisphereScene (clic sur un continent) et roseVentsScene
+// (clic sur un point cardinal). Aucune carte sous licence : tout est dessine a
+// la main (continents schematiques).
+//
+// Progression : N1 QCM ; N2/N3 QCM, CLIC ou TRI ; N4 reponse LIBRE (texte).
+
+import { type QmItem, tri } from "./types";
+import { planisphereScene, roseVentsScene } from "./scenes";
+
+export const BANQUE_ESPACE: QmItem[] = [
+  // =======================================================================
+  // QM.ESPACE.SEREPERER — plan, carte, maquette, photo aerienne
+  // =======================================================================
+  { cle: "qm-esp-rep-n1-a", competence: "QM.ESPACE.SEREPERER", niveau: 1, format: "qcm",
+    consigne: "Un dessin qui montre une ville vue de très haut, comme si on volait, s'appelle...",
+    options: ["un plan", "une photo de face", "un dessin de côté"], attendu: "un plan",
+    explication: "Un plan montre les choses vues d'en haut, comme si on volait au-dessus." },
+  { cle: "qm-esp-rep-n1-b", competence: "QM.ESPACE.SEREPERER", niveau: 1, format: "qcm",
+    consigne: "Pour trouver son chemin dans une ville, qu'est-ce qu'on regarde ?",
+    options: ["un plan", "une casserole", "un livre d'histoires"], attendu: "un plan",
+    explication: "Le plan de la ville montre les rues vues d'en haut pour trouver son chemin." },
+  { cle: "qm-esp-rep-n2-a", competence: "QM.ESPACE.SEREPERER", niveau: 2, format: "qcm",
+    consigne: "Sur un plan, comment voit-on les objets ?",
+    options: ["vus de dessus", "vus de face", "vus de dos"], attendu: "vus de dessus",
+    explication: "Sur un plan, on regarde tout d'en haut, vu de dessus." },
+  { cle: "qm-esp-rep-n2-b", competence: "QM.ESPACE.SEREPERER", niveau: 2, format: "qcm",
+    consigne: "Une petite reproduction en volume d'une maison ou d'une ville s'appelle...",
+    options: ["une maquette", "une photo", "une chanson"], attendu: "une maquette",
+    explication: "La maquette est un petit modèle en volume qu'on peut regarder de tous les côtés." },
+  { cle: "qm-esp-rep-n3-a", competence: "QM.ESPACE.SEREPERER", niveau: 3, format: "qcm",
+    consigne: "Une photo prise depuis un avion, qui montre le sol vu d'en haut, s'appelle une photo...",
+    options: ["aérienne", "de classe", "de famille"], attendu: "aérienne",
+    explication: "La photo aérienne est prise d'en haut, depuis un avion ou un satellite." },
+  { cle: "qm-esp-rep-n3-b", competence: "QM.ESPACE.SEREPERER", niveau: 3, format: "qcm",
+    consigne: "Sur un plan, le petit cadre qui explique les symboles et les couleurs s'appelle...",
+    options: ["la légende", "le titre", "la date"], attendu: "la légende",
+    explication: "La légende explique ce que veulent dire les couleurs et les dessins du plan." },
+  { cle: "qm-esp-rep-n4-a", competence: "QM.ESPACE.SEREPERER", niveau: 4, format: "texte",
+    consigne: "Le dessin d'un lieu vu d'en haut, avec les rues, s'appelle un... Écris le mot.",
+    attendu: "plan",
+    explication: "Le plan montre un lieu vu d'en haut, avec ses rues." },
+  { cle: "qm-esp-rep-n4-b", competence: "QM.ESPACE.SEREPERER", niveau: 4, format: "texte",
+    consigne: "La petite reproduction en volume d'un bâtiment s'appelle une... Écris le mot.",
+    attendu: "maquette",
+    explication: "La maquette est un petit modèle en volume." },
+
+  // =======================================================================
+  // QM.ESPACE.PLANETE — globe, planisphere, continents, oceans
+  // =======================================================================
+  { cle: "qm-esp-pla-n1-a", competence: "QM.ESPACE.PLANETE", niveau: 1, format: "qcm",
+    consigne: "Quelle est la forme de la Terre ?",
+    options: ["une boule", "une boîte", "une crêpe"], attendu: "une boule",
+    explication: "La Terre est ronde, comme une grosse boule. Le globe en est une petite copie." },
+  { cle: "qm-esp-pla-n1-b", competence: "QM.ESPACE.PLANETE", niveau: 1, format: "qcm",
+    consigne: "Qu'est-ce qui couvre la plus grande partie de la Terre ?",
+    options: ["l'eau", "le sable", "la neige"], attendu: "l'eau",
+    explication: "Les océans d'eau couvrent la plus grande partie de la Terre." },
+  { cle: "qm-esp-pla-n2-a", competence: "QM.ESPACE.PLANETE", niveau: 2, format: "clic",
+    consigne: "Clique sur l'Afrique sur le planisphère.",
+    attendu: "l'Afrique", figure: planisphereScene({ withZones: true }),
+    explication: "L'Afrique est le grand continent au centre de la carte." },
+  { cle: "qm-esp-pla-n2-b", competence: "QM.ESPACE.PLANETE", niveau: 2, format: "qcm",
+    consigne: "Un très grand morceau de terre sur la Terre s'appelle un...",
+    options: ["continent", "océan", "village"], attendu: "continent",
+    explication: "Un continent est un très grand morceau de terre, comme l'Europe ou l'Afrique." },
+  { cle: "qm-esp-pla-n3-a", competence: "QM.ESPACE.PLANETE", niveau: 3, format: "clic",
+    consigne: "Clique sur l'Asie, le plus grand continent.",
+    attendu: "l'Asie", figure: planisphereScene({ withZones: true }),
+    explication: "L'Asie est le plus grand continent, à droite sur la carte." },
+  { cle: "qm-esp-pla-n3-b", competence: "QM.ESPACE.PLANETE", niveau: 3, format: "qcm",
+    consigne: "Une très grande étendue d'eau salée s'appelle un...",
+    options: ["océan", "plan", "continent"], attendu: "océan",
+    explication: "Un océan est une très grande étendue d'eau salée, comme l'océan Atlantique." },
+  { cle: "qm-esp-pla-n4-a", competence: "QM.ESPACE.PLANETE", niveau: 4, format: "texte",
+    consigne: "Le continent où se trouve la France s'appelle l'... Écris le mot.",
+    attendu: "Europe",
+    explication: "La France se trouve en Europe." },
+  { cle: "qm-esp-pla-n4-b", competence: "QM.ESPACE.PLANETE", niveau: 4, format: "texte",
+    consigne: "La boule qui représente la Terre s'appelle un... Écris le mot.",
+    attendu: "globe",
+    explication: "Le globe est une boule qui représente la Terre." },
+
+  // =======================================================================
+  // QM.ESPACE.FRANCE — la France (contour, villes, fleuves)
+  // =======================================================================
+  { cle: "qm-esp-fra-n1-a", competence: "QM.ESPACE.FRANCE", niveau: 1, format: "qcm",
+    consigne: "Dans quel pays habites-tu ?",
+    options: ["la France", "l'Italie", "le Japon"], attendu: "la France",
+    explication: "Nous habitons en France." },
+  { cle: "qm-esp-fra-n1-b", competence: "QM.ESPACE.FRANCE", niveau: 1, format: "qcm",
+    consigne: "Quelle est la capitale de la France ?",
+    options: ["Paris", "Lyon", "Rome"], attendu: "Paris",
+    explication: "Paris est la capitale de la France." },
+  { cle: "qm-esp-fra-n2-a", competence: "QM.ESPACE.FRANCE", niveau: 2, format: "qcm",
+    consigne: "Quel fleuve traverse Paris ?",
+    options: ["la Seine", "le Rhône", "la Loire"], attendu: "la Seine",
+    explication: "La Seine est le fleuve qui traverse Paris." },
+  { cle: "qm-esp-fra-n2-b", competence: "QM.ESPACE.FRANCE", niveau: 2, format: "qcm",
+    consigne: "Quel est le plus long fleuve de France ?",
+    options: ["la Loire", "la Seine", "le Rhin"], attendu: "la Loire",
+    explication: "La Loire est le plus long fleuve de France." },
+  { cle: "qm-esp-fra-n3-a", competence: "QM.ESPACE.FRANCE", niveau: 3, format: "qcm",
+    consigne: "Quelle grande ville de France est au bord de la mer Méditerranée ?",
+    options: ["Marseille", "Strasbourg", "Lille"], attendu: "Marseille",
+    explication: "Marseille est une grande ville du sud, au bord de la mer Méditerranée." },
+  { cle: "qm-esp-fra-n3-b", competence: "QM.ESPACE.FRANCE", niveau: 3, format: "qcm",
+    consigne: "On surnomme la France d'après la forme de son contour. C'est...",
+    options: ["l'hexagone", "le carré", "le rond"], attendu: "l'hexagone",
+    explication: "On surnomme la France l'hexagone car son contour a six côtés." },
+  { cle: "qm-esp-fra-n4-a", competence: "QM.ESPACE.FRANCE", niveau: 4, format: "texte",
+    consigne: "La capitale de la France est... Écris le mot.",
+    attendu: "Paris",
+    explication: "Paris est la capitale de la France." },
+  { cle: "qm-esp-fra-n4-b", competence: "QM.ESPACE.FRANCE", niveau: 4, format: "texte",
+    consigne: "Le fleuve qui traverse Paris est la... Écris le mot.",
+    attendu: "Seine",
+    explication: "La Seine traverse Paris." },
+
+  // =======================================================================
+  // QM.ESPACE.CARDINAUX — points cardinaux
+  // =======================================================================
+  { cle: "qm-esp-car-n1-a", competence: "QM.ESPACE.CARDINAUX", niveau: 1, format: "qcm",
+    consigne: "Le matin, de quel côté se lève le soleil ?",
+    options: ["à l'est", "à l'ouest", "au nord"], attendu: "à l'est",
+    explication: "Le soleil se lève à l'est le matin." },
+  { cle: "qm-esp-car-n1-b", competence: "QM.ESPACE.CARDINAUX", niveau: 1, format: "qcm",
+    consigne: "Le soir, de quel côté se couche le soleil ?",
+    options: ["à l'ouest", "à l'est", "au sud"], attendu: "à l'ouest",
+    explication: "Le soleil se couche à l'ouest le soir." },
+  { cle: "qm-esp-car-n2-a", competence: "QM.ESPACE.CARDINAUX", niveau: 2, format: "clic",
+    consigne: "Sur la rose des vents, clique sur le nord.",
+    attendu: "le nord", figure: roseVentsScene({ withZones: true }),
+    explication: "Le nord est en haut de la rose des vents." },
+  { cle: "qm-esp-car-n2-b", competence: "QM.ESPACE.CARDINAUX", niveau: 2, format: "qcm",
+    consigne: "Sur une carte, où se trouve toujours le nord ?",
+    options: ["en haut", "en bas", "à droite"], attendu: "en haut",
+    explication: "Sur une carte, le nord est toujours en haut." },
+  { cle: "qm-esp-car-n3-a", competence: "QM.ESPACE.CARDINAUX", niveau: 3, format: "qcm",
+    consigne: "Les quatre points cardinaux sont le nord, le sud, l'est et l'...",
+    options: ["ouest", "avant", "dessus"], attendu: "ouest",
+    explication: "Les quatre points cardinaux sont le nord, le sud, l'est et l'ouest." },
+  { cle: "qm-esp-car-n3-b", competence: "QM.ESPACE.CARDINAUX", niveau: 3, format: "clic",
+    consigne: "Sur la rose des vents, clique sur le sud.",
+    attendu: "le sud", figure: roseVentsScene({ withZones: true }),
+    explication: "Le sud est en bas, à l'opposé du nord." },
+  { cle: "qm-esp-car-n4-a", competence: "QM.ESPACE.CARDINAUX", niveau: 4, format: "texte",
+    consigne: "Le point cardinal opposé au nord s'appelle le... Écris le mot.",
+    attendu: "sud",
+    explication: "Le sud est à l'opposé du nord." },
+  { cle: "qm-esp-car-n4-b", competence: "QM.ESPACE.CARDINAUX", niveau: 4, format: "texte",
+    consigne: "Le matin, le soleil se lève à l'... Écris le mot.",
+    attendu: "est",
+    explication: "Le soleil se lève à l'est." },
+
+  // =======================================================================
+  // QM.ESPACE.PAYSAGES — ville, campagne, montagne, littoral
+  // =======================================================================
+  { cle: "qm-esp-pay-n1-a", competence: "QM.ESPACE.PAYSAGES", niveau: 1, format: "qcm",
+    consigne: "Un endroit avec beaucoup d'immeubles, de rues et de magasins, c'est...",
+    options: ["la ville", "la campagne", "la mer"], attendu: "la ville",
+    explication: "La ville a beaucoup d'immeubles, de rues et de magasins." },
+  { cle: "qm-esp-pay-n1-b", competence: "QM.ESPACE.PAYSAGES", niveau: 1, format: "qcm",
+    consigne: "Un endroit avec des champs, des fermes et des animaux, c'est...",
+    options: ["la campagne", "la ville", "la montagne"], attendu: "la campagne",
+    explication: "La campagne a des champs, des fermes et des animaux." },
+  { cle: "qm-esp-pay-n2-a", competence: "QM.ESPACE.PAYSAGES", niveau: 2, format: "tri",
+    consigne: "Classe chaque chose : ville ou campagne ?",
+    ...tri(["la ville", "la campagne"], [["beaucoup d'immeubles", "la ville"], ["des champs", "la campagne"], ["beaucoup de voitures", "la ville"], ["des vaches dans un pré", "la campagne"]]),
+    explication: "Immeubles et voitures : la ville. Champs et vaches : la campagne." },
+  { cle: "qm-esp-pay-n2-b", competence: "QM.ESPACE.PAYSAGES", niveau: 2, format: "qcm",
+    consigne: "Le bord de la mer, avec ses plages, s'appelle le...",
+    options: ["littoral", "sommet", "désert"], attendu: "littoral",
+    explication: "Le littoral est le bord de la mer, avec ses plages." },
+  { cle: "qm-esp-pay-n3-a", competence: "QM.ESPACE.PAYSAGES", niveau: 3, format: "qcm",
+    consigne: "Un paysage avec de hauts sommets parfois couverts de neige, c'est...",
+    options: ["la montagne", "la plage", "la ville"], attendu: "la montagne",
+    explication: "La montagne a de hauts sommets, parfois couverts de neige." },
+  { cle: "qm-esp-pay-n3-b", competence: "QM.ESPACE.PAYSAGES", niveau: 3, format: "tri",
+    consigne: "Classe chaque chose : montagne ou littoral ?",
+    ...tri(["la montagne", "le littoral"], [["de hauts sommets", "la montagne"], ["des plages de sable", "le littoral"], ["des pistes de ski", "la montagne"], ["des bateaux au port", "le littoral"]]),
+    explication: "Sommets et pistes de ski : la montagne. Plages et bateaux : le littoral." },
+  { cle: "qm-esp-pay-n4-a", competence: "QM.ESPACE.PAYSAGES", niveau: 4, format: "texte",
+    consigne: "Le bord de la mer s'appelle le... Écris le mot.",
+    attendu: "littoral",
+    explication: "Le littoral est le bord de la mer." },
+  { cle: "qm-esp-pay-n4-b", competence: "QM.ESPACE.PAYSAGES", niveau: 4, format: "texte",
+    consigne: "Un paysage avec de très hauts sommets s'appelle la... Écris le mot.",
+    attendu: "montagne",
+    explication: "La montagne a de très hauts sommets." },
+];
+
+export const COMPETENCES_ESPACE = [
+  "QM.ESPACE.SEREPERER",
+  "QM.ESPACE.PLANETE",
+  "QM.ESPACE.FRANCE",
+  "QM.ESPACE.CARDINAUX",
+  "QM.ESPACE.PAYSAGES",
+] as const;

@@ -61,3 +61,56 @@ export function circuitScene(opts: { closed: boolean; broken?: boolean; withZone
     : [];
   return { kind: "scene", viewBox: "0 0 120 96", els, zones };
 }
+
+// --------------------------------------------------------------------------
+// Planisphere SIMPLIFIE maison (aucune carte sous licence) : fond ocean + 5
+// continents schematiques (ellipses) etiquetes. Zones cliquables sur chaque
+// continent. viewBox large (160 x 90).
+// --------------------------------------------------------------------------
+const CONTINENT = "#86efac"; // vert clair
+const OCEAN = "#bae6fd"; // bleu clair
+export function planisphereScene(opts: { withZones?: boolean } = {}): QmScene {
+  const conts: Array<{ label: string; cx: number; cy: number; rx: number; ry: number; tag: string; zx: number; zy: number; zw: number; zh: number }> = [
+    { label: "l'Amérique", cx: 28, cy: 48, rx: 15, ry: 30, tag: "Amérique", zx: 13, zy: 18, zw: 30, zh: 60 },
+    { label: "l'Europe", cx: 82, cy: 26, rx: 8, ry: 7, tag: "Europe", zx: 73, zy: 17, zw: 18, zh: 17 },
+    { label: "l'Afrique", cx: 86, cy: 58, rx: 13, ry: 19, tag: "Afrique", zx: 72, zy: 38, zw: 28, zh: 40 },
+    { label: "l'Asie", cx: 120, cy: 32, rx: 24, ry: 15, tag: "Asie", zx: 96, zy: 16, zw: 48, zh: 32 },
+    { label: "l'Océanie", cx: 134, cy: 70, rx: 10, ry: 7, tag: "Océanie", zx: 123, zy: 62, zw: 22, zh: 16 },
+  ];
+  const els: QmSceneEl[] = [
+    { t: "rect", x: 2, y: 2, w: 156, h: 86, fill: OCEAN, stroke: "var(--kk-border)", sw: 1, opacity: 0.55 },
+  ];
+  for (const c of conts) {
+    els.push({ t: "ellipse", cx: c.cx, cy: c.cy, rx: c.rx, ry: c.ry, fill: CONTINENT, stroke: "var(--kk-text)", sw: 1 });
+    els.push({ t: "text", x: c.cx, y: c.cy + 2, text: c.tag, fontSize: 7, fill: "var(--kk-text)" });
+  }
+  const zones: QmZone[] = opts.withZones
+    ? conts.map((c) => ({ label: c.label, shape: "rect" as const, x: c.zx, y: c.zy, w: c.zw, h: c.zh }))
+    : [];
+  return { kind: "scene", viewBox: "0 0 160 90", els, zones };
+}
+
+// --------------------------------------------------------------------------
+// Rose des vents maison : croix nord/sud/est/ouest. Zones cliquables aux 4 tips.
+// --------------------------------------------------------------------------
+export function roseVentsScene(opts: { withZones?: boolean } = {}): QmScene {
+  const els: QmSceneEl[] = [
+    { t: "line", x1: 50, y1: 16, x2: 50, y2: 84, stroke: "var(--kk-text)", sw: 2 },
+    { t: "line", x1: 16, y1: 50, x2: 84, y2: 50, stroke: "var(--kk-text)", sw: 2 },
+    { t: "polygon", points: "50,12 46,22 54,22", fill: "var(--kk-accent)", stroke: "none" }, // fleche nord
+    { t: "circle", cx: 50, cy: 50, r: 3, fill: "var(--kk-text)", stroke: "none" },
+    { t: "text", x: 50, y: 10, text: "N", fontSize: 10, fill: "var(--kk-text)" },
+    { t: "text", x: 50, y: 95, text: "S", fontSize: 10, fill: "var(--kk-text)" },
+    { t: "text", x: 90, y: 53, text: "E", fontSize: 10, fill: "var(--kk-text)" },
+    { t: "text", x: 10, y: 53, text: "O", fontSize: 10, fill: "var(--kk-text)" },
+  ];
+  const zones: QmZone[] = opts.withZones
+    ? [
+        { label: "le nord", shape: "rect", x: 38, y: 4, w: 24, h: 22 },
+        { label: "le sud", shape: "rect", x: 38, y: 74, w: 24, h: 22 },
+        { label: "l'est", shape: "rect", x: 74, y: 38, w: 22, h: 24 },
+        { label: "l'ouest", shape: "rect", x: 4, y: 38, w: 22, h: 24 },
+      ]
+    : [];
+  return { kind: "scene", viewBox: "0 0 100 100", els, zones };
+}

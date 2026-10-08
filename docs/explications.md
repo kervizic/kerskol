@@ -929,3 +929,19 @@ Domaine `objets`, 4 compétences × 4 niveaux × 2 = 32 items.
 Premier usage du format `clic` avec scène SVG (zones cliquables dans
 `QuestionnerLeMonde.tsx`). Domaine `objets` actif au défaut et sur tous les
 profils (Iris incluse).
+
+## Sous-matière « L'espace » (migration 0055)
+
+Domaine `espace`, 5 compétences × 4 niveaux × 2 = 40 items.
+
+- `QM.ESPACE.SEREPERER` — plan (vu de dessus), maquette, photo aérienne, légende.
+- `QM.ESPACE.PLANETE` — la Terre (boule), continents et océans. Scène SVG maison
+  `planisphereScene` (SVG maison, AUCUNE carte sous licence) : 5 continents
+  schématiques cliquables (`clic`).
+- `QM.ESPACE.FRANCE` — pays, capitale (Paris), fleuves (Seine, Loire), grande
+  ville (Marseille), surnom hexagone.
+- `QM.ESPACE.CARDINAUX` — nord/sud/est/ouest, lever/coucher du soleil. Scène
+  `roseVentsScene` (clic sur un point cardinal).
+- `QM.ESPACE.PAYSAGES` — ville, campagne, montagne, littoral (tri).
+
+Domaine `espace` actif au défaut et sur tous les profils (Iris incluse).
