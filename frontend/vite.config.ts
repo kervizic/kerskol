@@ -28,7 +28,11 @@ export default defineConfig({
   },
   test: {
     globals: true,
+    // Par defaut node (tests de domaine purs, rapides). Les tests de RENDU de
+    // composants (*.test.tsx, @testing-library/react) tournent sous jsdom.
     environment: "node",
-    include: ["src/**/*.test.ts"],
+    environmentMatchGlobs: [["**/*.test.tsx", "jsdom"]],
+    setupFiles: ["src/test/setup.ts"],
+    include: ["src/**/*.test.ts", "src/**/*.test.tsx"],
   },
 });

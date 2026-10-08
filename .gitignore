@@ -21,6 +21,11 @@ build/
 .DS_Store
 *.log
 
+# Captures Playwright (revue visuelle locale, jamais committees)
+docs/captures/
+frontend/stories-dist/
+frontend/test-results/
+
 # Données et volumes runtime
 volumes/
 data/
