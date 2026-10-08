@@ -30,6 +30,8 @@ import { buildEmc } from "../emc";
 import type { QmFormat, QmFigure } from "../qm/types";
 import type { DonFigure, DonFormat, DonInteract } from "../donnees/donnees";
 import { buildComprehension } from "../francais/comprehension";
+import { buildEcriture } from "../francais/ecriture";
+import type { EcrFormat, EcrCheck } from "../francais/ecriture";
 import type { CompFormat } from "../francais/comprehension";
 import type { Temps, Personne } from "../francais/conjugaison";
 import type { Genre } from "../francais/passe-compose";
@@ -53,6 +55,7 @@ export type Forme =
   | "geometrie" // maths : geometrie et reperage (figures, solides, symetrie, quadrillage, plan)
   | "donnees" // maths : tableaux et graphiques (tableau, barres, pictogramme, comparer)
   | "comprehension" // francais : comprendre un texte (info, inference, ordre, vrai/faux, sens d'un mot)
+  | "ecriture" // francais : copier et ecrire (copie, etiquettes, completer, transformer, phrase libre)
   | "maitresse" // francais : les mots de la maitresse (listes/textes saisis par le parent)
   | "qm"; // questionner le monde (vivant, matiere, objets, espace, temps)
 
@@ -104,6 +107,11 @@ export type Saisie =
   // du texte / saisie libre / remise d'evenements dans l'ordre). Le serveur
   // (verif_comprehension, op 'lire') reste seul juge via la cle.
   | "comprehension"
+  // ecriture -> composant autonome <Ecriture> : copier (saisie clavier verifiee
+  // mot a mot), remettre des etiquettes dans l'ordre, completer, transformer, ou
+  // ecrire une phrase LIBRE verifiee par une check-list. Le serveur
+  // (verif_ecriture, op 'ecr') reste seul juge via la cle.
+  | "ecriture"
   // maitresse -> composant autonome <MaitresseExo> : mots a apprendre (QCM
   // orthographe / memoriser puis ecrire), mot a trou, et dictee detective sur le
   // texte du foyer (reutilise <DicteeDetective>). Contenu saisi par le parent ;
@@ -147,7 +155,7 @@ export type Saisie =
 // reponse est du TEXTE (mot a apprendre, mot a trou) ou une liste de positions
 // (dictee) ; `cle` porte l'id de la liste du foyer (p_op2), `a` l'index 1-base
 // du mot (mmots / mtrou). Verification serveur uniquement (ops dediees).
-export type VerifOp = "add" | "sub" | "mul" | "div" | "cmp" | "val" | "lettres" | "conj" | "dictee" | "gram" | "lex" | "geo" | "don" | "lire" | "mmots" | "mtrou" | "mdictee" | "qm";
+export type VerifOp = "add" | "sub" | "mul" | "div" | "cmp" | "val" | "lettres" | "conj" | "dictee" | "gram" | "lex" | "geo" | "don" | "lire" | "ecr" | "mmots" | "mtrou" | "mdictee" | "qm";
 export type VerifOp2 = "add" | "sub" | "mul" | "div" | "rsub";
 export interface Verif {
   op: VerifOp;
@@ -203,6 +211,10 @@ function applyOp(op: VerifOp, a: number, b: number): { answer: number; reste: nu
     case "lire":
       // Comprehension de texte : la reponse est du TEXTE (p_reponse_texte) ;
       // a = 0 (invariant answer=a). Verification serveur (verif_comprehension) via la cle.
+      return { answer: a, reste: null };
+    case "ecr":
+      // Copier et ecrire : la reponse est du TEXTE (p_reponse_texte) ;
+      // a = 0 (invariant answer=a). Verification serveur (verif_ecriture) via la cle.
       return { answer: a, reste: null };
     case "qm":
       // Questionner le monde : la reponse est du TEXTE (p_reponse_texte) ;
@@ -475,6 +487,26 @@ export interface GeneratedExercise {
     source?: string; // texte d'origine (domaine public) : « Auteur, Titre »
     preuve: string; // phrase du texte citee en cas d'erreur (correctif phase 5)
   };
+  // Copier et ecrire : item choisi par le generateur (reproductible via la
+  // graine). Le composant <Ecriture> le rend (copie / etiquettes / completer /
+  // transformer / phrase libre) ; le serveur (verif_ecriture, op 'ecr') juge via
+  // `cle`. Pour la phrase libre, `check` porte la check-list verifiee.
+  ecr?: {
+    cle: string;
+    format: EcrFormat;
+    consigne: string;
+    attendu: string;
+    modele?: string;
+    differe?: boolean;
+    etiquettes?: string[];
+    phrase?: string;
+    options?: string[];
+    check?: EcrCheck;
+    amorce?: string;
+    image?: string;
+    exemple?: string;
+    explication: string;
+  };
   // Les mots de la maitresse (phase 6) : marqueur. Le composant <MaitresseExo>
   // choisit la liste/l'exercice dans la banque du foyer (chargee par la seance).
   maitresse?: {
@@ -644,6 +676,10 @@ function buildExercise(
   // --- Francais : comprendre un texte (phase 5) -------------------------
   if (src.competence.startsWith("FR.LECTURE.")) {
     return buildComprehension(src, rng, base);
+  }
+  // --- Francais : copier et ecrire (lot 0063) ---------------------------
+  if (src.competence.startsWith("FR.ECR.")) {
+    return buildEcriture(src, rng, base);
   }
   // --- Francais : les mots de la maitresse (phase 6) --------------------
   if (src.competence.startsWith("FR.MAITRESSE.")) {

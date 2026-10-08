@@ -1142,3 +1142,42 @@ porte une erreur injectée déterministe : `a_a`, `et_est`, `pluriel`, `son_sont
 `on_ont`, `verbe_ent`, `accord`, `ces_ses`, `e_er_ez`, `m_mbp` (ids 201 à 210).
 On ne force aucune notion absente du texte. Le serveur (`verif_dictee`) reste seul
 juge ; `bienveillance_test.sql` scanne tous ces textes.
+
+# Sous-matière « Copier et écrire » (français, lot 0063)
+
+Nouvelle sous-matière française, domaine `ecriture`, compétences **FR.ECR.\***
+(additives : aucune réinitialisation d'Iris ; le domaine est simplement ajouté
+aux profils). Deux activités, source de vérité
+`frontend/src/domain/francais/ecriture.ts`, miroir serveur `public.ecriture_item`
++ `public.verif_ecriture`, op dédiée `ecr` dans `enregistrer_reponse`. Composant
+`Ecriture.tsx`. Contrôles sur la page : **Valider / Indice / Effacer / Continuer** ;
+cibles tactiles ≥ 44 px.
+
+## FR.ECR.COPIE — recopier
+Un modèle est affiché, l'enfant le recopie au clavier. **N1** un mot → **N2** un
+groupe de mots → **N3** une phrase → **N4** un passage de 3 phrases affiché puis
+**masqué** (copie différée : on regarde, on cache, on écrit de mémoire). La
+vérification est **déterministe mot à mot** : majuscule, accents et point sont
+**exigés** (espaces normalisés). En cas d'écart, un **diagnostic bienveillant**
+côté client explique quoi regarder (mot oublié, lettre manquante, accent,
+majuscule, point) ; le serveur reste seul juge (juste/faux).
+
+## FR.ECR.GUIDEE — écriture guidée
+- **N1** remettre des **étiquettes-mots** dans l'ordre pour faire une phrase ;
+- **N2** compléter une phrase avec le **mot cohérent** (QCM) ;
+- **N3** **transformer** une phrase vers une cible exacte (singulier → pluriel,
+  présent → passé composé) ;
+- **N4** écrire une **phrase libre** à partir d'une **image** (Fluent Emoji) ou
+  d'un **début d'histoire**, vérifiée par une **check-list** automatique : une
+  majuscule au début, un point final, au moins N mots, au moins un **verbe** d'une
+  liste, et les **mots-clés** imposés (ex. « écris une phrase avec chat et
+  jardin »). **Le sens n'est jamais jugé par IA.** Message toujours encourageant.
+
+La phrase libre de l'enfant est **enregistrée** (`public.ecriture_production`,
+insert via `enregistrer_reponse` seulement) et **relue par le parent** dans
+l'espace parent (section « Phrases écrites »). Lecture protégée par RLS
+(`peut_acceder_profil`).
+
+**Bienveillance.** `bienveillance.test.ts` scanne `BANQUE_ECRITURE` ;
+`bienveillance_test.sql` scanne `ecriture_item.attendu`. Golden croisé :
+`ecriture.test.ts` (24 items) ⇄ `ecriture_test.sql`.

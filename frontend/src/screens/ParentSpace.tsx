@@ -9,6 +9,7 @@ import {
   deleteFoyer,
   demanderLienEnfant,
   getDefiResume,
+  getEcritureProductions,
   getJournal,
   listLiensEnAttente,
   reauthGoogle,
@@ -21,6 +22,7 @@ import {
   activerMaitresse,
   supprimerMaitresse,
   type DefiResume,
+  type EcritureProduction,
   type MaitresseListeParent,
 } from "../lib/api";
 import { DEFI_THEMES } from "../domain/calcul/defi";
@@ -75,6 +77,34 @@ const RETRY_KEY = "kerskol_retry_suppr_foyer";
 const SUPPR_WORD_KEY = "kerskol_suppr_foyer_mot";
 const SUPPR_WORD = "SUPPRIMER";
 const MATIERE_ACTIVE = "MA";
+
+// Phrases écrites par l'enfant (N4 de « Copier et écrire »), relues par le
+// parent. Lecture seule ; rien n'est jugé ici, c'est pour accompagner l'enfant.
+function EcritureSummary({ profilId }: { profilId: string }) {
+  const [prods, setProds] = useState<EcritureProduction[] | null>(null);
+  useEffect(() => {
+    let alive = true;
+    getEcritureProductions(profilId)
+      .then((r) => alive && setProds(r))
+      .catch(() => alive && setProds([]));
+    return () => {
+      alive = false;
+    };
+  }, [profilId]);
+  if (prods === null || prods.length === 0) return null;
+  return (
+    <div>
+      <h3 style={{ margin: "0 0 6px" }}>Phrases écrites</h3>
+      <ul className="kk-list" style={{ margin: 0 }}>
+        {prods.map((p, i) => (
+          <li key={i} style={{ padding: "6px 0", border: "none" }}>
+            « {p.texte} »
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
 
 function num(v: string): number | null {
   const n = parseInt(v, 10);
@@ -685,6 +715,7 @@ export function ParentSpace({
               onReload={reloadLiens}
             />
             <DefiSummary profilId={p.id} />
+            <EcritureSummary profilId={p.id} />
           </div>
         ))}
 

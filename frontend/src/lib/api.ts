@@ -502,7 +502,7 @@ export async function getFrancais(): Promise<{ competences: Competence[]; source
     sb
       .from("exercices")
       .select("id, competence, niveau, methode, type")
-      .in("type", ["conjugaison", "dictee", "grammaire", "vocabulaire", "mots_invariables", "comprehension"])
+      .in("type", ["conjugaison", "dictee", "grammaire", "vocabulaire", "mots_invariables", "comprehension", "ecriture"])
       .eq("actif", true),
   ]);
   if (comp.error) throw comp.error;
@@ -514,22 +514,28 @@ export async function getFrancais(): Promise<{ competences: Competence[]; source
     const lex = type === "vocabulaire" || type === "mots_invariables";
     // comprehension (phase 5) : composant <Comprehension>, verification op 'lire'.
     const comp = type === "comprehension";
-    const operation = comp
-      ? "lire"
-      : type === "dictee"
-        ? "dictee"
-        : type === "grammaire"
-          ? "gram"
-          : lex
-            ? "lex"
-            : "conj";
-    const forme = (comp
-      ? "comprehension"
-      : type === "dictee"
-        ? "dictee"
-        : type === "grammaire" || lex
-          ? "grammaire"
-          : "conjugaison") as Forme;
+    // ecriture (lot 0063) : composant <Ecriture>, verification op 'ecr'.
+    const ecr = type === "ecriture";
+    const operation = ecr
+      ? "ecr"
+      : comp
+        ? "lire"
+        : type === "dictee"
+          ? "dictee"
+          : type === "grammaire"
+            ? "gram"
+            : lex
+              ? "lex"
+              : "conj";
+    const forme = (ecr
+      ? "ecriture"
+      : comp
+        ? "comprehension"
+        : type === "dictee"
+          ? "dictee"
+          : type === "grammaire" || lex
+            ? "grammaire"
+            : "conjugaison") as Forme;
     return {
       exerciceId: e.id as string,
       competence: e.competence as string,
@@ -1036,6 +1042,28 @@ export interface DefiResume {
   record: number;
   dernier: string | null;
 }
+// Phrases écrites par l'enfant (N4 « phrase libre » de Copier et écrire), pour
+// relecture par le parent (espace parent). RLS : peut_acceder_profil.
+export interface EcritureProduction {
+  cle: string;
+  competence: string;
+  niveau: number;
+  texte: string;
+  correct: boolean;
+  cree_le: string;
+}
+export async function getEcritureProductions(profilId: string): Promise<EcritureProduction[]> {
+  if (isDemo()) return [];
+  const { data, error } = await supabase()
+    .from("ecriture_production")
+    .select("cle, competence, niveau, texte, correct, cree_le")
+    .eq("profil_id", profilId)
+    .order("cree_le", { ascending: false })
+    .limit(50);
+  if (error) throw error;
+  return (data ?? []) as EcritureProduction[];
+}
+
 export async function getDefiResume(profilId: string): Promise<DefiResume[]> {
   if (isDemo()) return [];
   const { data, error } = await supabase()

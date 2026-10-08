@@ -45,6 +45,7 @@ import Grammaire from "../components/Grammaire";
 import Geometrie from "../components/Geometrie";
 import Donnees from "../components/Donnees";
 import Comprehension from "../components/Comprehension";
+import Ecriture from "../components/Ecriture";
 import QuestionnerLeMonde from "../components/QuestionnerLeMonde";
 import MaitresseExo, { type MaitresseSubmit } from "../components/MaitresseExo";
 import type { MaitresseListe } from "../domain/francais/maitresse";
@@ -2037,6 +2038,14 @@ export function Session({
           <Comprehension
             key={ex.key}
             item={ex.comp}
+            indice={indice}
+            onSoumettre={soumettreGrammaire}
+            onContinuer={(correct) => advance(correct, true)}
+          />
+        ) : ex.saisie === "ecriture" && ex.ecr ? (
+          <Ecriture
+            key={ex.key}
+            item={ex.ecr}
             indice={indice}
             onSoumettre={soumettreGrammaire}
             onContinuer={(correct) => advance(correct, true)}

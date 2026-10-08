@@ -67,6 +67,14 @@ BEGIN
         n := n + 1;
     END LOOP;
 
+    -- 2bis. Reponses attendues de reference « Copier et ecrire » (lot 0063).
+    FOR r IN
+        SELECT cle, attendu FROM public.ecriture_item WHERE attendu ~* pat
+    LOOP
+        RAISE WARNING 'BIENVEILLANCE KO : ecriture_item % : « % »', r.cle, r.attendu;
+        n := n + 1;
+    END LOOP;
+
     -- 3. Reponses attendues de reference (QM et EMC, meme table qm_item), apres
     --    retrait des mots whitelistes applicables a la ligne.
     FOR r IN
