@@ -749,11 +749,84 @@ export async function getMaitresse(profilId: string): Promise<MaitresseListe[]> 
         mots: (r.mots as string[]) ?? [],
         texte: r.texte == null ? null : String(r.texte),
         dictees,
+        ema: Array.isArray(r.ema) ? (r.ema as unknown[]).map((x) => Number(x)) : undefined,
       };
     });
   } catch {
     return [];
   }
+}
+
+// ------ Dictee avec papa ou maman (RPC maitresse_dictee_enregistrer) --------
+// Le SERVEUR est seul juge : on envoie, par mot, l'index (1-base) et la saisie
+// (mode voix), ou la coche juste/faux du parent (mode papier). Il renvoie le
+// detail mot par mot, le score, et les mots a revoir (qui remontent dans l'EMA).
+export interface DicteeMaitresseReponse {
+  index: number;
+  saisie?: string;
+  juste?: boolean; // mode papier : coche du parent (fait foi)
+}
+export interface DicteeMaitresseMot {
+  index: number;
+  mot: string;
+  saisie: string | null;
+  correct: boolean;
+  type: string | null;
+}
+export interface DicteeMaitresseResultat {
+  dictee_id: string;
+  mode: "voix" | "papier";
+  score_juste: number;
+  score_total: number;
+  mots: DicteeMaitresseMot[];
+  a_revoir: string[];
+}
+
+export async function enregistrerDicteeMaitresse(
+  profilId: string,
+  listeId: string,
+  mode: "voix" | "papier",
+  reponses: DicteeMaitresseReponse[],
+): Promise<DicteeMaitresseResultat> {
+  const { data, error } = await supabase().rpc("maitresse_dictee_enregistrer", {
+    p_profil: profilId, p_liste: listeId, p_mode: mode, p_reponses: reponses,
+  });
+  if (error) throw error;
+  const r = (data ?? {}) as Record<string, unknown>;
+  return {
+    dictee_id: String(r.dictee_id ?? ""),
+    mode: (r.mode as "voix" | "papier") ?? mode,
+    score_juste: Number(r.score_juste ?? 0),
+    score_total: Number(r.score_total ?? 0),
+    mots: Array.isArray(r.mots) ? (r.mots as DicteeMaitresseMot[]) : [],
+    a_revoir: Array.isArray(r.a_revoir) ? (r.a_revoir as string[]) : [],
+  };
+}
+
+// Espace PARENT : historique des dictees d'un profil (date, mode, score, mots rates).
+export interface HistoriqueDictee {
+  id: string;
+  cree_le: string;
+  mode: "voix" | "papier";
+  score_juste: number;
+  score_total: number;
+  titre: string;
+  rates: string[];
+}
+export async function getHistoriqueMaitresse(profilId: string): Promise<HistoriqueDictee[]> {
+  if (isDemo()) return [];
+  const { data, error } = await supabase().rpc("maitresse_historique", { p_profil: profilId });
+  if (error) throw error;
+  if (!Array.isArray(data)) return [];
+  return (data as Record<string, unknown>[]).map((r) => ({
+    id: String(r.id),
+    cree_le: String(r.cree_le ?? ""),
+    mode: (r.mode as "voix" | "papier") ?? "voix",
+    score_juste: Number(r.score_juste ?? 0),
+    score_total: Number(r.score_total ?? 0),
+    titre: String(r.titre ?? ""),
+    rates: Array.isArray(r.rates) ? (r.rates as string[]) : [],
+  }));
 }
 
 // Cote PARENT : gestion des listes (espace parent). La lecture passe par RLS

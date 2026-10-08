@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BookOpen, Settings, Timer } from "lucide-react";
+import { BookOpen, PencilLine, Settings, Timer } from "lucide-react";
 import { AvatarView } from "../domain/avatars";
 import {
   AVATAR_COLORS,
@@ -39,6 +39,7 @@ export function Village({
   onStart,
   onDefi,
   onBiblio,
+  onDictee,
   onProfilChange,
 }: {
   profil: Profil;
@@ -47,6 +48,7 @@ export function Village({
   onStart: () => void;
   onDefi: () => void;
   onBiblio: () => void;
+  onDictee: () => void;
   onProfilChange: (p: Profil) => void;
 }) {
   const [progression, setProgression] = useState<Progression[] | null>(null);
@@ -255,6 +257,13 @@ export function Village({
           title="Des histoires, des fables et des poésies à lire"
         >
           <BookOpen size={20} aria-hidden="true" /> Bibliothèque
+        </button>
+        <button
+          className="kk-btn kk-btn--block"
+          onClick={onDictee}
+          title="Un parent te lit des mots, tu les écris"
+        >
+          <PencilLine size={20} aria-hidden="true" /> Dictée avec un parent
         </button>
       </div>
     </div>

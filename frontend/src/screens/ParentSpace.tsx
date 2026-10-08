@@ -21,11 +21,14 @@ import {
   upsertMaitresse,
   activerMaitresse,
   supprimerMaitresse,
+  getHistoriqueMaitresse,
   type DefiResume,
   type EcritureProduction,
   type MaitresseListeParent,
+  type HistoriqueDictee,
 } from "../lib/api";
 import { DEFI_THEMES } from "../domain/calcul/defi";
+import DicteeMaitresse from "../components/DicteeMaitresse";
 import { MatieresEditor } from "../components/MatieresEditor";
 import { TOUS_DOMAINES } from "../domain/matieres";
 import { messageClasse } from "./CreateProfile";
@@ -600,6 +603,80 @@ function MaitresseManager({ foyerId }: { foyerId: string }) {
   );
 }
 
+// « Dictée avec papa ou maman » (espace parent). Le parent choisit un enfant,
+// lance une dictée (il lit, l'enfant écrit sur l'écran ou sur le cahier) et
+// consulte l'historique (date, score, mots ratés). Le composant <DicteeMaitresse>
+// est partagé avec l'écran enfant.
+function MaitresseDicteeParent({ profils }: { profils: Profil[] }) {
+  const [profilId, setProfilId] = useState(profils[0]?.id ?? "");
+  const [enCours, setEnCours] = useState(false);
+  const [hist, setHist] = useState<HistoriqueDictee[] | null>(null);
+
+  const reload = useCallback(() => {
+    if (!profilId) { setHist([]); return; }
+    getHistoriqueMaitresse(profilId).then(setHist).catch(() => setHist([]));
+  }, [profilId]);
+  useEffect(() => { reload(); }, [reload]);
+
+  const profil = profils.find((p) => p.id === profilId) ?? null;
+
+  if (enCours && profil) {
+    return <DicteeMaitresse profil={profil} onExit={() => { setEnCours(false); reload(); }} />;
+  }
+
+  return (
+    <div className="kk-card kk-stack" style={{ marginTop: 24 }}>
+      <h2>Dictée avec papa ou maman</h2>
+      <p className="kk-muted" style={{ margin: 0 }}>
+        Lis les mots d'une liste active à voix haute : l'enfant les écrit sur l'écran, ou
+        sur son cahier (tu coches juste / à revoir). À la fin, la correction est automatique
+        et les mots ratés reviennent en priorité.
+      </p>
+
+      {profils.length > 1 && (
+        <label className="kk-field">
+          <span>Pour quel enfant ?</span>
+          <select className="kk-input" value={profilId} onChange={(e) => setProfilId(e.target.value)}>
+            {profils.map((p) => <option key={p.id} value={p.id}>{p.surnom}</option>)}
+          </select>
+        </label>
+      )}
+
+      <button className="kk-btn kk-btn--accent" disabled={!profil} onClick={() => setEnCours(true)}>
+        Lancer une dictée
+      </button>
+
+      <h3 style={{ margin: "8px 0 0" }}>Historique des dictées</h3>
+      {hist === null ? (
+        <Spinner />
+      ) : hist.length === 0 ? (
+        <p className="kk-muted" style={{ margin: 0 }}>Aucune dictée pour l'instant.</p>
+      ) : (
+        <ul className="kk-list">
+          {hist.map((h) => (
+            <li key={h.id} style={{ padding: "8px 0" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", gap: 8, flexWrap: "wrap" }}>
+                <strong>
+                  {new Date(h.cree_le).toLocaleDateString("fr-FR", { day: "2-digit", month: "2-digit", year: "numeric" })}
+                  {" · "}{h.mode === "voix" ? "sur l'écran" : "sur papier"}
+                </strong>
+                <span className="kk-muted">{h.score_juste} / {h.score_total}{" "}
+                  — <em>{h.titre}</em>
+                </span>
+              </div>
+              {h.rates.length > 0 && (
+                <p className="kk-muted" style={{ margin: "2px 0 0", fontSize: "0.85rem" }}>
+                  Mots ratés : {h.rates.join(", ")}.
+                </p>
+              )}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
 export function ParentSpace({
   foyerId,
   profils,
@@ -728,6 +805,8 @@ export function ParentSpace({
         </button>
 
         <MaitresseManager foyerId={foyerId} />
+
+        {profils.length > 0 && <MaitresseDicteeParent profils={profils} />}
 
         <div className="kk-card kk-stack" style={{ marginTop: 24 }}>
           <h2>Journal des réglages</h2>

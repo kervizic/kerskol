@@ -721,15 +721,24 @@ texte) ; au plus 10 listes actives par foyer ; **aucun chevron `<` `>`**
 `SECURITY DEFINER maitresse_charger` (jamais d'accès direct).
 
 **Voix** : aucune synthèse à la volée (la voix Naf est pré-générée). Les exercices
-marchent **sans audio** :
+marchent **sans audio**. La progression des **mots à apprendre** (`FR.MAITRESSE.MOTS`)
+est volontairement **exigeante** (migration 0064, `maitresse.ts`) :
 
-- **mémoriser puis écrire** (N3-N4) : le mot s'affiche quelques secondes, se
-  cache, l'enfant l'écrit (op serveur `mmots`) ;
-- **QCM orthographe** (N1-N2) : le bon mot parmi des **formes erronées générées de
-  façon déterministe** (lettre doublée / manquante, accent oublié, lettre muette,
-  double consonne simplifiée — `formesErronees`) (op `mmots`) ;
-- **mot à trou** dans une phrase du texte : QCM (N1-N2) ou saisie libre (N3-N4),
-  on cache en priorité un mot de la liste à apprendre (op `mtrou`) ;
+- **N1 — reconnaître** le mot bien écrit parmi **3 pièges plausibles** générés de
+  façon **déterministe** (`formesErronees`) : **homophone** (est/et, sont/son…),
+  **erreur de son** (o/au/eau, s/ss/c/ç, g/ge/j), **accent** oublié, **consonne
+  doublée** ou **simplifiée**, **lettre muette** finale (op `mmots`) ;
+- **N2 — s'entraîner sur le difficile** : soit **compléter les lettres DIFFICILES**
+  (`lettresDifficiles` : accents, consonnes doubles, lettre muette, sons ambigus ;
+  jamais plus de la moitié du mot, les lettres faciles restent visibles), soit
+  **remettre les syllabes dans l'ordre** (`segmenterSyllabes`). Le mot reconstruit
+  est renvoyé au serveur (op `mmots`) ;
+- **N3 — écrire en contexte** : le mot est à écrire dans une **phrase à trou**
+  bienveillante (`phraseGabarit`), le parent peut la lire à voix haute (op `mmots`) ;
+- **N4 — mémoriser puis écrire** : le mot s'affiche quelques secondes, se cache,
+  l'enfant l'écrit sans contexte (le plus dur, op `mmots`) ;
+- **mot à trou** dans une phrase du texte (`FR.MAITRESSE.DICTEE`) : QCM (N1-N2) ou
+  saisie libre (N3-N4), on cache en priorité un mot de la liste à apprendre (op `mtrou`) ;
 - **dictée détective** sur le texte de la maîtresse : erreurs **injectées de façon
   déterministe** côté serveur (`_maitresse_injecter` : homophones est/sont/ont/à/
   ses, et `m` devant `m`/`b`/`p` comme tambour → tanbour), en **réutilisant le
@@ -740,6 +749,35 @@ marchent **sans audio** :
 Le **serveur reste seul juge** (ops `mmots` / `mtrou` / `mdictee`,
 `enregistrer_reponse`, migration 0046) ; il compare la saisie normalisée
 (`normaliser_mot`, accents exigés) au mot stocké, ou applique le moteur de dictée.
+Quand c'est faux, le **diagnostic déterministe de la faute** (`diagnostiquerMot`
+côté client, `_maitresse_diag` côté serveur, **même classification** : homophone,
+accent, doublement, lettre muette, son, lettre) choisit un **message bienveillant**
+avec un exemple concret et l'épellation de la bonne graphie.
+
+### Dictée avec papa ou maman (migration 0064)
+
+Mode **dicté par un parent**, accessible depuis **l'espace parent** ET **l'écran
+enfant** (`<DicteeMaitresse>`). Le parent lit à voix haute les mots d'une **liste
+active** ; l'enfant les écrit. Deux modes :
+
+- **voix** : l'écran enfant montre **seulement « Mot X sur N »** et une zone de
+  saisie (jamais le mot ; un bouton discret « parent » permet de revoir le mot à
+  lire). Bouton **« Mot suivant »** ;
+- **papier** : l'enfant écrit sur son cahier, le parent **coche juste / à revoir**
+  (et peut taper la graphie de l'enfant).
+
+À la fin : **correction automatique mot par mot** (serveur seul juge,
+`maitresse_dictee_enregistrer`), **score**, **diagnostic** de chaque mot raté,
+**liste des mots à revoir**. Les mots ratés **remontent dans une mémoire par mot**
+(`maitresse_mot_ema`, moyenne mobile) : ils **reviennent en priorité** dans les
+exercices (`choisirMotPrioritaire`) et en tête des dictées suivantes. Un
+**emplacement « Prendre en photo la dictée »** est prévu (bouton désactivé) pour
+scanner le cahier plus tard (`maitresse_dictee.photo_prevue`).
+
+L'**historique** des dictées (date, mode, score, mots ratés) est visible dans
+l'espace parent (`maitresse_historique`, réservé au parent du foyer, RLS stricte).
+Golden : `maitresse_dictee_test.sql` (diagnostic, score, EMA, isolation) +
+`diagnostic/maitresse.test.ts` (classification, bienveillance).
 
 **Visibilité** : le domaine `mots-maitresse` est **actif par défaut** mais le
 moteur ne le propose que s'il existe **au moins une liste active** (filtrage côté

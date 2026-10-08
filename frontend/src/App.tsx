@@ -9,6 +9,7 @@ import { Session } from "./screens/Session";
 import { DefiChrono } from "./screens/DefiChrono";
 import { LinkCode } from "./screens/LinkCode";
 import { Bibliotheque } from "./screens/Bibliotheque";
+import DicteeMaitresse from "./components/DicteeMaitresse";
 import { ChildTheme } from "./components/ChildTheme";
 import {
   ensureFoyer,
@@ -39,7 +40,7 @@ function currentPath(): string {
     return "/";
   }
 }
-const CHILD_RE = /^\/enfant\/([^/]+)\/(village|seance|defi|bibliotheque)$/;
+const CHILD_RE = /^\/enfant\/([^/]+)\/(village|seance|defi|bibliotheque|dictee-maitresse)$/;
 
 export function App() {
   const [ready, setReady] = useState(false);
@@ -334,6 +335,7 @@ export function App() {
               onStart={() => navigate(`/enfant/${prof.id}/seance`)}
               onDefi={() => navigate(`/enfant/${prof.id}/defi`)}
               onBiblio={() => navigate(`/enfant/${prof.id}/bibliotheque`)}
+              onDictee={() => navigate(`/enfant/${prof.id}/dictee-maitresse`)}
               onProfilChange={upsertProfil}
             />
           </ChildTheme>
@@ -345,6 +347,13 @@ export function App() {
             {/* Profil enfant passe au lecteur rythme : classe + reglages memorises
                 par profil (sinon le lecteur tournerait en mode « invite »). */}
             <Bibliotheque profil={prof} onExit={() => navigate(`/enfant/${prof.id}/village`)} />
+          </ChildTheme>
+        );
+      }
+      if (m[2] === "dictee-maitresse") {
+        return (
+          <ChildTheme couleur={couleur}>
+            <DicteeMaitresse profil={prof} onExit={() => navigate(`/enfant/${prof.id}/village`)} />
           </ChildTheme>
         );
       }
