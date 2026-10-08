@@ -1247,3 +1247,28 @@ l'espace parent (section « Phrases écrites »). Lecture protégée par RLS
 **Bienveillance.** `bienveillance.test.ts` scanne `BANQUE_ECRITURE` ;
 `bienveillance_test.sql` scanne `ecriture_item.attendu`. Golden croisé :
 `ecriture.test.ts` (24 items) ⇄ `ecriture_test.sql`.
+
+# Socle multi-classes (lot 1)
+
+La classe de l'enfant (`public.profils.classe`, CP..CM2, défaut CE2, réglable
+dans l'espace parent) pilote désormais le contenu. Chaque compétence porte une
+**portée** `classe_min` / `classe_max` (migration `0066`, additive : toutes les
+compétences existantes = CE2, aucun reset ; Iris reste en CE2). Les **rappels
+CE1** évidents (calcul mental de la classe d'avant : addition, doubles, moitiés,
+compléments) sont marqués `classe_min = CE1`.
+
+**Règle du moteur** (`composeSession`) : pour un enfant de classe C, une
+compétence est **candidate** si sa portée `[classe_min, classe_max]` chevauche
+`[C-1, C+1]` — révision de la classe d'avant si lacune, un peu d'avance (classe
+suivante) si la compétence est déjà acquise. Une compétence sans portée (démo /
+ancien référentiel) n'est pas restreinte.
+
+**Sous-matières visibles selon la classe** (`matieres.ts`) : visibilité
+**stricte** `classeMin <= classe <= classeMax` (défaut : visible partout). Une
+sous-matière propre au CM1 (lot 2) porte `classeMin = 'CM1'` et reste **masquée
+pour un CE2** dans les réglages ; le moteur peut tout de même proposer une
+compétence un peu en avance DANS une sous-matière déjà visible (marge d'un an).
+
+**Tests.** `composer.test.ts` (candidature ±1 an, Iris CE2 inchangée),
+`matieres.test.ts`, et `classe_test.sql` (portée par défaut CE2, 4 rappels CE1,
+contrainte d'ordre `classe_min <= classe_max`).
