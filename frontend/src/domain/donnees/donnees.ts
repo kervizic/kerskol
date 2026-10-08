@@ -373,6 +373,107 @@ export const BANQUE_DONNEES: DonItem[] = [
     attendu: "3",
     figure: bars(10, [{ label: "pommes", value: 9 }, { label: "poires", value: 6 }]),
     explication: "Il y a 9 pommes et 6 poires. 9 moins 6 font 3 : il y a 3 poires de moins." },
+
+  // =======================================================================
+  // MA.DONNEES.LIRE_CM1 — lire et completer un tableau ou un diagramme en
+  // barres (CM1), situations « a la maison », nombres plus grands qu'au CE2.
+  // Portee CM1..CM2. N1 QCM ; N4 reponse libre.
+  // =======================================================================
+  // N1 : QCM — lire une valeur dans un tableau (rangement de la maison)
+  { cle: "lire-cm1-n1-a", competence: "MA.DONNEES.LIRE_CM1", niveau: 1, format: "qcm",
+    consigne: "Dans ce tableau, combien de livres y a-t-il sur l'étagère du salon ?",
+    options: ["24", "18", "7"], attendu: "24",
+    figure: table(["Nombre de livres"], [["salon", "24"], ["chambre", "18"], ["cuisine", "7"]]),
+    explication: "On cherche la ligne du salon et on lit le nombre à côté : 24 livres." },
+  { cle: "lire-cm1-n1-b", competence: "MA.DONNEES.LIRE_CM1", niveau: 1, format: "qcm",
+    consigne: "Dans ce tableau, combien de bouteilles d'eau y a-t-il dans le placard ?",
+    options: ["12", "20", "5"], attendu: "12",
+    figure: table(["Nombre de bouteilles"], [["placard", "12"], ["cave", "20"], ["frigo", "5"]]),
+    explication: "On cherche la ligne du placard et on lit le nombre à côté : 12 bouteilles." },
+  // N2 : QCM — lire une barre d'un diagramme (courses de la semaine)
+  { cle: "lire-cm1-n2-a", competence: "MA.DONNEES.LIRE_CM1", niveau: 2, format: "qcm",
+    consigne: "Regarde le diagramme des courses. Combien de yaourts la famille a-t-elle achetés ?",
+    options: ["12", "8", "4"], attendu: "12",
+    figure: bars(14, [{ label: "pommes", value: 8 }, { label: "yaourts", value: 12 }, { label: "pains", value: 4 }]),
+    explication: "La barre des yaourts monte jusqu'au trait 12 : la famille a acheté 12 yaourts." },
+  { cle: "lire-cm1-n2-b", competence: "MA.DONNEES.LIRE_CM1", niveau: 2, format: "qcm",
+    consigne: "Regarde le diagramme du linge. Combien de chaussettes y a-t-il dans le panier ?",
+    options: ["13", "9", "6"], attendu: "13",
+    figure: bars(14, [{ label: "tee-shirts", value: 9 }, { label: "chaussettes", value: 13 }, { label: "pulls", value: 6 }]),
+    explication: "La barre des chaussettes monte jusqu'au trait 13 : il y a 13 chaussettes." },
+  // N3 : QCM — completer un tableau avec un total (nombres plus grands)
+  { cle: "lire-cm1-n3-a", competence: "MA.DONNEES.LIRE_CM1", niveau: 3, format: "qcm",
+    consigne: "Dans ce tableau, le total est 50 vêtements. Il y a 30 hauts et 12 pantalons. Quel nombre complète la case des pulls ?",
+    options: ["8", "18", "12"], attendu: "8",
+    figure: table(["Nombre"], [["hauts", "30"], ["pantalons", "12"], ["pulls", "?"], ["Total", "50"]]),
+    explication: "30 et 12 font 42. Il faut 8 de plus pour arriver à 50 : on écrit 8." },
+  { cle: "lire-cm1-n3-b", competence: "MA.DONNEES.LIRE_CM1", niveau: 3, format: "qcm",
+    consigne: "Dans ce tableau, le total est 40 bouteilles. Il y a 25 bouteilles à la cave. Quel nombre complète la case du garage ?",
+    options: ["15", "25", "40"], attendu: "15",
+    figure: table(["Nombre"], [["cave", "25"], ["garage", "?"], ["Total", "40"]]),
+    explication: "25 et 15 font 40 : on écrit 15 dans la case du garage." },
+  // N4 : reponse libre — lire une barre, puis calculer un total dans un tableau
+  { cle: "lire-cm1-n4-a", competence: "MA.DONNEES.LIRE_CM1", niveau: 4, format: "texte",
+    consigne: "Regarde le diagramme de la bibliothèque. Écris le nombre de bandes dessinées.",
+    attendu: "9",
+    figure: bars(12, [{ label: "BD", value: 9 }, { label: "romans", value: 6 }, { label: "albums", value: 3 }]),
+    explication: "La barre des bandes dessinées monte jusqu'au trait 9 : il y a 9 bandes dessinées." },
+  { cle: "lire-cm1-n4-b", competence: "MA.DONNEES.LIRE_CM1", niveau: 4, format: "texte",
+    consigne: "Dans ce tableau, écris combien il y a de verres en tout dans la maison.",
+    attendu: "60",
+    figure: table(["Cuisine", "Salon"], [["verres", "40", "20"], ["assiettes", "15", "25"]]),
+    explication: "On additionne la ligne des verres : 40 et 20 font 60 verres en tout." },
+
+  // =======================================================================
+  // MA.DONNEES.HASARD — vocabulaire du hasard : possible, impossible, certain
+  // (dé, pièce, sac de billes). QCM aux niveaux faciles, réponse libre au N4.
+  // Aucune figure (figure « none ») : la situation est décrite à l'oral.
+  // Portee CM1..CM2.
+  // =======================================================================
+  // N1 : QCM — un evenement possible
+  { cle: "has-n1-a", competence: "MA.DONNEES.HASARD", niveau: 1, format: "qcm",
+    consigne: "Tu lances un dé à six faces. Obtenir 4, est-ce possible, impossible ou certain ?",
+    options: ["possible", "impossible", "certain"], attendu: "possible",
+    figure: { kind: "none" },
+    explication: "Le dé a les faces 1, 2, 3, 4, 5, 6. On peut tomber sur 4 : c'est possible." },
+  { cle: "has-n1-b", competence: "MA.DONNEES.HASARD", niveau: 1, format: "qcm",
+    consigne: "Tu lances une pièce. Obtenir pile, est-ce possible, impossible ou certain ?",
+    options: ["possible", "impossible", "certain"], attendu: "possible",
+    figure: { kind: "none" },
+    explication: "Une pièce a deux côtés : pile et face. On peut tomber sur pile : c'est possible." },
+  // N2 : QCM — un evenement impossible
+  { cle: "has-n2-a", competence: "MA.DONNEES.HASARD", niveau: 2, format: "qcm",
+    consigne: "Tu lances un dé à six faces. Obtenir 9, est-ce possible, impossible ou certain ?",
+    options: ["possible", "impossible", "certain"], attendu: "impossible",
+    figure: { kind: "none" },
+    explication: "Le plus grand nombre du dé est 6. On ne peut pas obtenir 9 : c'est impossible." },
+  { cle: "has-n2-b", competence: "MA.DONNEES.HASARD", niveau: 2, format: "qcm",
+    consigne: "Dans un sac, il y a seulement des billes rouges. Tirer une bille verte, est-ce possible, impossible ou certain ?",
+    options: ["possible", "impossible", "certain"], attendu: "impossible",
+    figure: { kind: "none" },
+    explication: "Il n'y a aucune bille verte dans le sac. On ne peut pas en tirer une : c'est impossible." },
+  // N3 : QCM — un evenement certain
+  { cle: "has-n3-a", competence: "MA.DONNEES.HASARD", niveau: 3, format: "qcm",
+    consigne: "Dans un sac, il y a seulement des billes bleues. Tirer une bille bleue, est-ce possible, impossible ou certain ?",
+    options: ["possible", "impossible", "certain"], attendu: "certain",
+    figure: { kind: "none" },
+    explication: "Toutes les billes sont bleues. On est sûr de tirer une bille bleue : c'est certain." },
+  { cle: "has-n3-b", competence: "MA.DONNEES.HASARD", niveau: 3, format: "qcm",
+    consigne: "Tu lances un dé à six faces. Obtenir un nombre plus petit que 7, est-ce possible, impossible ou certain ?",
+    options: ["possible", "impossible", "certain"], attendu: "certain",
+    figure: { kind: "none" },
+    explication: "Toutes les faces du dé, de 1 à 6, sont plus petites que 7 : c'est certain." },
+  // N4 : reponse libre — ecrire possible, impossible ou certain
+  { cle: "has-n4-a", competence: "MA.DONNEES.HASARD", niveau: 4, format: "texte",
+    consigne: "Dans un sac, il y a 3 billes rouges et 2 billes jaunes. Écris si tirer une bille verte est possible, impossible ou certain.",
+    attendu: "impossible",
+    figure: { kind: "none" },
+    explication: "Il n'y a pas de bille verte dans le sac : tirer une bille verte est impossible." },
+  { cle: "has-n4-b", competence: "MA.DONNEES.HASARD", niveau: 4, format: "texte",
+    consigne: "Tu lances un dé à six faces. Écris si obtenir le nombre 2 est possible, impossible ou certain.",
+    attendu: "possible",
+    figure: { kind: "none" },
+    explication: "Le dé a une face avec le nombre 2. On peut l'obtenir : c'est possible." },
 ];
 
 // Competences de la sous-matiere (ordre d'affichage = ordre du referentiel).
@@ -382,6 +483,8 @@ export const COMPETENCES_DONNEES = [
   "MA.DONNEES.BARRES",
   "MA.DONNEES.PICTOGRAMME",
   "MA.DONNEES.COMPARER",
+  "MA.DONNEES.LIRE_CM1",
+  "MA.DONNEES.HASARD",
 ] as const;
 
 // Items jouables pour une competence et un niveau donnes.

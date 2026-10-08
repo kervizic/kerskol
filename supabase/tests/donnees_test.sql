@@ -4,7 +4,7 @@
 --
 -- Couvre :
 --   * la table de reference public.donnees_item contient EXACTEMENT les memes
---     items que le front (40 lignes ; couverture 5 competences x 4 niveaux ;
+--     items que le front (56 lignes ; couverture 7 competences x 4 niveaux ;
 --     spot check) : TEST CROISE avec le golden vitest
 --     (frontend/.../donnees/donnees.test.ts) ;
 --   * verif_donnees : bonne reponse acceptee, mauvaise refusee, accents EXIGES
@@ -26,14 +26,15 @@ DECLARE
     n   integer;
 BEGIN
     SELECT count(*) INTO n FROM public.donnees_item;
-    IF n <> 40 THEN
-        RAISE EXCEPTION 'donnees_item : 40 items attendus, obtenu %', n;
+    IF n <> 56 THEN
+        RAISE EXCEPTION 'donnees_item : 56 items attendus, obtenu %', n;
     END IF;
 
     -- Couverture : chaque competence a au moins un item a chaque niveau 1..4.
     FOR r IN SELECT c AS competence, nv AS niveau
                FROM unnest(ARRAY['MA.DONNEES.TABLEAU','MA.DONNEES.COMPLETER','MA.DONNEES.BARRES',
-                    'MA.DONNEES.PICTOGRAMME','MA.DONNEES.COMPARER']) AS c,
+                    'MA.DONNEES.PICTOGRAMME','MA.DONNEES.COMPARER',
+                    'MA.DONNEES.LIRE_CM1','MA.DONNEES.HASARD']) AS c,
                     generate_series(1,4) AS nv
     LOOP
         IF NOT EXISTS (SELECT 1 FROM public.donnees_item
@@ -52,7 +53,15 @@ BEGIN
         ('don-pic-n3-a','MA.DONNEES.PICTOGRAMME',3,'clic','lapins'),
         ('don-pic-n4-b','MA.DONNEES.PICTOGRAMME',4,'texte','15'),
         ('don-cmp-n1-b','MA.DONNEES.COMPARER',1,'qcm','des poires'),
-        ('don-cmp-n4-a','MA.DONNEES.COMPARER',4,'texte','3')
+        ('don-cmp-n4-a','MA.DONNEES.COMPARER',4,'texte','3'),
+        -- LOT 7 (CM1) : donnees et probabilites
+        ('lire-cm1-n1-a','MA.DONNEES.LIRE_CM1',1,'qcm','24'),
+        ('lire-cm1-n3-a','MA.DONNEES.LIRE_CM1',3,'qcm','8'),
+        ('lire-cm1-n4-b','MA.DONNEES.LIRE_CM1',4,'texte','60'),
+        ('has-n1-a','MA.DONNEES.HASARD',1,'qcm','possible'),
+        ('has-n2-b','MA.DONNEES.HASARD',2,'qcm','impossible'),
+        ('has-n3-a','MA.DONNEES.HASARD',3,'qcm','certain'),
+        ('has-n4-a','MA.DONNEES.HASARD',4,'texte','impossible')
     ) AS t(cle, competence, niveau, format, attendu)
     LOOP
         SELECT format || '|' || attendu INTO got FROM public.donnees_item WHERE cle = r.cle;
@@ -86,6 +95,13 @@ BEGIN
     IF public.verif_donnees('don-bar-n3-a','6')               THEN RAISE EXCEPTION 'grille mauvaise hauteur acceptee'; END IF;
     -- Item absent.
     IF public.verif_donnees('cle-bidon','x')                  THEN RAISE EXCEPTION 'item absent accepte'; END IF;
+    -- LOT 7 (CM1) : hasard (qcm, casse ignoree) et texte libre (N4).
+    IF NOT public.verif_donnees('has-n2-a','impossible')      THEN RAISE EXCEPTION 'hasard juste refuse : impossible'; END IF;
+    IF NOT public.verif_donnees('has-n2-a','Impossible')      THEN RAISE EXCEPTION 'hasard casse KO'; END IF;
+    IF public.verif_donnees('has-n2-a','possible')            THEN RAISE EXCEPTION 'hasard mauvaise reponse acceptee'; END IF;
+    IF NOT public.verif_donnees('has-n4-a','impossible')      THEN RAISE EXCEPTION 'hasard texte juste refuse'; END IF;
+    IF NOT public.verif_donnees('lire-cm1-n4-b','60')         THEN RAISE EXCEPTION 'lire cm1 texte juste refuse : 60'; END IF;
+    IF public.verif_donnees('lire-cm1-n4-b','40')             THEN RAISE EXCEPTION 'lire cm1 mauvais total accepte'; END IF;
     RAISE NOTICE 'verif_donnees : OK';
 END $$;
 

@@ -1341,6 +1341,28 @@ exercices apparaissent au CM1 et **en avance** à un CE2 qui a validé
 `composer.test.ts` (invariants golden sur toutes les sources), `cm1_fractions_test.sql`
 (jugement serveur + bornes + portée + non-régression `MA.FRAC.SIMPLES`).
 
+## Livré : « Données et probabilités » (migration 0070, lot 7)
+
+Deux nouvelles compétences **portée CM1..CM2**, dans le domaine `donnees` déjà
+existant (sous-matière « Tableaux et graphiques », 0044). On **réutilise tout**
+(table `donnees_item`, `verif_donnees` op `don` — **serveur seul juge**,
+composant `<Donnees>`, QCM existant) : **aucune nouvelle UI**.
+- **MA.DONNEES.LIRE_CM1** - lire / compléter un **tableau** ou un **diagramme en
+  barres** à partir de situations **« à la maison »** (livres sur les étagères,
+  courses de la semaine, linge, vêtements rangés), avec des **nombres plus
+  grands** qu'au CE2 (totaux jusqu'à 60). N1 QCM, N2-N3 QCM (lecture de barre,
+  complétion avec un total), N4 réponse libre.
+- **MA.DONNEES.HASARD** - vocabulaire du hasard : **possible / impossible /
+  certain**, à partir d'un **dé**, d'une **pièce**, d'un **sac de billes**. QCM
+  aux niveaux faciles (figure « none » : la situation est décrite à l'oral, zéro
+  dessin), réponse libre au N4.
+
+Les deux compétences sont au **cœur du plan de classe CM1** (`classes.ts`) et
+apparaissent **en avance** à un CE2 qui a acquis la lecture de données CE2
+(prérequis `MA.DONNEES.TABLEAU` / `MA.DONNEES.COMPARER` niveau 2). Miroir exact
+front (`donnees.ts`, 56 items au total) ↔ SQL (`donnees_item`), vérifié par le
+golden vitest `donnees.test.ts` et le test croisé `donnees_test.sql`.
+
 ## Reste à livrer pour le CM1 (maths)
 
 Chaque point suit le même patron (nouvelle compétence `classe_min = 'CM1'`,
@@ -1358,8 +1380,6 @@ tests golden) :
   carré/rectangle), durées, angles (droit/aigu/obtus).
 - **Espace et géométrie** : perpendiculaires, parallèles, cercle, programme de
   construction, symétrie axiale (réutiliser règle/équerre/compas existants).
-- **Données et probabilités** : tableaux, diagrammes, vocabulaire du hasard
-  (possible / impossible / certain) — QCM déterministe, sous-matière nouvelle.
 - **Pensée informatique** : programmer un déplacement (réutiliser l'existant).
 
 Et pour les autres matières CM1 : **français, sciences, histoire-géographie,
