@@ -312,9 +312,11 @@ export function App() {
       );
     }
 
-    // Bibliotheque (espace parent) : accessible depuis les reglages.
+    // Bibliotheque (espace parent) : accessible depuis les reglages. On passe le
+    // 1er profil enfant (classe = mode de lecture par defaut ; id = reglages
+    // memorises par profil).
     if (path === "/bibliotheque") {
-      return <Bibliotheque onExit={() => navigate("/reglages")} />;
+      return <Bibliotheque onExit={() => navigate("/reglages")} profil={profils[0]} />;
     }
 
     const m = path.match(CHILD_RE);

@@ -613,3 +613,36 @@ button.kk-don__picto-row { cursor: pointer; }
 .kk-biblio__gloss-list { margin: 10px 4px 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; }
 .kk-biblio__gloss-list li { font-size: 1.05rem; line-height: 1.6; }
 .kk-biblio__source { font-size: 0.85rem; margin: 0; }
+
+/* Lecture rythmee (lot « lecture ») */
+.kk-lr { display: flex; flex-direction: column; gap: 12px; }
+.kk-lr__controls { display: flex; gap: 10px; flex-wrap: wrap; }
+.kk-lr__play, .kk-lr__restart {
+  min-height: 44px; display: inline-flex; align-items: center; gap: 8px;
+}
+.kk-lr__play { flex: 1 1 auto; justify-content: center; }
+.kk-lr__row { display: flex; flex-direction: column; gap: 6px; }
+.kk-lr__label { font-size: 0.95rem; color: var(--kk-text-2); font-weight: 600; }
+.kk-lr__segmented { display: flex; gap: 6px; flex-wrap: wrap; }
+.kk-lr__opt {
+  min-height: 44px; padding: 6px 14px; border: 1px solid var(--kk-border);
+  border-radius: var(--kk-radius-sm); background: var(--kk-surface);
+  color: var(--kk-text); font-size: 0.95rem; cursor: pointer;
+}
+.kk-lr__opt--on { background: var(--kk-accent); color: var(--kk-on-accent); border-color: var(--kk-accent); }
+.kk-lr__slider { width: 100%; min-height: 44px; accent-color: var(--kk-accent); }
+.kk-lr__check { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-size: 1rem; }
+.kk-lr__texte { line-height: 2; }
+.kk-lr__para { font-size: clamp(1.15rem, 3.4vw, 1.4rem); color: var(--kk-text); margin: 0 0 14px; }
+.kk-lr__para:last-child { margin-bottom: 0; }
+.kk-lr__mot {
+  font: inherit; color: inherit; background: transparent; border: 0;
+  padding: 1px 3px; margin: 0; border-radius: 6px; cursor: pointer;
+  line-height: inherit;
+}
+.kk-lr__mot:hover { background: var(--kk-border); }
+.kk-lr__mot--seg { background: var(--kk-success-bg); color: var(--kk-success-text); }
+.kk-lr__mot--mot { background: var(--kk-accent); color: var(--kk-on-accent); }
+.kk-lr__texte--large { word-spacing: 0.4em; }
+.kk-lr__texte--tres-large { word-spacing: 0.9em; letter-spacing: 0.02em; }
+.kk-lr__aide { font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px; margin: 0; }

@@ -8,14 +8,30 @@
 // LibriVox (champ librivoxUrl). Il reste dans le DOM mais n'est pas affiché.
 
 import { useState } from "react";
-import { ArrowLeft, Volume2 } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { BIBLIOTHEQUE, BIBLIO_AUTEURS, type BiblioTexte } from "../domain/francais/bibliotheque";
+import { CLASSE_DISPONIBLE, type Profil } from "../lib/types";
+import { LecteurRythme } from "../components/LecteurRythme";
 
 interface Props {
   onExit: () => void;
+  // Profil enfant courant : fournit la classe (mode de lecture par defaut) et
+  // l'id (reglages memorises par profil). Optionnel (page accessible en espace
+  // parent) : a defaut, classe disponible (CE2) + reglages « invite ».
+  profil?: Profil;
 }
 
-function Lecture({ texte, onBack }: { texte: BiblioTexte; onBack: () => void }) {
+function Lecture({
+  texte,
+  onBack,
+  profilId,
+  classe,
+}: {
+  texte: BiblioTexte;
+  onBack: () => void;
+  profilId: string;
+  classe: string;
+}) {
   return (
     <div className="kk-page">
       <div className="kk-container kk-biblio">
@@ -32,23 +48,9 @@ function Lecture({ texte, onBack }: { texte: BiblioTexte; onBack: () => void }) 
           <p className="kk-biblio__dp kk-muted">Domaine public</p>
         </header>
 
-        {/* Emplacement « Écouter » : prévu pour la future voix, DÉSACTIVÉ et MASQUÉ. */}
-        <button
-          type="button"
-          className="kk-btn kk-biblio__ecouter"
-          disabled
-          hidden
-          aria-hidden="true"
-          data-librivox={texte.librivoxUrl || undefined}
-        >
-          <Volume2 size={18} aria-hidden="true" /> Écouter
-        </button>
-
-        <article className="kk-biblio__texte" aria-label={`texte : ${texte.titre}`}>
-          {texte.corps.map((para, i) => (
-            <p key={i} className="kk-biblio__para">{para}</p>
-          ))}
-        </article>
+        {/* Lecture rythmee : controles + texte interactif si audio+timings, sinon
+            rendu statique (le composant decide selon le manifeste). */}
+        <LecteurRythme texte={texte} profilId={profilId} classe={classe} />
 
         {texte.glossaire.length > 0 && (
           <details className="kk-biblio__gloss">
@@ -70,11 +72,20 @@ function Lecture({ texte, onBack }: { texte: BiblioTexte; onBack: () => void }) 
   );
 }
 
-export function Bibliotheque({ onExit }: Props) {
+export function Bibliotheque({ onExit, profil }: Props) {
   const [ouvert, setOuvert] = useState<BiblioTexte | null>(null);
+  const profilId = profil?.id ?? "invite";
+  const classe = profil?.classe ?? CLASSE_DISPONIBLE;
 
   if (ouvert) {
-    return <Lecture texte={ouvert} onBack={() => setOuvert(null)} />;
+    return (
+      <Lecture
+        texte={ouvert}
+        onBack={() => setOuvert(null)}
+        profilId={profilId}
+        classe={classe}
+      />
+    );
   }
 
   return (

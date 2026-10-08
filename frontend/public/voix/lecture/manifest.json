@@ -1,0 +1,4 @@
+{
+  "_doc": "Liste des textes de la Bibliotheque disposant d'un audio + timings valides (QC passe). Rempli par tools/lecture/aligner.py. Le bouton Ecouter n'apparait que pour ces ids.",
+  "textes": []
+}

@@ -36,10 +36,16 @@ self.addEventListener("activate", function (event) {
 function isImmutableAsset(url) {
   // /audio/ = clips voix (noms = hash du texte, contenu immuable) -> mis en
   // cache A LA DEMANDE (cache-first avec cache.put), pas de prechargement massif.
+  // /voix/lecture/ = audio + timings de la « lecture rythmee » (nom = id du
+  // texte ; le contenu change seulement a un deploiement, qui vide le cache via
+  // app-version.js) -> cache-first pour l'ecoute HORS LIGNE apres 1re ecoute.
+  // EXCEPTION : manifest.json (liste des textes dispo) doit rester reseau-d'abord.
+  if (url.pathname === "/voix/lecture/manifest.json") return false;
   return (
     url.pathname.startsWith("/assets/") ||
     url.pathname.startsWith("/theme/") ||
-    url.pathname.startsWith("/audio/")
+    url.pathname.startsWith("/audio/") ||
+    url.pathname.startsWith("/voix/lecture/")
   );
 }
 
