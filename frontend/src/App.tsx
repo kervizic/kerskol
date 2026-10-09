@@ -9,6 +9,7 @@ import { Session } from "./screens/Session";
 import { DefiChrono } from "./screens/DefiChrono";
 import { LinkCode } from "./screens/LinkCode";
 import { Bibliotheque } from "./screens/Bibliotheque";
+import { Histoire } from "./screens/Histoire";
 import DicteeMaitresse from "./components/DicteeMaitresse";
 import { ChildTheme } from "./components/ChildTheme";
 import {
@@ -40,7 +41,7 @@ function currentPath(): string {
     return "/";
   }
 }
-const CHILD_RE = /^\/enfant\/([^/]+)\/(village|seance|defi|bibliotheque|dictee-maitresse)$/;
+const CHILD_RE = /^\/enfant\/([^/]+)\/(village|seance|defi|bibliotheque|dictee-maitresse|histoire)$/;
 
 export function App() {
   const [ready, setReady] = useState(false);
@@ -156,7 +157,7 @@ export function App() {
     const busy =
       path === "/creer-profil" ||
       path === "/reglages" ||
-      /^\/enfant\/[^/]+\/(seance|defi)$/.test(path);
+      /^\/enfant\/[^/]+\/(seance|defi|histoire)$/.test(path);
     window.Kerskol?.version?.setBusy?.(busy);
     // A chaque changement d'ecran : on verifie /version.json. Si non occupe et
     // qu'une nouvelle version existe, app-version.js l'applique (transition).
@@ -336,6 +337,7 @@ export function App() {
               onDefi={() => navigate(`/enfant/${prof.id}/defi`)}
               onBiblio={() => navigate(`/enfant/${prof.id}/bibliotheque`)}
               onDictee={() => navigate(`/enfant/${prof.id}/dictee-maitresse`)}
+              onHistoire={() => navigate(`/enfant/${prof.id}/histoire`)}
               onProfilChange={upsertProfil}
             />
           </ChildTheme>
@@ -347,6 +349,13 @@ export function App() {
             {/* Profil enfant passe au lecteur rythme : classe + reglages memorises
                 par profil (sinon le lecteur tournerait en mode « invite »). */}
             <Bibliotheque profil={prof} onExit={() => navigate(`/enfant/${prof.id}/village`)} />
+          </ChildTheme>
+        );
+      }
+      if (m[2] === "histoire") {
+        return (
+          <ChildTheme couleur={couleur}>
+            <Histoire profil={prof} onExit={() => navigate(`/enfant/${prof.id}/village`)} />
           </ChildTheme>
         );
       }

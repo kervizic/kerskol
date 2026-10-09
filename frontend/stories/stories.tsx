@@ -14,6 +14,9 @@ import Grammaire from "../src/components/Grammaire";
 import Comprehension from "../src/components/Comprehension";
 import Ecriture from "../src/components/Ecriture";
 import Geometrie from "../src/components/Geometrie";
+import Parcours from "../src/components/Parcours";
+import Frise from "../src/components/Frise";
+import { chapitreParCle, friseCartesToutes } from "../src/domain/histoire/parcours";
 import { generateExercise as genEx } from "../src/domain/calcul/generator";
 import type { DonRender } from "../src/domain/donnees/donnees";
 import type { GramRender } from "../src/domain/francais/grammaire";
@@ -324,4 +327,21 @@ export const STORIES: Story[] = [
       explication: "Deux droites qui forment un angle droit sont perpendiculaires. On le vérifie avec l'équerre.",
       figure: { kind: "none" },
     }} onSoumettre={noopSubmit} onContinuer={noop} /> },
+
+  // --- Parcours d'Histoire (lot 1 CM1) : etape RECIT du chapitre Moyen Age.
+  { id: "parcours-recit-moyenage", label: "Parcours Histoire — récit « Un jour dans la seigneurie » (CM1)",
+    node: <Parcours chapitre={chapitreParCle("moyen_age")!} frisePlacees={[]}
+      onSoumettre={noopSubmit} onPlacerFrise={noopSubmit} onTermine={noop} /> },
+
+  // --- Frise : consultation (quelques cartes placees).
+  { id: "frise-consultation", label: "Frise — consultation (siècles, périodes, lot 1 CM1)",
+    node: <Frise titre="Ma frise du temps"
+      cartes={friseCartesToutes().filter((c) => ["fri-1163-notredame", "fri-1492-colomb", "fri-1682-versailles", "fri-1789-bastille"].includes(c.cle)).sort((a, b) => a.cleTri - b.cleTri)} /> },
+
+  // --- Frise : placement d'une nouvelle carte (date cachee).
+  { id: "frise-placement", label: "Frise — placer une carte (vérification serveur, lot 1 CM1)",
+    node: <Frise
+      cartes={friseCartesToutes().filter((c) => ["fri-1492-colomb", "fri-1682-versailles"].includes(c.cle)).sort((a, b) => a.cleTri - b.cleTri)}
+      aPlacer={friseCartesToutes().find((c) => c.cle === "fri-1519-magellan")!}
+      onPlacer={noopSubmit} onContinuer={noop} /> },
 ];

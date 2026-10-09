@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BookOpen, PencilLine, Settings, Timer } from "lucide-react";
+import { BookOpen, PencilLine, ScrollText, Settings, Timer } from "lucide-react";
 import { AvatarView } from "../domain/avatars";
 import {
   AVATAR_COLORS,
@@ -18,6 +18,7 @@ import { TOUS_DOMAINES } from "../domain/matieres";
 import { Spinner } from "../components/ui";
 import { ThemeToggle } from "../components/ThemeToggle";
 import { getProgression, reglerMatieres, updateProfil } from "../lib/api";
+import { classeDansPortee } from "../lib/types";
 import type { Avatar, Profil, Progression, UniversId } from "../lib/types";
 import type { Referentiel } from "../lib/api";
 
@@ -40,6 +41,7 @@ export function Village({
   onDefi,
   onBiblio,
   onDictee,
+  onHistoire,
   onProfilChange,
 }: {
   profil: Profil;
@@ -49,6 +51,7 @@ export function Village({
   onDefi: () => void;
   onBiblio: () => void;
   onDictee: () => void;
+  onHistoire: () => void;
   onProfilChange: (p: Profil) => void;
 }) {
   const [progression, setProgression] = useState<Progression[] | null>(null);
@@ -266,6 +269,17 @@ export function Village({
         >
           <PencilLine size={20} aria-hidden="true" /> Dictée avec un parent
         </button>
+        {/* Parcours d'Histoire : contenu CM1 (nouveau programme). Visible a partir
+            du CM1 seulement (comme les sous-matieres HIST). */}
+        {classeDansPortee("CM1", undefined, profil.classe) && (
+          <button
+            className="kk-btn kk-btn--block"
+            onClick={onHistoire}
+            title="Lis un récit, réponds aux questions et construis ta frise du temps"
+          >
+            <ScrollText size={20} aria-hidden="true" /> Parcours d'Histoire
+          </button>
+        )}
       </div>
     </div>
   );

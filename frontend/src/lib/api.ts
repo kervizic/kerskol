@@ -13,6 +13,7 @@ import { estJusteGrammaire } from "../domain/francais/grammaire";
 import { estJusteGeometrie } from "../domain/geometrie/geometrie";
 import { estJusteDonnees } from "../domain/donnees/donnees";
 import { estJusteQm } from "../domain/qm";
+import { estJusteFriseOrdre } from "../domain/histoire/parcours";
 import {
   isDemo,
   DEMO_COMPETENCES,
@@ -1074,6 +1075,41 @@ export async function insertReponse(row: ReponseInsert): Promise<ReponseResult> 
     deja: Boolean(d.deja),
     dictee: d.dictee ?? null,
   };
+}
+
+// -------------------------------- Frise d'Histoire -----------------------
+// Frise personnelle (par profil). Le SERVEUR est seul juge de l'ordre : le front
+// envoie l'ordre propose (liste des cles), le serveur verifie et n'enregistre la
+// carte que si l'ordre est correct. frise_etat renvoie les cles deja placees,
+// triees chronologiquement.
+
+// Cles des cartes deja placees sur la frise du profil (ordre chronologique).
+export async function friseEtat(profilId: string): Promise<string[]> {
+  if (isDemo()) return [];
+  const { data, error } = await supabase().rpc("frise_etat", { p_profil: profilId });
+  if (error) throw error;
+  return (data as string[] | null) ?? [];
+}
+
+// Place une carte : `ordreCles` = l'ordre propose (cartes placees + la nouvelle).
+// Renvoie le verdict serveur, ou null si le reseau a coupe (le front retentera).
+export async function frisePlacer(
+  profilId: string,
+  cle: string,
+  ordreCles: string[],
+): Promise<{ correct: boolean } | null> {
+  if (isDemo()) return { correct: estJusteFriseOrdre(ordreCles) };
+  try {
+    const { data, error } = await supabase().rpc("frise_placer", {
+      p_profil: profilId,
+      p_cle: cle,
+      p_ordre: ordreCles,
+    });
+    if (error) throw error;
+    return { correct: Boolean(data) };
+  } catch {
+    return null;
+  }
 }
 
 // -------------------------------- Defi chrono ----------------------------
