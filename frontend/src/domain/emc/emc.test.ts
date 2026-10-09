@@ -69,12 +69,12 @@ describe("banque EMC — Bien utiliser les ecrans", () => {
 });
 
 describe("banque EMC — complement CM1", () => {
-  it("48 items CM1 (6 competences x 4 niveaux x 2)", () => {
+  it("56 items CM1 (7 competences x 4 niveaux x 2)", () => {
     const cm1 = BANQUE_EMC.filter((i) => COMPETENCES_EMC_CM1.includes(i.competence as never));
-    expect(cm1.length).toBe(48);
-    expect(COMPETENCES_EMC_CM1.length).toBe(6);
+    expect(cm1.length).toBe(56);
+    expect(COMPETENCES_EMC_CM1.length).toBe(7);
   });
-  it("couverture des 6 competences CM1 x niveaux (2 par niveau)", () => {
+  it("couverture des 7 competences CM1 x niveaux (2 par niveau)", () => {
     for (const c of COMPETENCES_EMC_CM1) {
       for (let n = 1; n <= 4; n++) expect(itemsEmcDe(c, n).length, `${c} N${n}`).toBe(2);
     }
@@ -82,9 +82,9 @@ describe("banque EMC — complement CM1", () => {
 });
 
 describe("banque EMC — totaux et qualite", () => {
-  it("168 items au total (21 competences x 8), cles uniques", () => {
-    expect(BANQUE_EMC.length).toBe(168);
-    expect(COMPETENCES_EMC.length).toBe(21);
+  it("176 items au total (22 competences x 8), cles uniques", () => {
+    expect(BANQUE_EMC.length).toBe(176);
+    expect(COMPETENCES_EMC.length).toBe(22);
     const cles = new Set(BANQUE_EMC.map((i) => i.cle));
     expect(cles.size).toBe(BANQUE_EMC.length);
   });

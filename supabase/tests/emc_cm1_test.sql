@@ -14,13 +14,13 @@ DECLARE r record; got text; n integer;
 BEGIN
     SELECT count(*) INTO n FROM public.qm_item
      WHERE competence IN ('EMC.DROITS','EMC.SYMBOLES','EMC.COOPERATION',
-                          'EMC.EGALITE','EMC.PRUDENCE','EMC.ENGAGEMENT');
-    IF n <> 48 THEN RAISE EXCEPTION 'EMC CM1 : 48 items attendus, obtenu %', n; END IF;
+                          'EMC.EGALITE','EMC.PRUDENCE','EMC.ENGAGEMENT','EMC.LAICITE');
+    IF n <> 56 THEN RAISE EXCEPTION 'EMC CM1 : 56 items attendus, obtenu %', n; END IF;
 
     FOR r IN SELECT c.code AS competence, nv AS niveau
                FROM public.competences c, generate_series(1,4) AS nv
               WHERE c.code IN ('EMC.DROITS','EMC.SYMBOLES','EMC.COOPERATION',
-                               'EMC.EGALITE','EMC.PRUDENCE','EMC.ENGAGEMENT')
+                               'EMC.EGALITE','EMC.PRUDENCE','EMC.ENGAGEMENT','EMC.LAICITE')
     LOOP
         IF NOT EXISTS (SELECT 1 FROM public.qm_item
                         WHERE competence = r.competence AND niveau = r.niveau) THEN
@@ -38,7 +38,11 @@ BEGIN
         ('emc-pru-n2-a','EMC.PRUDENCE',2,'tri','mon mot de passe=on garde pour soi;mon adresse=on garde pour soi;mon dessin préféré=on peut partager;mon jeu préféré=on peut partager'),
         ('emc-eng-n1-b','EMC.ENGAGEMENT',1,'qcm','on vote'),
         ('emc-eng-n4-a','EMC.ENGAGEMENT',4,'texte','délégué'),
-        ('emc-coo-n4-b','EMC.COOPERATION',4,'texte','confiance')
+        ('emc-coo-n4-b','EMC.COOPERATION',4,'texte','confiance'),
+        ('emc-lai-n2-a','EMC.LAICITE',2,'qcm','la laïcité'),
+        ('emc-lai-n2-b','EMC.LAICITE',2,'tri','avoir chacun ses croyances=la laïcité le permet;respecter les croyances des autres=la laïcité le permet;se moquer de la croyance d''un camarade=la laïcité ne le permet pas;obliger les autres à croire comme soi=la laïcité ne le permet pas'),
+        ('emc-lai-n4-a','EMC.LAICITE',4,'texte','laïcité'),
+        ('emc-lai-n4-b','EMC.LAICITE',4,'texte','tolérance')
     ) AS t(cle, competence, niveau, format, attendu)
     LOOP
         SELECT format || '|' || attendu INTO got FROM public.qm_item WHERE cle = r.cle;
@@ -47,7 +51,7 @@ BEGIN
                 r.cle, r.format || '|' || r.attendu, got;
         END IF;
     END LOOP;
-    RAISE NOTICE 'EMC CM1 : 48 items, couverture + spot OK';
+    RAISE NOTICE 'EMC CM1 : 56 items (dont laicite 2024), couverture + spot OK';
 END $$;
 
 -- 2. verif_qm sur quelques items CM1.
@@ -98,11 +102,11 @@ END $$;
 
 RESET ROLE;
 
--- 4. Activation : 6 domaines CM1 actifs pour TOUS les profils + completude DEFAUT.
+-- 4. Activation : 7 domaines CM1 actifs pour TOUS les profils + completude DEFAUT.
 DO $$
 DECLARE n integer; d text; v_expr text; v_cur text[];
 BEGIN
-    FOREACH d IN ARRAY ARRAY['droits_enfant','symboles_republique','cooperation','egalite','prudence_ecrans','engagement']
+    FOREACH d IN ARRAY ARRAY['droits_enfant','symboles_republique','cooperation','egalite','prudence_ecrans','engagement','laicite']
     LOOP
         SELECT count(*) INTO n FROM public.profils WHERE NOT (d = ANY (domaines_actifs));
         IF n <> 0 THEN RAISE EXCEPTION 'domaine % devrait etre actif pour TOUS les profils, manque dans %', d, n; END IF;
@@ -113,11 +117,11 @@ BEGIN
     EXECUTE 'SELECT ' || v_expr INTO v_cur;
     FOREACH d IN ARRAY ARRAY['numeration','lecture','respect','etats_matiere','traces_anciennes',
                              'se_reperer','droits_enfant','symboles_republique','cooperation',
-                             'egalite','prudence_ecrans','engagement']
+                             'egalite','prudence_ecrans','engagement','laicite']
     LOOP
         IF NOT (d = ANY (v_cur)) THEN RAISE EXCEPTION 'DEFAUT domaines_actifs incomplet : % manquant', d; END IF;
     END LOOP;
-    RAISE NOTICE 'EMC CM1 : 6 domaines actifs partout + DEFAUT complet : OK';
+    RAISE NOTICE 'EMC CM1 : 7 domaines actifs partout (dont laicite) + DEFAUT complet : OK';
 END $$;
 
 ROLLBACK;

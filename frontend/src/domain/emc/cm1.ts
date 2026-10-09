@@ -1,13 +1,16 @@
 // Banque « VIVRE ENSEMBLE / EMC » - complement CM1 (cycle 3). S'AJOUTE a la
 // banque EMC (CE2, 0058) dans la MEME matiere EMC, meme op serveur 'qm', meme
-// table qm_item, meme verif_qm, meme <QuestionnerLeMonde>. Six sous-matieres
-// CM1 (un domaine chacune, classe_min CM1) :
+// table qm_item, meme verif_qm, meme <QuestionnerLeMonde>. Sept sous-matieres
+// CM1 (un domaine chacune, classe_min CM1), alignees sur le programme EMC 2024
+// (BO n° 24 du 13 juin 2024) :
 //   EMC.DROITS      droits_enfant       Convention des droits de l'enfant, droits/devoirs ;
 //   EMC.SYMBOLES    symboles_republique drapeau, Marianne, devise, Marseillaise, 14 juillet ;
 //   EMC.COOPERATION cooperation         s'entraider, ecouter, partager ;
 //   EMC.EGALITE     egalite             egalite filles-garcons ;
 //   EMC.PRUDENCE    prudence_ecrans     internet et ecrans : regles de prudence ;
-//   EMC.ENGAGEMENT  engagement          delegues, associations, s'engager.
+//   EMC.ENGAGEMENT  engagement          delegues, associations, s'engager ;
+//   EMC.LAICITE     laicite             laicite, liberte de croire ou non, respect
+//                                       des croyances, tolerance (attendu CM1 2024).
 // Harcelement : TOUJOURS « en parler a un adulte de confiance ». Ton bienveillant,
 // jamais moralisateur. Progression N1 (CM1) -> N4 (reponse libre).
 
@@ -212,6 +215,44 @@ export const BANQUE_EMC_CM1: QmItem[] = [
     consigne: "Pour choisir le délégué, chaque élève donne sa voix : on... Écris le verbe (on ...).",
     attendu: "vote",
     explication: "On vote : c'est ainsi qu'on choisit ses représentants, comme les grands." },
+
+  // ===== EMC.LAICITE - la laicite et le respect des croyances =====
+  // Attendu CM1 du programme EMC 2024 (BO n° 24 du 13 juin 2024) : la laicite
+  // comme valeur de la Republique (Liberte, Egalite, Fraternite, laicite) ; la
+  // liberte de croire ou de ne pas croire ; le respect des croyances d'autrui ;
+  // la tolerance. Ton bienveillant, aucune religion citee ni jugee.
+  { cle: "emc-lai-n1-a", competence: "EMC.LAICITE", niveau: 1, format: "qcm",
+    consigne: "À l'école en France, les enfants sont-ils tous accueillis de la même façon, quelles que soient leurs croyances ?",
+    options: ["oui, tous pareil", "non, cela dépend"], attendu: "oui, tous pareil",
+    explication: "À l'école, grâce à la laïcité, chaque enfant est accueilli de la même façon, quelles que soient ses croyances." },
+  { cle: "emc-lai-n1-b", competence: "EMC.LAICITE", niveau: 1, format: "qcm",
+    consigne: "La laïcité, c'est la liberté de croire en une religion ou de...",
+    options: ["ne pas croire", "voler", "tricher"], attendu: "ne pas croire",
+    explication: "La laïcité laisse chacun libre de croire ou de ne pas croire. Personne n'est obligé." },
+  { cle: "emc-lai-n2-a", competence: "EMC.LAICITE", niveau: 2, format: "qcm",
+    consigne: "À côté de Liberté, Égalité et Fraternité, quelle grande valeur permet à chacun de croire ou non, dans le respect des autres ?",
+    options: ["la laïcité", "la récréation", "la vitesse"], attendu: "la laïcité",
+    explication: "La laïcité est une grande valeur de la République, à côté de Liberté, Égalité et Fraternité." },
+  { cle: "emc-lai-n2-b", competence: "EMC.LAICITE", niveau: 2, format: "tri",
+    consigne: "Range : est-ce que la laïcité le permet à l'école, ou pas ?",
+    ...tri(["la laïcité le permet", "la laïcité ne le permet pas"], [["avoir chacun ses croyances", "la laïcité le permet"], ["respecter les croyances des autres", "la laïcité le permet"], ["se moquer de la croyance d'un camarade", "la laïcité ne le permet pas"], ["obliger les autres à croire comme soi", "la laïcité ne le permet pas"]]),
+    explication: "La laïcité protège les croyances de chacun : on respecte celles des autres et on n'oblige personne." },
+  { cle: "emc-lai-n3-a", competence: "EMC.LAICITE", niveau: 3, format: "qcm",
+    consigne: "Un camarade n'a pas les mêmes croyances que toi. Que demande la laïcité ?",
+    options: ["se respecter tous les deux", "l'éviter", "se disputer"], attendu: "se respecter tous les deux",
+    explication: "La laïcité demande le respect de chacun : on peut être amis même avec des croyances différentes." },
+  { cle: "emc-lai-n3-b", competence: "EMC.LAICITE", niveau: 3, format: "qcm",
+    consigne: "La laïcité donne à chacun le droit égal d'exercer librement son...",
+    options: ["jugement", "sport", "goûter"], attendu: "jugement",
+    explication: "La laïcité accorde à chacun le même droit de penser et de juger librement, et de respecter ce droit chez les autres." },
+  { cle: "emc-lai-n4-a", competence: "EMC.LAICITE", niveau: 4, format: "texte",
+    consigne: "La valeur qui permet à chacun de croire ou de ne pas croire, dans le respect de tous, s'appelle la... Écris le mot.",
+    attendu: "laïcité",
+    explication: "La laïcité : chacun est libre de croire ou non, et tous se respectent." },
+  { cle: "emc-lai-n4-b", competence: "EMC.LAICITE", niveau: 4, format: "texte",
+    consigne: "Respecter les croyances des autres, même différentes des siennes, c'est faire preuve de... Écris le mot.",
+    attendu: "tolérance",
+    explication: "La tolérance, c'est accepter que les autres pensent et croient autrement que soi." },
 ];
 
 export const COMPETENCES_EMC_CM1 = [
@@ -221,4 +262,5 @@ export const COMPETENCES_EMC_CM1 = [
   "EMC.EGALITE",
   "EMC.PRUDENCE",
   "EMC.ENGAGEMENT",
+  "EMC.LAICITE",
 ] as const;

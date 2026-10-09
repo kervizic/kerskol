@@ -314,6 +314,8 @@ export const INDICES: Record<string, string> = {
     "Sur Internet, on ne donne jamais son adresse ni son mot de passe. On demande à un adulte avant de cliquer.",
   "EMC.ENGAGEMENT":
     "Le délégué représente la classe : on le choisit en votant. S'engager, c'est aider les autres.",
+  "EMC.LAICITE":
+    "La laïcité, c'est la liberté de croire ou de ne pas croire. À l'école, on accueille tout le monde pareil et on respecte les croyances de chacun.",
 };
 
 // Indice d'une competence, UNIQUEMENT aux niveaux 1 et 2 (sinon null : plus

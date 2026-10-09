@@ -92,6 +92,7 @@ export const MATIERES: MatiereDef[] = [
       { domaine: "egalite", libelle: "Filles et garçons, l'égalité", classeMin: "CM1" },
       { domaine: "prudence_ecrans", libelle: "Internet : rester prudent", classeMin: "CM1" },
       { domaine: "engagement", libelle: "S'engager : délégués, associations", classeMin: "CM1" },
+      { domaine: "laicite", libelle: "La laïcité et le respect des croyances", classeMin: "CM1" },
     ],
   },
   {
