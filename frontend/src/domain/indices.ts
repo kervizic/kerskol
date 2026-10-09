@@ -276,6 +276,20 @@ export const INDICES: Record<string, string> = {
     "Chaque objet sert à quelque chose, c'est sa fonction. Dans une lampe, le courant passe seulement si le circuit est bien fermé en boucle.",
   "ST.TERRE.CIEL":
     "La Terre tourne sur elle-même en un jour : d'un côté le jour, de l'autre la nuit. Elle fait un grand tour du Soleil en un an.",
+
+  // --- Histoire (indices aux niveaux 1 et 2 seulement) ----------------------
+  "HIST.TRACES":
+    "La Préhistoire, c'est avant l'écriture. Pense aux peintures d'animaux dans les grottes, comme à Lascaux.",
+  "HIST.GALLOROMAINS":
+    "Avant la France, c'était la Gaule, avec les Gaulois. Les Romains ont construit de belles choses, comme le Pont du Gard.",
+  "HIST.MOYENAGE":
+    "Au Moyen Âge, pense au château fort du seigneur, au village des paysans et au marché sur la place.",
+  "HIST.MONUMENTS":
+    "Les grandes églises très hautes sont des cathédrales, comme Notre-Dame. Les moines vivaient dans des abbayes.",
+  "HIST.ROIS":
+    "Clovis a été baptisé à Reims. Charlemagne, couronné en l'an 800, aimait les écoles. Range les rois dans l'ordre du temps.",
+  "HIST.FRISE":
+    "La frise range les événements dans le temps. Un siècle, c'est cent ans. En chiffres romains, V vaut 5 et X vaut 10.",
 };
 
 // Indice d'une competence, UNIQUEMENT aux niveaux 1 et 2 (sinon null : plus

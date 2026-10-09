@@ -39,6 +39,7 @@ import { BIBLIOTHEQUE } from "./francais/bibliotheque";
 import { BANQUE_QM } from "./qm";
 import { BANQUE_EMC } from "./emc";
 import { BANQUE_SCIENCES } from "./sciences";
+import { BANQUE_HISTOIRE } from "./histoire";
 import { BANQUE_GRAMMAIRE } from "./francais/grammaire";
 import { BANQUE_LEXIQUE } from "./francais/lexique";
 import { BANQUE_DONNEES } from "./donnees/donnees";
@@ -130,6 +131,7 @@ describe("bienveillance : aucun contenu enfant ne contient de mot interdit", () 
     scanBanque("qm", BANQUE_QM, acc);
     scanBanque("emc", BANQUE_EMC, acc);
     scanBanque("sciences", BANQUE_SCIENCES, acc);
+    scanBanque("histoire", BANQUE_HISTOIRE, acc);
     scanBanque("grammaire", BANQUE_GRAMMAIRE, acc);
     scanBanque("lexique", BANQUE_LEXIQUE, acc);
     scanBanque("donnees", BANQUE_DONNEES, acc);

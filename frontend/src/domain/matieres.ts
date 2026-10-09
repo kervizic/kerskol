@@ -102,6 +102,20 @@ export const MATIERES: MatiereDef[] = [
       { domaine: "ciel_terre", libelle: "La Terre et le ciel", classeMin: "CM1" },
     ],
   },
+  {
+    // « Histoire » (cycle 3, CM1). Repères apaisés (bienveillance stricte).
+    // Réutilise le rendu de Questionner le monde.
+    code: "HIST",
+    libelle: "Histoire",
+    sousMatieres: [
+      { domaine: "traces_anciennes", libelle: "Les premières traces", classeMin: "CM1" },
+      { domaine: "gaulois_romains", libelle: "Gaulois et Romains", classeMin: "CM1" },
+      { domaine: "moyen_age", libelle: "Au Moyen Âge", classeMin: "CM1" },
+      { domaine: "monuments", libelle: "Églises et monuments", classeMin: "CM1" },
+      { domaine: "rois_de_france", libelle: "Les grands rois", classeMin: "CM1" },
+      { domaine: "frise", libelle: "La frise et les siècles", classeMin: "CM1" },
+    ],
+  },
 ];
 
 // Tous les codes matieres / tous les domaines connus (defauts « tout actif »).

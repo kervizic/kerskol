@@ -1141,6 +1141,44 @@ en toute rigueur plutôt CM2 dans les progressions d'académie : la **digestion*
 **simplement** et placés aux **niveaux hauts** (N3/N4). Sources eduscol notées
 dans le rapport de lot.
 
+## Nouvelle matière « Histoire » (HIST, CM1, migration 0099)
+
+Sixième matière. **Additive** au-dessus de 0098 : la table `qm_item` (déjà
+ouverte à `HIST.%`), la branche op `qm` de `enregistrer_reponse` (déjà élargie)
+et le `CHECK` des types (déjà `'histoire'`) ont été posés par 0098. Ce lot
+ajoute seulement la matière `HIST`, la méthode `histoire`, 6 compétences
+(`classe_min = 'CM1'`), 48 items, les exercices et l'activation (défaut
+`domaines_actifs` lu en base puis complété). Test croisé : `histoire.test.ts` +
+`histoire_test.sql`.
+
+6 sous-matières × 4 niveaux × 2 = **48 items** :
+
+- **Les premières traces** (`traces_anciennes`, `HIST.TRACES`) : Préhistoire,
+  grottes ornées (Lascaux), maîtrise du feu, première frise des périodes.
+- **Gaulois et Romains** (`gaulois_romains`, `HIST.GALLOROMAINS`) : la Gaule, vie
+  quotidienne gallo-romaine, monuments (aqueducs, Pont du Gard, arènes de Nîmes,
+  Lugdunum/Lyon), routes pavées.
+- **Au Moyen Âge** (`moyen_age`, `HIST.MOYENAGE`) : château fort (lieu de vie),
+  village, paysans, métiers (forgeron, meunier, boulanger), chevaliers.
+- **Églises et monuments** (`monuments`, `HIST.MONUMENTS`) : cathédrales
+  (Notre-Dame), vitraux, abbayes, art gothique.
+- **Les grands rois** (`rois_de_france`, `HIST.ROIS`) : Clovis (baptisé à Reims),
+  Charlemagne (couronné en 800, les écoles), Saint Louis (rend la justice).
+- **La frise et les siècles** (`frise`, `HIST.FRISE`) : frise chronologique,
+  siècles (cent ans), chiffres romains (V, X, C), ordre des grandes périodes.
+
+**Bienveillance STRICTE (histoire).** Aucun récit de bataille, massacre,
+supplice, esclavage ni guerre. Les repères intrinsèquement militaires sont
+**laissés de côté ou présentés par un angle apaisé** : Vercingétorix / Alésia →
+remplacés par la **vie quotidienne gallo-romaine et les monuments** ; les
+« invasions » → non traitées ; Saint Louis → le **roi qui rend la justice** (pas
+les croisades) ; Henri IV / Louis XIV / Versailles → non inclus dans ce lot
+(réservés à un lot « Temps des rois » ultérieur). Garde-fou `bienveillance.test.ts`
+étendu à la banque `histoire`, plus un test local interdisant
+`guerre|bataille|supplice|esclave`. Note programme : le découpage suit la demande
+de Manu (ancien programme : Préhistoire → Moyen Âge → rois) ; le programme 2025 a
+déplacé l'Antiquité en 6e (signalé dans le rapport).
+
 # Règle de bienveillance (décision de Manu, absolue)
 
 **TOUS les contenus montrés à l'enfant doivent être OPTIMISTES et PLEINS DE
@@ -1179,8 +1217,8 @@ s'excuse quand on a blessé un ami), jamais une blessure physique.
 à chaque build :
 
 - côté frontend : `frontend/src/domain/bienveillance.test.ts` (banques statiques
-  lecture / QM / EMC / sciences / grammaire / vocabulaire / données / géométrie,
-  indices, messages de correction, et énoncés de maths GÉNÉRÉS) ;
+  lecture / QM / EMC / sciences / histoire / grammaire / vocabulaire / données /
+  géométrie, indices, messages de correction, et énoncés de maths GÉNÉRÉS) ;
 - côté serveur : `supabase/tests/bienveillance_test.sql` (textes de la dictée
   détective et réponses attendues de référence).
 

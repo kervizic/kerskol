@@ -30,6 +30,7 @@ import { buildDonnees } from "../donnees/donnees";
 import { buildQm } from "../qm";
 import { buildEmc } from "../emc";
 import { buildSciences } from "../sciences";
+import { buildHistoire } from "../histoire";
 import type { QmFormat, QmFigure } from "../qm/types";
 import type { DonFigure, DonFormat, DonInteract } from "../donnees/donnees";
 import { buildComprehension } from "../francais/comprehension";
@@ -726,6 +727,11 @@ function buildExercise(
   // objets techniques, Terre) : reutilise l'infra « situation » de QM.
   if (src.competence.startsWith("ST.")) {
     return buildSciences(src, rng, base);
+  }
+  // --- Histoire (CM1 : traces, Gaulois/Romains, Moyen Age, monuments, rois,
+  // frise) : reutilise l'infra « situation » de QM.
+  if (src.competence.startsWith("HIST.")) {
+    return buildHistoire(src, rng, base);
   }
   // --- Numeration : lire/ecrire, decomposer, comparer, suite ------------
   if (src.competence.startsWith("MA.NUM.")) {
