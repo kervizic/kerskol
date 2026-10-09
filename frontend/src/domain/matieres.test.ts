@@ -8,6 +8,7 @@ import {
   matiereDe,
   competenceActivable,
   auMoinsUneSousMatiere,
+  sousMatieresVisibles,
 } from "./matieres";
 
 describe("catalogue matieres / sous-matieres", () => {
@@ -43,6 +44,28 @@ describe("catalogue matieres / sous-matieres", () => {
     expect(heure?.libelle).toBe("Lire l'heure");
     expect(TOUS_DOMAINES).toContain("mesures");
     expect(TOUS_DOMAINES).toContain("heure");
+  });
+});
+
+describe("visibilite CE1 : les sous-matieres MATHS sont visibles au CE1", () => {
+  it("un profil CE1 voit numeration, calcul, tables, pose, problemes, mesures, heure, fractions", () => {
+    const ma = MATIERES.find((m) => m.code === "MA")!;
+    const vus = new Set(sousMatieresVisibles(ma, "CE1").map((s) => s.domaine));
+    for (const d of [
+      "numeration",
+      "calcul_mental",
+      "tables_multiplication",
+      "calcul_pose",
+      "problemes",
+      "mesures",
+      "heure",
+      "fractions",
+    ]) {
+      expect(vus.has(d)).toBe(true);
+    }
+    // Les sous-matieres propres au CM1 restent masquees au CE1.
+    expect(vus.has("decimaux")).toBe(false);
+    expect(vus.has("proportionnalite")).toBe(false);
   });
 });
 

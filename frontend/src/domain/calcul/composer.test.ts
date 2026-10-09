@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { composeSession, type ProgressionDetail } from "./composer";
+import { classPlan } from "./classes";
 import { SEED_SOURCES } from "./seedSources";
 import type { Competence, Prerequis } from "../../lib/types";
 
@@ -119,6 +120,42 @@ describe("composeSession : 1re seance CE2 (sensible a la classe)", () => {
   it("la majorite des exercices ne sont PAS de la revision (impression « a son niveau »)", () => {
     const revision = plan.filter((p) => p.category === "revision").length;
     expect(revision).toBeLessThan(plan.length - revision);
+  });
+});
+
+describe("composeSession : 1re seance CE1 (plan de classe CE1)", () => {
+  const plan = composeSession({
+    competences: COMPETENCES,
+    prerequis: PREREQUIS,
+    progress: [],
+    sources: SEED_SOURCES,
+    seed: 7,
+    now: NOW,
+    classe: "CE1",
+  });
+  const coeurCE1 = new Set(Object.keys(classPlan("CE1").coeur));
+
+  it("produit une seance non vide, pilotee par le plan CE1", () => {
+    expect(plan.length).toBeGreaterThan(0);
+    expect(plan.length).toBeLessThanOrEqual(12);
+  });
+
+  it("ne tire QUE des competences du coeur CE1 (aucune notion hors CE1)", () => {
+    for (const p of plan) expect(coeurCE1.has(p.exercise.competence)).toBe(true);
+    // Notions non-CE1 jamais proposees en 1re seance CE1.
+    const codes = new Set(plan.map((p) => p.exercise.competence));
+    expect(codes.has("MA.POSE.MULTIPLICATION")).toBe(false);
+    expect(codes.has("MA.TABLES.7")).toBe(false);
+    expect(codes.has("MA.CM.DIV_RESTE")).toBe(false);
+  });
+
+  it("demarre au niveau 1 (debut du cycle, placement en escalier ensuite)", () => {
+    for (const p of plan) expect(p.exercise.niveau).toBe(1);
+  });
+
+  it("chaque competence du coeur CE1 existe dans la banque d'exercices", () => {
+    const sourceCodes = new Set(SEED_SOURCES.map((s) => s.competence));
+    for (const code of coeurCE1) expect(sourceCodes.has(code)).toBe(true);
   });
 });
 

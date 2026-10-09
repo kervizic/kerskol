@@ -396,6 +396,50 @@ Exemples de `params` (extraits) :
 L'exhaustivité des paramètres est portée par le seed lui-même
 (`0006_seed_referentiel_calcul.sql`), volontairement lisible et versionné.
 
+## CE1 — socle maths (incrément 1, migration 0114)
+
+Le programme de **mathématiques CE1** est rendu jouable **sans nouvelle
+compétence ni nouvelle banque** : la migration `0114_ce1_socle_maths.sql`
+ouvre la **portée par classe** (`classe_min = 'CE1'`, `classe_max` inchangée,
+reste CE2/CM2) des compétences dont la notion commence au CE1. Le moteur
+d'escalier et le plan de 1re séance CE1 (`domain/calcul/classes.ts`, plan `CE1`)
+font le reste ; un enfant CE1 démarre au **niveau 1** de chaque compétence.
+
+**Sûreté pour les CE2 (Iris)** : seul `classe_min` baisse (CE2 → CE1) ;
+`classe_max` reste ≥ CE2, donc la candidature d'une compétence pour un CE2
+(`classeDansMarge`, chevauchement avec [C−1, C+1]) est **inchangée**. Aucune
+donnée élève touchée, aucune compétence créée/supprimée.
+
+27 compétences maths sont au CE1 : 4 déjà marquées par le socle 0066
+(`MA.CM.ADDITION`, `DOUBLES`, `MOITIES`, `COMPL_SUP`) + 23 ouvertes par 0114 :
+
+| Domaine | Compétences CE1 | Attendu CE1 (source) |
+|---------|-----------------|----------------------|
+| numération | `MA.NUM.LIRE_ECRIRE`, `DECOMPOSER`, `COMPARER`, `SUITE` | nombres ≤ 1 000 : lire/écrire/décomposer, comparer/encadrer/ranger, demi-droite, c/d/u, parité |
+| calcul mental | `MA.CM.COMPL_100_1000`, `SOMMES_DIFF`, `X10_X100` (+ ADDITION/DOUBLES/MOITIES/COMPL_SUP) | compléments, ×10, sommes/différences, doubles, moitiés, commutativité |
+| tables | `MA.TABLES.2`, `.3`, `.4`, `.5` | tables de multiplication par 2, 3, 4 et 5 |
+| calcul posé | `MA.POSE.ADDITION`, `MA.POSE.SOUSTRACTION` | addition et soustraction en colonnes (PAS la multiplication posée) |
+| problèmes | `MA.PB.ADD_SUB`, `MULT_DIV`, `DEUX_ETAPES`, `MONNAIE`, `MESURES` | additifs/multiplicatifs ≤ 1 000, 1-2 étapes, partage, monnaie €/centimes, grandeurs |
+| mesures | `MA.MES.LONGUEURS`, `MASSES_CONTENANCES` | cm/dm/m/km, g/kg, L |
+| heure | `MA.MES.HEURE`, `MA.MES.DUREES` | heures entières et demi-heures, jour/semaine, heure/minute |
+| fractions | `MA.FRAC.SIMPLES` | approche 1/2, 1/3, 1/4 (N1) |
+
+**Non ouverts au CE1** (restent CE2/CM1, débordement vérifié par garde-fou) :
+multiplication posée, division (potence, `DIV_RESTE`), tables de 6 à 9.
+
+**À venir (incréments CE1 suivants)** : géométrie (figures planes, angle droit à
+l'équerre, reproduire sur quadrillage, alignement, solides) et repérage /
+déplacements — ces compétences utilisent d'**autres moteurs** (géométrie, QCM)
+et leur calibrage CE1 sera vérifié banque par banque. Des banques
+**calibrées CE1** (ex. N3-N4 de numération plafonnés à 1 000, N4 « écrire en
+lettres ≤ 1 000 ») pourront remplacer l'escalier réutilisé si besoin.
+
+**Sources officielles (programme 2024, cycle 2)** : Attendus de fin d'année de
+CE1 en mathématiques, Éduscol / Éducation nationale
+(<https://eduscol.education.gouv.fr/sites/default/files/document/04-maths-ce1-attendus-eduscol1114734pdf-74628.pdf>) ;
+programme de mathématiques du cycle 2, avril 2024
+(<https://www.education.gouv.fr/media/194205/download>).
+
 ## Modèle de données (rappel)
 
 - `matieres`, `competences`, `competence_prerequis`, `methodes` : structure du

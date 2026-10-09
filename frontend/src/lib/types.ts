@@ -18,8 +18,16 @@ export type Avatar = AnyAvatar;
 
 export type Classe = "CP" | "CE1" | "CE2" | "CM1" | "CM2";
 export const CLASSES: Classe[] = ["CP", "CE1", "CE2", "CM1", "CM2"];
-// Seul le programme de CE2 est disponible pour l'instant (contenu de calcul).
+// Classe par défaut quand aucun profil n'est connu (ex. bibliothèque en mode
+// invité) : le programme historique.
 export const CLASSE_DISPONIBLE: Classe = "CE2";
+// Classes dont le programme (contenu de calcul) est effectivement disponible.
+// CE1 est ouvert par la migration 0114 (socle maths CE1, réutilise les moteurs
+// existants). CM1 a été livré (lots 0089-0113).
+export const CLASSES_DISPONIBLES: Classe[] = ["CE1", "CE2", "CM1"];
+export function classeDisponible(c: Classe): boolean {
+  return CLASSES_DISPONIBLES.includes(c);
+}
 
 // Rang scolaire d'une classe (CP=0 .. CM2=4). Sert aux comparaisons de portee.
 export function classeRang(c: Classe): number {

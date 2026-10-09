@@ -11,7 +11,7 @@ import { UNIVERS_LIST } from "../domain/univers";
 import { Feedback } from "../components/ui";
 import { createProfil } from "../lib/api";
 import { clearDraft, loadDraft, saveDraft } from "../lib/session";
-import { CLASSES, CLASSE_DISPONIBLE, type Classe, type Matiere, type Profil, type UniversId } from "../lib/types";
+import { CLASSES, CLASSE_DISPONIBLE, classeDisponible, type Classe, type Matiere, type Profil, type UniversId } from "../lib/types";
 
 type Step = "parent" | "handover" | "child";
 
@@ -19,7 +19,7 @@ type Step = "parent" | "handover" | "child";
 const MATIERE_ACTIVE = "MA";
 
 export function messageClasse(classe: Classe): string | null {
-  if (classe === CLASSE_DISPONIBLE) return null;
+  if (classeDisponible(classe)) return null;
   return `Programme de ${classe} bientôt disponible : en attendant, ton enfant s’entraîne sur le calcul de ${CLASSE_DISPONIBLE}.`;
 }
 

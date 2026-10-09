@@ -303,6 +303,21 @@ vend bien.
 - TIMSS 2023, résultats mathématiques CM1 (grade 4). <https://timss2023.org/results/grade-4-math-achievement/>
 - PIRLS 2021, résultats en lecture. <https://pirls2021.org/results/>
 
+### Programmes officiels (contenu CE1, programme 2024 cycle 2)
+
+Le contenu CE1 suit le **programme 2024 du cycle 2** et les **attendus de fin
+d'année de CE1** publiés par Éduscol :
+
+- **Mathématiques CE1**, attendus de fin d'année (nombres ≤ 1 000 ; tables
+  ×2, ×3, ×4, ×5 ; addition et soustraction posées ; problèmes 1-2 étapes ;
+  grandeurs ; heure en heures/demi-heures).
+  <https://eduscol.education.gouv.fr/sites/default/files/document/04-maths-ce1-attendus-eduscol1114734pdf-74628.pdf>
+  — programme cycle 2 : <https://www.education.gouv.fr/media/194205/download>
+- **Français CE1**, attendus de fin d'année (étude de la langue : grammaire,
+  conjugaison, orthographe, lexique).
+  <https://eduscol.education.gouv.fr/sites/default/files/document/03-francais-ce1-attendus-eduscol1114733pdf-74625.pdf>
+  — programme cycle 2 : <https://www.education.gouv.fr/media/194199/download>
+
 ### Programmes officiels (contenu CM1, rentrée 2026)
 
 Les matières d'éveil du CM1 suivent les **nouveaux programmes** applicables à la
@@ -325,8 +340,11 @@ rentrée 2026 (le contenu CM1 livré en 0098-0101 suivait l'ancien programme et 
 
 ## Classe et passage en classe supérieure (règle validée, à implémenter avec le moteur de séance)
 
-Chaque profil a une **classe** (CP à CM2, `profils.classe`, défaut CE2). Pour
-l'instant, seul le **programme de CE2** (calcul) existe : une classe différente
+Chaque profil a une **classe** (CP à CM2, `profils.classe`, défaut CE2). Les
+programmes **CE1, CE2 et CM1** sont disponibles (`CLASSES_DISPONIBLES`,
+`lib/types.ts`). Le **CE1** (socle maths) est ouvert par la migration 0114 en
+réutilisant les moteurs existants (portée `classe_min='CE1'`, plan de 1re séance
+CE1), voir `docs/referentiel-calcul.md`. Une classe encore non couverte (CP, CM2)
 affiche côté parent « Programme de <classe> bientôt disponible : en attendant,
 ton enfant s'entraîne sur le calcul de CE2 », sans bloquer.
 

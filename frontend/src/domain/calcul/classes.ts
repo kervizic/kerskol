@@ -82,7 +82,39 @@ const CM1: ClassPlan = {
   },
 };
 
-const PLANS: Partial<Record<Classe, ClassPlan>> = { CE2, CM1 };
+// CE1 : début du cycle 2 pour ces notions. Pas de « révision » lourde de la
+// classe d'avant (CP) ; la 1re séance part directement du cœur CE1 au niveau 1
+// (placement en escalier ensuite). Cœur = nombres <= 1 000, calcul mental
+// (sommes/différences, doubles, moitiés), tables 2 et 5, addition/soustraction
+// posées, premiers problèmes et monnaie, lire l'heure, fractions simples. Toutes
+// ces compétences sont ouvertes au CE1 par la migration 0114 (classe_min='CE1').
+const CE1: ClassPlan = {
+  revision: {},
+  coeur: {
+    "MA.NUM.LIRE_ECRIRE": 1,
+    "MA.NUM.DECOMPOSER": 1,
+    "MA.NUM.COMPARER": 1,
+    "MA.NUM.SUITE": 1,
+    "MA.CM.ADDITION": 1,
+    "MA.CM.SOMMES_DIFF": 1,
+    "MA.CM.DOUBLES": 1,
+    "MA.CM.MOITIES": 1,
+    "MA.TABLES.2": 1,
+    "MA.TABLES.5": 1,
+    "MA.TABLES.3": 1,
+    "MA.TABLES.4": 1,
+    "MA.POSE.ADDITION": 1,
+    "MA.POSE.SOUSTRACTION": 1,
+    "MA.PB.ADD_SUB": 1,
+    "MA.PB.MULT_DIV": 1,
+    "MA.PB.MONNAIE": 1,
+    "MA.MES.HEURE": 1,
+    "MA.MES.LONGUEURS": 1,
+    "MA.FRAC.SIMPLES": 1,
+  },
+};
+
+const PLANS: Partial<Record<Classe, ClassPlan>> = { CE1, CE2, CM1 };
 
 // Repli sur CE2 tant que les autres programmes ne sont pas definis.
 export function classPlan(classe: Classe): ClassPlan {
