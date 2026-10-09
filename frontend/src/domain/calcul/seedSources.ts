@@ -106,6 +106,16 @@ const NUM: Row[] = [
 
 // --- Calculs poses (domaine calcul_pose) ---
 const POSE: Row[] = [
+  // CE1 dédié (migration 0122) : posé borné <= 1 000.
+  ["MA.POSE.CE1_ADDITION", 1, "add", "pose", "cpa_barres", "aucun", "addition_posee", { terms: 2, min: 11, max: 99, sans_retenue: true }],
+  ["MA.POSE.CE1_ADDITION", 2, "add", "pose", "exemples_estompes", "aucun", "addition_posee", { terms: 2, min: 11, max: 89 }],
+  ["MA.POSE.CE1_ADDITION", 3, "add", "pose", "variation", "aucun", "addition_posee", { terms: 2, min: 100, max: 499, sans_retenue: true }],
+  ["MA.POSE.CE1_ADDITION", 4, "add", "pose", "probleme_dabord", "aucun", "addition_posee", { terms: 2, min: 100, max: 450 }],
+  ["MA.POSE.CE1_SOUSTRACTION", 1, "sub", "pose", "cpa_barres", "aucun", "soustraction_posee", { min: 11, max: 99, bmin: 10, bmax: 99, sans_retenue: true }],
+  ["MA.POSE.CE1_SOUSTRACTION", 2, "sub", "pose", "exemples_estompes", "aucun", "soustraction_posee", { min: 20, max: 99, bmin: 10, bmax: 98 }],
+  ["MA.POSE.CE1_SOUSTRACTION", 3, "sub", "pose", "variation", "aucun", "soustraction_posee", { min: 100, max: 999, bmin: 10, bmax: 500, sans_retenue: true }],
+  ["MA.POSE.CE1_SOUSTRACTION", 4, "sub", "pose", "probleme_dabord", "aucun", "soustraction_posee", { min: 100, max: 999, bmin: 10, bmax: 900 }],
+
   ["MA.POSE.ADDITION", 1, "add", "pose", "cpa_barres", "aucun", "addition_posee", { terms: 2, min: 10, max: 99, sans_retenue: true }],
   ["MA.POSE.ADDITION", 2, "add", "pose", "exemples_estompes", "aucun", "addition_posee", { terms: 2, min: 10, max: 999 }],
   ["MA.POSE.ADDITION", 3, "add", "pose", "variation", "aucun", "addition_posee", { terms: 2, min: 100, max: 9999 }],

@@ -37,12 +37,14 @@ const CE2: ClassPlan = {
     "MA.CM.X10_X100": 1,
     "MA.TABLES.2": 1,
     "MA.TABLES.5": 1,
-    // Numeration CE2 : presumee debloquee (classUnlocks). Necessaire pour que la
-    // compétence reste debloquee malgre le nouveau prerequis de REMEDIATION
-    // MA.NUM.COMPARER <- MA.NUM.CE1_MILLE (migration 0121) : le prerequis CE1
-    // n'ayant pas de progression chez un CE2, isUnlocked serait faux ; classUnlocks
+    // Compétences CE2 presumees debloquees (classUnlocks). Necessaire pour que
+    // ces compétences restent debloquees malgre les nouveaux prerequis de
+    // REMEDIATION CE1 -> CE2 (migrations 0121/0122) : le prerequis CE1 n'ayant
+    // pas de progression chez un CE2, isUnlocked serait faux ; classUnlocks
     // garantit qu'aucune seance de CE2 (Iris) n'est verrouillee.
     "MA.NUM.COMPARER": 1,
+    "MA.POSE.ADDITION": 1,
+    "MA.POSE.SOUSTRACTION": 1,
   },
 };
 
@@ -117,12 +119,12 @@ const CE1: ClassPlan = {
     "MA.MES.HEURE": 1,
     "MA.MES.LONGUEURS": 1,
     "MA.FRAC.SIMPLES": 1,
-    // Numeration CE1 DEDIEE (migration 0121) : 4 niveaux TOUS calibres CE1
-    // (lire <= 100, comparer <= 1000, decomposer c/d/u, ranger <= 1000), sans
-    // debordement vers le CE2 (classe_max = CE1). Elle devient le coeur de
-    // numeration d'un CE1 ; la version partagee MA.NUM.* reste disponible en
-    // complement (avance via marge).
-    "MA.NUM.CE1_MILLE": 1,
+    // Compétences CE1 DEDIEES (classe_max = CE1), 4 niveaux TOUS calibres CE1,
+    // sans debordement vers le CE2. Elles forment le coeur CE1 ; les versions
+    // partagees restent disponibles en complement (avance via marge).
+    "MA.NUM.CE1_MILLE": 1,       // numeration <= 1000 (0121)
+    "MA.POSE.CE1_ADDITION": 1,   // addition posee <= 1000 (0122)
+    "MA.POSE.CE1_SOUSTRACTION": 1, // soustraction posee <= 1000 (0122)
   },
 };
 
