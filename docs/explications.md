@@ -1468,6 +1468,44 @@ CM1, N4 nettement plus dur). ANGLES / DROITES (vocabulaire) sont **plats N1-N3**
 (seul le format QCM→libre monte) : leur vraie montée viendra des **versions avec
 figure** (lot B : comparer/toucher sur un dessin).
 
+## Livré : calcul mental « Diviser par 10 et 100 » (lot B, migration 0080)
+
+Nouvelle compétence CM1 **MA.CM.DIV10_100** (domaine `calcul_mental`, portée
+CM1..CM2), **symétrique de MA.CM.X10_X100** (multiplier). Elle comble le seul
+vrai manque du calcul mental CM1 : la **division EXACTE par 10 et 100** (×10/×100
+et la division avec reste existaient déjà). **Aucune nouvelle UI** : on réutilise
+le moteur de calcul mental (op `div`, branche « division exacte » de
+`buildExercise` : dividende = diviseur × quotient, reste 0, saisie au pavé
+clavier). Étagement : **N1** ÷10 petit (20..90), **N2** ÷10 grand (100..990),
+**N3** ÷100 (200..2000), **N4** ÷10 et ÷100 mélangés et plus grands. Indice
+N1-N2 ajouté. **Serveur seul juge** : `verif_calcul` (CREATE OR REPLACE) ajoute
+`MA.CM.DIV10_100` à la liste blanche (op `div`) + un garde-fou diviseur ∈ {10,100}
+(comme la garde du facteur de X10_X100). Test `cm1_div10_100_test.sql`.
+
+### Reste du lot B (reporté : demande une NOUVELLE UI, non livrée)
+
+Les autres points du lot B demandent chacun une **nouvelle interface** (figure ou
+interaction) qui ne peut pas être livrée « production-ready » avec capture vérifiée
+dans le budget courant. À faire, par effort croissant :
+- **Décimaux sur droite graduée** (lire/placer un décimal sur une droite) :
+  réutiliser le rendu de bande graduée des fractions ou la droite de `MA.NUM.SUITE`
+  (op `val` prêt) — effort moyen.
+- **Aire par comptage de carreaux** (figures non rectangulaires) : réutiliser la
+  figure quadrillage `GeoGridSpec` + `GridView` avec une saisie numérique — moyen.
+- **Angles sur figure** (droit/aigu/obtus sur un dessin, équerre virtuelle) :
+  nouvelle figure « angle » (deux demi-droites + sommet) ; l'équerre draggable est
+  un widget à part — moyen à grand.
+- **Boucles « répète N fois »** (programmation de déplacement) : le serveur
+  (`verif_geo_programme`) accepte déjà une liste d'instructions ; il faut un
+  **éditeur de boucle** côté UI — moyen à grand.
+- **Ranger plusieurs décimaux** (glisser/ordonner) : aucune UI de tri numérique
+  n'existe (seul le réordonnancement de syllabes en français) — grand.
+- **Perpendiculaires/parallèles sur figure** (toucher la paire) : pas de
+  sélection de droites sur un dessin aujourd'hui — grand.
+- **Division posée (potence)** : le jugement serveur (`div` avec reste) est prêt,
+  mais la **potence** est un nouveau composant d'UI (migration 0076 l'a déjà noté
+  comme reporté) — grand.
+
 ## Livré : « Grandeurs et mesures » (migration 0075, lot 5)
 
 Réutilisation des moteurs existants, **aucune nouvelle UI** :
