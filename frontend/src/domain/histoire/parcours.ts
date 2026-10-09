@@ -647,14 +647,328 @@ const CH_REVOLUTION: ParcoursChapitre = {
 };
 
 // ==========================================================================
-// Catalogue ordonne des chapitres (ordre pedagogique = ordre chronologique).
+// THEME 1 (2e chapitre) — LES BATISSEURS DE CATHEDRALES : HIST.MOYENAGE
+// ==========================================================================
+const CH_MOYENAGE_2: ParcoursChapitre = {
+  cle: "moyen_age_cathedrale",
+  theme: "Le Moyen Âge (XIe-XIIIe siècle)",
+  titre: "Perrine et la cathédrale",
+  competence: "HIST.MOYENAGE",
+  personnage: "Perrine, fille d'un tailleur de pierre, vers 1250",
+  recit: [
+    "Je m'appelle Perrine. Mon père taille la pierre sur un grand chantier.",
+    "On construit une cathédrale, la grande église de la ville.",
+    "Elle est si grande que sa construction dure parfois cent ans.",
+    "Avant, on bâtissait des églises à l'art roman : murs épais, petites fenêtres, arcs ronds.",
+    "Aujourd'hui, on bâtit à l'art gothique : des arcs en pointe, les ogives.",
+    "Les murs peuvent être plus hauts et percés de grandes fenêtres.",
+    "Ces fenêtres sont remplies de verre coloré : ce sont les vitraux.",
+    "Quand le soleil passe au travers, toute l'église devient colorée.",
+    "Mon père dit qu'il ne verra peut-être jamais la cathédrale finie.",
+    "Mais moi, un jour, je montrerai à mes enfants la pierre qu'il a taillée.",
+  ],
+  document: {
+    scene: {
+      kind: "scene",
+      viewBox: "0 0 200 100",
+      els: [
+        { t: "line", x1: 0, y1: 88, x2: 200, y2: 88, stroke: "var(--kk-border)", sw: 1 },
+        // arc roman (plein cintre, demi-cercle) a gauche
+        { t: "path", d: "M30 88 L30 50 A24 24 0 0 1 78 50 L78 88", stroke: "var(--kk-text)", sw: 1.6 },
+        texte(54, 98, "arc rond (roman)", 7),
+        // arc gothique (brise, en pointe) a droite
+        { t: "path", d: "M122 88 L122 46 Q146 14 170 46 L170 88", stroke: "var(--kk-text)", sw: 1.6 },
+        texte(146, 98, "arc en pointe (gothique)", 7),
+        texte(100, 16, "deux façons de bâtir", 8),
+      ],
+      zones: [],
+    },
+    nature: "schéma",
+    auteur: "Kerskol (schéma fait maison)",
+    date: "aujourd'hui",
+    legende: "L'art roman a des arcs ronds ; l'art gothique a des arcs en pointe (ogives) et de grands vitraux.",
+  },
+  questions: [
+    {
+      cle: "pa-mo2-q1",
+      competence: "HIST.MOYENAGE",
+      niveau: 1,
+      format: "qcm",
+      consigne: "Dans le récit, comment s'appellent les grandes fenêtres de verre coloré des cathédrales ?",
+      options: ["les vitraux", "les ordinateurs", "les tableaux"],
+      attendu: "les vitraux",
+      explication: "Les vitraux sont des fenêtres de verre coloré qui racontent souvent des histoires.",
+    },
+    {
+      cle: "pa-mo2-q2",
+      competence: "HIST.MOYENAGE",
+      niveau: 2,
+      format: "qcm",
+      consigne: "Les arcs en pointe (les ogives) et les grandes fenêtres sont typiques de quel art ?",
+      options: ["l'art gothique", "l'art roman", "la photographie"],
+      attendu: "l'art gothique",
+      explication: "L'art gothique utilise des arcs en pointe (ogives), ce qui permet des murs hauts et de grands vitraux.",
+    },
+    {
+      cle: "pa-mo2-q3",
+      competence: "HIST.MOYENAGE",
+      niveau: 3,
+      format: "tri",
+      consigne: "Classe chaque détail : est-il plutôt de l'art roman ou de l'art gothique ?",
+      ...tri(
+        ["art roman", "art gothique"],
+        [
+          ["des arcs ronds", "art roman"],
+          ["des murs épais", "art roman"],
+          ["des arcs en pointe", "art gothique"],
+          ["de grands vitraux", "art gothique"],
+        ],
+      ),
+      explication: "L'art roman : arcs ronds, murs épais. L'art gothique : arcs en pointe, grands vitraux.",
+    },
+    {
+      cle: "pa-mo2-q4",
+      competence: "HIST.MOYENAGE",
+      niveau: 4,
+      format: "texte",
+      consigne: "Écris le mot : l'art avec des arcs en pointe (ogives) et de grandes fenêtres s'appelle l'art...",
+      attendu: "gothique",
+      explication: "L'art gothique (arcs en pointe, grands vitraux) succède à l'art roman au Moyen Âge.",
+    },
+  ],
+  frise: [
+    { cle: "fri-1100-roman", titre: "L'art roman", icone: "cathedrale", dateLabel: "vers 1100", cleTri: 11000101, periode: "moyen_age" },
+    { cle: "fri-1250-gothique", titre: "Les cathédrales gothiques", icone: "cathedrale", dateLabel: "vers 1250", cleTri: 12500101, periode: "moyen_age" },
+  ],
+  jeRetiens: {
+    resume:
+      "L'art {1} a des murs épais et des arcs ronds. L'art {2} a des arcs en pointe et de grands {3}.",
+    blancs: [
+      { cle: "pa-mo2-jr1", competence: "HIST.MOYENAGE", niveau: 2, attendu: "roman" },
+      { cle: "pa-mo2-jr2", competence: "HIST.MOYENAGE", niveau: 2, attendu: "gothique" },
+      { cle: "pa-mo2-jr3", competence: "HIST.MOYENAGE", niveau: 2, attendu: "vitraux" },
+    ],
+  },
+};
+
+// ==========================================================================
+// THEME 2 (2e chapitre) — UN PAGE A VERSAILLES : HIST.MONARCHIE
+// ==========================================================================
+const CH_MONARCHIE_2: ParcoursChapitre = {
+  cle: "monarchie_versailles",
+  theme: "La monarchie en France (XVIe-XVIIe siècle)",
+  titre: "Un page à Versailles",
+  competence: "HIST.MONARCHIE",
+  personnage: "Un jeune page à la cour de Louis XIV, vers 1685",
+  recit: [
+    "Je suis page à la cour du roi Louis XIV, au château de Versailles.",
+    "Le château est immense, avec des jardins à perte de vue.",
+    "Ici, le roi décide de tout, tout seul : c'est la monarchie absolue.",
+    "On l'appelle le Roi-Soleil, car tout tourne autour de lui.",
+    "Les grands nobles vivent près de lui pour obtenir ses faveurs.",
+    "La société est divisée en trois groupes, les trois ordres.",
+    "Le clergé prie, la noblesse combat et conseille le roi.",
+    "Le tiers état, lui, travaille et paie presque tous les impôts.",
+    "Chaque matin, des dizaines de personnes regardent le roi se lever.",
+    "Moi, je cours partout pour porter ses messages dans le château.",
+  ],
+  document: {
+    scene: {
+      kind: "scene",
+      viewBox: "0 0 200 100",
+      els: [
+        { t: "line", x1: 0, y1: 86, x2: 200, y2: 86, stroke: "var(--kk-border)", sw: 1 },
+        // facade du chateau
+        { t: "rect", x: 44, y: 50, w: 112, h: 36 },
+        { t: "rect", x: 60, y: 58, w: 10, h: 20 },
+        { t: "rect", x: 86, y: 58, w: 10, h: 20 },
+        { t: "rect", x: 112, y: 58, w: 10, h: 20 },
+        { t: "rect", x: 138, y: 58, w: 10, h: 20 },
+        { t: "polygon", points: "44,50 100,36 156,50", stroke: "var(--kk-text)", sw: 1.5 },
+        // soleil
+        { t: "circle", cx: 100, cy: 20, r: 7, stroke: "var(--kk-accent)", sw: 1.4 },
+        { t: "line", x1: 100, y1: 8, x2: 100, y2: 2, stroke: "var(--kk-accent)", sw: 1.2 },
+        { t: "line", x1: 88, y1: 20, x2: 82, y2: 20, stroke: "var(--kk-accent)", sw: 1.2 },
+        { t: "line", x1: 112, y1: 20, x2: 118, y2: 20, stroke: "var(--kk-accent)", sw: 1.2 },
+        texte(100, 98, "le château de Versailles", 7),
+      ],
+      zones: [],
+    },
+    nature: "schéma",
+    auteur: "Kerskol (schéma fait maison)",
+    date: "aujourd'hui",
+    legende: "Louis XIV, le Roi-Soleil, gouverne seul depuis son grand château de Versailles.",
+  },
+  questions: [
+    {
+      cle: "pa-na2-q1",
+      competence: "HIST.MONARCHIE",
+      niveau: 1,
+      format: "qcm",
+      consigne: "Dans le récit, quel roi vit au château de Versailles ?",
+      options: ["Louis XIV", "Clovis", "Charlemagne"],
+      attendu: "Louis XIV",
+      explication: "Louis XIV, le Roi-Soleil, fit de Versailles le centre de son pouvoir.",
+    },
+    {
+      cle: "pa-na2-q2",
+      competence: "HIST.MONARCHIE",
+      niveau: 2,
+      format: "qcm",
+      consigne: "Quand le roi décide de tout, tout seul, comment appelle-t-on ce pouvoir ?",
+      options: ["la monarchie absolue", "la récréation", "la démocratie"],
+      attendu: "la monarchie absolue",
+      explication: "Dans la monarchie absolue, le roi gouverne seul, sans partager son pouvoir.",
+    },
+    {
+      cle: "pa-na2-q3",
+      competence: "HIST.MONARCHIE",
+      niveau: 3,
+      format: "qcm",
+      consigne: "Avant la Révolution, quel groupe payait presque tous les impôts ?",
+      options: ["le tiers état", "le clergé", "la noblesse"],
+      attendu: "le tiers état",
+      explication: "Le tiers état (paysans, artisans, bourgeois) payait presque tous les impôts, pas le clergé ni la noblesse.",
+    },
+    {
+      cle: "pa-na2-q4",
+      competence: "HIST.MONARCHIE",
+      niveau: 4,
+      format: "texte",
+      consigne: "Écris le mot : les trois groupes de la société (clergé, noblesse, tiers état) forment les trois...",
+      attendu: "ordres",
+      explication: "La société d'ordres : le clergé, la noblesse et le tiers état.",
+    },
+  ],
+  frise: [
+    { cle: "fri-1661-louis14", titre: "Louis XIV gouverne seul", icone: "couronne", dateLabel: "1661", cleTri: 16610310, periode: "temps_modernes" },
+  ],
+  jeRetiens: {
+    resume:
+      "Louis XIV gouverne {1} : c'est la monarchie absolue. La société est divisée en trois {2}. C'est surtout le tiers {3} qui paie les impôts.",
+    blancs: [
+      { cle: "pa-na2-jr1", competence: "HIST.MONARCHIE", niveau: 2, attendu: "seul" },
+      { cle: "pa-na2-jr2", competence: "HIST.MONARCHIE", niveau: 3, attendu: "ordres" },
+      { cle: "pa-na2-jr3", competence: "HIST.MONARCHIE", niveau: 2, attendu: "état" },
+    ],
+  },
+};
+
+// ==========================================================================
+// THEME 4 (2e chapitre) — LA NUIT DU 4 AOUT 1789 : HIST.REVOLUTION
+// ==========================================================================
+const CH_REVOLUTION_2: ParcoursChapitre = {
+  cle: "revolution_4aout",
+  theme: "1789, la Révolution",
+  titre: "La nuit du 4 août",
+  competence: "HIST.REVOLUTION",
+  personnage: "Un jeune paysan qui apprend la grande nouvelle, en août 1789",
+  recit: [
+    "Je suis paysan, comme mon père et mon grand-père avant moi.",
+    "Depuis toujours, les nobles ont des avantages que nous n'avons pas.",
+    "Ces avantages s'appellent des privilèges.",
+    "Nous devons leur payer des taxes et travailler pour eux.",
+    "Mais cet été 1789, tout change très vite.",
+    "Dans la nuit du 4 août, les députés se réunissent à Paris.",
+    "Cette nuit-là, ils décident de supprimer les privilèges.",
+    "Quelques jours plus tard, ils votent la Déclaration des droits de l'Homme.",
+    "Elle dit que tous les hommes naissent libres et égaux en droits.",
+    "Pour la première fois, j'ai l'impression d'être un citoyen comme les autres.",
+  ],
+  document: {
+    scene: {
+      kind: "scene",
+      viewBox: "0 0 200 100",
+      els: [
+        // un decret (parchemin) avec des lignes
+        { t: "rect", x: 56, y: 16, w: 88, h: 62, rx: 3 },
+        { t: "line", x1: 66, y1: 30, x2: 134, y2: 30, stroke: "var(--kk-text)", sw: 1 },
+        { t: "line", x1: 66, y1: 40, x2: 134, y2: 40, stroke: "var(--kk-text)", sw: 1 },
+        { t: "line", x1: 66, y1: 50, x2: 120, y2: 50, stroke: "var(--kk-text)", sw: 1 },
+        texte(100, 68, "Droits de l'Homme", 8),
+        texte(100, 92, "la Déclaration de 1789", 7),
+      ],
+      zones: [],
+    },
+    nature: "schéma",
+    auteur: "Kerskol (schéma fait maison)",
+    date: "aujourd'hui",
+    legende: "En août 1789, les privilèges sont supprimés et la Déclaration des droits de l'Homme est votée.",
+  },
+  questions: [
+    {
+      cle: "pa-re2-q1",
+      competence: "HIST.REVOLUTION",
+      niveau: 1,
+      format: "qcm",
+      consigne: "Dans le récit, qu'est-ce que les députés suppriment dans la nuit du 4 août 1789 ?",
+      options: ["les privilèges", "les vacances", "les récréations"],
+      attendu: "les privilèges",
+      explication: "Les privilèges étaient les avantages des nobles et du clergé. Ils sont supprimés dans la nuit du 4 août 1789.",
+    },
+    {
+      cle: "pa-re2-q2",
+      competence: "HIST.REVOLUTION",
+      niveau: 2,
+      format: "qcm",
+      consigne: "Que dit la Déclaration des droits de l'Homme votée en 1789 ?",
+      options: [
+        "les hommes naissent libres et égaux en droits",
+        "le roi décide tout seul",
+        "les nobles ont plus de droits",
+      ],
+      attendu: "les hommes naissent libres et égaux en droits",
+      explication: "La Déclaration des droits de l'Homme et du citoyen affirme que les hommes naissent libres et égaux en droits.",
+    },
+    {
+      cle: "pa-re2-q3",
+      competence: "HIST.REVOLUTION",
+      niveau: 3,
+      format: "ordre",
+      consigne: "Range ces moments de 1789 dans l'ordre.",
+      ...ordre([
+        "la prise de la Bastille",
+        "la nuit du 4 août",
+        "la Déclaration des droits de l'Homme",
+      ]),
+      explication: "En 1789 : la prise de la Bastille (14 juillet), puis la nuit du 4 août, puis la Déclaration des droits (26 août).",
+    },
+    {
+      cle: "pa-re2-q4",
+      competence: "HIST.REVOLUTION",
+      niveau: 4,
+      format: "texte",
+      consigne: "Écris le mot : les avantages que les nobles avaient avant 1789 s'appelaient des...",
+      attendu: "privilèges",
+      explication: "Les privilèges étaient les avantages des nobles et du clergé, supprimés dans la nuit du 4 août 1789.",
+    },
+  ],
+  frise: [
+    { cle: "fri-1789-4aout", titre: "Abolition des privilèges", icone: "declaration", dateLabel: "4 août 1789", cleTri: 17890804, periode: "contemporaine" },
+  ],
+  jeRetiens: {
+    resume:
+      "Dans la nuit du 4 {1}, les députés suppriment les {2}. Avec la Déclaration des droits de l'Homme, tous les citoyens deviennent {3} en droits.",
+    blancs: [
+      { cle: "pa-re2-jr1", competence: "HIST.REVOLUTION", niveau: 2, attendu: "août" },
+      { cle: "pa-re2-jr2", competence: "HIST.REVOLUTION", niveau: 2, attendu: "privilèges" },
+      { cle: "pa-re2-jr3", competence: "HIST.REVOLUTION", niveau: 3, attendu: "égaux" },
+    ],
+  },
+};
+
+// ==========================================================================
+// Catalogue ordonne des chapitres (regroupes par theme).
 // ==========================================================================
 export const PARCOURS_HISTOIRE: ParcoursChapitre[] = [
   CH_MOYENAGE,
+  CH_MOYENAGE_2,
   CH_MONARCHIE,
+  CH_MONARCHIE_2,
   CH_EXPLORATIONS,
   CH_TRAITE,
   CH_REVOLUTION,
+  CH_REVOLUTION_2,
 ];
 
 // Un chapitre par sa cle.

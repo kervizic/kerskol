@@ -19,8 +19,8 @@ import {
 } from "./parcours";
 
 describe("Parcours — structure des chapitres", () => {
-  it("5 chapitres couvrant les 4 themes du programme", () => {
-    expect(PARCOURS_HISTOIRE.length).toBe(5);
+  it("8 chapitres couvrant les 4 themes du programme", () => {
+    expect(PARCOURS_HISTOIRE.length).toBe(8);
     const comps = new Set(PARCOURS_HISTOIRE.map((c) => c.competence));
     expect(comps).toEqual(
       new Set(["HIST.MOYENAGE", "HIST.MONARCHIE", "HIST.EXPLORATIONS", "HIST.REVOLUTION"]),
@@ -53,8 +53,8 @@ describe("Parcours — structure des chapitres", () => {
 describe("Parcours — items 'qm' (seed SQL miroir)", () => {
   const items = itemsParcoursTousQm();
 
-  it("35 items (20 questions + 15 trous), cles uniques, prefixe pa-", () => {
-    expect(items.length).toBe(35);
+  it("56 items (32 questions + 24 trous), cles uniques, prefixe pa-", () => {
+    expect(items.length).toBe(56);
     const cles = new Set(items.map((i) => i.cle));
     expect(cles.size).toBe(items.length);
     for (const i of items) expect(i.cle.startsWith("pa-"), i.cle).toBe(true);

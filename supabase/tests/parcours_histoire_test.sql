@@ -11,7 +11,7 @@ DECLARE n int;
 BEGIN
     -- 35 items « pa-* » au total.
     SELECT count(*) INTO n FROM public.qm_item WHERE cle LIKE 'pa-%';
-    IF n <> 35 THEN RAISE EXCEPTION 'parcours : 35 items pa-* attendus, obtenu %', n; END IF;
+    IF n <> 56 THEN RAISE EXCEPTION 'parcours : 56 items pa-* attendus, obtenu %', n; END IF;
 
     -- Chaque theme a bien des items de parcours.
     IF (SELECT count(*) FROM public.qm_item WHERE cle LIKE 'pa-moy-%') = 0

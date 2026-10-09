@@ -356,4 +356,9 @@ export const STORIES: Story[] = [
   { id: "parcours-sciences-recit", label: "Parcours Sciences — récit « L'eau dans tous ses états » (CM1)",
     node: <Parcours chapitre={chapitreSciencesParCle("sc_etats")!} frisePlacees={[]}
       onSoumettre={noopSubmit} onPlacerFrise={noopSubmit} onTermine={noop} /> },
+
+  // --- Parcours d'Histoire (chapitre supplémentaire) : récit cathédrale.
+  { id: "parcours-recit-cathedrale", label: "Parcours Histoire — récit « Perrine et la cathédrale » (CM1)",
+    node: <Parcours chapitre={chapitreParCle("moyen_age_cathedrale")!} frisePlacees={[]}
+      onSoumettre={noopSubmit} onPlacerFrise={noopSubmit} onTermine={noop} /> },
 ];
