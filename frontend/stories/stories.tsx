@@ -18,6 +18,7 @@ import Parcours from "../src/components/Parcours";
 import Frise from "../src/components/Frise";
 import { chapitreParCle, friseCartesToutes } from "../src/domain/histoire/parcours";
 import { chapitreGeoParCle } from "../src/domain/geographie/parcours";
+import { chapitreSciencesParCle } from "../src/domain/sciences/parcours";
 import { generateExercise as genEx } from "../src/domain/calcul/generator";
 import type { DonRender } from "../src/domain/donnees/donnees";
 import type { GramRender } from "../src/domain/francais/grammaire";
@@ -349,5 +350,10 @@ export const STORIES: Story[] = [
   // --- Parcours de Géographie (lot 3 CM1) : étape RECIT avec carte.
   { id: "parcours-geo-recit", label: "Parcours Géographie — récit « Awa et le puits » + carte (CM1)",
     node: <Parcours chapitre={chapitreGeoParCle("geo_inegalites")!} frisePlacees={[]}
+      onSoumettre={noopSubmit} onPlacerFrise={noopSubmit} onTermine={noop} /> },
+
+  // --- Parcours de Sciences (lot 5 CM1) : étape RECIT avec schéma des états.
+  { id: "parcours-sciences-recit", label: "Parcours Sciences — récit « L'eau dans tous ses états » (CM1)",
+    node: <Parcours chapitre={chapitreSciencesParCle("sc_etats")!} frisePlacees={[]}
       onSoumettre={noopSubmit} onPlacerFrise={noopSubmit} onTermine={noop} /> },
 ];

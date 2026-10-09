@@ -25,8 +25,11 @@ BEGIN
         IF NOT EXISTS (SELECT 1 FROM public.competences WHERE code = r.code AND actif) THEN
             RAISE EXCEPTION 'competence active attendue manquante : %', r.code;
         END IF;
+        -- AU MOINS 8 items (les 8 d'entrainement libre de 0105). Depuis 0111, le
+        -- Parcours de Sciences AJOUTE des items (cles « ps-* ») a certaines
+        -- competences : le total peut depasser 8. On verifie le socle, pas un total exact.
         SELECT count(*) INTO n FROM public.qm_item WHERE competence = r.code;
-        IF n <> 8 THEN RAISE EXCEPTION 'qm_item : 8 items attendus pour %, obtenu %', r.code, n; END IF;
+        IF n < 8 THEN RAISE EXCEPTION 'qm_item : au moins 8 items attendus pour %, obtenu %', r.code, n; END IF;
         FOR n IN 1..4 LOOP
             IF NOT EXISTS (SELECT 1 FROM public.qm_item WHERE competence = r.code AND niveau = n) THEN
                 RAISE EXCEPTION 'qm_item : aucun item pour % N%', r.code, n;

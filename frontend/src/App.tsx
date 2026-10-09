@@ -11,6 +11,7 @@ import { LinkCode } from "./screens/LinkCode";
 import { Bibliotheque } from "./screens/Bibliotheque";
 import { Histoire } from "./screens/Histoire";
 import { GeographieParcours } from "./screens/GeographieParcours";
+import { SciencesParcours } from "./screens/SciencesParcours";
 import DicteeMaitresse from "./components/DicteeMaitresse";
 import { ChildTheme } from "./components/ChildTheme";
 import {
@@ -42,7 +43,7 @@ function currentPath(): string {
     return "/";
   }
 }
-const CHILD_RE = /^\/enfant\/([^/]+)\/(village|seance|defi|bibliotheque|dictee-maitresse|histoire|geo-parcours)$/;
+const CHILD_RE = /^\/enfant\/([^/]+)\/(village|seance|defi|bibliotheque|dictee-maitresse|histoire|geo-parcours|sciences-parcours)$/;
 
 export function App() {
   const [ready, setReady] = useState(false);
@@ -158,7 +159,7 @@ export function App() {
     const busy =
       path === "/creer-profil" ||
       path === "/reglages" ||
-      /^\/enfant\/[^/]+\/(seance|defi|histoire|geo-parcours)$/.test(path);
+      /^\/enfant\/[^/]+\/(seance|defi|histoire|geo-parcours|sciences-parcours)$/.test(path);
     window.Kerskol?.version?.setBusy?.(busy);
     // A chaque changement d'ecran : on verifie /version.json. Si non occupe et
     // qu'une nouvelle version existe, app-version.js l'applique (transition).
@@ -340,6 +341,7 @@ export function App() {
               onDictee={() => navigate(`/enfant/${prof.id}/dictee-maitresse`)}
               onHistoire={() => navigate(`/enfant/${prof.id}/histoire`)}
               onGeoParcours={() => navigate(`/enfant/${prof.id}/geo-parcours`)}
+              onSciencesParcours={() => navigate(`/enfant/${prof.id}/sciences-parcours`)}
               onProfilChange={upsertProfil}
             />
           </ChildTheme>
@@ -365,6 +367,13 @@ export function App() {
         return (
           <ChildTheme couleur={couleur}>
             <GeographieParcours profil={prof} onExit={() => navigate(`/enfant/${prof.id}/village`)} />
+          </ChildTheme>
+        );
+      }
+      if (m[2] === "sciences-parcours") {
+        return (
+          <ChildTheme couleur={couleur}>
+            <SciencesParcours profil={prof} onExit={() => navigate(`/enfant/${prof.id}/village`)} />
           </ChildTheme>
         );
       }
