@@ -26,13 +26,16 @@ import { BANQUE_RESPECT, COMPETENCES_RESPECT } from "./respect";
 import { BANQUE_EMOTIONS, COMPETENCES_EMOTIONS } from "./emotions";
 import { BANQUE_REPUBLIQUE, COMPETENCES_REPUBLIQUE } from "./republique";
 import { BANQUE_ECRANS, COMPETENCES_ECRANS } from "./ecrans";
+import { BANQUE_EMC_CM1, COMPETENCES_EMC_CM1 } from "./cm1";
 
 // Banque complete (toutes sous-matieres EMC actives dans le build courant).
+// Les sous-matieres CM1 (cm1.ts) s'ajoutent aux sous-matieres CE2 (meme matiere).
 export const BANQUE_EMC: QmItem[] = [
   ...BANQUE_RESPECT,
   ...BANQUE_EMOTIONS,
   ...BANQUE_REPUBLIQUE,
   ...BANQUE_ECRANS,
+  ...BANQUE_EMC_CM1,
 ];
 
 // Competences EMC, dans l'ordre d'affichage du referentiel.
@@ -41,6 +44,7 @@ export const COMPETENCES_EMC = [
   ...COMPETENCES_EMOTIONS,
   ...COMPETENCES_REPUBLIQUE,
   ...COMPETENCES_ECRANS,
+  ...COMPETENCES_EMC_CM1,
 ] as const;
 
 // Items jouables pour une competence et un niveau donnes.

@@ -304,6 +304,20 @@ export const INDICES: Record<string, string> = {
     "La Seine traverse Paris. Les Alpes sont les plus hautes montagnes. L'océan Atlantique borde la France à l'ouest.",
   "GEO.PAYSAGES":
     "Regarde ce qu'il y a dans le paysage : des arbres serrés, c'est une forêt ; du sable et des vagues, c'est le bord de mer.",
+
+  // --- EMC CM1 (indices aux niveaux 1 et 2 seulement) -----------------------
+  "EMC.DROITS":
+    "Chaque enfant a des droits : aller à l'école, être soigné, jouer. On a aussi des devoirs, comme respecter les autres.",
+  "EMC.SYMBOLES":
+    "Pense aux symboles de la France : le drapeau bleu blanc rouge, Marianne, la devise Liberté Égalité Fraternité, la Marseillaise.",
+  "EMC.COOPERATION":
+    "Coopérer, c'est écouter, partager et s'entraider. Si quelqu'un t'embête, tu en parles à un adulte de confiance.",
+  "EMC.EGALITE":
+    "Filles et garçons ont les mêmes droits et peuvent faire les mêmes jeux et les mêmes métiers.",
+  "EMC.PRUDENCE":
+    "Sur Internet, on ne donne jamais son adresse ni son mot de passe. On demande à un adulte avant de cliquer.",
+  "EMC.ENGAGEMENT":
+    "Le délégué représente la classe : on le choisit en votant. S'engager, c'est aider les autres.",
 };
 
 // Indice d'une competence, UNIQUEMENT aux niveaux 1 et 2 (sinon null : plus

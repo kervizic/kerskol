@@ -85,6 +85,13 @@ export const MATIERES: MatiereDef[] = [
       { domaine: "emotions", libelle: "Mes émotions" },
       { domaine: "republique", libelle: "Droits et République" },
       { domaine: "ecrans", libelle: "Les écrans et Internet" },
+      // Sous-matieres CM1 (cycle 3), masquees au CE2.
+      { domaine: "droits_enfant", libelle: "Les droits de l'enfant", classeMin: "CM1" },
+      { domaine: "symboles_republique", libelle: "Les symboles de la République", classeMin: "CM1" },
+      { domaine: "cooperation", libelle: "Coopérer et s'entraider", classeMin: "CM1" },
+      { domaine: "egalite", libelle: "Filles et garçons, l'égalité", classeMin: "CM1" },
+      { domaine: "prudence_ecrans", libelle: "Internet : rester prudent", classeMin: "CM1" },
+      { domaine: "engagement", libelle: "S'engager : délégués, associations", classeMin: "CM1" },
     ],
   },
   {

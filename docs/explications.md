@@ -1213,6 +1213,29 @@ garantir une cartographie vérifiée) ; le contenu actuel localise fleuves et
 reliefs par QCM / tri / saisie. Garde-fou `bienveillance.test.ts` étendu à la
 banque `geographie`.
 
+## EMC — complément CM1 (migration 0101)
+
+**Additif** à la matière EMC (0058) : mêmes `qm_item` / `verif_qm` / op `qm` /
+type `'emc'` / méthode `vivre_ensemble`. Ajoute 6 sous-matières CM1
+(`classe_min = 'CM1'`), 6 compétences × 4 niveaux × 2 = **48 items** (total EMC :
+168 items, 21 compétences). Banque `frontend/src/domain/emc/cm1.ts` ajoutée à
+`BANQUE_EMC`. Tests : `emc_test.sql` (comptage global auto-échelonné) +
+`emc_cm1_test.sql` (couverture, spot, verdict) + bloc CM1 dans `emc.test.ts`.
+
+- **Les droits de l'enfant** (`droits_enfant`, `EMC.DROITS`) : Convention des
+  droits de l'enfant (école, santé, jeu, protection), droits et devoirs.
+- **Les symboles de la République** (`symboles_republique`, `EMC.SYMBOLES`) :
+  drapeau tricolore, Marianne, devise Liberté-Égalité-Fraternité, Marseillaise,
+  14 juillet.
+- **Coopérer et s'entraider** (`cooperation`, `EMC.COOPERATION`).
+- **Filles et garçons, l'égalité** (`egalite`, `EMC.EGALITE`).
+- **Internet : rester prudent** (`prudence_ecrans`, `EMC.PRUDENCE`) : infos
+  perso, mot de passe, temps d'écran, esprit critique.
+- **S'engager : délégués, associations** (`engagement`, `EMC.ENGAGEMENT`).
+
+**Harcèlement** : les items où un enfant est embêté renvoient TOUJOURS à « en
+parler à un adulte de confiance » (vérifié par un test). Ton bienveillant.
+
 # Règle de bienveillance (décision de Manu, absolue)
 
 **TOUS les contenus montrés à l'enfant doivent être OPTIMISTES et PLEINS DE

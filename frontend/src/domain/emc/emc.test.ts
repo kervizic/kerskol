@@ -18,6 +18,7 @@ import { COMPETENCES_RESPECT } from "./respect";
 import { COMPETENCES_EMOTIONS } from "./emotions";
 import { COMPETENCES_REPUBLIQUE } from "./republique";
 import { COMPETENCES_ECRANS } from "./ecrans";
+import { COMPETENCES_EMC_CM1 } from "./cm1";
 
 describe("banque EMC — Respecter les autres et les regles", () => {
   it("32 items (4 competences x 4 niveaux x 2)", () => {
@@ -67,10 +68,23 @@ describe("banque EMC — Bien utiliser les ecrans", () => {
   });
 });
 
+describe("banque EMC — complement CM1", () => {
+  it("48 items CM1 (6 competences x 4 niveaux x 2)", () => {
+    const cm1 = BANQUE_EMC.filter((i) => COMPETENCES_EMC_CM1.includes(i.competence as never));
+    expect(cm1.length).toBe(48);
+    expect(COMPETENCES_EMC_CM1.length).toBe(6);
+  });
+  it("couverture des 6 competences CM1 x niveaux (2 par niveau)", () => {
+    for (const c of COMPETENCES_EMC_CM1) {
+      for (let n = 1; n <= 4; n++) expect(itemsEmcDe(c, n).length, `${c} N${n}`).toBe(2);
+    }
+  });
+});
+
 describe("banque EMC — totaux et qualite", () => {
-  it("120 items au total (15 competences x 8), cles uniques", () => {
-    expect(BANQUE_EMC.length).toBe(120);
-    expect(COMPETENCES_EMC.length).toBe(15);
+  it("168 items au total (21 competences x 8), cles uniques", () => {
+    expect(BANQUE_EMC.length).toBe(168);
+    expect(COMPETENCES_EMC.length).toBe(21);
     const cles = new Set(BANQUE_EMC.map((i) => i.cle));
     expect(cles.size).toBe(BANQUE_EMC.length);
   });
@@ -153,5 +167,36 @@ describe("spot-check croise front <-> SQL", () => {
       expect(item!.format, cle).toBe(format);
       expect(item!.attendu, cle).toBe(attendu);
     }
+  });
+});
+
+// ===========================================================================
+// SPOT-CHECK CROISE CM1 : identiques cote SQL (supabase/tests/emc_cm1_test.sql).
+// ===========================================================================
+describe("spot-check croise CM1 front <-> SQL", () => {
+  const SPOT: Array<[string, string, string]> = [
+    ["emc-dro-n2-a", "tri", "aller à l'école=un droit de l'enfant;être soigné quand on est malade=un droit de l'enfant;jouer et se reposer=un droit de l'enfant;faire tout ce qu'on veut sans règle=pas un droit"],
+    ["emc-dro-n4-a", "texte", "enfant"],
+    ["emc-sym-n2-a", "qcm", "Liberté, Égalité, Fraternité"],
+    ["emc-sym-n4-a", "texte", "Fraternité"],
+    ["emc-coo-n3-b", "qcm", "en parler à un adulte de confiance"],
+    ["emc-ega-n2-a", "tri", "une fille peut devenir pompière=vrai;un garçon peut faire de la danse=vrai;seuls les garçons sont bons en maths=faux;seules les filles peuvent cuisiner=faux"],
+    ["emc-pru-n2-a", "tri", "mon mot de passe=on garde pour soi;mon adresse=on garde pour soi;mon dessin préféré=on peut partager;mon jeu préféré=on peut partager"],
+    ["emc-eng-n1-b", "qcm", "on vote"],
+    ["emc-eng-n4-a", "texte", "délégué"],
+    ["emc-coo-n4-b", "texte", "confiance"],
+  ];
+  it("chaque triplet CM1 correspond a la banque", () => {
+    for (const [cle, format, attendu] of SPOT) {
+      const item = itemEmcParCle(cle);
+      expect(item, cle).toBeDefined();
+      expect(item!.format, cle).toBe(format);
+      expect(item!.attendu, cle).toBe(attendu);
+    }
+  });
+  it("harcelement : le reflexe « adulte de confiance » est present", () => {
+    // Les items sur le fait d'etre embete renvoient a un adulte de confiance.
+    expect(itemEmcParCle("emc-coo-n3-b")!.attendu).toContain("adulte de confiance");
+    expect(itemEmcParCle("emc-pru-n3-b")!.attendu).toContain("adulte de confiance");
   });
 });
