@@ -1443,7 +1443,7 @@ export const BIBLIOTHEQUE: BiblioTexte[] = [
       { mot: "importun", sens: "qui dérange, qui ennuie." },
       { mot: "menu", sens: "très petit, très mince." },
       { mot: "voltiger", sens: "voler légèrement, flotter dans l'air." },
-      { mot: "railleur", sens: "moqueur." },
+      { mot: "railleur", sens: "taquin, d'un petit air amusé." },
       { mot: "les balayures", sens: "les saletés qu'on ramasse en balayant." },
       { mot: "resplendissant", sens: "qui brille, éclatant de beauté." },
     ],
