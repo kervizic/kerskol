@@ -105,7 +105,9 @@ describe("problemes : deux etapes (op2) reserve a DEUX_ETAPES", () => {
     expect(sawRsub).toBe(true);
   });
   it("les competences a une etape ne portent jamais op2", () => {
-    const srcs = PB_SOURCES.filter((s) => s.competence !== "MA.PB.DEUX_ETAPES");
+    // MA.PB.DEUX_ETAPES et sa variante CE1 dédiée MA.PB.CE1_DEUX_ETAPES sont les
+    // seules à porter op2 (deux étapes). verif_calcul le garantit côté serveur.
+    const srcs = PB_SOURCES.filter((s) => !s.competence.endsWith("DEUX_ETAPES"));
     for (const src of srcs) {
       for (let seed = 1; seed <= 100; seed++) {
         const g = generateExercise(src, seed * 53 + src.niveau);

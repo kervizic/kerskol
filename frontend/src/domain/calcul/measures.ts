@@ -263,15 +263,27 @@ const LEN_OBJETS: { obj: string; u: string }[] = [
   { obj: "la distance d'un marathon", u: "km" },
 ];
 
+// Objets CE1 : longueurs en cm et m uniquement (ni mm, ni km, ni conversion).
+const LEN_OBJETS_CE1: { obj: string; u: string }[] = [
+  { obj: "la longueur d'un crayon", u: "cm" },
+  { obj: "la longueur d'une gomme", u: "cm" },
+  { obj: "la largeur d'un livre", u: "cm" },
+  { obj: "la hauteur d'une porte", u: "m" },
+  { obj: "la longueur d'un lit", u: "m" },
+  { obj: "la hauteur d'un arbre", u: "m" },
+];
+
 function buildLongueur(src: ExCalcul, rng: Rng, base: Base): GeneratedExercise {
   const p = src.params || {};
+  const ce1 = p.ce1 === true; // CE1 dédié : cm/m seulement, pas de conversion
   const type = pick(rng, (p.types as string[] | undefined) || ["unite"]);
 
   // --- Choisir l'unite adaptee (QCM : la valeur = code de l'unite) ---
   if (type === "unite") {
-    const o = pick(rng, LEN_OBJETS);
+    const o = pick(rng, ce1 ? LEN_OBJETS_CE1 : LEN_OBJETS);
     const code = LEN_CODE[o.u];
-    const options = shuffle(rng, ["mm", "cm", "m", "km"]).map((u) => ({ label: u, value: LEN_CODE[u] }));
+    const unites = ce1 ? ["cm", "m", "km"] : ["mm", "cm", "m", "km"];
+    const options = shuffle(rng, unites).map((u) => ({ label: u, value: LEN_CODE[u] }));
     return {
       ...base,
       saisie: "qcm",
@@ -367,13 +379,24 @@ const MASS_OBJETS: { obj: string; u: string; opts: string[] }[] = [
   { obj: "l'eau d'une baignoire", u: "L", opts: ["cL", "dL", "L", "g"] },
 ];
 
+// Objets CE1 : masses en g et kg, contenances en L (pas de mL/cL/dL ni conversion).
+const MASS_OBJETS_CE1: { obj: string; u: string; opts: string[] }[] = [
+  { obj: "la masse d'une pomme", u: "g", opts: ["g", "kg", "L"] },
+  { obj: "la masse d'une plume", u: "g", opts: ["g", "kg", "L"] },
+  { obj: "la masse d'un sac de sucre", u: "kg", opts: ["g", "kg", "L"] },
+  { obj: "la masse d'un enfant", u: "kg", opts: ["g", "kg", "L"] },
+  { obj: "l'eau d'une grande bouteille", u: "L", opts: ["g", "kg", "L"] },
+  { obj: "le lait d'une brique", u: "L", opts: ["g", "kg", "L"] },
+];
+
 function buildMasseContenance(src: ExCalcul, rng: Rng, base: Base): GeneratedExercise {
   const p = src.params || {};
+  const ce1 = p.ce1 === true; // CE1 dédié : g/kg/L seulement, pas de conversion
   const type = pick(rng, (p.types as string[] | undefined) || ["unite"]);
 
   // --- Choisir l'unite adaptee (QCM) ---
   if (type === "unite") {
-    const o = pick(rng, MASS_OBJETS);
+    const o = pick(rng, ce1 ? MASS_OBJETS_CE1 : MASS_OBJETS);
     const code = MASS_CODE[o.u];
     const options = shuffle(rng, o.opts).map((u) => ({ label: u, value: MASS_CODE[u] }));
     return {
@@ -472,10 +495,14 @@ function buildMasseContenance(src: ExCalcul, rng: Rng, base: Base): GeneratedExe
 }
 
 export function buildMesure(src: ExCalcul, rng: Rng, base: Base): GeneratedExercise {
-  if (src.competence === "MA.MES.HEURE") return buildHeure(src, rng, base);
-  if (src.competence === "MA.MES.DUREES") return buildDuree(src, rng, base);
-  if (src.competence === "MA.MES.LONGUEURS") return buildLongueur(src, rng, base);
-  if (src.competence === "MA.MES.MASSES_CONTENANCES") return buildMasseContenance(src, rng, base);
+  // Compétences CE1 DÉDIÉES (infixe « .CE1_ ») : même générateur que la
+  // compétence de base, calibré CE1 via le drapeau params.ce1 (cm/m ; g/kg/L ;
+  // pas de conversion). On normalise la clé de dispatch.
+  const comp = src.competence.replace(".CE1_", ".");
+  if (comp === "MA.MES.HEURE") return buildHeure(src, rng, base);
+  if (comp === "MA.MES.DUREES") return buildDuree(src, rng, base);
+  if (comp === "MA.MES.LONGUEURS") return buildLongueur(src, rng, base);
+  if (comp === "MA.MES.MASSES_CONTENANCES") return buildMasseContenance(src, rng, base);
   // Repli defensif (ne devrait pas arriver : dispatch par prefixe en amont).
   return {
     ...base,

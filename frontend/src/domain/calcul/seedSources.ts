@@ -173,6 +173,13 @@ const PB: Row[] = [
   ["MA.PB.DEUX_ETAPES", 2, "probleme", "probleme", "exemples_estompes", "aucun", "schema_barres", { types: ["mul_sub", "mul_add"], tables: [2, 3, 4, 5], qmax: 5, mag: 20 }],
   ["MA.PB.DEUX_ETAPES", 3, "probleme", "probleme", "variation", "aucun", "schema_barres", { types: ["add_div", "add_sub", "mul_rsub", "add_rsub"], tables: [2, 3, 4, 5], qmax: 10, mag: 100 }],
   ["MA.PB.DEUX_ETAPES", 4, "probleme", "probleme", "probleme_dabord", "aucun", "schema_barres", { types: ["mul_add", "mul_sub", "add_div", "mul_rsub", "add_rsub"], tables: [2, 3, 4, 5, 6, 7, 8, 9], qmax: 10, mag: 100 }],
+
+  // CE1 dédiée (migration 0126) : problèmes à deux étapes, tables 2-5, résultats
+  // petits (mag <= 20) ; TOUS les niveaux calibrés CE1.
+  ["MA.PB.CE1_DEUX_ETAPES", 1, "probleme", "probleme", "cpa_barres", "aucun", "schema_barres", { types: ["mul_add", "add_sub"], tables: [2, 5], qmax: 5, mag: 10 }],
+  ["MA.PB.CE1_DEUX_ETAPES", 2, "probleme", "probleme", "exemples_estompes", "aucun", "schema_barres", { types: ["mul_add", "mul_sub", "add_sub"], tables: [2, 3, 5], qmax: 5, mag: 15 }],
+  ["MA.PB.CE1_DEUX_ETAPES", 3, "probleme", "probleme", "variation", "aucun", "schema_barres", { types: ["mul_add", "mul_sub", "add_sub"], tables: [2, 3, 4, 5], qmax: 6, mag: 20 }],
+  ["MA.PB.CE1_DEUX_ETAPES", 4, "probleme", "probleme", "probleme_dabord", "aucun", "schema_barres", { types: ["mul_add", "mul_sub", "add_rsub"], tables: [2, 3, 4, 5], qmax: 6, mag: 20 }],
 ];
 
 // --- Problemes de MESURES (domaine problemes) : grandeurs a 1-2 etapes ---
@@ -210,6 +217,18 @@ const MES: Row[] = [
   ["MA.MES.MASSES_CONTENANCES", 2, "masse", "mesure", "exemples_estompes", "aucun", "conversions_masse", { types: ["conversion"] }],
   ["MA.MES.MASSES_CONTENANCES", 3, "masse", "mesure", "variation", "aucun", "comparer_mesures", { types: ["comparer", "conversion"] }],
   ["MA.MES.MASSES_CONTENANCES", 4, "masse", "mesure", "probleme_dabord", "aucun", "lire_balance_verre", { types: ["lecture"], lecture: ["balance", "verre"] }],
+
+  // CE1 dédiées (migration 0126) : longueurs cm/m et masses g/kg/L, choix de
+  // l'unité + lecture d'instrument. Aucune conversion (CE2). Drapeau ce1.
+  ["MA.MES.CE1_LONGUEURS", 1, "longueur", "mesure", "cpa_barres", "aucun", "unite_adaptee", { ce1: true, types: ["unite"] }],
+  ["MA.MES.CE1_LONGUEURS", 2, "longueur", "mesure", "exemples_estompes", "aucun", "mesurer_regle", { ce1: true, types: ["regle"], max: 10 }],
+  ["MA.MES.CE1_LONGUEURS", 3, "longueur", "mesure", "variation", "aucun", "unite_adaptee", { ce1: true, types: ["unite"] }],
+  ["MA.MES.CE1_LONGUEURS", 4, "longueur", "mesure", "probleme_dabord", "aucun", "mesurer_regle", { ce1: true, types: ["regle"], max: 20 }],
+
+  ["MA.MES.CE1_MASSES", 1, "masse", "mesure", "cpa_barres", "aucun", "unite_adaptee", { ce1: true, types: ["unite"] }],
+  ["MA.MES.CE1_MASSES", 2, "masse", "mesure", "exemples_estompes", "aucun", "lire_balance_verre", { ce1: true, types: ["lecture"], lecture: ["balance"] }],
+  ["MA.MES.CE1_MASSES", 3, "masse", "mesure", "variation", "aucun", "unite_adaptee", { ce1: true, types: ["unite"] }],
+  ["MA.MES.CE1_MASSES", 4, "masse", "mesure", "probleme_dabord", "aucun", "lire_balance_verre", { ce1: true, types: ["lecture"], lecture: ["balance"] }],
 ];
 
 // --- Grandeurs CM1 : perimetre et aire (carre / rectangle). Saisie clavier ;
