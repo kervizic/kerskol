@@ -1413,6 +1413,24 @@ vérifiée (390/820 px).
 SVG de droite décimale) et **ranger** plusieurs décimaux (UI d'ordre) ; l'addition
 et la soustraction de décimaux relèvent du lot 3 (opérations).
 
+## Livré : « Proportionnalité » (migration 0074, lot 4)
+
+Nouvelle sous-matière / domaine `proportionnalite` (**portée CM1..CM2**, visible
+CM1+). On **réutilise intégralement** le moteur `donnees` (tableau + op `don`,
+**serveur seul juge**, composant `<Donnees>`) : **aucune nouvelle UI, aucun
+nouveau juge**. Astuce d'architecture : les compétences gardent un **code en
+`MA.DONNEES.PROP_*`** (le routage `buildDonnees`, `verif_donnees` et le CHECK de
+`donnees_item` exigent ce préfixe) mais portent le **domaine `proportionnalite`**
+(nouvelle sous-matière). Deux compétences, **tableau à compléter** « à la
+maison » :
+- **MA.DONNEES.PROP_RECETTE** - proportionnaliser une recette (œufs, farine,
+  lait…) : « Pour 2 gâteaux 6 œufs → pour 8 gâteaux ? ».
+- **MA.DONNEES.PROP_COURSES** - proportionnaliser un prix (courses, achats) :
+  « 3 pommes 6 € → 6 pommes ? ».
+
+QCM aux niveaux faciles, réponse libre au N4. 16 items miroir front ↔ SQL (golden
+72), plan de classe **CM1** (cœur). Capture Playwright vérifiée (390/820 px).
+
 ## Reste à livrer pour le CM1 (maths)
 
 Chaque point suit le même patron (nouvelle compétence `classe_min = 'CM1'`,
@@ -1423,7 +1441,6 @@ tests golden) :
 - **Quatre opérations** dont **division posée** (diviseur à 1 puis 2 chiffres) :
   étendre le moteur `MA.POSE.*`.
 - **Calcul mental et en ligne** CM1 (grands nombres, multiples).
-- **Proportionnalité** (sous-matière nouvelle, visible CM1 seulement).
 - **Grandeurs et mesures** : périmètre, aire (comptage puis formules
   carré/rectangle), durées, angles (droit/aigu/obtus).
 - **Espace et géométrie** : perpendiculaires, parallèles, cercle, programme de

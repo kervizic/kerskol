@@ -4,7 +4,7 @@
 --
 -- Couvre :
 --   * la table de reference public.donnees_item contient EXACTEMENT les memes
---     items que le front (56 lignes ; couverture 7 competences x 4 niveaux ;
+--     items que le front (72 lignes ; couverture 9 competences x 4 niveaux ;
 --     spot check) : TEST CROISE avec le golden vitest
 --     (frontend/.../donnees/donnees.test.ts) ;
 --   * verif_donnees : bonne reponse acceptee, mauvaise refusee, accents EXIGES
@@ -26,15 +26,16 @@ DECLARE
     n   integer;
 BEGIN
     SELECT count(*) INTO n FROM public.donnees_item;
-    IF n <> 56 THEN
-        RAISE EXCEPTION 'donnees_item : 56 items attendus, obtenu %', n;
+    IF n <> 72 THEN
+        RAISE EXCEPTION 'donnees_item : 72 items attendus, obtenu %', n;
     END IF;
 
     -- Couverture : chaque competence a au moins un item a chaque niveau 1..4.
     FOR r IN SELECT c AS competence, nv AS niveau
                FROM unnest(ARRAY['MA.DONNEES.TABLEAU','MA.DONNEES.COMPLETER','MA.DONNEES.BARRES',
                     'MA.DONNEES.PICTOGRAMME','MA.DONNEES.COMPARER',
-                    'MA.DONNEES.LIRE_CM1','MA.DONNEES.HASARD']) AS c,
+                    'MA.DONNEES.LIRE_CM1','MA.DONNEES.HASARD',
+                    'MA.DONNEES.PROP_RECETTE','MA.DONNEES.PROP_COURSES']) AS c,
                     generate_series(1,4) AS nv
     LOOP
         IF NOT EXISTS (SELECT 1 FROM public.donnees_item
@@ -61,7 +62,12 @@ BEGIN
         ('has-n1-a','MA.DONNEES.HASARD',1,'qcm','possible'),
         ('has-n2-b','MA.DONNEES.HASARD',2,'qcm','impossible'),
         ('has-n3-a','MA.DONNEES.HASARD',3,'qcm','certain'),
-        ('has-n4-a','MA.DONNEES.HASARD',4,'texte','impossible')
+        ('has-n4-a','MA.DONNEES.HASARD',4,'texte','impossible'),
+        -- LOT 4 (CM1) : proportionnalite (recettes, courses)
+        ('prop-rec-n1-a','MA.DONNEES.PROP_RECETTE',1,'qcm','8'),
+        ('prop-rec-n4-a','MA.DONNEES.PROP_RECETTE',4,'texte','24'),
+        ('prop-crs-n1-a','MA.DONNEES.PROP_COURSES',1,'qcm','12'),
+        ('prop-crs-n4-b','MA.DONNEES.PROP_COURSES',4,'texte','10')
     ) AS t(cle, competence, niveau, format, attendu)
     LOOP
         SELECT format || '|' || attendu INTO got FROM public.donnees_item WHERE cle = r.cle;

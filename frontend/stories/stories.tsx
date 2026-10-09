@@ -46,6 +46,21 @@ const lireCm1: DonRender = {
   },
 };
 
+const propCourses: DonRender = {
+  cle: "prop-crs-n1-a",
+  format: "qcm",
+  consigne: "3 pommes coûtent 6 euros. Combien coûtent 6 pommes ?",
+  options: ["12", "9", "6"],
+  attendu: "12",
+  explication: "6 pommes, c'est 2 fois plus que 3 pommes. Le prix est 2 fois plus grand : 2 fois 6 font 12 euros.",
+  figure: {
+    kind: "table",
+    colHeaders: ["3 pommes", "6 pommes"],
+    rowHeaders: ["Prix en euros"],
+    cells: [["6", "?"]],
+  },
+};
+
 // Registre. Ajouter une entree par nouveau composant d'UI.
 export const STORIES: Story[] = [
   { id: "donnees-hasard-qcm", label: "Données — hasard (QCM, lot 7)",
@@ -63,4 +78,6 @@ export const STORIES: Story[] = [
         <DecimalInput onCode={noop} />
       </div>
     ) },
+  { id: "proportionnalite-table", label: "Proportionnalité — tableau à compléter (lot 4)",
+    node: <Donnees item={propCourses} onSoumettre={noopSubmit} onContinuer={noop} /> },
 ];

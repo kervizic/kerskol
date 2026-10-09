@@ -65,6 +65,8 @@ const CM1: ClassPlan = {
     "MA.DEC.ECRIRE": 1,
     "MA.DEC.COMPARER": 1,
     "MA.DEC.ENCADRER": 1,
+    "MA.DONNEES.PROP_RECETTE": 1,
+    "MA.DONNEES.PROP_COURSES": 1,
   },
 };
 
