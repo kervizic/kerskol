@@ -241,10 +241,56 @@ export const BANQUE_ECRITURE: EcrItem[] = [
     consigne: "Écris une belle phrase avec les mots fleur et soleil.",
     attendu: "", image: "soleil", check: { minMots: 4, motsCles: ["fleur", "soleil"] },
     exemple: "La fleur aime le soleil.",
-    explication: "Bravo ! Une jolie phrase avec les mots fleur et soleil. Par exemple : La fleur aime le soleil." },
+    explication: "Bravo ! Une phrase avec une majuscule, un point, et les mots fleur et soleil. Par exemple : La fleur aime le soleil." },
+
+  // =======================================================================
+  // CM1 (lot 5). FR.ECR.COPIE_CM1 : copier des phrases plus longues avec des
+  // connecteurs (puis, ensuite, car, mais, enfin). FR.ECR.GUIDEE_CM1 :
+  // transformer au passé simple (N1-N3) puis phrase libre avec check-list CM1.
+  // =======================================================================
+  // --- FR.ECR.COPIE_CM1 : phrases plus longues avec connecteurs ---
+  { cle: "ecr-copiecm1-n1", competence: "FR.ECR.COPIE_CM1", niveau: 1, format: "copie",
+    consigne: "Recopie cette phrase sans erreur. Regarde bien le petit mot puis.",
+    attendu: "Le matin, je me lève, puis je déjeune.",
+    modele: "Le matin, je me lève, puis je déjeune.",
+    explication: "Bravo ! Le mot puis relie les deux actions, l'une après l'autre." },
+  { cle: "ecr-copiecm1-n2", competence: "FR.ECR.COPIE_CM1", niveau: 2, format: "copie",
+    consigne: "Recopie cette phrase sans erreur. Fais attention au mot ensuite.",
+    attendu: "Je fais mes devoirs, ensuite je joue dans le jardin.",
+    modele: "Je fais mes devoirs, ensuite je joue dans le jardin.",
+    explication: "Super ! Le mot ensuite dit ce qu'on fait après. On garde bien la virgule." },
+  { cle: "ecr-copiecm1-n3", competence: "FR.ECR.COPIE_CM1", niveau: 3, format: "copie",
+    consigne: "Recopie cette phrase plus longue sans erreur. Il y a deux connecteurs.",
+    attendu: "Je range ma chambre, car maman arrive, mais je garde mon livre préféré.",
+    modele: "Je range ma chambre, car maman arrive, mais je garde mon livre préféré.",
+    explication: "Bravo ! Le mot car explique pourquoi, et le mot mais montre le contraire." },
+  { cle: "ecr-copiecm1-n4", competence: "FR.ECR.COPIE_CM1", niveau: 4, format: "copie", differe: true,
+    consigne: "Regarde bien le texte, puis cache-le et recopie-le de mémoire.",
+    attendu: "D'abord, nous préparons le goûter. Ensuite, nous jouons ensemble. Enfin, nous rangeons tout.",
+    modele: "D'abord, nous préparons le goûter. Ensuite, nous jouons ensemble. Enfin, nous rangeons tout.",
+    explication: "Super ! Les mots d'abord, ensuite et enfin rangent les actions dans l'ordre." },
+
+  // --- FR.ECR.GUIDEE_CM1 : transformation au passé simple + phrase libre ---
+  { cle: "ecr-guidecm1-n1", competence: "FR.ECR.GUIDEE_CM1", niveau: 1, format: "transform",
+    consigne: "Récris cette phrase au passé simple, comme dans une histoire.", phrase: "Il mange une pomme.",
+    attendu: "Il mangea une pomme.",
+    explication: "Bravo ! Au passé simple : Il mangea une pomme. Dans les histoires, on dit il mangea." },
+  { cle: "ecr-guidecm1-n2", competence: "FR.ECR.GUIDEE_CM1", niveau: 2, format: "transform",
+    consigne: "Récris cette phrase au passé simple, comme dans une histoire.", phrase: "Elle regarde les étoiles.",
+    attendu: "Elle regarda les étoiles.",
+    explication: "Super ! Au passé simple : Elle regarda les étoiles. Le verbe en -er fait a à la fin." },
+  { cle: "ecr-guidecm1-n3", competence: "FR.ECR.GUIDEE_CM1", niveau: 3, format: "transform",
+    consigne: "Récris cette phrase au passé simple. Attention, il y a plusieurs personnes.", phrase: "Les enfants chantent une chanson.",
+    attendu: "Les enfants chantèrent une chanson.",
+    explication: "Bravo ! Au passé simple, avec ils : Les enfants chantèrent une chanson." },
+  { cle: "ecr-guidecm1-n4", competence: "FR.ECR.GUIDEE_CM1", niveau: 4, format: "libre",
+    consigne: "Écris une phrase pour raconter un moment à la maison. Utilise le mot puis. Pense à la majuscule et au point.",
+    attendu: "", amorce: "À la maison,", check: { minMots: 8, motsCles: ["puis"] },
+    exemple: "Le matin, je mange mon pain, puis je vais à l'école.",
+    explication: "Bravo ! Ta phrase commence par une majuscule, finit par un point, et le mot puis relie deux actions. Par exemple : Le matin, je mange mon pain, puis je vais à l'école." },
 ];
 
-export const COMPETENCES_ECRITURE = ["FR.ECR.COPIE", "FR.ECR.GUIDEE"] as const;
+export const COMPETENCES_ECRITURE = ["FR.ECR.COPIE", "FR.ECR.GUIDEE", "FR.ECR.COPIE_CM1", "FR.ECR.GUIDEE_CM1"] as const;
 
 export function itemsEcrDe(competence: string, niveau: number): EcrItem[] {
   return BANQUE_ECRITURE.filter((i) => i.competence === competence && i.niveau === niveau);

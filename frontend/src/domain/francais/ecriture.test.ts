@@ -19,7 +19,7 @@ import {
 import { generateExercise } from "../calcul/generator";
 import type { ExCalcul } from "../calcul/generator";
 
-const NB_ITEMS_GOLDEN = 24;
+const NB_ITEMS_GOLDEN = 32;
 
 function source(competence: string, niveau: number): ExCalcul {
   return {

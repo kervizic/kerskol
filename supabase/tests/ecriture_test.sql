@@ -23,10 +23,10 @@ DO $$
 DECLARE r record; got text; n integer;
 BEGIN
     SELECT count(*) INTO n FROM public.ecriture_item;
-    IF n <> 24 THEN RAISE EXCEPTION 'ecriture_item : 24 items attendus, obtenu %', n; END IF;
+    IF n <> 32 THEN RAISE EXCEPTION 'ecriture_item : 32 items attendus, obtenu %', n; END IF;
 
     FOR r IN SELECT c AS competence, nv AS niveau
-               FROM unnest(ARRAY['FR.ECR.COPIE','FR.ECR.GUIDEE']) AS c, generate_series(1,4) AS nv
+               FROM unnest(ARRAY['FR.ECR.COPIE','FR.ECR.GUIDEE','FR.ECR.COPIE_CM1','FR.ECR.GUIDEE_CM1']) AS c, generate_series(1,4) AS nv
     LOOP
         IF NOT EXISTS (SELECT 1 FROM public.ecriture_item
                         WHERE competence = r.competence AND niveau = r.niveau) THEN
@@ -40,7 +40,11 @@ BEGIN
         ('ecr-guide-n1-a','FR.ECR.GUIDEE',1,'ordre','Le chat dort.'),
         ('ecr-guide-n2-a','FR.ECR.GUIDEE',2,'qcm','lait'),
         ('ecr-guide-n3-c','FR.ECR.GUIDEE',3,'transform','J''ai mangé une pomme.'),
-        ('ecr-guide-n4-a','FR.ECR.GUIDEE',4,'libre','')
+        ('ecr-guide-n4-a','FR.ECR.GUIDEE',4,'libre',''),
+        ('ecr-copiecm1-n1','FR.ECR.COPIE_CM1',1,'copie','Le matin, je me lève, puis je déjeune.'),
+        ('ecr-guidecm1-n1','FR.ECR.GUIDEE_CM1',1,'transform','Il mangea une pomme.'),
+        ('ecr-guidecm1-n3','FR.ECR.GUIDEE_CM1',3,'transform','Les enfants chantèrent une chanson.'),
+        ('ecr-guidecm1-n4','FR.ECR.GUIDEE_CM1',4,'libre','')
     ) AS t(cle, competence, niveau, format, attendu)
     LOOP
         SELECT format || '|' || attendu INTO got FROM public.ecriture_item WHERE cle = r.cle;

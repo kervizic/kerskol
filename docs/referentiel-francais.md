@@ -46,6 +46,19 @@ d'un mot, N3 inférence, N4 réponse libre) dans `comprehension.ts` +
 auteurs ; aucun nom de mois dans les questions (le poème de Gautier en contient,
 on choisit d'autres strophes). Serveur seul juge (op `lire`).
 
+## Copier et écrire CM1 (lot 5)
+
+Deux compétences additives (moteur `ecriture_item` + `verif_ecriture` réutilisés,
+aucune nouvelle UI), portée CM1..CM2, migration 0092, golden **32** :
+
+| Code | Libellé | Contenu |
+|------|---------|---------|
+| `FR.ECR.COPIE_CM1`  | Recopier des phrases plus longues | phrases avec connecteurs (puis, ensuite, car, mais, enfin) ; N4 copie différée |
+| `FR.ECR.GUIDEE_CM1` | Écrire au passé simple et en autonomie | N1-N3 transformer au passé simple (branché lot 1) ; N4 phrase libre, check-list CM1 (≥ 8 mots, « puis » imposé) |
+
+Serveur seul juge (op `ecr`). La phrase libre N4 est enregistrée pour relecture
+par le parent (`ecriture_production`).
+
 ## Compétences livrées : CONJUGAISON
 
 Quatre compétences, **4 niveaux** chacune :

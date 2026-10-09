@@ -12,6 +12,7 @@ import Donnees from "../src/components/Donnees";
 import DecimalInput from "../src/components/DecimalInput";
 import Grammaire from "../src/components/Grammaire";
 import Comprehension from "../src/components/Comprehension";
+import Ecriture from "../src/components/Ecriture";
 import type { DonRender } from "../src/domain/donnees/donnees";
 import type { GramRender } from "../src/domain/francais/grammaire";
 import { generateExercise } from "../src/domain/calcul/generator";
@@ -176,6 +177,14 @@ export const STORIES: Story[] = [
       options: ["obtus", "aigu", "droit"], attendu: "obtus",
       explication: "Un angle plus grand qu'un angle droit est un angle obtus. Obtus, c'est bien ouvert.",
       figure: { kind: "none" },
+    }} onSoumettre={noopSubmit} onContinuer={noop} /> },
+  { id: "ecriture-passe-simple", label: "Écriture — transformer au passé simple (lot 5)",
+    node: <Ecriture item={{
+      cle: "ecr-guidecm1-n3", format: "transform",
+      consigne: "Récris cette phrase au passé simple. Attention, il y a plusieurs personnes.",
+      phrase: "Les enfants chantent une chanson.",
+      attendu: "Les enfants chantèrent une chanson.",
+      explication: "Bravo ! Au passé simple, avec ils : Les enfants chantèrent une chanson.",
     }} onSoumettre={noopSubmit} onContinuer={noop} /> },
   { id: "comp-biblio-cm1", label: "Compréhension — texte CM1 bibliothèque (inférence N3, lot 4)",
     node: <Comprehension item={{
