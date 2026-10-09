@@ -69,23 +69,24 @@ END $$;
 DO $$
 DECLARE n integer;
 BEGIN
-    -- 5 competences : ECRIRE / COMPARER / ENCADRER (lot 2) + ADDITION / SOUSTRACTION (lot 3).
+    -- 7 competences : ECRIRE / COMPARER / ENCADRER (lot 2) + ADDITION / SOUSTRACTION
+    -- (lot 3) + DROITE / RANGER (lot 7).
     SELECT count(*) INTO n FROM public.competences
      WHERE code LIKE 'MA.DEC.%' AND domaine = 'decimaux'
        AND classe_min = 'CM1' AND classe_max = 'CM2';
-    IF n <> 5 THEN RAISE EXCEPTION 'competences decimaux : % (attendu 5)', n; END IF;
+    IF n <> 7 THEN RAISE EXCEPTION 'competences decimaux : % (attendu 7)', n; END IF;
 
-    -- 20 exercices (5 x 4), forme 'decimal' ; operation decimal (lot 2) ou add/sub (lot 3).
+    -- 28 exercices (7 x 4), forme 'decimal' ; operation decimal ou add/sub.
     SELECT count(*) INTO n FROM public.exercices e
       JOIN public.ex_calcul x ON x.exercice_id = e.id
      WHERE e.competence LIKE 'MA.DEC.%' AND e.type = 'calcul'
        AND x.forme = 'decimal' AND x.operation IN ('decimal','add','sub') AND e.actif;
-    IF n <> 20 THEN RAISE EXCEPTION 'exercices decimaux : % (attendu 20)', n; END IF;
+    IF n <> 28 THEN RAISE EXCEPTION 'exercices decimaux : % (attendu 28)', n; END IF;
 
     SELECT count(*) INTO n FROM public.profils WHERE NOT ('decimaux' = ANY (domaines_actifs));
     IF n <> 0 THEN RAISE EXCEPTION 'domaine decimaux manquant pour % profils', n; END IF;
 
-    RAISE NOTICE 'referentiel decimaux (5 competences, 20 exercices, domaine actif) : OK';
+    RAISE NOTICE 'referentiel decimaux (7 competences, 28 exercices, domaine actif) : OK';
 END $$;
 
 ROLLBACK;
