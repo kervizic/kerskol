@@ -202,3 +202,10 @@ ON CONFLICT (cle) DO UPDATE SET
     niveau     = EXCLUDED.niveau,
     format     = EXCLUDED.format,
     attendu    = EXCLUDED.attendu;
+
+-- Enregistrement de la migration (etait ABSENT : la migration se reappliquait a
+-- chaque deploiement car deploy.sh ne la trouvait jamais dans schema_migrations ;
+-- lot 11, nettoyage sans risque -- cette migration est purement idempotente).
+INSERT INTO public.schema_migrations (version)
+VALUES ('0062_bibliotheque_comprehension_complet')
+ON CONFLICT (version) DO NOTHING;
