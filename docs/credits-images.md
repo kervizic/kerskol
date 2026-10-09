@@ -107,6 +107,23 @@ planisphère), Wikimedia Commons **uniquement** en domaine public ou CC0 (vérif
 chaque fichier). Interdits : OpenMoji (CC BY-SA), Flaticon/Freepik,
 Pixabay/Unsplash, images trouvées sur Google, personnages ou marques connus.
 
+## Parcours d'Histoire (lot 1 CM1) — documents et cartes de frise
+
+Les DOCUMENTS des récits (seigneurie, château de la Loire, planisphère, triangle
+de la traite, Bastille…) et les PETITES IMAGES des cartes de frise sont des
+SCHÉMAS SVG FAITS MAISON, dessinés à la main avec des primitives simples et les
+variables de thème (`var(--kk-*)`). Aucune image externe n'est utilisée : aucun
+téléchargement, aucune licence tierce, aucun risque CC BY-SA / fair use.
+
+- Documents : définis dans `frontend/src/domain/histoire/parcours.ts`
+  (`ParcoursDocument.scene`, type `QmScene`), rendus par `Parcours.tsx`.
+- Icônes de frise : `frontend/src/components/FriseIcone.tsx`.
+
+Choix assumé (budget + sécurité des licences) : on n'intègre PAS, pour l'instant,
+de gravures/peintures/cartes du domaine public (Wikimedia Commons). Un
+enrichissement ultérieur, image par image vérifiée DP/CC0, reste possible (il
+devra alors être crédité ici et sur `/credits`).
+
 ## Autres crédits
 
 Les billets et pièces en euros, la police Andika, les icônes Lucide, la voix de
