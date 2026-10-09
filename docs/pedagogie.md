@@ -18,6 +18,32 @@ le détail, la liste de mots interdits et la liste blanche dans
 vérifiée automatiquement à chaque build (`bienveillance.test.ts` côté frontend,
 `bienveillance_test.sql` côté serveur).
 
+### Vérité historique vs bienveillance des récits (décision de Manu, 9 octobre 2026)
+
+Il faut distinguer deux choses :
+
+- **Les récits** (histoires, lectures, dictée détective, énoncés de maths,
+  consignes de toutes les matières) restent sous la **bienveillance stricte** :
+  pas de mort, pas de violence, pas de peur forte. C'est la règle générale
+  ci-dessus, sans exception.
+- **Le cours d'histoire dit la vérité**, sans l'adoucir (« n'adoucis pas
+  l'Histoire »). La banque **histoire** (et elle seule) est **exemptée** de la
+  bienveillance stricte : elle nomme factuellement, au niveau d'un bon manuel de
+  CM1 et **sans détail gratuit ni macabre**, les faits que le programme exige -
+  guerres de religion et massacre de la Saint-Barthélemy, traite et esclavage
+  (millions d'Africains déportés, travail forcé, Code noir), conquête des
+  Amériques, inégalités de la société d'ordres, violence de 1789 (prise de la
+  Bastille).
+
+Cette exemption est **limitée** (vocabulaire mesuré de guerre / mort /
+esclavage) et **testée** : `estAutorise` pour les compétences `HIST.*` dans
+`bienveillance.test.ts`, branche `HIST.%` dans `bienveillance_test.sql`. Les
+autres matières (y compris la géographie, où les inégalités du monde sont dites
+avec mesure et espoir) ne bénéficient d'aucune exemption. Un garde-fou de
+« vérité historique » (`histoire.test.ts`) vérifie en sens inverse que le
+vocabulaire factuel du programme reste bien présent, pour éviter qu'un futur
+« adoucissement » ne réintroduise des euphémismes.
+
 ## Principes transverses
 
 Deux techniques d'apprentissage ressortent avec une utilité forte dans la revue
@@ -276,6 +302,26 @@ vend bien.
 - van Hiele, P. M. *The van Hiele model of geometric thought*. <https://en.wikipedia.org/wiki/Van_Hiele_model>
 - TIMSS 2023, résultats mathématiques CM1 (grade 4). <https://timss2023.org/results/grade-4-math-achievement/>
 - PIRLS 2021, résultats en lecture. <https://pirls2021.org/results/>
+
+### Programmes officiels (contenu CM1, rentrée 2026)
+
+Les matières d'éveil du CM1 suivent les **nouveaux programmes** applicables à la
+rentrée 2026 (le contenu CM1 livré en 0098-0101 suivait l'ancien programme et a
+été refait en 0103-0106) :
+
+- **Histoire-géographie, cycle 3** (annexe 4). CM1 histoire : Moyen Âge (vie
+  quotidienne), monarchie XVIe-XVIIe, explorations et conquêtes (traite et
+  esclavage), 1789. CM1 géographie : la diversité des modes de vie dans le monde
+  (se nourrir, inégalités, se déplacer, communiquer avec Internet).
+  <https://www.education.gouv.fr/sites/default/files/document/annexe-4-programme-d-histoire-geographie-cycle-3-516779.pdf>
+- **Sciences et technologie, cycle 3** - arrêté du 5 juin 2026, BO n° 24 du
+  11 juin 2026 (en vigueur au CM1 à la rentrée 2026 ; annexe 2 pour les attendus
+  « Cours moyen première année »).
+  <https://www.education.gouv.fr/bo/2026/Hebdo24/MENE2611650A> —
+  <https://www.education.gouv.fr/sites/default/files/document/annexe-2-programme-de-sciences-et-technologie-du-cycle-3-519023.pdf>
+- **Enseignement moral et civique** - programme 2024, BO n° 24 du 13 juin 2024
+  (mise en œuvre progressive 2024-2026). Attendu CM1 ajouté : la laïcité.
+  <https://www.education.gouv.fr/media/160329/download>
 
 ## Classe et passage en classe supérieure (règle validée, à implémenter avec le moteur de séance)
 

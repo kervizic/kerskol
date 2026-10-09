@@ -1167,17 +1167,34 @@ ajoute seulement la matière `HIST`, la méthode `histoire`, 6 compétences
 - **La frise et les siècles** (`frise`, `HIST.FRISE`) : frise chronologique,
   siècles (cent ans), chiffres romains (V, X, C), ordre des grandes périodes.
 
-**Bienveillance STRICTE (histoire).** Aucun récit de bataille, massacre,
-supplice, esclavage ni guerre. Les repères intrinsèquement militaires sont
-**laissés de côté ou présentés par un angle apaisé** : Vercingétorix / Alésia →
-remplacés par la **vie quotidienne gallo-romaine et les monuments** ; les
-« invasions » → non traitées ; Saint Louis → le **roi qui rend la justice** (pas
-les croisades) ; Henri IV / Louis XIV / Versailles → non inclus dans ce lot
-(réservés à un lot « Temps des rois » ultérieur). Garde-fou `bienveillance.test.ts`
-étendu à la banque `histoire`, plus un test local interdisant
-`guerre|bataille|supplice|esclave`. Note programme : le découpage suit la demande
-de Manu (ancien programme : Préhistoire → Moyen Âge → rois) ; le programme 2025 a
-déplacé l'Antiquité en 6e (signalé dans le rapport).
+> **MISE À JOUR (lot 0103, 9 octobre 2026) — l'histoire ci-dessus a été
+> entièrement refaite selon le NOUVEAU PROGRAMME 2026.** Les sous-matières
+> ci-dessus (Préhistoire, Gaulois/Romains, Charlemagne, monuments isolés)
+> relevaient de l'ancien programme : elles sont **désactivées** (`actif=false`,
+> sans perte de données). Les cinq sous-matières CM1 en vigueur sont désormais :
+> **La vie quotidienne au Moyen Âge** (`moyen_age`, seigneurie, dîme, corvée,
+> Église, art roman/gothique, Cluny, Notre-Dame), **La monarchie XVIe-XVIIe**
+> (`monarchie`, François Ier / Léonard de Vinci, Henri IV et les guerres de
+> religion dont la Saint-Barthélemy, édit de Nantes, Louis XIV monarchie
+> absolue, société d'ordres), **Explorations et conquêtes** (`explorations`,
+> caravelle, boussole, Colomb 1492, Magellan, commerce triangulaire, **traite
+> et esclavage**, Code noir 1685), **1789, la Révolution** (`revolution`,
+> Lumières, Ancien Régime, cahiers de doléances, prise de la Bastille, DDHC,
+> égalité) et **La frise et les siècles** (`frise`).
+
+**Vérité historique, pas bienveillance adoucie (décision de Manu : « n'adoucis
+pas l'Histoire »).** Contrairement à l'ancien lot, l'histoire **ne masque plus**
+les faits. La banque `histoire` est **exemptée** de la bienveillance stricte
+(elle seule), pour dire au niveau d'un bon manuel de CM1, **sans détail gratuit
+ni macabre**, les faits que le programme exige : guerres de religion et massacre
+de la Saint-Barthélemy nommé, traite et esclavage expliqués honnêtement
+(millions d'Africains déportés, travail forcé, Code noir), conquête des
+Amériques, inégalités de la société d'ordres, violence de 1789. L'exemption est
+**limitée** (vocabulaire mesuré de guerre / mort / esclavage) et **testée** :
+`estAutorise` pour `HIST.*` dans `bienveillance.test.ts`, branche `HIST.%` dans
+`bienveillance_test.sql`. Le test `histoire.test.ts` vérifie en sens inverse que
+ce vocabulaire factuel **reste présent** (pas de ré-adoucissement). **Les
+histoires, lectures et énoncés restent, eux, sous la bienveillance stricte.**
 
 ## Nouvelle matière « Géographie » (GEO, CM1, migration 0100)
 
@@ -1213,6 +1230,20 @@ garantir une cartographie vérifiée) ; le contenu actuel localise fleuves et
 reliefs par QCM / tri / saisie. Garde-fou `bienveillance.test.ts` étendu à la
 banque `geographie`.
 
+> **MISE À JOUR (lot 0104, 9 octobre 2026) — la géographie ci-dessus a été
+> refaite selon le NOUVEAU PROGRAMME 2026 : « la diversité des modes de vie dans
+> le monde ».** Les six sous-matières ci-dessus (se_reperer, habiter,
+> travail_loisirs, consommer, france_reperes, paysages) sont **désactivées**
+> (`actif=false`, sans perte de données). Les quatre sous-matières CM1 en vigueur
+> sont : **Se nourrir dans le monde** (`se_nourrir`, céréales, agriculture,
+> élevage, pêche, accès inégal à la nourriture), **Les inégalités dans le monde**
+> (`inegalites`, eau potable, santé, éducation ; planisphère), **Se déplacer**
+> (`se_deplacer`, modes, infrastructures, distances en km et temps) et
+> **Communiquer avec Internet** (`communiquer`, câbles sous-marins, satellites,
+> inégalités d'accès). La géographie **reste sous la bienveillance stricte** (pas
+> d'exemption) : les inégalités sont dites avec mesure et espoir. Le planisphère
+> reste en QCM (pas de scène SVG, repli « sinon QCM »).
+
 ## EMC — complément CM1 (migration 0101)
 
 **Additif** à la matière EMC (0058) : mêmes `qm_item` / `verif_qm` / op `qm` /
@@ -1235,6 +1266,25 @@ type `'emc'` / méthode `vivre_ensemble`. Ajoute 6 sous-matières CM1
 
 **Harcèlement** : les items où un enfant est embêté renvoient TOUJOURS à « en
 parler à un adulte de confiance » (vérifié par un test). Ton bienveillant.
+
+> **MISE À JOUR (lot 0106, 9 octobre 2026) — alignement sur le programme EMC
+> 2024 (BO n° 24 du 13 juin 2024).** Vérification de l'EMC CM1 : les six
+> sous-matières ci-dessus couvrent l'essentiel ; seul écart comblé, la **laïcité**
+> (attendu CM1 explicite : « Liberté, Égalité, Fraternité, laïcité » ; droit égal
+> d'exercer librement son jugement ; respect des croyances d'autrui ; tolérance).
+> Ajout d'une 7e sous-matière **EMC.LAICITE** (`laicite`), sans toucher aux six
+> autres. Ton bienveillant, aucune religion citée ni jugée ; EMC reste sous la
+> bienveillance stricte (le token « se moquer » y est whitelisté, car c'est le
+> sujet enseigné : refuser la moquerie).
+
+> **MISE À JOUR (lot 0105, 9 octobre 2026) — sciences et technologie alignées sur
+> le PROGRAMME 2026** (arrêté du 5 juin 2026, BO n° 24 du 11 juin 2026, annexe 2,
+> attendus « Cours moyen première année »). Sept sous-matières couvrant les
+> 4 thèmes : masse/mélanges, lumière-ombres-mouvement, classer le vivant,
+> écosystèmes/chaînes, cerveau et puberté, Terre et ciel (météo + phases de la
+> Lune), objets techniques et programmation. L'ancienne sous-matière « energie »
+> est désactivée (`actif=false`, sans perte de données). Sciences sous
+> bienveillance stricte (prédation dite « se nourrir de », jamais « dévore »).
 
 # Règle de bienveillance (décision de Manu, absolue)
 
@@ -1281,11 +1331,23 @@ s'excuse quand on a blessé un ami), jamais une blessure physique.
   détective et réponses attendues de référence).
 
 La liste blanche (whitelist) est explicite et commentée dans ces deux fichiers
-(les seuls cas pédagogiques nécessaires : `qm-viv-car-n4-a` pour « mourir », le
-domaine `EMC.*` pour « moquerie » / « blesser (les sentiments) »). Les mots
+(les cas pédagogiques nécessaires : `qm-viv-car-n4-a` pour « mourir », le
+domaine `EMC.*` pour « moquerie » / « blesser (les sentiments) », et le domaine
+**`HIST.*` pour la vérité historique** — voir ci-dessous). Les mots
 isolés de vocabulaire (« triste », « méchant », antonymes) ne sont pas interdits :
 la règle vise les **scènes**, pas le lexique nécessaire ; leur usage reste
 surveillé par la revue éditoriale.
+
+**Vérité historique vs bienveillance des récits (décision de Manu, 9 octobre
+2026).** Une seule exemption de contenu : la banque **histoire** (`HIST.*`).
+L'histoire **dit la vérité sans l'adoucir** (guerres de religion, massacre de la
+Saint-Barthélemy, traite et esclavage, Code noir, violence de 1789), au niveau
+d'un bon manuel de CM1 et **sans détail gratuit ni macabre**. L'exemption est
+limitée à un vocabulaire mesuré (guerre, mort, esclavage…) et **testée** des deux
+côtés (`estAutorise` pour `HIST.*` ; branche `HIST.%` dans
+`bienveillance_test.sql`, avec un test d'exemption in situ). **Tout le reste** -
+histoires, lectures, dictée, énoncés, et les autres matières d'éveil (géographie,
+sciences, EMC) - demeure sous la **bienveillance stricte**, sans exemption.
 
 # Bibliothèque de textes du domaine public (lot 0060)
 
