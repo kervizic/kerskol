@@ -62,6 +62,9 @@ const CM1: ClassPlan = {
     "MA.DONNEES.HASARD": 1,
     "MA.PB.DEUX_ETAPES": 1,
     "MA.REPERE.PROGRAMMER": 1,
+    "MA.DEC.ECRIRE": 1,
+    "MA.DEC.COMPARER": 1,
+    "MA.DEC.ENCADRER": 1,
   },
 };
 

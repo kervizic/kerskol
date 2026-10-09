@@ -200,6 +200,28 @@ const FRAC: Row[] = [
   ["MA.FRAC.QUANTITE", 4, "fraction", "fraction", "probleme_dabord", "aucun", "fraction_quantite", { types: ["quantite_cm1"], dens: [3, 4, 5, 6, 8] }],
 ];
 
+// --- Nombres decimaux CM1 (domaine decimaux). Encodage en CENTIEMES (entier) ;
+//     saisie <DecimalInput> (virgule) ; serveur seul juge (op 'val'). ---
+const DEC: Row[] = [
+  // Ecrire un decimal (dixiemes, centiemes, fraction decimale -> lien fractions).
+  ["MA.DEC.ECRIRE", 1, "decimal", "decimal", "cpa_barres", "aucun", "ecrire_decimal", { types: ["ecrire_dixiemes"], maxE: 9 }],
+  ["MA.DEC.ECRIRE", 2, "decimal", "decimal", "exemples_estompes", "aucun", "ecrire_decimal", { types: ["ecrire_centiemes", "ecrire_dixiemes"], maxE: 9 }],
+  ["MA.DEC.ECRIRE", 3, "decimal", "decimal", "variation", "aucun", "ecrire_decimal", { types: ["ecrire_centiemes", "ecrire_fraction"], maxE: 20 }],
+  ["MA.DEC.ECRIRE", 4, "decimal", "decimal", "probleme_dabord", "aucun", "ecrire_decimal", { types: ["ecrire_fraction", "ecrire_centiemes"], maxE: 99 }],
+
+  // Comparer deux decimaux (ecrire le plus grand / le plus petit).
+  ["MA.DEC.COMPARER", 1, "decimal", "decimal", "cpa_barres", "aucun", "comparer_decimal", { types: ["comparer_grand"], maxE: 5 }],
+  ["MA.DEC.COMPARER", 2, "decimal", "decimal", "exemples_estompes", "aucun", "comparer_decimal", { types: ["comparer_grand", "comparer_petit"], maxE: 9 }],
+  ["MA.DEC.COMPARER", 3, "decimal", "decimal", "variation", "aucun", "comparer_decimal", { types: ["comparer_grand", "comparer_petit"], maxE: 20 }],
+  ["MA.DEC.COMPARER", 4, "decimal", "decimal", "probleme_dabord", "aucun", "comparer_decimal", { types: ["comparer_grand", "comparer_petit"], maxE: 99 }],
+
+  // Encadrer entre deux entiers consecutifs (entier juste avant / juste apres).
+  ["MA.DEC.ENCADRER", 1, "decimal", "decimal", "cpa_barres", "aucun", "encadrer_decimal", { types: ["encadrer_avant"], maxE: 5 }],
+  ["MA.DEC.ENCADRER", 2, "decimal", "decimal", "exemples_estompes", "aucun", "encadrer_decimal", { types: ["encadrer_avant", "encadrer_apres"], maxE: 9 }],
+  ["MA.DEC.ENCADRER", 3, "decimal", "decimal", "variation", "aucun", "encadrer_decimal", { types: ["encadrer_avant", "encadrer_apres"], maxE: 20 }],
+  ["MA.DEC.ENCADRER", 4, "decimal", "decimal", "probleme_dabord", "aucun", "encadrer_decimal", { types: ["encadrer_avant", "encadrer_apres"], maxE: 99 }],
+];
+
 const TABLE_STRATS: Record<number, string> = {
   2: "double",
   3: "double_plus_une_fois",
@@ -245,4 +267,4 @@ function toSource(r: Row): ExCalcul {
   };
 }
 
-export const SEED_SOURCES: ExCalcul[] = [...CM, ...tableRows(), ...NUM, ...POSE, ...PB, ...PBM, ...MES, ...FRAC].map(toSource);
+export const SEED_SOURCES: ExCalcul[] = [...CM, ...tableRows(), ...NUM, ...POSE, ...PB, ...PBM, ...MES, ...FRAC, ...DEC].map(toSource);

@@ -20,6 +20,7 @@ import { makeRng, intBetween, pick, shuffle, type Rng } from "./rng";
 import { buildProbleme } from "./problemes";
 import { buildMesure } from "./measures";
 import { buildFraction } from "./fractions";
+import { buildDecimal } from "./decimaux";
 import { enLettresFr } from "../diagnostic/lettres";
 import { buildFrancaisConjugaison, buildFrancaisDictee, buildFrancaisPasseCompose, buildFrancaisGrammaire, buildFrancaisLexique, buildMaitresse } from "../francais/generator";
 import { buildGeometrie } from "../geometrie/geometrie";
@@ -49,6 +50,7 @@ export type Forme =
   | "probleme" // probleme en francais (mascotte, monnaie, deux etapes)
   | "mesure" // mesures (heure, durees, longueurs, masses, contenances)
   | "fraction" // fractions simples
+  | "decimal" // maths : nombres decimaux CM1 (ecrire, comparer, encadrer)
   | "conjugaison" // francais : conjuguer un verbe (present / futur / imparfait)
   | "dictee" // francais : dictee detective (trouver / corriger des erreurs)
   | "grammaire" // francais : grammaire (nature, sujet/verbe, types, ponctuation, GN)
@@ -88,6 +90,10 @@ export type Support = "rectangle" | "droite" | "aucun" | null;
 export type Saisie =
   | "clavier" | "compare" | "chiffres" | "pose" | "qcm" | "droite" | "monnaie"
   | "heure" | "fraction" | "fraction_num" | "lettres" | "qcm_texte"
+  // decimal -> saisie LIBRE d'un nombre decimal (pave + virgule, <DecimalInput>) :
+  // l'enfant tape un nombre a virgule, encode en CENTIEMES (entier) ; le serveur
+  // (op 'val') juge. Utilise par les competences MA.DEC.* (CM1).
+  | "decimal"
   // dictee -> enquete d'orthographe : l'enfant touche les mots fautifs puis les
   // corrige (selon le niveau) ; le texte et la verification viennent du serveur.
   | "dictee"
@@ -721,6 +727,10 @@ function buildExercise(
   // --- Fractions simples -------------------------------------------------
   if (src.competence.startsWith("MA.FRAC.")) {
     return buildFraction(src, rng, base);
+  }
+  // --- Nombres decimaux CM1 (ecrire, comparer, encadrer) ----------------
+  if (src.competence.startsWith("MA.DEC.")) {
+    return buildDecimal(src, rng, base);
   }
   // --- Tables de multiplication -----------------------------------------
   if (src.competence.startsWith("MA.TABLES.")) {

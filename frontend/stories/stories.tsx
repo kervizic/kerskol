@@ -9,6 +9,7 @@
 
 import type { ReactNode } from "react";
 import Donnees from "../src/components/Donnees";
+import DecimalInput from "../src/components/DecimalInput";
 import type { DonRender } from "../src/domain/donnees/donnees";
 
 export interface Story {
@@ -51,4 +52,15 @@ export const STORIES: Story[] = [
     node: <Donnees item={hasard} onSoumettre={noopSubmit} onContinuer={noop} /> },
   { id: "donnees-lire-cm1-tableau", label: "Données — compléter un tableau CM1 (lot 7)",
     node: <Donnees item={lireCm1} onSoumettre={noopSubmit} onContinuer={noop} /> },
+  { id: "decimal-input", label: "Décimaux — saisie à virgule (DecimalInput, lot 2)",
+    node: <DecimalInput onCode={noop} /> },
+  { id: "decimal-exercice", label: "Décimaux — exercice CM1 (consigne + saisie, lot 2)",
+    node: (
+      <div className="kk-stack" style={{ textAlign: "center" }}>
+        <p className="kk-lead" style={{ margin: "0 auto 8px" }}>
+          Écris ce nombre en chiffres : 3 unités et 25 centièmes.
+        </p>
+        <DecimalInput onCode={noop} />
+      </div>
+    ) },
 ];

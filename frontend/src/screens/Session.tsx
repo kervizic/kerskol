@@ -79,6 +79,7 @@ import {
   type EngineState,
 } from "../domain/calcul/engine";
 import { wrapHour, wrapMinute, startHour, START_MINUTE } from "../domain/calcul/horloge";
+import DecimalInput from "../components/DecimalInput";
 import { moneyAsset } from "../domain/calcul/moneyAssets";
 import { diagnostiquer, diagnostiquerConjugaison, diagnostiquerPasseCompose, type Diagnostic, type Faute } from "../domain/diagnostic";
 import { indicePour } from "../domain/indices";
@@ -1783,7 +1784,7 @@ export function Session({
   const typeDigit = useCallback(
     (d: string) => {
       if (phase !== "answering") return;
-      if (ex && (ex.saisie === "compare" || ex.saisie === "qcm" || ex.saisie === "monnaie" || ex.saisie === "heure" || ex.saisie === "fraction" || ex.saisie === "fraction_num" || ex.saisie === "lettres" || ex.saisie === "qcm_texte")) return;
+      if (ex && (ex.saisie === "compare" || ex.saisie === "qcm" || ex.saisie === "monnaie" || ex.saisie === "heure" || ex.saisie === "fraction" || ex.saisie === "fraction_num" || ex.saisie === "decimal" || ex.saisie === "lettres" || ex.saisie === "qcm_texte")) return;
       if (ex && (ex.saisie === "pose" || ex.saisie === "chiffres")) {
         const dir = ex.saisie === "pose" ? -1 : 1;
         const next = digits.slice();
@@ -1799,7 +1800,7 @@ export function Session({
   );
   const backspace = useCallback(() => {
     if (phase !== "answering") return;
-    if (ex && (ex.saisie === "compare" || ex.saisie === "qcm" || ex.saisie === "monnaie" || ex.saisie === "heure" || ex.saisie === "fraction" || ex.saisie === "fraction_num" || ex.saisie === "lettres" || ex.saisie === "qcm_texte")) return;
+    if (ex && (ex.saisie === "compare" || ex.saisie === "qcm" || ex.saisie === "monnaie" || ex.saisie === "heure" || ex.saisie === "fraction" || ex.saisie === "fraction_num" || ex.saisie === "decimal" || ex.saisie === "lettres" || ex.saisie === "qcm_texte")) return;
     if (ex && (ex.saisie === "pose" || ex.saisie === "chiffres")) {
       const dir = ex.saisie === "pose" ? -1 : 1;
       const next = digits.slice();
@@ -1846,6 +1847,12 @@ export function Session({
   // Fraction (saisie libre num/den) : le code num*100+den devient f1 ; -1 => rien.
   const onFractionCode = useCallback((code: number) => {
     setF1(code > 0 ? String(code) : "");
+  }, []);
+
+  // Saisie d'un nombre decimal (MA.DEC.*) : le code (centiemes) devient la
+  // reponse ; -1 = saisie vide/invalide.
+  const onDecimalCode = useCallback((code: number) => {
+    setF1(code >= 0 ? String(code) : "");
   }, []);
 
   // Ecriture en toutes lettres : la saisie texte est conservee telle quelle.
@@ -2095,6 +2102,9 @@ export function Session({
         {(phase === "answering" || phase === "sure") && ex.saisie === "fraction_num" && (
           <FractionInput key={ex.key} onCode={onFractionCode} />
         )}
+        {(phase === "answering" || phase === "sure") && ex.saisie === "decimal" && (
+          <DecimalInput key={ex.key} onCode={onDecimalCode} />
+        )}
         {(phase === "answering" || phase === "sure") && ex.saisie === "heure" && ex.horlogeData && (
           <HorlogeInput key={ex.key} data={ex.horlogeData} onValue={onHeureValue} />
         )}
@@ -2242,7 +2252,7 @@ export function Session({
                   <button className="kk-btn kk-btn--accent" onClick={doValidate}>Oui, je valide</button>
                 </div>
               </div>
-            ) : ex.saisie === "compare" || ex.saisie === "qcm" || ex.saisie === "monnaie" || ex.saisie === "heure" || ex.saisie === "fraction" || ex.saisie === "fraction_num" || ex.saisie === "lettres" || ex.saisie === "qcm_texte" ? (
+            ) : ex.saisie === "compare" || ex.saisie === "qcm" || ex.saisie === "monnaie" || ex.saisie === "heure" || ex.saisie === "fraction" || ex.saisie === "fraction_num" || ex.saisie === "decimal" || ex.saisie === "lettres" || ex.saisie === "qcm_texte" ? (
               <div className="kk-row" style={{ justifyContent: "center" }}>
                 <button
                   className="kk-btn kk-btn--accent kk-btn--big"

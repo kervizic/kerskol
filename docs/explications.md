@@ -1385,14 +1385,41 @@ instructions répétées). Mais **proposer** une boucle à l'enfant demande un
 étant « sans nouvelle UI ». Aucun item ajouté → aucun golden modifié ; test de
 non-régression : `0071` vérifie la portée CM2 des deux compétences.
 
+## Livré : « Nombres décimaux » (migration 0072, lot 2)
+
+Nouvelle sous-matière / domaine `decimaux` (**portée CM1..CM2**, visible CM1+),
+avec une **nouvelle saisie à virgule** (`<DecimalInput>`, calquée sur
+`FractionInput`). **Encodage en centièmes entiers** : un décimal `x` est codé
+`round(x·100)` (3,25 → 325 ; 3,5 → 350 ; 0,07 → 7 ; 7 → 700) ; aucun flottant ne
+circule, le **serveur reste seul juge** (`verif_calcul`, op `val`, famille
+`MA.DEC.%` bornée à 100000 centièmes = 1000,00). Trois compétences, toutes via
+`<DecimalInput>` :
+- **MA.DEC.ECRIRE** - écrire un décimal depuis une désignation (unités +
+  dixièmes/centièmes) ou depuis une **fraction décimale** (lien fractions ↔
+  virgule : « 25 centièmes » → 0,25).
+- **MA.DEC.COMPARER** - comparer deux décimaux en **écrivant le plus grand / le
+  plus petit** (évite une UI de signes dédiée aux décimaux).
+- **MA.DEC.ENCADRER** - écrire l'**entier juste avant / juste après** un décimal.
+
+Progression N1→N4 : dixièmes puis centièmes puis fraction décimale ; bornes qui
+grandissent (`maxE` 5→99). Génération client `buildDecimal` depuis
+`ex_calcul.params` (miroir `seedSources.ts`, bloc DEC, et test golden
+`decimaux.test.ts`) ; `ex_calcul` étend ses CHECK (`operation`/`forme` =
+`decimal`). Plan de classe **CM1** (cœur). Test croisé serveur `decimaux_test.sql`
+(jugement val/cmp, ops interdites, bornes, référentiel). Capture Playwright
+vérifiée (390/820 px).
+
+**Reste décimaux (lot d'UI suivant)** : **placer sur une droite graduée** (figure
+SVG de droite décimale) et **ranger** plusieurs décimaux (UI d'ordre) ; l'addition
+et la soustraction de décimaux relèvent du lot 3 (opérations).
+
 ## Reste à livrer pour le CM1 (maths)
 
 Chaque point suit le même patron (nouvelle compétence `classe_min = 'CM1'`,
 banque `ex_calcul`, extension de `verif_calcul` ou nouveau juge, plan de classe,
 tests golden) :
-- **Nombres décimaux** : dixièmes, centièmes, lien fractions décimales ↔ écriture
-  à virgule, comparer/ranger/encadrer. **Nécessite un pavé numérique avec
-  virgule** (nouvelle saisie) et un juge décimal (non encore présent).
+- **Nombres décimaux** : compléter avec la **droite graduée** décimale et le
+  **rangement** de plusieurs décimaux (saisies/figures supplémentaires).
 - **Quatre opérations** dont **division posée** (diviseur à 1 puis 2 chiffres) :
   étendre le moteur `MA.POSE.*`.
 - **Calcul mental et en ligne** CM1 (grands nombres, multiples).
