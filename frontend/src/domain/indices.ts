@@ -263,19 +263,21 @@ export const INDICES: Record<string, string> = {
   "EMC.ECRANS.ESPRITCRITIQUE":
     "Sur Internet, tout n'est pas vrai. Avant de croire une chose, on réfléchit et on vérifie avec un adulte.",
 
-  // --- Sciences et technologie (indices aux niveaux 1 et 2 seulement) -------
+  // --- Sciences et technologie (programme 2026 ; indices aux niveaux 1 et 2) -
   "ST.MATIERE.ETATS":
-    "Pense à l'eau. Quand elle est dure et froide, c'est un solide. Quand elle coule, c'est un liquide. Quand elle part dans l'air, c'est un gaz.",
+    "La balance mesure la masse. Le sel et le sucre se dissolvent dans l'eau ; le sable, non : on le récupère avec un filtre (filtration).",
+  "ST.PHYSIQUE.LUMIERE":
+    "Transparent : on voit au travers. Translucide : la lumière passe un peu. Opaque : la lumière ne passe pas et forme une ombre.",
   "ST.VIVANT.CLASSER":
-    "Regarde ce que l'animal a sur le corps. Des plumes, c'est un oiseau. Six pattes, c'est un insecte. Dans une chaîne, la plante est toujours au début.",
+    "Une espèce = des individus qui ont des petits ensemble. Ovipare : pond des œufs. Vivipare : les petits naissent déjà formés.",
+  "ST.VIVANT.ECOSYSTEMES":
+    "Un écosystème = des êtres vivants, leur milieu et leurs relations. Dans une chaîne, la flèche va du mangé vers le mangeur.",
   "ST.CORPS.SANTE":
-    "Pour être en forme, on mange un peu de tout, on boit de l'eau et on dort bien. Les aliments commencent leur voyage par la bouche.",
-  "ST.ENERGIE.SOURCES":
-    "Le soleil, le vent et l'eau reviennent toujours. Pour aider la planète, on éteint la lumière et les écrans quand on ne s'en sert pas.",
-  "ST.OBJETS.TECHNIQUE":
-    "Chaque objet sert à quelque chose, c'est sa fonction. Dans une lampe, le courant passe seulement si le circuit est bien fermé en boucle.",
+    "Le cerveau commande le corps, la mémoire et les émotions. À la puberté, le corps grandit : cela arrive à des âges différents, c'est normal.",
   "ST.TERRE.CIEL":
-    "La Terre tourne sur elle-même en un jour : d'un côté le jour, de l'autre la nuit. Elle fait un grand tour du Soleil en un an.",
+    "Thermomètre (température), pluviomètre (pluie), anémomètre (vent). La Lune change de forme : ce sont ses phases.",
+  "ST.OBJETS.TECHNIQUE":
+    "Chaque partie d'un objet a une fonction (le bouchon protège la pointe du stylo). Un programme commande un robot, dans le bon ordre.",
 
   // --- Histoire (nouveau programme 2026 ; indices aux niveaux 1 et 2) -------
   "HIST.MOYENAGE":

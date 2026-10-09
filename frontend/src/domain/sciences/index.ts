@@ -1,7 +1,9 @@
-// « Sciences et technologie » (ST, cycle 3, reperes CM1). NOUVELLE MATIERE a
-// cote de Maths, Francais, Questionner le monde et EMC. Six sous-matieres
-// (un `domaine` chacune) : etats_matiere, classification, corps_humain,
-// energie, objets_techniques, ciel_terre.
+// « Sciences et technologie » (ST, cycle 3 - PROGRAMME 2026, attendus CM1 de
+// l'arrete du 5 juin 2026 / BO n° 24 du 11 juin 2026, annexe 2). MATIERE a cote
+// de Maths, Francais, Questionner le monde, EMC, Histoire et Geographie. Sept
+// sous-matieres (un `domaine` chacune), couvrant les 4 themes du programme :
+// etats_matiere, lumiere, classification, ecosystemes, corps_humain, ciel_terre,
+// objets_techniques.
 //
 // REUTILISATION : ST partage l'INFRASTRUCTURE « situation » de Questionner le
 // monde (meme type QmItem, memes formats qcm/tri/ordre/texte, meme composant

@@ -101,12 +101,13 @@ export const MATIERES: MatiereDef[] = [
     code: "ST",
     libelle: "Sciences et technologie",
     sousMatieres: [
-      { domaine: "etats_matiere", libelle: "États et mélanges", classeMin: "CM1" },
+      { domaine: "etats_matiere", libelle: "Matière et mélanges", classeMin: "CM1" },
+      { domaine: "lumiere", libelle: "Lumière, ombres et mouvement", classeMin: "CM1" },
       { domaine: "classification", libelle: "Classer le vivant", classeMin: "CM1" },
-      { domaine: "corps_humain", libelle: "Le corps et la santé", classeMin: "CM1" },
-      { domaine: "energie", libelle: "L'énergie", classeMin: "CM1" },
-      { domaine: "objets_techniques", libelle: "Les objets techniques", classeMin: "CM1" },
+      { domaine: "ecosystemes", libelle: "Écosystèmes et chaînes", classeMin: "CM1" },
+      { domaine: "corps_humain", libelle: "Le corps : cerveau et puberté", classeMin: "CM1" },
       { domaine: "ciel_terre", libelle: "La Terre et le ciel", classeMin: "CM1" },
+      { domaine: "objets_techniques", libelle: "Objets techniques et programmation", classeMin: "CM1" },
     ],
   },
   {
