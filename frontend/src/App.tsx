@@ -10,6 +10,7 @@ import { DefiChrono } from "./screens/DefiChrono";
 import { LinkCode } from "./screens/LinkCode";
 import { Bibliotheque } from "./screens/Bibliotheque";
 import { Histoire } from "./screens/Histoire";
+import { GeographieParcours } from "./screens/GeographieParcours";
 import DicteeMaitresse from "./components/DicteeMaitresse";
 import { ChildTheme } from "./components/ChildTheme";
 import {
@@ -41,7 +42,7 @@ function currentPath(): string {
     return "/";
   }
 }
-const CHILD_RE = /^\/enfant\/([^/]+)\/(village|seance|defi|bibliotheque|dictee-maitresse|histoire)$/;
+const CHILD_RE = /^\/enfant\/([^/]+)\/(village|seance|defi|bibliotheque|dictee-maitresse|histoire|geo-parcours)$/;
 
 export function App() {
   const [ready, setReady] = useState(false);
@@ -157,7 +158,7 @@ export function App() {
     const busy =
       path === "/creer-profil" ||
       path === "/reglages" ||
-      /^\/enfant\/[^/]+\/(seance|defi|histoire)$/.test(path);
+      /^\/enfant\/[^/]+\/(seance|defi|histoire|geo-parcours)$/.test(path);
     window.Kerskol?.version?.setBusy?.(busy);
     // A chaque changement d'ecran : on verifie /version.json. Si non occupe et
     // qu'une nouvelle version existe, app-version.js l'applique (transition).
@@ -338,6 +339,7 @@ export function App() {
               onBiblio={() => navigate(`/enfant/${prof.id}/bibliotheque`)}
               onDictee={() => navigate(`/enfant/${prof.id}/dictee-maitresse`)}
               onHistoire={() => navigate(`/enfant/${prof.id}/histoire`)}
+              onGeoParcours={() => navigate(`/enfant/${prof.id}/geo-parcours`)}
               onProfilChange={upsertProfil}
             />
           </ChildTheme>
@@ -356,6 +358,13 @@ export function App() {
         return (
           <ChildTheme couleur={couleur}>
             <Histoire profil={prof} onExit={() => navigate(`/enfant/${prof.id}/village`)} />
+          </ChildTheme>
+        );
+      }
+      if (m[2] === "geo-parcours") {
+        return (
+          <ChildTheme couleur={couleur}>
+            <GeographieParcours profil={prof} onExit={() => navigate(`/enfant/${prof.id}/village`)} />
           </ChildTheme>
         );
       }

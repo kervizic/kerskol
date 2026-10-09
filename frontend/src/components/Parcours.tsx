@@ -31,7 +31,8 @@ interface Props {
 }
 
 type Etape = "recit" | "questions" | "frise" | "retiens";
-const ETAPES: Etape[] = ["recit", "questions", "frise", "retiens"];
+const ETAPES_AVEC_FRISE: Etape[] = ["recit", "questions", "frise", "retiens"];
+const ETAPES_SANS_FRISE: Etape[] = ["recit", "questions", "retiens"];
 const ETAPE_LABEL: Record<Etape, string> = {
   recit: "Le récit",
   questions: "Les questions",
@@ -194,13 +195,15 @@ export default function Parcours({
   const [revoirRecit, setRevoirRecit] = useState(false);
   const verdictFrise = useRef(false);
 
+  const avecFrise = chapitre.frise.length > 0;
+  const ETAPES = avecFrise ? ETAPES_AVEC_FRISE : ETAPES_SANS_FRISE;
   const etapeIdx = ETAPES.indexOf(etape);
 
   // --- Etape QUESTIONS : avance question par question ---------------------
   const question = chapitre.questions[qIndex];
   const avancerQuestion = () => {
     if (qIndex + 1 < chapitre.questions.length) setQIndex((i) => i + 1);
-    else setEtape("frise");
+    else setEtape(avecFrise ? "frise" : "retiens");
   };
 
   // --- Etape FRISE : place une carte a la fois ----------------------------

@@ -2,6 +2,7 @@ import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import Parcours from "./Parcours";
 import { chapitreParCle } from "../domain/histoire/parcours";
+import { chapitreGeoParCle } from "../domain/geographie/parcours";
 
 const chapitre = chapitreParCle("moyen_age")!;
 
@@ -41,6 +42,17 @@ describe("Parcours — étapes", () => {
     fireEvent.click(screen.getByRole("button", { name: "la seigneurie" }));
     fireEvent.click(screen.getByRole("button", { name: /Valider/ }));
     await waitFor(() => expect(onSoumettre).toHaveBeenCalledWith("pa-moy-q1", "la seigneurie"));
+  });
+
+  it("chapitre géo (sans frise) : l'étape frise est masquée", () => {
+    const chGeo = chapitreGeoParCle("geo_nourrir")!;
+    render(
+      <Parcours chapitre={chGeo} frisePlacees={[]} onSoumettre={vi.fn().mockResolvedValue({ correct: true })}
+        onPlacerFrise={vi.fn().mockResolvedValue({ correct: true })} onTermine={vi.fn()} />,
+    );
+    // Les étapes affichées ne contiennent PAS « Ma frise ».
+    expect(screen.queryByText(/Ma frise/)).not.toBeInTheDocument();
+    expect(screen.getByText(/3\. Je retiens/)).toBeInTheDocument();
   });
 
   it("« Revoir le récit » réaffiche le récit pendant les questions", () => {

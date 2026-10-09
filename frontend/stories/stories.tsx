@@ -17,6 +17,7 @@ import Geometrie from "../src/components/Geometrie";
 import Parcours from "../src/components/Parcours";
 import Frise from "../src/components/Frise";
 import { chapitreParCle, friseCartesToutes } from "../src/domain/histoire/parcours";
+import { chapitreGeoParCle } from "../src/domain/geographie/parcours";
 import { generateExercise as genEx } from "../src/domain/calcul/generator";
 import type { DonRender } from "../src/domain/donnees/donnees";
 import type { GramRender } from "../src/domain/francais/grammaire";
@@ -344,4 +345,9 @@ export const STORIES: Story[] = [
       cartes={friseCartesToutes().filter((c) => ["fri-1492-colomb", "fri-1682-versailles"].includes(c.cle)).sort((a, b) => a.cleTri - b.cleTri)}
       aPlacer={friseCartesToutes().find((c) => c.cle === "fri-1519-magellan")!}
       onPlacer={noopSubmit} onContinuer={noop} /> },
+
+  // --- Parcours de Géographie (lot 3 CM1) : étape RECIT avec carte.
+  { id: "parcours-geo-recit", label: "Parcours Géographie — récit « Awa et le puits » + carte (CM1)",
+    node: <Parcours chapitre={chapitreGeoParCle("geo_inegalites")!} frisePlacees={[]}
+      onSoumettre={noopSubmit} onPlacerFrise={noopSubmit} onTermine={noop} /> },
 ];
