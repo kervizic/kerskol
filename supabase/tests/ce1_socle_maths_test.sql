@@ -63,11 +63,12 @@ BEGIN
 
     -- 4c. Total compétences maths CE1 = 27 (0114+0066) + 6 (0115) + 4 dédiées
     --     CE1 [CE1,CE1] (0121 MA.NUM.CE1_MILLE ; 0122 MA.POSE.CE1_ADDITION,
-    --     MA.POSE.CE1_SOUSTRACTION ; 0123 MA.PB.CE1_MULT_DIV) = 37.
+    --     MA.POSE.CE1_SOUSTRACTION ; 0123 MA.PB.CE1_MULT_DIV) + 3 dédiées (0126 :
+    --     MA.MES.CE1_LONGUEURS, MA.MES.CE1_MASSES, MA.PB.CE1_DEUX_ETAPES) = 40.
     SELECT count(*) INTO v_n FROM public.competences
      WHERE matiere = 'MA' AND classe_min = 'CE1';
-    IF v_n <> 37 THEN
-        RAISE EXCEPTION 'ce1_socle : 37 compétences maths CE1 attendues, obtenu %', v_n;
+    IF v_n <> 40 THEN
+        RAISE EXCEPTION 'ce1_socle : 40 compétences maths CE1 attendues, obtenu %', v_n;
     END IF;
 
     -- 5. Candidature d'un profil CE1 : une compétence [CE1,CE2] chevauche la
@@ -90,5 +91,5 @@ BEGIN
         RAISE EXCEPTION 'ce1_socle : certaines compétences ne sont plus candidates pour un CE2 (obtenu %)', v_n;
     END IF;
 
-    RAISE NOTICE 'ce1_socle_maths_test : PASS (37 compétences maths CE1 : 23 par 0114, 6 géo/repère par 0115, 4 par 0066, 1 dédiée par 0121, 2 dédiées par 0122, 1 dédiée par 0123)';
+    RAISE NOTICE 'ce1_socle_maths_test : PASS (40 compétences maths CE1 : 23 par 0114, 6 géo/repère par 0115, 4 par 0066, 1 dédiée 0121, 2 dédiées 0122, 1 dédiée 0123, 3 dédiées 0126)';
 END $$;
