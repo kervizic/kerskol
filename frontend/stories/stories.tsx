@@ -76,6 +76,17 @@ const complementCoi: GramRender = {
   explication: "Je téléphone à qui ? À ma grand-mère. Il y a le petit mot à : c'est un complément d'objet indirect.",
 };
 
+// Orthographe CM1 (lot C) : homophones grammaticaux (QCM « choisis le bon mot »).
+const homophone: GramRender = {
+  cle: "homo-n2-ce",
+  format: "qcm",
+  consigne: "Choisis le bon mot pour compléter la phrase.",
+  phrase: "… gâteau est délicieux.",
+  options: ["Ce", "Se"],
+  attendu: "Ce",
+  explication: "ce se met devant un nom. Ce gâteau, comme ce chien : ce est un petit mot devant le nom.",
+};
+
 // Registre. Ajouter une entree par nouveau composant d'UI.
 export const STORIES: Story[] = [
   { id: "donnees-hasard-qcm", label: "Données — hasard (QCM, lot 7)",
@@ -97,6 +108,8 @@ export const STORIES: Story[] = [
     node: <Donnees item={propCourses} onSoumettre={noopSubmit} onContinuer={noop} /> },
   { id: "grammaire-complements-coi", label: "Grammaire — compléments COD/COI (lot C, N3)",
     node: <Grammaire item={complementCoi} onSoumettre={noopSubmit} onContinuer={noop} /> },
+  { id: "orthographe-homophones", label: "Orthographe — homophones ce/se (lot C, N2)",
+    node: <Grammaire item={homophone} onSoumettre={noopSubmit} onContinuer={noop} /> },
   { id: "decimal-addition", label: "Opérations — addition de décimaux (lot 3)",
     node: (
       <div className="kk-stack" style={{ textAlign: "center" }}>

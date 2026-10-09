@@ -26,15 +26,15 @@ DECLARE
     n   integer;
 BEGIN
     SELECT count(*) INTO n FROM public.grammaire_item;
-    IF n <> 90 THEN
-        RAISE EXCEPTION 'grammaire_item : 90 items attendus, obtenu %', n;
+    IF n <> 102 THEN
+        RAISE EXCEPTION 'grammaire_item : 102 items attendus, obtenu %', n;
     END IF;
 
     -- Couverture : chaque competence a au moins un item a chaque niveau 1..4.
     FOR r IN SELECT c AS competence, nv AS niveau
                FROM unnest(ARRAY['FR.GRAM.NATURE','FR.GRAM.SUJET_VERBE',
                     'FR.GRAM.TYPES_PHRASES','FR.GRAM.PONCTUATION',
-                    'FR.GRAM.GROUPE_NOMINAL','FR.GRAM.COMPLEMENTS']) AS c,
+                    'FR.GRAM.GROUPE_NOMINAL','FR.GRAM.COMPLEMENTS','FR.GRAM.HOMOPHONES']) AS c,
                     generate_series(1,4) AS nv
     LOOP
         IF NOT EXISTS (SELECT 1 FROM public.grammaire_item
@@ -57,7 +57,11 @@ BEGIN
         ('comp-n1-cod','FR.GRAM.COMPLEMENTS',1,'qcm','la voiture'),
         ('comp-n2-cod','FR.GRAM.COMPLEMENTS',2,'clic','bateau'),
         ('comp-n3-coi','FR.GRAM.COMPLEMENTS',3,'qcm','un complément d''objet indirect'),
-        ('comp-n4-cc','FR.GRAM.COMPLEMENTS',4,'texte','ciel')
+        ('comp-n4-cc','FR.GRAM.COMPLEMENTS',4,'texte','ciel'),
+        ('homo-n1-on','FR.GRAM.HOMOPHONES',1,'qcm','On'),
+        ('homo-n2-se','FR.GRAM.HOMOPHONES',2,'qcm','se'),
+        ('homo-n3-ces','FR.GRAM.HOMOPHONES',3,'qcm','ces'),
+        ('homo-n4-sest','FR.GRAM.HOMOPHONES',4,'qcm','s''est')
     ) AS t(cle, competence, niveau, format, attendu)
     LOOP
         SELECT format || '|' || attendu INTO got FROM public.grammaire_item WHERE cle = r.cle;

@@ -514,6 +514,66 @@ export const BANQUE_GRAMMAIRE: GramItem[] = [
     consigne: "Écris le mot qui dit OÙ volent les oiseaux.", phrase: "Les oiseaux volent dans le ciel.",
     attendu: "ciel",
     explication: "Les oiseaux volent où ? Dans le ciel. Le mot qui dit le lieu est ciel." },
+
+  // =========================================================================
+  // FR.GRAM.HOMOPHONES (CM1) — homophones grammaticaux (orthographe
+  // grammaticale) : ou/où, on/ont, ce/se, ces/ses, leur/leurs, tout/tous,
+  // c'est/s'est. Attendu CM1 (eduscol doc 13984). QCM « choisis le bon mot »
+  // (on ne peut pas taper la reponse : les deux mots se prononcent pareil).
+  // Difficulte croissante par la subtilite de la paire et du contexte.
+  // =========================================================================
+  // N1 : paires les plus simples (ou/où, on/ont)
+  { cle: "homo-n1-ou", competence: "FR.GRAM.HOMOPHONES", niveau: 1, format: "qcm",
+    consigne: "Choisis le bon mot pour compléter la phrase.", phrase: "Tu veux une pomme … une poire ?",
+    options: ["ou", "où"], attendu: "ou",
+    explication: "ou sans accent sert à choisir entre deux choses. Ici, on choisit entre une pomme et une poire : ou." },
+  { cle: "homo-n1-on", competence: "FR.GRAM.HOMOPHONES", niveau: 1, format: "qcm",
+    consigne: "Choisis le bon mot pour compléter la phrase.", phrase: "Ce soir, … regarde un film.",
+    options: ["On", "Ont"], attendu: "On",
+    explication: "On peut être remplacé par il. On regarde, comme il regarde : on sans t." },
+  { cle: "homo-n1-ou2", competence: "FR.GRAM.HOMOPHONES", niveau: 1, format: "qcm",
+    consigne: "Choisis le bon mot pour compléter la phrase.", phrase: "Dis-moi … tu vas.",
+    options: ["où", "ou"], attendu: "où",
+    explication: "où avec un accent dit le lieu. Où tu vas, c'est à quel endroit : où." },
+  // N2 : ce/se, ont
+  { cle: "homo-n2-ce", competence: "FR.GRAM.HOMOPHONES", niveau: 2, format: "qcm",
+    consigne: "Choisis le bon mot pour compléter la phrase.", phrase: "… gâteau est délicieux.",
+    options: ["Ce", "Se"], attendu: "Ce",
+    explication: "ce se met devant un nom. Ce gâteau, comme ce chien : ce est un petit mot devant le nom." },
+  { cle: "homo-n2-se", competence: "FR.GRAM.HOMOPHONES", niveau: 2, format: "qcm",
+    consigne: "Choisis le bon mot pour compléter la phrase.", phrase: "Le chat … cache sous le lit.",
+    options: ["se", "ce"], attendu: "se",
+    explication: "se se met devant un verbe. Il se cache : se accompagne l'action." },
+  { cle: "homo-n2-ont", competence: "FR.GRAM.HOMOPHONES", niveau: 2, format: "qcm",
+    consigne: "Choisis le bon mot pour compléter la phrase.", phrase: "Les oiseaux … un joli nid.",
+    options: ["ont", "on"], attendu: "ont",
+    explication: "ont est le verbe avoir. Les oiseaux ont, comme ils ont : ont avec un t." },
+  // N3 : ces/ses, tout/tous, leur/leurs (devant un nom)
+  { cle: "homo-n3-ces", competence: "FR.GRAM.HOMOPHONES", niveau: 3, format: "qcm",
+    consigne: "Choisis le bon mot pour compléter la phrase.", phrase: "Regarde … belles fleurs dans le jardin !",
+    options: ["ces", "ses"], attendu: "ces",
+    explication: "ces montre des choses qu'on désigne. On peut dire ces fleurs-là : ces." },
+  { cle: "homo-n3-tous", competence: "FR.GRAM.HOMOPHONES", niveau: 3, format: "qcm",
+    consigne: "Choisis le bon mot pour compléter la phrase.", phrase: "… les enfants chantent ensemble.",
+    options: ["Tous", "Tout"], attendu: "Tous",
+    explication: "tous est au pluriel, devant un nom pluriel. Tous les enfants : on peut en compter plusieurs." },
+  { cle: "homo-n3-leurs", competence: "FR.GRAM.HOMOPHONES", niveau: 3, format: "qcm",
+    consigne: "Choisis le bon mot pour compléter la phrase.", phrase: "Les élèves rangent … cahiers.",
+    options: ["leurs", "leur"], attendu: "leurs",
+    explication: "leurs est devant un nom pluriel : plusieurs cahiers. Chacun a le sien, cela fait plusieurs : leurs." },
+  // N4 : c'est/s'est, leur (devant un verbe) — les plus subtils
+  { cle: "homo-n4-cest", competence: "FR.GRAM.HOMOPHONES", niveau: 4, format: "qcm",
+    consigne: "Choisis le bon mot pour compléter la phrase.", phrase: "… une très belle journée.",
+    options: ["C'est", "S'est"], attendu: "C'est",
+    explication: "c'est veut dire cela est. C'est une belle journée, comme cela est une belle journée." },
+  { cle: "homo-n4-sest", competence: "FR.GRAM.HOMOPHONES", niveau: 4, format: "qcm",
+    consigne: "Choisis le bon mot pour compléter la phrase.", phrase: "Léa … lavé les mains avant de manger.",
+    options: ["s'est", "c'est"], attendu: "s'est",
+    explication: "s'est accompagne un verbe à l'action passée. Léa s'est lavée : s'est va avec le verbe." },
+  { cle: "homo-n4-leur", competence: "FR.GRAM.HOMOPHONES", niveau: 4, format: "qcm",
+    consigne: "Choisis le bon mot pour compléter la phrase.", phrase: "Le maître … explique la leçon.",
+    options: ["leur", "leurs"], attendu: "leur",
+    explication: "leur devant un verbe ne change jamais. Il leur explique, comme il lui explique : leur sans s." },
 ];
 
 // Toutes les competences de grammaire (ordre d'affichage = ordre du referentiel).
@@ -524,6 +584,7 @@ export const COMPETENCES_GRAMMAIRE = [
   "FR.GRAM.PONCTUATION",
   "FR.GRAM.GROUPE_NOMINAL",
   "FR.GRAM.COMPLEMENTS",
+  "FR.GRAM.HOMOPHONES",
 ] as const;
 
 // Items jouables pour une competence et un niveau donnes.
