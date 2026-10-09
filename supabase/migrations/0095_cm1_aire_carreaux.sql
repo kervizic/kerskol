@@ -48,7 +48,7 @@ BEGIN
     FOR v_niv IN 1..4 LOOP
         v_id := md5('MA.GEO.AIRE:' || v_niv || ':geometrie')::uuid;
         INSERT INTO public.exercices (id, competence, type, niveau, methode, actif)
-        VALUES (v_id, 'MA.GEO.AIRE', 'geometrie', v_niv, 'geometrie', true)
+        VALUES (v_id, 'MA.GEO.AIRE', 'geometrie', v_niv, 'van_hiele', true)
         ON CONFLICT (id) DO UPDATE SET competence=EXCLUDED.competence,
             type=EXCLUDED.type, niveau=EXCLUDED.niveau, methode=EXCLUDED.methode, actif=true;
     END LOOP;
