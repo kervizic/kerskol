@@ -28,14 +28,14 @@ DECLARE
     n   integer;
 BEGIN
     SELECT count(*) INTO n FROM public.comprehension_item;
-    IF n <> 244 THEN
-        RAISE EXCEPTION 'comprehension_item : 244 items attendus, obtenu %', n;
+    IF n <> 256 THEN
+        RAISE EXCEPTION 'comprehension_item : 256 items attendus, obtenu %', n;
     END IF;
 
     -- Couverture : chaque competence a au moins un item a chaque niveau 1..4.
     FOR r IN SELECT c AS competence, nv AS niveau
                FROM unnest(ARRAY['FR.LECTURE.INFO','FR.LECTURE.INFERENCE','FR.LECTURE.ORDRE',
-                    'FR.LECTURE.VRAIFAUX','FR.LECTURE.SENS_MOT']) AS c,
+                    'FR.LECTURE.VRAIFAUX','FR.LECTURE.SENS_MOT','FR.LECTURE.CE1_INFERENCE']) AS c,
                     generate_series(1,4) AS nv
     LOOP
         IF NOT EXISTS (SELECT 1 FROM public.comprehension_item
@@ -46,6 +46,9 @@ BEGIN
 
     -- Spot check (miroir exact du front).
     FOR r IN SELECT * FROM (VALUES
+        ('ce1inf-n1-a','FR.LECTURE.CE1_INFERENCE',1,'qcm','content'),
+        ('ce1inf-n3-b','FR.LECTURE.CE1_INFERENCE',3,'clic','parapluie'),
+        ('ce1inf-n4-c','FR.LECTURE.CE1_INFERENCE',4,'texte','mal'),
         ('lec-info-n1-a','FR.LECTURE.INFO',1,'qcm','Mistigri'),
         ('lec-info-n3-b','FR.LECTURE.INFO',3,'clic','coffre'),
         ('lec-info-n4-b','FR.LECTURE.INFO',4,'texte','Biscuit'),

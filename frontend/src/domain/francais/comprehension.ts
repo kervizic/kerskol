@@ -1969,6 +1969,70 @@ export const BANQUE_COMPREHENSION: CompItem[] = [
     attendu: "soleil",
     explication: "Abeille préfère un simple rayon de soleil à toutes les pierres précieuses.",
     source: "Anatole France, « Abeille »" },
+
+  // =========================================================================
+  // LOT CE1 (incrément 14) - FR.LECTURE.CE1_INFERENCE : inférence CE1 DÉDIÉE
+  // ([CE1,CE1]). Textes ORIGINAUX très courts (quotidien, animaux, nature),
+  // aucune donnée de calendrier, bienveillance stricte, aucun texte coupé.
+  // N1 qcm, N2 qcm, N3 qcm/clic, N4 clic/texte. Prérequis de remédiation vers
+  // FR.LECTURE.INFERENCE (CE2).
+  // =========================================================================
+  { cle: "ce1inf-n1-a", competence: "FR.LECTURE.CE1_INFERENCE", niveau: 1, format: "qcm",
+    texte: ["Tom a reçu un cadeau.", "Il ouvre la boîte et il sourit très fort."],
+    consigne: "Comment se sent Tom ?",
+    options: ["content", "fâché", "malade"], attendu: "content",
+    explication: "Tom sourit très fort après son cadeau : il est content." },
+  { cle: "ce1inf-n1-b", competence: "FR.LECTURE.CE1_INFERENCE", niveau: 1, format: "qcm",
+    texte: ["Lila met son manteau et son bonnet.", "Elle prend ses moufles avant de sortir."],
+    consigne: "Quel temps fait-il dehors ?",
+    options: ["il fait froid", "il fait très chaud", "il y a du soleil"], attendu: "il fait froid",
+    explication: "Lila met un bonnet et des moufles : c'est qu'il fait froid." },
+  { cle: "ce1inf-n1-c", competence: "FR.LECTURE.CE1_INFERENCE", niveau: 1, format: "qcm",
+    texte: ["Le chat miaule devant sa gamelle vide.", "Il tourne autour des jambes de Léa."],
+    consigne: "Que veut le chat ?",
+    options: ["manger", "dormir", "se cacher"], attendu: "manger",
+    explication: "La gamelle est vide et le chat miaule : il a faim, il veut manger." },
+  { cle: "ce1inf-n2-a", competence: "FR.LECTURE.CE1_INFERENCE", niveau: 2, format: "qcm",
+    texte: ["Noé cherche partout sous son lit et dans son sac.", "Il ne trouve plus son doudou et ses yeux brillent."],
+    consigne: "Pourquoi Noé est-il triste ?",
+    options: ["il a perdu son doudou", "il a trop de jouets", "il a gagné un prix"], attendu: "il a perdu son doudou",
+    explication: "Noé cherche son doudou et ne le trouve pas : c'est pour ça qu'il est triste." },
+  { cle: "ce1inf-n2-b", competence: "FR.LECTURE.CE1_INFERENCE", niveau: 2, format: "qcm",
+    texte: ["Maya range vite ses jouets.", "Elle entend la voiture de papa qui arrive."],
+    consigne: "Pourquoi Maya se dépêche-t-elle ?",
+    options: ["parce que papa arrive", "parce qu'elle a faim", "parce qu'elle est fatiguée"], attendu: "parce que papa arrive",
+    explication: "Maya entend la voiture de papa : elle range vite avant qu'il entre." },
+  { cle: "ce1inf-n2-c", competence: "FR.LECTURE.CE1_INFERENCE", niveau: 2, format: "qcm",
+    texte: ["Le ciel devient tout gris.", "Les oiseaux se cachent et le vent se lève."],
+    consigne: "Qu'est-ce qui va bientôt arriver ?",
+    options: ["un orage", "un arc-en-ciel", "une fête"], attendu: "un orage",
+    explication: "Le ciel gris et le vent annoncent la pluie : un orage va arriver." },
+  { cle: "ce1inf-n3-a", competence: "FR.LECTURE.CE1_INFERENCE", niveau: 3, format: "qcm",
+    texte: ["Hugo regarde son assiette de légumes.", "Il fait la grimace et pousse l'assiette un peu plus loin."],
+    consigne: "Est-ce que Hugo aime les légumes ?",
+    options: ["non, il n'aime pas", "oui, beaucoup", "il en reprend"], attendu: "non, il n'aime pas",
+    explication: "Hugo fait la grimace et pousse l'assiette : il n'aime pas les légumes." },
+  { cle: "ce1inf-n3-b", competence: "FR.LECTURE.CE1_INFERENCE", niveau: 3, format: "clic",
+    texte: ["Emma tient un grand parapluie.", "Ses bottes sont pleines d'eau."],
+    consigne: "Clique le mot qui montre qu'il pleut.", attendu: "parapluie",
+    explication: "On prend un parapluie quand il pleut : c'est l'indice." },
+  { cle: "ce1inf-n3-c", competence: "FR.LECTURE.CE1_INFERENCE", niveau: 3, format: "qcm",
+    texte: ["Le bébé bâille et se frotte les yeux.", "Sa maman le pose doucement dans son lit."],
+    consigne: "De quoi a besoin le bébé ?",
+    options: ["de dormir", "de courir", "de jouer"], attendu: "de dormir",
+    explication: "Le bébé bâille et se frotte les yeux : il a sommeil, il a besoin de dormir." },
+  { cle: "ce1inf-n4-a", competence: "FR.LECTURE.CE1_INFERENCE", niveau: 4, format: "clic",
+    texte: ["Paul a couru pour rentrer.", "Il est essoufflé et son visage est tout rouge."],
+    consigne: "Clique le mot qui montre que Paul est fatigué.", attendu: "essoufflé",
+    explication: "Essoufflé veut dire qu'on a du mal à respirer : Paul est fatigué d'avoir couru." },
+  { cle: "ce1inf-n4-b", competence: "FR.LECTURE.CE1_INFERENCE", niveau: 4, format: "clic",
+    texte: ["Sara serre son nounours très fort.", "La lumière est éteinte et elle n'ose pas bouger."],
+    consigne: "Clique le mot qui montre qu'il fait noir.", attendu: "éteinte",
+    explication: "La lumière est éteinte : il fait noir, et Sara a un peu peur." },
+  { cle: "ce1inf-n4-c", competence: "FR.LECTURE.CE1_INFERENCE", niveau: 4, format: "texte",
+    texte: ["Tom tombe de son vélo et se gratte le genou.", "Une larme coule mais il se relève tout seul."],
+    consigne: "Que ressent Tom quand il tombe ? Écris un mot.", attendu: "mal",
+    explication: "Tom a une larme et se gratte le genou : il a mal, mais il est courageux." },
 ];
 
 // Competences de la sous-matiere (ordre d'affichage = ordre du referentiel).
@@ -1978,6 +2042,7 @@ export const COMPETENCES_LECTURE = [
   "FR.LECTURE.ORDRE",
   "FR.LECTURE.VRAIFAUX",
   "FR.LECTURE.SENS_MOT",
+  "FR.LECTURE.CE1_INFERENCE",
 ] as const;
 
 // Items jouables pour une competence et un niveau donnes.
@@ -2257,6 +2322,19 @@ export const PREUVE_PAR_CLE: Record<string, string> = {
   "lec-bib-abeille-sens-n2": "L'avare est la proie de son or.",
   "lec-bib-abeille-inf-n3": "À toutes ces pierres, Abeille préfère un rayon de soleil ; et aux perles, elle préfère les yeux de son ami Georges.",
   "lec-bib-abeille-texte-n4": "À toutes ces pierres je préfère un seul des rayons de soleil qui se brisent sur le toit d'ardoise du château des Clarides.",
+  // FR.LECTURE.CE1_INFERENCE (incrément 14)
+  "ce1inf-n1-a": "Il ouvre la boîte et il sourit très fort.",
+  "ce1inf-n1-b": "Elle prend ses moufles avant de sortir.",
+  "ce1inf-n1-c": "Le chat miaule devant sa gamelle vide.",
+  "ce1inf-n2-a": "Il ne trouve plus son doudou et ses yeux brillent.",
+  "ce1inf-n2-b": "Elle entend la voiture de papa qui arrive.",
+  "ce1inf-n2-c": "Le ciel devient tout gris.",
+  "ce1inf-n3-a": "Il fait la grimace et pousse l'assiette un peu plus loin.",
+  "ce1inf-n3-b": "Emma tient un grand parapluie.",
+  "ce1inf-n3-c": "Le bébé bâille et se frotte les yeux.",
+  "ce1inf-n4-a": "Il est essoufflé et son visage est tout rouge.",
+  "ce1inf-n4-b": "La lumière est éteinte et elle n'ose pas bouger.",
+  "ce1inf-n4-c": "Tom tombe de son vélo et se gratte le genou.",
 };
 
 // Preuve d'un item (repli sur sa 1re phrase si la cle est inconnue).
