@@ -267,6 +267,18 @@ const DEC: Row[] = [
   ["MA.DEC.SOUSTRACTION", 2, "sub", "decimal", "exemples_estompes", "aucun", "soustraction_decimale", { maxE: 9 }],
   ["MA.DEC.SOUSTRACTION", 3, "sub", "decimal", "variation", "aucun", "soustraction_decimale", { maxE: 20 }],
   ["MA.DEC.SOUSTRACTION", 4, "sub", "decimal", "probleme_dabord", "aucun", "soustraction_decimale", { maxE: 50 }],
+
+  // Lot 7 : decimal sur droite graduee (reutilise <DroiteView>, labels decimaux).
+  ["MA.DEC.DROITE", 1, "val", "decimal", "cpa_barres", "aucun", "droite_decimale", { types: ["droite"], maxE: 2 }],
+  ["MA.DEC.DROITE", 2, "val", "decimal", "exemples_estompes", "aucun", "droite_decimale", { types: ["droite"], maxE: 5 }],
+  ["MA.DEC.DROITE", 3, "val", "decimal", "variation", "aucun", "droite_decimale", { types: ["droite"], maxE: 10 }],
+  ["MA.DEC.DROITE", 4, "val", "decimal", "probleme_dabord", "aucun", "droite_decimale", { types: ["droite"], maxE: 20 }],
+
+  // Lot 7 : ranger des decimaux (trouver le plus petit / le plus grand de trois).
+  ["MA.DEC.RANGER", 1, "val", "decimal", "cpa_barres", "aucun", "ranger_decimaux", { types: ["ranger_petit"], maxE: 2 }],
+  ["MA.DEC.RANGER", 2, "val", "decimal", "exemples_estompes", "aucun", "ranger_decimaux", { types: ["ranger_petit", "ranger_grand"], maxE: 5 }],
+  ["MA.DEC.RANGER", 3, "val", "decimal", "variation", "aucun", "ranger_decimaux", { types: ["ranger_petit", "ranger_grand"], maxE: 10 }],
+  ["MA.DEC.RANGER", 4, "val", "decimal", "probleme_dabord", "aucun", "ranger_decimaux", { types: ["ranger_petit", "ranger_grand"], maxE: 20 }],
 ];
 
 const TABLE_STRATS: Record<number, string> = {

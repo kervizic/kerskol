@@ -148,6 +148,12 @@ et le reste sous le dividende (saisie à 2 champs : quotient + reste). Le juge
 serveur existait déjà (op `div` : quotient = `a / b`, reste = `a % b`). Diviseur
 à 1 chiffre au CM1.
 
+**Décimaux CM1 (lot 7, migration 0094, domaine `decimaux`)** :
+`MA.DEC.DROITE` (placer/lire un décimal sur une droite graduée en dixièmes,
+réutilise `<DroiteView>` avec labels décimaux) et `MA.DEC.RANGER` (écrire le plus
+petit / le plus grand de trois décimaux, pièges 0,7 vs 0,07). Réponse encodée en
+centièmes, op `val` (déjà autorisée pour `MA.DEC.%`).
+
 ## Problèmes (domaine `problemes`, migration 0024)
 
 Quatre compétences, alignées sur le programme CE2 (Éduscol : résoudre des

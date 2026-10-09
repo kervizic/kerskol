@@ -71,6 +71,45 @@ function ConjPhraseStory({ ex }: { ex: GeneratedExercise }) {
     </div>
   );
 }
+// Decimal sur droite graduee (lot 7) : replique le SVG de DroiteView (privé a
+// Session) avec des labels decimaux, pour un exercice MA.DEC.DROITE reel.
+const exDroiteDec = genEx({
+  exerciceId: "ex", competence: "MA.DEC.DROITE", niveau: 2, methode: null,
+  operation: "val", forme: "decimal", params: { types: ["droite"], maxE: 5 },
+  support: "aucun", correctionStrategie: null,
+}, 42424242);
+function DroiteDecStory() {
+  const d = exDroiteDec.droiteData!;
+  const W = 520, H = 96, pad = 28, axisY = 62;
+  const span = Math.max(1, d.to - d.from);
+  const x = (v: number) => pad + ((v - d.from) / span) * (W - 2 * pad);
+  const fmt = (v: number) => {
+    const e = Math.floor(v / 100), dd = Math.round(v % 100);
+    if (dd === 0) return String(e);
+    return `${e},${dd % 10 === 0 ? dd / 10 : dd < 10 ? `0${dd}` : dd}`;
+  };
+  const ticks: number[] = [];
+  for (let v = d.from; v <= d.to + 1e-6; v += d.step) ticks.push(Math.round(v));
+  return (
+    <div style={{ textAlign: "center" }}>
+      <p className="kk-lead" style={{ margin: "0 auto 8px" }}>{exDroiteDec.prompt}</p>
+      <svg width="100%" height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label="droite graduee decimale">
+        <line x1={pad} y1={axisY} x2={W - pad} y2={axisY} stroke="#bbb" strokeWidth={3} />
+        {ticks.map((v, i) => (
+          <g key={i}>
+            <line x1={x(v)} y1={axisY - 6} x2={x(v)} y2={axisY + 6} stroke="#bbb" strokeWidth={2} />
+            {(v === d.from || v === d.to) && (
+              <text x={x(v)} y={axisY + 24} textAnchor="middle" fontSize="16" fontWeight={700} fill="#333">{fmt(v)}</text>
+            )}
+          </g>
+        ))}
+        <path d={`M ${x(d.at)} ${axisY - 30} L ${x(d.at)} ${axisY - 6}`} stroke="#d35400" strokeWidth={3} />
+        <polygon points={`${x(d.at) - 4},${axisY - 10} ${x(d.at) + 4},${axisY - 10} ${x(d.at)},${axisY - 3}`} fill="#d35400" />
+      </svg>
+    </div>
+  );
+}
+
 // Division posee en potence (lot 6) : markup identique a PotenceView (privé a
 // Session). Statique (quotient/reste vides). On genere un exercice reel.
 const exDivision = genEx({
@@ -210,6 +249,8 @@ export const STORIES: Story[] = [
     }} onSoumettre={noopSubmit} onContinuer={noop} /> },
   { id: "division-potence", label: "Division posée en potence (lot 6)",
     node: <PotenceStory /> },
+  { id: "decimal-droite", label: "Décimal sur droite graduée (lot 7)",
+    node: <DroiteDecStory /> },
   { id: "ecriture-passe-simple", label: "Écriture — transformer au passé simple (lot 5)",
     node: <Ecriture item={{
       cle: "ecr-guidecm1-n3", format: "transform",

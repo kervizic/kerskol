@@ -218,6 +218,15 @@ function SupportView({ data }: { data: SupportData }) {
 // --- Droite graduee : la fleche pointe la valeur a lire (jamais etiquetee) ---
 function DroiteView({ data }: { data: DroiteData }) {
   const { from, to, step, at } = data;
+  // Labels : decimaux (centiemes -> ecriture a virgule) ou entiers.
+  const fmt = (v: number): string => {
+    if (!data.decimales) return String(Math.round(v));
+    const e = Math.floor(v / 100);
+    const d = Math.round(v % 100);
+    if (d === 0) return String(e);
+    const dec = d % 10 === 0 ? String(d / 10) : d < 10 ? `0${d}` : String(d);
+    return `${e},${dec}`;
+  };
   const W = 520;
   const H = 96;
   const pad = 28;
@@ -235,7 +244,7 @@ function DroiteView({ data }: { data: DroiteData }) {
             <line x1={x(v)} y1={axisY - 6} x2={x(v)} y2={axisY + 6} stroke="var(--kk-border)" strokeWidth={2} />
             {(v === from || v === to) && (
               <text x={x(v)} y={axisY + 24} textAnchor="middle" fontSize="16" fontWeight={700} fill="var(--kk-text)">
-                {v}
+                {fmt(v)}
               </text>
             )}
           </g>
@@ -2182,7 +2191,7 @@ export function Session({
         {(phase === "answering" || phase === "sure") && ex.saisie === "qcm_texte" && ex.optionsTexte && (
           <QcmTexte options={ex.optionsTexte} chosen={texte} onPick={pickTexte} />
         )}
-        {ex.saisie === "droite" && ex.droiteData && <DroiteView data={ex.droiteData} />}
+        {ex.droiteData && <DroiteView data={ex.droiteData} />}
         {(phase === "answering" || phase === "sure") && ex.saisie === "pose" && ex.poseData && (
           <PoseView
             data={ex.poseData}

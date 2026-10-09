@@ -100,3 +100,38 @@ describe("decimaux : generateur (buildDecimal sur les sources reelles)", () => {
     }
   });
 });
+
+describe("decimaux CM1 (lot 7) : droite graduee et ranger", () => {
+  const src = (competence: string, niveau: number) =>
+    SEED_SOURCES.find((s) => s.competence === competence && s.niveau === niveau)!;
+  const SEEDS = Array.from({ length: 40 }, (_, i) => (i + 1) * 2654435761);
+
+  it("MA.DEC.DROITE : droiteData decimale, fleche = reponse, dans [from,to]", () => {
+    for (const seed of SEEDS) {
+      const ex = generateExercise(src("MA.DEC.DROITE", 2), seed);
+      expect(ex.saisie).toBe("decimal");
+      expect(ex.droiteData).toBeTruthy();
+      expect(ex.droiteData!.decimales).toBe(true);
+      expect(ex.droiteData!.at).toBe(ex.answer); // la fleche pointe la reponse
+      expect(ex.answer).toBeGreaterThan(ex.droiteData!.from);
+      expect(ex.answer).toBeLessThan(ex.droiteData!.to);
+      expect(ex.verif.op).toBe("val");
+      expect(ex.verif.a).toBe(ex.answer);
+    }
+  });
+
+  it("MA.DEC.RANGER : reponse = plus petit ou plus grand des trois nombres", () => {
+    for (const seed of SEEDS) {
+      for (const n of [2, 3, 4]) {
+        const ex = generateExercise(src("MA.DEC.RANGER", n), seed);
+        expect(ex.saisie).toBe("decimal");
+        expect(ex.verif.op).toBe("val");
+        // Le prompt liste trois nombres ; la reponse est l'un d'eux.
+        const nums = (ex.prompt.match(/\d+(?:,\d+)?/g) ?? []).map(decimalToCentiemes);
+        expect(nums.length).toBeGreaterThanOrEqual(3);
+        expect(nums).toContain(ex.answer);
+        expect([Math.min(...nums), Math.max(...nums)]).toContain(ex.answer);
+      }
+    }
+  });
+});

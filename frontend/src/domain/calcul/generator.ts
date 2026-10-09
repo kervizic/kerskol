@@ -358,6 +358,7 @@ export interface DroiteData {
   to: number;
   step: number; // pas de graduation
   at: number; // position pointee (= la reponse)
+  decimales?: boolean; // true : from/to/at/step sont en CENTIEMES, labels decimaux
 }
 
 // --- MESURES : visuels et saisies originaux -------------------------------

@@ -60,6 +60,56 @@ export function buildDecimal(src: ExCalcul, rng: Rng, base: Base): GeneratedExer
     correction,
   });
 
+  // --- DROITE GRADUEE (lot 7) : lire un decimal place par une fleche sur une
+  //     droite entre deux entiers consecutifs, graduee en DIXIEMES (reutilise la
+  //     bande des fractions : <DroiteView> avec labels decimaux). Reponse en
+  //     centiemes, op 'val'. --------------------------------------------------
+  if (type === "droite") {
+    const e = intBetween(rng, 0, Math.max(0, maxE - 1));
+    const k = intBetween(rng, 1, 9); // dixieme pointe (1..9, jamais sur un entier)
+    const from = e * 100;
+    const to = (e + 1) * 100;
+    const at = from + k * 10;
+    return {
+      ...base,
+      saisie: "decimal",
+      reste: null,
+      fields: 1,
+      droiteData: { from, to, step: 10, at, decimales: true },
+      prompt: "Quel nombre décimal est indiqué par la flèche ? Écris-le.",
+      answer: at,
+      verif: { op: "val", a: at, b: 0 },
+      correction: `La flèche est sur ${fmtDecimal(at)} (entre ${e} et ${e + 1}, c'est ${k} ${k > 1 ? "dixièmes" : "dixième"}).`,
+    };
+  }
+
+  // --- RANGER (lot 7) : trouver le plus petit / le plus grand parmi TROIS
+  //     decimaux (pieges du zero et des longueurs : 0,7 / 0,07 / 0,65). Reponse
+  //     en centiemes, op 'val'. -----------------------------------------------
+  if (type === "ranger_petit" || type === "ranger_grand") {
+    const petit = type === "ranger_petit";
+    const e = intBetween(rng, 0, maxE);
+    // Trois formes decimales distinctes du meme entier : un centieme seul
+    // (e,0c), un dixieme seul (e,d0), un mixte (e,dc) -> pieges classiques.
+    const vals = new Set<number>();
+    vals.add(e * 100 + intBetween(rng, 1, 9)); // e,0c
+    while (vals.size < 2) vals.add(e * 100 + intBetween(rng, 1, 9) * 10); // e,d
+    while (vals.size < 3) vals.add(e * 100 + intBetween(rng, 1, 9) * 10 + intBetween(rng, 1, 9)); // e,dc
+    const arr = [...vals];
+    // Melange stable par la graine.
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = intBetween(rng, 0, i);
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    const answer = petit ? Math.min(...arr) : Math.max(...arr);
+    const mot = petit ? "le plus petit" : "le plus grand";
+    return mk(
+      `Écris ${mot} de ces trois nombres : ${arr.map(fmtDecimal).join(" ; ")}.`,
+      answer,
+      `On compare l'entier, puis les dixièmes, puis les centièmes. ${mot[0].toUpperCase()}${mot.slice(1)} est ${fmtDecimal(answer)}.`,
+    );
+  }
+
   // --- ADDITION / SOUSTRACTION de decimaux (lot 3) : saisie <DecimalInput>,
   //     op 'add'/'sub' sur les CENTIEMES (le serveur recalcule). ------------
   if (src.competence === "MA.DEC.ADDITION" || src.competence === "MA.DEC.SOUSTRACTION") {

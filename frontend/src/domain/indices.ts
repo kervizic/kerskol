@@ -168,6 +168,10 @@ export const INDICES: Record<string, string> = {
     "Commence par les unités, à droite, et n'oublie pas les retenues.",
   "MA.POSE.DIVISION":
     "Cherche combien de fois le diviseur tient dans le nombre. Tu écris le résultat dans la case du quotient, à droite. Ce qui reste va dans la case du reste, en bas. Le reste est toujours plus petit que le diviseur.",
+  "MA.DEC.DROITE":
+    "La droite est partagée en dix petits pas entre deux nombres entiers. Chaque pas, c'est un dixième. Compte les pas depuis l'entier de gauche pour trouver le chiffre après la virgule.",
+  "MA.DEC.RANGER":
+    "Pour comparer, regarde d'abord la partie entière. Si elle est pareille, regarde le chiffre des dixièmes, juste après la virgule. Attention, 0,7 est plus grand que 0,07.",
 
   // --- Questionner le monde : Le vivant -------------------------------------
   "QM.VIVANT.CARACTERISTIQUES":
