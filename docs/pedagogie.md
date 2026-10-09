@@ -342,9 +342,15 @@ rentrée 2026 (le contenu CM1 livré en 0098-0101 suivait l'ancien programme et 
 
 Chaque profil a une **classe** (CP à CM2, `profils.classe`, défaut CE2). Les
 programmes **CE1, CE2 et CM1** sont disponibles (`CLASSES_DISPONIBLES`,
-`lib/types.ts`). Le **CE1** (socle maths) est ouvert par la migration 0114 en
-réutilisant les moteurs existants (portée `classe_min='CE1'`, plan de 1re séance
-CE1), voir `docs/referentiel-calcul.md`. Une classe encore non couverte (CP, CM2)
+`lib/types.ts`). Le **CE1** est ouvert en
+réutilisant les moteurs existants (portée `classe_min='CE1'`, banques N1
+vérifiées de niveau CE1 ; aucun impact sur un profil CE2 car `classe_max` reste
+≥ CE2) : maths (migrations 0114-0115, voir `docs/referentiel-calcul.md`),
+français (0116, voir `docs/referentiel-francais.md`), Questionner le monde
+(0117, programme cycle 2 en vigueur) et EMC / vivre ensemble (0118, domaine
+sensibilité). La dictée détective, la compréhension de lecture CE1, ainsi que la
+République et les écrans en EMC restent à ouvrir après vérification des textes /
+attendus. Une classe encore non couverte (CP, CM2)
 affiche côté parent « Programme de <classe> bientôt disponible : en attendant,
 ton enfant s'entraîne sur le calcul de CE2 », sans bloquer.
 
