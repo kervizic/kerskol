@@ -46,18 +46,19 @@ const lireCm1: DonRender = {
   },
 };
 
+// N4 recalibre (lot A) : tableau a 3 colonnes + reponse libre (passage par
+// l'unite pour une cible non multiple des colonnes montrees).
 const propCourses: DonRender = {
-  cle: "prop-crs-n1-a",
-  format: "qcm",
-  consigne: "3 pommes coûtent 6 euros. Combien coûtent 6 pommes ?",
-  options: ["12", "9", "6"],
-  attendu: "12",
-  explication: "6 pommes, c'est 2 fois plus que 3 pommes. Le prix est 2 fois plus grand : 2 fois 6 font 12 euros.",
+  cle: "prop-crs-n4-a",
+  format: "texte",
+  consigne: "Regarde le tableau. 2 kilos coûtent 4 euros, 4 kilos coûtent 8 euros. Écris combien coûtent 5 kilos.",
+  attendu: "10",
+  explication: "Pour 1 kilo, c'est 2 euros, car 4 euros font 2 kilos. Pour 5 kilos : 5 fois 2 font 10 euros.",
   figure: {
     kind: "table",
-    colHeaders: ["3 pommes", "6 pommes"],
+    colHeaders: ["2 kilos", "4 kilos", "5 kilos"],
     rowHeaders: ["Prix en euros"],
-    cells: [["6", "?"]],
+    cells: [["4", "8", "?"]],
   },
 };
 
