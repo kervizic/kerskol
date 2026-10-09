@@ -1230,22 +1230,25 @@ export const BANQUE_GEOMETRIE: GeoItem[] = [
     options: ["a et b", "a et c", "b et c"], attendu: "a et b",
     explication: "Les droites a et b se croisent en formant un angle droit : elles sont perpendiculaires.",
     figure: shapes(
-      { kind: "segment", pts: [[40, 15], [40, 85]], label: "a" }, { kind: "segment", pts: [[15, 50], [85, 50]], label: "b" },
-      { kind: "segment", pts: [[20, 20], [80, 80]], label: "c" }, { kind: "right", cx: 40, cy: 50 }) },
+      { kind: "segment", pts: [[40, 15], [40, 85]] }, { kind: "segment", pts: [[15, 50], [85, 50]] },
+      { kind: "segment", pts: [[20, 20], [80, 80]] }, { kind: "right", cx: 40, cy: 50 },
+      dot(48, 16, { label: "a" }), dot(86, 43, { label: "b" }), dot(85, 84, { label: "c" })) },
   { cle: "geo-ang-n4-perp", competence: "MA.GEO.ANGLES", niveau: 4, format: "qcm",
     consigne: "Quelles droites sont perpendiculaires (elles forment un angle droit) ?",
     options: ["b et c", "a et b", "a et c"], attendu: "b et c",
     explication: "Les droites b et c se croisent en formant un angle droit : elles sont perpendiculaires.",
     figure: shapes(
-      { kind: "segment", pts: [[20, 25], [80, 55]], label: "a" }, { kind: "segment", pts: [[35, 15], [35, 85]], label: "b" },
-      { kind: "segment", pts: [[15, 50], [85, 50]], label: "c" }, { kind: "right", cx: 35, cy: 50 }) },
+      { kind: "segment", pts: [[20, 25], [80, 55]] }, { kind: "segment", pts: [[35, 15], [35, 85]] },
+      { kind: "segment", pts: [[15, 50], [85, 50]] }, { kind: "right", cx: 35, cy: 50 },
+      dot(84, 56, { label: "a" }), dot(42, 16, { label: "b" }), dot(86, 44, { label: "c" })) },
   { cle: "geo-ang-n4-parallel", competence: "MA.GEO.ANGLES", niveau: 4, format: "qcm",
     consigne: "Quelles droites sont parallèles (elles ne se croisent jamais) ?",
     options: ["a et c", "a et b", "b et c"], attendu: "a et c",
     explication: "Les droites a et c vont dans la même direction et gardent toujours le même écart : elles sont parallèles.",
     figure: shapes(
-      { kind: "segment", pts: [[25, 15], [25, 85]], label: "a" }, { kind: "segment", pts: [[45, 15], [75, 85]], label: "b" },
-      { kind: "segment", pts: [[75, 15], [75, 85]], label: "c" }) },
+      { kind: "segment", pts: [[25, 15], [25, 85]] }, { kind: "segment", pts: [[45, 15], [75, 85]] },
+      { kind: "segment", pts: [[75, 15], [75, 85]] },
+      dot(25, 10, { label: "a" }), dot(48, 11, { label: "b" }), dot(75, 10, { label: "c" })) },
 ];
 
 // Competences par sous-matiere (ordre d'affichage = ordre du referentiel).

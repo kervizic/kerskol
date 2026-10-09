@@ -259,8 +259,9 @@ export const STORIES: Story[] = [
       options: ["a et b", "a et c", "b et c"], attendu: "a et b",
       explication: "Les droites a et b se croisent en formant un angle droit : elles sont perpendiculaires.",
       figure: { kind: "shapes", shapes: [
-        { kind: "segment", pts: [[40, 15], [40, 85]], label: "a" }, { kind: "segment", pts: [[15, 50], [85, 50]], label: "b" },
-        { kind: "segment", pts: [[20, 20], [80, 80]], label: "c" }, { kind: "right", cx: 40, cy: 50 } ] },
+        { kind: "segment", pts: [[40, 15], [40, 85]] }, { kind: "segment", pts: [[15, 50], [85, 50]] },
+        { kind: "segment", pts: [[20, 20], [80, 80]] }, { kind: "right", cx: 40, cy: 50 },
+        { kind: "dot", cx: 48, cy: 16, label: "a" }, { kind: "dot", cx: 86, cy: 43, label: "b" }, { kind: "dot", cx: 85, cy: 84, label: "c" } ] },
     }} onSoumettre={noopSubmit} onContinuer={noop} /> },
   { id: "aire-carreaux", label: "Aire par comptage de carreaux (figure en L, lot 8)",
     node: <Geometrie item={{
