@@ -52,8 +52,51 @@ ON CONFLICT (code) DO UPDATE SET ordre = EXCLUDED.ordre,
 -- =========================================================================
 -- 3. Textes (ids 301-312 ; 3 par notion, niveaux 2-4). Positions calculees par
 --    _dictee_add a partir du mot fautif ; exception si mot absent ou si la
---    correction egale la faute.
+--    correction egale la faute. Le helper est recree ici (il est DROP a la fin
+--    de chaque migration de dictee) puis supprime en fin de migration.
 -- =========================================================================
+CREATE OR REPLACE FUNCTION public._dictee_add(
+    p_id integer, p_niveau integer, p_notion text,
+    p_theme text, p_texte text, p_erreurs jsonb)
+RETURNS void LANGUAGE plpgsql SET search_path = public, pg_temp AS $$
+DECLARE
+    toks text[];
+    e    jsonb;
+    v_mot text; v_occ integer; v_cor text; v_type text;
+    i integer; seen integer; pos integer;
+BEGIN
+    INSERT INTO public.dictee_texte (id, niveau, notion, theme, texte)
+    VALUES (p_id, p_niveau, p_notion, p_theme, p_texte)
+    ON CONFLICT (id) DO UPDATE SET niveau = EXCLUDED.niveau,
+        notion = EXCLUDED.notion, theme = EXCLUDED.theme, texte = EXCLUDED.texte;
+    DELETE FROM public.dictee_erreur WHERE texte_id = p_id;
+
+    toks := regexp_split_to_array(btrim(p_texte), '\s+');
+    FOR e IN SELECT * FROM jsonb_array_elements(p_erreurs) LOOP
+        v_mot  := public.normaliser_mot(e->>'mot');
+        v_occ  := COALESCE((e->>'occ')::integer, 1);
+        v_cor  := e->>'cor';
+        v_type := e->>'type';
+        seen := 0; pos := NULL;
+        FOR i IN 1 .. array_length(toks, 1) LOOP
+            IF public.normaliser_mot(toks[i]) = v_mot THEN
+                seen := seen + 1;
+                IF seen = v_occ THEN pos := i; EXIT; END IF;
+            END IF;
+        END LOOP;
+        IF pos IS NULL THEN
+            RAISE EXCEPTION 'dictee % : mot « % » occ % introuvable dans « % »',
+                p_id, e->>'mot', v_occ, p_texte;
+        END IF;
+        IF public.normaliser_mot(v_cor) = public.normaliser_mot(toks[pos]) THEN
+            RAISE EXCEPTION 'dictee % : correction identique a la faute (« % ») position %',
+                p_id, v_cor, pos;
+        END IF;
+        INSERT INTO public.dictee_erreur (texte_id, position, faute, correction, type)
+        VALUES (p_id, pos, toks[pos], v_cor, v_type);
+    END LOOP;
+END $$;
+
 -- accord_sv : le verbe s'accorde avec son sujet (eloigne ou inverse).
 SELECT public._dictee_add(301, 2, 'accord_sv', 'maison',
     'Les chats de la maison dort sur le canapé.',
@@ -94,6 +137,8 @@ SELECT public._dictee_add(311, 3, 'imperatif', 'maison',
 SELECT public._dictee_add(312, 4, 'imperatif', 'maison',
     'Avant de dormir, prends ton livre et ranges tes jouets.',
     '[{"mot":"ranges","cor":"range","type":"imperatif"}]'::jsonb);
+
+DROP FUNCTION IF EXISTS public._dictee_add(integer, integer, text, text, text, jsonb);
 
 -- =========================================================================
 -- 4. Garde-fou : 18 notions, chacune >= 2 textes, 4 nouveaux types plantes.
