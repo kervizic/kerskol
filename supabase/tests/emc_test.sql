@@ -50,6 +50,10 @@ BEGIN
         ('emc-res-pol-n3-b','EMC.RESPECT.POLITESSE',3,'ordre','tu demandes de l''aide, s''il te plaît>on t''aide>tu dis merci'),
         ('emc-res-moq-n2-a','EMC.RESPECT.MOQUERIE',2,'qcm','défendre Sami et prévenir un adulte'),
         ('emc-res-moq-n4-a','EMC.RESPECT.MOQUERIE',4,'texte','adulte'),
+        -- CE1 dédiées (incrément 17)
+        ('emc-res-ce1ent-n1-b','EMC.CE1_ENTRAIDE',1,'qcm','ranger ensemble'),
+        ('emc-res-ce1ent-n4-a','EMC.CE1_ENTRAIDE',4,'texte','entraider'),
+        ('emc-res-ce1ega-n4-a','EMC.CE1_EGALITE',4,'texte','droits'),
         ('emc-emo-rec-n2-b','EMC.EMOTIONS.RECONNAITRE',2,'tri','c''est mon anniversaire=joie;on a cassé mon jouet exprès=colère;je suis seul dans le noir=peur'),
         ('emc-emo-cal-n3-a','EMC.EMOTIONS.CALME',3,'ordre','je m''arrête>je respire doucement>je parle calmement'),
         ('emc-emo-rec-n4-b','EMC.EMOTIONS.RECONNAITRE',4,'texte','colère'),

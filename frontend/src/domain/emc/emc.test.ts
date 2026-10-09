@@ -22,8 +22,8 @@ import { COMPETENCES_EMC_CM1 } from "./cm1";
 
 describe("banque EMC — Respecter les autres et les regles", () => {
   it("32 items (4 competences x 4 niveaux x 2)", () => {
-    const respect = BANQUE_EMC.filter((i) => i.competence.startsWith("EMC.RESPECT."));
-    expect(respect.length).toBe(32);
+    const respect = BANQUE_EMC.filter((i) => i.competence.startsWith("EMC.RESPECT.") || i.competence === "EMC.CE1_ENTRAIDE" || i.competence === "EMC.CE1_EGALITE");
+    expect(respect.length).toBe(48);
   });
   it("couverture des 4 competences respect x niveaux", () => {
     for (const c of COMPETENCES_RESPECT) {
@@ -83,8 +83,8 @@ describe("banque EMC — complement CM1", () => {
 
 describe("banque EMC — totaux et qualite", () => {
   it("176 items au total (22 competences x 8), cles uniques", () => {
-    expect(BANQUE_EMC.length).toBe(176);
-    expect(COMPETENCES_EMC.length).toBe(22);
+    expect(BANQUE_EMC.length).toBe(192);
+    expect(COMPETENCES_EMC.length).toBe(24);
     const cles = new Set(BANQUE_EMC.map((i) => i.cle));
     expect(cles.size).toBe(BANQUE_EMC.length);
   });
