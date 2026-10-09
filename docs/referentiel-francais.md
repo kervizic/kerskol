@@ -346,11 +346,15 @@ sujet-verbe / participe passé, phrase complexe, classes (adverbe/conjonction),
 compléments, homophones CM1, passé composé, passé simple, impératif, registres,
 sens figuré, variantes CM1 d'écriture.
 
-**À venir (incréments CE1 suivants)** : dictée détective CE1 (`FR.ORTHO.DETECTIVE`)
-et compréhension de lecture (`FR.LECTURE.*`), qui dépendent du **niveau des
-textes** — à ouvrir après vérification des textes CE1 de la bibliothèque ;
-accords « de base » GN et sujet-verbe au vrai niveau CE1 (banques dédiées
-éventuelles), homophones CE1 (a/à, et/est, son/sont, on/ont).
+**Dictée détective et compréhension CE1** (incrément 7, migration 0119) :
+`FR.ORTHO.DETECTIVE` (sélection pilotée par le niveau ; 18 textes de niveau 1,
+courts et bienveillants, avec erreurs-détective CE1) et compréhension de lecture
+`FR.LECTURE.INFO`, `VRAIFAUX`, `ORDRE`, `SENS_MOT` (banques N1 de niveau CE1).
+`FR.LECTURE.INFERENCE` reste CE2 (banque N1 trop mince).
+
+**À venir (incréments CE1 suivants)** : accords « de base » GN et sujet-verbe au
+vrai niveau CE1 (banques dédiées éventuelles), homophones CE1 (a/à, et/est,
+son/sont, on/ont), inférence CE1.
 
 **Sources officielles** : attendus de fin d'année de CE1 en français, Éduscol /
 Éducation nationale (étude de la langue : grammaire, conjugaison, orthographe,
