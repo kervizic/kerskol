@@ -43,8 +43,8 @@ describe("decimaux : formatage et encodage", () => {
 });
 
 describe("decimaux : generateur (buildDecimal sur les sources reelles)", () => {
-  it("20 sources DEC (5 competences x 4 niveaux : ecrire/comparer/encadrer + add/sub)", () => {
-    expect(DEC_SOURCES.length).toBe(20);
+  it("28 sources DEC (7 competences x 4 niveaux : ecrire/comparer/encadrer/add/sub + droite/ranger)", () => {
+    expect(DEC_SOURCES.length).toBe(28);
   });
 
   it("exercice coherent : saisie decimal, op val/add/sub, serveur reproduit la reponse", () => {

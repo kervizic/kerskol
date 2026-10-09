@@ -35,14 +35,14 @@ DECLARE r record; v_id uuid;
 BEGIN
     FOR r IN
         SELECT * FROM (VALUES
-        ('MA.DEC.DROITE',1,'val','decimal','cpa_barres','{"types":["droite"],"maxE":2}'::jsonb),
-        ('MA.DEC.DROITE',2,'val','decimal','exemples_estompes','{"types":["droite"],"maxE":5}'::jsonb),
-        ('MA.DEC.DROITE',3,'val','decimal','variation','{"types":["droite"],"maxE":10}'::jsonb),
-        ('MA.DEC.DROITE',4,'val','decimal','probleme_dabord','{"types":["droite"],"maxE":20}'::jsonb),
-        ('MA.DEC.RANGER',1,'val','decimal','cpa_barres','{"types":["ranger_petit"],"maxE":2}'::jsonb),
-        ('MA.DEC.RANGER',2,'val','decimal','exemples_estompes','{"types":["ranger_petit","ranger_grand"],"maxE":5}'::jsonb),
-        ('MA.DEC.RANGER',3,'val','decimal','variation','{"types":["ranger_petit","ranger_grand"],"maxE":10}'::jsonb),
-        ('MA.DEC.RANGER',4,'val','decimal','probleme_dabord','{"types":["ranger_petit","ranger_grand"],"maxE":20}'::jsonb)
+        ('MA.DEC.DROITE',1,'decimal','decimal','cpa_barres','{"types":["droite"],"maxE":2}'::jsonb),
+        ('MA.DEC.DROITE',2,'decimal','decimal','exemples_estompes','{"types":["droite"],"maxE":5}'::jsonb),
+        ('MA.DEC.DROITE',3,'decimal','decimal','variation','{"types":["droite"],"maxE":10}'::jsonb),
+        ('MA.DEC.DROITE',4,'decimal','decimal','probleme_dabord','{"types":["droite"],"maxE":20}'::jsonb),
+        ('MA.DEC.RANGER',1,'decimal','decimal','cpa_barres','{"types":["ranger_petit"],"maxE":2}'::jsonb),
+        ('MA.DEC.RANGER',2,'decimal','decimal','exemples_estompes','{"types":["ranger_petit","ranger_grand"],"maxE":5}'::jsonb),
+        ('MA.DEC.RANGER',3,'decimal','decimal','variation','{"types":["ranger_petit","ranger_grand"],"maxE":10}'::jsonb),
+        ('MA.DEC.RANGER',4,'decimal','decimal','probleme_dabord','{"types":["ranger_petit","ranger_grand"],"maxE":20}'::jsonb)
         ) AS t(competence,niveau,operation,forme,methode,params)
     LOOP
         v_id := md5(r.competence || ':' || r.niveau || ':calcul')::uuid;
