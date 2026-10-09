@@ -69,6 +69,20 @@ describe("visibilite CE1 : les sous-matieres MATHS sont visibles au CE1", () => 
     expect(vus.has("decimaux")).toBe(false);
     expect(vus.has("proportionnalite")).toBe(false);
   });
+
+  it("un profil CE1 voit les sous-matieres FRANCAIS (grammaire, vocabulaire, conjugaison, ecriture)", () => {
+    const fr = MATIERES.find((m) => m.code === "FR")!;
+    const vus = new Set(sousMatieresVisibles(fr, "CE1").map((s) => s.domaine));
+    for (const d of [
+      "grammaire",
+      "vocabulaire",
+      "mots-invariables",
+      "conjugaison",
+      "ecriture",
+    ]) {
+      expect(vus.has(d)).toBe(true);
+    }
+  });
 });
 
 describe("competenceActivable : matiere active ET domaine actif", () => {

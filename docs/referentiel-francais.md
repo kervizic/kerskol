@@ -319,3 +319,42 @@ juste ! ». Mot bien trouvé mais mal corrigé : « Bien trouvé ! Mais on écri
 2 sur 3 ! »), **jamais punitif**. Messages complets dans
 `docs/explications.md` (section dictée) et dans
 `frontend/src/domain/diagnostic/dictee.ts` (`MESSAGES_DICTEE`).
+
+## CE1 — cœur du français (incrément 3, migration 0116)
+
+Le programme de **français CE1** est rendu jouable **sans nouvelle compétence
+ni nouvelle banque** : la migration `0116_ce1_francais.sql` ouvre la portée par
+classe (`classe_min='CE1'`, `classe_max` inchangée = CE2) de 17 compétences dont
+le N1 est de niveau CE1 (banques vérifiées). Le moteur d'escalier (placement) et
+la composition par besoin font le reste ; toutes les sources FR alimentent le
+même `composeSession` (Session.tsx), aucun changement de moteur.
+
+**Sûreté pour les CE2 (Iris)** : seul `classe_min` baisse ; `classe_max` reste
+≥ CE2, donc la candidature d'une compétence pour un CE2 est inchangée. Aucune
+donnée élève touchée.
+
+| Domaine | Compétences CE1 | Attendu CE1 (source) |
+|---------|-----------------|----------------------|
+| grammaire | `FR.GRAM.NATURE`, `SUJET_VERBE`, `GROUPE_NOMINAL`, `TYPES_PHRASES`, `PONCTUATION` | identifier phrase, sujet, verbe ; nom/déterminant/adjectif/verbe/pronom sujet ; GN ; 3 types de phrases ; ponctuation |
+| vocabulaire | `FR.VOC.ALPHABET`, `FAMILLES`, `SYN_CONTRAIRES`, `CATEGORIES`, `SENS`, `PREFIXE_SUFFIXE` | synonymes/antonymes, familles, catégories, sens selon contexte, dérivations, ordre alphabétique |
+| mots invariables | `FR.MOTS.INVARIABLES` | mémoriser les principaux mots invariables |
+| conjugaison | `FR.CONJ.PRESENT`, `FUTUR`, `IMPARFAIT` | présent, futur, imparfait (être, avoir, 1er groupe ; irréguliers aux N hauts) |
+| écriture | `FR.ECR.COPIE`, `FR.ECR.GUIDEE` | copier sans erreur, écrire une phrase |
+
+**Restent CE2/CM1** (débordement vérifié par garde-fou) : accords GN /
+sujet-verbe / participe passé, phrase complexe, classes (adverbe/conjonction),
+compléments, homophones CM1, passé composé, passé simple, impératif, registres,
+sens figuré, variantes CM1 d'écriture.
+
+**À venir (incréments CE1 suivants)** : dictée détective CE1 (`FR.ORTHO.DETECTIVE`)
+et compréhension de lecture (`FR.LECTURE.*`), qui dépendent du **niveau des
+textes** — à ouvrir après vérification des textes CE1 de la bibliothèque ;
+accords « de base » GN et sujet-verbe au vrai niveau CE1 (banques dédiées
+éventuelles), homophones CE1 (a/à, et/est, son/sont, on/ont).
+
+**Sources officielles** : attendus de fin d'année de CE1 en français, Éduscol /
+Éducation nationale (étude de la langue : grammaire, conjugaison, orthographe,
+lexique)
+(<https://eduscol.education.gouv.fr/sites/default/files/document/03-francais-ce1-attendus-eduscol1114733pdf-74625.pdf>) ;
+programme de français du cycle 2, avril 2024
+(<https://www.education.gouv.fr/media/194199/download>).
