@@ -87,6 +87,21 @@ export const MATIERES: MatiereDef[] = [
       { domaine: "ecrans", libelle: "Les écrans et Internet" },
     ],
   },
+  {
+    // « Sciences et technologie » (cycle 3, CM1). Reutilise le rendu de
+    // Questionner le monde (QCM, tri, ordre, saisie libre). Sous-matieres
+    // propres au CM1 (classeMin CM1) : masquees dans les reglages d'un CE2.
+    code: "ST",
+    libelle: "Sciences et technologie",
+    sousMatieres: [
+      { domaine: "etats_matiere", libelle: "États et mélanges", classeMin: "CM1" },
+      { domaine: "classification", libelle: "Classer le vivant", classeMin: "CM1" },
+      { domaine: "corps_humain", libelle: "Le corps et la santé", classeMin: "CM1" },
+      { domaine: "energie", libelle: "L'énergie", classeMin: "CM1" },
+      { domaine: "objets_techniques", libelle: "Les objets techniques", classeMin: "CM1" },
+      { domaine: "ciel_terre", libelle: "La Terre et le ciel", classeMin: "CM1" },
+    ],
+  },
 ];
 
 // Tous les codes matieres / tous les domaines connus (defauts « tout actif »).

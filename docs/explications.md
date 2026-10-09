@@ -1094,6 +1094,53 @@ Sous-matières et compétences (15 compétences × 4 niveaux × 2 = **120 items*
   `DONNEES` (ne pas donner ses infos, demander à un adulte), `POLITESSE` (être
   poli en ligne), `ESPRITCRITIQUE` (ne pas tout croire, vérifier).
 
+## Nouvelle matière « Sciences et technologie » (ST, CM1, migration 0098)
+
+Cinquième matière, à côté de Maths, Français, Questionner le monde et EMC : les
+**sciences et technologie** (cycle 3, repères CM1 d'eduscol). Portée **CM1..CM2**
+(`classe_min = 'CM1'`) : masquée dans les réglages d'un CE2 et non proposée à un
+CE2 par le moteur (sous-matière non visible), exactement comme les décimaux.
+Matière `ST` et ses 6 sous-matières **actives au défaut et sur tous les profils
+existants** (ajout **additif** ; le défaut `domaines_actifs` est **lu en base
+puis complété**, jamais recopié — leçon de 0073, avec test de complétude).
+
+**Réutilisation (pas de duplication)** : ST partage l'infrastructure
+« situation » de QM — même table serveur `public.qm_item` (contrainte élargie à
+`ST.%`), même fonction `verif_qm`, même op `qm` dans `enregistrer_reponse`
+(branche élargie à `ST.%` / `HIST.%` / `GEO.%` pour les lots suivants), même
+composant `<QuestionnerLeMonde>` (formats `qcm` / `tri` / `ordre` / `texte`).
+Seuls changent le **catalogue** (`exercices.type = 'sciences'`, méthode
+`sciences`) et le **contenu** (banque `frontend/src/domain/sciences`, miroir de
+`qm_item`). Test croisé front ↔ SQL : `sciences.test.ts` + `sciences_test.sql`.
+
+Sous-matières et compétences (6 compétences × 4 niveaux × 2 = **48 items**),
+progression N1 (CM1 d'emblée) → N4 (réponse libre exigeante) :
+
+- **États et mélanges** (`etats_matiere`, `ST.MATIERE.ETATS`) : états de l'eau
+  (solide/liquide/gaz), changements d'état (évaporation, fonte), mélanges et
+  solutions (ce qui se dissout), l'air et le vent.
+- **Classer le vivant** (`classification`, `ST.VIVANT.CLASSER`) : groupes
+  simples (poissons, oiseaux, insectes), besoins des végétaux, chaînes
+  alimentaires formulées **« est mangé par »** (jamais « tue / dévore »).
+- **Le corps et la santé** (`corps_humain`, `ST.CORPS.SANTE`) : alimentation
+  équilibrée, hygiène de vie, trajet simple de la digestion (bouche → estomac →
+  intestin).
+- **L'énergie** (`energie`, `ST.ENERGIE.SOURCES`) : sources (soleil, vent, eau,
+  pétrole, charbon), renouvelables vs qui s'épuise, économies à la maison.
+- **Les objets techniques** (`objets_techniques`, `ST.OBJETS.TECHNIQUE`) :
+  fonction d'usage, évolution d'un objet (bougie → ampoule), circuits
+  électriques simples (pile, ampoule, interrupteur, circuit ouvert/fermé,
+  conducteur/isolant).
+- **La Terre et le ciel** (`ciel_terre`, `ST.TERRE.CIEL`) : système solaire,
+  alternance jour/nuit (rotation), saisons (révolution).
+
+**Limites CM1 ↔ CM2 assumées (signalées).** Trois repères demandés par Manu sont
+en toute rigueur plutôt CM2 dans les progressions d'académie : la **digestion**
+(fonction de nutrition), les **saisons** par la révolution, et le couple
+**conducteur / isolant**. Ils sont conservés (demande explicite) mais traités
+**simplement** et placés aux **niveaux hauts** (N3/N4). Sources eduscol notées
+dans le rapport de lot.
+
 # Règle de bienveillance (décision de Manu, absolue)
 
 **TOUS les contenus montrés à l'enfant doivent être OPTIMISTES et PLEINS DE
@@ -1132,8 +1179,8 @@ s'excuse quand on a blessé un ami), jamais une blessure physique.
 à chaque build :
 
 - côté frontend : `frontend/src/domain/bienveillance.test.ts` (banques statiques
-  lecture / QM / EMC / grammaire / vocabulaire / données / géométrie, indices,
-  messages de correction, et énoncés de maths GÉNÉRÉS) ;
+  lecture / QM / EMC / sciences / grammaire / vocabulaire / données / géométrie,
+  indices, messages de correction, et énoncés de maths GÉNÉRÉS) ;
 - côté serveur : `supabase/tests/bienveillance_test.sql` (textes de la dictée
   détective et réponses attendues de référence).
 

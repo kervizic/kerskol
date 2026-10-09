@@ -29,6 +29,7 @@ import type { GeoFigure, GeoFormat, GeoInteract } from "../geometrie/geometrie";
 import { buildDonnees } from "../donnees/donnees";
 import { buildQm } from "../qm";
 import { buildEmc } from "../emc";
+import { buildSciences } from "../sciences";
 import type { QmFormat, QmFigure } from "../qm/types";
 import type { DonFigure, DonFormat, DonInteract } from "../donnees/donnees";
 import { buildComprehension } from "../francais/comprehension";
@@ -720,6 +721,11 @@ function buildExercise(
   // Reutilise l'infra « situation » de QM (forme / saisie / op 'qm').
   if (src.competence.startsWith("EMC.")) {
     return buildEmc(src, rng, base);
+  }
+  // --- Sciences et technologie (CM1 : matiere, vivant, corps, energie,
+  // objets techniques, Terre) : reutilise l'infra « situation » de QM.
+  if (src.competence.startsWith("ST.")) {
+    return buildSciences(src, rng, base);
   }
   // --- Numeration : lire/ecrire, decomposer, comparer, suite ------------
   if (src.competence.startsWith("MA.NUM.")) {

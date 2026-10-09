@@ -262,6 +262,20 @@ export const INDICES: Record<string, string> = {
     "Derrière l'écran, il y a une vraie personne. On reste poli dans les messages, comme quand on se parle en vrai.",
   "EMC.ECRANS.ESPRITCRITIQUE":
     "Sur Internet, tout n'est pas vrai. Avant de croire une chose, on réfléchit et on vérifie avec un adulte.",
+
+  // --- Sciences et technologie (indices aux niveaux 1 et 2 seulement) -------
+  "ST.MATIERE.ETATS":
+    "Pense à l'eau. Quand elle est dure et froide, c'est un solide. Quand elle coule, c'est un liquide. Quand elle part dans l'air, c'est un gaz.",
+  "ST.VIVANT.CLASSER":
+    "Regarde ce que l'animal a sur le corps. Des plumes, c'est un oiseau. Six pattes, c'est un insecte. Dans une chaîne, la plante est toujours au début.",
+  "ST.CORPS.SANTE":
+    "Pour être en forme, on mange un peu de tout, on boit de l'eau et on dort bien. Les aliments commencent leur voyage par la bouche.",
+  "ST.ENERGIE.SOURCES":
+    "Le soleil, le vent et l'eau reviennent toujours. Pour aider la planète, on éteint la lumière et les écrans quand on ne s'en sert pas.",
+  "ST.OBJETS.TECHNIQUE":
+    "Chaque objet sert à quelque chose, c'est sa fonction. Dans une lampe, le courant passe seulement si le circuit est bien fermé en boucle.",
+  "ST.TERRE.CIEL":
+    "La Terre tourne sur elle-même en un jour : d'un côté le jour, de l'autre la nuit. Elle fait un grand tour du Soleil en un an.",
 };
 
 // Indice d'une competence, UNIQUEMENT aux niveaux 1 et 2 (sinon null : plus
