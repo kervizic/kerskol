@@ -1,50 +1,59 @@
 -- geographie_test.sql
--- « Geographie » (GEO, migration 0100). Transaction ROLLBACK :
--- aucune donnee de test ne subsiste. Execution : deploy/test-db.sh.
+-- « Geographie » (GEO, NOUVEAU PROGRAMME 2026, migrations 0100 puis 0104).
+-- Transaction ROLLBACK : aucune donnee de test ne subsiste. Execution :
+-- deploy/test-db.sh.
 --
--- Couvre : la table de reference public.qm_item (48 items GEO, couverture
--- 6 competences x 4 niveaux + spot-check CROISE avec le golden vitest
--- frontend/src/domain/geographie/geographie.test.ts) ; verif_qm ; enregistrer_reponse
--- (op='qm' elargi a GEO.%) : verdict, competence interdite, item absent, niveau
--- incoherent, autre foyer refuse ; activation (matiere GEO + 6 domaines actifs
--- pour TOUS les profils).
+-- Couvre : la table de reference public.qm_item (4 competences ACTIVES x 4
+-- niveaux x 2 items + spot-check CROISE avec le golden vitest
+-- frontend/src/domain/geographie/geographie.test.ts) ; la DESACTIVATION propre
+-- des anciennes competences (donnees conservees) ; verif_qm ;
+-- enregistrer_reponse (op='qm' elargi a GEO.%) ; activation (matiere GEO + 4
+-- nouveaux domaines) ; completude du DEFAUT.
 
 BEGIN;
 
 -- ===========================================================================
--- 1. Table de reference : 48 items GEO, couverture complete + spot check
+-- 1. Competences actives (nouveau programme) + anciennes desactivees.
 -- ===========================================================================
 DO $$
-DECLARE r record; got text; n integer; attendu_n integer;
+DECLARE r record; got text; n integer;
 BEGIN
-    SELECT count(*) INTO n FROM public.qm_item WHERE competence LIKE 'GEO.%';
-    SELECT count(*) * 8 INTO attendu_n FROM public.competences WHERE matiere = 'GEO';
-    IF n <> attendu_n THEN
-        RAISE EXCEPTION 'qm_item : % items GEO attendus (8 par competence), obtenu %', attendu_n, n;
-    END IF;
-
-    FOR r IN SELECT c.code AS competence, nv AS niveau
-               FROM public.competences c, generate_series(1,4) AS nv
-              WHERE c.matiere = 'GEO'
+    FOR r IN SELECT unnest(ARRAY['GEO.NOURRIR','GEO.INEGALITES','GEO.DEPLACER','GEO.COMMUNIQUER']) AS code
     LOOP
-        IF NOT EXISTS (SELECT 1 FROM public.qm_item
-                        WHERE competence = r.competence AND niveau = r.niveau) THEN
-            RAISE EXCEPTION 'qm_item : aucun item pour % N%', r.competence, r.niveau;
+        IF NOT EXISTS (SELECT 1 FROM public.competences WHERE code = r.code AND actif) THEN
+            RAISE EXCEPTION 'competence active attendue manquante : %', r.code;
         END IF;
+        SELECT count(*) INTO n FROM public.qm_item WHERE competence = r.code;
+        IF n <> 8 THEN RAISE EXCEPTION 'qm_item : 8 items attendus pour %, obtenu %', r.code, n; END IF;
+        FOR n IN 1..4 LOOP
+            IF NOT EXISTS (SELECT 1 FROM public.qm_item WHERE competence = r.code AND niveau = n) THEN
+                RAISE EXCEPTION 'qm_item : aucun item pour % N%', r.code, n;
+            END IF;
+        END LOOP;
+    END LOOP;
+
+    FOR r IN SELECT unnest(ARRAY['GEO.REPERES','GEO.HABITER','GEO.ACTIVITES',
+                                 'GEO.CONSOMMER','GEO.FRANCE','GEO.PAYSAGES']) AS code
+    LOOP
+        IF EXISTS (SELECT 1 FROM public.competences WHERE code = r.code AND actif) THEN
+            RAISE EXCEPTION 'ancienne competence % devrait etre desactivee (actif=false)', r.code;
+        END IF;
+        SELECT count(*) INTO n FROM public.qm_item WHERE competence = r.code;
+        IF n = 0 THEN RAISE EXCEPTION 'donnees perdues : plus aucun item pour l''ancienne competence %', r.code; END IF;
     END LOOP;
 
     FOR r IN SELECT * FROM (VALUES
-        ('ge-rep-n3-a','GEO.REPERES',3,'tri','la légende=sur une carte;l''échelle=sur une carte;le titre=sur une carte;une recette de gâteau=pas sur une carte'),
-        ('ge-rep-n4-a','GEO.REPERES',4,'texte','ouest'),
-        ('ge-hab-n2-a','GEO.HABITER',2,'tri','un grand immeuble=la ville;beaucoup de magasins=la ville;un champ de blé=la campagne;une ferme=la campagne'),
-        ('ge-act-n2-a','GEO.ACTIVITES',2,'tri','une usine=travail;un parc d''attractions=loisir;un musée=culture'),
-        ('ge-con-n2-b','GEO.CONSOMMER',2,'tri','le blé=du champ;les légumes=du champ;le lait=de l''élevage;les œufs=de l''élevage'),
-        ('ge-fra-n1-a','GEO.FRANCE',1,'qcm','la Seine'),
-        ('ge-fra-n2-a','GEO.FRANCE',2,'tri','la Loire=un fleuve;la Garonne=un fleuve;les Pyrénées=une montagne;le Massif central=une montagne'),
-        ('ge-fra-n3-b','GEO.FRANCE',3,'tri','l''océan Atlantique=au nord ou à l''ouest;la Manche=au nord ou à l''ouest;la mer Méditerranée=au sud'),
-        ('ge-pay-n3-a','GEO.PAYSAGES',3,'tri','faire du ski=à la montagne;se baigner dans la mer=au bord de mer;visiter une ferme=à la campagne'),
-        ('ge-con-n4-b','GEO.CONSOMMER',4,'texte','court')
-    ) AS t(cle, competence, niveau, format, attendu)
+        ('ge-nou-n2-b','tri','le blé=l''agriculture;les légumes=l''agriculture;le lait=l''élevage;le poisson=la pêche'),
+        ('ge-nou-n4-a','texte','céréales'),
+        ('ge-ine-n2-b','tri','l''eau potable=un besoin essentiel;aller à l''école=un besoin essentiel;voir un médecin=un besoin essentiel;un jeu vidéo=un loisir'),
+        ('ge-ine-n4-a','texte','planisphère'),
+        ('ge-dep-n2-a','tri','le train=sur terre;la voiture=sur terre;le bateau=sur l''eau;l''avion=dans les airs'),
+        ('ge-dep-n4-b','texte','kilomètres'),
+        ('ge-com-n2-a','qcm','câbles'),
+        ('ge-com-n3-a','tri','envoyer un message=communiquer;faire un appel vidéo=communiquer;lire les informations=s''informer;chercher sur une carte=s''informer'),
+        ('ge-com-n3-b','qcm','accès'),
+        ('ge-com-n4-b','texte','Internet')
+    ) AS t(cle, format, attendu)
     LOOP
         SELECT format || '|' || attendu INTO got FROM public.qm_item WHERE cle = r.cle;
         IF got IS DISTINCT FROM (r.format || '|' || r.attendu) THEN
@@ -52,7 +61,7 @@ BEGIN
                 r.cle, r.format || '|' || r.attendu, got;
         END IF;
     END LOOP;
-    RAISE NOTICE 'table qm_item GEO (% items, couverture + spot) : OK', n;
+    RAISE NOTICE 'table qm_item GEO (nouveau programme : couverture + desactivation + spot) : OK';
 END $$;
 
 -- ===========================================================================
@@ -60,14 +69,15 @@ END $$;
 -- ===========================================================================
 DO $$
 BEGIN
-    IF NOT public.verif_qm('ge-fra-n1-a','la Seine') THEN RAISE EXCEPTION 'qcm juste refuse'; END IF;
-    IF NOT public.verif_qm('ge-fra-n1-a','La Seine') THEN RAISE EXCEPTION 'qcm casse KO'; END IF;
-    IF public.verif_qm('ge-fra-n1-a','la Loire') THEN RAISE EXCEPTION 'qcm mauvaise reponse acceptee'; END IF;
-    IF NOT public.verif_qm('ge-fra-n2-a','la Loire=un fleuve;la Garonne=un fleuve;les Pyrénées=une montagne;le Massif central=une montagne') THEN RAISE EXCEPTION 'tri juste refuse'; END IF;
-    IF public.verif_qm('ge-fra-n2-a','la Loire=une montagne;la Garonne=un fleuve;les Pyrénées=une montagne;le Massif central=une montagne') THEN RAISE EXCEPTION 'tri faux accepte'; END IF;
-    IF NOT public.verif_qm('ge-pay-n4-a','forêt') THEN RAISE EXCEPTION 'texte juste refuse'; END IF;
-    IF NOT public.verif_qm('ge-pay-n4-a','Forêt') THEN RAISE EXCEPTION 'texte casse KO'; END IF;
-    IF public.verif_qm('ge-pay-n4-a','foret') THEN RAISE EXCEPTION 'texte accent non exige'; END IF;
+    IF NOT public.verif_qm('ge-com-n1-a','Internet') THEN RAISE EXCEPTION 'qcm juste refuse'; END IF;
+    IF NOT public.verif_qm('ge-com-n1-a','internet') THEN RAISE EXCEPTION 'qcm casse KO'; END IF;
+    IF public.verif_qm('ge-com-n1-a','le marché') THEN RAISE EXCEPTION 'qcm mauvaise reponse acceptee'; END IF;
+    IF NOT public.verif_qm('ge-dep-n2-a','le train=sur terre;la voiture=sur terre;le bateau=sur l''eau;l''avion=dans les airs') THEN RAISE EXCEPTION 'tri juste refuse'; END IF;
+    IF NOT public.verif_qm('ge-dep-n2-a','le train = sur terre; la voiture = sur terre; le bateau = sur l''eau; l''avion = dans les airs') THEN RAISE EXCEPTION 'tri espaces KO'; END IF;
+    IF public.verif_qm('ge-dep-n2-a','le train=dans les airs;la voiture=sur terre;le bateau=sur l''eau;l''avion=sur terre') THEN RAISE EXCEPTION 'tri faux accepte'; END IF;
+    IF NOT public.verif_qm('ge-nou-n4-a','céréales') THEN RAISE EXCEPTION 'texte juste refuse'; END IF;
+    IF NOT public.verif_qm('ge-nou-n4-a','Céréales') THEN RAISE EXCEPTION 'texte casse KO'; END IF;
+    IF public.verif_qm('ge-nou-n4-a','cereales') THEN RAISE EXCEPTION 'texte accent non exige'; END IF;
     IF public.verif_qm('cle-bidon','x') THEN RAISE EXCEPTION 'item absent accepte'; END IF;
     RAISE NOTICE 'verif_qm GEO : OK';
 END $$;
@@ -96,16 +106,16 @@ INSERT INTO profils (id, foyer_id, surnom, classe) VALUES
 SET ROLE authenticated;
 SET request.jwt.claims = :'claimsA';
 
--- 3a. Bonne reponse ACCEPTEE (QCM « la Seine », GEO.FRANCE N1).
+-- 3a. Bonne reponse ACCEPTEE (QCM, GEO.COMMUNIQUER N1).
 DO $$
 DECLARE v jsonb; v_id uuid := gen_random_uuid();
 BEGIN
     v := public.enregistrer_reponse(
-        v_id, 'a0000001-0000-0000-0000-000000000000'::uuid, NULL, 'GEO.FRANCE', NULL, 1, 'geographie',
+        v_id, 'a0000001-0000-0000-0000-000000000000'::uuid, NULL, 'GEO.COMMUNIQUER', NULL, 1, 'geographie',
         'qm', 0, 0, 0, NULL, 1, 3000, false, false, false, now(),
-        'ge-fra-n1-a', NULL, 'seance', 'la Seine', NULL);
+        'ge-com-n1-a', NULL, 'seance', 'Internet', NULL);
     IF (v ->> 'correct')::boolean IS NOT TRUE THEN
-        RAISE EXCEPTION 'GEO « la Seine » devrait etre juste : %', v;
+        RAISE EXCEPTION 'GEO « Internet » devrait etre juste : %', v;
     END IF;
 END $$;
 
@@ -114,22 +124,22 @@ DO $$
 DECLARE v jsonb; v_id uuid := gen_random_uuid();
 BEGIN
     v := public.enregistrer_reponse(
-        v_id, 'a0000001-0000-0000-0000-000000000000'::uuid, NULL, 'GEO.FRANCE', NULL, 1, 'geographie',
+        v_id, 'a0000001-0000-0000-0000-000000000000'::uuid, NULL, 'GEO.COMMUNIQUER', NULL, 1, 'geographie',
         'qm', 0, 0, 0, NULL, 1, 3000, false, false, false, now(),
-        'ge-fra-n1-a', NULL, 'seance', 'la Loire', NULL);
+        'ge-com-n1-a', NULL, 'seance', 'le marché', NULL);
     IF (v ->> 'correct')::boolean IS NOT FALSE THEN
-        RAISE EXCEPTION 'GEO « la Loire » devrait etre faux : %', v;
+        RAISE EXCEPTION 'GEO « le marché » devrait etre faux : %', v;
     END IF;
 END $$;
 
--- 3c. Reponse « tri » ACCEPTEE (GEO.FRANCE N2).
+-- 3c. Reponse « tri » ACCEPTEE (GEO.DEPLACER N2).
 DO $$
 DECLARE v jsonb; v_id uuid := gen_random_uuid();
 BEGIN
     v := public.enregistrer_reponse(
-        v_id, 'a0000001-0000-0000-0000-000000000000'::uuid, NULL, 'GEO.FRANCE', NULL, 2, 'geographie',
+        v_id, 'a0000001-0000-0000-0000-000000000000'::uuid, NULL, 'GEO.DEPLACER', NULL, 2, 'geographie',
         'qm', 0, 0, 0, NULL, 1, 3000, false, false, false, now(),
-        'ge-fra-n2-a', NULL, 'seance', 'la Loire=un fleuve;la Garonne=un fleuve;les Pyrénées=une montagne;le Massif central=une montagne', NULL);
+        'ge-dep-n2-a', NULL, 'seance', 'le train=sur terre;la voiture=sur terre;le bateau=sur l''eau;l''avion=dans les airs', NULL);
     IF (v ->> 'correct')::boolean IS NOT TRUE THEN
         RAISE EXCEPTION 'GEO tri devrait etre juste : %', v;
     END IF;
@@ -142,7 +152,7 @@ BEGIN
     PERFORM public.enregistrer_reponse(
         v_id, 'a0000001-0000-0000-0000-000000000000'::uuid, NULL, 'MA.DONNEES.TABLEAU', NULL, 1, 'geographie',
         'qm', 0, 0, 0, NULL, 1, 3000, false, false, false, now(),
-        'ge-fra-n1-a', NULL, 'seance', 'la Seine', NULL);
+        'ge-com-n1-a', NULL, 'seance', 'Internet', NULL);
     RAISE EXCEPTION 'competence interdite aurait du etre rejetee';
 EXCEPTION WHEN others THEN
     IF SQLERRM NOT LIKE '%enonce_incoherent%' THEN
@@ -155,9 +165,9 @@ DO $$
 DECLARE v_id uuid := gen_random_uuid();
 BEGIN
     PERFORM public.enregistrer_reponse(
-        v_id, 'a0000001-0000-0000-0000-000000000000'::uuid, NULL, 'GEO.FRANCE', NULL, 1, 'geographie',
+        v_id, 'a0000001-0000-0000-0000-000000000000'::uuid, NULL, 'GEO.COMMUNIQUER', NULL, 1, 'geographie',
         'qm', 0, 0, 0, NULL, 1, 3000, false, false, false, now(),
-        'cle-bidon', NULL, 'seance', 'la Seine', NULL);
+        'cle-bidon', NULL, 'seance', 'Internet', NULL);
     RAISE EXCEPTION 'item inexistant aurait du etre rejete';
 EXCEPTION WHEN others THEN
     IF SQLERRM NOT LIKE '%enonce_incoherent%' THEN
@@ -170,9 +180,9 @@ DO $$
 DECLARE v_id uuid := gen_random_uuid();
 BEGIN
     PERFORM public.enregistrer_reponse(
-        v_id, 'a0000001-0000-0000-0000-000000000000'::uuid, NULL, 'GEO.FRANCE', NULL, 2, 'geographie',
+        v_id, 'a0000001-0000-0000-0000-000000000000'::uuid, NULL, 'GEO.COMMUNIQUER', NULL, 2, 'geographie',
         'qm', 0, 0, 0, NULL, 1, 3000, false, false, false, now(),
-        'ge-fra-n1-a', NULL, 'seance', 'la Seine', NULL);
+        'ge-com-n1-a', NULL, 'seance', 'Internet', NULL);
     RAISE EXCEPTION 'niveau incoherent aurait du etre rejete';
 EXCEPTION WHEN others THEN
     IF SQLERRM NOT LIKE '%enonce_incoherent%' THEN
@@ -185,9 +195,9 @@ DO $$
 DECLARE v_id uuid := gen_random_uuid();
 BEGIN
     PERFORM public.enregistrer_reponse(
-        v_id, 'b0000001-0000-0000-0000-000000000000'::uuid, NULL, 'GEO.FRANCE', NULL, 1, 'geographie',
+        v_id, 'b0000001-0000-0000-0000-000000000000'::uuid, NULL, 'GEO.COMMUNIQUER', NULL, 1, 'geographie',
         'qm', 0, 0, 0, NULL, 1, 3000, false, false, false, now(),
-        'ge-fra-n1-a', NULL, 'seance', 'la Seine', NULL);
+        'ge-com-n1-a', NULL, 'seance', 'Internet', NULL);
     RAISE EXCEPTION 'acces a un autre foyer aurait du etre refuse';
 EXCEPTION WHEN others THEN
     IF SQLERRM NOT LIKE '%acces_refuse%' THEN
@@ -198,24 +208,24 @@ END $$;
 RESET ROLE;
 
 -- ===========================================================================
--- 4. Activation : matiere GEO + 6 domaines actifs pour TOUS les profils.
+-- 4. Activation : matiere GEO + 4 nouveaux domaines actifs pour TOUS les profils.
 -- ===========================================================================
 DO $$
 DECLARE n integer; d text;
 BEGIN
     SELECT count(*) INTO n FROM public.profils WHERE NOT ('GEO' = ANY (matieres_actives));
     IF n <> 0 THEN RAISE EXCEPTION 'GEO devrait etre active pour TOUS les profils, manque dans %', n; END IF;
-    FOREACH d IN ARRAY ARRAY['se_reperer','habiter','travail_loisirs','consommer','france_reperes','paysages']
+    FOREACH d IN ARRAY ARRAY['se_nourrir','inegalites','se_deplacer','communiquer']
     LOOP
         SELECT count(*) INTO n FROM public.profils WHERE NOT (d = ANY (domaines_actifs));
         IF n <> 0 THEN RAISE EXCEPTION 'domaine % devrait etre actif pour TOUS les profils, manque dans %', d, n; END IF;
     END LOOP;
-    RAISE NOTICE 'matiere GEO + 6 domaines actifs pour tous les profils : OK';
+    RAISE NOTICE 'matiere GEO + 4 domaines (nouveau programme) actifs pour tous les profils : OK';
 END $$;
 
 -- ===========================================================================
--- 5. Completude du DEFAUT : les domaines historiques ET les 6 nouveaux sont
---    dans le DEFAUT de profils.domaines_actifs (non-regression de 0073).
+-- 5. Completude du DEFAUT : domaines historiques + nouveaux domaines GEO
+--    presents (non-regression : on ne retire JAMAIS un domaine du defaut).
 -- ===========================================================================
 DO $$
 DECLARE v_expr text; v_cur text[]; d text;
@@ -226,16 +236,14 @@ BEGIN
      WHERE a.attrelid = 'public.profils'::regclass AND a.attname = 'domaines_actifs';
     EXECUTE 'SELECT ' || v_expr INTO v_cur;
     FOREACH d IN ARRAY ARRAY['numeration','lecture','vivant','respect','decimaux',
-                             'etats_matiere','classification','corps_humain',
-                             'energie','objets_techniques','ciel_terre',
-                             'se_reperer','habiter','travail_loisirs','consommer',
-                             'france_reperes','paysages']
+                             'se_reperer','habiter','paysages',
+                             'se_nourrir','inegalites','se_deplacer','communiquer']
     LOOP
         IF NOT (d = ANY (v_cur)) THEN
             RAISE EXCEPTION 'DEFAUT domaines_actifs incomplet : % manquant', d;
         END IF;
     END LOOP;
-    RAISE NOTICE 'DEFAUT domaines_actifs complet (historique + GEO) : OK';
+    RAISE NOTICE 'DEFAUT domaines_actifs complet (historique + GEO nouveau programme) : OK';
 END $$;
 
 ROLLBACK;

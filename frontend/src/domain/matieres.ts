@@ -124,16 +124,15 @@ export const MATIERES: MatiereDef[] = [
     ],
   },
   {
-    // « Géographie » (cycle 3, CM1). Réutilise le rendu de Questionner le monde.
+    // « Géographie » (cycle 3, CM1 - NOUVEAU PROGRAMME 2026 : la diversité des
+    // modes de vie dans le monde). Réutilise le rendu de Questionner le monde.
     code: "GEO",
     libelle: "Géographie",
     sousMatieres: [
-      { domaine: "se_reperer", libelle: "Se repérer : plan et carte", classeMin: "CM1" },
-      { domaine: "habiter", libelle: "Habiter en ville, à la campagne", classeMin: "CM1" },
-      { domaine: "travail_loisirs", libelle: "Travailler, se cultiver, les loisirs", classeMin: "CM1" },
-      { domaine: "consommer", libelle: "Consommer en France", classeMin: "CM1" },
-      { domaine: "france_reperes", libelle: "La France : fleuves et reliefs", classeMin: "CM1" },
-      { domaine: "paysages", libelle: "Paysages et milieux", classeMin: "CM1" },
+      { domaine: "se_nourrir", libelle: "Se nourrir dans le monde", classeMin: "CM1" },
+      { domaine: "inegalites", libelle: "Les inégalités dans le monde", classeMin: "CM1" },
+      { domaine: "se_deplacer", libelle: "Se déplacer", classeMin: "CM1" },
+      { domaine: "communiquer", libelle: "Communiquer avec Internet", classeMin: "CM1" },
     ],
   },
 ];

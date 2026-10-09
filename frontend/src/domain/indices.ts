@@ -289,19 +289,15 @@ export const INDICES: Record<string, string> = {
   "HIST.FRISE":
     "La frise range les événements dans le temps. Un siècle, c'est cent ans. En chiffres romains, V vaut 5, X vaut 10, C vaut 100.",
 
-  // --- Géographie (indices aux niveaux 1 et 2 seulement) --------------------
-  "GEO.REPERES":
-    "Sur une carte, le nord est souvent en haut. La légende, c'est le petit cadre qui explique les couleurs et les dessins.",
-  "GEO.HABITER":
-    "En ville, beaucoup d'immeubles et de magasins. À la campagne, des champs et des fermes. Une très grande ville est une métropole.",
-  "GEO.ACTIVITES":
-    "Pense aux lieux : le musée et la bibliothèque pour la culture, le stade et le parc pour les loisirs, l'usine pour le travail.",
-  "GEO.CONSOMMER":
-    "L'eau du robinet vient des rivières, puis elle est rendue propre. Le vent fait tourner les éoliennes pour l'électricité.",
-  "GEO.FRANCE":
-    "La Seine traverse Paris. Les Alpes sont les plus hautes montagnes. L'océan Atlantique borde la France à l'ouest.",
-  "GEO.PAYSAGES":
-    "Regarde ce qu'il y a dans le paysage : des arbres serrés, c'est une forêt ; du sable et des vagues, c'est le bord de mer.",
+  // --- Géographie (nouveau programme 2026 ; indices aux niveaux 1 et 2) -----
+  "GEO.NOURRIR":
+    "Se nourrir, c'est manger et boire. Le riz, le blé et le maïs sont des céréales : les aliments de base du monde.",
+  "GEO.INEGALITES":
+    "Le planisphère montre toute la Terre. L'eau potable, l'école et les soins sont des besoins essentiels : tous n'y ont pas encore accès.",
+  "GEO.DEPLACER":
+    "On se déplace sur terre (train, voiture), sur l'eau (bateau) ou dans les airs (avion). On mesure les trajets en kilomètres et en temps.",
+  "GEO.COMMUNIQUER":
+    "Internet relie les ordinateurs du monde. De grands câbles au fond des océans et des satellites transportent les communications.",
 
   // --- EMC CM1 (indices aux niveaux 1 et 2 seulement) -----------------------
   "EMC.DROITS":
