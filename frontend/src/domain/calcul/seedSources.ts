@@ -70,6 +70,12 @@ const CM: Row[] = [
 
 // --- Numeration jusqu'a 10 000 (domaine numeration) ---
 const NUM: Row[] = [
+  // CE1 dédiée (migration 0121) : 4 niveaux TOUS calibrés CE1 (<= 1 000).
+  ["MA.NUM.CE1_MILLE", 1, "lire", "lecture", "cpa_barres", "aucun", "lire_nombre_jusqu_100", { type: "lire", min: 0, max: 100 }],
+  ["MA.NUM.CE1_MILLE", 2, "comparer", "comparaison", "exemples_estompes", "aucun", "comparer_jusqu_1000", { type: "comparer", min: 0, max: 999 }],
+  ["MA.NUM.CE1_MILLE", 3, "decomposer", "decomposition", "variation", "aucun", "decomposer_cdu", { type: "decomposer", ranks: ["c", "d", "u"], min: 100, max: 999 }],
+  ["MA.NUM.CE1_MILLE", 4, "comparer", "comparaison", "probleme_dabord", "aucun", "ranger_le_plus_grand", { type: "ranger", n: 3, min: 100, max: 999 }],
+
   ["MA.NUM.LIRE_ECRIRE", 1, "lire", "lecture", "cpa_barres", "aucun", "lire_nombre", { type: "lire", max: 100 }],
   ["MA.NUM.LIRE_ECRIRE", 2, "lire", "lecture", "exemples_estompes", "aucun", "ecrire_nombre", { type: "ecrire", max: 1000 }],
   ["MA.NUM.LIRE_ECRIRE", 3, "lire", "lecture", "variation", "aucun", "ecrire_nombre", { type: "ecrire", max: 9999 }],

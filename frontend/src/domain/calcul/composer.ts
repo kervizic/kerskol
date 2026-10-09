@@ -10,7 +10,7 @@
 //   * 1re seance (aucune reponse encore) = competences SANS prerequis.
 
 import { isUnlocked } from "../buildings";
-import { classeDansMarge } from "../../lib/types";
+import { classeDansMarge, classeRang } from "../../lib/types";
 import type { Classe, Competence, Prerequis, ProgressionDetail } from "../../lib/types";
 import { generateExercise, type ExCalcul, type GeneratedExercise, type ProblemContext } from "./generator";
 import { classPlan, classUnlocks } from "./classes";
@@ -132,13 +132,30 @@ export function composeSession(input: ComposeInput): PlannedItem[] {
       (!doms || doms.includes(c.domaine)) &&
       classeDansMarge(c.classe_min, c.classe_max, classe)
   );
+  // --- Gate « competence de classe inferieure » (CE1 dediee pour un CE2) ----
+  // Une competence dont la portee PLAFONNE sous la classe de l'enfant
+  // (classe_max < classe) n'est PAS une candidate normale : elle ne doit jamais
+  // arriver comme nouveaute / lacune / placement (sinon elle polluerait les
+  // seances, p. ex. une competence [CE1,CE1] remonterait a Iris en CE2). Elle ne
+  // revient qu'en REVISION, et seulement comme prerequis d'une competence LIEE
+  // que l'enfant travaille mal (lacune ou revision due) : c'est exactement la
+  // « marge -1 » du prompt. Pour un enfant dont la classe est <= classe_max
+  // (p. ex. un CE1 sur une competence [CE1,CE1]), estSousNiveau est faux -> elle
+  // reste une candidate normale, rien ne change. Sans aucune competence
+  // sous-niveau active, tout ce bloc est inerte (comportement historique).
+  const rang = classeRang(classe);
+  const estSousNiveau = (c: Competence) =>
+    c.classe_max != null && classeRang(c.classe_max) < rang;
+  const activeNormal = active.filter((c) => !estSousNiveau(c));
+  const sousNiveauCodes = new Set(active.filter(estSousNiveau).map((c) => c.code));
+
   // Une progression sert de reference "deja debloque". Une competence est
   // retenue si ses prerequis sont atteints OU si la classe la presume debloquee
   // (coeur/revision de la classe, prerequis presumes tant qu'ils ne sont pas
-  // infirmes).
+  // infirmes). Les competences sous-niveau sont ecartees du pool normal.
   const progForUnlock: Record<string, { niveau_max_atteint: number }> = {};
   for (const p of input.progress) progForUnlock[p.competence] = { niveau_max_atteint: p.niveau_max_atteint };
-  const unlocked = active.filter(
+  const unlocked = activeNormal.filter(
     (c) => isUnlocked(c.code, prerequis, progForUnlock as never) || classUnlocks(classe, c.code)
   );
 
@@ -167,6 +184,25 @@ export function composeSession(input: ComposeInput): PlannedItem[] {
     if (due) revision.push(c.code);
     else if (p.ema_courte < 0.7 || p.niveau <= 1) lacune.push(c.code);
     else solides.push(c.code);
+  }
+
+  // Remediation « classe d'avant » : pour chaque competence que l'enfant
+  // travaille mal (lacune) ou revise (revision due), on ramene EN REVISION ses
+  // prerequis de classe inferieure (competences sous-niveau actives). C'est le
+  // seul canal par lequel une competence CE1 dediee ([CE1,CE1]) atteint un CE2 :
+  // via une lacune sur la competence CE2 LIEE (prerequis CE1 -> CE2). Inerte s'il
+  // n'existe aucune competence sous-niveau active (comportement historique).
+  if (sousNiveauCodes.size > 0) {
+    const enDifficulte = new Set<string>([...lacune, ...revision]);
+    for (const r of prerequis) {
+      if (
+        enDifficulte.has(r.competence) &&
+        sousNiveauCodes.has(r.prerequis) &&
+        !revision.includes(r.prerequis)
+      ) {
+        revision.push(r.prerequis);
+      }
+    }
   }
 
   // Cibles d'items par categorie (40/40/20), ajustees a `count`.
