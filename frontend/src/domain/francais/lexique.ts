@@ -180,6 +180,22 @@ export const BANQUE_VOCABULAIRE: LexItem[] = [
   { cle: "voc-fig-n4-1", competence: "FR.VOC.SENS_FIGURE", niveau: 4, format: "texte", consigne: "Cette phrase est-elle au sens propre ou au sens figuré ? Écris ta réponse en un mot : propre ou figuré.", phrase: "Dehors, il pleut des cordes.", attendu: "figuré", explication: "Il ne tombe pas de vraies cordes ! Il pleut des cordes veut dire qu'il pleut très fort : c'est le sens figuré." },
   { cle: "voc-fig-n4-2", competence: "FR.VOC.SENS_FIGURE", niveau: 4, format: "texte", consigne: "Cette phrase est-elle au sens propre ou au sens figuré ? Écris ta réponse en un mot : propre ou figuré.", phrase: "Le jardinier arrose les fleurs.", attendu: "propre", explication: "Le jardinier arrose vraiment les fleurs avec de l'eau : c'est le sens propre, le vrai sens." },
   { cle: "voc-fig-n4-3", competence: "FR.VOC.SENS_FIGURE", niveau: 4, format: "texte", consigne: "Cette phrase est-elle au sens propre ou au sens figuré ? Écris ta réponse en un mot : propre ou figuré.", phrase: "Après la bonne nouvelle, il était aux anges.", attendu: "figuré", explication: "Il n'est pas vraiment avec des anges ! Être aux anges veut dire être très heureux : c'est le sens figuré." },
+
+  // FR.VOC.REGISTRES (CM1) — registres de langue : familier / courant / soutenu
+  // (eduscol doc 13984). N1 QCM reconnaitre le registre d'un mot ; N2/N3 QCM
+  // (trouver un synonyme / classer) ; N4 reponse libre (ecrire le registre).
+  { cle: "voc-reg-n1-1", competence: "FR.VOC.REGISTRES", niveau: 1, format: "qcm", consigne: "Le mot « bouffer » appartient à quel registre de langue ?", phrase: "", options: ["familier", "soutenu"], attendu: "familier", explication: "bouffer est un mot familier, qu'on dit entre copains. Le mot courant, poli, est manger." },
+  { cle: "voc-reg-n1-2", competence: "FR.VOC.REGISTRES", niveau: 1, format: "qcm", consigne: "Le mot « bagnole » appartient à quel registre de langue ?", phrase: "", options: ["familier", "courant"], attendu: "familier", explication: "bagnole est un mot familier pour voiture. Le mot courant est voiture." },
+  { cle: "voc-reg-n1-3", competence: "FR.VOC.REGISTRES", niveau: 1, format: "qcm", consigne: "Le mot « demeure » (une belle maison) appartient à quel registre ?", phrase: "", options: ["soutenu", "familier"], attendu: "soutenu", explication: "demeure est un mot soutenu, élégant, pour une belle maison. Le mot courant est maison." },
+  { cle: "voc-reg-n2-1", competence: "FR.VOC.REGISTRES", niveau: 2, format: "qcm", consigne: "Quel mot est le plus courant pour dire « bouquin » ?", phrase: "", options: ["livre", "roman", "cahier"], attendu: "livre", explication: "bouquin est familier. Le mot courant, celui de tous les jours, est livre." },
+  { cle: "voc-reg-n2-2", competence: "FR.VOC.REGISTRES", niveau: 2, format: "qcm", consigne: "Quel mot veut dire « content » en langage soutenu ?", phrase: "", options: ["ravi", "chouette", "sympa"], attendu: "ravi", explication: "ravi est un mot soutenu pour très content. chouette et sympa sont familiers." },
+  { cle: "voc-reg-n2-3", competence: "FR.VOC.REGISTRES", niveau: 2, format: "qcm", consigne: "Quel mot est familier pour dire « parler » ?", phrase: "", options: ["causer", "s'exprimer", "discuter"], attendu: "causer", explication: "causer est familier pour parler. s'exprimer est soutenu, discuter est courant." },
+  { cle: "voc-reg-n3-1", competence: "FR.VOC.REGISTRES", niveau: 3, format: "qcm", consigne: "À l'école, pour parler poliment à la maîtresse, quel registre utilises-tu ?", phrase: "", options: ["courant", "familier"], attendu: "courant", explication: "À l'école, on parle en langage courant, correct et poli. En familier, entre copains, on parle autrement." },
+  { cle: "voc-reg-n3-2", competence: "FR.VOC.REGISTRES", niveau: 3, format: "qcm", consigne: "Classe le mot « rigoler » : familier, courant ou soutenu ?", phrase: "", options: ["familier", "courant", "soutenu"], attendu: "familier", explication: "rigoler est familier. Le mot courant est rire." },
+  { cle: "voc-reg-n3-3", competence: "FR.VOC.REGISTRES", niveau: 3, format: "qcm", consigne: "Le mot « s'exprimer » (pour parler) est de quel registre ?", phrase: "", options: ["soutenu", "familier", "courant"], attendu: "soutenu", explication: "s'exprimer est un mot soutenu, élégant. Le mot courant est parler." },
+  { cle: "voc-reg-n4-1", competence: "FR.VOC.REGISTRES", niveau: 4, format: "texte", consigne: "Le mot « flotte » (pour l'eau) est familier, courant ou soutenu ? Écris ta réponse en un mot.", phrase: "Passe-moi la flotte, j'ai soif.", attendu: "familier", explication: "flotte est un mot familier pour l'eau. Le mot courant est eau." },
+  { cle: "voc-reg-n4-2", competence: "FR.VOC.REGISTRES", niveau: 4, format: "texte", consigne: "Le mot « demeure » est familier, courant ou soutenu ? Écris ta réponse en un mot.", phrase: "Nous emménageons dans une belle demeure.", attendu: "soutenu", explication: "demeure est un mot soutenu pour une belle maison." },
+  { cle: "voc-reg-n4-3", competence: "FR.VOC.REGISTRES", niveau: 4, format: "texte", consigne: "Le mot « voiture » est familier, courant ou soutenu ? Écris ta réponse en un mot.", phrase: "La voiture rouge roule sur la route.", attendu: "courant", explication: "voiture est le mot courant, celui qu'on utilise tous les jours. Le mot familier est bagnole." },
 ];
 
 export const BANQUE_MOTS: LexItem[] = [
@@ -217,6 +233,7 @@ export const COMPETENCES_VOCABULAIRE = [
   "FR.VOC.CATEGORIES",
   "FR.VOC.SENS",
   "FR.VOC.SENS_FIGURE",
+  "FR.VOC.REGISTRES",
 ] as const;
 
 export const COMPETENCES_MOTS = [

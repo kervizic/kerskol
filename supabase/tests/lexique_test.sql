@@ -26,15 +26,16 @@ DECLARE
     n   integer;
 BEGIN
     SELECT count(*) INTO n FROM public.lexique_item;
-    IF n <> 152 THEN
-        RAISE EXCEPTION 'lexique_item : 152 items attendus, obtenu %', n;
+    IF n <> 164 THEN
+        RAISE EXCEPTION 'lexique_item : 164 items attendus, obtenu %', n;
     END IF;
 
     -- Couverture : chaque competence a au moins un item a chaque niveau 1..4.
     FOR r IN SELECT c AS competence, nv AS niveau
                FROM unnest(ARRAY['FR.VOC.ALPHABET','FR.VOC.FAMILLES',
                     'FR.VOC.SYN_CONTRAIRES','FR.VOC.PREFIXE_SUFFIXE',
-                    'FR.VOC.CATEGORIES','FR.VOC.SENS','FR.VOC.SENS_FIGURE','FR.MOTS.INVARIABLES']) AS c,
+                    'FR.VOC.CATEGORIES','FR.VOC.SENS','FR.VOC.SENS_FIGURE',
+                    'FR.VOC.REGISTRES','FR.MOTS.INVARIABLES']) AS c,
                     generate_series(1,4) AS nv
     LOOP
         IF NOT EXISTS (SELECT 1 FROM public.lexique_item
@@ -52,6 +53,9 @@ BEGIN
         ('voc-fig-n1-2','FR.VOC.SENS_FIGURE',1,'qcm','sens figuré'),
         ('voc-fig-n2-1','FR.VOC.SENS_FIGURE',2,'qcm','être très gentil'),
         ('voc-fig-n4-1','FR.VOC.SENS_FIGURE',4,'texte','figuré'),
+        ('voc-reg-n1-1','FR.VOC.REGISTRES',1,'qcm','familier'),
+        ('voc-reg-n2-2','FR.VOC.REGISTRES',2,'qcm','ravi'),
+        ('voc-reg-n4-2','FR.VOC.REGISTRES',4,'texte','soutenu'),
         ('voc-fam-n3-1','FR.VOC.FAMILLES',3,'clic','voiture'),
         ('voc-syn-n3-1','FR.VOC.SYN_CONTRAIRES',3,'qcm','malheureux'),
         ('voc-ps-n1-5','FR.VOC.PREFIXE_SUFFIXE',1,'qcm','chanteur'),
