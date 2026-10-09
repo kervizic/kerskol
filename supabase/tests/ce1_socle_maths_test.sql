@@ -19,6 +19,10 @@ DECLARE
         'MA.PB.ADD_SUB','MA.PB.MULT_DIV','MA.PB.DEUX_ETAPES','MA.PB.MONNAIE','MA.PB.MESURES',
         'MA.MES.LONGUEURS','MA.MES.MASSES_CONTENANCES','MA.MES.HEURE','MA.MES.DUREES',
         'MA.FRAC.SIMPLES'];
+    -- Géométrie et repérage ouverts au CE1 par 0115 (SYMETRIE reste CE2).
+    geo   text[] := ARRAY[
+        'MA.GEO.FIGURES','MA.GEO.VOCABULAIRE','MA.GEO.SOLIDES',
+        'MA.REPERE.QUADRILLAGE','MA.REPERE.DEPLACEMENTS','MA.REPERE.PLAN'];
 BEGIN
     -- 1. Les 23 compétences ciblées existent et sont CE1.
     SELECT count(*) INTO v_n FROM public.competences
@@ -44,11 +48,24 @@ BEGIN
         RAISE EXCEPTION 'ce1_socle : notion hors CE1 ouverte à tort : %', bad;
     END IF;
 
-    -- 4. Total compétences maths CE1 = 27 (23 + 4 de la migration 0066).
+    -- 4a. Les 6 compétences géométrie/repère sont CE1 avec classe_max >= CE2.
+    SELECT count(*) INTO v_n FROM public.competences
+     WHERE matiere = 'MA' AND classe_min = 'CE1' AND code = ANY(geo)
+       AND array_position(ARRAY['CP','CE1','CE2','CM1','CM2'], classe_max) >= 2;
+    IF v_n <> 6 THEN
+        RAISE EXCEPTION 'ce1_socle : 6 compétences géométrie/repère CE1 attendues, obtenu %', v_n;
+    END IF;
+
+    -- 4b. La symétrie reste CE2 (pas un attendu CE1).
+    IF (SELECT classe_min FROM public.competences WHERE code = 'MA.GEO.SYMETRIE') = 'CE1' THEN
+        RAISE EXCEPTION 'ce1_socle : MA.GEO.SYMETRIE ne doit pas être CE1';
+    END IF;
+
+    -- 4c. Total compétences maths CE1 = 27 (0114+0066) + 6 (0115) = 33.
     SELECT count(*) INTO v_n FROM public.competences
      WHERE matiere = 'MA' AND classe_min = 'CE1';
-    IF v_n <> 27 THEN
-        RAISE EXCEPTION 'ce1_socle : 27 compétences maths CE1 attendues, obtenu %', v_n;
+    IF v_n <> 33 THEN
+        RAISE EXCEPTION 'ce1_socle : 33 compétences maths CE1 attendues, obtenu %', v_n;
     END IF;
 
     -- 5. Candidature d'un profil CE1 : une compétence [CE1,CE2] chevauche la
@@ -71,5 +88,5 @@ BEGIN
         RAISE EXCEPTION 'ce1_socle : certaines compétences ne sont plus candidates pour un CE2 (obtenu %)', v_n;
     END IF;
 
-    RAISE NOTICE 'ce1_socle_maths_test : PASS (27 compétences maths CE1, dont 23 ouvertes par 0114)';
+    RAISE NOTICE 'ce1_socle_maths_test : PASS (33 compétences maths CE1 : 23 par 0114, 6 géo/repère par 0115, 4 par 0066)';
 END $$;

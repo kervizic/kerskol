@@ -424,15 +424,25 @@ donnée élève touchée, aucune compétence créée/supprimée.
 | heure | `MA.MES.HEURE`, `MA.MES.DUREES` | heures entières et demi-heures, jour/semaine, heure/minute |
 | fractions | `MA.FRAC.SIMPLES` | approche 1/2, 1/3, 1/4 (N1) |
 
-**Non ouverts au CE1** (restent CE2/CM1, débordement vérifié par garde-fou) :
-multiplication posée, division (potence, `DIV_RESTE`), tables de 6 à 9.
+**Géométrie et repérage CE1** (incrément 2, migration 0115, moteur
+`<Geometrie>` / table `geometrie_item`) : 6 compétences ouvertes au CE1
+(`classe_min='CE1'`, `classe_max` CE2) — `MA.GEO.FIGURES` (carré, rectangle,
+triangle, cercle), `MA.GEO.VOCABULAIRE` (côtés, sommets, angle droit à
+l'équerre), `MA.GEO.SOLIDES` (cube, pavé, boule, cône, pyramide ; face/sommet/
+arête), `MA.REPERE.QUADRILLAGE`, `MA.REPERE.DEPLACEMENTS`, `MA.REPERE.PLAN`.
+`MA.GEO.SYMETRIE` reste CE2. **33 compétences maths CE1 au total.** Toutes les
+sources (calcul, géométrie, données) alimentent le même `composeSession`
+(Session.tsx) : aucun changement de moteur, les compétences géométrie CE1
+apparaissent comme « nouveauté » (pas de prérequis bloquant).
 
-**À venir (incréments CE1 suivants)** : géométrie (figures planes, angle droit à
-l'équerre, reproduire sur quadrillage, alignement, solides) et repérage /
-déplacements — ces compétences utilisent d'**autres moteurs** (géométrie, QCM)
-et leur calibrage CE1 sera vérifié banque par banque. Des banques
-**calibrées CE1** (ex. N3-N4 de numération plafonnés à 1 000, N4 « écrire en
-lettres ≤ 1 000 ») pourront remplacer l'escalier réutilisé si besoin.
+**Non ouverts au CE1** (restent CE2/CM1, débordement vérifié par garde-fou) :
+multiplication posée, division (potence, `DIV_RESTE`), tables de 6 à 9,
+symétrie axiale.
+
+**À venir (incréments CE1 suivants)** : des banques **calibrées CE1** (ex. N3-N4
+de numération plafonnés à 1 000, N4 « écrire en lettres ≤ 1 000 ») pourront
+remplacer l'escalier réutilisé si besoin ; tracé de segments à la règle graduée
+(reproduire en cm/dm).
 
 **Sources officielles (programme 2024, cycle 2)** : Attendus de fin d'année de
 CE1 en mathématiques, Éduscol / Éducation nationale

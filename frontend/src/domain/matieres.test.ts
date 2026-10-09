@@ -60,6 +60,8 @@ describe("visibilite CE1 : les sous-matieres MATHS sont visibles au CE1", () => 
       "mesures",
       "heure",
       "fractions",
+      "geometrie",
+      "repere",
     ]) {
       expect(vus.has(d)).toBe(true);
     }
