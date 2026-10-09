@@ -25,7 +25,7 @@ import io
 import json
 import pathlib
 
-KIT = pathlib.Path(__file__).resolve().parents[2] / "kerskol-kits" / "bibliotheque-domaine-public"
+KIT = pathlib.Path(__file__).resolve().parents[3] / "kerskol-kits" / "bibliotheque-domaine-public"
 
 RETIRES = {
     "c2-050": "retire (lot 0068) : extrait coupe pour la bienveillance -> regle Manu, on ne coupe jamais un texte, on le retire entier",
