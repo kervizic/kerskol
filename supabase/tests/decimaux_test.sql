@@ -56,8 +56,10 @@ BEGIN
     PERFORM public.verif_calcul('MA.DEC.ECRIRE', 1, 'val', 200000, 0, NULL, NULL);
     RAISE EXCEPTION 'valeur hors bornes aurait du etre rejetee';
 EXCEPTION WHEN others THEN
-    IF SQLERRM NOT LIKE '%hors bornes%' AND SQLERRM NOT LIKE '%trop grand%' THEN
-        RAISE EXCEPTION 'erreur inattendue (attendu hors bornes) : %', SQLERRM;
+    -- Le message est 'enonce_incoherent' ; le detail (« hors bornes ») n'est pas
+    -- dans SQLERRM. On verifie donc le message standard de rejet.
+    IF SQLERRM NOT LIKE '%enonce_incoherent%' THEN
+        RAISE EXCEPTION 'erreur inattendue (attendu enonce_incoherent) : %', SQLERRM;
     END IF;
 END $$;
 
