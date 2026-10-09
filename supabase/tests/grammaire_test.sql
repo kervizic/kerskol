@@ -26,8 +26,8 @@ DECLARE
     n   integer;
 BEGIN
     SELECT count(*) INTO n FROM public.grammaire_item;
-    IF n <> 162 THEN
-        RAISE EXCEPTION 'grammaire_item : 162 items attendus, obtenu %', n;
+    IF n <> 198 THEN
+        RAISE EXCEPTION 'grammaire_item : 198 items attendus, obtenu %', n;
     END IF;
 
     -- Couverture : chaque competence a au moins un item a chaque niveau 1..4.
@@ -35,7 +35,8 @@ BEGIN
                FROM unnest(ARRAY['FR.GRAM.NATURE','FR.GRAM.SUJET_VERBE',
                     'FR.GRAM.TYPES_PHRASES','FR.GRAM.PONCTUATION',
                     'FR.GRAM.GROUPE_NOMINAL','FR.GRAM.COMPLEMENTS','FR.GRAM.HOMOPHONES',
-                    'FR.GRAM.CLASSES','FR.GRAM.PHRASE']) AS c,
+                    'FR.GRAM.CLASSES','FR.GRAM.PHRASE',
+                    'FR.GRAM.CE1_ACCORD_GN','FR.GRAM.CE1_ACCORD_SV','FR.GRAM.CE1_HOMOPHONES']) AS c,
                     generate_series(1,4) AS nv
     LOOP
         IF NOT EXISTS (SELECT 1 FROM public.grammaire_item
@@ -70,7 +71,17 @@ BEGIN
         ('phr-n1-3','FR.GRAM.PHRASE',1,'qcm','complexe'),
         ('phr-n2-1','FR.GRAM.PHRASE',2,'clic','boit'),
         ('phr-n3-3','FR.GRAM.PHRASE',3,'qcm','trois'),
-        ('phr-n4-2','FR.GRAM.PHRASE',4,'texte','dort')
+        ('phr-n4-2','FR.GRAM.PHRASE',4,'texte','dort'),
+        -- CE1 dédiées (incrément 13) : spot check du miroir front==SQL.
+        ('ce1agn-n1-pluriel','FR.GRAM.CE1_ACCORD_GN',1,'qcm','chats'),
+        ('ce1agn-n2-determinant','FR.GRAM.CE1_ACCORD_GN',2,'clic','des'),
+        ('ce1agn-n4-feminin','FR.GRAM.CE1_ACCORD_GN',4,'texte','jolie'),
+        ('ce1asv-n1-ils','FR.GRAM.CE1_ACCORD_SV',1,'qcm','mangent'),
+        ('ce1asv-n2-verbe','FR.GRAM.CE1_ACCORD_SV',2,'clic','jouent'),
+        ('ce1asv-n4-elles','FR.GRAM.CE1_ACCORD_SV',4,'texte','chantent'),
+        ('ce1homo-n1-on','FR.GRAM.CE1_HOMOPHONES',1,'qcm','On'),
+        ('ce1homo-n2-aaccent','FR.GRAM.CE1_HOMOPHONES',2,'qcm','à'),
+        ('ce1homo-n4-ont','FR.GRAM.CE1_HOMOPHONES',4,'qcm','ont')
     ) AS t(cle, competence, niveau, format, attendu)
     LOOP
         SELECT format || '|' || attendu INTO got FROM public.grammaire_item WHERE cle = r.cle;
