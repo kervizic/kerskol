@@ -160,6 +160,11 @@ figure coloriée sur un quadrillage (GeoGridSpec / GridView, composant
 (format `texte`, op `geo`). N1-N2 rectangles, N3 figures en L / T, N4 figures
 plus grandes. Golden géométrie = **120 items**.
 
+**Angles et droites (lot 9, migration 0096, `MA.GEO.ANGLES`)** : toucher l'angle
+droit / obtus (clic sur le sommet), reconnaître le type d'un angle (QCM
+aigu/droit/obtus), identifier les paires de droites perpendiculaires / parallèles
+(QCM sur une figure). Composant `<Geometrie>` réutilisé. Golden géométrie = **128**.
+
 ## Problèmes (domaine `problemes`, migration 0024)
 
 Quatre compétences, alignées sur le programme CE2 (Éduscol : résoudre des

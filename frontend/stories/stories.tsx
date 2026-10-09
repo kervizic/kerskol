@@ -252,6 +252,16 @@ export const STORIES: Story[] = [
     node: <PotenceStory /> },
   { id: "decimal-droite", label: "Décimal sur droite graduée (lot 7)",
     node: <DroiteDecStory /> },
+  { id: "angles-perp", label: "Angles et droites — perpendiculaires (QCM, lot 9)",
+    node: <Geometrie item={{
+      cle: "geo-ang-n3-perp", format: "qcm",
+      consigne: "Quelles droites sont perpendiculaires (elles forment un angle droit) ?",
+      options: ["a et b", "a et c", "b et c"], attendu: "a et b",
+      explication: "Les droites a et b se croisent en formant un angle droit : elles sont perpendiculaires.",
+      figure: { kind: "shapes", shapes: [
+        { kind: "segment", pts: [[40, 15], [40, 85]], label: "a" }, { kind: "segment", pts: [[15, 50], [85, 50]], label: "b" },
+        { kind: "segment", pts: [[20, 20], [80, 80]], label: "c" }, { kind: "right", cx: 40, cy: 50 } ] },
+    }} onSoumettre={noopSubmit} onContinuer={noop} /> },
   { id: "aire-carreaux", label: "Aire par comptage de carreaux (figure en L, lot 8)",
     node: <Geometrie item={{
       cle: "geo-aire-n3-a", format: "texte",

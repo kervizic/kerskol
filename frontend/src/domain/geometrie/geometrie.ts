@@ -1178,6 +1178,74 @@ export const BANQUE_GEOMETRIE: GeoItem[] = [
     attendu: "13",
     explication: "Il y a 12 carreaux dans le rectangle, et 1 carreau de plus en bas : 12 et 1 font 13.",
     figure: grid({ cols: 6, rows: 5, fill: ["B2", "C2", "D2", "E2", "B3", "C3", "D3", "E3", "B4", "C4", "D4", "E4", "C5"] }) },
+
+  // =======================================================================
+  // MA.GEO.ANGLES (lot 9) : angles et droites sur une figure. N1-N2 TOUCHER
+  // l'angle droit / obtus (clic sur le sommet) ; N1-N4 reconnaitre le type
+  // d'un angle (QCM aigu/droit/obtus) et les paires de droites perpendiculaires
+  // / paralleles (QCM). Composant <Geometrie> reutilise (clic + qcm).
+  // =======================================================================
+  { cle: "geo-ang-n1-droit", competence: "MA.GEO.ANGLES", niveau: 1, format: "clic",
+    consigne: "Clique sur le sommet où l'angle est droit (le coin bien carré).",
+    attendu: "A",
+    explication: "L'angle droit est au sommet A : les deux côtés forment un coin bien carré, comme le coin d'une feuille.",
+    figure: shapes(
+      { kind: "segment", pts: [[20, 80], [80, 80]] }, { kind: "segment", pts: [[20, 80], [20, 25]] },
+      { kind: "segment", pts: [[80, 80], [20, 25]] }, { kind: "right", cx: 20, cy: 80 },
+      dot(20, 80, { name: "A", label: "A" }), dot(80, 80, { name: "B", label: "B" }), dot(20, 25, { name: "C", label: "C" })) },
+  { cle: "geo-ang-n1-type-aigu", competence: "MA.GEO.ANGLES", niveau: 1, format: "qcm",
+    consigne: "Regarde l'angle au sommet B. Est-il aigu, droit ou obtus ?",
+    options: ["aigu", "droit", "obtus"], attendu: "aigu",
+    explication: "L'angle au sommet B est plus petit (plus fermé) qu'un angle droit : c'est un angle aigu.",
+    figure: shapes(
+      { kind: "segment", pts: [[20, 80], [80, 80]] }, { kind: "segment", pts: [[20, 80], [20, 25]] },
+      { kind: "segment", pts: [[80, 80], [20, 25]] }, { kind: "right", cx: 20, cy: 80 },
+      dot(20, 80, { name: "A", label: "A" }), dot(80, 80, { name: "B", label: "B" }), dot(20, 25, { name: "C", label: "C" })) },
+  { cle: "geo-ang-n2-obtus", competence: "MA.GEO.ANGLES", niveau: 2, format: "clic",
+    consigne: "Clique sur le sommet où l'angle est obtus (plus ouvert qu'un angle droit).",
+    attendu: "B",
+    explication: "L'angle obtus est au sommet B : il est bien ouvert, plus grand qu'un angle droit.",
+    figure: shapes(
+      { kind: "segment", pts: [[15, 75], [40, 45]] }, { kind: "segment", pts: [[40, 45], [85, 75]] },
+      { kind: "segment", pts: [[85, 75], [15, 75]] },
+      dot(15, 75, { name: "A", label: "A" }), dot(40, 45, { name: "B", label: "B" }), dot(85, 75, { name: "C", label: "C" })) },
+  { cle: "geo-ang-n2-type-obtus", competence: "MA.GEO.ANGLES", niveau: 2, format: "qcm",
+    consigne: "Regarde l'angle au sommet B. Est-il aigu, droit ou obtus ?",
+    options: ["obtus", "droit", "aigu"], attendu: "obtus",
+    explication: "L'angle au sommet B est plus ouvert qu'un angle droit : c'est un angle obtus.",
+    figure: shapes(
+      { kind: "segment", pts: [[15, 75], [40, 45]] }, { kind: "segment", pts: [[40, 45], [85, 75]] },
+      { kind: "segment", pts: [[85, 75], [15, 75]] },
+      dot(15, 75, { name: "A", label: "A" }), dot(40, 45, { name: "B", label: "B" }), dot(85, 75, { name: "C", label: "C" })) },
+  { cle: "geo-ang-n3-droit", competence: "MA.GEO.ANGLES", niveau: 3, format: "clic",
+    consigne: "Clique sur le sommet où l'angle est droit.",
+    attendu: "C",
+    explication: "L'angle droit est au sommet C : le petit carré montre le coin bien carré.",
+    figure: shapes(
+      { kind: "segment", pts: [[25, 25], [80, 40]] }, { kind: "segment", pts: [[25, 25], [40, 85]] },
+      { kind: "segment", pts: [[80, 40], [40, 85]] }, { kind: "right", cx: 40, cy: 85 },
+      dot(25, 25, { name: "A", label: "A" }), dot(80, 40, { name: "B", label: "B" }), dot(40, 85, { name: "C", label: "C" })) },
+  { cle: "geo-ang-n3-perp", competence: "MA.GEO.ANGLES", niveau: 3, format: "qcm",
+    consigne: "Quelles droites sont perpendiculaires (elles forment un angle droit) ?",
+    options: ["a et b", "a et c", "b et c"], attendu: "a et b",
+    explication: "Les droites a et b se croisent en formant un angle droit : elles sont perpendiculaires.",
+    figure: shapes(
+      { kind: "segment", pts: [[40, 15], [40, 85]], label: "a" }, { kind: "segment", pts: [[15, 50], [85, 50]], label: "b" },
+      { kind: "segment", pts: [[20, 20], [80, 80]], label: "c" }, { kind: "right", cx: 40, cy: 50 }) },
+  { cle: "geo-ang-n4-perp", competence: "MA.GEO.ANGLES", niveau: 4, format: "qcm",
+    consigne: "Quelles droites sont perpendiculaires (elles forment un angle droit) ?",
+    options: ["b et c", "a et b", "a et c"], attendu: "b et c",
+    explication: "Les droites b et c se croisent en formant un angle droit : elles sont perpendiculaires.",
+    figure: shapes(
+      { kind: "segment", pts: [[20, 25], [80, 55]], label: "a" }, { kind: "segment", pts: [[35, 15], [35, 85]], label: "b" },
+      { kind: "segment", pts: [[15, 50], [85, 50]], label: "c" }, { kind: "right", cx: 35, cy: 50 }) },
+  { cle: "geo-ang-n4-parallel", competence: "MA.GEO.ANGLES", niveau: 4, format: "qcm",
+    consigne: "Quelles droites sont parallèles (elles ne se croisent jamais) ?",
+    options: ["a et c", "a et b", "b et c"], attendu: "a et c",
+    explication: "Les droites a et c vont dans la même direction et gardent toujours le même écart : elles sont parallèles.",
+    figure: shapes(
+      { kind: "segment", pts: [[25, 15], [25, 85]], label: "a" }, { kind: "segment", pts: [[45, 15], [75, 85]], label: "b" },
+      { kind: "segment", pts: [[75, 15], [75, 85]], label: "c" }) },
 ];
 
 // Competences par sous-matiere (ordre d'affichage = ordre du referentiel).
@@ -1191,6 +1259,7 @@ export const COMPETENCES_GEOMETRIE = [
   "MA.GEO.CERCLE",
   "MA.GEO.PATRONS",
   "MA.GEO.AIRE",
+  "MA.GEO.ANGLES",
 ] as const;
 export const COMPETENCES_REPERE = [
   "MA.REPERE.QUADRILLAGE",
