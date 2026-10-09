@@ -310,11 +310,16 @@ $$;
 --    (Visibilite stricte CM1 cote client : un CE2 ne la voit pas dans ses
 --    reglages ; elle reste jouable « en avance » si prerequis acquis.)
 -- =========================================================================
+-- DEFAUT COMPLET (liste de 0063) + 'decimaux'. NB : la liste doit inclure TOUTES
+-- les sous-matieres deja presentes au defaut (QM, EMC, ecriture), sinon un
+-- nouveau profil les perdrait (cf. correctif 0073).
 ALTER TABLE public.profils
     ALTER COLUMN domaines_actifs SET DEFAULT ARRAY[
         'numeration','calcul_mental','tables_multiplication','calcul_pose',
         'problemes','mesures','heure','fractions','decimaux','geometrie','repere','donnees',
-        'grammaire','vocabulaire','mots-invariables','conjugaison','orthographe'
+        'grammaire','vocabulaire','mots-invariables','conjugaison','orthographe',
+        'lecture','mots-maitresse','vivant','matiere','objets','espace','temps',
+        'respect','emotions','republique','ecrans','ecriture'
     ]::text[];
 
 UPDATE public.profils
