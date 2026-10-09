@@ -131,7 +131,7 @@ export function Village({
   }
 
   const port = progression
-    ? computePort(referentiel.competences, referentiel.prerequis, progression)
+    ? computePort(referentiel.competences, referentiel.prerequis, progression, profil.classe)
     : [];
 
   return (

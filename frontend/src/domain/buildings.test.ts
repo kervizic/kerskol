@@ -118,3 +118,65 @@ describe("computePort", () => {
     expect(port.find((p) => p.code === "MA.CM.MOITIES")?.state).toBe("vide");
   });
 });
+
+// -------------------------------------------------------------------------
+// LOT CE1 (incrément 12) - Garde-fou SOUS-NIVEAU générique (toutes matières).
+// Un prérequis de classe inférieure (remédiation, p. ex. une compétence
+// [CE1,CE1] prérequis d'une compétence CE2) ne doit JAMAIS verrouiller la
+// compétence liée pour un enfant plus avancé : le port d'Iris (CE2) reste
+// inchangé quand on ajoute un lien CE1 -> CE2. Voir sousNiveauCodes / isUnlocked
+// / computePort(classe).
+// -------------------------------------------------------------------------
+import { sousNiveauCodes } from "./buildings";
+import type { Classe } from "../lib/types";
+
+function compC(
+  code: string,
+  classe_min: Classe,
+  classe_max: Classe,
+  matiere = "MA",
+  domaine = "numeration",
+): Competence {
+  return { code, matiere, domaine, libelle: code, ordre: 1, nb_niveaux: 4, actif: true, classe_min, classe_max };
+}
+
+describe("garde-fou sous-niveau : un prérequis de classe inférieure ne verrouille pas", () => {
+  // CE2 lié (MA.NUM.COMPARER) dépend d'une compétence CE1 dédiée [CE1,CE1].
+  const competences: Competence[] = [
+    compC("MA.NUM.COMPARER", "CE1", "CE2"),
+    compC("MA.NUM.CE1_MILLE", "CE1", "CE1"),
+  ];
+  const prereqs: Prerequis[] = [
+    { competence: "MA.NUM.COMPARER", prerequis: "MA.NUM.CE1_MILLE", niveau_min: 2 },
+  ];
+  // Iris (CE2) a une progression sur SA compétence CE2, aucune sur la CE1 dédiée.
+  const progsIris = [prog("MA.NUM.COMPARER", 3, 3)];
+
+  it("sousNiveauCodes repère la compétence CE1 dédiée pour un CE2, pas pour un CE1", () => {
+    expect(sousNiveauCodes(competences, "CE2").has("MA.NUM.CE1_MILLE")).toBe(true);
+    expect(sousNiveauCodes(competences, "CE1").has("MA.NUM.CE1_MILLE")).toBe(false);
+    expect(sousNiveauCodes(competences, undefined).size).toBe(0);
+  });
+
+  it("port d'Iris (CE2) : la compétence CE2 liée reste débloquée malgré le prérequis CE1", () => {
+    const port = computePort(competences, prereqs, progsIris, "CE2");
+    expect(port.find((p) => p.code === "MA.NUM.COMPARER")?.state).toBe("maison");
+  });
+
+  it("sans le garde-fou (classe absente) le prérequis CE1 verrouillerait la compétence CE2", () => {
+    // Démontre que la régression est réelle : sans classe, le port masque la
+    // compétence CE2 d'Iris (ancien comportement de computePort à 3 arguments).
+    const port = computePort(competences, prereqs, progsIris);
+    expect(port.find((p) => p.code === "MA.NUM.COMPARER")).toBeUndefined();
+  });
+
+  it("isUnlocked : un prérequis genuinement de même classe verrouille toujours", () => {
+    const comp2: Competence[] = [
+      compC("MA.A", "CE2", "CE2"),
+      compC("MA.B", "CE2", "CE2"),
+    ];
+    const pr: Prerequis[] = [{ competence: "MA.A", prerequis: "MA.B", niveau_min: 2 }];
+    const ignore = sousNiveauCodes(comp2, "CE2"); // vide : B n'est pas sous-niveau
+    expect(isUnlocked("MA.A", pr, {}, ignore)).toBe(false);
+  });
+});

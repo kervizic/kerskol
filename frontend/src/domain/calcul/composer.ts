@@ -155,8 +155,14 @@ export function composeSession(input: ComposeInput): PlannedItem[] {
   // infirmes). Les competences sous-niveau sont ecartees du pool normal.
   const progForUnlock: Record<string, { niveau_max_atteint: number }> = {};
   for (const p of input.progress) progForUnlock[p.competence] = { niveau_max_atteint: p.niveau_max_atteint };
+  // Un prerequis SOUS-NIVEAU (competence de classe inferieure, remediation) ne
+  // verrouille pas la competence liee : sinon un prerequis CE1 -> CE2 masquerait
+  // la competence CE2 d'Iris (aucune progression sur la competence CE1). Garde-fou
+  // generique, toutes matieres (FR / QLM / EMC inclus), pas seulement le plan maths.
   const unlocked = activeNormal.filter(
-    (c) => isUnlocked(c.code, prerequis, progForUnlock as never) || classUnlocks(classe, c.code)
+    (c) =>
+      isUnlocked(c.code, prerequis, progForUnlock as never, sousNiveauCodes) ||
+      classUnlocks(classe, c.code)
   );
 
   // --- 1re seance : aucune reponse -> plan de la CLASSE -------------------
