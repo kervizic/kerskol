@@ -4,7 +4,7 @@
 --
 -- Couvre :
 --   * la table de reference public.donnees_item contient EXACTEMENT les memes
---     items que le front (80 lignes ; couverture 10 competences x 4 niveaux ;
+--     items que le front (88 lignes ; couverture 11 competences x 4 niveaux ;
 --     spot check) : TEST CROISE avec le golden vitest
 --     (frontend/.../donnees/donnees.test.ts) ;
 --   * verif_donnees : bonne reponse acceptee, mauvaise refusee, accents EXIGES
@@ -26,8 +26,8 @@ DECLARE
     n   integer;
 BEGIN
     SELECT count(*) INTO n FROM public.donnees_item;
-    IF n <> 80 THEN
-        RAISE EXCEPTION 'donnees_item : 80 items attendus, obtenu %', n;
+    IF n <> 88 THEN
+        RAISE EXCEPTION 'donnees_item : 88 items attendus, obtenu %', n;
     END IF;
 
     -- Couverture : chaque competence a au moins un item a chaque niveau 1..4.
@@ -35,7 +35,7 @@ BEGIN
                FROM unnest(ARRAY['MA.DONNEES.TABLEAU','MA.DONNEES.COMPLETER','MA.DONNEES.BARRES',
                     'MA.DONNEES.PICTOGRAMME','MA.DONNEES.COMPARER',
                     'MA.DONNEES.LIRE_CM1','MA.DONNEES.HASARD',
-                    'MA.DONNEES.PROP_RECETTE','MA.DONNEES.PROP_COURSES','MA.DONNEES.ANGLES']) AS c,
+                    'MA.DONNEES.PROP_RECETTE','MA.DONNEES.PROP_COURSES','MA.DONNEES.ANGLES','MA.DONNEES.DROITES']) AS c,
                     generate_series(1,4) AS nv
     LOOP
         IF NOT EXISTS (SELECT 1 FROM public.donnees_item
@@ -71,7 +71,11 @@ BEGIN
         -- LOT 5 (CM1) : angles (vocabulaire)
         ('ang-n1-a','MA.DONNEES.ANGLES',1,'qcm','droit'),
         ('ang-n2-a','MA.DONNEES.ANGLES',2,'qcm','obtus'),
-        ('ang-n4-b','MA.DONNEES.ANGLES',4,'texte','aigu')
+        ('ang-n4-b','MA.DONNEES.ANGLES',4,'texte','aigu'),
+        -- LOT 6 (CM1) : droites (perpendiculaires / paralleles)
+        ('dro-n1-a','MA.DONNEES.DROITES',1,'qcm','perpendiculaires'),
+        ('dro-n2-a','MA.DONNEES.DROITES',2,'qcm','parallèles'),
+        ('dro-n4-b','MA.DONNEES.DROITES',4,'texte','parallèles')
     ) AS t(cle, competence, niveau, format, attendu)
     LOOP
         SELECT format || '|' || attendu INTO got FROM public.donnees_item WHERE cle = r.cle;

@@ -95,4 +95,12 @@ export const STORIES: Story[] = [
       explication: "Un angle plus grand qu'un angle droit est un angle obtus. Obtus, c'est bien ouvert.",
       figure: { kind: "none" },
     }} onSoumettre={noopSubmit} onContinuer={noop} /> },
+  { id: "droites-qcm", label: "Géométrie — perpendiculaires / parallèles (QCM, lot 6)",
+    node: <Donnees item={{
+      cle: "dro-n1-a", format: "qcm",
+      consigne: "Deux droites qui se croisent en formant un angle droit sont... ?",
+      options: ["perpendiculaires", "parallèles", "obliques"], attendu: "perpendiculaires",
+      explication: "Deux droites qui forment un angle droit sont perpendiculaires. On le vérifie avec l'équerre.",
+      figure: { kind: "none" },
+    }} onSoumettre={noopSubmit} onContinuer={noop} /> },
 ];

@@ -1465,6 +1465,17 @@ Réutilisation des moteurs existants, **aucune nouvelle UI** :
 `decimaux.test.ts` (20 sources, ops val/add/sub, `computeVerif == answer`).
 Capture Playwright vérifiée (addition décimale).
 
+## Livré : « Espace et géométrie » (migration 0077, lot 6)
+
+Réutilisation des **outils virtuels existants** (moteur geometrie, `<Geometrie>`,
+`verif_geo`), **aucune nouvelle UI** :
+- **MA.GEO.CERCLE** (compas), **MA.GEO.SYMETRIE** (axe), **MA.GEO.CONSTRUIRE**
+  (programme de construction) - **élargies** à CM1..CM2 et ajoutées au cœur du
+  plan de classe CM1 (leur contenu CE2 couvre déjà le niveau CM1).
+- **MA.DONNEES.DROITES** (domaine `geometrie`) - vocabulaire **perpendiculaires /
+  parallèles** via le moteur `donnees` (QCM, figure « none »). 8 items (golden
+  donnees = 88). Capture Playwright vérifiée.
+
 ## Reste à livrer pour le CM1 (maths)
 
 Chaque point suit le même patron (nouvelle compétence `classe_min = 'CM1'`,
@@ -1476,10 +1487,10 @@ tests golden) :
   (disposition de la division) ; **calcul mental CM1** (grands nombres, multiples).
 - **Grandeurs et mesures** : aire par **comptage de carreaux** et angles **avec
   figure** (reconnaissance visuelle) — nécessitent une figure quadrillée/angle.
-- **Espace et géométrie** : perpendiculaires, parallèles, cercle, programme de
-  construction, symétrie axiale (réutiliser règle/équerre/compas existants).
+- **Géométrie** : reconnaissance / tracé **visuel** des perpendiculaires et
+  parallèles sur une figure (nouvelle figure dans `<Geometrie>`).
 - **Boucles de programmation** (« répète 3 fois ») : éditeur de boucle (UI) pour
   `MA.REPERE.PROGRAMMER` — nécessite une nouvelle UI (lot d'UI).
 
 Et pour les autres matières CM1 : **français, sciences, histoire-géographie,
-EMC** (non traités dans ce lot).
+EMC** (non traités dans ces lots).

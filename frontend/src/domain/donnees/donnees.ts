@@ -612,6 +612,51 @@ export const BANQUE_DONNEES: DonItem[] = [
     attendu: "aigu",
     figure: { kind: "none" },
     explication: "Un angle plus petit que l'angle droit est un angle aigu." },
+
+  // =======================================================================
+  // LOT 6 (CM1) — DROITES perpendiculaires et parallèles (vocabulaire).
+  // Sous-matiere « geometrie ». Moteur donnees (op 'don', QCM, figure « none »).
+  // =======================================================================
+  { cle: "dro-n1-a", competence: "MA.DONNEES.DROITES", niveau: 1, format: "qcm",
+    consigne: "Deux droites qui se croisent en formant un angle droit sont... ?",
+    options: ["perpendiculaires", "parallèles", "obliques"], attendu: "perpendiculaires",
+    figure: { kind: "none" },
+    explication: "Deux droites qui forment un angle droit sont perpendiculaires. On le vérifie avec l'équerre." },
+  { cle: "dro-n1-b", competence: "MA.DONNEES.DROITES", niveau: 1, format: "qcm",
+    consigne: "Deux droites qui ne se croisent jamais, toujours à la même distance, sont... ?",
+    options: ["parallèles", "perpendiculaires", "obliques"], attendu: "parallèles",
+    figure: { kind: "none" },
+    explication: "Deux droites qui gardent toujours le même écart et ne se croisent jamais sont parallèles." },
+  { cle: "dro-n2-a", competence: "MA.DONNEES.DROITES", niveau: 2, format: "qcm",
+    consigne: "Les deux rails d'une voie de train, qui gardent toujours le même écart, sont... ?",
+    options: ["parallèles", "perpendiculaires", "obliques"], attendu: "parallèles",
+    figure: { kind: "none" },
+    explication: "Les rails gardent le même écart et ne se croisent jamais : ils sont parallèles." },
+  { cle: "dro-n2-b", competence: "MA.DONNEES.DROITES", niveau: 2, format: "qcm",
+    consigne: "Au coin d'une feuille, les deux bords forment un angle droit. Ils sont... ?",
+    options: ["perpendiculaires", "parallèles", "obliques"], attendu: "perpendiculaires",
+    figure: { kind: "none" },
+    explication: "Les deux bords forment un angle droit : ils sont perpendiculaires." },
+  { cle: "dro-n3-a", competence: "MA.DONNEES.DROITES", niveau: 3, format: "qcm",
+    consigne: "Avec l'équerre, on vérifie que deux droites forment un angle droit. Elles sont... ?",
+    options: ["perpendiculaires", "parallèles", "obliques"], attendu: "perpendiculaires",
+    figure: { kind: "none" },
+    explication: "L'équerre sert à vérifier l'angle droit : ces droites sont perpendiculaires." },
+  { cle: "dro-n3-b", competence: "MA.DONNEES.DROITES", niveau: 3, format: "qcm",
+    consigne: "Les lignes d'un cahier, qui gardent toujours le même écart, sont... ?",
+    options: ["parallèles", "perpendiculaires", "obliques"], attendu: "parallèles",
+    figure: { kind: "none" },
+    explication: "Les lignes du cahier gardent le même écart : elles sont parallèles." },
+  { cle: "dro-n4-a", competence: "MA.DONNEES.DROITES", niveau: 4, format: "texte",
+    consigne: "Deux droites forment un angle droit. Écris comment elles sont, en un mot : perpendiculaires ou parallèles.",
+    attendu: "perpendiculaires",
+    figure: { kind: "none" },
+    explication: "Deux droites qui forment un angle droit sont perpendiculaires." },
+  { cle: "dro-n4-b", competence: "MA.DONNEES.DROITES", niveau: 4, format: "texte",
+    consigne: "Deux droites ne se croisent jamais et gardent le même écart. Écris comment elles sont, en un mot : perpendiculaires ou parallèles.",
+    attendu: "parallèles",
+    figure: { kind: "none" },
+    explication: "Deux droites qui ne se croisent jamais et gardent le même écart sont parallèles." },
 ];
 
 // Competences de la sous-matiere (ordre d'affichage = ordre du referentiel).
@@ -626,6 +671,7 @@ export const COMPETENCES_DONNEES = [
   "MA.DONNEES.PROP_RECETTE",
   "MA.DONNEES.PROP_COURSES",
   "MA.DONNEES.ANGLES",
+  "MA.DONNEES.DROITES",
 ] as const;
 
 // Items jouables pour une competence et un niveau donnes.

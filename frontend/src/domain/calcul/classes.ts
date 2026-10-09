@@ -74,6 +74,10 @@ const CM1: ClassPlan = {
     "MA.DEC.ADDITION": 1,
     "MA.DEC.SOUSTRACTION": 1,
     "MA.POSE.MULT2": 1,
+    "MA.GEO.CERCLE": 1,
+    "MA.GEO.SYMETRIE": 1,
+    "MA.GEO.CONSTRUIRE": 1,
+    "MA.DONNEES.DROITES": 1,
   },
 };
 
