@@ -1,9 +1,10 @@
-// « Histoire et technologie » (ST, cycle 3, reperes CM1). NOUVELLE MATIERE a
-// cote de Maths, Francais, Questionner le monde et EMC. Six sous-matieres
-// (un `domaine` chacune) : etats_matiere, classification, corps_humain,
-// energie, objets_techniques, ciel_terre.
+// « Histoire » (HIST, cycle 3 - NOUVEAU PROGRAMME 2026, reperes CM1). MATIERE a
+// cote de Maths, Francais, Questionner le monde, EMC, Sciences et Geographie.
+// Cinq sous-matieres (un `domaine` chacune) : moyen_age (vie quotidienne au
+// Moyen Age), monarchie (XVIe-XVIIe), explorations (conquetes et traite),
+// revolution (1789), frise (chronologie et siecles).
 //
-// REUTILISATION : ST partage l'INFRASTRUCTURE « situation » de Questionner le
+// REUTILISATION : HIST partage l'INFRASTRUCTURE « situation » de Questionner le
 // monde (meme type QmItem, memes formats qcm/tri/ordre/texte, meme composant
 // <QuestionnerLeMonde>, meme op serveur 'qm' + table public.qm_item + verif_qm).
 // Seuls le CATALOGUE d'exercices (type 'histoire') et le contenu changent. Le

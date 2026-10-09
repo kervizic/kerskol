@@ -110,16 +110,16 @@ export const MATIERES: MatiereDef[] = [
     ],
   },
   {
-    // « Histoire » (cycle 3, CM1). Repères apaisés (bienveillance stricte).
-    // Réutilise le rendu de Questionner le monde.
+    // « Histoire » (cycle 3, CM1 - NOUVEAU PROGRAMME 2026). Contenu factuel non
+    // adouci (verite historique) ; seule la banque histoire est exemptee de la
+    // bienveillance stricte. Réutilise le rendu de Questionner le monde.
     code: "HIST",
     libelle: "Histoire",
     sousMatieres: [
-      { domaine: "traces_anciennes", libelle: "Les premières traces", classeMin: "CM1" },
-      { domaine: "gaulois_romains", libelle: "Gaulois et Romains", classeMin: "CM1" },
-      { domaine: "moyen_age", libelle: "Au Moyen Âge", classeMin: "CM1" },
-      { domaine: "monuments", libelle: "Églises et monuments", classeMin: "CM1" },
-      { domaine: "rois_de_france", libelle: "Les grands rois", classeMin: "CM1" },
+      { domaine: "moyen_age", libelle: "La vie au Moyen Âge", classeMin: "CM1" },
+      { domaine: "monarchie", libelle: "Les rois (XVIe-XVIIe)", classeMin: "CM1" },
+      { domaine: "explorations", libelle: "Explorations et conquêtes", classeMin: "CM1" },
+      { domaine: "revolution", libelle: "1789, la Révolution", classeMin: "CM1" },
       { domaine: "frise", libelle: "La frise et les siècles", classeMin: "CM1" },
     ],
   },

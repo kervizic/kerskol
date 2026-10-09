@@ -47,10 +47,29 @@ DECLARE
                      'moqueur|moqueuse|blesse|blessé|blessée|blessés|blessées|' ||
                      'blesser|blessure|blessant)\y';
     wpat_vivant text := '\y(mourir|meurt|meurs|meurent|mort|morte|morts|mortes)\y';
+    -- wpat_hist : exemption LIMITEE a la banque histoire (decision de Manu :
+    --   « n'adoucis pas l'Histoire »). La verite historique exige un
+    --   vocabulaire mesure de guerre / mort / esclavage (guerres de religion,
+    --   massacre de la Saint-Barthelemy, traite et esclavage, Code noir, prise
+    --   de la Bastille). Autorise pour les SEULES competences HIST.%.
+    wpat_hist text := '\y(guerre|guerres|massacre|massacré|sanglant|mort|morte|morts|' ||
+                      'mortes|mourir|meurt|tuer|tue|tues|tué|tuée|sang|blesse|blessé|' ||
+                      'blessée|blessés|blesser|blessure|battu|battue|battus)\y';
     cleaned text;
     r record;
     n integer := 0;
 BEGIN
+    -- Row TEMPORAIRE (rollback) : prouve que l'exemption HIST.% neutralise bien
+    -- un vocabulaire historique qui serait sinon interdit.
+    INSERT INTO public.qm_item (cle, competence, niveau, format, attendu)
+    VALUES ('hi-test-exemption-biencheck', 'HIST.MONARCHIE', 1, 'qcm', 'les guerres de religion')
+    ON CONFLICT (cle) DO UPDATE SET attendu = EXCLUDED.attendu;
+    IF 'les guerres de religion' !~* pat THEN
+        RAISE EXCEPTION 'test d''exemption invalide : « guerres » devrait matcher la liste interdite';
+    END IF;
+    IF regexp_replace('les guerres de religion', wpat_hist, ' ', 'gi') ~* pat THEN
+        RAISE EXCEPTION 'exemption HIST KO : « guerres de religion » encore interdit apres nettoyage';
+    END IF;
     -- 1. Dictee detective : les textes affiches a l'enfant.
     FOR r IN
         SELECT id, theme, texte FROM public.dictee_texte WHERE texte ~* pat
@@ -83,6 +102,9 @@ BEGIN
         cleaned := r.attendu;
         IF r.competence LIKE 'EMC.%' THEN
             cleaned := regexp_replace(cleaned, wpat_emc, ' ', 'gi');
+        END IF;
+        IF r.competence LIKE 'HIST.%' THEN
+            cleaned := regexp_replace(cleaned, wpat_hist, ' ', 'gi');
         END IF;
         IF r.cle = 'qm-viv-car-n4-a' THEN
             cleaned := regexp_replace(cleaned, wpat_vivant, ' ', 'gi');

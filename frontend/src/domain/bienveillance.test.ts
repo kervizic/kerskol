@@ -77,10 +77,20 @@ const FORBIDDEN: { token: string; re: RegExp }[] = [
   { token: "peur-forte", re: /\b(mortes? de peur|pleure[a-z]* de peur|folle? de peur|peur panique|terrorise[a-z]*)\b/ },
 ];
 
+// Exemption HISTOIRE (decision de Manu : « n'adoucis pas l'Histoire »). La
+// banque histoire est le SEUL contenu exempte de la regle de bienveillance
+// stricte : la verite historique exige un vocabulaire mesure de guerre, de mort
+// et d'esclavage (guerres de religion, massacre de la Saint-Barthelemy, traite
+// et esclavage, Code noir, prise de la Bastille). Exemption LIMITEE a ces
+// tokens, pour les SEULES competences HIST.* ; sans detail gratuit ni macabre.
+// Les histoires, lectures et enonces de maths restent sous la regle stricte.
+const HIST_TOKENS_AUTORISES = new Set(["mort", "mourir", "tuer", "sang", "blesser", "battu", "arme"]);
+
 // Seuls cas pedagogiques ou un mot sensible est garde volontairement.
 function estAutorise(competence: string, cle: string, token: string): boolean {
   if (cle === "qm-viv-car-n4-a" && (token === "mourir" || token === "mort")) return true;
   if (competence.startsWith("EMC.") && (token === "moquer" || token === "blesser")) return true;
+  if (competence.startsWith("HIST.") && HIST_TOKENS_AUTORISES.has(token)) return true;
   return false;
 }
 
