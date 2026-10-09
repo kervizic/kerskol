@@ -574,6 +574,65 @@ export const BANQUE_GRAMMAIRE: GramItem[] = [
     consigne: "Choisis le bon mot pour compléter la phrase.", phrase: "Le maître … explique la leçon.",
     options: ["leur", "leurs"], attendu: "leur",
     explication: "leur devant un verbe ne change jamais. Il leur explique, comme il lui explique : leur sans s." },
+
+  // =========================================================================
+  // FR.GRAM.CLASSES (CM1) — classes de mots élargies : adverbe, conjonction de
+  // coordination, pronom (au-delà du pronom personnel sujet). Attendu CM1
+  // (eduscol doc 13984 : identifier les classes de mots). N1 QCM, N2 clic,
+  // N3 QCM (donner la classe), N4 réponse libre.
+  // =========================================================================
+  // N1 : QCM — reconnaitre la classe
+  { cle: "cls-n1-adverbe", competence: "FR.GRAM.CLASSES", niveau: 1, format: "qcm",
+    consigne: "Quel mot est un adverbe ? Un adverbe dit comment, quand ou où.", phrase: "",
+    options: ["vite", "chien", "rouge"], attendu: "vite",
+    explication: "vite dit comment on fait : c'est un adverbe. chien est un nom, rouge est un adjectif." },
+  { cle: "cls-n1-conj", competence: "FR.GRAM.CLASSES", niveau: 1, format: "qcm",
+    consigne: "Quel petit mot relie deux idées ? C'est une conjonction (mais, et, ou, donc...).", phrase: "",
+    options: ["mais", "table", "grand"], attendu: "mais",
+    explication: "mais relie deux idées. C'est une conjonction de coordination, comme et, ou, donc." },
+  { cle: "cls-n1-adverbe2", competence: "FR.GRAM.CLASSES", niveau: 1, format: "qcm",
+    consigne: "Quel mot est un adverbe ?", phrase: "",
+    options: ["doucement", "voiture", "petit"], attendu: "doucement",
+    explication: "doucement dit comment on fait, de façon douce : c'est un adverbe." },
+  // N2 : clic sur un mot dans une phrase
+  { cle: "cls-n2-adverbe", competence: "FR.GRAM.CLASSES", niveau: 2, format: "clic",
+    consigne: "Clique sur l'adverbe. Il dit comment le chat dort.", phrase: "Le chat dort tranquillement.",
+    attendu: "tranquillement",
+    explication: "tranquillement dit comment le chat dort : c'est un adverbe." },
+  { cle: "cls-n2-conj", competence: "FR.GRAM.CLASSES", niveau: 2, format: "clic",
+    consigne: "Clique sur le petit mot qui relie les deux idées.", phrase: "Je voudrais jouer mais il pleut.",
+    attendu: "mais",
+    explication: "mais relie deux idées : jouer et il pleut. C'est une conjonction de coordination." },
+  { cle: "cls-n2-adverbe3", competence: "FR.GRAM.CLASSES", niveau: 2, format: "clic",
+    consigne: "Clique sur l'adverbe. Il dit quand on part.", phrase: "Nous partirons bientôt.",
+    attendu: "bientôt",
+    explication: "bientôt dit quand on part : c'est un adverbe de temps." },
+  // N3 : QCM — donner la classe d'un mot
+  { cle: "cls-n3-adverbe", competence: "FR.GRAM.CLASSES", niveau: 3, format: "qcm",
+    consigne: "Quelle est la classe du mot « bien » dans la phrase ?", phrase: "Elle chante bien.",
+    options: ["un adverbe", "un adjectif", "un nom"], attendu: "un adverbe",
+    explication: "bien dit comment elle chante : c'est un adverbe. Un adjectif, lui, décrirait un nom." },
+  { cle: "cls-n3-conj", competence: "FR.GRAM.CLASSES", niveau: 3, format: "qcm",
+    consigne: "Quelle est la classe du mot « et » dans la phrase ?", phrase: "Tom et Léa jouent ensemble.",
+    options: ["une conjonction", "un adverbe", "un pronom"], attendu: "une conjonction",
+    explication: "et relie Tom et Léa : c'est une conjonction de coordination." },
+  { cle: "cls-n3-pronom", competence: "FR.GRAM.CLASSES", niveau: 3, format: "qcm",
+    consigne: "Quelle est la classe du mot « la » dans la phrase ?", phrase: "Je la regarde.",
+    options: ["un pronom", "un déterminant", "un adverbe"], attendu: "un pronom",
+    explication: "la remplace une personne ou une chose (je regarde qui ? la). Ici, la est un pronom, pas le petit mot devant un nom." },
+  // N4 : reponse libre (ecrire le mot)
+  { cle: "cls-n4-adverbe", competence: "FR.GRAM.CLASSES", niveau: 4, format: "texte",
+    consigne: "Écris l'adverbe de la phrase. Il dit comment les enfants rient.", phrase: "Les enfants rient joyeusement.",
+    attendu: "joyeusement",
+    explication: "joyeusement dit comment les enfants rient : c'est un adverbe." },
+  { cle: "cls-n4-conj", competence: "FR.GRAM.CLASSES", niveau: 4, format: "texte",
+    consigne: "Écris la conjonction qui relie les deux idées.", phrase: "Il fait froid donc je mets un manteau.",
+    attendu: "donc",
+    explication: "donc relie les deux idées : il fait froid, et je mets un manteau. C'est une conjonction." },
+  { cle: "cls-n4-adverbe2", competence: "FR.GRAM.CLASSES", niveau: 4, format: "texte",
+    consigne: "Écris l'adverbe de la phrase. Il dit où le chien attend.", phrase: "Le chien attend dehors.",
+    attendu: "dehors",
+    explication: "dehors dit où le chien attend : c'est un adverbe de lieu." },
 ];
 
 // Toutes les competences de grammaire (ordre d'affichage = ordre du referentiel).
@@ -585,6 +644,7 @@ export const COMPETENCES_GRAMMAIRE = [
   "FR.GRAM.GROUPE_NOMINAL",
   "FR.GRAM.COMPLEMENTS",
   "FR.GRAM.HOMOPHONES",
+  "FR.GRAM.CLASSES",
 ] as const;
 
 // Items jouables pour une competence et un niveau donnes.
