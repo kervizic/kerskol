@@ -633,6 +633,65 @@ export const BANQUE_GRAMMAIRE: GramItem[] = [
     consigne: "Écris l'adverbe de la phrase. Il dit où le chien attend.", phrase: "Le chien attend dehors.",
     attendu: "dehors",
     explication: "dehors dit où le chien attend : c'est un adverbe de lieu." },
+
+  // =========================================================================
+  // FR.GRAM.PHRASE (CM1) — phrase simple / phrase complexe. Attendu CM1
+  // (eduscol doc 13984). Une phrase SIMPLE a un seul verbe conjugué ; une phrase
+  // COMPLEXE en a plusieurs. N1 QCM, N2 clic (le verbe), N3 QCM, N4 réponse libre
+  // (écrire un verbe de la phrase).
+  // =========================================================================
+  // N1 : QCM — compter les verbes / reconnaitre simple ou complexe
+  { cle: "phr-n1-1", competence: "FR.GRAM.PHRASE", niveau: 1, format: "qcm",
+    consigne: "Combien y a-t-il de verbes conjugués dans la phrase ?", phrase: "Le chat dort.",
+    options: ["un", "deux", "zéro"], attendu: "un",
+    explication: "Il y a un seul verbe conjugué : dort. Avec un seul verbe, c'est une phrase simple." },
+  { cle: "phr-n1-2", competence: "FR.GRAM.PHRASE", niveau: 1, format: "qcm",
+    consigne: "Cette phrase est simple (un seul verbe) ou complexe (plusieurs verbes) ?", phrase: "Léa chante.",
+    options: ["simple", "complexe"], attendu: "simple",
+    explication: "Il y a un seul verbe conjugué : chante. C'est une phrase simple." },
+  { cle: "phr-n1-3", competence: "FR.GRAM.PHRASE", niveau: 1, format: "qcm",
+    consigne: "Cette phrase est simple ou complexe ?", phrase: "Je lis et mon frère dessine.",
+    options: ["complexe", "simple"], attendu: "complexe",
+    explication: "Il y a deux verbes conjugués : lis et dessine. C'est une phrase complexe." },
+  // N2 : clic sur un verbe
+  { cle: "phr-n2-1", competence: "FR.GRAM.PHRASE", niveau: 2, format: "clic",
+    consigne: "Clique sur le deuxième verbe conjugué de la phrase.", phrase: "Tom mange une pomme et Léa boit de l'eau.",
+    attendu: "boit",
+    explication: "Il y a deux verbes : mange et boit. Le deuxième est boit : c'est une phrase complexe." },
+  { cle: "phr-n2-2", competence: "FR.GRAM.PHRASE", niveau: 2, format: "clic",
+    consigne: "Clique sur le verbe conjugué de cette phrase simple.", phrase: "Les oiseaux chantent dans le jardin.",
+    attendu: "chantent",
+    explication: "Il y a un seul verbe : chantent. C'est une phrase simple." },
+  { cle: "phr-n2-3", competence: "FR.GRAM.PHRASE", niveau: 2, format: "clic",
+    consigne: "Clique sur le petit mot qui relie les deux parties de la phrase.", phrase: "Je range ma chambre puis je joue.",
+    attendu: "puis",
+    explication: "puis relie les deux parties : je range et je joue. La phrase a deux verbes, elle est complexe." },
+  // N3 : QCM — phrases plus longues (un distracteur de longueur)
+  { cle: "phr-n3-1", competence: "FR.GRAM.PHRASE", niveau: 3, format: "qcm",
+    consigne: "Cette phrase est simple ou complexe ?", phrase: "Quand il pleut, je reste à la maison.",
+    options: ["complexe", "simple"], attendu: "complexe",
+    explication: "Il y a deux verbes conjugués : pleut et reste. C'est une phrase complexe." },
+  { cle: "phr-n3-2", competence: "FR.GRAM.PHRASE", niveau: 3, format: "qcm",
+    consigne: "Cette phrase est simple ou complexe ?", phrase: "Le grand chien noir aboie très fort.",
+    options: ["simple", "complexe"], attendu: "simple",
+    explication: "Même si la phrase est longue, il y a un seul verbe : aboie. C'est une phrase simple." },
+  { cle: "phr-n3-3", competence: "FR.GRAM.PHRASE", niveau: 3, format: "qcm",
+    consigne: "Combien y a-t-il de verbes conjugués dans la phrase ?", phrase: "Il mange, il boit et il rit.",
+    options: ["trois", "deux", "un"], attendu: "trois",
+    explication: "Il y a trois verbes conjugués : mange, boit et rit. La phrase est complexe." },
+  // N4 : reponse libre (ecrire un verbe de la phrase)
+  { cle: "phr-n4-1", competence: "FR.GRAM.PHRASE", niveau: 4, format: "texte",
+    consigne: "Écris le deuxième verbe conjugué de la phrase.", phrase: "Le soleil brille et les oiseaux chantent.",
+    attendu: "chantent",
+    explication: "Il y a deux verbes : brille et chantent. Le deuxième est chantent. La phrase est complexe." },
+  { cle: "phr-n4-2", competence: "FR.GRAM.PHRASE", niveau: 4, format: "texte",
+    consigne: "Écris le verbe conjugué de cette phrase simple.", phrase: "Le chat dort sur le canapé.",
+    attendu: "dort",
+    explication: "Il y a un seul verbe : dort. C'est une phrase simple." },
+  { cle: "phr-n4-3", competence: "FR.GRAM.PHRASE", niveau: 4, format: "texte",
+    consigne: "Écris le deuxième verbe conjugué de la phrase.", phrase: "Je ferme la porte quand je sors.",
+    attendu: "sors",
+    explication: "Il y a deux verbes : ferme et sors. Le deuxième est sors. La phrase est complexe." },
 ];
 
 // Toutes les competences de grammaire (ordre d'affichage = ordre du referentiel).
@@ -645,6 +704,7 @@ export const COMPETENCES_GRAMMAIRE = [
   "FR.GRAM.COMPLEMENTS",
   "FR.GRAM.HOMOPHONES",
   "FR.GRAM.CLASSES",
+  "FR.GRAM.PHRASE",
 ] as const;
 
 // Items jouables pour une competence et un niveau donnes.
