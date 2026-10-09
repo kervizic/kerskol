@@ -29,8 +29,8 @@ describe("banque Histoire — totaux et couverture", () => {
     }
   });
 
-  it("les competences ST sont bien prefixees ST.", () => {
-    for (const c of COMPETENCES_HISTOIRE) expect(c.startsWith("ST.")).toBe(true);
+  it("les competences HIST sont bien prefixees HIST.", () => {
+    for (const c of COMPETENCES_HISTOIRE) expect(c.startsWith("HIST.")).toBe(true);
   });
 });
 
