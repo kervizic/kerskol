@@ -76,6 +76,8 @@ export const INDICES: Record<string, string> = {
     "Demande-toi combien il manque pour arriver jusqu'au nombre.",
   "MA.CM.DIV_RESTE":
     "Cherche combien de fois le petit nombre entre dans le grand. Ce qui dépasse, c'est le reste.",
+  "MA.CM.DIV10_100":
+    "Pour diviser par 10, tu enlèves un zéro à la fin. Pour diviser par 100, tu enlèves deux zéros.",
   "MA.CM.DOUBLES":
     "Le double, c'est deux fois le même nombre. Tu l'ajoutes avec lui-même.",
   "MA.CM.MOITIES":

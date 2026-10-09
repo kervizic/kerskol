@@ -58,6 +58,14 @@ const CM: Row[] = [
   ["MA.CM.DIV_RESTE", 2, "div", "reste", "exemples_estompes", "aucun", "plus_grand_multiple_inferieur", { type: "avec_reste", diviseur: { min: 2, max: 9 }, dividende: { min: 10, max: 89 } }],
   ["MA.CM.DIV_RESTE", 3, "div", "reste", "variation", "aucun", "division_par_nombres_ronds", { type: "avec_reste", diviseurs: [10, 25, 50, 100], dividende: { min: 30, max: 990 } }],
   ["MA.CM.DIV_RESTE", 4, "div", "reste", "probleme_dabord", "aucun", "division_en_contexte", { type: "melange", tables: [2, 3, 4, 5, 6, 7, 8, 9], diviseurs: [10, 25, 50, 100], contexte: true }],
+
+  // CM1 (lot B) : diviser par 10 et 100 (exact, resultat entier). Symetrique de
+  // X10_X100 (multiplier). Division exacte -> op 'div', reste 0, fields 1.
+  // N1 ÷10 petit ; N2 ÷10 grand ; N3 ÷100 ; N4 ÷10 et ÷100 melanges, grands.
+  ["MA.CM.DIV10_100", 1, "div", "resultat", "cpa_barres", "aucun", "division_par_10_100", { type: "exacte", tables: [10], quotient: { min: 2, max: 9 } }],
+  ["MA.CM.DIV10_100", 2, "div", "resultat", "exemples_estompes", "aucun", "division_par_10_100", { type: "exacte", tables: [10], quotient: { min: 10, max: 99 } }],
+  ["MA.CM.DIV10_100", 3, "div", "resultat", "variation", "aucun", "division_par_10_100", { type: "exacte", tables: [100], quotient: { min: 2, max: 20 } }],
+  ["MA.CM.DIV10_100", 4, "div", "resultat", "probleme_dabord", "aucun", "division_par_10_100", { type: "exacte", tables: [10, 100], quotient: { min: 20, max: 99 } }],
 ];
 
 // --- Numeration jusqu'a 10 000 (domaine numeration) ---

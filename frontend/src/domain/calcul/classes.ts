@@ -78,6 +78,7 @@ const CM1: ClassPlan = {
     "MA.GEO.SYMETRIE": 1,
     "MA.GEO.CONSTRUIRE": 1,
     "MA.DONNEES.DROITES": 1,
+    "MA.CM.DIV10_100": 1,
   },
 };
 
