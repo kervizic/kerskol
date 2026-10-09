@@ -1545,6 +1545,9 @@ changement de `domaines_actifs`** (domaines `grammaire`, `orthographe`,
   libre (« propre » / « figuré »). Complète `FR.VOC.SENS` (polysémie). Golden
   lexique 140 → 152. (0085 : correctif bienveillance - retrait du mot « dévorer »,
   interdit par le filtre, de deux items.)
+- **Vocabulaire - Les registres de langue** (`FR.VOC.REGISTRES`, migration 0087) :
+  reconnaître le registre **familier / courant / soutenu** et choisir le mot
+  adapté. N1-N3 QCM, N4 réponse libre. Golden lexique 152 → 164.
 
 Chaque compétence : **portée CM1..CM2** + **prérequis** (réservée au CM1, « en
 avance » pour un CE2 seulement si le prérequis est acquis). Captures Playwright
@@ -1560,8 +1563,8 @@ lexique_test.sql).
   ajouter un temps demande d'étendre l'enum `Temps`, les codes et le juge).
 - **Orthographe** : accord sujet-verbe éloigné/inversé, accord du GN étendu,
   participe passé avec être (dictée détective, banques par notion).
-- **Vocabulaire** : registres de langue (familier / courant / soutenu),
-  extensions préfixes/suffixes et synonymes/antonymes CM1.
+- **Vocabulaire** : extensions préfixes/suffixes et synonymes/antonymes au
+  niveau CM1 (le reste du lexique CM1 est livré).
 - **Dictées par notions CM1**, **compréhension** avec les textes classés CM1 de
   la bibliothèque, **copie / écriture guidée CM1** (phrases plus longues,
   connecteurs).
