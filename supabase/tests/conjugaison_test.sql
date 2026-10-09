@@ -23,7 +23,9 @@ DECLARE
     got text;
     n   integer;
 BEGIN
-    SELECT count(*) INTO n FROM public.conjugaison;
+    -- CE2 = temps simples 1..3 (le passe simple/imperatif CM1 sont temps 5/6,
+    -- couverts par conjugaison_cm1_test.sql).
+    SELECT count(*) INTO n FROM public.conjugaison WHERE temps BETWEEN 1 AND 3;
     IF n <> 360 THEN
         RAISE EXCEPTION 'conjugaison : 360 formes attendues, obtenu %', n;
     END IF;

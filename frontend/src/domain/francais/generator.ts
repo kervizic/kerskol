@@ -37,12 +37,21 @@ import {
   AUXILIAIRE, PC_CODE, VERBES_PC, formePC, participeAccorde,
   type Genre,
 } from "./passe-compose";
+import {
+  PS_CODE, IMP_CODE, formeCm1, formesCm1,
+  VERBES_PS_ER, VERBES_PS_ORTHO, VERBES_PS_FREQUENTS, VERBES_PS_IRREGULIERS,
+  VERBES_IMP_ER, VERBES_IMP_ORTHO, VERBES_IMP_FREQUENTS, VERBES_IMP_IRREGULIERS,
+  type TempsCm1,
+} from "./conjugaison-cm1";
 import { normaliser } from "../diagnostic/lettres";
 import { itemsDe } from "./grammaire";
 import { itemsLexiqueDe } from "./lexique";
 
 // Temps « etendu » : les 3 temps simples + le passe compose.
 type Temps4 = Temps | "pc";
+// Temps affichable par construirePhrase : les 4 temps ci-dessus + les 2 temps
+// CM1 (passe simple, imperatif).
+type TempsAff = Temps4 | TempsCm1;
 
 // Temps porte par la competence (temps simples).
 function tempsDe(competence: string): Temps {
@@ -52,25 +61,31 @@ function tempsDe(competence: string): Temps {
 }
 
 // Nom du temps (titre-consigne) et repere en mots d'enfant / mot repere de phrase.
-const TEMPS_NOM: Record<Temps4, string> = {
+const TEMPS_NOM: Record<TempsAff, string> = {
   present: "présent",
   futur: "futur",
   imparfait: "imparfait",
   pc: "passé composé",
+  passe_simple: "passé simple",
+  imperatif: "impératif",
 };
 // Repere en mots d'enfant, affiche sous le titre au N1.
-const REPERE_ENFANT: Record<Temps4, string> = {
+const REPERE_ENFANT: Record<TempsAff, string> = {
   present: "présent : aujourd'hui, en ce moment",
   futur: "futur : demain",
   imparfait: "imparfait : avant, autrefois",
   pc: "passé composé : hier, c'est déjà fait",
+  passe_simple: "passé simple : dans les histoires, autrefois (il chanta)",
+  imperatif: "impératif : c'est un ordre (chante !, mangeons !)",
 };
 // Mot repere place EN DEBUT de phrase au N3/N4 (la phrase le contient toujours).
-const REPERE_PHRASE: Record<Temps4, string> = {
+// L'imperatif n'a PAS de repere temporel (ce n'est pas un temps du recit).
+const REPERE_PHRASE: Record<Temps4 | "passe_simple", string> = {
   present: "En ce moment",
   futur: "Demain",
   imparfait: "Autrefois",
   pc: "Hier",
+  passe_simple: "Il y a longtemps",
 };
 
 // Complement (« suite ») de chaque verbe : une VRAIE phrase courte et naturelle,
@@ -102,7 +117,16 @@ const COMPLEMENT: Record<string, string> = {
   voir: "la mer",
   vouloir: "un bonbon",
 };
-function complementDe(verbe: string): string {
+// Complements specifiques a l'IMPERATIF quand le complement generique sonne mal
+// comme un ordre (« Aie faim ! » -> « Aie du courage ! »).
+const COMPLEMENT_IMPERATIF: Record<string, string> = {
+  etre: "sage",
+  avoir: "du courage",
+};
+function complementDe(verbe: string, temps?: TempsAff): string {
+  if (temps === "imperatif" && COMPLEMENT_IMPERATIF[verbe]) {
+    return COMPLEMENT_IMPERATIF[verbe];
+  }
   const c = COMPLEMENT[verbe];
   if (!c) throw new Error(`complement manquant pour le verbe: ${verbe}`);
   return c;
@@ -118,10 +142,13 @@ function infMaj(verbe: string): string {
   return infinitifAffiche(verbe).toUpperCase();
 }
 
-// Titre-consigne selon le niveau : le temps n'est nomme qu'aux N1/N2.
-function consigneDe(verbe: string, temps: Temps4, niveau: number): string {
+// Titre-consigne selon le niveau : le temps n'est nomme qu'aux N1/N2. La
+// preposition correcte : « à l'impératif », sinon « au <temps> ».
+function consigneDe(verbe: string, temps: TempsAff, niveau: number): string {
   const base = `Conjugue le verbe ${infMaj(verbe)}`;
-  return niveau <= 2 ? `${base} au ${TEMPS_NOM[temps]}` : base;
+  if (niveau > 2) return base;
+  const suffixe = temps === "imperatif" ? "à l'impératif" : `au ${TEMPS_NOM[temps]}`;
+  return `${base} ${suffixe}`;
 }
 
 // Assemble la phrase (prefixe repere + sujet + case + apres) et la phrase
@@ -130,22 +157,27 @@ function consigneDe(verbe: string, temps: Temps4, niveau: number): string {
 // (prenom) ; la majuscule de debut de phrase est posee ici.
 function construirePhrase(args: {
   verbe: string;
-  temps: Temps4;
+  temps: TempsAff;
   personne: Personne;
   niveau: number;
   sujetBrut: string;
   bonneForme: string;
 }): NonNullable<GeneratedExercise["conjPhrase"]> {
   const { verbe, temps, personne, niveau, sujetBrut, bonneForme } = args;
-  // Elision « j' » : seulement personne 1, quand la forme commence par une voyelle.
-  const colle = personne === 1 && commenceParVoyelle(bonneForme);
+  const estImp = temps === "imperatif";
+  // Elision « j' » : seulement personne 1, quand la forme commence par une
+  // voyelle (jamais a l'imperatif, qui n'a ni « je » ni sujet reel).
+  const colle = !estImp && personne === 1 && commenceParVoyelle(bonneForme);
   const sujetRaw = colle ? "j'" : sujetBrut;
   const sep = colle ? "" : " ";
-  // Mot repere en debut de phrase a partir du N3 (la phrase le contient toujours).
-  const prefixe = niveau >= 3 ? `${REPERE_PHRASE[temps]}, ` : "";
+  // Mot repere en debut de phrase a partir du N3 (la phrase le contient
+  // toujours) ; PAS pour l'imperatif, qui n'est pas un temps du recit.
+  const prefixe =
+    niveau >= 3 && temps !== "imperatif" ? `${REPERE_PHRASE[temps]}, ` : "";
   // Complement : une VRAIE suite, pour ne jamais produire « Il est. ».
-  const suite = complementDe(verbe);
-  const apres = ".";
+  const suite = complementDe(verbe, temps);
+  // L'imperatif se termine par « ! » (c'est un ordre).
+  const apres = estImp ? " !" : ".";
   // Majuscule : sur le prefixe s'il existe (deja capitalise), sinon sur le sujet.
   const sujet = prefixe ? sujetRaw : capFirst(sujetRaw);
   const corps = `${sujetRaw}${sep}${bonneForme} ${suite}`;
@@ -471,6 +503,134 @@ export function buildFrancaisPasseCompose(
     conjPC: { verbe, personne, genre },
     conjPhrase,
     verif: { op: "conj", a: PC_CODE, b: personne, cle: verbe, c: cGenre },
+    correction: `On écrit « ${conjPhrase.complete} ».`,
+  };
+}
+
+// =========================================================================
+// PASSE SIMPLE (temps 5, 3e personnes il/ils) et IMPERATIF (temps 6, tu/nous/
+// vous). Memes format « phrase a completer » et verification serveur (op 'conj'
+// avec p_a = 5 ou 6 ; table public.conjugaison). Le genre n'intervient pas.
+// =========================================================================
+function verbesDePS(niveau: number): string[] {
+  if (niveau === 1) return [...VERBES_PS_ER];
+  if (niveau === 2) return [...VERBES_PS_ER, ...VERBES_PS_ORTHO, ...VERBES_PS_FREQUENTS];
+  if (niveau === 3)
+    return [...VERBES_PS_ER, ...VERBES_PS_ORTHO, ...VERBES_PS_FREQUENTS, "faire", "dire"];
+  return [...VERBES_PS_ER, ...VERBES_PS_ORTHO, ...VERBES_PS_FREQUENTS, ...VERBES_PS_IRREGULIERS];
+}
+function personnesDePS(niveau: number): Personne[] {
+  return niveau === 1 ? ([3] as Personne[]) : ([3, 6] as Personne[]);
+}
+
+function verbesDeImp(niveau: number): string[] {
+  if (niveau === 1) return [...VERBES_IMP_ER];
+  if (niveau === 2) return [...VERBES_IMP_ER, ...VERBES_IMP_ORTHO, ...VERBES_IMP_FREQUENTS];
+  if (niveau === 3)
+    return [...VERBES_IMP_ER, ...VERBES_IMP_ORTHO, ...VERBES_IMP_FREQUENTS, "dire", "venir", "prendre", "voir"];
+  return [...VERBES_IMP_ER, ...VERBES_IMP_ORTHO, ...VERBES_IMP_FREQUENTS, ...VERBES_IMP_IRREGULIERS];
+}
+function personnesDeImp(niveau: number): Personne[] {
+  return niveau === 1 ? ([2] as Personne[]) : ([2, 4, 5] as Personne[]);
+}
+
+// Propositions QCM pour un temps CM1. Distracteurs : les AUTRES personnes du
+// meme temps (mauvaise personne) et, au N3 (`melange`), les formes du MEME verbe
+// aux temps simples (mauvais temps). Le present de la personne sert de piege clef
+// (imperatif « chante » vs present « chantes » ; passe simple « chanta » vs
+// imparfait « chantait »).
+function propositionsCm1(
+  verbe: string, temps: TempsCm1, personne: Personne, niveau: number, rng: Rng
+): string[] {
+  const attendu = formeCm1(verbe, temps, personne);
+  const vus = new Set([normaliser(attendu)]);
+  const distracteurs: string[] = [];
+  const ajoute = (f: string) => {
+    const k = normaliser(f);
+    if (k && !vus.has(k)) { vus.add(k); distracteurs.push(f); }
+  };
+  // Piege clef : le present du MEME verbe a la MEME personne (quand il existe).
+  const c = CONJ[verbe];
+  if (c) {
+    ajoute(c.present[personne - 1]);
+    if (niveau >= 2) ajoute(c.imparfait[personne - 1]);
+  }
+  // Autres personnes du meme temps CM1 (mauvaise personne).
+  for (const f of shuffle(rng, formesCm1(verbe, temps))) ajoute(f);
+  // N3 : ajoute aussi le futur du meme verbe/personne (mauvais temps net).
+  if (niveau >= 3 && c) ajoute(c.futur[personne - 1]);
+  const choisis = shuffle(rng, distracteurs).slice(0, niveau >= 2 ? 3 : 2);
+  return shuffle(rng, [attendu, ...choisis]);
+}
+
+export function buildFrancaisPasseSimple(
+  src: ExCalcul, rng: Rng, base: Base
+): GeneratedExercise {
+  const niveau = src.niveau;
+  const verbe = pick(rng, verbesDePS(niveau));
+  const personne = pick(rng, personnesDePS(niveau));
+  const attendu = formeCm1(verbe, "passe_simple", personne);
+
+  let sujetBrut: string;
+  if (niveau === 4 && personne === 3) sujetBrut = pick(rng, SUJETS_P3);
+  else if (niveau === 4 && personne === 6) sujetBrut = pick(rng, SUJETS_P6);
+  else sujetBrut = pronomSujet(personne);
+
+  const qcm = niveau <= 3;
+  const optionsTexte = qcm ? propositionsCm1(verbe, "passe_simple", personne, niveau, rng) : undefined;
+
+  const conjPhrase = construirePhrase({
+    verbe, temps: "passe_simple", personne, niveau, sujetBrut, bonneForme: attendu,
+  });
+
+  return {
+    ...base,
+    forme: "conjugaison",
+    support: "aucun",
+    saisie: qcm ? "qcm_texte" : "lettres",
+    prompt: conjPhrase.consigne,
+    answer: 0,
+    reste: null,
+    fields: 1,
+    optionsTexte,
+    conj: { verbe, temps: "passe_simple", personne },
+    conjPhrase,
+    verif: { op: "conj", a: PS_CODE, b: personne, cle: verbe },
+    correction: `On écrit « ${conjPhrase.complete} ».`,
+  };
+}
+
+export function buildFrancaisImperatif(
+  src: ExCalcul, rng: Rng, base: Base
+): GeneratedExercise {
+  const niveau = src.niveau;
+  const verbe = pick(rng, verbesDeImp(niveau));
+  const personne = pick(rng, personnesDeImp(niveau));
+  const attendu = formeCm1(verbe, "imperatif", personne);
+
+  // Pas de sujet reel : un indice « (tu) / (nous) / (vous) » dit a qui on parle.
+  const cue = personne === 2 ? "(tu)" : personne === 4 ? "(nous)" : "(vous)";
+
+  const qcm = niveau <= 3;
+  const optionsTexte = qcm ? propositionsCm1(verbe, "imperatif", personne, niveau, rng) : undefined;
+
+  const conjPhrase = construirePhrase({
+    verbe, temps: "imperatif", personne, niveau, sujetBrut: cue, bonneForme: attendu,
+  });
+
+  return {
+    ...base,
+    forme: "conjugaison",
+    support: "aucun",
+    saisie: qcm ? "qcm_texte" : "lettres",
+    prompt: conjPhrase.consigne,
+    answer: 0,
+    reste: null,
+    fields: 1,
+    optionsTexte,
+    conj: { verbe, temps: "imperatif", personne },
+    conjPhrase,
+    verif: { op: "conj", a: IMP_CODE, b: personne, cle: verbe },
     correction: `On écrit « ${conjPhrase.complete} ».`,
   };
 }

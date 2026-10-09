@@ -23,7 +23,7 @@ import { buildFraction } from "./fractions";
 import { buildDecimal } from "./decimaux";
 import { buildGrandeurs } from "./grandeurs";
 import { enLettresFr } from "../diagnostic/lettres";
-import { buildFrancaisConjugaison, buildFrancaisDictee, buildFrancaisPasseCompose, buildFrancaisGrammaire, buildFrancaisLexique, buildMaitresse } from "../francais/generator";
+import { buildFrancaisConjugaison, buildFrancaisDictee, buildFrancaisPasseCompose, buildFrancaisPasseSimple, buildFrancaisImperatif, buildFrancaisGrammaire, buildFrancaisLexique, buildMaitresse } from "../francais/generator";
 import { buildGeometrie } from "../geometrie/geometrie";
 import type { GeoFigure, GeoFormat, GeoInteract } from "../geometrie/geometrie";
 import { buildDonnees } from "../donnees/donnees";
@@ -35,7 +35,8 @@ import { buildComprehension } from "../francais/comprehension";
 import { buildEcriture } from "../francais/ecriture";
 import type { EcrFormat, EcrCheck } from "../francais/ecriture";
 import type { CompFormat } from "../francais/comprehension";
-import type { Temps, Personne } from "../francais/conjugaison";
+import type { Personne } from "../francais/conjugaison";
+import type { TempsConj } from "../diagnostic/conjugaison";
 import type { Genre } from "../francais/passe-compose";
 
 export type Forme =
@@ -407,7 +408,7 @@ export interface GeneratedExercise {
   saisie: Saisie; // mode de saisie cote interface (defaut "clavier")
   options?: QcmOption[]; // mode qcm (valeurs numeriques)
   optionsTexte?: string[]; // mode qcm_texte (propositions TEXTE : conjugaison)
-  conj?: { verbe: string; temps: Temps; personne: Personne }; // diagnostic conjugaison
+  conj?: { verbe: string; temps: TempsConj; personne: Personne }; // diagnostic conjugaison
   // Nouveau format « phrase a completer » (conjugaison) : un titre-consigne, un
   // eventuel repere en mots d'enfant (N1), et une phrase avec une CASE visible a
   // la place des « … » (le sujet est mis en couleur). Apres la reponse, la phrase
@@ -664,9 +665,10 @@ function buildExercise(
 
   // --- Francais : conjugaison (temps simples + passe compose) -----------
   if (src.competence.startsWith("FR.CONJ.")) {
-    return src.competence.endsWith("PASSE_COMPOSE")
-      ? buildFrancaisPasseCompose(src, rng, base)
-      : buildFrancaisConjugaison(src, rng, base);
+    if (src.competence.endsWith("PASSE_COMPOSE")) return buildFrancaisPasseCompose(src, rng, base);
+    if (src.competence.endsWith("PASSE_SIMPLE")) return buildFrancaisPasseSimple(src, rng, base);
+    if (src.competence.endsWith("IMPERATIF")) return buildFrancaisImperatif(src, rng, base);
+    return buildFrancaisConjugaison(src, rng, base);
   }
   // --- Francais : dictee detective --------------------------------------
   if (src.competence.startsWith("FR.ORTHO.")) {

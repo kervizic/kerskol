@@ -121,6 +121,34 @@ Source : `frontend/src/domain/diagnostic/conjugaison.ts` (`diagnostiquerConjugai
 
 ---
 
+# Messages de correction - passé simple et impératif CM1 (français)
+
+Compétences `FR.CONJ.PASSE_SIMPLE` (3e personnes) et `FR.CONJ.IMPERATIF` (tu /
+nous / vous). Source : `frontend/src/domain/diagnostic/conjugaison.ts`
+(`diagnostiquerConjugaisonCm1`). Le diagnostic **cible les terminaisons**, dans
+cet ordre : JUSTE → ACCENT → **terminaison du « s »** → MAUVAISE_PERSONNE →
+MAUVAIS_TEMPS → TERMINAISON générale → ORTHO_RADICAL → INCONNU.
+
+La règle du « s » est testée **avant** le mauvais temps : « chantes » à
+l'impératif est aussi le présent de « tu », mais on veut dire *pas de s*, pas
+*mauvais temps*.
+
+- **TERMINAISON (impératif, tu, verbe en -er)** : « À l'impératif, quand tu
+  donnes un ordre, il n'y a pas de s à la fin. On écrit : {forme}. On dit range
+  ta chambre, pas ranges. »
+- **TERMINAISON (générale)** : « Bon début, mauvaise fin. Pour {repère}, on
+  écrit : {forme}. Regarde bien la fin du mot. » ({repère} = « dans les
+  histoires, au passé » pour le passé simple ; « c'est un ordre » pour
+  l'impératif).
+- **MAUVAISE_PERSONNE (impératif)** : « Attention à qui tu parles. On écrit :
+  {forme}. On dit chante à une personne, mais chantez à plusieurs. »
+- **MAUVAISE_PERSONNE (passé simple)** : « Attention à la personne. On écrit :
+  {forme}. On dit il chanta pour une personne, et ils chantèrent pour plusieurs. »
+- **MAUVAIS_TEMPS** : « Attention au temps. Ici, {repère}. On écrit : {forme}. »
+- **ACCENT / ORTHO_RADICAL / INCONNU** : mêmes messages que la conjugaison CE2.
+
+---
+
 # Messages de correction - passé composé (français)
 
 Liste **complète** des explications affichées quand l'enfant conjugue au **passé

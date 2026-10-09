@@ -24,6 +24,17 @@ import {
   CONJ, TEMPS, TEMPS_LIBELLE, PERSONNES, avecPronom, pronom, forme,
   type Temps, type Personne,
 } from "../francais/conjugaison";
+import {
+  formeCm1, PS_PERSONNES, IMP_PERSONNES,
+  type TempsCm1,
+} from "../francais/conjugaison-cm1";
+
+// Temps porte par un exercice de conjugaison : les 3 temps simples OU un temps
+// CM1 (passe simple / imperatif). Le passe compose a son propre diagnostic.
+export type TempsConj = Temps | TempsCm1;
+function estCm1(t: TempsConj): t is TempsCm1 {
+  return t === "passe_simple" || t === "imperatif";
+}
 
 // Retire les accents pour la comparaison ACCENT (les accents restent EXIGES
 // pour « juste » : une forme sans le bon accent est fausse).
@@ -77,10 +88,11 @@ function finQuiChange(saisie: string, bonne: string): string[] {
 
 export function diagnostiquerConjugaison(
   verbe: string,
-  temps: Temps,
+  temps: TempsConj,
   personne: Personne,
   saisie: string
 ): Diagnostic {
+  if (estCm1(temps)) return diagnostiquerConjugaisonCm1(verbe, temps, personne, saisie);
   const attendu = forme(verbe, temps, personne);
   const input = normaliser(saisie);
   const cible = normaliser(attendu);
@@ -152,15 +164,124 @@ export function diagnostiquerConjugaison(
   return faire({ type: "INCONNU", message: msgInconnu(attendu), surligne: [attendu] });
 }
 
+// --- Diagnostic CM1 : passe simple / imperatif (focus TERMINAISON) ----------
+// Repere en mots d'enfant pour chaque temps CM1.
+const REPERE_CM1: Record<TempsCm1, string> = {
+  passe_simple: "dans les histoires, au passé",
+  imperatif: "c'est un ordre",
+};
+// Message TERMINAISON cible pour le piege le plus frequent de chaque temps.
+function msgTerminaisonCm1(temps: TempsCm1, personne: Personne, bonne: string): string {
+  if (temps === "imperatif" && personne === 2) {
+    // Piege classique : le « tu » de l'imperatif des verbes en -er n'a PAS de s.
+    return `À l'impératif, quand tu donnes un ordre, il n'y a pas de s à la fin. On écrit : ${bonne}. On dit range ta chambre, pas ranges.`;
+  }
+  return `Bon début, mauvaise fin. Pour ${REPERE_CM1[temps]}, on écrit : ${bonne}. Regarde bien la fin du mot.`;
+}
+function msgMauvaisePersonneCm1(temps: TempsCm1, bonne: string): string {
+  if (temps === "imperatif") {
+    return `Attention à qui tu parles. On écrit : ${bonne}. On dit chante à une personne, mais chantez à plusieurs.`;
+  }
+  return `Attention à la personne. On écrit : ${bonne}. On dit il chanta pour une personne, et ils chantèrent pour plusieurs.`;
+}
+function msgMauvaisTempsCm1(temps: TempsCm1, bonne: string): string {
+  return `Attention au temps. Ici, ${REPERE_CM1[temps]}. On écrit : ${bonne}.`;
+}
+
+export function diagnostiquerConjugaisonCm1(
+  verbe: string,
+  temps: TempsCm1,
+  personne: Personne,
+  saisie: string
+): Diagnostic {
+  const attendu = formeCm1(verbe, temps, personne);
+  const input = normaliser(saisie);
+  const cible = normaliser(attendu);
+
+  const faire = (f: Faute): Diagnostic => ({
+    juste: false,
+    bonneEcriture: attendu,
+    fautes: [f],
+  });
+
+  // a) JUSTE (accents exiges).
+  if (input === cible) return { juste: true, bonneEcriture: attendu, fautes: [] };
+  if (input === "") {
+    return faire({ type: "INCONNU", message: msgInconnu(attendu), surligne: [attendu] });
+  }
+  // b) ACCENT : identique une fois les accents retires.
+  if (sansAccents(input) === sansAccents(cible)) {
+    return faire({ type: "ACCENT", message: msgAccent(attendu), surligne: [attendu] });
+  }
+  // b') TERMINAISON du « s » (cible de ce lot) : on la traite AVANT mauvais
+  //     temps, car « chantes » (imperatif, s en trop) est aussi le present de
+  //     « tu » -> on veut dire « pas de s a l'imperatif », pas « mauvais temps ».
+  const si = sansAccents(input);
+  const sc = sansAccents(cible);
+  if (si === `${sc}s` || `${si}s` === sc) {
+    return faire({
+      type: "TERMINAISON",
+      message: msgTerminaisonCm1(temps, personne, attendu),
+      surligne: finQuiChange(saisie, attendu),
+    });
+  }
+  // c) MAUVAISE_PERSONNE : forme correcte d'une AUTRE personne du MEME temps.
+  const personnes = temps === "passe_simple" ? PS_PERSONNES : IMP_PERSONNES;
+  for (const p of personnes) {
+    if (p === personne) continue;
+    if (normaliser(formeCm1(verbe, temps, p)) === input) {
+      return faire({
+        type: "MAUVAISE_PERSONNE",
+        message: msgMauvaisePersonneCm1(temps, attendu),
+        surligne: finQuiChange(saisie, attendu),
+      });
+    }
+  }
+  // d) MAUVAIS_TEMPS : forme du MEME verbe a un temps SIMPLE connu (present,
+  //    futur, imparfait) -> l'enfant a confondu le temps.
+  const c = CONJ[verbe];
+  if (c) {
+    for (const t of TEMPS) {
+      for (const p of PERSONNES) {
+        if (normaliser(c[t][p - 1]) === input) {
+          return faire({
+            type: "MAUVAIS_TEMPS",
+            message: msgMauvaisTempsCm1(temps, attendu),
+            surligne: [attendu],
+          });
+        }
+      }
+    }
+  }
+  // e) TERMINAISON : bon radical, mauvaise fin (cible privilegiee de ce lot).
+  const k = prefixeCommun(input, cible);
+  if (k >= 1 && k >= cible.length - 3 && k >= Math.ceil(cible.length / 2)) {
+    return faire({
+      type: "TERMINAISON",
+      message: msgTerminaisonCm1(temps, personne, attendu),
+      surligne: finQuiChange(saisie, attendu),
+    });
+  }
+  // f) ORTHO_RADICAL : radical mal ecrit, proche (distance d'edition <= 2).
+  if (levenshtein(input, cible) <= 2) {
+    return faire({ type: "ORTHO_RADICAL", message: msgOrthoRadical(attendu), surligne: [attendu] });
+  }
+  // g) INCONNU.
+  return faire({ type: "INCONNU", message: msgInconnu(attendu), surligne: [attendu] });
+}
+
 // Decision juste/faux cote client (meme regle que verif_conjugaison serveur :
 // accents EXIGES). Sert au feedback instantane et au repli demo.
 export function estJusteConjugaison(
   verbe: string,
-  temps: Temps,
+  temps: TempsConj,
   personne: Personne,
   saisie: string
 ): boolean {
-  return normaliser(saisie) === normaliser(forme(verbe, temps, personne));
+  const attendu = estCm1(temps)
+    ? formeCm1(verbe, temps, personne)
+    : forme(verbe, temps, personne);
+  return normaliser(saisie) === normaliser(attendu);
 }
 
 // Phrase de reference complete (sujet + forme), pour la correction de repli.

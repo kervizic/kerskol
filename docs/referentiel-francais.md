@@ -27,10 +27,37 @@ Quatre compétences, **4 niveaux** chacune :
 | `FR.CONJ.FUTUR`     | Conjuguer au futur      | futur de l'indicatif |
 | `FR.CONJ.IMPARFAIT` | Conjuguer à l'imparfait | imparfait de l'indicatif |
 | `FR.CONJ.PASSE_COMPOSE` | Conjuguer au passé composé | passé composé de l'indicatif (voir plus bas) |
+| `FR.CONJ.PASSE_SIMPLE` | Conjuguer au passé simple | passé simple, **3e personnes** (CM1) |
+| `FR.CONJ.IMPERATIF` | Conjuguer à l'impératif | impératif présent (CM1) |
 
-**Ouverture (prérequis)** : `FR.CONJ.PRESENT` est ouverte d'emblée.
-`FR.CONJ.FUTUR`, `FR.CONJ.IMPARFAIT` et `FR.CONJ.PASSE_COMPOSE` s'ouvrent après
-**le présent niveau 2** (table `competence_prerequis`, `niveau_min = 2`).
+**Ouverture (prérequis)** : `FR.CONJ.PRESENT` est ouverte d'emblée. Toutes les
+autres (`FUTUR`, `IMPARFAIT`, `PASSE_COMPOSE`, `PASSE_SIMPLE`, `IMPERATIF`)
+s'ouvrent après **le présent niveau 2** (table `competence_prerequis`,
+`niveau_min = 2`).
+
+### CM1 : passé simple et impératif (migration 0088)
+
+Deux temps CM1 ajoutés à la **même table de référence** `public.conjugaison`
+(codes temps **5 = passé simple**, **6 = impératif**) ; `verif_conjugaison` est
+inchangée et le serveur reste seul juge (op `conj`, `p_a = 5` ou `6`). Miroir
+exact de `frontend/src/domain/francais/conjugaison-cm1.ts` (golden `cm1Golden()`
++ `supabase/tests/conjugaison_cm1_test.sql`).
+
+- **Passé simple** — seulement les **3e personnes** (il = 3, ils = 6), comme on
+  le rencontre dans les histoires. Verbes : les 7 verbes en -er, les cas -ger/-cer
+  (manger, placer), et être, avoir, aller, faire, dire, venir, prendre, voir.
+  Terminaisons : `il chanta` / `ils chantèrent` ; `il fut` / `ils furent`.
+- **Impératif présent** — **tu (2), nous (4), vous (5)**, **sans sujet** (c'est
+  un ordre, phrase terminée par « ! ») ; un indice « (tu) / (nous) / (vous) »
+  dit à qui on parle. Piège clef : le **« tu » des verbes en -er n'a pas de s**
+  (`chante !`, pas `chantes !`). Verbes : les mêmes + finir (finis/finissons/
+  finissez). être → sois/soyons/soyez ; avoir → aie/ayons/ayez.
+
+Étagement (4 niveaux) : N1 verbes en -er (passé simple = il seul ; impératif =
+tu seul, pour travailler le « pas de s ») ; N2 ajoute -ger/-cer + verbes
+fréquents (être/avoir/aller…) et toutes les personnes du temps ; N3 ajoute des
+irréguliers et **mélange les temps** dans les propositions ; N4 **saisie libre**.
+Le diagnostic cible les **terminaisons** (voir `docs/explications.md`).
 
 ### Verbes couverts
 

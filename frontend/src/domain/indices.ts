@@ -20,6 +20,10 @@ export const INDICES: Record<string, string> = {
     "L'imparfait, c'est avant, autrefois. Souvent le verbe se termine par ais, ait ou aient.",
   "FR.CONJ.PASSE_COMPOSE":
     "Le passé composé, c'est deux mots. D'abord avoir ou être, puis le verbe. Avec être, pense à accorder avec le sujet.",
+  "FR.CONJ.PASSE_SIMPLE":
+    "Le passé simple, c'est le passé des histoires. Pour il, souvent le verbe finit par a, comme il chanta. Pour ils, souvent par èrent, comme ils chantèrent.",
+  "FR.CONJ.IMPERATIF":
+    "L'impératif, c'est pour donner un ordre. Avec tu et un verbe en er, il n'y a pas de s à la fin, comme range. Avec nous, le verbe finit par ons. Avec vous, par ez.",
   "FR.ORTHO.DETECTIVE":
     "Lis la phrase tout doucement dans ta tête. Cherche les petits mots qui se ressemblent et qui se cachent.",
 
