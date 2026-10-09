@@ -1530,10 +1530,21 @@ changement de `domaines_actifs`** (domaines `grammaire`, `orthographe`,
   Choix d'architecture : code `FR.GRAM.*` (contrainte du préfixe de
   `grammaire_item`) mais **domaine `orthographe`** (comme la proportionnalité :
   code `MA.DONNEES.*`, domaine `proportionnalite`).
-- **Vocabulaire - Sens propre et sens figuré** (`FR.VOC.SENS_FIGURE`, migration
-  0083) : distinguer le vrai sens et le sens imagé (cœur d'or, tomber dans les
-  pommes, tête dans les nuages...). N1-N3 QCM, N4 réponse libre (« propre » /
-  « figuré »). Complète `FR.VOC.SENS` (polysémie). Golden lexique 140 → 152.
+- **Grammaire - Les classes de mots élargies** (`FR.GRAM.CLASSES`, migration
+  0084) : au-delà des classes de base (`FR.GRAM.NATURE`), identifier l'**adverbe**,
+  la **conjonction de coordination** (mais, et, ou, donc...) et le **pronom** au
+  sens large. N1 QCM, N2 clic, N3 QCM (donner la classe), N4 réponse libre.
+  Golden grammaire 102 → 114.
+- **Grammaire - Phrase simple et phrase complexe** (`FR.GRAM.PHRASE`, migration
+  0086) : distinguer une phrase **simple** (un verbe conjugué) d'une phrase
+  **complexe** (plusieurs verbes). N1 QCM (compter les verbes), N2 clic, N3 QCM,
+  N4 réponse libre. Golden grammaire 114 → 126.
+- **Vocabulaire - Sens propre et sens figuré** (`FR.VOC.SENS_FIGURE`, migrations
+  0083 et 0085) : distinguer le vrai sens et le sens imagé (cœur d'or, avoir la
+  pêche, tête dans les nuages, couper la poire en deux...). N1-N3 QCM, N4 réponse
+  libre (« propre » / « figuré »). Complète `FR.VOC.SENS` (polysémie). Golden
+  lexique 140 → 152. (0085 : correctif bienveillance - retrait du mot « dévorer »,
+  interdit par le filtre, de deux items.)
 
 Chaque compétence : **portée CM1..CM2** + **prérequis** (réservée au CM1, « en
 avance » pour un CE2 seulement si le prérequis est acquis). Captures Playwright
@@ -1544,8 +1555,6 @@ lexique_test.sql).
 ### Reste du lot C (français CM1, non livré - budget)
 
 À faire, tous sur les moteurs existants (banques à écrire) :
-- **Grammaire** : classes de mots élargies (adverbe, pronoms, conjonctions de
-  coordination), phrase simple / complexe.
 - **Conjugaison** : passé composé (existe), **passé simple 3e personnes**,
   **impératif présent** (le moteur `conjugaison.ts` est une table procédurale :
   ajouter un temps demande d'étendre l'enum `Temps`, les codes et le juge).
