@@ -14,7 +14,7 @@ export interface BiblioGlose {
 
 export interface BiblioTexte {
   id: string;
-  classe: "CE1" | "CE2";
+  classe: "CE1" | "CE2" | "CM1";
   titre: string;
   oeuvre: string;
   auteur: string;
@@ -1147,6 +1147,130 @@ export const BIBLIOTHEQUE: BiblioTexte[] = [
       { mot: "festonnées", sens: "décorées de jolis bords découpés en vagues." },
       { mot: "une crèche", sens: "la mangeoire des animaux où l'on a couché l'enfant Jésus." },
       { mot: "le chaume", sens: "la paille qui sert de toit à certaines maisons." },
+    ],
+  },
+
+  // =======================================================================
+  // TEXTES CM1 (cycle 3, domaine public, utilisable=oui, ton=garde ; lot 4).
+  // Corps repris fidèlement du kit (jamais coupés). Classe CM1.
+  // =======================================================================
+  {
+    id: "c3-010",
+    classe: "CM1",
+    titre: "Premier sourire du printemps",
+    oeuvre: "Émaux et Camées",
+    auteur: "Théophile Gautier",
+    auteurDeces: "1872",
+    url: "https://fr.wikisource.org/wiki/%C3%89maux_et_Cam%C3%A9es/Premier_Sourire_du_Printemps",
+    librivoxUrl: "",
+    theme: "printemps, nature",
+    corps: [
+      "Tandis qu'à leurs œuvres perverses\nLes hommes courent haletants,\nMars qui rit, malgré les averses,\nPrépare en secret le printemps.",
+      "Pour les petites pâquerettes,\nSournoisement, lorsque tout dort,\nIl repasse des collerettes\nEt cisèle des boutons d'or.",
+      "Dans le verger et dans la vigne\nIl s'en va, furtif perruquier,\nAvec une houppe de cygne,\nPoudrer à frimas l'amandier.",
+      "La nature au lit se repose ;\nLui, descend au jardin désert\nEt lace les boutons de rose\nDans leur corset de velours vert.",
+      "Tout en composant des solfèges,\nQu'aux merles il siffle à mi-voix,\nIl sème aux prés les perce-neiges\nEt les violettes aux bois.",
+      "Sur le cresson de la fontaine\nOù le cerf boit, l'oreille au guet,\nDe sa main glacée il égrène\nLes grelots d'argent du muguet.",
+      "Sous l'herbe, pour que tu la cueilles,\nIl met la fraise au teint vermeil,\nEt te tresse un chapeau de feuilles\nPour te garantir du soleil.",
+      "Puis, lorsque sa besogne est faite\nEt que son règne va finir,\nAu seuil d'avril tournant la tête,\nIl dit : « Printemps, tu peux venir ! »",
+    ],
+    glossaire: [
+      { mot: "une pâquerette", sens: "une petite fleur blanche à cœur jaune qui pousse dans l'herbe." },
+      { mot: "ciseler", sens: "travailler finement une matière, comme un bijou." },
+      { mot: "furtif", sens: "qui se fait en cachette, sans se faire voir." },
+      { mot: "une houppe", sens: "une touffe douce et légère, par exemple de duvet." },
+      { mot: "le frimas", sens: "le givre, la fine glace blanche du matin." },
+      { mot: "la besogne", sens: "le travail à faire." },
+    ],
+  },
+  {
+    id: "c3-037",
+    classe: "CM1",
+    titre: "La Princesse sur un pois",
+    oeuvre: "Contes d'Andersen",
+    auteur: "Hans Christian Andersen",
+    auteurDeces: "1875",
+    url: "https://fr.wikisource.org/wiki/Contes_d%E2%80%99Andersen/La_Princesse_sur_un_pois",
+    librivoxUrl: "",
+    theme: "princesse, merveilleux",
+    corps: [
+      "Il y avait une fois un prince qui voulait épouser une princesse, mais une princesse véritable. Il fit donc le tour du monde pour en trouver une, et, à la vérité, les princesses ne manquaient pas ; mais il ne pouvait jamais s'assurer si c'étaient de véritables princesses ; toujours quelque chose en elles lui paraissait suspect. En conséquence, il revint bien affligé de n'avoir pas trouvé ce qu'il désirait.",
+      "Un soir, il faisait un temps horrible, les éclairs se croisaient, le tonnerre grondait, la pluie tombait à torrent ; c'était épouvantable ! Quelqu'un frappa à la porte du château, et le vieux roi s'empressa d'ouvrir.",
+      "C'était une princesse. Mais grand Dieu ! comme la pluie et l'orage l'avaient arrangée ! L'eau ruisselait de ses cheveux et de ses vêtements, entrait par le nez dans ses souliers, et sortait par le talon. Néanmoins, elle se donna pour une véritable princesse.",
+      "« C'est ce que nous saurons bientôt ! » pensa la vieille reine. Puis, sans rien dire, elle entra dans la chambre à coucher, ôta toute la literie, et mit un pois au fond du lit. Ensuite elle prit vingt matelas, qu'elle étendit sur le pois, et encore vingt édredons qu'elle entassa par-dessus les matelas.",
+      "C'était la couche destinée à la princesse ; le lendemain matin, on lui demanda comment elle avait passé la nuit.",
+      "« Bien mal ! répondit-elle ; à peine si j'ai fermé les yeux de toute la nuit ! Dieu sait ce qu'il y avait dans le lit ; c'était quelque chose de dur qui m'a rendu la peau toute violette. Quel supplice ! »",
+      "À cette réponse, on reconnut que c'était une véritable princesse, puisqu'elle avait senti un pois à travers vingt matelas et vingt édredons. Quelle femme, sinon une princesse, pouvait avoir la peau aussi délicate ?",
+      "Le prince, bien convaincu que c'était une véritable princesse, la prit pour femme, et le pois fut placé dans le musée, où il doit se trouver encore, à moins qu'un amateur ne l'ait enlevé.",
+      "Voilà une histoire aussi véritable que la princesse !",
+    ],
+    glossaire: [
+      { mot: "véritable", sens: "vrai, pour de bon." },
+      { mot: "affligé", sens: "triste, peiné." },
+      { mot: "ruisseler", sens: "couler en abondance, comme un petit ruisseau." },
+      { mot: "la literie", sens: "tout ce qui garnit le lit (draps, couvertures, oreillers)." },
+      { mot: "un édredon", sens: "une grosse couverture gonflée de plumes, bien chaude." },
+      { mot: "un supplice", sens: "une souffrance, quelque chose de très pénible à supporter." },
+      { mot: "délicate", sens: "ici, une peau très fine et très sensible." },
+    ],
+  },
+  {
+    id: "c3-021",
+    classe: "CM1",
+    titre: "La poupée de cire au soleil",
+    oeuvre: "Les Malheurs de Sophie",
+    auteur: "La Comtesse de Ségur",
+    auteurDeces: "1874",
+    url: "https://www.gutenberg.org/ebooks/15058",
+    librivoxUrl: "",
+    theme: "enfance, jouet, bêtise",
+    corps: [
+      "Le lendemain, Sophie peigna et habilla sa poupée, parce que ses amies devaient venir. En l'habillant, elle la trouva pâle. « Peut-être, dit-elle, a-t-elle froid, ses pieds sont glacés. Je vais la mettre un peu au soleil pour que mes amies voient que j'en ai bien soin et que je la tiens bien chaudement. » Sophie alla porter la poupée au soleil sur la fenêtre du salon.",
+      "« Que fais-tu à la fenêtre, Sophie ? » lui demanda sa maman.",
+      "SOPHIE. — Je veux réchauffer ma poupée, maman ; elle a très froid.",
+      "LA MAMAN. — Prends garde, tu vas la faire fondre.",
+      "SOPHIE. — Oh non ! maman, il n'y a pas de danger : elle est dure comme du bois.",
+      "LA MAMAN. — Mais la chaleur la rendra molle ; il lui arrivera quelque malheur, je t'en préviens.",
+      "Sophie ne voulut pas croire sa maman, elle mit la poupée étendue tout de son long au soleil, qui était brûlant.",
+      "Au même instant elle entendit le bruit d'une voiture : c'étaient ses amies qui arrivaient. Elle courut au-devant d'elles ; Paul les avait attendues sur le perron ; elles entrèrent au salon en courant et parlant toutes à la fois. Malgré leur impatience de voir la poupée, elles commencèrent par dire bonjour à Mme de Réan, maman de Sophie ; elles allèrent ensuite à Sophie, qui tenait sa poupée et la regardait d'un air consterné.",
+      "MADELEINE, regardant la poupée. — La poupée est aveugle, elle n'a pas d'yeux.",
+      "CAMILLE. — Quel dommage ! comme elle est jolie !",
+      "MADELEINE. — Mais comment est-elle devenue aveugle ! Elle devait avoir des yeux.",
+      "Sophie ne disait rien ; elle regardait la poupée et pleurait.",
+      "MADAME DE RÉAN. — Je t'avais dit, Sophie, qu'il arriverait un malheur à ta poupée si tu t'obstinais à la mettre au soleil. Heureusement que la figure et les bras n'ont pas eu le temps de fondre. Voyons, ne pleure pas ; je suis très habile médecin, je pourrai peut-être lui rendre ses yeux.",
+    ],
+    glossaire: [
+      { mot: "la cire", sens: "une matière molle et jaune qui fond à la chaleur (comme celle des bougies)." },
+      { mot: "pâle", sens: "d'une couleur très claire, presque blanche." },
+      { mot: "prendre garde", sens: "faire attention, se méfier." },
+      { mot: "consterné", sens: "très triste et déçu." },
+      { mot: "s'obstiner", sens: "vouloir à tout prix, refuser de changer d'avis." },
+      { mot: "habile", sens: "adroit, qui sait très bien faire quelque chose." },
+    ],
+  },
+  {
+    id: "c3-059",
+    classe: "CM1",
+    titre: "Le matin du grand départ",
+    oeuvre: "Douze dialogues de bêtes",
+    auteur: "Colette",
+    auteurDeces: "1954",
+    url: "https://fr.wikisource.org/wiki/Douze_dialogues_de_b%C3%AAtes/Le_voyage",
+    librivoxUrl: "",
+    theme: "animaux, humour",
+    corps: [
+      "Toby-Chien, résigné. — Je n'ai pas de chance. Personne ne veut me parler. Je m'ennuie un peu, et puis je ne connais pas assez cette voiture. Je suis fatigué. On m'a éveillé de bonne heure, et je me suis diverti à courir par toute la maison. On avait caché les fauteuils sous des draps, emmailloté les lampes, roulé les tapis ; tout était blanc, changé, angoissant, avec une funèbre odeur de camphre.",
+      "J'ai éternué sous chaque fauteuil, les yeux pleins d'eau, et glissé sur le parquet nu, dans ma hâte à suivre le tablier blanc des bonnes. Car elles s'agitaient autour des malles semées partout, et leur zèle inusité suffisait à m'avertir d'un événement exceptionnel…",
+      "À la dernière minute, juste comme Elle criait, toute chaude de mouvement : « Le collier de Toby ! Et le panier du chat, vite le chat dans le panier !… », juste comme Elle disait cela… mon camarade disparut. Ce fut indescriptible. Lui, terrible à voir, jurait le tonnerre de Dieu et frappait de la canne sur le parquet, furieux parce qu'on avait laissé son Kiki s'évader.",
+      "Elle appelait « Kiki ! » tantôt avec prière, tantôt avec menace, et les deux bonnes apportaient de trompeuses assiettes vides, des papiers jaunes de la boucherie… Je crus fermement que mon camarade le Chat avait quitté ce monde ! Soudain il apparut à tous les yeux, juché au plus haut de la bibliothèque, et nous méprisant de son regard vert.",
+    ],
+    glossaire: [
+      { mot: "résigné", sens: "qui accepte sans se plaindre une chose désagréable." },
+      { mot: "se divertir", sens: "s'amuser, passer le temps agréablement." },
+      { mot: "emmailloté", sens: "enveloppé complètement, comme un bébé dans ses langes." },
+      { mot: "le camphre", sens: "une matière à l'odeur forte qui éloigne les mites des vêtements." },
+      { mot: "le zèle inusité", sens: "un empressement à bien faire, inhabituel." },
+      { mot: "juché", sens: "perché, placé très haut." },
     ],
   },
 ];

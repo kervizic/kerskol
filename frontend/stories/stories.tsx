@@ -11,6 +11,7 @@ import type { ReactNode } from "react";
 import Donnees from "../src/components/Donnees";
 import DecimalInput from "../src/components/DecimalInput";
 import Grammaire from "../src/components/Grammaire";
+import Comprehension from "../src/components/Comprehension";
 import type { DonRender } from "../src/domain/donnees/donnees";
 import type { GramRender } from "../src/domain/francais/grammaire";
 import { generateExercise } from "../src/domain/calcul/generator";
@@ -175,6 +176,17 @@ export const STORIES: Story[] = [
       options: ["obtus", "aigu", "droit"], attendu: "obtus",
       explication: "Un angle plus grand qu'un angle droit est un angle obtus. Obtus, c'est bien ouvert.",
       figure: { kind: "none" },
+    }} onSoumettre={noopSubmit} onContinuer={noop} /> },
+  { id: "comp-biblio-cm1", label: "Compréhension — texte CM1 bibliothèque (inférence N3, lot 4)",
+    node: <Comprehension item={{
+      cle: "lec-bib-pois-inf-n3", format: "qcm",
+      texte: ["Puis, sans rien dire, elle entra dans la chambre à coucher, ôta toute la literie, et mit un pois au fond du lit. Ensuite elle prit vingt matelas, qu'elle étendit sur le pois, et encore vingt édredons qu'elle entassa par-dessus les matelas."],
+      consigne: "Pourquoi la vieille reine cache-t-elle un pois sous les matelas ?",
+      options: ["pour savoir si c'est une vraie princesse", "pour que la princesse mange le pois", "pour rendre le lit plus doux"],
+      attendu: "pour savoir si c'est une vraie princesse",
+      explication: "C'est une épreuve : une vraie princesse a la peau si fine qu'elle sentira le pois.",
+      source: "Hans Christian Andersen, « La Princesse sur un pois »",
+      preuve: "Puis, sans rien dire, elle entra dans la chambre à coucher, ôta toute la literie, et mit un pois au fond du lit. Ensuite elle prit vingt matelas, qu'elle étendit sur le pois, et encore vingt édredons qu'elle entassa par-dessus les matelas.",
     }} onSoumettre={noopSubmit} onContinuer={noop} /> },
   { id: "accord-sv-qcm", label: "Accord — sujet-verbe éloigné (QCM, lot 2)",
     node: <Grammaire item={{

@@ -34,6 +34,18 @@ nom), N4 **texte** (recopier la forme bien accordée : réponse libre). Prérequ
 `ACCORD_SV` ← `SUJET_VERBE` n2 ; `ACCORD_GN` et `ACCORD_PP` ← `GROUPE_NOMINAL`
 n2. Golden grammaire global = **162 items**.
 
+## Bibliothèque CM1 et compréhension (lot 4)
+
+Quatre textes du domaine public (cycle 3, `utilisable=oui`, `ton=garde`, jamais
+coupés) ajoutés à la page Bibliothèque (`frontend/.../francais/bibliotheque.ts`,
+classe `CM1`) : Gautier « Premier sourire du printemps », Andersen « La Princesse
+sur un pois », Ségur « La poupée de cire au soleil », Colette « Le matin du grand
+départ ». Chacun reçoit **4 questions de compréhension** (N1 QCM info, N2 sens
+d'un mot, N3 inférence, N4 réponse libre) dans `comprehension.ts` +
+`comprehension_item` (migration 0091, golden **208**). Extraits exacts des
+auteurs ; aucun nom de mois dans les questions (le poème de Gautier en contient,
+on choisit d'autres strophes). Serveur seul juge (op `lire`).
+
 ## Compétences livrées : CONJUGAISON
 
 Quatre compétences, **4 niveaux** chacune :

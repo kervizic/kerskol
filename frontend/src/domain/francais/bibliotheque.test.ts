@@ -33,7 +33,7 @@ describe("bibliotheque : textes du domaine public", () => {
       expect(t.auteur.trim().length, `${t.id} auteur`).toBeGreaterThan(0);
       expect(t.oeuvre.trim().length, `${t.id} oeuvre`).toBeGreaterThan(0);
       expect(t.titre.trim().length, `${t.id} titre`).toBeGreaterThan(0);
-      expect(["CE1", "CE2"], `${t.id} classe`).toContain(t.classe);
+      expect(["CE1", "CE2", "CM1"], `${t.id} classe`).toContain(t.classe);
       expect(t.url.startsWith("http"), `${t.id} url`).toBe(true);
       expect(Array.isArray(t.corps) && t.corps.length, `${t.id} corps`).toBeGreaterThan(0);
       expect(t.corps.every((p) => p.trim().length > 0), `${t.id} corps vide`).toBe(true);
