@@ -10,7 +10,9 @@
 import type { ReactNode } from "react";
 import Donnees from "../src/components/Donnees";
 import DecimalInput from "../src/components/DecimalInput";
+import Grammaire from "../src/components/Grammaire";
 import type { DonRender } from "../src/domain/donnees/donnees";
+import type { GramRender } from "../src/domain/francais/grammaire";
 
 export interface Story {
   id: string; // identifiant stable -> nom de fichier PNG
@@ -62,6 +64,18 @@ const propCourses: DonRender = {
   },
 };
 
+// Grammaire CM1 (lot C) : N3, distinguer complement d'objet direct / indirect
+// (QCM a libelles longs -> verifie la mise en page des gros boutons).
+const complementCoi: GramRender = {
+  cle: "comp-n3-coi",
+  format: "qcm",
+  consigne: "Dans la phrase, le complément « à ma grand-mère » est de quelle sorte ?",
+  phrase: "Je téléphone à ma grand-mère.",
+  options: ["un complément d'objet indirect", "un complément d'objet direct"],
+  attendu: "un complément d'objet indirect",
+  explication: "Je téléphone à qui ? À ma grand-mère. Il y a le petit mot à : c'est un complément d'objet indirect.",
+};
+
 // Registre. Ajouter une entree par nouveau composant d'UI.
 export const STORIES: Story[] = [
   { id: "donnees-hasard-qcm", label: "Données — hasard (QCM, lot 7)",
@@ -81,6 +95,8 @@ export const STORIES: Story[] = [
     ) },
   { id: "proportionnalite-table", label: "Proportionnalité — tableau à compléter (lot 4)",
     node: <Donnees item={propCourses} onSoumettre={noopSubmit} onContinuer={noop} /> },
+  { id: "grammaire-complements-coi", label: "Grammaire — compléments COD/COI (lot C, N3)",
+    node: <Grammaire item={complementCoi} onSoumettre={noopSubmit} onContinuer={noop} /> },
   { id: "decimal-addition", label: "Opérations — addition de décimaux (lot 3)",
     node: (
       <div className="kk-stack" style={{ textAlign: "center" }}>

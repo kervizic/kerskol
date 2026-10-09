@@ -454,6 +454,66 @@ export const BANQUE_GRAMMAIRE: GramItem[] = [
     consigne: "Écris le nom le plus important du groupe.", phrase: "la boîte de chocolats",
     attendu: "boîte",
     explication: "Le groupe parle d'une boîte. Les mots de chocolats disent ce qu'il y a dedans. Le nom le plus important est boîte." },
+
+  // =========================================================================
+  // FR.GRAM.COMPLEMENTS (CM1) — compléments du verbe (objet direct COD,
+  // objet indirect COI) et compléments circonstanciels (temps, lieu).
+  // Attendus CM1 (eduscol, doc 13984 : identifier les constituants d'une phrase
+  // simple : sujet, verbe, compléments d'objet et compléments circonstanciels).
+  // N1 QCM ; N2 clic (un mot) ; N3 QCM (distinguer COD/COI) ou clic ; N4 texte.
+  // =========================================================================
+  // N1 : QCM — reconnaitre le complement
+  { cle: "comp-n1-cod", competence: "FR.GRAM.COMPLEMENTS", niveau: 1, format: "qcm",
+    consigne: "Dans la phrase, qu'est-ce que Paul lave ? C'est le complément d'objet.", phrase: "Paul lave la voiture.",
+    options: ["la voiture", "Paul", "lave"], attendu: "la voiture",
+    explication: "On demande : Paul lave quoi ? Il lave la voiture. La voiture est le complément d'objet." },
+  { cle: "comp-n1-cc-temps", competence: "FR.GRAM.COMPLEMENTS", niveau: 1, format: "qcm",
+    consigne: "Dans la phrase, quel mot dit QUAND ? C'est un complément de temps.", phrase: "Nous partons demain.",
+    options: ["demain", "partons", "nous"], attendu: "demain",
+    explication: "On demande : nous partons quand ? Demain. Le mot demain dit le temps." },
+  { cle: "comp-n1-cc-lieu", competence: "FR.GRAM.COMPLEMENTS", niveau: 1, format: "qcm",
+    consigne: "Dans la phrase, quel groupe dit OÙ ? C'est un complément de lieu.", phrase: "Le chat dort sur le lit.",
+    options: ["sur le lit", "dort", "le chat"], attendu: "sur le lit",
+    explication: "On demande : le chat dort où ? Sur le lit. Ce groupe dit le lieu." },
+  // N2 : clic sur un mot (le noyau du complement)
+  { cle: "comp-n2-cod", competence: "FR.GRAM.COMPLEMENTS", niveau: 2, format: "clic",
+    consigne: "Clique sur le mot qui dit ce que Léa dessine.", phrase: "Léa dessine un bateau.",
+    attendu: "bateau",
+    explication: "Léa dessine quoi ? Un bateau. Le mot important du complément d'objet est bateau." },
+  { cle: "comp-n2-cc-lieu", competence: "FR.GRAM.COMPLEMENTS", niveau: 2, format: "clic",
+    consigne: "Clique sur le mot qui dit OÙ jouent les enfants.", phrase: "Les enfants jouent dehors.",
+    attendu: "dehors",
+    explication: "Les enfants jouent où ? Dehors. Le mot dehors dit le lieu." },
+  { cle: "comp-n2-cc-temps", competence: "FR.GRAM.COMPLEMENTS", niveau: 2, format: "clic",
+    consigne: "Clique sur le mot qui dit QUAND Tom se lève.", phrase: "Tom se lève tôt.",
+    attendu: "tôt",
+    explication: "Tom se lève quand ? Tôt. Le mot tôt dit le temps." },
+  // N3 : distinguer complement d'objet direct et indirect (QCM) + clic long
+  { cle: "comp-n3-coi", competence: "FR.GRAM.COMPLEMENTS", niveau: 3, format: "qcm",
+    consigne: "Dans la phrase, le complément « à ma grand-mère » est de quelle sorte ?", phrase: "Je téléphone à ma grand-mère.",
+    options: ["un complément d'objet indirect", "un complément d'objet direct"], attendu: "un complément d'objet indirect",
+    explication: "Je téléphone à qui ? À ma grand-mère. Il y a le petit mot à : c'est un complément d'objet indirect." },
+  { cle: "comp-n3-cod", competence: "FR.GRAM.COMPLEMENTS", niveau: 3, format: "qcm",
+    consigne: "Dans la phrase, le complément « la balle » est de quelle sorte ?", phrase: "Le chien attrape la balle.",
+    options: ["un complément d'objet direct", "un complément d'objet indirect"], attendu: "un complément d'objet direct",
+    explication: "Le chien attrape quoi ? La balle, juste après le verbe, sans petit mot : c'est un complément d'objet direct." },
+  { cle: "comp-n3-cc-clic", competence: "FR.GRAM.COMPLEMENTS", niveau: 3, format: "clic",
+    consigne: "Clique sur le mot qui dit QUAND, dans cette phrase.", phrase: "Le matin, le facteur passe devant la maison.",
+    attendu: "matin",
+    explication: "Le facteur passe quand ? Le matin. Le mot matin dit le temps." },
+  // N4 : reponse libre (ecrire le nom noyau du complement d'objet, ou le mot du lieu)
+  { cle: "comp-n4-cod", competence: "FR.GRAM.COMPLEMENTS", niveau: 4, format: "texte",
+    consigne: "Écris le nom le plus important du complément d'objet.", phrase: "Le jardinier plante des fleurs.",
+    attendu: "fleurs",
+    explication: "Le jardinier plante quoi ? Des fleurs. Le nom le plus important est fleurs." },
+  { cle: "comp-n4-cod2", competence: "FR.GRAM.COMPLEMENTS", niveau: 4, format: "texte",
+    consigne: "Écris le nom le plus important du complément d'objet.", phrase: "Maman prépare le gâteau.",
+    attendu: "gâteau",
+    explication: "Maman prépare quoi ? Le gâteau. Le nom le plus important est gâteau." },
+  { cle: "comp-n4-cc", competence: "FR.GRAM.COMPLEMENTS", niveau: 4, format: "texte",
+    consigne: "Écris le mot qui dit OÙ volent les oiseaux.", phrase: "Les oiseaux volent dans le ciel.",
+    attendu: "ciel",
+    explication: "Les oiseaux volent où ? Dans le ciel. Le mot qui dit le lieu est ciel." },
 ];
 
 // Toutes les competences de grammaire (ordre d'affichage = ordre du referentiel).
@@ -463,6 +523,7 @@ export const COMPETENCES_GRAMMAIRE = [
   "FR.GRAM.TYPES_PHRASES",
   "FR.GRAM.PONCTUATION",
   "FR.GRAM.GROUPE_NOMINAL",
+  "FR.GRAM.COMPLEMENTS",
 ] as const;
 
 // Items jouables pour une competence et un niveau donnes.
