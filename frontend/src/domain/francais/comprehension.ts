@@ -2035,14 +2035,14 @@ export const PREUVE_PAR_CLE: Record<string, string> = {
   "lec-bib-depart-sens-n2": "Soudain il apparut à tous les yeux, juché au plus haut de la bibliothèque, et nous méprisant de son regard vert.",
   "lec-bib-depart-inf-n3": "On avait caché les fauteuils sous des draps, emmailloté les lampes, roulé les tapis ; tout était blanc, changé, angoissant, avec une funèbre odeur de camphre.",
   "lec-bib-depart-clic-n4": "Soudain il apparut à tous les yeux, juché au plus haut de la bibliothèque, et nous méprisant de son regard vert.",
-  "lec-bib-lune-info-n1": "La lune blanche",
-  "lec-bib-lune-sens-n2": "Luit dans les bois;",
-  "lec-bib-lune-inf-n3": "Un vaste et tendre",
-  "lec-bib-lune-clic-n4": "Du saule noir",
+  "lec-bib-lune-info-n1": "La lune blanche\nLuit dans les bois;",
+  "lec-bib-lune-sens-n2": "La lune blanche\nLuit dans les bois;",
+  "lec-bib-lune-inf-n3": "Un vaste et tendre\nApaisement\nSemble descendre\nDu firmament",
+  "lec-bib-lune-clic-n4": "L'étang reflète,\nProfond miroir,\nLa silhouette\nDu saule noir",
   "lec-bib-berceaux-info-n1": "Berceaux, frêles berceaux, vous êtes des nacelles",
   "lec-bib-berceaux-sens-n2": "Berceaux, frêles berceaux, vous êtes des nacelles",
-  "lec-bib-berceaux-inf-n3": "Ils dorment, ces mignons, les poings fermés, la tête",
-  "lec-bib-berceaux-texte-n4": "confiés aux douces mains des femmes",
+  "lec-bib-berceaux-inf-n3": "Ils dorment, ces mignons, les poings fermés, la tête\nSur le duvet mol et profond,",
+  "lec-bib-berceaux-texte-n4": "confiés aux douces mains des femmes\nQui vous balancent nuit et jour,",
 };
 
 // Preuve d'un item (repli sur sa 1re phrase si la cle est inconnue).
