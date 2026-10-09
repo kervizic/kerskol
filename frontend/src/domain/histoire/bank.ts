@@ -94,9 +94,9 @@ export const BANQUE_HISTOIRE: QmItem[] = [
     attendu: "Nantes",
     explication: "L'édit de Nantes autorise les protestants à pratiquer leur religion." },
   { cle: "hi-nar-n4-b", competence: "HIST.MONARCHIE", niveau: 4, format: "texte",
-    consigne: "Le roi qui vivait à Versailles était surnommé le Roi-... Écris le mot.",
-    attendu: "Soleil",
-    explication: "Le Roi-Soleil, c'est Louis XIV, qui régna très longtemps depuis le château de Versailles." },
+    consigne: "Avant la Révolution, le royaume est divisé en trois groupes : le clergé, la noblesse et le tiers état. On dit la société d'... Écris le mot.",
+    attendu: "ordres",
+    explication: "La société d'ordres : le clergé, la noblesse et le tiers état. C'est surtout le tiers état qui payait les impôts." },
 
   // ===== HIST.EXPLORATIONS - Theme 3 : explorations et conquetes (XVe-XVIIe) =====
   { cle: "hi-exp-n1-a", competence: "HIST.EXPLORATIONS", niveau: 1, format: "qcm",

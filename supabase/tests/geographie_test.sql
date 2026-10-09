@@ -52,7 +52,7 @@ BEGIN
         ('ge-com-n2-a','qcm','câbles'),
         ('ge-com-n3-a','tri','envoyer un message=communiquer;faire un appel vidéo=communiquer;lire les informations=s''informer;chercher sur une carte=s''informer'),
         ('ge-com-n3-b','qcm','accès'),
-        ('ge-com-n4-b','texte','Internet')
+        ('ge-com-n4-b','texte','données')
     ) AS t(cle, format, attendu)
     LOOP
         SELECT format || '|' || attendu INTO got FROM public.qm_item WHERE cle = r.cle;

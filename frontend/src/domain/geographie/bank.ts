@@ -58,9 +58,9 @@ export const BANQUE_GEOGRAPHIE: QmItem[] = [
     attendu: "céréales",
     explication: "Les céréales sont cultivées partout sur la planète pour nourrir les humains et les animaux." },
   { cle: "ge-nou-n4-b", competence: "GEO.NOURRIR", niveau: 4, format: "texte",
-    consigne: "L'aliment de base dans beaucoup de pays d'Asie est le... Écris le mot.",
-    attendu: "riz",
-    explication: "Le riz pousse dans des champs inondés, les rizières. C'est l'aliment de base de milliards de personnes." },
+    consigne: "Quand, dans une région, beaucoup de personnes manquent gravement de nourriture pendant longtemps, on parle d'une... Écris le mot.",
+    attendu: "famine",
+    explication: "Une famine, c'est un grave manque de nourriture pour beaucoup de gens. Des régions du monde en souffrent encore aujourd'hui." },
 
   // ===== GEO.INEGALITES - les inegalites dans le monde =====
   { cle: "ge-ine-n1-a", competence: "GEO.INEGALITES", niveau: 1, format: "qcm",
@@ -160,9 +160,9 @@ export const BANQUE_GEOGRAPHIE: QmItem[] = [
     attendu: "câbles",
     explication: "Les câbles sous-marins sont les grandes « autoroutes » d'Internet entre les continents." },
   { cle: "ge-com-n4-b", competence: "GEO.COMMUNIQUER", niveau: 4, format: "texte",
-    consigne: "Le réseau mondial qui relie les ordinateurs s'appelle... Écris le mot.",
-    attendu: "Internet",
-    explication: "Internet relie le monde entier : il sert à communiquer et à s'informer." },
+    consigne: "Les immenses bâtiments remplis d'ordinateurs qui stockent les informations d'Internet s'appellent des centres de... Écris le mot.",
+    attendu: "données",
+    explication: "Un centre de données garde les photos, messages et vidéos d'Internet. Il consomme beaucoup d'électricité." },
 ];
 
 export const COMPETENCES_GEOGRAPHIE = [

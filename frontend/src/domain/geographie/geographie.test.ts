@@ -116,7 +116,7 @@ describe("spot-check croise front <-> SQL", () => {
     ["ge-com-n2-a", "qcm", "câbles"],
     ["ge-com-n3-a", "tri", "envoyer un message=communiquer;faire un appel vidéo=communiquer;lire les informations=s'informer;chercher sur une carte=s'informer"],
     ["ge-com-n3-b", "qcm", "accès"],
-    ["ge-com-n4-b", "texte", "Internet"],
+    ["ge-com-n4-b", "texte", "données"],
   ];
   it("chaque triplet correspond a la banque", () => {
     for (const [cle, format, attendu] of SPOT) {

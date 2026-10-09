@@ -176,9 +176,9 @@ export const BANQUE_SCIENCES: QmItem[] = [
     attendu: "écosystème",
     explication: "L'écosystème relie les êtres vivants entre eux et avec leur milieu de vie." },
   { cle: "st-eco-n4-b", competence: "ST.VIVANT.ECOSYSTEMES", niveau: 4, format: "texte",
-    consigne: "Pour fabriquer leur matière, les plantes vertes ont besoin de lumière et d'... Écris le mot.",
-    attendu: "eau",
-    explication: "Avec la lumière, l'eau et l'air, les plantes vertes fabriquent leur propre nourriture." },
+    consigne: "La fabrication de matière par les plantes vertes, grâce à la lumière, l'eau et l'air, s'appelle la... Écris le mot.",
+    attendu: "photosynthèse",
+    explication: "La photosynthèse : grâce à la lumière, les plantes vertes fabriquent leur nourriture et rejettent de l'oxygène." },
 
   // ===== ST.CORPS.SANTE - le cerveau et la puberte =====
   { cle: "st-cor-n1-a", competence: "ST.CORPS.SANTE", niveau: 1, format: "qcm",
@@ -244,9 +244,9 @@ export const BANQUE_SCIENCES: QmItem[] = [
     attendu: "pluviomètre",
     explication: "Le pluviomètre recueille la pluie pour mesurer combien il est tombé d'eau." },
   { cle: "st-ter-n4-b", competence: "ST.TERRE.CIEL", niveau: 4, format: "texte",
-    consigne: "Quand la Lune est toute ronde dans le ciel, c'est la pleine... Écris le mot.",
-    attendu: "Lune",
-    explication: "La pleine Lune : une des phases de la Lune, quand on voit toute sa face éclairée." },
+    consigne: "Le mouvement de la Terre qui tourne sur elle-même en un jour, et qui explique le jour et la nuit, s'appelle la... Écris le mot.",
+    attendu: "rotation",
+    explication: "La rotation de la Terre sur elle-même dure 24 heures : c'est elle qui fait l'alternance du jour et de la nuit." },
 
   // ===== ST.OBJETS.TECHNIQUE - objets techniques et programmation =====
   { cle: "st-obj-n1-a", competence: "ST.OBJETS.TECHNIQUE", niveau: 1, format: "qcm",
