@@ -38,6 +38,13 @@ export const MESSAGES_DICTEE: Record<TypeDictee, string> = {
   verbe_ent: "Quand plusieurs personnes font l'action, le verbe prend la terminaison ent. On dit il joue, et ils jouent.",
   m_mbp: "Devant les lettres m, b et p, on écrit un m à la place du n. Comme dans un tambour, une jambe, important.",
   e_er_ez: "On écrit le verbe avec e r à la fin quand on peut dire vendre, comme dans il va manger. On écrit é quand c'est déjà fait, comme dans il a mangé.",
+  la_la: "Le mot la sans accent est un petit mot devant un nom, comme dans la maison. Le mot là avec un accent montre un endroit, comme dans il est là.",
+  ou_ou: "Le mot ou sans accent sert à choisir, comme dans du thé ou du lait. Le mot où avec un accent parle d'un endroit, comme dans la ville où j'habite.",
+  // Notions CM1 (lot 3).
+  accord_sv: "Le verbe s'accorde avec son sujet, même quand il est loin ou placé après. On dit les chats dorment, pas les chats dort. On cherche qui fait l'action.",
+  participe_passe: "Avec être, le mot qui suit s'accorde avec le sujet. On dit elle est partie, avec un e. On dit ils sont partis, avec un s.",
+  passe_simple: "Dans les histoires, on écrit le passé simple. On dit il mangea, pas il mangeait. C'est une action courte et finie.",
+  imperatif: "Quand on donne un ordre avec tu, le verbe en er ne prend pas de s. On dit range ta chambre, pas ranges ta chambre.",
 };
 
 // Explication courte d'un type (astuce + exemple).

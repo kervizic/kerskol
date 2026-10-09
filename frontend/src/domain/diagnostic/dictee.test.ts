@@ -18,6 +18,8 @@ import {
 const TYPES: TypeDictee[] = [
   "a_a", "et_est", "son_sont", "on_ont", "ces_ses", "ce_se",
   "pluriel", "pluriel_al_aux", "accord", "verbe_ent", "m_mbp", "e_er_ez",
+  "la_la", "ou_ou",
+  "accord_sv", "participe_passe", "passe_simple", "imperatif",
 ];
 
 function err(over: Partial<DicteeErreurRevelee>): DicteeErreurRevelee {

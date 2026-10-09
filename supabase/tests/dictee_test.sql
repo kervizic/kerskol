@@ -74,11 +74,11 @@ BEGIN
         END IF;
     END LOOP;
 
-    -- Les 14 notions ordonnees doivent exister et chacune porter des textes
-    -- (12 d'origine + la_la et ou_ou, migration 0051).
+    -- Les 18 notions ordonnees doivent exister et chacune porter des textes
+    -- (12 d'origine + la_la/ou_ou en 0051 + 4 notions CM1 en 0090).
     SELECT count(*) INTO n_notions FROM public.dictee_notion;
-    IF n_notions <> 14 THEN
-        RAISE EXCEPTION 'dictee_notion : 14 notions attendues, obtenu %', n_notions;
+    IF n_notions <> 18 THEN
+        RAISE EXCEPTION 'dictee_notion : 18 notions attendues, obtenu %', n_notions;
     END IF;
     IF EXISTS (
         SELECT 1 FROM public.dictee_notion dn

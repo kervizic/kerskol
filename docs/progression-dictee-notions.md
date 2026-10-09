@@ -101,6 +101,19 @@ calendrier. Le moteur ne raisonne que sur la **notion** et le **niveau**.
 > Ajout **migration 0051** : notions `la_la` (ordre 13) et `ou_ou` (ordre 14),
 > chacune avec 2 textes originaux et une faute plantée sur l'homophone.
 
+## Notions CM1 (migration 0090, branchées sur les lots 1-2)
+
+Quatre notions CM1, 3 textes chacune (niveaux 2-4), univers « à la maison »,
+une seule faute plantée par texte. Le moteur reste générique (verif_dictee,
+sélection, injection). Astuces côté client dans `diagnostic/dictee.ts`.
+
+| Ordre | Notion DB | Libellé | Faute plantée → correction |
+|---|---|---|---|
+| 15 | `accord_sv`       | Accord sujet-verbe (sujet éloigné ou inversé) | « Les chats de la maison **dort** » → *dorment* |
+| 16 | `participe_passe` | Accord du participe passé avec être | « Maman est **parti** » → *partie* |
+| 17 | `passe_simple`    | Le passé simple dans un récit | « le chat **sautait** … et attrapa » → *sauta* |
+| 18 | `imperatif`       | L'impératif (pas de s avec tu) | « Range … et **fermes** la porte » → *ferme* |
+
 ## Mots fréquents à savoir écrire, par bloc
 
 Chaque liste (8 à 12 mots) est pensée pour accompagner la notion du bloc

@@ -12,7 +12,10 @@
 
 export type TypeDictee =
   | "a_a" | "et_est" | "son_sont" | "on_ont" | "ces_ses" | "ce_se"
-  | "pluriel" | "pluriel_al_aux" | "accord" | "verbe_ent" | "m_mbp" | "e_er_ez";
+  | "pluriel" | "pluriel_al_aux" | "accord" | "verbe_ent" | "m_mbp" | "e_er_ez"
+  | "la_la" | "ou_ou"
+  // Notions CM1 (lot 3, branchées sur les lots 1-2).
+  | "accord_sv" | "participe_passe" | "passe_simple" | "imperatif";
 
 // Texte servi par le serveur (dictee_charger_tous) : jamais d'erreurs.
 // notion rattache le texte a une notion de la progression (migration 0033) ;
