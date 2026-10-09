@@ -166,6 +166,8 @@ export const INDICES: Record<string, string> = {
     "Commence par les unités, à droite. Si le chiffre du haut est trop petit, tu empruntes une dizaine à côté.",
   "MA.POSE.MULTIPLICATION":
     "Commence par les unités, à droite, et n'oublie pas les retenues.",
+  "MA.POSE.DIVISION":
+    "Cherche combien de fois le diviseur tient dans le nombre. Tu écris le résultat dans la case du quotient, à droite. Ce qui reste va dans la case du reste, en bas. Le reste est toujours plus petit que le diviseur.",
 
   // --- Questionner le monde : Le vivant -------------------------------------
   "QM.VIVANT.CARACTERISTIQUES":

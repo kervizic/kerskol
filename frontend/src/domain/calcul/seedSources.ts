@@ -120,6 +120,14 @@ const POSE: Row[] = [
   ["MA.POSE.MULT2", 2, "mul", "pose", "exemples_estompes", "aucun", "multiplication_posee", { min: 11, max: 49, bmin: 11, bmax: 29 }],
   ["MA.POSE.MULT2", 3, "mul", "pose", "variation", "aucun", "multiplication_posee", { min: 12, max: 99, bmin: 11, bmax: 49 }],
   ["MA.POSE.MULT2", 4, "mul", "pose", "probleme_dabord", "aucun", "multiplication_posee", { min: 12, max: 99, bmin: 12, bmax: 99 }],
+
+  // Lot 6 : division posee en POTENCE (CM1). Diviseur a 1 chiffre, dividende
+  // croissant. Le moteur buildPose route vers buildPotence (endsWith DIVISION) ;
+  // saisie "potence" (quotient + reste), serveur op 'div' seul juge.
+  ["MA.POSE.DIVISION", 1, "div", "pose", "cpa_barres", "aucun", "division_posee", { min: 20, max: 50, bmin: 2, bmax: 5 }],
+  ["MA.POSE.DIVISION", 2, "div", "pose", "exemples_estompes", "aucun", "division_posee", { min: 30, max: 99, bmin: 2, bmax: 9 }],
+  ["MA.POSE.DIVISION", 3, "div", "pose", "variation", "aucun", "division_posee", { min: 100, max: 500, bmin: 2, bmax: 9 }],
+  ["MA.POSE.DIVISION", 4, "div", "pose", "probleme_dabord", "aucun", "division_posee", { min: 100, max: 999, bmin: 2, bmax: 9 }],
 ];
 
 // --- Problemes (domaine problemes) : mascotte, monnaie, deux etapes ---

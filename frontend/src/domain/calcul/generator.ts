@@ -90,7 +90,7 @@ export type Support = "rectangle" | "droite" | "aucun" | null;
 //               faciles) : la VALEUR choisie est la forme, envoyee comme TEXTE
 //               (reponse_texte) et jugee par le serveur (op 'conj').
 export type Saisie =
-  | "clavier" | "compare" | "chiffres" | "pose" | "qcm" | "droite" | "monnaie"
+  | "clavier" | "compare" | "chiffres" | "pose" | "potence" | "qcm" | "droite" | "monnaie"
   | "heure" | "fraction" | "fraction_num" | "lettres" | "qcm_texte"
   // decimal -> saisie LIBRE d'un nombre decimal (pave + virgule, <DecimalInput>) :
   // l'enfant tape un nombre a virgule, encode en CENTIEMES (entier) ; le serveur
@@ -337,6 +337,14 @@ export interface PoseData {
   width: number; // nombre de colonnes (= longueur du plus grand nombre affiche)
   answerDigits: number; // nombre de chiffres du resultat attendu
 }
+// Division posee en POTENCE : le dividende sous le crochet, le diviseur a droite,
+// le quotient sous le diviseur et le reste sous le dividende. La saisie du
+// quotient (f1) et du reste (f2) reutilise le mecanisme a 2 champs ; le SERVEUR
+// (op 'div') reste seul juge (expected = quotient, reste = p_a % p_b).
+export interface PotenceData {
+  dividende: number;
+  diviseur: number;
+}
 export interface ChiffresData {
   // Cases de chiffres par rang, du plus fort au plus faible (ex. m,c,d,u).
   ranks: { key: "m" | "c" | "d" | "u"; label: string }[];
@@ -536,6 +544,7 @@ export interface GeneratedExercise {
     figure?: QmFigure;
   };
   poseData?: PoseData; // mode pose
+  potenceData?: PotenceData; // mode potence (division posee)
   chiffresData?: ChiffresData; // mode chiffres (decomposition)
   droiteData?: DroiteData; // mode droite
   moneyData?: MoneyData; // mode monnaie (composer une somme)
@@ -1231,7 +1240,7 @@ export function enLettres(n: number): string {
 export type Base = Omit<
   GeneratedExercise,
   | "prompt" | "answer" | "verif" | "correction"
-  | "supportData" | "options" | "poseData" | "chiffresData" | "droiteData"
+  | "supportData" | "options" | "poseData" | "potenceData" | "chiffresData" | "droiteData"
   | "moneyData" | "horlogeData" | "regleData" | "balanceData" | "fractionData"
   | "compareLabels" | "barres"
 >;
@@ -1481,9 +1490,32 @@ function digitsOf(n: number): number[] {
   return String(n).split("").map(Number);
 }
 
+// Division posee en potence (MA.POSE.DIVISION). dividende = p_a, diviseur = p_b ;
+// le serveur (op 'div') recalcule quotient + reste. Saisie a 2 champs (quotient
+// en f1, reste en f2). Diviseur a 1 chiffre au CM1, dividende croissant.
+function buildPotence(src: ExCalcul, rng: Rng, base: Base): GeneratedExercise {
+  const p = src.params || {};
+  const diviseur = intBetween(rng, Number(p.bmin ?? 2), Number(p.bmax ?? 9));
+  const dividende = intBetween(rng, Number(p.min ?? 20), Number(p.max ?? 99));
+  const quotient = Math.floor(dividende / diviseur);
+  const reste = dividende % diviseur;
+  return {
+    ...base,
+    saisie: "potence",
+    fields: 2,
+    reste,
+    potenceData: { dividende, diviseur },
+    prompt: `Pose et calcule la division : ${dividende} ÷ ${diviseur}`,
+    answer: quotient,
+    verif: { op: "div", a: dividende, b: diviseur },
+    correction: `${dividende} ÷ ${diviseur} = ${quotient} et il reste ${reste}.`,
+  };
+}
+
 function buildPose(src: ExCalcul, rng: Rng, base: Base): GeneratedExercise {
   const p = src.params || {};
   const comp = src.competence;
+  if (comp.endsWith("DIVISION")) return buildPotence(src, rng, base);
   const nbTerms = Number(p.terms ?? 2);
   const termMin = Number(p.min ?? 10);
   const termMax = Number(p.max ?? 99);

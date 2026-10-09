@@ -58,6 +58,7 @@ import type {
   SupportData,
   DroiteData,
   PoseData,
+  PotenceData,
   ChiffresData,
   QcmOption,
   MoneyData,
@@ -315,6 +316,58 @@ function QcmChoice({
           {o.label}
         </button>
       ))}
+    </div>
+  );
+}
+
+// --- DIVISION POSEE EN POTENCE : dividende sous le crochet, diviseur a droite,
+// quotient sous le diviseur, reste sous le dividende. Les deux cases (quotient =
+// f1, reste = f2) reutilisent le pave et l'etat `active`. Le serveur (op 'div')
+// reste seul juge. ---
+function PotenceView({
+  data,
+  f1,
+  f2,
+  active,
+  inputMode,
+  onPick,
+}: {
+  data: PotenceData;
+  f1: string;
+  f2: string;
+  active: 1 | 2;
+  inputMode: InputMode;
+  onPick: (n: 1 | 2) => void;
+}) {
+  const { dividende, diviseur } = data;
+  const box = (slot: 1 | 2, val: string, label: string) => (
+    <button
+      type="button"
+      className={`kk-answer__box kk-potence__box${active === slot ? " kk-answer__box--active" : ""}${
+        active === slot && inputMode === "keyboard" ? " kk-answer__box--caret" : ""
+      }`}
+      aria-label={label}
+      onClick={() => onPick(slot)}
+    >
+      {val || "?"}
+    </button>
+  );
+  const cell = { padding: "6px 12px", fontSize: "1.8rem", fontWeight: 700, textAlign: "center" } as const;
+  const vBar = "3px solid var(--kk-fg, #333)";
+  return (
+    <div className="kk-potence" role="group" aria-label="division en potence"
+      style={{ display: "grid", gridTemplateColumns: "auto auto", justifyContent: "center", alignItems: "center", margin: "12px 0" }}>
+      {/* Haut-gauche : dividende, barre verticale du crochet a droite */}
+      <div style={{ ...cell, borderRight: vBar, textAlign: "right" }}>{dividende}</div>
+      {/* Haut-droite : diviseur, barre horizontale du crochet en dessous */}
+      <div style={{ ...cell, borderBottom: vBar }}>{diviseur}</div>
+      {/* Bas-gauche : reste (sous le dividende) */}
+      <div style={{ ...cell, borderRight: vBar, textAlign: "right", display: "flex", gap: 6, alignItems: "center", justifyContent: "flex-end" }}>
+        <span style={{ fontSize: "1rem", fontWeight: 400 }}>reste</span>
+        {box(2, f2, "reste")}
+      </div>
+      {/* Bas-droite : quotient (sous le diviseur) */}
+      <div style={cell}>{box(1, f1, "quotient")}</div>
     </div>
   );
 }
@@ -2078,6 +2131,21 @@ export function Session({
             valeur={texte}
             revele={phase === "correct" || phase === "wrong"}
           />
+        ) : ex.saisie === "potence" && ex.potenceData ? (
+          <>
+            <div className="kk-enonce" aria-live="polite">{ex.prompt}</div>
+            <PotenceView
+              data={ex.potenceData}
+              f1={f1}
+              f2={f2}
+              active={active}
+              inputMode={inputMode}
+              onPick={(n) => {
+                setActive(n);
+                touchAnswerZone();
+              }}
+            />
+          </>
         ) : (
           <EquationView
             prompt={ex.prompt}

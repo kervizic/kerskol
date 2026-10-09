@@ -140,6 +140,13 @@ chiffre de droite à gauche**, cases de retenue optionnelles (aide, non notées)
 | `MA.POSE.ADDITION` | Addition posée | 2 nombres à 2 chiffres, sans retenue | 2 ou 3 chiffres, retenues | 3-4 chiffres | 3 termes |
 | `MA.POSE.SOUSTRACTION` | Soustraction posée (résultat ≥ 0) | 2 chiffres sans emprunt | 2-3 chiffres avec emprunt | 3 chiffres | 4 chiffres |
 | `MA.POSE.MULTIPLICATION` | Multiplication posée × 1 chiffre | 2 chiffres × (2..4) | 2 chiffres × (2..9) | 3 chiffres × 1 chiffre | 3 chiffres × 1 chiffre |
+| `MA.POSE.DIVISION` | Division posée en potence (lot 6) | 20-50 ÷ (2..5) | 30-99 ÷ (2..9) | 100-500 ÷ (2..9) | 100-999 ÷ (2..9) |
+
+**Division en potence** (lot 6, migration 0093) : composant `<PotenceView>` —
+le dividende sous le crochet, le diviseur à droite, le quotient sous le diviseur
+et le reste sous le dividende (saisie à 2 champs : quotient + reste). Le juge
+serveur existait déjà (op `div` : quotient = `a / b`, reste = `a % b`). Diviseur
+à 1 chiffre au CM1.
 
 ## Problèmes (domaine `problemes`, migration 0024)
 

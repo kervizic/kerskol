@@ -13,6 +13,7 @@ import DecimalInput from "../src/components/DecimalInput";
 import Grammaire from "../src/components/Grammaire";
 import Comprehension from "../src/components/Comprehension";
 import Ecriture from "../src/components/Ecriture";
+import { generateExercise as genEx } from "../src/domain/calcul/generator";
 import type { DonRender } from "../src/domain/donnees/donnees";
 import type { GramRender } from "../src/domain/francais/grammaire";
 import { generateExercise } from "../src/domain/calcul/generator";
@@ -70,6 +71,35 @@ function ConjPhraseStory({ ex }: { ex: GeneratedExercise }) {
     </div>
   );
 }
+// Division posee en potence (lot 6) : markup identique a PotenceView (privé a
+// Session). Statique (quotient/reste vides). On genere un exercice reel.
+const exDivision = genEx({
+  exerciceId: "ex", competence: "MA.POSE.DIVISION", niveau: 2, methode: null,
+  operation: "div", forme: "pose", params: { min: 40, max: 99, bmin: 3, bmax: 7 },
+  support: "aucun", correctionStrategie: null,
+}, 123456789);
+function PotenceStory() {
+  const d = exDivision.potenceData!;
+  const cell = { padding: "6px 12px", fontSize: "1.8rem", fontWeight: 700, textAlign: "center" } as const;
+  const vBar = "3px solid #333";
+  const boxCls = "kk-answer__box kk-potence__box";
+  return (
+    <div style={{ textAlign: "center" }}>
+      <p className="kk-lead" style={{ margin: "0 auto 8px" }}>{exDivision.prompt}</p>
+      <div className="kk-potence" role="group" aria-label="division en potence"
+        style={{ display: "grid", gridTemplateColumns: "auto auto", justifyContent: "center", alignItems: "center", margin: "12px 0" }}>
+        <div style={{ ...cell, borderRight: vBar, textAlign: "right" }}>{d.dividende}</div>
+        <div style={{ ...cell, borderBottom: vBar }}>{d.diviseur}</div>
+        <div style={{ ...cell, borderRight: vBar, textAlign: "right", display: "flex", gap: 6, alignItems: "center", justifyContent: "flex-end" }}>
+          <span style={{ fontSize: "1rem", fontWeight: 400 }}>reste</span>
+          <button type="button" className={boxCls} aria-label="reste">?</button>
+        </div>
+        <div style={cell}><button type="button" className={`${boxCls} kk-answer__box--active`} aria-label="quotient">?</button></div>
+      </div>
+    </div>
+  );
+}
+
 // Passe simple N3 (il/ils, repere « Il y a longtemps, », melange des temps).
 const exPasseSimple = pickConj("FR.CONJ.PASSE_SIMPLE", 3, (e) => e.conj?.personne === 3);
 // Imperatif N2, 2e personne (tu) d'un verbe en -er : piege « pas de s ».
@@ -178,6 +208,8 @@ export const STORIES: Story[] = [
       explication: "Un angle plus grand qu'un angle droit est un angle obtus. Obtus, c'est bien ouvert.",
       figure: { kind: "none" },
     }} onSoumettre={noopSubmit} onContinuer={noop} /> },
+  { id: "division-potence", label: "Division posée en potence (lot 6)",
+    node: <PotenceStory /> },
   { id: "ecriture-passe-simple", label: "Écriture — transformer au passé simple (lot 5)",
     node: <Ecriture item={{
       cle: "ecr-guidecm1-n3", format: "transform",
