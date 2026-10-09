@@ -135,7 +135,35 @@ BEGIN
         RAISE EXCEPTION 'lec-bib-papillon-sens-n1 : item bibliotheque (0060) absent';
     END IF;
 
-    RAISE NOTICE 'bienveillance (dictee + attendus de reference) : OK';
+    -- Marqueurs de coupe INTERDITS a l'affichage (decision Manu, lot 0113 :
+    -- « pourquoi on met les crochets […] ? pour un enfant il ne va pas
+    -- comprendre »). « [...] », « […] », « (...) », « (…) » ne doivent jamais
+    -- apparaitre dans un contenu montre a l'enfant. Les textes de la Bibliotheque
+    -- vivent cote frontend (garde-fou bibliotheque.test.ts) ; cote SERVEUR on
+    -- verifie les champs STOCKES affiches : le texte de la dictee detective et les
+    -- reponses de reference de comprehension. Les extraits RACCOURCIS restent
+    -- autorises : seul le marqueur visible est interdit.
+    FOR r IN
+        SELECT 'dictee '||id::text AS src, texte AS v FROM public.dictee_texte
+         WHERE texte ~ '\[(\.\.\.|…)\]|\((\.\.\.|…)\)'
+        UNION ALL
+        SELECT 'comprehension '||cle, attendu FROM public.comprehension_item
+         WHERE attendu ~ '\[(\.\.\.|…)\]|\((\.\.\.|…)\)'
+    LOOP
+        RAISE WARNING 'MARQUEUR DE COUPE AFFICHE : % : « % »', r.src, r.v;
+        n := n + 1;
+    END LOOP;
+    IF n > 0 THEN
+        RAISE EXCEPTION 'MARQUEUR DE COUPE : % contenu(s) affiche(s) avec un marqueur « [...] » / « (…) »', n;
+    END IF;
+
+    -- Lot 0113 (bibliotheque CM1 raccourcie) : un item de reference est bien en base.
+    IF NOT EXISTS (SELECT 1 FROM public.comprehension_item
+                    WHERE cle = 'lec-bib-abeille-sens-n2' AND attendu = 'une personne qui aime trop l''argent') THEN
+        RAISE EXCEPTION 'lec-bib-abeille-sens-n2 : item bibliotheque (0113) absent';
+    END IF;
+
+    RAISE NOTICE 'bienveillance (dictee + attendus de reference + marqueurs de coupe) : OK';
 END $$;
 
 ROLLBACK;

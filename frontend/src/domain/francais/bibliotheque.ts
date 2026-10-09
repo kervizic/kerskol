@@ -1,9 +1,14 @@
-// FICHIER GÉNÉRÉ (ne pas éditer à la main). Source : bibliothèque domaine
-// public vérifiée (kerskol-kits/bibliotheque-domaine-public). Ne contient que
-// des textes cycle 2 (CE1/CE2), utilisable=oui, ton=garde, et dont le CORPS ne
-// contient aucun mot interdit (garde-fou bienveillance). Chaque texte porte son
-// auteur, son œuvre, sa source, son glossaire « mots difficiles » et un
-// emplacement librivoxUrl pour la future voix (bouton « Écouter » désactivé).
+// Source : bibliothèque domaine public vérifiée
+// (kerskol-kits/bibliotheque-domaine-public). Textes cycle 2 (CE1/CE2) et cycle 3
+// (CM1), utilisable=oui, ton=garde, et dont le CORPS AFFICHÉ ne contient aucun
+// mot interdit (garde-fou bienveillance). Chaque texte porte son auteur, son
+// œuvre, sa source, son glossaire « mots difficiles » et un emplacement
+// librivoxUrl pour la future voix (bouton « Écouter » désactivé).
+//
+// Certains textes sont des EXTRAITS RACCOURCIS (raccourci = true) : l'œuvre
+// longue est abrégée POUR LA LONGUEUR, les coupes tombant entre phrases ou
+// paragraphes, SANS aucun marqueur « [...] » affiché (décision Manu). Un crédit
+// discret « Extrait raccourci de ... » est alors montré.
 //
 // Lecture SILENCIEUSE uniquement (décision Manu) : aucun audio ici.
 
@@ -24,6 +29,14 @@ export interface BiblioTexte {
   theme: string;
   corps: string[]; // paragraphes/strophes ; les retours à la ligne (\n) sont des vers
   glossaire: BiblioGlose[];
+  // Extrait RACCOURCI (décision Manu, 9 octobre 2026) : certaines œuvres longues
+  // sont présentées abrégées POUR LA LONGUEUR. Les coupes tombent toujours entre
+  // phrases ou paragraphes, SANS marqueur « [...] » affiché (décision Manu : « pour
+  // un enfant il ne va pas comprendre les crochets »), et le texte raccourci reste
+  // bienveillant d'un bout à l'autre. Quand raccourci = true, la page affiche un
+  // crédit discret « Extrait raccourci de <œuvre>, <auteur> ». On ne coupe JAMAIS
+  // pour cacher un passage dur : si un passage dur subsiste, le texte est refusé.
+  raccourci?: boolean;
 }
 
 export const BIBLIOTHEQUE: BiblioTexte[] = [
@@ -170,6 +183,7 @@ export const BIBLIOTHEQUE: BiblioTexte[] = [
   },
   {
     id: "c2-077",
+    raccourci: true,
     classe: "CE2",
     titre: "Le premier feu",
     oeuvre: "Douze dialogues de bêtes",
@@ -180,7 +194,7 @@ export const BIBLIOTHEQUE: BiblioTexte[] = [
     theme: "chat, chien",
     corps: [
       "Parce qu’il pleut et que le vent d’octobre chasse dans l’air les feuilles trempées, Elle a allumé dans la cheminée le premier feu de la saison. En extase, Kiki-la-Doucette et Toby-Chien, couchés côte à côte au coin du marbre tiède, s’éblouissent à contempler la flamme et lui dédient des prières intérieures.",
-      "Kiki-la-Doucette (pareil à un coussin, sans pattes apparentes). — Feu ! te voici revenu, plus beau que mon souvenir, plus cuisant et plus proche que le soleil ! Feu ! que tu es splendide ! Par pudeur, je cache ma joie de te revoir, je ferme à demi mes yeux où ta lumière amincit la prunelle, et rien ne paraît sur ma figure où est peinte l’image d’une pensée fauve et brune… Mon ronron discret se perd dans ton crépitement. [...]",
+      "Kiki-la-Doucette (pareil à un coussin, sans pattes apparentes). — Feu ! te voici revenu, plus beau que mon souvenir, plus cuisant et plus proche que le soleil ! Feu ! que tu es splendide ! Par pudeur, je cache ma joie de te revoir, je ferme à demi mes yeux où ta lumière amincit la prunelle, et rien ne paraît sur ma figure où est peinte l’image d’une pensée fauve et brune… Mon ronron discret se perd dans ton crépitement.",
     ],
     glossaire: [
       { mot: "en extase", sens: "rempli d’admiration, émerveillé." },
@@ -237,6 +251,7 @@ export const BIBLIOTHEQUE: BiblioTexte[] = [
   },
   {
     id: "c2-070",
+    raccourci: true,
     classe: "CE2",
     titre: "Ce que disent les fleurs",
     oeuvre: "Contes d'une grand-mère - Ce que disent les fleurs",
@@ -246,7 +261,10 @@ export const BIBLIOTHEQUE: BiblioTexte[] = [
     librivoxUrl: "",
     theme: "nature, jardin",
     corps: [
-      "Quand j'étais enfant, ma chère Aurore, j'étais très-tourmentée de ne pouvoir saisir ce que les fleurs se disaient entre elles. [...] Je les entendais babiller confusément, surtout à la rosée du soir; mais elles parlaient trop bas pour que je pusse distinguer leurs paroles; et puis elles étaient méfiantes, et, quand je passais près des plates-bandes du jardin ou sur le sentier du pré, elles s'avertissaient par une espèce de psitt, qui courait de l'une à l'autre. [...] Je m'exerçai à marcher si doucement, sans frôler le plus petit brin d'herbe, qu'elles ne m'entendirent plus. [...] Il fallait beaucoup d'attention; c'était de si petites voix, si douces, si fines, que la moindre brise les emportait.",
+      "Quand j'étais enfant, ma chère Aurore, j'étais très-tourmentée de ne pouvoir saisir ce que les fleurs se disaient entre elles.",
+      "Je les entendais babiller confusément, surtout à la rosée du soir ; mais elles parlaient trop bas pour que je pusse distinguer leurs paroles ; et puis elles étaient méfiantes, et, quand je passais près des plates-bandes du jardin ou sur le sentier du pré, elles s'avertissaient par une espèce de psitt, qui courait de l'une à l'autre.",
+      "Je m'exerçai à marcher si doucement, sans frôler le plus petit brin d'herbe, qu'elles ne m'entendirent plus.",
+      "Il fallait beaucoup d'attention ; c'était de si petites voix, si douces, si fines, que la moindre brise les emportait.",
     ],
     glossaire: [
       { mot: "babiller", sens: "parler beaucoup à voix basse, bavarder gentiment." },
@@ -257,6 +275,7 @@ export const BIBLIOTHEQUE: BiblioTexte[] = [
   },
   {
     id: "c2-071",
+    raccourci: true,
     classe: "CE2",
     titre: "La petite Bichette",
     oeuvre: "Contes d'une grand-mère - Le Nuage rose",
@@ -266,7 +285,9 @@ export const BIBLIOTHEQUE: BiblioTexte[] = [
     librivoxUrl: "",
     theme: "tendresse, animaux",
     corps: [
-      "Catherine avait trois brebis à garder. Elle ne savait encore ni lire ni écrire ; mais elle ne causait pas trop mal, et c’était une très-bonne fille, seulement un peu curieuse et changeant de caprice volontiers, ce qui prouve qu’au moins elle n’était pas têtue. Un peu après la Noël, ses trois brebis lui donnèrent trois agneaux, deux très-forts et le troisième si petit, si petit, qu’on eût dit un petit lapin. [...] Elle se promit d’en avoir grand soin, et lui donna le nom de Bichette, car c’était une agnèle. [...] elle la caressait sans cesse, elle la portait dans ses bras, elle la faisait dormir sur ses genoux.",
+      "Catherine avait trois brebis à garder. Elle ne savait encore ni lire ni écrire ; mais elle ne causait pas trop mal, et c’était une très-bonne fille, seulement un peu curieuse et changeant de caprice volontiers, ce qui prouve qu’au moins elle n’était pas têtue. Un peu après la Noël, ses trois brebis lui donnèrent trois agneaux, deux très-forts et le troisième si petit, si petit, qu’on eût dit un petit lapin.",
+      "Elle se promit d’en avoir grand soin, et lui donna le nom de Bichette, car c’était une agnèle.",
+      "Elle la caressait sans cesse, elle la portait dans ses bras, elle la faisait dormir sur ses genoux.",
     ],
     glossaire: [
       { mot: "une brebis", sens: "la femelle du mouton." },
@@ -277,6 +298,7 @@ export const BIBLIOTHEQUE: BiblioTexte[] = [
   },
   {
     id: "c2-072",
+    raccourci: true,
     classe: "CE2",
     titre: "Clopinet rêve de la mer",
     oeuvre: "Contes d'une grand-mère - Les Ailes de courage",
@@ -286,7 +308,10 @@ export const BIBLIOTHEQUE: BiblioTexte[] = [
     librivoxUrl: "",
     theme: "campagne, rêve",
     corps: [
-      "Il y avait dans les terres du pays d’Auge, du côté de Saint-Pierre-d’Azif, à trois lieues de la mer, un bon paysan et sa femme qui, à force de travail, étaient devenus assez riches. [...] C’étaient des herbages et puis des herbages, avec des pommiers et encore des pommiers ; un grand pays tout plat, à perte de vue, et de temps en temps un petit bois de noisetiers, avec un jardinet et une maison de bois et de torchis, la pierre étant rare. On élevait par là de bonnes vaches, on faisait d’excellent beurre et des fromages renommés [...]. Il y en avait un seul, qu’on appelait Clopinet [...] ; il était frais et fort, quoiqu’un peu boiteux, très-joli de visage et rose comme une pomme. [...] il avait une idée à lui, et cette idée, c’était d’être marin.",
+      "Il y avait dans les terres du pays d’Auge, du côté de Saint-Pierre-d’Azif, à trois lieues de la mer, un bon paysan et sa femme qui, à force de travail, étaient devenus assez riches.",
+      "C’étaient des herbages et puis des herbages, avec des pommiers et encore des pommiers ; un grand pays tout plat, à perte de vue, et de temps en temps un petit bois de noisetiers, avec un jardinet et une maison de bois et de torchis, la pierre étant rare. On élevait par là de bonnes vaches, on faisait d’excellent beurre et des fromages renommés.",
+      "Ils avaient un fils, qu’on appelait Clopinet ; il était frais et fort, quoiqu’un peu boiteux, très-joli de visage et rose comme une pomme.",
+      "Il avait une idée à lui, et cette idée, c’était d’être marin.",
     ],
     glossaire: [
       { mot: "un herbage", sens: "un pré où pousse l'herbe pour les animaux." },
@@ -503,6 +528,7 @@ export const BIBLIOTHEQUE: BiblioTexte[] = [
   },
   {
     id: "c2-074",
+    raccourci: true,
     classe: "CE2",
     titre: "Le Gland et la Citrouille (extrait)",
     oeuvre: "Fables, Livre IX, 4 - Le Gland et la Citrouille",
@@ -514,9 +540,7 @@ export const BIBLIOTHEQUE: BiblioTexte[] = [
     corps: [
       "Dieu fait bien ce qu'il fait. Sans en chercher la preuve\nEn tout cet univers, et l'aller parcourant,\nDans les citrouilles je la treuve.",
       "Un villageois, considérant\nCombien ce fruit est gros et sa tige menue :\nÀ quoi songeait, dit-il, l'auteur de tout cela ?\nIl a bien mal placé cette citrouille-là !\nEh parbleu ! je l'aurais pendue\nÀ l'un des chênes que voilà ;\nC'eût été justement l'affaire :\nTel fruit, tel arbre, pour bien faire.",
-      "[...]",
       "Sous un chêne aussitôt il va prendre son somme.\nUn gland tombe : le nez du dormeur en pâtit.\nIl s'éveille ; et, portant la main sur son visage,\nIl trouve encor le gland pris au poil du menton.",
-      "[...]",
       "Dieu ne l'a pas voulu : sans doute il eut raison ;\nJ'en vois bien à présent la cause.\nEn louant Dieu de toute chose\nGaro retourne à la maison.",
     ],
     glossaire: [
@@ -530,6 +554,7 @@ export const BIBLIOTHEQUE: BiblioTexte[] = [
   },
   {
     id: "c2-018",
+    raccourci: true,
     classe: "CE1",
     titre: "Le Grillon (extrait)",
     oeuvre: "Fables de Florian - Le Grillon",
@@ -540,7 +565,6 @@ export const BIBLIOTHEQUE: BiblioTexte[] = [
     theme: "animaux, nature",
     corps: [
       "Un pauvre petit grillon\nCaché dans l'herbe fleurie,\nRegardait un papillon\nVoltigeant dans la prairie.",
-      "[...]",
       "Oh ! oh ! dit le grillon, je ne suis plus fâché ;\nIl en coûte trop cher pour briller dans le monde.\nCombien je vais aimer ma retraite profonde !\nPour vivre heureux vivons caché.",
     ],
     glossaire: [
@@ -552,6 +576,7 @@ export const BIBLIOTHEQUE: BiblioTexte[] = [
   },
   {
     id: "c2-076",
+    raccourci: true,
     classe: "CE2",
     titre: "Le Chat et le Miroir (extrait)",
     oeuvre: "Fables de Florian, Livre I - Le Chat et le Miroir",
@@ -561,9 +586,7 @@ export const BIBLIOTHEQUE: BiblioTexte[] = [
     librivoxUrl: "",
     theme: "humour, animaux",
     corps: [
-      "[...]",
       "Sur une table de toilette\nCe chat aperçut un miroir ;\nIl y saute, regarde, et d'abord pense voir\nUn de ses frères qui le guette.\nNotre chat veut le joindre, il se trouve arrêté.\nSurpris, il juge alors la glace transparente,\nEt passe de l'autre côté,\nNe trouve rien, revient, et le chat se présente.",
-      "[...]",
       "Sur le haut du miroir il se met à cheval,\nUne patte par-ci, l'autre par-là, de sorte\nQu'il puisse partout le saisir.\nAlors, croyant bien le tenir,\nDoucement vers la glace il incline la tête,\nAperçoit une oreille, et puis deux… À l'instant,\nÀ droite, à gauche, il va jetant\nSa griffe qu'il tient toute prête.\nMais il perd l'équilibre, il tombe et n'a rien pris.\nAlors, sans davantage attendre,\nSans chercher plus longtemps ce qu'il ne peut comprendre,\nIl laisse le miroir et retourne aux souris.\nQue m'importe, dit-il, de percer ce mystère ?\nUne chose que notre esprit,\nAprès un long travail, n'entend ni ne saisit,\nNe nous est jamais nécessaire.",
     ],
     glossaire: [
@@ -599,6 +622,7 @@ export const BIBLIOTHEQUE: BiblioTexte[] = [
   },
   {
     id: "c2-032",
+    raccourci: true,
     classe: "CE2",
     titre: "Les Fourmis",
     oeuvre: "Histoires naturelles",
@@ -612,7 +636,6 @@ export const BIBLIOTHEQUE: BiblioTexte[] = [
       "Chacune d’elles ressemble au chiffre 3.",
       "Et il y en a ! il y en a !",
       "Il y en a 3 3 3 3 3 3 3 3 3 3 3 3… jusqu’à l’infini.",
-      "[...]",
     ],
     glossaire: [
       { mot: "une fourmi", sens: "un tout petit insecte noir qui vit en groupe et travaille beaucoup." },
@@ -995,6 +1018,7 @@ export const BIBLIOTHEQUE: BiblioTexte[] = [
   },
   {
     id: "c2-066",
+    raccourci: true,
     classe: "CE2",
     titre: "La ronde de joie",
     oeuvre: "Les Petites Filles modèles, XIX - L'illumination",
@@ -1005,9 +1029,7 @@ export const BIBLIOTHEQUE: BiblioTexte[] = [
     theme: "joie, amitié",
     corps: [
       "Après avoir embrassé encore Mme de Fleurville, Sophie courut chez ses amies pour leur annoncer ces grandes nouvelles. Ce fut une joie générale; elles se mirent à danser une ronde si bruyante, accompagnée de tels cris de joie, qu'Élisa accourut au bruit.",
-      "[...]",
       "Et la ronde, les sauts, les cris recommencèrent de plus belle. Élisa s'était mise de la partie, et le tapage devint tel, que successivement toute la maison vint savoir la cause de ce bruit sans pareil.",
-      "[...]",
       "Enfin les petites filles se lassèrent de danser; toutes quatre tombèrent sur des chaises; Élisa s'y laissa tomber comme elles.",
     ],
     glossaire: [
@@ -1019,6 +1041,7 @@ export const BIBLIOTHEQUE: BiblioTexte[] = [
   },
   {
     id: "c2-067",
+    raccourci: true,
     classe: "CE2",
     titre: "Le goûter à la ferme",
     oeuvre: "Les Vacances, II - Les cabanes",
@@ -1028,7 +1051,9 @@ export const BIBLIOTHEQUE: BiblioTexte[] = [
     librivoxUrl: "",
     theme: "vacances, ferme",
     corps: [
-      "Jacques avait eu, avant de se coucher, une conversation à voix basse avec son père et Marguerite; on les voyait causer avec animation; on les entendait rire; de temps en temps, Jacques sautait, battait des mains et embrassait son papa et Marguerite [...]. En attendant mes cousines et mes amies, allons faire un tour à la ferme; nous déjeunerons avec du bon lait tout chaud et du pain bis. Jean approuva vivement ce projet; ils arrivèrent au moment où l'on finissait de traire les vaches. La fermière, la mère Diart, les reçut avec empressement. [...] Léon et Jean remercièrent la fermière et se mirent à manger avec délices ce bon lait tout chaud et ce pain de ménage, à peine sorti du four et tiède encore.",
+      "Jacques avait eu, avant de se coucher, une conversation à voix basse avec son père et Marguerite ; on les voyait causer avec animation ; on les entendait rire ; de temps en temps, Jacques sautait, battait des mains et embrassait son papa et Marguerite.",
+      "En attendant mes cousines et mes amies, allons faire un tour à la ferme ; nous déjeunerons avec du bon lait tout chaud et du pain bis. Jean approuva vivement ce projet ; ils arrivèrent au moment où l'on finissait de traire les vaches. La fermière, la mère Diart, les reçut avec empressement.",
+      "Léon et Jean remercièrent la fermière et se mirent à manger avec délices ce bon lait tout chaud et ce pain de ménage, à peine sorti du four et tiède encore.",
     ],
     glossaire: [
       { mot: "le pain bis", sens: "un pain de campagne un peu gris, fait de farine complète." },
@@ -1062,6 +1087,7 @@ export const BIBLIOTHEQUE: BiblioTexte[] = [
   },
   {
     id: "c2-069",
+    raccourci: true,
     classe: "CE2",
     titre: "La promenade au moulin",
     oeuvre: "Les Vacances, III - La visite au moulin",
@@ -1071,7 +1097,8 @@ export const BIBLIOTHEQUE: BiblioTexte[] = [
     librivoxUrl: "",
     theme: "promenade, nature",
     corps: [
-      "«Je propose une grande promenade au moulin, par les bois, dit M. de Rugès. [...] pendant que nous examinerons les machines, vous autres enfants vous jouerez sur l'herbe où l'on vous préparera un bon goûter de campagne: pain bis, crème fraîche, lait caillé, fromage, beurre et galette de ménage. Que ceux qui m'aiment me suivent!» Tous l'entourèrent au même instant. Les enfants, qui étaient partis au galop, revinrent sur leurs pas et se groupèrent autour de leurs parents. La promenade fut charmante, la fraîcheur du bois tempérait la chaleur du soleil; de temps en temps on s'asseyait, on causait, on cueillait des fleurs, on trouvait quelques fraises.",
+      "« Je propose une grande promenade au moulin, par les bois, dit M. de Rugès. Pendant que nous examinerons les machines, vous autres enfants vous jouerez sur l'herbe où l'on vous préparera un bon goûter de campagne : pain bis, crème fraîche, lait caillé, fromage, beurre et galette de ménage. Que ceux qui m'aiment me suivent ! »",
+      "Tous l'entourèrent au même instant. Les enfants, qui étaient partis au galop, revinrent sur leurs pas et se groupèrent autour de leurs parents. La promenade fut charmante, la fraîcheur du bois tempérait la chaleur du soleil ; de temps en temps on s'asseyait, on causait, on cueillait des fleurs, on trouvait quelques fraises.",
     ],
     glossaire: [
       { mot: "un goûter de campagne", sens: "un petit repas pris dehors, à la campagne." },
@@ -1326,6 +1353,208 @@ export const BIBLIOTHEQUE: BiblioTexte[] = [
       { mot: "un port", sens: "l'abri où les bateaux viennent se mettre à l'abri." },
     ],
   },
+
+  // =======================================================================
+  // TEXTES CM1 RACCOURCIS (lot 0113, décision Manu du 9 octobre 2026). Œuvres
+  // longues du kit, abrégées POUR LA LONGUEUR : coupes entre phrases/paragraphes,
+  // AUCUN marqueur « [...] » affiché, texte bienveillant d'un bout à l'autre.
+  // raccourci = true -> crédit discret « Extrait raccourci de ... » sur la page.
+  // =======================================================================
+  {
+    id: "c3-014",
+    classe: "CM1",
+    raccourci: true,
+    titre: "Berceuse",
+    oeuvre: "Le Coffret de santal",
+    auteur: "Charles Cros",
+    auteurDeces: "1888",
+    url: "https://fr.wikisource.org/wiki/Le_Coffret_de_santal_(%C3%A9d._1879)/Berceuse",
+    librivoxUrl: "",
+    theme: "sommeil, animaux",
+    corps: [
+      "Endormons-nous, petit chat noir.\nVoici que j'ai mis l'éteignoir\nSur la chandelle.\nTu vas penser à des oiseaux\nSous bois, à de félins museaux…\nMoi rêver d'Elle.",
+      "Nous n'avons pas pris de café,\nEt, dans notre lit bien chauffé\n(Qui veille pleure.)\nNous dormirons, pattes dans bras.\nPendant que tu ronronneras,\nJ'oublierai l'heure.",
+    ],
+    glossaire: [
+      { mot: "une berceuse", sens: "une chanson douce pour endormir." },
+      { mot: "un éteignoir", sens: "un petit cône qu'on posait sur une bougie pour éteindre la flamme." },
+      { mot: "la chandelle", sens: "une sorte de bougie qui servait à s'éclairer autrefois." },
+      { mot: "félin", sens: "qui ressemble au chat." },
+      { mot: "un museau", sens: "le bout du nez et de la bouche d'un animal." },
+      { mot: "ronronner", sens: "le petit bruit doux que fait le chat content." },
+    ],
+  },
+  {
+    id: "c3-020",
+    classe: "CM1",
+    raccourci: true,
+    titre: "La troupe du signor Vitalis",
+    oeuvre: "Sans famille",
+    auteur: "Hector Malot",
+    auteurDeces: "1907",
+    url: "https://fr.wikisource.org/wiki/Sans_famille/Dentu,_1887/Premi%C3%A8re_partie/3",
+    librivoxUrl: "",
+    theme: "enfance, animaux, aventure",
+    corps: [
+      "— Voici le premier sujet de ma troupe, dit Vitalis, c'est M. Joli-Cœur. Joli-Cœur, mon ami, saluez la société.",
+      "Joli-Cœur porta sa main fermée à ses lèvres et nous envoya à tous un baiser.",
+      "— Maintenant, continua Vitalis étendant sa main vers le caniche blanc, à un autre : le signor Capi va avoir l'honneur de présenter ses amis à l'estimable société ici présente.",
+      "À ce commandement le caniche, qui jusque-là n'avait pas fait le plus petit mouvement, se leva vivement et, se dressant sur ses pattes de derrière, il croisa ses deux pattes de devant sur sa poitrine, puis il salua son maître si bas que son bonnet de police toucha le sol.",
+      "Ce devoir de politesse accompli, il se tourna vers ses camarades et, d'une patte, il leur fit signe d'approcher.",
+      "Les deux chiens, qui avaient les yeux attachés sur leur camarade, se dressèrent aussitôt et, se donnant chacun une patte de devant, comme on se donne la main dans le monde, ils firent gravement six pas en avant, puis trois pas en arrière, et saluèrent la société.",
+      "— Celui que j'appelle Capi, continua Vitalis, autrement dit Capitano en italien, est le chef des chiens : c'est lui qui, comme le plus intelligent, transmet mes ordres. Ce jeune élégant à poil noir est le signor Zerbino, ce qui signifie le galant. Quant à cette jeune personne à l'air modeste, c'est la signora Dolce, une charmante Anglaise qui n'a pas volé son nom de douce.",
+      "— Capi, venez ici, mon ami, et soyez assez aimable, je vous prie, pour dire à ce jeune garçon qui vous regarde avec des yeux ronds comme des billes quelle heure il est.",
+      "Capi s'approcha de son maître, fouilla dans la poche du gilet, en tira une grosse montre en argent, regarda le cadran et jappa deux fois distinctement ; puis, après ces deux jappements bien accentués, il en poussa trois autres plus faibles.",
+      "Il était en effet deux heures et trois quarts.",
+    ],
+    glossaire: [
+      { mot: "un signor", sens: "« monsieur » en italien." },
+      { mot: "un caniche", sens: "une race de chien à poils bouclés, souvent savant dans les cirques." },
+      { mot: "un bonnet de police", sens: "un petit bonnet plié, comme celui des soldats." },
+      { mot: "gravement", sens: "avec sérieux, sans rire." },
+      { mot: "le cadran", sens: "la face d'une montre, où l'on lit l'heure." },
+      { mot: "japper", sens: "pousser de petits aboiements." },
+    ],
+  },
+  {
+    id: "c3-047",
+    classe: "CM1",
+    raccourci: true,
+    titre: "La fée Poussière",
+    oeuvre: "Contes d'une grand-mère",
+    auteur: "George Sand",
+    auteurDeces: "1876",
+    url: "https://www.gutenberg.org/cache/epub/12338/pg12338.txt",
+    librivoxUrl: "",
+    theme: "merveilleux, rêve, nature",
+    corps: [
+      "Autrefois, il y a bien longtemps, mes chers enfants, j'étais jeune et j'entendais souvent les gens se plaindre d'une importune petite vieille qui entrait par les fenêtres quand on l'avait chassée par les portes. Elle était si fine et si menue qu'on eût dit qu'elle flottait au lieu de marcher, et mes parents la comparaient à une petite fée.",
+      "Elle portait toujours une vilaine robe grise traînante et une sorte de voile pâle que le moindre vent faisait voltiger autour de sa tête ébouriffée en mèches jaunâtres.",
+      "Elle était si malpropre qu'on prétendait qu'elle couchait dans les balayures des maisons et des rues, et, à cause de cela, on la nommait la fée Poussière.",
+      "— Pourquoi donc êtes-vous si poudreuse ? lui dis-je un jour qu'elle voulait m'embrasser.",
+      "— Tu es une sotte de me craindre, répondit-elle d'un ton railleur : tu m'appartiens, et tu me ressembles plus que tu ne penses. Si tu veux savoir qui je suis, appelle-moi par trois fois cette nuit, aussitôt que tu seras endormie.",
+      "Là-dessus, elle s'éloigna en poussant un grand éclat de rire, et il me sembla la voir se dissoudre et s'élever en une grande traînée d'or, rougie par le soleil couchant.",
+      "Je m'endormis, et tout aussitôt je rêvai que je l'appelais. Je ne suis même pas sûre de n'avoir pas crié tout haut par trois fois : « Fée Poussière ! fée Poussière ! fée Poussière ! »",
+      "À l'instant même, je fus transportée dans un immense jardin au milieu duquel s'élevait un palais enchanté, et, sur le seuil de cette merveilleuse demeure, une dame resplendissante de jeunesse et de beauté m'attendait dans de magnifiques habits de fête.",
+      "Je courus à elle et elle m'embrassa en me disant :",
+      "— Eh bien, reconnais-tu, à présent, la fée Poussière ?",
+    ],
+    glossaire: [
+      { mot: "importun", sens: "qui dérange, qui ennuie." },
+      { mot: "menu", sens: "très petit, très mince." },
+      { mot: "voltiger", sens: "voler légèrement, flotter dans l'air." },
+      { mot: "railleur", sens: "moqueur." },
+      { mot: "les balayures", sens: "les saletés qu'on ramasse en balayant." },
+      { mot: "resplendissant", sens: "qui brille, éclatant de beauté." },
+    ],
+  },
+  {
+    id: "c3-053",
+    classe: "CM1",
+    raccourci: true,
+    titre: "L'écolier",
+    oeuvre: "Le Livre des mères et des enfants",
+    auteur: "Marceline Desbordes-Valmore",
+    auteurDeces: "1859",
+    url: "https://www.gutenberg.org/cache/epub/14258/pg14258.txt",
+    librivoxUrl: "",
+    theme: "école, nature, abeille",
+    corps: [
+      "Un tout petit enfant s'en allait à l'école.\nOn avait dit. Allez !… il tâchait d'obéir ;\nMais son livre était lourd, il ne pouvait courir.\nIl pleure et suit des yeux une abeille qui vole.\n« Abeille, lui dit-il, voulez-vous me parler ?\nMoi, je vais à l'école : il faut apprendre à lire ;\nMais le maître est tout noir, et je n'ose pas rire :\nVoulez-vous rire, abeille, et m'apprendre à voler ? »",
+      "« Non, dit-elle ; j'arrive et je suis très-pressée.\nJ'avais froid ; l'aquilon m'a long-temps oppressée :\nEnfin, j'ai vu les fleurs, je redescends du ciel,\nEt je vais commencer mon doux rayon de miel.\nVoyez ! j'en ai déjà puisé dans quatre roses ;\nAvant une heure encor nous en aurons d'écloses.\nVite, vite à la ruche ! on ne rit pas toujours :\nC'est pour faire le miel qu'on nous rend les beaux jours. »",
+    ],
+    glossaire: [
+      { mot: "tâcher", sens: "faire des efforts pour y arriver." },
+      { mot: "l'aquilon", sens: "un vent froid qui vient du nord." },
+      { mot: "oppresser", sens: "gêner, serrer la poitrine." },
+      { mot: "écloses", sens: "des fleurs qui viennent de s'ouvrir (du verbe éclore)." },
+      { mot: "une ruche", sens: "la maison des abeilles, où elles font le miel." },
+      { mot: "un rayon de miel", sens: "le gâteau de cire rempli de miel que fabriquent les abeilles." },
+    ],
+  },
+  {
+    id: "c3-055",
+    classe: "CM1",
+    raccourci: true,
+    titre: "La Belle aux cheveux d'or",
+    oeuvre: "Contes de Madame d'Aulnoy",
+    auteur: "Marie-Catherine d'Aulnoy",
+    auteurDeces: "1705",
+    url: "https://www.gutenberg.org/cache/epub/18367/pg18367.txt",
+    librivoxUrl: "",
+    theme: "conte, princesse, royauté",
+    corps: [
+      "Il y avait une fois la fille d'un roi qui était si belle qu'il n'y avait rien de si beau au monde ; et, à cause qu'elle était si belle, on la nommait la Belle aux cheveux d'or, car ses cheveux étaient plus fins que de l'or, et blonds par merveille, tout frisés, qui lui tombaient jusque sur les pieds. Elle allait toujours couverte de ses cheveux bouclés, avec une couronne de fleurs sur la tête et des habits brodés de diamants et de perles : tant y a qu'on ne pouvait la voir sans l'aimer.",
+      "Il y avait un jeune roi de ses voisins qui n'était point marié, et qui était bien fait et bien riche. Quand il eut appris tout ce qu'on disait de la Belle aux cheveux d'or, bien qu'il ne l'eût point encore vue, il se prit à l'aimer si fort qu'il résolut de lui envoyer un ambassadeur pour la demander en mariage.",
+      "L'ambassadeur, arrivé chez la Belle aux cheveux d'or, lui fit son petit message ; mais, soit qu'elle ne fût pas de bonne humeur, ou que le compliment ne lui semblât pas à son gré, elle répondit à l'ambassadeur qu'elle remerciait le roi, mais qu'elle n'avait point envie de se marier.",
+      "Il y avait un jeune garçon à la cour qui était beau comme le soleil, et le mieux fait de tout le royaume : à cause de sa bonne grâce et de son esprit, on le nommait Avenant. Tout le monde l'aimait, hors les envieux, qui étaient fâchés que le roi lui fît du bien et qu'il lui confiât tous les jours ses affaires.",
+    ],
+    glossaire: [
+      { mot: "par merveille", sens: "d'une façon merveilleuse, extraordinaire." },
+      { mot: "tant y a que", sens: "façon ancienne de dire « si bien que », « c'est pourquoi »." },
+      { mot: "un ambassadeur", sens: "une personne envoyée par un roi pour parler en son nom." },
+      { mot: "avenant", sens: "agréable, aimable, qui plaît (c'est aussi le nom du jeune garçon)." },
+      { mot: "les envieux", sens: "ceux qui sont jaloux du bonheur ou du succès des autres." },
+    ],
+  },
+  {
+    id: "c3-075",
+    classe: "CM1",
+    raccourci: true,
+    titre: "Ce que disent les hirondelles",
+    oeuvre: "Émaux et Camées",
+    auteur: "Théophile Gautier",
+    auteurDeces: "1872",
+    url: "https://fr.wikisource.org/wiki/%C3%89maux_et_Cam%C3%A9es/Ce_que_disent_les_hirondelles",
+    librivoxUrl: "",
+    theme: "voyage, oiseaux",
+    corps: [
+      "Elles s'assemblent par centaines,\nSe concertant pour le départ.\nL'une dit : « Oh ! que dans Athènes\nIl fait bon sur le vieux rempart ! »",
+      "La cinquième : « Je ferai halte,\nCar l'âge m'alourdit un peu,\nAux blanches terrasses de Malte,\nEntre l'eau bleue et le ciel bleu. »",
+      "Toutes : « Demain, combien de lieues\nAuront filé sous notre essaim,\nPlaines brunes, pics blancs, mers bleues\nBrodant d'écume leur bassin ! »",
+      "Avec cris et battements d'ailes,\nSur la moulure aux bords étroits,\nAinsi jasent les hirondelles,\nVoyant venir la rouille aux bois.",
+      "Je comprends tout ce qu'elles disent,\nCar le poète est un oiseau ;\nMais, captif, ses élans se brisent\nContre un invisible réseau !",
+      "Des ailes ! des ailes ! des ailes !\nPour voler là-bas, avec elles,\nAu soleil d'or, au printemps vert !",
+    ],
+    glossaire: [
+      { mot: "se concerter", sens: "se mettre d'accord ensemble avant de faire quelque chose." },
+      { mot: "un rempart", sens: "un grand mur qui entourait autrefois les villes." },
+      { mot: "un essaim", sens: "un grand groupe d'oiseaux (ou d'abeilles) qui volent ensemble." },
+      { mot: "jaser", sens: "bavarder gaiement, sans s'arrêter, comme les oiseaux." },
+      { mot: "une moulure", sens: "la bordure sculptée tout en haut d'un mur ou d'un toit." },
+    ],
+  },
+  {
+    id: "c3-081",
+    classe: "CM1",
+    raccourci: true,
+    titre: "Abeille et les trésors du roi Loc",
+    oeuvre: "Abeille",
+    auteur: "Anatole France",
+    auteurDeces: "1924",
+    url: "https://fr.wikisource.org/wiki/Balthasar_(recueil)/Abeille",
+    librivoxUrl: "",
+    theme: "merveilleux, sagesse",
+    corps: [
+      "Alors le roi Loc fit un signe à son trésorier qui, soulevant d'épaisses draperies, découvrit un coffre énorme, tout armé de lames de fer et de ferrures découpées. Ce coffre étant ouvert, il en sortit des rayons de mille nuances diverses et charmantes ; chacun de ces rayons jaillissait d'une pierre précieuse artistement taillée.",
+      "— Abeille, choisissez, dit le roi Loc.",
+      "Mais Abeille secoua la tête et dit :",
+      "— Petit roi Loc, à toutes ces pierres je préfère un seul des rayons de soleil qui se brisent sur le toit d'ardoise du château des Clarides.",
+      "Alors le roi Loc fit ouvrir un second coffre qui ne contenait que des perles. Mais ces perles étaient rondes et pures ; leurs reflets changeants prenaient toutes les teintes du ciel et de la mer, et leur éclat était si doux qu'il semblait exprimer une pensée d'amour.",
+      "— Prenez, dit le roi Loc.",
+      "Mais Abeille lui répondit :",
+      "— Petit roi Loc, ces perles me rappellent le regard de Georges de Blanchelande ; j'aime ces perles, mais j'aime mieux les yeux de Georges.",
+      "— Abeille, les plus beaux trésors seront bien placés entre vos mains. Vous les posséderez et ils ne vous posséderont pas. L'avare est la proie de son or ; ceux-là seuls qui méprisent la richesse peuvent être riches sans danger : leur âme sera toujours plus grande que leur fortune.",
+    ],
+    glossaire: [
+      { mot: "un trésorier", sens: "la personne chargée de garder les richesses, l'argent et les trésors." },
+      { mot: "des ferrures", sens: "les pièces de fer qui renforcent un coffre ou une porte." },
+      { mot: "jaillir", sens: "sortir vivement, en jet, comme la lumière ou l'eau." },
+      { mot: "l'ardoise", sens: "une pierre grise et plate dont on couvre les toits." },
+      { mot: "un avare", sens: "une personne qui aime trop l'argent et n'aime pas le dépenser." },
+      { mot: "mépriser", sens: "ne pas accorder d'importance à quelque chose, le dédaigner." },
+    ],
+  },
 ];
 
 // Auteurs dans l'ordre d'affichage (regroupement de la page Bibliothèque).
@@ -1336,6 +1565,7 @@ export const BIBLIO_AUTEURS: string[] = [
   "Colette",
   "George Sand",
   "Hans Christian Andersen",
+  "Hector Malot",
   "Jean Aicard",
   "Jean de La Fontaine",
   "Jean-Pierre Claris de Florian",

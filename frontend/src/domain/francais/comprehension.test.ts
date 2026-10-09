@@ -21,7 +21,7 @@ import { normaliserMot } from "./dictee";
 import { generateExercise } from "../calcul/generator";
 import type { ExCalcul } from "../calcul/generator";
 
-const NB_ITEMS_GOLDEN = 216;
+const NB_ITEMS_GOLDEN = 244;
 
 function source(competence: string, niveau: number): ExCalcul {
   return {

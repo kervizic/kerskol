@@ -19,7 +19,7 @@
 BEGIN;
 
 -- ===========================================================================
--- 1. Table de reference : 192 items, couverture complete + spot check (front==SQL)
+-- 1. Table de reference : 244 items, couverture complete + spot check (front==SQL)
 -- ===========================================================================
 DO $$
 DECLARE
@@ -28,8 +28,8 @@ DECLARE
     n   integer;
 BEGIN
     SELECT count(*) INTO n FROM public.comprehension_item;
-    IF n <> 216 THEN
-        RAISE EXCEPTION 'comprehension_item : 216 items attendus, obtenu %', n;
+    IF n <> 244 THEN
+        RAISE EXCEPTION 'comprehension_item : 244 items attendus, obtenu %', n;
     END IF;
 
     -- Couverture : chaque competence a au moins un item a chaque niveau 1..4.
@@ -71,7 +71,14 @@ BEGIN
         ('lec-bib-cigogne-info-n4','FR.LECTURE.INFO',4,'clic','vase'),
         ('lec-bib-camille-sens-n4','FR.LECTURE.SENS_MOT',4,'clic','attachement'),
         ('lec-bib-noel-info-n1','FR.LECTURE.INFO',1,'qcm','blanche'),
-        ('lec-bib-serpent-sens-n2','FR.LECTURE.SENS_MOT',2,'qcm','un animal long et sans pattes')
+        ('lec-bib-serpent-sens-n2','FR.LECTURE.SENS_MOT',2,'qcm','un animal long et sans pattes'),
+        -- Textes de la bibliotheque CM1 raccourcie (lot 0113) : spot check par format
+        ('lec-bib-berceuse-info-n1','FR.LECTURE.INFO',1,'qcm','noir'),
+        ('lec-bib-berceuse-texte-n4','FR.LECTURE.INFO',4,'texte','éteignoir'),
+        ('lec-bib-vitalis-sens-n2','FR.LECTURE.SENS_MOT',2,'qcm','pousser de petits aboiements'),
+        ('lec-bib-poussiere-texte-n4','FR.LECTURE.INFO',4,'texte','trois'),
+        ('lec-bib-abeille-sens-n2','FR.LECTURE.SENS_MOT',2,'qcm','une personne qui aime trop l''argent'),
+        ('lec-bib-hirondelles-inf-n3','FR.LECTURE.INFERENCE',3,'qcm','d''avoir des ailes pour voler avec elles')
     ) AS t(cle, competence, niveau, format, attendu)
     LOOP
         SELECT format || '|' || attendu INTO got FROM public.comprehension_item WHERE cle = r.cle;
@@ -80,7 +87,7 @@ BEGIN
                 r.cle, r.format || '|' || r.attendu, got;
         END IF;
     END LOOP;
-    RAISE NOTICE 'table comprehension_item (192 + couverture + spot) : OK';
+    RAISE NOTICE 'table comprehension_item (244 + couverture + spot) : OK';
 END $$;
 
 -- ===========================================================================

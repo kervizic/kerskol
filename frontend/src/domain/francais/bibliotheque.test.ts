@@ -66,6 +66,29 @@ describe("bibliotheque : textes du domaine public", () => {
     }
   });
 
+  it("garde-fou : aucun marqueur de coupe affiché (« [...] », « […] », « (…) »)", () => {
+    // Décision Manu (9 octobre 2026) : les extraits RACCOURCIS sont autorisés (on
+    // abrège une œuvre longue pour la longueur), mais JAMAIS avec un marqueur de
+    // coupe visible — « pourquoi on met les crochets […] ? pour un enfant il ne va
+    // pas comprendre ». Les coupes tombent entre phrases ou paragraphes et ne
+    // laissent aucune trace dans le corps affiché à l'enfant. Un extrait raccourci
+    // (raccourci = true) reste parfaitement autorisé : seul le marqueur est interdit.
+    const MARQUEUR_AFFICHE = /\[(?:\.\.\.|…|\. \. \.)\]|\((?:\.\.\.|…)\)/;
+    for (const t of BIBLIOTHEQUE) {
+      for (const para of t.corps) {
+        expect(MARQUEUR_AFFICHE.test(para), `${t.id} : marqueur de coupe affiché « ${para} »`).toBe(false);
+      }
+    }
+  });
+
+  it("extrait raccourci : raccourci est un booléen quand il est présent", () => {
+    for (const t of BIBLIOTHEQUE) {
+      if (t.raccourci !== undefined) {
+        expect(typeof t.raccourci, `${t.id} raccourci`).toBe("boolean");
+      }
+    }
+  });
+
   it("la liste des auteurs couvre tous les auteurs des textes", () => {
     const auteurs = new Set(BIBLIOTHEQUE.map((t) => t.auteur));
     for (const a of auteurs) {

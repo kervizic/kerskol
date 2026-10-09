@@ -45,6 +45,11 @@ function Lecture({
             {texte.auteur}
             {texte.oeuvre ? <> — <em>{texte.oeuvre}</em></> : null}
           </p>
+          {texte.raccourci ? (
+            <p className="kk-biblio__raccourci kk-muted">
+              Extrait raccourci de <em>{texte.oeuvre}</em>, {texte.auteur}.
+            </p>
+          ) : null}
           <p className="kk-biblio__dp kk-muted">Domaine public</p>
         </header>
 
