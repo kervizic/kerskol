@@ -165,6 +165,12 @@ droit / obtus (clic sur le sommet), reconnaître le type d'un angle (QCM
 aigu/droit/obtus), identifier les paires de droites perpendiculaires / parallèles
 (QCM sur une figure). Composant `<Geometrie>` réutilisé. Golden géométrie = **128**.
 
+**Boucles « répète N fois » (lot 10, migration 0097, `MA.REPERE.BOUCLES`)** :
+introduction des boucles en programmation par lecture (clic sur la case
+d'arrivée d'un programme contenant une boucle, décrite en toutes lettres) et
+reconnaissance (QCM : ce que fait une boucle, équivalence boucle ↔ programme
+déroulé). Composant `<Geometrie>` réutilisé (clic + qcm). Golden = **136**.
+
 ## Problèmes (domaine `problemes`, migration 0024)
 
 Quatre compétences, alignées sur le programme CE2 (Éduscol : résoudre des

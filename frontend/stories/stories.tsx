@@ -252,6 +252,14 @@ export const STORIES: Story[] = [
     node: <PotenceStory /> },
   { id: "decimal-droite", label: "Décimal sur droite graduée (lot 7)",
     node: <DroiteDecStory /> },
+  { id: "boucles-prog", label: "Boucles « répète N fois » — lecture (clic, lot 10)",
+    node: <Geometrie item={{
+      cle: "geo-bcl-n2-a", format: "clic",
+      consigne: "Le robot part de B1 et regarde vers le haut. Il répète 3 fois : avance. Clique sur la case d'arrivée.",
+      attendu: "B4",
+      explication: "Répète 3 fois : avance, donc le robot monte de 3 cases depuis B1 : il arrive en B4.",
+      figure: { kind: "grid", grid: { cols: 5, rows: 5, coded: true, start: "B1", dir: "N" } },
+    }} onSoumettre={noopSubmit} onContinuer={noop} /> },
   { id: "angles-perp", label: "Angles et droites — perpendiculaires (QCM, lot 9)",
     node: <Geometrie item={{
       cle: "geo-ang-n3-perp", format: "qcm",

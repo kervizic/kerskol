@@ -1249,6 +1249,59 @@ export const BANQUE_GEOMETRIE: GeoItem[] = [
       { kind: "segment", pts: [[25, 15], [25, 85]] }, { kind: "segment", pts: [[45, 15], [75, 85]] },
       { kind: "segment", pts: [[75, 15], [75, 85]] },
       dot(25, 10, { label: "a" }), dot(48, 11, { label: "b" }), dot(75, 10, { label: "c" })) },
+
+  // =======================================================================
+  // MA.REPERE.BOUCLES (lot 10) : les boucles « répète N fois » en programmation.
+  // Introduction par LECTURE (clic sur la case d'arrivée d'un programme qui
+  // contient une boucle) et RECONNAISSANCE (QCM : ce que fait une boucle, quel
+  // programme utilise une boucle). Composant <Geometrie> reutilise (clic + qcm) ;
+  // la boucle est decrite EN TOUTES LETTRES dans la consigne. verif_geo seul juge.
+  // =======================================================================
+  { cle: "geo-bcl-n1-compte", competence: "MA.REPERE.BOUCLES", niveau: 1, format: "qcm",
+    consigne: "Le programme dit : répète 3 fois : avance. Le robot avance de combien de cases ?",
+    options: ["3 cases", "1 case", "6 cases"], attendu: "3 cases",
+    explication: "Répète 3 fois : avance veut dire faire avance trois fois. Le robot avance de 3 cases.",
+    figure: { kind: "none" } },
+  { cle: "geo-bcl-n1-choix", competence: "MA.REPERE.BOUCLES", niveau: 1, format: "qcm",
+    consigne: "Le robot doit avancer de 4 cases. Quel programme utilise une boucle « répète » ?",
+    options: ["répète 4 fois : avance", "avance puis tourne", "répète 2 fois : tourne"], attendu: "répète 4 fois : avance",
+    explication: "Pour avancer de 4 cases avec une boucle, on écrit répète 4 fois : avance.",
+    figure: { kind: "none" } },
+  { cle: "geo-bcl-n2-a", competence: "MA.REPERE.BOUCLES", niveau: 2, format: "clic",
+    consigne: "Le robot part de B1 et regarde vers le haut. Il répète 3 fois : avance. Clique sur la case d'arrivée.",
+    attendu: "B4",
+    explication: "Répète 3 fois : avance, donc le robot monte de 3 cases depuis B1 : il arrive en B4.",
+    figure: grid({ cols: 5, rows: 5, coded: true, start: "B1", dir: "N" }) },
+  { cle: "geo-bcl-n2-b", competence: "MA.REPERE.BOUCLES", niveau: 2, format: "clic",
+    consigne: "Le robot part de A1 et regarde vers le haut. Il répète 4 fois : avance. Clique sur la case d'arrivée.",
+    attendu: "A5",
+    explication: "Répète 4 fois : avance, donc le robot monte de 4 cases depuis A1 : il arrive en A5.",
+    figure: grid({ cols: 5, rows: 5, coded: true, start: "A1", dir: "N" }) },
+  { cle: "geo-bcl-n3-pourquoi", competence: "MA.REPERE.BOUCLES", niveau: 3, format: "qcm",
+    consigne: "Pourquoi utiliser une boucle « répète » dans un programme ?",
+    options: ["pour éviter d'écrire plusieurs fois la même chose", "pour avancer moins vite", "pour effacer le programme"],
+    attendu: "pour éviter d'écrire plusieurs fois la même chose",
+    explication: "La boucle répète permet d'écrire une seule fois une action qu'on veut faire plusieurs fois.",
+    figure: { kind: "none" } },
+  { cle: "geo-bcl-n3-a", competence: "MA.REPERE.BOUCLES", niveau: 3, format: "clic",
+    consigne: "Le robot part de A1, vers le haut. Il répète 2 fois : avance, avance, tourne à droite. Clique sur la case d'arrivée.",
+    attendu: "C3",
+    explication: "Il monte de 2 cases (A3), tourne à droite, avance de 2 cases (C3), puis tourne encore. Il arrive en C3.",
+    figure: grid({ cols: 5, rows: 5, coded: true, start: "A1", dir: "N" }) },
+  { cle: "geo-bcl-n4-a", competence: "MA.REPERE.BOUCLES", niveau: 4, format: "clic",
+    consigne: "Le robot part de A1, vers le haut. Il répète 2 fois : avance, tourne à droite, avance. Clique sur la case d'arrivée.",
+    attendu: "C1",
+    explication: "Avance (A2), tourne à droite, avance (B2) ; puis avance (C2), tourne à droite, avance (C1). Il arrive en C1.",
+    figure: grid({ cols: 5, rows: 5, coded: true, start: "A1", dir: "N" }) },
+  { cle: "geo-bcl-n4-equiv", competence: "MA.REPERE.BOUCLES", niveau: 4, format: "qcm",
+    consigne: "Quel programme fait la même chose que « répète 3 fois : avance, tourne à droite » ?",
+    options: [
+      "avance, tourne à droite, avance, tourne à droite, avance, tourne à droite",
+      "avance, avance, avance",
+      "tourne à droite, tourne à droite, tourne à droite"],
+    attendu: "avance, tourne à droite, avance, tourne à droite, avance, tourne à droite",
+    explication: "Répéter 3 fois (avance, tourne à droite), c'est écrire avance et tourne à droite, trois fois de suite.",
+    figure: { kind: "none" } },
 ];
 
 // Competences par sous-matiere (ordre d'affichage = ordre du referentiel).
@@ -1269,6 +1322,7 @@ export const COMPETENCES_REPERE = [
   "MA.REPERE.DEPLACEMENTS",
   "MA.REPERE.PLAN",
   "MA.REPERE.PROGRAMMER",
+  "MA.REPERE.BOUCLES",
 ] as const;
 export const COMPETENCES_GEO_TOUTES = [...COMPETENCES_GEOMETRIE, ...COMPETENCES_REPERE] as const;
 

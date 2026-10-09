@@ -27,8 +27,8 @@ DECLARE
     n   integer;
 BEGIN
     SELECT count(*) INTO n FROM public.geometrie_item;
-    IF n <> 128 THEN
-        RAISE EXCEPTION 'geometrie_item : 128 items attendus, obtenu %', n;
+    IF n <> 136 THEN
+        RAISE EXCEPTION 'geometrie_item : 136 items attendus, obtenu %', n;
     END IF;
 
     -- Couverture : chaque competence a au moins un item a chaque niveau 1..4
@@ -37,7 +37,7 @@ BEGIN
                FROM unnest(ARRAY['MA.GEO.FIGURES','MA.GEO.VOCABULAIRE','MA.GEO.SOLIDES',
                     'MA.GEO.SYMETRIE','MA.GEO.CONSTRUIRE','MA.REPERE.QUADRILLAGE',
                     'MA.REPERE.DEPLACEMENTS','MA.REPERE.PLAN','MA.REPERE.PROGRAMMER',
-                    'MA.GEO.MESURER_TRACER','MA.GEO.CERCLE','MA.GEO.PATRONS','MA.GEO.AIRE','MA.GEO.ANGLES']) AS c,
+                    'MA.GEO.MESURER_TRACER','MA.GEO.CERCLE','MA.GEO.PATRONS','MA.GEO.AIRE','MA.GEO.ANGLES','MA.REPERE.BOUCLES']) AS c,
                     generate_series(1,4) AS nv
     LOOP
         IF NOT EXISTS (SELECT 1 FROM public.geometrie_item
