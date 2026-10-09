@@ -1383,6 +1383,29 @@ que du CE1/CE2). Côté kit, le pourcentage de textes écartés passe de **25,1 
 « Papa a écrit ___ sur la liste des courses. » (univers « à la maison »,
 bienveillant).
 
+### Textes CM1 de la bibliothèque et leurs questions (lots 0091 puis 0102)
+
+Le lot 0091 a intégré **4 textes CM1** du kit domaine public (Gautier
+« Premier sourire du printemps », Andersen « La Princesse sur un pois », Ségur
+« La poupée de cire au soleil », Colette « Le matin du grand départ »), 4
+questions chacun (golden 192 → 208).
+
+Le lot **0102** ajoute **2 poèmes CM1** supplémentaires, 4 questions chacun
+(golden 208 → **216**) :
+
+- **c3-052** Paul Verlaine, « La lune blanche » ;
+- **c3-071** Jean Aicard, « Les Berceaux ».
+
+**Textes CM1 « ok » laissés de côté (lecture seule du kit).** Sur les 17 textes
+CM1 `utilisable=oui, ton=garde` du kit, 4 étaient déjà intégrés et 2 le sont ici.
+Les **10 autres** ne sont pas repris : leur version **dans le kit est abrégée**
+(marqueur `[...]`), or la règle de Manu interdit tout texte coupé — on ne va pas
+chercher le texte complet ailleurs (lecture seule du kit). Un (c3-049, Renard,
+« Portraits d'animaux ») est en plus écarté par le **garde-fou bienveillance**
+(le mot « meurent » dans le corps). Ces choix sont signalés dans le rapport de
+lot ; pour les intégrer plus tard, il faudra des versions **complètes** et
+conformes à la bienveillance.
+
 ## Dictée : extraits inspirés de la bibliothèque (lot 0061)
 
 La dictée détective reçoit dix extraits courts (2 à 4 phrases, **orthographe

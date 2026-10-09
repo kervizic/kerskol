@@ -28,8 +28,8 @@ DECLARE
     n   integer;
 BEGIN
     SELECT count(*) INTO n FROM public.comprehension_item;
-    IF n <> 208 THEN
-        RAISE EXCEPTION 'comprehension_item : 208 items attendus, obtenu %', n;
+    IF n <> 216 THEN
+        RAISE EXCEPTION 'comprehension_item : 216 items attendus, obtenu %', n;
     END IF;
 
     -- Couverture : chaque competence a au moins un item a chaque niveau 1..4.
