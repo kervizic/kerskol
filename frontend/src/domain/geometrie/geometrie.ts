@@ -1131,6 +1131,53 @@ export const BANQUE_GEOMETRIE: GeoItem[] = [
   patronJuge("geo-pat-n4-non", 4, "Regarde bien ce dessin. Si on le replie, fait-il un cube ? Réponds oui ou non.",
     NET_BLOC_2x3,
     "Non. Deux carrés se poseraient sur la même face et il resterait un trou : ce n'est pas un patron de cube."),
+
+  // =======================================================================
+  // MA.GEO.AIRE (lot 8) : aire par COMPTAGE DE CARREAUX. La figure coloriée est
+  // dessinée sur un quadrillage (GeoGridSpec/GridView) ; l'enfant COMPTE les
+  // carreaux et SAISIT le nombre (format "texte", op 'geo'). N1-N2 rectangles,
+  // N3 figures non rectangulaires (L, T), N4 figures plus grandes.
+  // =======================================================================
+  { cle: "geo-aire-n1-a", competence: "MA.GEO.AIRE", niveau: 1, format: "texte",
+    consigne: "Compte les carreaux coloriés. Quelle est l'aire de cette figure, en carreaux ?",
+    attendu: "6",
+    explication: "On compte les carreaux coloriés un par un : il y en a 6. L'aire est 6 carreaux.",
+    figure: grid({ cols: 6, rows: 5, fill: ["B2", "C2", "D2", "B3", "C3", "D3"] }) },
+  { cle: "geo-aire-n1-b", competence: "MA.GEO.AIRE", niveau: 1, format: "texte",
+    consigne: "Compte les carreaux coloriés. Quelle est l'aire de cette figure, en carreaux ?",
+    attendu: "4",
+    explication: "Il y a 2 carreaux sur 2 lignes : on compte 4 carreaux. L'aire est 4 carreaux.",
+    figure: grid({ cols: 6, rows: 5, fill: ["B2", "C2", "B3", "C3"] }) },
+  { cle: "geo-aire-n2-a", competence: "MA.GEO.AIRE", niveau: 2, format: "texte",
+    consigne: "Compte les carreaux coloriés. Quelle est l'aire de cette figure, en carreaux ?",
+    attendu: "12",
+    explication: "Il y a 4 carreaux sur chaque ligne, et 3 lignes : 4 et 4 et 4 font 12 carreaux.",
+    figure: grid({ cols: 6, rows: 5, fill: ["B2", "C2", "D2", "E2", "B3", "C3", "D3", "E3", "B4", "C4", "D4", "E4"] }) },
+  { cle: "geo-aire-n2-b", competence: "MA.GEO.AIRE", niveau: 2, format: "texte",
+    consigne: "Compte les carreaux coloriés. Quelle est l'aire de cette figure, en carreaux ?",
+    attendu: "10",
+    explication: "Il y a 5 carreaux sur chaque ligne, et 2 lignes : 5 et 5 font 10 carreaux.",
+    figure: grid({ cols: 6, rows: 5, fill: ["A2", "B2", "C2", "D2", "E2", "A3", "B3", "C3", "D3", "E3"] }) },
+  { cle: "geo-aire-n3-a", competence: "MA.GEO.AIRE", niveau: 3, format: "texte",
+    consigne: "Cette figure n'est pas un rectangle. Compte bien tous les carreaux coloriés.",
+    attendu: "8",
+    explication: "On compte les carreaux un par un, même quand la figure a une forme en L : il y en a 8.",
+    figure: grid({ cols: 6, rows: 5, fill: ["B2", "C2", "B3", "C3", "B4", "C4", "D4", "E4"] }) },
+  { cle: "geo-aire-n3-b", competence: "MA.GEO.AIRE", niveau: 3, format: "texte",
+    consigne: "Cette figure n'est pas un rectangle. Compte bien tous les carreaux coloriés.",
+    attendu: "5",
+    explication: "On compte les carreaux de la figure en T un par un : il y en a 5.",
+    figure: grid({ cols: 6, rows: 5, fill: ["B2", "C2", "D2", "C3", "C4"] }) },
+  { cle: "geo-aire-n4-a", competence: "MA.GEO.AIRE", niveau: 4, format: "texte",
+    consigne: "Compte tous les carreaux coloriés pour trouver l'aire, en carreaux.",
+    attendu: "14",
+    explication: "Il y a 12 carreaux dans le grand rectangle, et 2 carreaux de plus en bas : 12 et 2 font 14.",
+    figure: grid({ cols: 6, rows: 5, fill: ["B2", "C2", "D2", "E2", "B3", "C3", "D3", "E3", "B4", "C4", "D4", "E4", "C5", "D5"] }) },
+  { cle: "geo-aire-n4-b", competence: "MA.GEO.AIRE", niveau: 4, format: "texte",
+    consigne: "Compte tous les carreaux coloriés pour trouver l'aire, en carreaux.",
+    attendu: "13",
+    explication: "Il y a 12 carreaux dans le rectangle, et 1 carreau de plus en bas : 12 et 1 font 13.",
+    figure: grid({ cols: 6, rows: 5, fill: ["B2", "C2", "D2", "E2", "B3", "C3", "D3", "E3", "B4", "C4", "D4", "E4", "C5"] }) },
 ];
 
 // Competences par sous-matiere (ordre d'affichage = ordre du referentiel).
@@ -1143,6 +1190,7 @@ export const COMPETENCES_GEOMETRIE = [
   "MA.GEO.MESURER_TRACER",
   "MA.GEO.CERCLE",
   "MA.GEO.PATRONS",
+  "MA.GEO.AIRE",
 ] as const;
 export const COMPETENCES_REPERE = [
   "MA.REPERE.QUADRILLAGE",

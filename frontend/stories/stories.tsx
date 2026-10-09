@@ -13,6 +13,7 @@ import DecimalInput from "../src/components/DecimalInput";
 import Grammaire from "../src/components/Grammaire";
 import Comprehension from "../src/components/Comprehension";
 import Ecriture from "../src/components/Ecriture";
+import Geometrie from "../src/components/Geometrie";
 import { generateExercise as genEx } from "../src/domain/calcul/generator";
 import type { DonRender } from "../src/domain/donnees/donnees";
 import type { GramRender } from "../src/domain/francais/grammaire";
@@ -251,6 +252,14 @@ export const STORIES: Story[] = [
     node: <PotenceStory /> },
   { id: "decimal-droite", label: "Décimal sur droite graduée (lot 7)",
     node: <DroiteDecStory /> },
+  { id: "aire-carreaux", label: "Aire par comptage de carreaux (figure en L, lot 8)",
+    node: <Geometrie item={{
+      cle: "geo-aire-n3-a", format: "texte",
+      consigne: "Cette figure n'est pas un rectangle. Compte bien tous les carreaux coloriés.",
+      attendu: "8",
+      explication: "On compte les carreaux un par un, même en L : il y en a 8.",
+      figure: { kind: "grid", grid: { cols: 6, rows: 5, fill: ["B2", "C2", "B3", "C3", "B4", "C4", "D4", "E4"] } },
+    }} onSoumettre={noopSubmit} onContinuer={noop} /> },
   { id: "ecriture-passe-simple", label: "Écriture — transformer au passé simple (lot 5)",
     node: <Ecriture item={{
       cle: "ecr-guidecm1-n3", format: "transform",

@@ -154,6 +154,12 @@ réutilise `<DroiteView>` avec labels décimaux) et `MA.DEC.RANGER` (écrire le 
 petit / le plus grand de trois décimaux, pièges 0,7 vs 0,07). Réponse encodée en
 centièmes, op `val` (déjà autorisée pour `MA.DEC.%`).
 
+**Aire par comptage de carreaux (lot 8, migration 0095, `MA.GEO.AIRE`)** : une
+figure coloriée sur un quadrillage (GeoGridSpec / GridView, composant
+`<Geometrie>` réutilisé) ; l'enfant compte les carreaux et saisit le nombre
+(format `texte`, op `geo`). N1-N2 rectangles, N3 figures en L / T, N4 figures
+plus grandes. Golden géométrie = **120 items**.
+
 ## Problèmes (domaine `problemes`, migration 0024)
 
 Quatre compétences, alignées sur le programme CE2 (Éduscol : résoudre des

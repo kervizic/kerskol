@@ -27,7 +27,7 @@ import type { ConstruireSpec, ProgrammeSpec, ReproduireSpec, RegleSpec, CercleSp
 import { generateExercise } from "../calcul/generator";
 import type { ExCalcul } from "../calcul/generator";
 
-const NB_ITEMS_GOLDEN = 112;
+const NB_ITEMS_GOLDEN = 120;
 
 function source(competence: string, niveau: number): ExCalcul {
   return {
