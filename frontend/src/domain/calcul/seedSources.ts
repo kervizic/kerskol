@@ -230,16 +230,16 @@ const DEC: Row[] = [
   ["MA.DEC.ECRIRE", 4, "decimal", "decimal", "probleme_dabord", "aucun", "ecrire_decimal", { types: ["ecrire_fraction", "ecrire_centiemes"], maxE: 99 }],
 
   // Comparer deux decimaux (ecrire le plus grand / le plus petit).
-  ["MA.DEC.COMPARER", 1, "decimal", "decimal", "cpa_barres", "aucun", "comparer_decimal", { types: ["comparer_grand"], maxE: 5 }],
-  ["MA.DEC.COMPARER", 2, "decimal", "decimal", "exemples_estompes", "aucun", "comparer_decimal", { types: ["comparer_grand", "comparer_petit"], maxE: 9 }],
-  ["MA.DEC.COMPARER", 3, "decimal", "decimal", "variation", "aucun", "comparer_decimal", { types: ["comparer_grand", "comparer_petit"], maxE: 20 }],
-  ["MA.DEC.COMPARER", 4, "decimal", "decimal", "probleme_dabord", "aucun", "comparer_decimal", { types: ["comparer_grand", "comparer_petit"], maxE: 99 }],
+  ["MA.DEC.COMPARER", 1, "decimal", "decimal", "cpa_barres", "aucun", "comparer_decimal", { types: ["comparer_grand"], struct: "ent", maxE: 9 }],
+  ["MA.DEC.COMPARER", 2, "decimal", "decimal", "exemples_estompes", "aucun", "comparer_decimal", { types: ["comparer_grand", "comparer_petit"], struct: "dix", maxE: 9 }],
+  ["MA.DEC.COMPARER", 3, "decimal", "decimal", "variation", "aucun", "comparer_decimal", { types: ["comparer_grand", "comparer_petit"], struct: "long", maxE: 20 }],
+  ["MA.DEC.COMPARER", 4, "decimal", "decimal", "probleme_dabord", "aucun", "comparer_decimal", { types: ["comparer_grand", "comparer_petit"], struct: "cent", maxE: 99 }],
 
   // Encadrer entre deux entiers consecutifs (entier juste avant / juste apres).
-  ["MA.DEC.ENCADRER", 1, "decimal", "decimal", "cpa_barres", "aucun", "encadrer_decimal", { types: ["encadrer_avant"], maxE: 5 }],
-  ["MA.DEC.ENCADRER", 2, "decimal", "decimal", "exemples_estompes", "aucun", "encadrer_decimal", { types: ["encadrer_avant", "encadrer_apres"], maxE: 9 }],
-  ["MA.DEC.ENCADRER", 3, "decimal", "decimal", "variation", "aucun", "encadrer_decimal", { types: ["encadrer_avant", "encadrer_apres"], maxE: 20 }],
-  ["MA.DEC.ENCADRER", 4, "decimal", "decimal", "probleme_dabord", "aucun", "encadrer_decimal", { types: ["encadrer_avant", "encadrer_apres"], maxE: 99 }],
+  ["MA.DEC.ENCADRER", 1, "decimal", "decimal", "cpa_barres", "aucun", "encadrer_decimal", { types: ["encadrer_avant"], pas: "entier", decimales: 1, maxE: 9 }],
+  ["MA.DEC.ENCADRER", 2, "decimal", "decimal", "exemples_estompes", "aucun", "encadrer_decimal", { types: ["encadrer_avant", "encadrer_apres"], pas: "entier", decimales: 2, maxE: 20 }],
+  ["MA.DEC.ENCADRER", 3, "decimal", "decimal", "variation", "aucun", "encadrer_decimal", { types: ["encadrer_avant", "encadrer_apres"], pas: "dixieme", maxE: 20 }],
+  ["MA.DEC.ENCADRER", 4, "decimal", "decimal", "probleme_dabord", "aucun", "encadrer_decimal", { types: ["encadrer_avant", "encadrer_apres"], pas: "dixieme", maxE: 99 }],
 
   // Lot 3 : addition / soustraction de decimaux (saisie <DecimalInput>, op add/sub).
   ["MA.DEC.ADDITION", 1, "add", "decimal", "cpa_barres", "aucun", "addition_decimale", { maxE: 5 }],

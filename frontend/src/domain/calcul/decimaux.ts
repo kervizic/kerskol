@@ -132,31 +132,88 @@ export function buildDecimal(src: ExCalcul, rng: Rng, base: Base): GeneratedExer
   }
 
   // --- COMPARER : ecrire le plus grand / le plus petit -------------------
+  // ETAGEMENT (recalibrage lot A) : avant, x et y partageaient TOUJOURS la meme
+  // partie entiere et la comparaison portait sur deux nombres 0..99 a chaque
+  // niveau (maxE cosmetique) -> N2 = N3 = N4. La difficulte porte desormais sur
+  // la STRUCTURE decimale, via le parametre `struct` :
+  //   "ent"  : parties entieres DIFFERENTES (on tranche sur l'entier) -> facile ;
+  //   "dix"  : meme entier, dixiemes (un seul chiffre apres la virgule) ;
+  //   "long" : meme entier, longueurs differentes (piege « 2,5 vs 2,45 ») ;
+  //   "cent" : meme entier, centiemes avec piege du zero (« 0,07 vs 0,7 »).
   if (type === "comparer_grand" || type === "comparer_petit") {
-    const e = intBetween(rng, 0, maxE);
-    let d1 = intBetween(rng, 0, 99);
-    let d2 = intBetween(rng, 0, 99);
-    while (d2 === d1) d2 = intBetween(rng, 0, 99);
-    const x = e * 100 + d1;
-    const y = e * 100 + d2;
+    const struct = String(p.struct ?? "dix");
+    let x: number;
+    let y: number;
+    if (struct === "ent") {
+      const e1 = intBetween(rng, 0, maxE);
+      const e2 = e1 + intBetween(rng, 1, 3);
+      x = e1 * 100 + intBetween(rng, 0, 9) * 10;
+      y = e2 * 100 + intBetween(rng, 0, 9) * 10;
+    } else if (struct === "long") {
+      const e = intBetween(rng, 0, maxE);
+      const k = intBetween(rng, 1, 9); // un dixieme : e,k
+      let c = intBetween(rng, 1, 99); // un centieme : e,cc
+      while (c === k * 10 || c % 10 === 0) c = intBetween(rng, 1, 99);
+      x = e * 100 + k * 10;
+      y = e * 100 + c;
+    } else if (struct === "cent") {
+      const e = intBetween(rng, 0, maxE);
+      x = e * 100 + intBetween(rng, 1, 9); // e,0c (centiemes seuls : 0,01 a 0,09)
+      y = e * 100 + intBetween(rng, 1, 9) * 10; // e,d (dixiemes seuls : 0,10 a 0,90)
+    } else {
+      const e = intBetween(rng, 0, maxE); // "dix"
+      let k1 = intBetween(rng, 1, 9);
+      let k2 = intBetween(rng, 1, 9);
+      while (k2 === k1) k2 = intBetween(rng, 1, 9);
+      x = e * 100 + k1 * 10;
+      y = e * 100 + k2 * 10;
+    }
+    if (intBetween(rng, 0, 1) === 1) {
+      const t = x;
+      x = y;
+      y = t;
+    }
     const grand = type === "comparer_grand";
     const answer = grand ? Math.max(x, y) : Math.min(x, y);
     const mot = grand ? "le plus grand" : "le plus petit";
     return mk(
       `Écris ${mot} de ces deux nombres : ${fmtDecimal(x)} ou ${fmtDecimal(y)}.`,
       answer,
-      `On compare la partie après la virgule : ${mot} est ${fmtDecimal(answer)}.`,
+      `On compare d'abord la partie entière, puis les dixièmes, puis les centièmes. ${mot[0].toUpperCase()}${mot.slice(1)} est ${fmtDecimal(answer)}.`,
     );
   }
 
-  // --- ENCADRER : entier juste avant / juste apres -----------------------
+  // --- ENCADRER : entre deux entiers (N1/N2) ou au dixieme (N3/N4) --------
+  // ETAGEMENT (recalibrage lot A) : « entre deux entiers » etait une tache
+  // constante (maxE cosmetique) -> N2 = N3 = N4. On fait d'abord varier la
+  // longueur decimale, puis on passe a l'encadrement AU DIXIEME (plus exigeant,
+  // la reponse n'est plus un entier) :
+  //   pas "entier" + decimales 1 : entre deux entiers, un chiffre apres la virgule ;
+  //   pas "entier" + decimales 2 : entre deux entiers, centiemes ;
+  //   pas "dixieme"              : entre deux dixiemes (ex. 3,47 entre 3,4 et 3,5).
   if (type === "encadrer_avant" || type === "encadrer_apres") {
-    const e = intBetween(rng, 1, Math.max(1, maxE - 1));
-    const d = intBetween(rng, 1, 99);
-    const cent = e * 100 + d;
     const avant = type === "encadrer_avant";
-    const answer = avant ? e * 100 : (e + 1) * 100;
     const mot = avant ? "juste avant" : "juste après";
+    const pas = String(p.pas ?? "entier");
+    if (pas === "dixieme") {
+      const e = intBetween(rng, 1, Math.max(1, maxE - 1));
+      const dix = intBetween(rng, 0, 9);
+      const cent = intBetween(rng, 1, 9); // un centieme non nul : pas deja un dixieme
+      const val = e * 100 + dix * 10 + cent;
+      const low = e * 100 + dix * 10;
+      const high = low + 10;
+      const answer = avant ? low : high;
+      return mk(
+        `Écris le nombre à un seul chiffre après la virgule ${mot} ${fmtDecimal(val)}.`,
+        answer,
+        `${fmtDecimal(val)} est entre ${fmtDecimal(low)} et ${fmtDecimal(high)}. Le nombre ${mot} est ${fmtDecimal(answer)}.`,
+      );
+    }
+    const e = intBetween(rng, 1, Math.max(1, maxE - 1));
+    const decimales = Number(p.decimales ?? 2);
+    const d = decimales === 1 ? intBetween(rng, 1, 9) * 10 : intBetween(rng, 1, 99);
+    const cent = e * 100 + d;
+    const answer = avant ? e * 100 : (e + 1) * 100;
     return mk(
       `Quel est le nombre entier ${mot} ${fmtDecimal(cent)} ? Écris-le.`,
       answer,

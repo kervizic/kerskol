@@ -85,12 +85,17 @@ describe("decimaux : generateur (buildDecimal sur les sources reelles)", () => {
     }
   });
 
-  it("encadrer : la reponse est un entier (multiple de 100 en centiemes)", () => {
+  it("encadrer : N1/N2 entre entiers (multiple de 100), N3/N4 au dixieme (multiple de 10)", () => {
     const enc = DEC_SOURCES.filter((s) => s.competence === "MA.DEC.ENCADRER");
     for (const src of enc) {
       for (const seed of [6, 60, 600]) {
         const ex = generateExercise(src, seed);
-        expect(ex.answer % 100).toBe(0);
+        if (src.niveau <= 2) {
+          expect(ex.answer % 100, `${src.competence} N${src.niveau}`).toBe(0);
+        } else {
+          // encadrement au dixieme : la reponse est un dixieme (multiple de 10)
+          expect(ex.answer % 10, `${src.competence} N${src.niveau}`).toBe(0);
+        }
       }
     }
   });

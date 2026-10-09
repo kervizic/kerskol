@@ -65,9 +65,9 @@ BEGIN
         ('has-n4-a','MA.DONNEES.HASARD',4,'texte','impossible'),
         -- LOT 4 (CM1) : proportionnalite (recettes, courses)
         ('prop-rec-n1-a','MA.DONNEES.PROP_RECETTE',1,'qcm','8'),
-        ('prop-rec-n4-a','MA.DONNEES.PROP_RECETTE',4,'texte','24'),
+        ('prop-rec-n4-a','MA.DONNEES.PROP_RECETTE',4,'texte','21'),
         ('prop-crs-n1-a','MA.DONNEES.PROP_COURSES',1,'qcm','12'),
-        ('prop-crs-n4-b','MA.DONNEES.PROP_COURSES',4,'texte','10'),
+        ('prop-crs-n4-b','MA.DONNEES.PROP_COURSES',4,'texte','5'),
         -- LOT 5 (CM1) : angles (vocabulaire)
         ('ang-n1-a','MA.DONNEES.ANGLES',1,'qcm','droit'),
         ('ang-n2-a','MA.DONNEES.ANGLES',2,'qcm','obtus'),
