@@ -305,8 +305,7 @@ BEGIN
 
     RETURN;
 END;
-$function$
-
+$function$;
 
 -- =========================================================================
 -- 5. Enregistrement de la migration
