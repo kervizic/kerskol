@@ -32,10 +32,10 @@ INSERT INTO public.comprehension_item (cle, competence, niveau, format, attendu)
     ('lec-bib-poupee-inf-n3',     'FR.LECTURE.INFERENCE', 3, 'qcm',   'sa poupée est abîmée par le soleil'),
     ('lec-bib-poupee-clic-n4',    'FR.LECTURE.INFO',      4, 'clic',  'amies'),
     -- Colette, « Le matin du grand départ »
-    ('lec-bib-toby-info-n1',      'FR.LECTURE.INFO',      1, 'qcm',   'il a couru dans toute la maison'),
-    ('lec-bib-toby-sens-n2',      'FR.LECTURE.SENS_MOT',  2, 'qcm',   'perché, placé très haut'),
-    ('lec-bib-toby-inf-n3',       'FR.LECTURE.INFERENCE', 3, 'qcm',   'on prépare un grand départ'),
-    ('lec-bib-toby-clic-n4',      'FR.LECTURE.INFO',      4, 'clic',  'bibliothèque')
+    ('lec-bib-depart-info-n1',    'FR.LECTURE.INFO',      1, 'qcm',   'il a couru dans toute la maison'),
+    ('lec-bib-depart-sens-n2',    'FR.LECTURE.SENS_MOT',  2, 'qcm',   'perché, placé très haut'),
+    ('lec-bib-depart-inf-n3',     'FR.LECTURE.INFERENCE', 3, 'qcm',   'on prépare un grand départ'),
+    ('lec-bib-depart-clic-n4',    'FR.LECTURE.INFO',      4, 'clic',  'bibliothèque')
 ON CONFLICT (cle) DO UPDATE SET competence=EXCLUDED.competence, niveau=EXCLUDED.niveau,
     format=EXCLUDED.format, attendu=EXCLUDED.attendu;
 
