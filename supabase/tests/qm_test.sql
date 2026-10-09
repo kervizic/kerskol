@@ -74,7 +74,12 @@ BEGIN
         ('qm-tps-fri-n4-a','QM.TEMPS.FRISE',4,'ordre','le printemps>l''été>l''automne>l''hiver'),
         ('qm-tps-gen-n2-a','QM.TEMPS.GENERATIONS',2,'ordre','le grand-père>le père>l''enfant'),
         ('qm-tps-aut-n2-a','QM.TEMPS.AUTREFOIS',2,'tri','la plume et l''encre=autrefois;l''ordinateur=aujourd''hui;la bougie=autrefois;la lampe électrique=aujourd''hui'),
-        ('qm-tps-jou-n4-b','QM.TEMPS.JOURNUIT',4,'texte','tourne')
+        ('qm-tps-jou-n4-b','QM.TEMPS.JOURNUIT',4,'texte','tourne'),
+        -- CE1 dédiées (incrément 16)
+        ('qm-tps-ce1sais-n1-a','QM.TEMPS.CE1_SAISONS',1,'qcm','4'),
+        ('qm-tps-ce1sais-n4-a','QM.TEMPS.CE1_SAISONS',4,'texte','printemps'),
+        ('qm-esp-ce1dep-n2-a','QM.ESPACE.CE1_DEPLACER',2,'qcm','un itinéraire'),
+        ('qm-esp-ce1dep-n4-b','QM.ESPACE.CE1_DEPLACER',4,'texte','plan')
     ) AS t(cle, competence, niveau, format, attendu)
     LOOP
         SELECT format || '|' || attendu INTO got FROM public.qm_item WHERE cle = r.cle;

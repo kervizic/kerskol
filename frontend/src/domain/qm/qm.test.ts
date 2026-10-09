@@ -97,9 +97,9 @@ describe("banque QM — Les objets", () => {
 });
 
 describe("banque QM — L'espace", () => {
-  it("40 items (5 competences x 4 niveaux x 2)", () => {
+  it("48 items (6 competences x 4 niveaux x 2)", () => {
     const esp = BANQUE_QM.filter((i) => i.competence.startsWith("QM.ESPACE."));
-    expect(esp.length).toBe(40);
+    expect(esp.length).toBe(48);
   });
   it("couverture des 5 competences espace x niveaux", () => {
     for (const c of COMPETENCES_ESPACE) {
@@ -117,9 +117,9 @@ describe("banque QM — L'espace", () => {
 });
 
 describe("banque QM — Le temps", () => {
-  it("40 items (5 competences x 4 niveaux x 2)", () => {
+  it("48 items (6 competences x 4 niveaux x 2)", () => {
     const tps = BANQUE_QM.filter((i) => i.competence.startsWith("QM.TEMPS."));
-    expect(tps.length).toBe(40);
+    expect(tps.length).toBe(48);
   });
   it("couverture des 5 competences temps x niveaux", () => {
     for (const c of COMPETENCES_TEMPS) {
@@ -137,9 +137,9 @@ describe("banque QM — Le temps", () => {
 });
 
 describe("banque QM — totaux", () => {
-  it("192 items au total (24 competences x 8)", () => {
-    expect(BANQUE_QM.length).toBe(192);
-    expect(COMPETENCES_QM.length).toBe(24);
+  it("208 items au total (26 competences x 8)", () => {
+    expect(BANQUE_QM.length).toBe(208);
+    expect(COMPETENCES_QM.length).toBe(26);
   });
 });
 

@@ -195,9 +195,48 @@ export const BANQUE_ESPACE: QmItem[] = [
     consigne: "Un paysage avec de très hauts sommets s'appelle la... Écris le mot.",
     attendu: "montagne",
     explication: "La montagne a de très hauts sommets." },
+
+  // =======================================================================
+  // LOT CE1 (incrément 16) - QM.ESPACE.CE1_DEPLACER ([CE1,CE1]) : se repérer et
+  // se déplacer (devant/derrière, gauche/droite, suivre un itinéraire, plan).
+  // =======================================================================
+  { cle: "qm-esp-ce1dep-n1-a", competence: "QM.ESPACE.CE1_DEPLACER", niveau: 1, format: "qcm",
+    consigne: "Un jouet posé SOUS la table est...",
+    options: ["en dessous", "au-dessus", "très loin"], attendu: "en dessous",
+    explication: "Sous la table veut dire en dessous de la table." },
+  { cle: "qm-esp-ce1dep-n1-b", competence: "QM.ESPACE.CE1_DEPLACER", niveau: 1, format: "qcm",
+    consigne: "Si je suis DEVANT toi, alors tu es...",
+    options: ["derrière moi", "devant moi", "sur moi"], attendu: "derrière moi",
+    explication: "Devant et derrière sont des contraires." },
+  { cle: "qm-esp-ce1dep-n2-a", competence: "QM.ESPACE.CE1_DEPLACER", niveau: 2, format: "qcm",
+    consigne: "Le chemin que l'on suit pour aller d'un endroit à un autre s'appelle...",
+    options: ["un itinéraire", "un nuage", "un cartable"], attendu: "un itinéraire",
+    explication: "L'itinéraire, c'est le chemin que l'on suit pour se déplacer." },
+  { cle: "qm-esp-ce1dep-n2-b", competence: "QM.ESPACE.CE1_DEPLACER", niveau: 2, format: "qcm",
+    consigne: "Sur un plan, le petit cadre qui explique les dessins s'appelle...",
+    options: ["la légende", "la récré", "la cantine"], attendu: "la légende",
+    explication: "La légende explique ce que veulent dire les symboles du plan." },
+  { cle: "qm-esp-ce1dep-n3-a", competence: "QM.ESPACE.CE1_DEPLACER", niveau: 3, format: "qcm",
+    consigne: "Pour décrire un trajet, quels mots aident le plus ?",
+    options: ["tout droit, à gauche, à droite", "rouge, bleu, vert", "un, deux, trois"],
+    attendu: "tout droit, à gauche, à droite",
+    explication: "Pour se déplacer, on dit : tout droit, à gauche, à droite." },
+  { cle: "qm-esp-ce1dep-n3-b", competence: "QM.ESPACE.CE1_DEPLACER", niveau: 3, format: "qcm",
+    consigne: "Sur le plan de la classe, vu de dessus, une table est dessinée...",
+    options: ["par un rectangle", "par une photo", "par un son"], attendu: "par un rectangle",
+    explication: "Sur un plan, on dessine les objets vus de dessus, par des formes simples." },
+  { cle: "qm-esp-ce1dep-n4-a", competence: "QM.ESPACE.CE1_DEPLACER", niveau: 4, format: "texte",
+    consigne: "Le contraire de « à gauche », c'est à... ? Écris le mot.",
+    attendu: "droite",
+    explication: "Gauche et droite sont deux côtés opposés." },
+  { cle: "qm-esp-ce1dep-n4-b", competence: "QM.ESPACE.CE1_DEPLACER", niveau: 4, format: "texte",
+    consigne: "Comment appelle-t-on un dessin qui montre un lieu vu de dessus ? Écris le mot.",
+    attendu: "plan",
+    explication: "Un plan montre un lieu vu de dessus, comme la classe ou le quartier." },
 ];
 
 export const COMPETENCES_ESPACE = [
+  "QM.ESPACE.CE1_DEPLACER",
   "QM.ESPACE.SEREPERER",
   "QM.ESPACE.PLANETE",
   "QM.ESPACE.FRANCE",
