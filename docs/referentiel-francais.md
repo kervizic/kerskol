@@ -17,6 +17,23 @@ Sources :
 - Programme de français du cycle 2, avril 2024 (education.gouv.fr).
 - Éduscol, « Français CE2 — Attendus de fin d'année » et « Repères CE2 2024 ».
 
+## Compétences livrées : GRAMMAIRE — les accords (CM1, migration 0089)
+
+Trois compétences d'accord (domaine `grammaire`, portée CM1..CM2, 4 niveaux,
+moteur `grammaire_item` réutilisé, aucune nouvelle UI) :
+
+| Code | Libellé | Notion |
+|------|---------|--------|
+| `FR.GRAM.ACCORD_SV` | Accorder le verbe avec son sujet | sujet éloigné ou inversé |
+| `FR.GRAM.ACCORD_GN` | Accorder dans le groupe nominal | adjectifs multiples, complément du nom |
+| `FR.GRAM.ACCORD_PP` | Accorder le participe passé (être) | accord avec le sujet |
+
+Formats : N1 QCM (choisir la forme), N2 clic (montrer le sujet / le nom / le
+participe), N3 QCM (sujet séparé ou inversé, plusieurs adjectifs, complément du
+nom), N4 **texte** (recopier la forme bien accordée : réponse libre). Prérequis :
+`ACCORD_SV` ← `SUJET_VERBE` n2 ; `ACCORD_GN` et `ACCORD_PP` ← `GROUPE_NOMINAL`
+n2. Golden grammaire global = **162 items**.
+
 ## Compétences livrées : CONJUGAISON
 
 Quatre compétences, **4 niveaux** chacune :
