@@ -1506,6 +1506,57 @@ dans le budget courant. À faire, par effort croissant :
   mais la **potence** est un nouveau composant d'UI (migration 0076 l'a déjà noté
   comme reporté) — grand.
 
+## Livré : Français CM1 (lot C, migrations 0081 à 0083)
+
+Attendus CM1 vérifiés sur **eduscol, « Français CM1 - Attendus de fin d'année »,
+document 13984** (étude de la langue : grammaire, orthographe, lexique). Tout
+**réutilise les moteurs français existants** (banques statiques `grammaire_item`
+et `lexique_item`, juges `verif_grammaire` / `verif_lexique` par clé, composant
+`<Grammaire>`, formats QCM / clic / texte) : **aucune nouvelle UI, aucun nouveau
+juge**. Serveur seul juge. Migrations additives et idempotentes, **aucun
+changement de `domaines_actifs`** (domaines `grammaire`, `orthographe`,
+`vocabulaire` déjà actifs).
+
+- **Grammaire - Les compléments** (`FR.GRAM.COMPLEMENTS`, migration 0081) :
+  identifier le **complément d'objet direct (COD)**, **indirect (COI)** et les
+  **compléments circonstanciels** (temps, lieu). N1 QCM, N2 clic, N3 QCM
+  (distinguer COD/COI), N4 réponse libre. Golden grammaire 78 → 90.
+- **Orthographe - Les homophones grammaticaux** (`FR.GRAM.HOMOPHONES`, domaine
+  `orthographe`, migration 0082) : ou/où, on/ont, ce/se, ces/ses, leur/leurs,
+  tout/tous, c'est/s'est. **QCM à tous les niveaux** (on ne peut pas taper : les
+  deux mots se prononcent pareil), difficulté croissante par la subtilité de la
+  paire. Golden grammaire 90 → 102. La sous-matière orthographe est renommée
+  « Dictée détective » → **« Orthographe »** (dictée + homophones y cohabitent).
+  Choix d'architecture : code `FR.GRAM.*` (contrainte du préfixe de
+  `grammaire_item`) mais **domaine `orthographe`** (comme la proportionnalité :
+  code `MA.DONNEES.*`, domaine `proportionnalite`).
+- **Vocabulaire - Sens propre et sens figuré** (`FR.VOC.SENS_FIGURE`, migration
+  0083) : distinguer le vrai sens et le sens imagé (cœur d'or, tomber dans les
+  pommes, tête dans les nuages...). N1-N3 QCM, N4 réponse libre (« propre » /
+  « figuré »). Complète `FR.VOC.SENS` (polysémie). Golden lexique 140 → 152.
+
+Chaque compétence : **portée CM1..CM2** + **prérequis** (réservée au CM1, « en
+avance » pour un CE2 seulement si le prérequis est acquis). Captures Playwright
+vérifiées (compléments COD/COI et homophones ; sens figuré réutilise le même
+composant déjà capturé). Tests croisés front ↔ SQL (grammaire_test.sql,
+lexique_test.sql).
+
+### Reste du lot C (français CM1, non livré - budget)
+
+À faire, tous sur les moteurs existants (banques à écrire) :
+- **Grammaire** : classes de mots élargies (adverbe, pronoms, conjonctions de
+  coordination), phrase simple / complexe.
+- **Conjugaison** : passé composé (existe), **passé simple 3e personnes**,
+  **impératif présent** (le moteur `conjugaison.ts` est une table procédurale :
+  ajouter un temps demande d'étendre l'enum `Temps`, les codes et le juge).
+- **Orthographe** : accord sujet-verbe éloigné/inversé, accord du GN étendu,
+  participe passé avec être (dictée détective, banques par notion).
+- **Vocabulaire** : registres de langue (familier / courant / soutenu),
+  extensions préfixes/suffixes et synonymes/antonymes CM1.
+- **Dictées par notions CM1**, **compréhension** avec les textes classés CM1 de
+  la bibliothèque, **copie / écriture guidée CM1** (phrases plus longues,
+  connecteurs).
+
 ## Livré : « Grandeurs et mesures » (migration 0075, lot 5)
 
 Réutilisation des moteurs existants, **aucune nouvelle UI** :
