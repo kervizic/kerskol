@@ -31,6 +31,7 @@ import { buildQm } from "../qm";
 import { buildEmc } from "../emc";
 import { buildSciences } from "../sciences";
 import { buildHistoire } from "../histoire";
+import { buildGeographie } from "../geographie";
 import type { QmFormat, QmFigure } from "../qm/types";
 import type { DonFigure, DonFormat, DonInteract } from "../donnees/donnees";
 import { buildComprehension } from "../francais/comprehension";
@@ -732,6 +733,11 @@ function buildExercise(
   // frise) : reutilise l'infra « situation » de QM.
   if (src.competence.startsWith("HIST.")) {
     return buildHistoire(src, rng, base);
+  }
+  // --- Geographie (CM1 : se reperer, habiter, activites, consommer, France,
+  // paysages) : reutilise l'infra « situation » de QM.
+  if (src.competence.startsWith("GEO.")) {
+    return buildGeographie(src, rng, base);
   }
   // --- Numeration : lire/ecrire, decomposer, comparer, suite ------------
   if (src.competence.startsWith("MA.NUM.")) {

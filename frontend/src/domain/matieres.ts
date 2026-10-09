@@ -116,6 +116,19 @@ export const MATIERES: MatiereDef[] = [
       { domaine: "frise", libelle: "La frise et les siècles", classeMin: "CM1" },
     ],
   },
+  {
+    // « Géographie » (cycle 3, CM1). Réutilise le rendu de Questionner le monde.
+    code: "GEO",
+    libelle: "Géographie",
+    sousMatieres: [
+      { domaine: "se_reperer", libelle: "Se repérer : plan et carte", classeMin: "CM1" },
+      { domaine: "habiter", libelle: "Habiter en ville, à la campagne", classeMin: "CM1" },
+      { domaine: "travail_loisirs", libelle: "Travailler, se cultiver, les loisirs", classeMin: "CM1" },
+      { domaine: "consommer", libelle: "Consommer en France", classeMin: "CM1" },
+      { domaine: "france_reperes", libelle: "La France : fleuves et reliefs", classeMin: "CM1" },
+      { domaine: "paysages", libelle: "Paysages et milieux", classeMin: "CM1" },
+    ],
+  },
 ];
 
 // Tous les codes matieres / tous les domaines connus (defauts « tout actif »).

@@ -1179,6 +1179,40 @@ les croisades) ; Henri IV / Louis XIV / Versailles → non inclus dans ce lot
 de Manu (ancien programme : Préhistoire → Moyen Âge → rois) ; le programme 2025 a
 déplacé l'Antiquité en 6e (signalé dans le rapport).
 
+## Nouvelle matière « Géographie » (GEO, CM1, migration 0100)
+
+Septième matière. **Additive** au-dessus de 0098 (préfixe `GEO.` et type
+`'geographie'` déjà ouverts). Ajoute la matière `GEO`, la méthode `geographie`,
+6 compétences (`classe_min = 'CM1'`), 48 items, exercices et activation (défaut
+`domaines_actifs` lu en base puis complété). Test croisé : `geographie.test.ts` +
+`geographie_test.sql`.
+
+6 sous-matières × 4 niveaux × 2 = **48 items**, alignées sur les 3 thèmes CM1 +
+repères France :
+
+- **Se repérer : plan et carte** (`se_reperer`, `GEO.REPERES`) : plan vs carte,
+  titre/orientation/échelle/légende, points cardinaux (nord/sud/est/ouest).
+- **Habiter en ville, à la campagne** (`habiter`, `GEO.HABITER`) : ville vs
+  campagne, métropole, transports en commun, Paris capitale.
+- **Travailler, se cultiver, les loisirs** (`travail_loisirs`, `GEO.ACTIVITES`) :
+  musée/bibliothèque/théâtre/cinéma (culture), stade/parc (loisir), usine/bureau.
+- **Consommer en France** (`consommer`, `GEO.CONSOMMER`) : eau (rivières, nappes,
+  château d'eau, traitement), énergie (éolienne), alimentation (champ/élevage,
+  circuit court).
+- **La France : fleuves et reliefs** (`france_reperes`, `GEO.FRANCE`) : Seine,
+  Loire, Rhône, Garonne, Rhin ; Alpes, Pyrénées, Massif central ; Atlantique,
+  Manche, Méditerranée.
+- **Paysages et milieux** (`paysages`, `GEO.PAYSAGES`) : forêt, bord de mer,
+  montagne, ville, campagne.
+
+**Statut des « régions ».** Le découpage administratif (régions) n'est pas une
+leçon dédiée du CM1 : il est transversal au cycle 3. On en reste à la
+localisation (situer son lieu de vie, les grands repères). **Carte interactive
+Natural Earth (SVG « clic ») : évolution UI différée** (un sous-lot dédié, pour
+garantir une cartographie vérifiée) ; le contenu actuel localise fleuves et
+reliefs par QCM / tri / saisie. Garde-fou `bienveillance.test.ts` étendu à la
+banque `geographie`.
+
 # Règle de bienveillance (décision de Manu, absolue)
 
 **TOUS les contenus montrés à l'enfant doivent être OPTIMISTES et PLEINS DE
@@ -1217,8 +1251,9 @@ s'excuse quand on a blessé un ami), jamais une blessure physique.
 à chaque build :
 
 - côté frontend : `frontend/src/domain/bienveillance.test.ts` (banques statiques
-  lecture / QM / EMC / sciences / histoire / grammaire / vocabulaire / données /
-  géométrie, indices, messages de correction, et énoncés de maths GÉNÉRÉS) ;
+  lecture / QM / EMC / sciences / histoire / géographie / grammaire / vocabulaire
+  / données / géométrie, indices, messages de correction, et énoncés de maths
+  GÉNÉRÉS) ;
 - côté serveur : `supabase/tests/bienveillance_test.sql` (textes de la dictée
   détective et réponses attendues de référence).
 

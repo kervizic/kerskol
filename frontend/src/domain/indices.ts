@@ -290,6 +290,20 @@ export const INDICES: Record<string, string> = {
     "Clovis a été baptisé à Reims. Charlemagne, couronné en l'an 800, aimait les écoles. Range les rois dans l'ordre du temps.",
   "HIST.FRISE":
     "La frise range les événements dans le temps. Un siècle, c'est cent ans. En chiffres romains, V vaut 5 et X vaut 10.",
+
+  // --- Géographie (indices aux niveaux 1 et 2 seulement) --------------------
+  "GEO.REPERES":
+    "Sur une carte, le nord est souvent en haut. La légende, c'est le petit cadre qui explique les couleurs et les dessins.",
+  "GEO.HABITER":
+    "En ville, beaucoup d'immeubles et de magasins. À la campagne, des champs et des fermes. Une très grande ville est une métropole.",
+  "GEO.ACTIVITES":
+    "Pense aux lieux : le musée et la bibliothèque pour la culture, le stade et le parc pour les loisirs, l'usine pour le travail.",
+  "GEO.CONSOMMER":
+    "L'eau du robinet vient des rivières, puis elle est rendue propre. Le vent fait tourner les éoliennes pour l'électricité.",
+  "GEO.FRANCE":
+    "La Seine traverse Paris. Les Alpes sont les plus hautes montagnes. L'océan Atlantique borde la France à l'ouest.",
+  "GEO.PAYSAGES":
+    "Regarde ce qu'il y a dans le paysage : des arbres serrés, c'est une forêt ; du sable et des vagues, c'est le bord de mer.",
 };
 
 // Indice d'une competence, UNIQUEMENT aux niveaux 1 et 2 (sinon null : plus
