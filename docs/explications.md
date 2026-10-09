@@ -1450,6 +1450,21 @@ classe **CM1** (cœur). Capture Playwright vérifiée (angles). **Reste mesures*
 l'**aire par comptage de carreaux** (figure quadrillée) et les **angles avec
 figure** (reconnaissance visuelle) demandent une nouvelle figure.
 
+## Livré : « Opérations » partie 1 (migration 0076, lot 3)
+
+Réutilisation des moteurs existants, **aucune nouvelle UI** :
+- **MA.POSE.MULT2** (domaine `calcul_pose`, portée CM1..CM2) - **multiplication
+  posée à 2 chiffres** : moteur `pose` (`buildPose`), op `mul` (serveur recalcule
+  a × b, bornes `MA.POSE.%` ≤ 10000 → 99 × 99 = 9801).
+- **MA.DEC.ADDITION** / **MA.DEC.SOUSTRACTION** (domaine `decimaux`) - **addition
+  et soustraction de décimaux** : saisie `<DecimalInput>` (centièmes entiers),
+  op `add` / `sub` (serveur recalcule ; soustraction générée avec a ≥ b).
+
+`verif_calcul` étendu (MULT2 = mul ; ADDITION = add ; SOUSTRACTION = sub, placées
+**avant** le générique `MA.DEC.%`). Plan de classe **CM1** (cœur). Golden
+`decimaux.test.ts` (20 sources, ops val/add/sub, `computeVerif == answer`).
+Capture Playwright vérifiée (addition décimale).
+
 ## Reste à livrer pour le CM1 (maths)
 
 Chaque point suit le même patron (nouvelle compétence `classe_min = 'CM1'`,
@@ -1457,9 +1472,8 @@ banque `ex_calcul`, extension de `verif_calcul` ou nouveau juge, plan de classe,
 tests golden) :
 - **Nombres décimaux** : compléter avec la **droite graduée** décimale et le
   **rangement** de plusieurs décimaux (saisies/figures supplémentaires).
-- **Quatre opérations** dont **division posée** (diviseur à 1 puis 2 chiffres) :
-  étendre le moteur `MA.POSE.*`.
-- **Calcul mental et en ligne** CM1 (grands nombres, multiples).
+- **Division posée** (potence, diviseur à 1 puis 2 chiffres) : **nouvelle UI**
+  (disposition de la division) ; **calcul mental CM1** (grands nombres, multiples).
 - **Grandeurs et mesures** : aire par **comptage de carreaux** et angles **avec
   figure** (reconnaissance visuelle) — nécessitent une figure quadrillée/angle.
 - **Espace et géométrie** : perpendiculaires, parallèles, cercle, programme de

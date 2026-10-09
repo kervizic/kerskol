@@ -60,6 +60,32 @@ export function buildDecimal(src: ExCalcul, rng: Rng, base: Base): GeneratedExer
     correction,
   });
 
+  // --- ADDITION / SOUSTRACTION de decimaux (lot 3) : saisie <DecimalInput>,
+  //     op 'add'/'sub' sur les CENTIEMES (le serveur recalcule). ------------
+  if (src.competence === "MA.DEC.ADDITION" || src.competence === "MA.DEC.SOUSTRACTION") {
+    const randCent = () => intBetween(rng, 1, maxE) * 100 + intBetween(rng, 1, 99);
+    if (src.competence === "MA.DEC.ADDITION") {
+      const x = randCent();
+      const y = randCent();
+      return {
+        ...base, saisie: "decimal", reste: null, fields: 1,
+        prompt: `Calcule : ${fmtDecimal(x)} + ${fmtDecimal(y)}`,
+        answer: x + y, verif: { op: "add", a: x, b: y },
+        correction: `On aligne les virgules et on additionne : ${fmtDecimal(x)} plus ${fmtDecimal(y)} font ${fmtDecimal(x + y)}.`,
+      };
+    }
+    // soustraction : x >= y
+    let x = randCent();
+    let y = randCent();
+    if (y > x) { const t = x; x = y; y = t; }
+    return {
+      ...base, saisie: "decimal", reste: null, fields: 1,
+      prompt: `Calcule : ${fmtDecimal(x)} − ${fmtDecimal(y)}`,
+      answer: x - y, verif: { op: "sub", a: x, b: y },
+      correction: `On aligne les virgules et on soustrait : ${fmtDecimal(x)} moins ${fmtDecimal(y)} font ${fmtDecimal(x - y)}.`,
+    };
+  }
+
   // --- ECRIRE : unites + centiemes ---------------------------------------
   if (type === "ecrire_centiemes") {
     const e = intBetween(rng, 1, maxE);

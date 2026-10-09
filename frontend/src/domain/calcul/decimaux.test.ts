@@ -6,7 +6,7 @@
 
 import { describe, it, expect } from "vitest";
 import { fmtDecimal, decimalToCentiemes } from "./decimaux";
-import { generateExercise } from "./generator";
+import { generateExercise, computeVerif } from "./generator";
 import { SEED_SOURCES } from "./seedSources";
 
 const DEC_SOURCES = SEED_SOURCES.filter((s) => s.competence.startsWith("MA.DEC."));
@@ -43,18 +43,18 @@ describe("decimaux : formatage et encodage", () => {
 });
 
 describe("decimaux : generateur (buildDecimal sur les sources reelles)", () => {
-  it("12 sources DEC (3 competences x 4 niveaux)", () => {
-    expect(DEC_SOURCES.length).toBe(12);
+  it("20 sources DEC (5 competences x 4 niveaux : ecrire/comparer/encadrer + add/sub)", () => {
+    expect(DEC_SOURCES.length).toBe(20);
   });
 
-  it("exercice coherent : saisie decimal, op val, reponse encodee et bornee", () => {
+  it("exercice coherent : saisie decimal, op val/add/sub, serveur reproduit la reponse", () => {
     for (const src of DEC_SOURCES) {
       for (const seed of [1, 2, 3, 42, 777, 12345]) {
         const ex = generateExercise(src, seed);
         expect(ex.saisie, `${src.competence} N${src.niveau}`).toBe("decimal");
-        expect(ex.verif.op).toBe("val");
-        expect(ex.verif.b).toBe(0);
-        expect(ex.answer).toBe(ex.verif.a);
+        expect(["val", "add", "sub"]).toContain(ex.verif.op);
+        // Le serveur (computeVerif = miroir de verif_calcul) reproduit la reponse.
+        expect(computeVerif(ex.verif).answer, `${src.competence} N${src.niveau}`).toBe(ex.answer);
         expect(ex.answer).toBeGreaterThanOrEqual(0);
         expect(ex.answer).toBeLessThanOrEqual(100000);
         expect(ex.prompt.trim().length).toBeGreaterThan(0);

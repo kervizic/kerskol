@@ -80,6 +80,13 @@ export const STORIES: Story[] = [
     ) },
   { id: "proportionnalite-table", label: "Proportionnalité — tableau à compléter (lot 4)",
     node: <Donnees item={propCourses} onSoumettre={noopSubmit} onContinuer={noop} /> },
+  { id: "decimal-addition", label: "Opérations — addition de décimaux (lot 3)",
+    node: (
+      <div className="kk-stack" style={{ textAlign: "center" }}>
+        <p className="kk-lead" style={{ margin: "0 auto 8px" }}>Calcule : 3,25 + 1,50</p>
+        <DecimalInput onCode={noop} />
+      </div>
+    ) },
   { id: "angles-qcm", label: "Mesures — angles (QCM, lot 5)",
     node: <Donnees item={{
       cle: "ang-n2-a", format: "qcm",

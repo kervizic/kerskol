@@ -106,6 +106,12 @@ const POSE: Row[] = [
   ["MA.POSE.MULTIPLICATION", 2, "mul", "pose", "exemples_estompes", "aucun", "multiplication_posee", { min: 11, max: 99, bmin: 2, bmax: 9 }],
   ["MA.POSE.MULTIPLICATION", 3, "mul", "pose", "variation", "aucun", "multiplication_posee", { min: 100, max: 999, bmin: 2, bmax: 9 }],
   ["MA.POSE.MULTIPLICATION", 4, "mul", "pose", "probleme_dabord", "aucun", "multiplication_posee", { min: 100, max: 999, bmin: 2, bmax: 9 }],
+
+  // Lot 3 : multiplication posee a 2 chiffres (CM1). Reutilise le moteur pose.
+  ["MA.POSE.MULT2", 1, "mul", "pose", "cpa_barres", "aucun", "multiplication_posee", { min: 11, max: 25, bmin: 11, bmax: 20 }],
+  ["MA.POSE.MULT2", 2, "mul", "pose", "exemples_estompes", "aucun", "multiplication_posee", { min: 11, max: 49, bmin: 11, bmax: 29 }],
+  ["MA.POSE.MULT2", 3, "mul", "pose", "variation", "aucun", "multiplication_posee", { min: 12, max: 99, bmin: 11, bmax: 49 }],
+  ["MA.POSE.MULT2", 4, "mul", "pose", "probleme_dabord", "aucun", "multiplication_posee", { min: 12, max: 99, bmin: 12, bmax: 99 }],
 ];
 
 // --- Problemes (domaine problemes) : mascotte, monnaie, deux etapes ---
@@ -234,6 +240,17 @@ const DEC: Row[] = [
   ["MA.DEC.ENCADRER", 2, "decimal", "decimal", "exemples_estompes", "aucun", "encadrer_decimal", { types: ["encadrer_avant", "encadrer_apres"], maxE: 9 }],
   ["MA.DEC.ENCADRER", 3, "decimal", "decimal", "variation", "aucun", "encadrer_decimal", { types: ["encadrer_avant", "encadrer_apres"], maxE: 20 }],
   ["MA.DEC.ENCADRER", 4, "decimal", "decimal", "probleme_dabord", "aucun", "encadrer_decimal", { types: ["encadrer_avant", "encadrer_apres"], maxE: 99 }],
+
+  // Lot 3 : addition / soustraction de decimaux (saisie <DecimalInput>, op add/sub).
+  ["MA.DEC.ADDITION", 1, "add", "decimal", "cpa_barres", "aucun", "addition_decimale", { maxE: 5 }],
+  ["MA.DEC.ADDITION", 2, "add", "decimal", "exemples_estompes", "aucun", "addition_decimale", { maxE: 9 }],
+  ["MA.DEC.ADDITION", 3, "add", "decimal", "variation", "aucun", "addition_decimale", { maxE: 20 }],
+  ["MA.DEC.ADDITION", 4, "add", "decimal", "probleme_dabord", "aucun", "addition_decimale", { maxE: 50 }],
+
+  ["MA.DEC.SOUSTRACTION", 1, "sub", "decimal", "cpa_barres", "aucun", "soustraction_decimale", { maxE: 5 }],
+  ["MA.DEC.SOUSTRACTION", 2, "sub", "decimal", "exemples_estompes", "aucun", "soustraction_decimale", { maxE: 9 }],
+  ["MA.DEC.SOUSTRACTION", 3, "sub", "decimal", "variation", "aucun", "soustraction_decimale", { maxE: 20 }],
+  ["MA.DEC.SOUSTRACTION", 4, "sub", "decimal", "probleme_dabord", "aucun", "soustraction_decimale", { maxE: 50 }],
 ];
 
 const TABLE_STRATS: Record<number, string> = {

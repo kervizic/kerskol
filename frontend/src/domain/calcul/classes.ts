@@ -71,6 +71,9 @@ const CM1: ClassPlan = {
     "MA.MES.AIRE": 1,
     "MA.MES.DUREES": 1,
     "MA.DONNEES.ANGLES": 1,
+    "MA.DEC.ADDITION": 1,
+    "MA.DEC.SOUSTRACTION": 1,
+    "MA.POSE.MULT2": 1,
   },
 };
 
