@@ -58,9 +58,9 @@ export const BANQUE_GEOGRAPHIE: QmItem[] = [
     attendu: "céréales",
     explication: "Les céréales sont cultivées partout sur la planète pour nourrir les humains et les animaux." },
   { cle: "ge-nou-n4-b", competence: "GEO.NOURRIR", niveau: 4, format: "texte",
-    consigne: "Quand, dans une région, beaucoup de personnes manquent gravement de nourriture pendant longtemps, on parle d'une... Écris le mot.",
-    attendu: "famine",
-    explication: "Une famine, c'est un grave manque de nourriture pour beaucoup de gens. Des régions du monde en souffrent encore aujourd'hui." },
+    consigne: "Quand une personne ne mange pas assez pour être en bonne santé, elle souffre de... Écris le mot (deux mots reliés par un tiret).",
+    attendu: "sous-alimentation",
+    explication: "La sous-alimentation, c'est ne pas manger assez pour être en bonne santé. Elle touche encore des millions de personnes dans le monde." },
 
   // ===== GEO.INEGALITES - les inegalites dans le monde =====
   { cle: "ge-ine-n1-a", competence: "GEO.INEGALITES", niveau: 1, format: "qcm",

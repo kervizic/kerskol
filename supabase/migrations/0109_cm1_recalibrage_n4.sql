@@ -17,7 +17,7 @@
 -- reference de correction change (verif_qm comparera desormais au nouvel attendu).
 
 UPDATE public.qm_item SET attendu = 'ordres'        WHERE cle = 'hi-nar-n4-b';
-UPDATE public.qm_item SET attendu = 'famine'        WHERE cle = 'ge-nou-n4-b';
+UPDATE public.qm_item SET attendu = 'sous-alimentation' WHERE cle = 'ge-nou-n4-b';
 UPDATE public.qm_item SET attendu = 'données'       WHERE cle = 'ge-com-n4-b';
 UPDATE public.qm_item SET attendu = 'photosynthèse' WHERE cle = 'st-eco-n4-b';
 UPDATE public.qm_item SET attendu = 'rotation'      WHERE cle = 'st-ter-n4-b';
