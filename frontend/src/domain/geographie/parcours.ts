@@ -19,6 +19,7 @@
 import type { QmItem, QmScene } from "../qm/types";
 import { comparerQm } from "../qm/types";
 import type { ParcoursChapitre } from "../histoire/parcours";
+export type { ParcoursChapitre };
 
 // --------------------------------------------------------------------------
 // Planisphère schématique (fait maison) : 5 continents dessinés par des blobs
