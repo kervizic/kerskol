@@ -25,9 +25,12 @@ BEGIN
         IF NOT EXISTS (SELECT 1 FROM public.competences WHERE code = r.code AND actif) THEN
             RAISE EXCEPTION 'competence active attendue manquante : %', r.code;
         END IF;
-        -- 8 items par competence active, couverture des 4 niveaux.
+        -- AU MOINS 8 items par competence active (les 8 items d'entrainement libre
+        -- de 0103), couverture des 4 niveaux. Depuis 0107, le Parcours d'Histoire
+        -- AJOUTE des items (cles « pa-* ») aux memes competences : le total peut
+        -- donc depasser 8. On verifie la presence du socle, pas un total exact.
         SELECT count(*) INTO n FROM public.qm_item WHERE competence = r.code;
-        IF n <> 8 THEN RAISE EXCEPTION 'qm_item : 8 items attendus pour %, obtenu %', r.code, n; END IF;
+        IF n < 8 THEN RAISE EXCEPTION 'qm_item : au moins 8 items attendus pour %, obtenu %', r.code, n; END IF;
         FOR n IN 1..4 LOOP
             IF NOT EXISTS (SELECT 1 FROM public.qm_item WHERE competence = r.code AND niveau = n) THEN
                 RAISE EXCEPTION 'qm_item : aucun item pour % N%', r.code, n;
