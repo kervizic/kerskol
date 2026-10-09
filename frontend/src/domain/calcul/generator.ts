@@ -21,6 +21,7 @@ import { buildProbleme } from "./problemes";
 import { buildMesure } from "./measures";
 import { buildFraction } from "./fractions";
 import { buildDecimal } from "./decimaux";
+import { buildGrandeurs } from "./grandeurs";
 import { enLettresFr } from "../diagnostic/lettres";
 import { buildFrancaisConjugaison, buildFrancaisDictee, buildFrancaisPasseCompose, buildFrancaisGrammaire, buildFrancaisLexique, buildMaitresse } from "../francais/generator";
 import { buildGeometrie } from "../geometrie/geometrie";
@@ -719,6 +720,10 @@ function buildExercise(
   // --- Problemes (mascotte, monnaie, deux etapes) -----------------------
   if (src.competence.startsWith("MA.PB.")) {
     return buildProbleme(src, rng, base, opts.ctx);
+  }
+  // --- Grandeurs CM1 : perimetre et aire (rectangle / carre) ------------
+  if (src.competence === "MA.MES.PERIMETRE" || src.competence === "MA.MES.AIRE") {
+    return buildGrandeurs(src, rng, base);
   }
   // --- Mesures (heure, durees, longueurs, masses, contenances) ----------
   if (src.competence.startsWith("MA.MES.")) {

@@ -67,6 +67,10 @@ const CM1: ClassPlan = {
     "MA.DEC.ENCADRER": 1,
     "MA.DONNEES.PROP_RECETTE": 1,
     "MA.DONNEES.PROP_COURSES": 1,
+    "MA.MES.PERIMETRE": 1,
+    "MA.MES.AIRE": 1,
+    "MA.MES.DUREES": 1,
+    "MA.DONNEES.ANGLES": 1,
   },
 };
 

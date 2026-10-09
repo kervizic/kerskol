@@ -1431,6 +1431,25 @@ maison » :
 QCM aux niveaux faciles, réponse libre au N4. 16 items miroir front ↔ SQL (golden
 72), plan de classe **CM1** (cœur). Capture Playwright vérifiée (390/820 px).
 
+## Livré : « Grandeurs et mesures » (migration 0075, lot 5)
+
+Réutilisation des moteurs existants, **aucune nouvelle UI** :
+- **MA.MES.PERIMETRE** / **MA.MES.AIRE** (domaine `mesures`, portée CM1..CM2) -
+  périmètre et aire d'un **carré / rectangle** par les **formules**, énoncé
+  texte (dimensions données), saisie au **pavé clavier**. Aire → op `mul` (le
+  serveur recalcule L × l) ; périmètre → op `val` (valeur cible encodée, car
+  2×(L+l) n'est pas un produit en une opération). Génération `buildGrandeurs`,
+  miroir `seedSources.ts` (bloc GRANDEURS).
+- **MA.DONNEES.ANGLES** (domaine `mesures`) - vocabulaire **droit / aigu /
+  obtus** via le moteur `donnees` (QCM, figure « none »). 8 items (golden donnees
+  = 80).
+- **Durées** : `MA.MES.DUREES` **élargie** à CM1..CM2 (réutilisation).
+
+`verif_calcul` étendu (MA.MES.PERIMETRE = val/mul ; MA.MES.AIRE = mul). Plan de
+classe **CM1** (cœur). Capture Playwright vérifiée (angles). **Reste mesures** :
+l'**aire par comptage de carreaux** (figure quadrillée) et les **angles avec
+figure** (reconnaissance visuelle) demandent une nouvelle figure.
+
 ## Reste à livrer pour le CM1 (maths)
 
 Chaque point suit le même patron (nouvelle compétence `classe_min = 'CM1'`,
@@ -1441,8 +1460,8 @@ tests golden) :
 - **Quatre opérations** dont **division posée** (diviseur à 1 puis 2 chiffres) :
   étendre le moteur `MA.POSE.*`.
 - **Calcul mental et en ligne** CM1 (grands nombres, multiples).
-- **Grandeurs et mesures** : périmètre, aire (comptage puis formules
-  carré/rectangle), durées, angles (droit/aigu/obtus).
+- **Grandeurs et mesures** : aire par **comptage de carreaux** et angles **avec
+  figure** (reconnaissance visuelle) — nécessitent une figure quadrillée/angle.
 - **Espace et géométrie** : perpendiculaires, parallèles, cercle, programme de
   construction, symétrie axiale (réutiliser règle/équerre/compas existants).
 - **Boucles de programmation** (« répète 3 fois ») : éditeur de boucle (UI) pour

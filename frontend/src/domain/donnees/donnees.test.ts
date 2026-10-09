@@ -1,6 +1,6 @@
 // Tests de la banque « Tableaux et graphiques » (maths, CE2) et du generateur.
 //
-// Le nombre d'items (72) et les cles sont un GOLDEN : le test croise SQL
+// Le nombre d'items (80) et les cles sont un GOLDEN : le test croise SQL
 // (supabase/tests/donnees_test.sql) verifie que public.donnees_item porte
 // EXACTEMENT les memes cles et le meme `attendu`. Si ce nombre change, il faut
 // mettre a jour la migration ET le test SQL (sinon front != serveur).
@@ -17,7 +17,7 @@ import {
 import { generateExercise } from "../calcul/generator";
 import type { ExCalcul } from "../calcul/generator";
 
-const NB_ITEMS_GOLDEN = 72;
+const NB_ITEMS_GOLDEN = 80;
 
 function source(competence: string, niveau: number): ExCalcul {
   return {

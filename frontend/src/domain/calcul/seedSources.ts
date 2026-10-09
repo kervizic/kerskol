@@ -168,6 +168,20 @@ const MES: Row[] = [
   ["MA.MES.MASSES_CONTENANCES", 4, "masse", "mesure", "probleme_dabord", "aucun", "lire_balance_verre", { types: ["lecture"], lecture: ["balance", "verre"] }],
 ];
 
+// --- Grandeurs CM1 : perimetre et aire (carre / rectangle). Saisie clavier ;
+//     AIRE -> op 'mul' (serveur recalcule) ; PERIMETRE -> op 'val'. ---
+const GRANDEURS: Row[] = [
+  ["MA.MES.PERIMETRE", 1, "mul", "mesure", "cpa_barres", "aucun", "perimetre", { types: ["carre"], min: 2, max: 9 }],
+  ["MA.MES.PERIMETRE", 2, "mul", "mesure", "exemples_estompes", "aucun", "perimetre", { types: ["carre", "rectangle"], min: 2, max: 12 }],
+  ["MA.MES.PERIMETRE", 3, "mul", "mesure", "variation", "aucun", "perimetre", { types: ["rectangle"], min: 3, max: 20 }],
+  ["MA.MES.PERIMETRE", 4, "mul", "mesure", "probleme_dabord", "aucun", "perimetre", { types: ["rectangle", "carre"], min: 5, max: 40 }],
+
+  ["MA.MES.AIRE", 1, "mul", "mesure", "cpa_barres", "aucun", "aire", { types: ["carre"], min: 2, max: 6 }],
+  ["MA.MES.AIRE", 2, "mul", "mesure", "exemples_estompes", "aucun", "aire", { types: ["carre", "rectangle"], min: 2, max: 9 }],
+  ["MA.MES.AIRE", 3, "mul", "mesure", "variation", "aucun", "aire", { types: ["rectangle"], min: 2, max: 12 }],
+  ["MA.MES.AIRE", 4, "mul", "mesure", "probleme_dabord", "aucun", "aire", { types: ["rectangle", "carre"], min: 3, max: 15 }],
+];
+
 // --- Fractions simples (domaine fractions) ---
 const FRAC: Row[] = [
   ["MA.FRAC.SIMPLES", 1, "fraction", "fraction", "cpa_barres", "aucun", "nommer_fraction", { types: ["nommer"], dens: [2, 3, 4] }],
@@ -267,4 +281,4 @@ function toSource(r: Row): ExCalcul {
   };
 }
 
-export const SEED_SOURCES: ExCalcul[] = [...CM, ...tableRows(), ...NUM, ...POSE, ...PB, ...PBM, ...MES, ...FRAC, ...DEC].map(toSource);
+export const SEED_SOURCES: ExCalcul[] = [...CM, ...tableRows(), ...NUM, ...POSE, ...PB, ...PBM, ...MES, ...GRANDEURS, ...FRAC, ...DEC].map(toSource);

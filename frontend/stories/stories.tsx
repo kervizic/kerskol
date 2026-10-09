@@ -80,4 +80,12 @@ export const STORIES: Story[] = [
     ) },
   { id: "proportionnalite-table", label: "Proportionnalité — tableau à compléter (lot 4)",
     node: <Donnees item={propCourses} onSoumettre={noopSubmit} onContinuer={noop} /> },
+  { id: "angles-qcm", label: "Mesures — angles (QCM, lot 5)",
+    node: <Donnees item={{
+      cle: "ang-n2-a", format: "qcm",
+      consigne: "Comment s'appelle un angle plus grand qu'un angle droit ?",
+      options: ["obtus", "aigu", "droit"], attendu: "obtus",
+      explication: "Un angle plus grand qu'un angle droit est un angle obtus. Obtus, c'est bien ouvert.",
+      figure: { kind: "none" },
+    }} onSoumettre={noopSubmit} onContinuer={noop} /> },
 ];

@@ -565,6 +565,53 @@ export const BANQUE_DONNEES: DonItem[] = [
     attendu: "10",
     figure: table(["4 yaourts", "20 yaourts"], [["Prix en euros", "2", "?"]]),
     explication: "20 yaourts, c'est 5 fois plus que 4 yaourts. Le prix est 5 fois plus grand : 5 fois 2 font 10 euros." },
+
+  // =======================================================================
+  // LOT 5 (CM1) — ANGLES (vocabulaire : droit, aigu, obtus). Sous-matiere
+  // « mesures » (domaine mesures cote serveur). On REUTILISE le moteur donnees
+  // (op 'don', QCM, figure « none » : la situation est décrite à l'oral, zéro
+  // dessin). QCM aux niveaux faciles, réponse libre au N4.
+  // =======================================================================
+  { cle: "ang-n1-a", competence: "MA.DONNEES.ANGLES", niveau: 1, format: "qcm",
+    consigne: "Comment s'appelle l'angle qui a la forme du coin d'une feuille bien carrée ?",
+    options: ["droit", "aigu", "obtus"], attendu: "droit",
+    figure: { kind: "none" },
+    explication: "Le coin d'une feuille forme un angle droit. On le vérifie avec l'équerre." },
+  { cle: "ang-n1-b", competence: "MA.DONNEES.ANGLES", niveau: 1, format: "qcm",
+    consigne: "Comment s'appelle un angle plus petit qu'un angle droit ?",
+    options: ["aigu", "droit", "obtus"], attendu: "aigu",
+    figure: { kind: "none" },
+    explication: "Un angle plus petit qu'un angle droit est un angle aigu. Aigu, c'est pointu." },
+  { cle: "ang-n2-a", competence: "MA.DONNEES.ANGLES", niveau: 2, format: "qcm",
+    consigne: "Comment s'appelle un angle plus grand qu'un angle droit ?",
+    options: ["obtus", "aigu", "droit"], attendu: "obtus",
+    figure: { kind: "none" },
+    explication: "Un angle plus grand qu'un angle droit est un angle obtus. Obtus, c'est bien ouvert." },
+  { cle: "ang-n2-b", competence: "MA.DONNEES.ANGLES", niveau: 2, format: "qcm",
+    consigne: "Le coin d'une porte, bien carré, forme quel type d'angle ?",
+    options: ["droit", "aigu", "obtus"], attendu: "droit",
+    figure: { kind: "none" },
+    explication: "Le coin d'une porte forme un angle droit, comme l'équerre." },
+  { cle: "ang-n3-a", competence: "MA.DONNEES.ANGLES", niveau: 3, format: "qcm",
+    consigne: "Un angle très pointu et bien fermé, c'est quel type d'angle ?",
+    options: ["aigu", "droit", "obtus"], attendu: "aigu",
+    figure: { kind: "none" },
+    explication: "Un angle très pointu, plus petit que l'angle droit, est un angle aigu." },
+  { cle: "ang-n3-b", competence: "MA.DONNEES.ANGLES", niveau: 3, format: "qcm",
+    consigne: "Un angle très ouvert, presque plat, c'est quel type d'angle ?",
+    options: ["obtus", "droit", "aigu"], attendu: "obtus",
+    figure: { kind: "none" },
+    explication: "Un angle très ouvert, plus grand que l'angle droit, est un angle obtus." },
+  { cle: "ang-n4-a", competence: "MA.DONNEES.ANGLES", niveau: 4, format: "texte",
+    consigne: "Un angle qui a exactement la forme du coin de l'équerre. Écris son nom en un mot : droit, aigu ou obtus.",
+    attendu: "droit",
+    figure: { kind: "none" },
+    explication: "C'est un angle droit : on le vérifie avec l'équerre." },
+  { cle: "ang-n4-b", competence: "MA.DONNEES.ANGLES", niveau: 4, format: "texte",
+    consigne: "Un angle plus petit que l'angle droit. Écris son nom en un mot : droit, aigu ou obtus.",
+    attendu: "aigu",
+    figure: { kind: "none" },
+    explication: "Un angle plus petit que l'angle droit est un angle aigu." },
 ];
 
 // Competences de la sous-matiere (ordre d'affichage = ordre du referentiel).
@@ -578,6 +625,7 @@ export const COMPETENCES_DONNEES = [
   "MA.DONNEES.HASARD",
   "MA.DONNEES.PROP_RECETTE",
   "MA.DONNEES.PROP_COURSES",
+  "MA.DONNEES.ANGLES",
 ] as const;
 
 // Items jouables pour une competence et un niveau donnes.
