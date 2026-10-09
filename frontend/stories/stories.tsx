@@ -13,6 +13,8 @@ import DecimalInput from "../src/components/DecimalInput";
 import Grammaire from "../src/components/Grammaire";
 import type { DonRender } from "../src/domain/donnees/donnees";
 import type { GramRender } from "../src/domain/francais/grammaire";
+import { generateExercise } from "../src/domain/calcul/generator";
+import type { ExCalcul, GeneratedExercise } from "../src/domain/calcul/generator";
 
 export interface Story {
   id: string; // identifiant stable -> nom de fichier PNG
@@ -22,6 +24,55 @@ export interface Story {
 
 const noop = () => {};
 const noopSubmit = async () => null;
+
+// --- Conjugaison CM1 (lot 1) : revue visuelle du rendu « phrase a completer »
+// pour le passe simple et l'imperatif. On rend le VRAI conjPhrase genere
+// (meme balisage que ConjugaisonView de Session.tsx) + les gros boutons QCM,
+// pour verifier la mise en page, le repere et les cibles tactiles (>= 44 px).
+function srcConj(competence: string, niveau: number): ExCalcul {
+  return {
+    exerciceId: "ex", competence, niveau, methode: null, operation: "conj",
+    forme: "conjugaison", params: {}, support: "aucun", correctionStrategie: null,
+  };
+}
+// Choisit un exercice correspondant a un predicat (verbe/personne lisibles).
+function pickConj(competence: string, niveau: number, pred: (e: GeneratedExercise) => boolean): GeneratedExercise {
+  for (let i = 1; i <= 300; i++) {
+    const e = generateExercise(srcConj(competence, niveau), i * 2654435761);
+    if (pred(e)) return e;
+  }
+  return generateExercise(srcConj(competence, niveau), 2654435761);
+}
+function ConjPhraseStory({ ex }: { ex: GeneratedExercise }) {
+  const p = ex.conjPhrase!;
+  return (
+    <div className="kk-conj">
+      <h2 className="kk-consigne">{p.consigne}</h2>
+      {p.repere && <p className="kk-repere">{p.repere}</p>}
+      <p className="kk-phrase" aria-label={p.complete}>
+        {p.prefixe}
+        <span className="kk-sujet">{p.sujet}</span>
+        {p.colle ? "" : " "}
+        <span className="kk-answer__box kk-conj__box" aria-label="la case à compléter">?</span>
+        {" "}
+        {p.suite}
+        {p.apres}
+      </p>
+      {ex.optionsTexte && (
+        <div className="kk-qcm">
+          {ex.optionsTexte.map((o, i) => (
+            <button key={i} type="button" className="kk-btn kk-qcm__opt">{o}</button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+// Passe simple N3 (il/ils, repere « Il y a longtemps, », melange des temps).
+const exPasseSimple = pickConj("FR.CONJ.PASSE_SIMPLE", 3, (e) => e.conj?.personne === 3);
+// Imperatif N2, 2e personne (tu) d'un verbe en -er : piege « pas de s ».
+const exImperatif = pickConj("FR.CONJ.IMPERATIF", 2, (e) =>
+  e.conj?.personne === 2 && ["chanter", "jouer", "aimer", "regarder", "donner", "trouver", "parler"].includes(e.conj.verbe));
 
 const hasard: DonRender = {
   cle: "has-n1-a",
@@ -125,6 +176,10 @@ export const STORIES: Story[] = [
       explication: "Un angle plus grand qu'un angle droit est un angle obtus. Obtus, c'est bien ouvert.",
       figure: { kind: "none" },
     }} onSoumettre={noopSubmit} onContinuer={noop} /> },
+  { id: "conj-passe-simple", label: "Conjugaison — passé simple N3 (il/ils, lot 1)",
+    node: <ConjPhraseStory ex={exPasseSimple} /> },
+  { id: "conj-imperatif", label: "Conjugaison — impératif N2 « tu » sans s (lot 1)",
+    node: <ConjPhraseStory ex={exImperatif} /> },
   { id: "droites-qcm", label: "Géométrie — perpendiculaires / parallèles (QCM, lot 6)",
     node: <Donnees item={{
       cle: "dro-n1-a", format: "qcm",
