@@ -1431,6 +1431,43 @@ maison » :
 QCM aux niveaux faciles, réponse libre au N4. 16 items miroir front ↔ SQL (golden
 72), plan de classe **CM1** (cœur). Capture Playwright vérifiée (390/820 px).
 
+## Recalibré : niveaux CM1 (lot A, migrations 0078 et 0079)
+
+Correction d'un **étagement plat** signalé sur trois sous-matières CM1 : le N4
+n'était pas plus exigeant que le N1 (même famille d'erreur à chaque fois).
+
+- **Proportionnalité** (`PROP_RECETTE` / `PROP_COURSES`, migration 0078) : avant,
+  on **multipliait la quantité par un coefficient entier à chaque niveau**
+  (N1 « 3 pommes = 6 € → 6 pommes ? » et N4 « 2 gâteaux = 6 œufs → 8 gâteaux ? »
+  avaient la même difficulté). Désormais : **N1 doublement** (×2) ; **N2
+  coefficient entier** (×3, ×4) ; **N3 passage par l'unité** (cible qui n'est
+  pas un multiple de la donnée → coefficient de colonne non entier, ex. 3 verres
+  → 5 verres) ; **N4 tableau à 3 colonnes** + passage par l'unité pour une cible
+  multiple d'aucune colonne montrée (ex. 2 et 4 gâteaux connus → 7 gâteaux).
+  Capture Playwright vérifiée (tableau 3 colonnes + réponse libre).
+- **Décimaux COMPARER** (migration 0079) : les deux nombres partageaient
+  **toujours la même partie entière** (la comparaison portait sur deux nombres
+  0..99 à tous les niveaux, `maxE` cosmétique → N2 = N3 = N4). La difficulté
+  porte maintenant sur la **structure décimale** (`struct`) : **N1** parties
+  entières différentes ; **N2** dixièmes (même entier) ; **N3** longueurs
+  différentes (piège « 2,5 vs 2,45 ») ; **N4** piège du zéro (« 0,07 vs 0,7 »).
+- **Décimaux ENCADRER** (migration 0079) : « l'entier juste avant / juste après »
+  était une tâche constante (`maxE` cosmétique → N2 = N3 = N4). Désormais :
+  **N1** un chiffre après la virgule, **N2** centièmes + « juste après »,
+  **N3/N4** **encadrement au dixième** (ex. 3,47 entre 3,4 et 3,5).
+
+Migrations **additives et idempotentes** (UPDATE seulement : `donnees_item.attendu`
+pour 0078 ; `ex_calcul.params` pour 0079), **aucun changement de
+`domaines_actifs`**, golden inchangés (88 items `donnees`, 20 exercices `MA.DEC.%`).
+Front : `donnees.ts`, `decimaux.ts`, `seedSources.ts` ; goldens `donnees_test.sql`,
+`decimaux.test.ts`. Serveur seul juge inchangé.
+
+**Audit des autres sous-matières CM1 (0067-0077)** : GRANDS, les 4 FRAC, MULT2,
+PÉRIMÈTRE, ADDITION/SOUSTRACTION décimales ont un étagement **correct** (N1 déjà
+CM1, N4 nettement plus dur). ANGLES / DROITES (vocabulaire) sont **plats N1-N3**
+(seul le format QCM→libre monte) : leur vraie montée viendra des **versions avec
+figure** (lot B : comparer/toucher sur un dessin).
+
 ## Livré : « Grandeurs et mesures » (migration 0075, lot 5)
 
 Réutilisation des moteurs existants, **aucune nouvelle UI** :
