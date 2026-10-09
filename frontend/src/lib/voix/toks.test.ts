@@ -1,15 +1,26 @@
 import { describe, it, expect } from "vitest";
-import { readFileSync } from "node:fs";
-import { resolve } from "node:path";
+import { readFileSync, existsSync } from "node:fs";
+import { resolve, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 import { toks, mapperMots, spanPourToken, phrasesDepuisMots } from "./toks";
 
-// Jeu COMMUN avec Python (tools/tts/toks_fixture.json). Vitest tourne avec cwd =
-// frontend/ ; la fixture est a la racine du repo.
-const fixture: Array<{ t: string; toks: string[] }> = JSON.parse(
-  readFileSync(resolve(process.cwd(), "../tools/tts/toks_fixture.json"), "utf-8")
+// Jeu COMMUN avec Python (tools/tts/toks_fixture.json). On resout le chemin
+// RELATIVEMENT a ce fichier de test (et non au cwd), pour que la fixture soit
+// trouvee quel que soit le repertoire de lancement de Vitest.
+//   frontend/src/lib/voix/toks.test.ts -> ../../../../tools/tts (racine du repo)
+// Si la fixture n'est pas presente (ex. build isole du dossier frontend/, sans
+// le dossier tools/ de la racine), on SAUTE ce bloc de parite plutot que
+// d'echouer : les autres tests (mapperMots, phrasesDepuisMots) restent actifs.
+const fixturePath = resolve(
+  dirname(fileURLToPath(import.meta.url)),
+  "../../../../tools/tts/toks_fixture.json"
 );
+const fixtureDispo = existsSync(fixturePath);
+const fixture: Array<{ t: string; toks: string[] }> = fixtureDispo
+  ? JSON.parse(readFileSync(fixturePath, "utf-8"))
+  : [];
 
-describe("toks() TS == toks() Python (fixture commune)", () => {
+describe.skipIf(!fixtureDispo)("toks() TS == toks() Python (fixture commune)", () => {
   for (const cas of fixture) {
     it(`toks(${JSON.stringify(cas.t)})`, () => {
       expect(toks(cas.t)).toEqual(cas.toks);
