@@ -153,6 +153,12 @@ const PB: Row[] = [
   ["MA.PB.ADD_SUB", 3, "probleme", "probleme", "variation", "aucun", "schema_barres", { types: ["reunion", "ajout", "retrait", "de_plus", "de_moins"], mag: 1000 }],
   ["MA.PB.ADD_SUB", 4, "probleme", "probleme", "probleme_dabord", "aucun", "schema_barres", { types: ["etat_recu", "etat_don", "de_plus", "de_moins"], mag: 1000 }],
 
+  // CE1 dédié (migration 0123) : problèmes mult/div, tables 2 à 5 uniquement.
+  ["MA.PB.CE1_MULT_DIV", 1, "probleme", "probleme", "cpa_barres", "aucun", "schema_barres", { types: ["groupement", "partage"], tables: [2, 5], qmax: 6 }],
+  ["MA.PB.CE1_MULT_DIV", 2, "probleme", "probleme", "exemples_estompes", "aucun", "schema_barres", { types: ["groupement", "partage", "quotition"], tables: [2, 3, 4, 5], qmax: 8 }],
+  ["MA.PB.CE1_MULT_DIV", 3, "probleme", "probleme", "variation", "aucun", "schema_barres", { types: ["partage", "quotition", "groupement"], tables: [2, 3, 4, 5], qmax: 10 }],
+  ["MA.PB.CE1_MULT_DIV", 4, "probleme", "probleme", "probleme_dabord", "aucun", "schema_barres", { types: ["partage", "quotition", "fois_plus", "groupement"], tables: [2, 3, 4, 5], qmax: 10 }],
+
   ["MA.PB.MULT_DIV", 1, "probleme", "probleme", "cpa_barres", "aucun", "schema_barres", { types: ["groupement", "partage"], tables: [2, 3, 4, 5], qmax: 10 }],
   ["MA.PB.MULT_DIV", 2, "probleme", "probleme", "exemples_estompes", "aucun", "schema_barres", { types: ["groupement", "partage", "quotition"], tables: [2, 3, 4, 5], qmax: 10 }],
   ["MA.PB.MULT_DIV", 3, "probleme", "probleme", "variation", "aucun", "schema_barres", { types: ["partage", "quotition", "groupement", "fois_plus"], tables: [2, 3, 4, 5, 6, 7, 8, 9], qmax: 10 }],

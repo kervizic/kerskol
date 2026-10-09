@@ -45,6 +45,7 @@ const CE2: ClassPlan = {
     "MA.NUM.COMPARER": 1,
     "MA.POSE.ADDITION": 1,
     "MA.POSE.SOUSTRACTION": 1,
+    "MA.PB.MULT_DIV": 1,
   },
 };
 
@@ -125,6 +126,7 @@ const CE1: ClassPlan = {
     "MA.NUM.CE1_MILLE": 1,       // numeration <= 1000 (0121)
     "MA.POSE.CE1_ADDITION": 1,   // addition posee <= 1000 (0122)
     "MA.POSE.CE1_SOUSTRACTION": 1, // soustraction posee <= 1000 (0122)
+    "MA.PB.CE1_MULT_DIV": 1,     // problemes mult/div tables 2-5 (0123)
   },
 };
 

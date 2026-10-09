@@ -266,9 +266,17 @@ const BANK: Record<string, Gabarit[]> = {
   "MA.PB.MESURES": MESURES_BANK,
 };
 
+// Les compétences CE1 DÉDIÉES (infixe « .CE1_ », p. ex. MA.PB.CE1_MULT_DIV)
+// réutilisent la banque de gabarits de leur compétence de base (MA.PB.MULT_DIV) :
+// mêmes énoncés, seuls les PARAMS (tables / bornes) sont calibrés CE1. On
+// normalise donc la clé de lookup des gabarits.
+function gabaritKey(competence: string): string {
+  return competence.replace(".CE1_", ".");
+}
+
 // Expose le nombre de gabarits par competence (test : >= 15).
 export function templateCount(competence: string): number {
-  return (BANK[competence] ?? []).length;
+  return (BANK[gabaritKey(competence)] ?? []).length;
 }
 export { BANK as PROBLEME_BANK };
 
@@ -281,7 +289,7 @@ function strList(v: unknown, fb: string[]): string[] {
 }
 
 function renderGabarit(rng: Rng, competence: string, type: string, v: Vars): string {
-  const all = BANK[competence] ?? [];
+  const all = BANK[gabaritKey(competence)] ?? [];
   const matching = all.filter((g) => g.type === type);
   const g = matching.length > 0 ? pick(rng, matching) : pick(rng, all);
   return g.t(v);
