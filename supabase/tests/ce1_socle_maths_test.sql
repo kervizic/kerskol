@@ -61,11 +61,12 @@ BEGIN
         RAISE EXCEPTION 'ce1_socle : MA.GEO.SYMETRIE ne doit pas être CE1';
     END IF;
 
-    -- 4c. Total compétences maths CE1 = 27 (0114+0066) + 6 (0115) = 33.
+    -- 4c. Total compétences maths CE1 = 27 (0114+0066) + 6 (0115) + 1 dédiée
+    --     CE1 (0121, MA.NUM.CE1_MILLE [CE1,CE1]) = 34.
     SELECT count(*) INTO v_n FROM public.competences
      WHERE matiere = 'MA' AND classe_min = 'CE1';
-    IF v_n <> 33 THEN
-        RAISE EXCEPTION 'ce1_socle : 33 compétences maths CE1 attendues, obtenu %', v_n;
+    IF v_n <> 34 THEN
+        RAISE EXCEPTION 'ce1_socle : 34 compétences maths CE1 attendues, obtenu %', v_n;
     END IF;
 
     -- 5. Candidature d'un profil CE1 : une compétence [CE1,CE2] chevauche la
@@ -88,5 +89,5 @@ BEGIN
         RAISE EXCEPTION 'ce1_socle : certaines compétences ne sont plus candidates pour un CE2 (obtenu %)', v_n;
     END IF;
 
-    RAISE NOTICE 'ce1_socle_maths_test : PASS (33 compétences maths CE1 : 23 par 0114, 6 géo/repère par 0115, 4 par 0066)';
+    RAISE NOTICE 'ce1_socle_maths_test : PASS (34 compétences maths CE1 : 23 par 0114, 6 géo/repère par 0115, 4 par 0066, 1 dédiée par 0121)';
 END $$;
