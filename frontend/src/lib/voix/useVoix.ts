@@ -5,8 +5,17 @@
 // clips manquants), les fonctions ne font rien et l'app continue normalement.
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { chargerAlignement, chargerManifest, urlsPourCles, type Alignement, type VoixManifest } from "./manifest";
+import {
+  chargerAlignement,
+  chargerManifest,
+  clesManquantes,
+  sequenceJouable,
+  urlsPourCles,
+  type Alignement,
+  type VoixManifest,
+} from "./manifest";
 import { enonceEnCles } from "./verbalize";
+import { signalerBriquesManquantes } from "./journal";
 import { lectureAutoDeProfil, shouldAutoPlay, shouldPlayManual } from "./autoplay";
 import { effectiveLectureAuto, getStoredLectureAuto, setStoredLectureAuto } from "./lectureAutoLocale";
 import { markUserActivated, playItems, playUrls, precharger, scheduleTick, stop } from "./player";
@@ -32,6 +41,9 @@ export interface Voix {
   couper: () => void;
   direCles: (cles: string[], opts?: { auto?: boolean; gapMs?: number }) => void;
   direEnonce: (prompt: string, opts?: { auto?: boolean }) => void;
+  // true si l'enonce peut etre lu EN ENTIER (toutes ses briques existent) ; sert
+  // a griser le bouton audio plutot que de jouer une phrase incomplete.
+  enonceJouable: (prompt: string) => boolean;
   direDictee: (
     id: number,
     opts?: { auto?: boolean; mode?: "simple" | "dictee" } & KaraokeCallbacks
@@ -98,6 +110,13 @@ export function useVoix(profil: { id?: string; lecture_auto?: boolean | null } |
 
   const direCles = useCallback(
     (cles: string[], opts?: { auto?: boolean; gapMs?: number }) => {
+      // Regle d'or : ne JAMAIS lire une phrase incomplete. Si une seule brique
+      // manque, on ne joue rien (et on journalise la liste des clips a generer).
+      const manquantes = clesManquantes(manifest, cles);
+      if (manquantes.length > 0) {
+        signalerBriquesManquantes(manquantes);
+        return;
+      }
       const urls = urlsPourCles(manifest, cles);
       const hasClips = urls.length > 0;
       const ok = opts?.auto
@@ -118,6 +137,12 @@ export function useVoix(profil: { id?: string; lecture_auto?: boolean | null } |
       direCles(enonceEnCles(prompt), { auto: opts?.auto, gapMs: GAP_NOMBRE });
     },
     [direCles]
+  );
+
+  // Un enonce est jouable si toutes ses briques existent (sinon bouton grise).
+  const enonceJouable = useCallback(
+    (prompt: string) => sequenceJouable(manifest, enonceEnCles(prompt)),
+    [manifest]
   );
 
   const direDictee = useCallback(
@@ -192,7 +217,7 @@ export function useVoix(profil: { id?: string; lecture_auto?: boolean | null } |
   }, [manifest]);
 
   return useMemo(
-    () => ({ disponible, lectureAutoActive: lectureAuto, basculerLectureAuto, activer, couper, direCles, direEnonce, direDictee }),
-    [disponible, lectureAuto, basculerLectureAuto, activer, couper, direCles, direEnonce, direDictee]
+    () => ({ disponible, lectureAutoActive: lectureAuto, basculerLectureAuto, activer, couper, direCles, direEnonce, enonceJouable, direDictee }),
+    [disponible, lectureAuto, basculerLectureAuto, activer, couper, direCles, direEnonce, enonceJouable, direDictee]
   );
 }

@@ -2047,6 +2047,7 @@ export function Session({
           <>
             <SpeakerButton
               disponible={voix.disponible}
+              jouable={voix.enonceJouable(ex.prompt)}
               label="Relire la consigne"
               onClick={() => voix.direEnonce(ex.prompt)}
             />

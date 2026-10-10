@@ -100,3 +100,18 @@ export function urlsPourCles(manifest: VoixManifest | null, cles: string[]): str
   }
   return out;
 }
+
+// Cles ABSENTES du manifest parmi `cles` (briques audio manquantes). Sert a ne
+// JAMAIS jouer une phrase incomplete : si une seule brique manque, on prefere ne
+// rien lire (cf. docs/voix.md + bug du 10/10 : la voix sautait silencieusement le
+// 1er nombre d'une addition car son clip n'etait pas encore genere).
+export function clesManquantes(manifest: VoixManifest | null, cles: string[]): string[] {
+  if (!manifest) return cles.slice();
+  return cles.filter((c) => !manifest.keys[c]);
+}
+
+// Une sequence est JOUABLE si elle contient au moins une brique ET que TOUTES ses
+// briques existent dans le manifest (aucune phrase tronquee).
+export function sequenceJouable(manifest: VoixManifest | null, cles: string[]): boolean {
+  return cles.length > 0 && clesManquantes(manifest, cles).length === 0;
+}
