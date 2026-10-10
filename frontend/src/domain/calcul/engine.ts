@@ -10,9 +10,40 @@
 //     reinsere 2 a 4 positions plus loin (rattrapage) ;
 //   * « Tu es sure de toi ? » environ 1 fois sur 6.
 
-import { generateExercise, type ExCalcul, type GeneratedExercise, type ProblemContext } from "./generator";
+import { exerciceSignature, generateExercise, type ExCalcul, type GeneratedExercise, type ProblemContext } from "./generator";
 import { makeRng, hashSeed } from "./rng";
 import type { Category, PlannedItem } from "./composer";
+
+// Nombre de tirages tentes pour produire un enonce DISTINCT de ceux deja presents
+// dans la seance (reinsertion / bascule confiance / regeneration).
+const MAX_TIRAGES_DISTINCTS = 12;
+
+// Signatures de contenu de tous les slots (y compris deja repondus) : une meme
+// question ne doit jamais reapparaitre dans la seance.
+function signaturesSlots(slots: Slot[], sauf?: number): Set<string> {
+  const set = new Set<string>();
+  for (let i = 0; i < slots.length; i++) {
+    if (i === sauf) continue;
+    set.add(exerciceSignature(slots[i].exercise));
+  }
+  return set;
+}
+
+// Genere un exercice DISTINCT des signatures `used`, en salant la graine. Repli :
+// si la banque est epuisee, renvoie le dernier candidat (collision acceptee a la
+// marge plutot que pas d'exercice du tout pour un canal optionnel).
+function genererDistinct(
+  eff: ExCalcul,
+  used: Set<string>,
+  baseSeed: number,
+  opts: { rattrapage?: boolean; ctx?: ProblemContext }
+): GeneratedExercise {
+  let cand = generateExercise(eff, baseSeed, opts);
+  for (let attempt = 1; attempt < MAX_TIRAGES_DISTINCTS && used.has(exerciceSignature(cand)); attempt++) {
+    cand = generateExercise(eff, hashSeed(baseSeed, "dedup", attempt), opts);
+  }
+  return cand;
+}
 
 interface CompLive {
   niveau: number;
@@ -200,22 +231,28 @@ export function answerCurrent(
 
   let counter = state.counter;
 
-  // Reinsertion d'un exercice similaire apres une erreur comprise.
+  // Reinsertion d'un exercice SIMILAIRE (non identique) apres une erreur comprise.
   if (!correct && opts.correctionRead && !live.dropped) {
     const rng = makeRng(hashSeed(state.seed, "reinsert", state.pos));
     const offset = 2 + Math.floor(rng() * 3); // 2..4
     const insertAt = Math.min(state.pos + offset, slots.length);
     const eff: ExCalcul = { ...s.source, niveau: live.niveau };
     const newSeed = hashSeed(state.seed, code, live.niveau, "rattrapage", counter);
-    slots.splice(insertAt, 0, {
-      exercise: generateExercise(eff, newSeed, { rattrapage: true, ctx: state.ctx }),
-      source: eff,
-      category: s.category,
-      answered: false,
-      correct: null,
-    });
-    counter += 1;
-    event.reinserted = true;
+    const used = signaturesSlots(slots);
+    const ex = genererDistinct(eff, used, newSeed, { rattrapage: true, ctx: state.ctx });
+    // On ne reinsere QUE si l'exercice est bien distinct de tous les autres :
+    // mieux vaut ne pas rejouer que reposer une question deja vue (banque epuisee).
+    if (!used.has(exerciceSignature(ex))) {
+      slots.splice(insertAt, 0, {
+        exercise: ex,
+        source: eff,
+        category: s.category,
+        answered: false,
+        correct: null,
+      });
+      counter += 1;
+      event.reinserted = true;
+    }
   }
 
   // Bascule confiance : quand on abandonne une notion (3/5), on enchaine sur une
@@ -226,15 +263,19 @@ export function answerCurrent(
     if (conf && confSource) {
       const eff: ExCalcul = { ...confSource, niveau: comps[conf].niveau };
       const newSeed = hashSeed(state.seed, conf, comps[conf].niveau, "confiance", counter);
-      slots.splice(state.pos + 1, 0, {
-        exercise: generateExercise(eff, newSeed, { ctx: state.ctx }),
-        source: eff,
-        category: "revision",
-        answered: false,
-        correct: null,
-      });
-      counter += 1;
-      event.switched = conf;
+      const used = signaturesSlots(slots);
+      const ex = genererDistinct(eff, used, newSeed, { ctx: state.ctx });
+      if (!used.has(exerciceSignature(ex))) {
+        slots.splice(state.pos + 1, 0, {
+          exercise: ex,
+          source: eff,
+          category: "revision",
+          answered: false,
+          correct: null,
+        });
+        counter += 1;
+        event.switched = conf;
+      }
     }
   }
 
@@ -263,11 +304,13 @@ function regenerateFuture(
     if (sl.answered || sl.exercise.competence !== competence) continue;
     const eff: ExCalcul = { ...sl.source, niveau };
     const seed = hashSeed(state.seed, competence, niveau, "regen", i);
-    slots[i] = {
-      ...sl,
-      source: eff,
-      exercise: generateExercise(eff, seed, { rattrapage: sl.exercise.rattrapage, ctx: state.ctx }),
-    };
+    // Distinct de tous les autres slots (on exclut celui qu'on remplace).
+    const used = signaturesSlots(slots, i);
+    const ex = genererDistinct(eff, used, seed, { rattrapage: sl.exercise.rattrapage, ctx: state.ctx });
+    // Si impossible de produire un enonce distinct (banque epuisee), on conserve
+    // l'exercice d'origine (deja distinct) plutot que d'introduire un doublon.
+    if (used.has(exerciceSignature(ex))) continue;
+    slots[i] = { ...sl, source: eff, exercise: ex };
   }
 }
 

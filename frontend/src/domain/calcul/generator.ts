@@ -564,6 +564,52 @@ export interface GeneratedExercise {
   seed: number;
 }
 
+// Signature d'IDENTITE d'un exercice genere : deux exercices partageant la meme
+// signature sont « la meme question » pour l'enfant (meme enonce OU meme item de
+// banque). Sert a garantir qu'une question n'apparait jamais deux fois dans une
+// seance (deduplication a la composition et dans le moteur). Deterministe :
+// construite a partir de l'enonce normalise, de l'identite de verification
+// (op/a/b + cle serveur pour les items de banque : EMC/QM/grammaire/lexique/
+// comprehension/ecriture...) et des donnees de support visuel (horloge, regle,
+// fractions...) pour distinguer deux questions a l'enonce identique mais au
+// support different. Ne JAMAIS y inclure le `seed` ni la `key` React (qui
+// different a chaque tirage) : on compare le CONTENU, pas le tirage.
+export function exerciceSignature(ex: GeneratedExercise): string {
+  const prompt = ex.prompt.normalize("NFC").replace(/\s+/g, " ").trim().toLowerCase();
+  // Cle d'item de banque (une seule presente selon le type d'exercice).
+  const cle =
+    ex.gram?.cle ??
+    ex.comp?.cle ??
+    ex.qm?.cle ??
+    ex.don?.cle ??
+    ex.ecr?.cle ??
+    ex.conjPhrase?.complete ??
+    null;
+  // Donnees de support visuel (une seule presente selon le mode) : departage deux
+  // questions au meme enonce (p. ex. deux horloges a lire).
+  const data =
+    ex.supportData ??
+    ex.poseData ??
+    ex.potenceData ??
+    ex.chiffresData ??
+    ex.droiteData ??
+    ex.moneyData ??
+    ex.horlogeData ??
+    ex.regleData ??
+    ex.balanceData ??
+    ex.fractionData ??
+    null;
+  // Fallback DEGENERE d'une banque vide (QM/EMC/Sciences/Histoire/Geo : item
+  // introuvable -> enonce generique, verif.cle vide). Deux competences SANS items
+  // produiraient alors une signature identique et se fusionneraient a tort (une
+  // competence disparaitrait de la seance). On les distingue par leur code. Les
+  // VRAIS items (verif.cle renseignee) restent dedupliques par contenu, y compris
+  // entre deux competences qui generent le meme enonce.
+  const degenere = ex.verif.op === "qm" && !ex.verif.cle;
+  const g = degenere ? ex.competence : null;
+  return JSON.stringify({ p: prompt, v: ex.verif, a: ex.answer, r: ex.reste, c: cle, s: ex.support, d: data, g });
+}
+
 // --------------------------- Helpers de params ----------------------------
 interface Range {
   min: number;

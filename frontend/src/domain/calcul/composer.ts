@@ -12,7 +12,7 @@
 import { isUnlocked } from "../buildings";
 import { classeDansMarge, classeRang } from "../../lib/types";
 import type { Classe, Competence, Prerequis, ProgressionDetail } from "../../lib/types";
-import { generateExercise, type ExCalcul, type GeneratedExercise, type ProblemContext } from "./generator";
+import { exerciceSignature, generateExercise, type ExCalcul, type GeneratedExercise, type ProblemContext } from "./generator";
 import { classPlan, classUnlocks } from "./classes";
 import { hashSeed, makeRng, pick, type Rng } from "./rng";
 
@@ -341,6 +341,10 @@ function buildBlocks(
   return kept.map((b, i) => ({ ...b, size: sizes[i] }));
 }
 
+// Nombre de tirages tentes pour produire un enonce DISTINCT dans la seance avant
+// d'abandonner cet item (banque de la competence epuisee a ce niveau).
+const MAX_TIRAGES_DISTINCTS = 12;
+
 function materialize(
   specs: BlockSpec[],
   sources: ExCalcul[],
@@ -349,19 +353,41 @@ function materialize(
   ctx?: ProblemContext
 ): PlannedItem[] {
   const items: PlannedItem[] = [];
+  // Signatures deja presentes dans la seance : garantit qu'une meme question
+  // (meme enonce ou meme item de banque) n'apparait jamais deux fois, A
+  // L'INTERIEUR d'un bloc comme ENTRE deux competences. Cause historique du bug :
+  // un bloc de 2-3 items d'une competence a petite banque (EMC/QM : 2 items par
+  // niveau) retirait le meme item ; aucune deduplication n'existait.
+  const seen = new Set<string>();
   let idx = 0;
   for (const spec of specs) {
     const source = findSource(sources, spec.competence, spec.niveau);
     if (!source) continue;
     const eff: ExCalcul = { ...source, niveau: spec.niveau };
     for (let k = 0; k < spec.size; k++) {
-      const s = hashSeed(seed, spec.competence, spec.niveau, idx, Math.floor(rng() * 1e9));
-      items.push({
-        source: eff,
-        category: spec.category,
-        exercise: generateExercise(eff, s, { ctx }),
-      });
+      // Une seule avancee du RNG par item (preserve le determinisme en l'absence
+      // de collision) ; les tentatives supplementaires salent la graine sans
+      // reconsommer le flux.
+      const sel = Math.floor(rng() * 1e9);
+      let chosen: GeneratedExercise | null = null;
+      for (let attempt = 0; attempt < MAX_TIRAGES_DISTINCTS; attempt++) {
+        const s =
+          attempt === 0
+            ? hashSeed(seed, spec.competence, spec.niveau, idx, sel)
+            : hashSeed(seed, spec.competence, spec.niveau, idx, sel, "dedup", attempt);
+        const cand = generateExercise(eff, s, { ctx });
+        if (!seen.has(exerciceSignature(cand))) {
+          chosen = cand;
+          break;
+        }
+      }
       idx++;
+      // Impossible de produire un enonce distinct (banque epuisee) : on saute cet
+      // item plutot que de repeter la question. La seance est alors un peu plus
+      // courte, ce qui est preferable a une repetition.
+      if (!chosen) continue;
+      seen.add(exerciceSignature(chosen));
+      items.push({ source: eff, category: spec.category, exercise: chosen });
     }
   }
   return items;

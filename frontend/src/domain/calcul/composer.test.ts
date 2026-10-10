@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { composeSession, type ProgressionDetail } from "./composer";
+import { exerciceSignature } from "./generator";
 import { classPlan } from "./classes";
 import { SEED_SOURCES } from "./seedSources";
 import type { Competence, Prerequis } from "../../lib/types";
@@ -181,7 +182,7 @@ describe("composeSession : competences debloquees uniquement", () => {
     expect(codes.has("MA.CM.DIV_RESTE")).toBe(false);
   });
 
-  it("entrelace par blocs de 2 a 3", () => {
+  it("entrelace par blocs de 2 a 3 (1 si la variete est epuisee)", () => {
     const plan = composeSession({
       competences: COMPETENCES,
       prerequis: PREREQUIS,
@@ -190,10 +191,17 @@ describe("composeSession : competences debloquees uniquement", () => {
       seed: 99,
       now: NOW,
     });
+    // Blocs de 2-3 items. Exception : une competence qui ne peut produire qu'UN
+    // seul enonce distinct (banque minuscule, p. ex. une source demo a variante
+    // unique) est reduite a 1 item par la deduplication anti-doublon (mieux vaut
+    // 1 item qu'une meme question repetee). Jamais plus de 3.
     for (const size of blockSizes(plan.map((p) => p.exercise.competence))) {
-      expect(size).toBeGreaterThanOrEqual(2);
+      expect(size).toBeGreaterThanOrEqual(1);
       expect(size).toBeLessThanOrEqual(3);
     }
+    // Aucune question repetee dans la seance (invariant principal du correctif).
+    const sigs = plan.map((p) => exerciceSignature(p.exercise));
+    expect(new Set(sigs).size).toBe(sigs.length);
   });
 
   it("~12 exercices et debut plus facile que la fin en moyenne", () => {
