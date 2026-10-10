@@ -118,26 +118,52 @@ questionnaire.
 
 ## Composition d'une séance quand plusieurs matières sont actives
 
-Quand plusieurs matières sont actives sur un profil (par exemple **maths + français**),
-le choix des exercices d'une séance se fait selon les **besoins de l'enfant** sur
-l'**ensemble des compétences actives des deux matières**, et **pas** matière par
-matière. Concrètement (`frontend/src/domain/calcul/composer.ts`) :
+> **Révision du 10 octobre 2026 (décision de Manu).** On **favorise** les
+> lacunes, on ne s'y **focalise** pas. L'ancienne règle « besoin seul, aucun
+> quota par matière, ~40 % révisions / ~40 % lacunes / ~20 % nouveauté »
+> sur-sélectionnait les maths : un enfant qui a déjà travaillé les maths (donc
+> plein de lacunes et de révisions dues en maths) et jamais le français (donc
+> coincé dans les 20 % de nouveauté) recevait des séances quasi « tout maths ».
 
-- toutes les compétences actives et débloquées (maths **et** français) sont
-  versées dans les **mêmes** réservoirs de besoin : **révisions dues**,
-  **lacunes** (EMA courte < 0,7 ou niveau ≤ 1), **nouveautés** ;
-- la répartition cible reste **~40 % révisions / ~40 % lacunes / ~20 %
-  nouveauté**, c'est-à-dire par **catégorie de besoin**, jamais par matière ;
-- il n'y a **aucun quota par matière** ni **tirage au sort de la matière** : une
-  séance peut légitimement être majoritairement (voire entièrement) d'une
-  matière si c'est là que sont les besoins du moment.
+Règles de composition (`frontend/src/domain/calcul/composer.ts`) :
 
-**Seul garde-fou de variété** : si au moins deux matières sont actives et que la
-séance serait composée à **100 % d'une seule** alors qu'une **autre** matière
-active a un besoin (révision, lacune ou nouveauté), on **remplace le dernier
-exercice** (le moins prioritaire) par ce besoin de l'autre matière. On ne force
-rien d'autre : le besoin reste le seul critère de sélection. Cette règle est
-vérifiée par un test (`composer.test.ts`, « maths + francais »).
+- **Trois réservoirs de besoin**, à parts égales (~1/3 chacun), parcourus en
+  **tourniquet** :
+  - **lacunes** : EMA courte < 0,7 ou niveau ≤ 1 ;
+  - **découvertes** : compétences **jamais travaillées** (niveau 0) des matières
+    actives, abordées **vite** et **au niveau 1** ;
+  - **consolidation variée** : révisions dues + compétences acquises.
+  On favorise ainsi les lacunes **sans** s'y enfermer.
+- **Équilibre entre matières** : quand une autre matière active a des candidats,
+  les **maths ne dépassent pas ~40 %** des exercices. **Chaque matière active**
+  ayant au moins une compétence jouable est **présente** si possible. Quand il y
+  a **plus de matières actives que de blocs** (Iris : 7 matières pour 6 blocs),
+  une **rotation équitable** (pilotée par la graine) sert une matière différente
+  d'une séance à l'autre : aucune n'est jamais oubliée durablement.
+- **Variété des exercices** : une compétence par **bloc de 2 items** ; une
+  compétence n'est **jamais reprise** dans la séance. On garantit ainsi « **pas
+  plus de 2 exercices du même type d'affilée**, ni plus de 2 de ce type dans la
+  séance ». Les blocs sont **entrelacés par matière** (plus de gros paquet de
+  maths suivi d'un gros paquet de français).
+
+Ces règles sont vérifiées par `composer.test.ts` (compatibilité) et
+`composer-equilibre.test.ts` (maths ≤ 40 %, présence de chaque matière,
+découvertes au N1, variété, et simulation du profil réel d'Iris).
+
+### Avant / après sur le profil réel d'Iris (CE2, lecture seule le 10/10/2026)
+
+Iris a **7 matières actives** (maths, français, QLM, EMC, sciences, histoire,
+géographie) mais une progression **concentrée sur les maths** : 18 compétences
+de maths déjà travaillées (niveau moyen ~2,9), 1 de français, 1 d'EMC, **rien**
+ailleurs.
+
+- **Avant** (séance type de 12 exercices) : ~40 % révisions **maths** + ~40 %
+  lacunes **maths** + ~20 % nouveauté tirée au hasard → environ **9 à 10
+  exercices de maths** et **2 à 3** du reste, souvent le **même type** répété.
+- **Après** : **au plus ~4** exercices de maths, les autres répartis entre les
+  matières jamais faites (français, QLM, sciences, histoire, géo, EMC),
+  **découvertes au niveau 1**, **4 matières minimum** par séance, et jamais le
+  même type d'exercice plus de deux fois.
 
 ## Règle de correction
 

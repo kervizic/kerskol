@@ -99,7 +99,7 @@ function composeFirstSession(
   let ci = 0;
   while (remaining > 0 && coeur.length > 0 && ci < coeur.length) {
     const [competence, niveau] = coeur[ci];
-    const size = Math.min(3, remaining);
+    const size = Math.min(2, remaining); // blocs de 2 (variete, lot B)
     specs.push({ competence, niveau, category: "placement", size });
     remaining -= size;
     ci++;
@@ -211,73 +211,97 @@ export function composeSession(input: ComposeInput): PlannedItem[] {
     }
   }
 
-  // Cibles d'items par categorie (40/40/20), ajustees a `count`.
-  const nRev = Math.round(count * 0.4);
-  const nLac = Math.round(count * 0.4);
-  const nNouv = count - nRev - nLac;
+  // --- Selection EQUILIBREE (lot B, cf. docs/pedagogie.md) ----------------
+  // On FAVORISE les lacunes sans s'y FOCALISER :
+  //   * ~1/3 lacunes, ~1/3 decouvertes (competences jamais travaillees, au
+  //     niveau 1), ~1/3 consolidation variee (revisions dues + acquis) ;
+  //   * equilibre entre matieres : les maths ne depassent pas ~40 % des items
+  //     quand une autre matiere active a des candidats, et CHAQUE matiere active
+  //     ayant au moins une competence jouable est presente si possible ;
+  //   * variete : une competence par bloc de 2 items (gere les regles « pas plus
+  //     de 2 du meme type d'affilee ni plus de 2 par seance », a l'assemblage).
+  const matByCode: Record<string, string> = {};
+  for (const c of active) matByCode[c.code] = c.matiere;
+
+  const decouverte = nouveaute; // jamais travaillees / placement non fait (niveau 1)
+  const lacunes = lacune; // difficultes (EMA courte < 0,7 ou niveau <= 1)
+  const consolidation = [...revision, ...solides]; // revisions dues + acquis (varie)
+
+  // Categorie NATURELLE de chaque competence (jamais reetiquetee lors d'un
+  // remplissage croise) : la CE1 dediee remontee en remediation reste « revision ».
+  const catByCode: Record<string, Category> = {};
+  for (const c of decouverte) catByCode[c] = "nouveaute";
+  for (const c of lacunes) catByCode[c] = "lacune";
+  for (const c of consolidation) catByCode[c] = "revision";
+
+  // Reservoirs ~1/3 chacun, parcourus en round-robin : favorise les lacunes SANS
+  // s'y focaliser (decouvertes et consolidation a parts egales).
+  const reservoirs: string[][] = [lacunes, decouverte, consolidation];
+
+  // Matieres actives ayant au moins un candidat (competence debloquee).
+  const poolAll = [...lacunes, ...decouverte, ...consolidation];
+  const matieresPresentes = [...new Set(poolAll.map((c) => matByCode[c]).filter(Boolean))];
+  const multiMatiere = matieresPresentes.length >= 2;
+  // Rotation EQUITABLE (melange pilote par la graine) : l'ordre de service des
+  // matieres varie d'une seance a l'autre. Quand il y a plus de matieres actives
+  // que de blocs (ex. 7 matieres pour 6 blocs), aucune n'est toujours ecartee.
+  for (let i = matieresPresentes.length - 1; i > 0; i--) {
+    const j = Math.floor(rng() * (i + 1));
+    [matieresPresentes[i], matieresPresentes[j]] = [matieresPresentes[j], matieresPresentes[i]];
+  }
+
+  const BLOCK = 2; // items par bloc (variete : jamais 3 du meme type d'affilee)
+  const nbBlocks = Math.max(1, Math.floor(count / BLOCK));
+  // Plafond maths (en blocs) quand une autre matiere a des candidats (<= ~40 %).
+  const maxMaBlocks = multiMatiere
+    ? Math.max(1, Math.round((count * 0.4) / BLOCK))
+    : nbBlocks;
 
   const chosen: Array<{ competence: string; category: Category }> = [];
   const seen = new Set<string>();
-  const takeFrom = (
-    pool: string[],
-    target: number,
-    category: Category,
-    fallbacks: string[][]
-  ) => {
-    let items = 0;
-    const pools = [pool, ...fallbacks];
-    let pi = 0;
-    while (items < target && pi < pools.length) {
-      const cur = pools[pi];
-      const fresh = cur.filter((c) => !seen.has(c));
-      if (fresh.length === 0) {
-        pi++;
-        continue;
-      }
-      const c = pick(rng, fresh);
-      seen.add(c);
-      chosen.push({ competence: c, category });
-      items += 2; // un bloc ~2-3 items
-    }
+  let maBlocks = 0;
+  const peut = (code: string) => {
+    if (seen.has(code)) return false;
+    if (matByCode[code] === "MA" && maBlocks >= maxMaBlocks) return false;
+    return true;
   };
-  takeFrom(revision, nRev, "revision", [lacune, solides, nouveaute]);
-  takeFrom(lacune, nLac, "lacune", [revision, solides, nouveaute]);
-  takeFrom(nouveaute, nNouv, "nouveaute", [lacune, revision, solides]);
+  const prendre = (code: string) => {
+    seen.add(code);
+    if (matByCode[code] === "MA") maBlocks++;
+    chosen.push({ competence: code, category: catByCode[code] ?? "lacune" });
+  };
+
+  // 1) Presence : au moins un bloc par matiere active ayant un candidat, en
+  //    partant du besoin le plus fort (lacune > decouverte > consolidation).
+  for (const mat of matieresPresentes) {
+    if (chosen.length >= nbBlocks) break;
+    for (const pool of reservoirs) {
+      const code = pool.find((c) => matByCode[c] === mat && peut(c));
+      if (code) {
+        prendre(code);
+        break;
+      }
+    }
+  }
+
+  // 2) Remplissage en round-robin des trois reservoirs (~1/3 chacun), dans la
+  //    limite du plafond maths, jusqu'a nbBlocks ou epuisement des candidats.
+  let encore = true;
+  while (chosen.length < nbBlocks && encore) {
+    encore = false;
+    for (const pool of reservoirs) {
+      if (chosen.length >= nbBlocks) break;
+      const fresh = pool.filter((c) => peut(c));
+      if (fresh.length > 0) {
+        prendre(pick(rng, fresh));
+        encore = true;
+      }
+    }
+  }
 
   // Repli : si rien n'a ete choisi (cas limite), prendre les debloquees.
   if (chosen.length === 0) {
     for (const c of unlocked) chosen.push({ competence: c.code, category: "lacune" });
-  }
-
-  // --- Garde-fou de VARIETE (pas de quota par matiere) --------------------
-  // La selection ci-dessus se fait UNIQUEMENT selon le besoin (revision /
-  // lacune / nouveaute), sur l'ENSEMBLE des competences actives des deux
-  // matieres, sans tirage au sort de la matiere ni quota. Seul garde-fou : si
-  // plusieurs matieres sont actives et que la seance serait a 100 % d'une seule
-  // alors qu'une AUTRE matiere active a un besoin, on remplace le dernier item
-  // (le moins prioritaire) par ce besoin. On ne force rien d'autre : le besoin
-  // reste le seul critere (cf. docs/pedagogie.md).
-  const matByCode: Record<string, string> = {};
-  for (const c of active) matByCode[c.code] = c.matiere;
-  if (mats && mats.length >= 2 && chosen.length >= 2) {
-    const matieresChoisies = new Set(chosen.map((x) => matByCode[x.competence]));
-    if (matieresChoisies.size === 1) {
-      const seule = [...matieresChoisies][0];
-      const besoinAutre = (pool: string[], category: Category) => {
-        const c = pool.find((x) => matByCode[x] && matByCode[x] !== seule && !seen.has(x));
-        return c ? { competence: c, category } : null;
-      };
-      const rempl =
-        besoinAutre(revision, "revision") ??
-        besoinAutre(lacune, "lacune") ??
-        besoinAutre(nouveaute, "nouveaute");
-      if (rempl) {
-        const retire = chosen.pop();
-        if (retire) seen.delete(retire.competence);
-        seen.add(rempl.competence);
-        chosen.push(rempl);
-      }
-    }
   }
 
   const specsRaw = chosen.map(({ competence, category }) => {
@@ -294,16 +318,14 @@ function clampNiveau(n: number): number {
   return Math.max(1, Math.min(4, n || 1));
 }
 
-// Tailles de blocs (chacune dans {2,3}) sommant a min(count, 3*b) sans jamais
-// produire un bloc de 1. `b` = nombre de blocs effectivement retenus.
+// Tailles de blocs : 2 items chacun (variete, lot B). Un bloc de 2 garantit « au
+// plus 2 exercices du meme type d'affilee » (une competence par bloc) et, comme
+// une competence n'est jamais reprise, « au plus 2 par seance » pour ce type.
+// `b` = nombre de blocs effectivement retenus (<= count/2).
 function planSizes(numBlocks: number, count: number): number[] {
   if (numBlocks <= 0 || count < 2) return [];
   const b = Math.max(1, Math.min(numBlocks, Math.floor(count / 2)));
-  const target = Math.min(count, 3 * b);
-  const sizes = new Array<number>(b).fill(2);
-  const extra = target - 2 * b; // 0..b
-  for (let i = 0; i < extra && i < b; i++) sizes[i] = 3;
-  return sizes;
+  return new Array<number>(b).fill(2);
 }
 
 // Ordonne les competences choisies (facile au debut, reussite probable a la
@@ -325,7 +347,29 @@ function buildBlocks(
   ordered.sort((a, b) => a.niveau - b.niveau || catRank[a.category] - catRank[b.category]);
 
   const sizes = planSizes(ordered.length, count);
-  const kept = ordered.slice(0, sizes.length);
+  let kept = ordered.slice(0, sizes.length);
+
+  // Variete : entrelace les blocs par MATIERE en tourniquet (evite un gros
+  // paquet de maths puis un gros paquet de francais), en gardant l'ordre interne
+  // de chaque matiere (niveau croissant). Le prefixe du code est la matiere.
+  const parMat = new Map<string, typeof kept>();
+  for (const b of kept) {
+    const m = b.competence.split(".")[0];
+    const file = parMat.get(m);
+    if (file) file.push(b);
+    else parMat.set(m, [b]);
+  }
+  if (parMat.size > 1) {
+    const files = [...parMat.values()];
+    const tourniquet: typeof kept = [];
+    while (tourniquet.length < kept.length) {
+      for (const f of files) {
+        const next = f.shift();
+        if (next) tourniquet.push(next);
+      }
+    }
+    kept = tourniquet;
+  }
 
   // Fin sur reussite : remonter un bloc "facile" (revision/lacune, niveau bas)
   // en derniere position s'il ne s'y trouve pas deja.
