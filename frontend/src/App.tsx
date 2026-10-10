@@ -14,6 +14,7 @@ import { GeographieParcours } from "./screens/GeographieParcours";
 import { SciencesParcours } from "./screens/SciencesParcours";
 import DicteeMaitresse from "./components/DicteeMaitresse";
 import { ChildTheme } from "./components/ChildTheme";
+import { FEATURE_DICTEE_PARENT } from "./domain/featureFlags";
 import {
   ensureFoyer,
   getProfilById,
@@ -43,7 +44,14 @@ function currentPath(): string {
     return "/";
   }
 }
-const CHILD_RE = /^\/enfant\/([^/]+)\/(village|seance|defi|bibliotheque|dictee-maitresse|histoire|geo-parcours|sciences-parcours)$/;
+// La « dictée avec papa ou maman » (segment `dictee-maitresse`) n'est routable
+// que si son drapeau est actif : sinon l'URL directe ne matche pas et retombe
+// sur la selection de profil (fonctionnalite masquee mais code conserve).
+const CHILD_RE = new RegExp(
+  "^/enfant/([^/]+)/(village|seance|defi|bibliotheque|histoire|geo-parcours|sciences-parcours" +
+    (FEATURE_DICTEE_PARENT ? "|dictee-maitresse" : "") +
+    ")$"
+);
 
 export function App() {
   const [ready, setReady] = useState(false);

@@ -15,6 +15,7 @@ import { MatieresEditor } from "../components/MatieresEditor";
 import { UNIVERS_LIST, universDef } from "../domain/univers";
 import { BUILDING_LABEL, computePort, type BuildingState } from "../domain/buildings";
 import { TOUS_DOMAINES } from "../domain/matieres";
+import { FEATURE_DICTEE_PARENT } from "../domain/featureFlags";
 import { Spinner } from "../components/ui";
 import { ThemeToggle } from "../components/ThemeToggle";
 import { getProgression, reglerMatieres, updateProfil } from "../lib/api";
@@ -266,13 +267,15 @@ export function Village({
         >
           <BookOpen size={20} aria-hidden="true" /> Bibliothèque
         </button>
-        <button
-          className="kk-btn kk-btn--block"
-          onClick={onDictee}
-          title="Un parent te lit des mots, tu les écris"
-        >
-          <PencilLine size={20} aria-hidden="true" /> Dictée avec un parent
-        </button>
+        {FEATURE_DICTEE_PARENT && (
+          <button
+            className="kk-btn kk-btn--block"
+            onClick={onDictee}
+            title="Un parent te lit des mots, tu les écris"
+          >
+            <PencilLine size={20} aria-hidden="true" /> Dictée avec un parent
+          </button>
+        )}
         {/* Parcours d'Histoire : contenu CM1 (nouveau programme). Visible a partir
             du CM1 seulement (comme les sous-matieres HIST). */}
         {classeDansPortee("CM1", undefined, profil.classe) && (

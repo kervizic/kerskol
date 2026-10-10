@@ -29,6 +29,7 @@ import {
 } from "../lib/api";
 import { DEFI_THEMES } from "../domain/calcul/defi";
 import DicteeMaitresse from "../components/DicteeMaitresse";
+import { FEATURE_DICTEE_PARENT } from "../domain/featureFlags";
 import { MatieresEditor } from "../components/MatieresEditor";
 import { TOUS_DOMAINES } from "../domain/matieres";
 import { messageClasse } from "./CreateProfile";
@@ -806,7 +807,7 @@ export function ParentSpace({
 
         <MaitresseManager foyerId={foyerId} />
 
-        {profils.length > 0 && <MaitresseDicteeParent profils={profils} />}
+        {FEATURE_DICTEE_PARENT && profils.length > 0 && <MaitresseDicteeParent profils={profils} />}
 
         <div className="kk-card kk-stack" style={{ marginTop: 24 }}>
           <h2>Journal des réglages</h2>
