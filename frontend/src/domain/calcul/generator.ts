@@ -295,6 +295,41 @@ export interface BarModel {
   diff?: BarCell; // comparaison : l'ecart
 }
 
+// --- Schema en barres d'INDICE pour les calculs additifs (lot A) ------------
+// Quand l'enfant n'a plus le schema en haut (support « aucun », des le niveau 2),
+// le bouton « Je veux un schema » propose une barre tout/parties adaptee a
+// l'operation, l'INCONNUE restant « ? » (la reponse n'est jamais revelee).
+// Derive du `verif` normalise :
+//   op add -> le TOUT est inconnu : « ? = a + b » (ex. 37 + 15) ;
+//   op sub -> une PARTIE est inconnue : le tout `a`, une partie `b`, l'autre a
+//             trouver, ce qui couvre la soustraction « a − b » comme le
+//             complement « b + ? = a » (ex. barre 52 = 37 + ?).
+function barreIndiceCell(value: number, connu: boolean): BarCell {
+  return {
+    units: Math.max(1, Math.abs(value)),
+    value,
+    label: connu ? String(value) : "?",
+    unknown: !connu,
+  };
+}
+export function schemaBarresAdditif(verif: Verif, answer: number): BarModel | undefined {
+  if (verif.op === "add") {
+    return {
+      variant: "tout_parties",
+      whole: barreIndiceCell(answer, false),
+      parts: [barreIndiceCell(verif.a, true), barreIndiceCell(verif.b, true)],
+    };
+  }
+  if (verif.op === "sub") {
+    return {
+      variant: "tout_parties",
+      whole: barreIndiceCell(verif.a, true),
+      parts: [barreIndiceCell(verif.b, true), barreIndiceCell(answer, false)],
+    };
+  }
+  return undefined;
+}
+
 // Composition d'une somme : l'enfant touche billets et pieces (valeurs en
 // CENTIMES) jusqu'a atteindre la cible. Seul le total final (centimes) est
 // envoye au serveur (verif val). Les centimes n'apparaissent qu'aux niveaux hauts.
@@ -652,7 +687,7 @@ function correctionTable(table: number, f: number): string {
     case 3:
       return `3 fois ${f} = 2 fois ${f} plus une fois ${f} : ${2 * f} + ${f} = ${p}.`;
     case 4:
-      return `4 fois ${f}, c'est le double du double : ${f} → ${2 * f} → ${p}.`;
+      return `4 fois ${f}, c'est le double du double : ${f}, puis ${2 * f}, puis ${p}.`;
     case 5:
       return `5 fois ${f}, c'est la moitie de 10 fois ${f} : ${10 * f} ÷ 2 = ${p}.`;
     case 6:
@@ -697,7 +732,18 @@ export function generateExercise(
   // rendu. Les problemes en francais sont des questions : on ne les suffixe pas.
   if (ex.saisie !== "clavier") return ex;
   if (ex.forme === "probleme") return ex;
-  return { ...ex, prompt: withAnswerBox(ex.prompt) };
+  // Lot A : pour les calculs additifs (addition / complement) SANS schema en
+  // haut (support « aucun », des le niveau 2), on attache un schema en barres
+  // propose en INDICE (bouton « Je veux un schema »), l'inconnue restant « ? ».
+  const eligibleSchema =
+    !ex.barres &&
+    ex.support === "aucun" &&
+    ex.forme !== "ordre_grandeur" &&
+    (src.operation === "add" || src.operation === "complement");
+  const withBar = eligibleSchema
+    ? { ...ex, barres: schemaBarresAdditif(ex.verif, ex.answer) }
+    : ex;
+  return { ...withBar, prompt: withAnswerBox(withBar.prompt) };
 }
 
 function buildExercise(
@@ -981,7 +1027,7 @@ function buildExercise(
     const rang = step === 1000 ? "millier" : step === 100 ? "centaine" : "dizaine";
     return {
       ...base,
-      prompt: `${n} → combien pour aller a la ${rang} au-dessus ?`,
+      prompt: `Il manque combien à ${n} pour faire ${target} ?`,
       answer,
       verif: { op: "sub", a: target, b: n },
       correction: `On vise ${target} (la ${rang} juste au-dessus de ${n}). ${target} − ${n} = ${answer}.`,
@@ -1052,8 +1098,8 @@ function buildExercise(
     const a = rangeInt(rng, asRange(p.a, { min: 2, max: 9 }));
     const answer = a * facteur;
     let correction: string;
-    if (facteur === 10) correction = `${a} × 10 : on ajoute un zero → ${answer}.`;
-    else if (facteur === 100) correction = `${a} × 100 : on ajoute deux zeros → ${answer}.`;
+    if (facteur === 10) correction = `${a} × 10 : on ajoute un zéro, ça fait ${answer}.`;
+    else if (facteur === 100) correction = `${a} × 100 : on ajoute deux zéros, ça fait ${answer}.`;
     else if (facteur === 20) correction = `${a} × 20 = ${a} × 10 × 2 = ${a * 10} × 2 = ${answer}.`;
     else if (facteur === 50) correction = `${a} × 50 = ${a} × 100 ÷ 2 = ${a * 100} ÷ 2 = ${answer}.`;
     else correction = `${a} × ${facteur} = ${answer}.`;
@@ -1138,7 +1184,7 @@ function buildExercise(
         prompt: `${a} ${signe} ${b}`,
         answer,
         verif: { op: op === "add" ? "add" : "sub", a, b },
-        correction: `${b} est un nombre de dizaines : on ${op === "add" ? "ajoute" : "enleve"} ${b / 10} dizaines a ${a} → ${answer}.`,
+        correction: `${b} est un nombre de dizaines : on ${op === "add" ? "ajoute" : "enlève"} ${b / 10} dizaines à ${a}, ça fait ${answer}.`,
       };
     }
 
@@ -1205,7 +1251,7 @@ function buildExercise(
         prompt: `${a} + ${b}`,
         answer,
         verif: { op: "add", a, b },
-        correction: `On passe par 10 : ${a} + ${pour10} = 10, il reste ${reste} a ajouter → 10 + ${reste} = ${answer}.`,
+        correction: `On passe par 10 : ${a} + ${pour10} = 10, il reste ${reste} à ajouter, puis 10 + ${reste} = ${answer}.`,
       };
     }
 
@@ -1228,7 +1274,7 @@ function buildExercise(
       prompt: `${a} + ${b}`,
       answer,
       verif: { op: "add", a, b },
-      correction: `Je pars du plus grand (${Math.max(a, b)}) et j'ajoute ${Math.min(a, b)} → ${answer}.`,
+      correction: `Je pars du plus grand (${Math.max(a, b)}) et j'ajoute ${Math.min(a, b)}, ça fait ${answer}.`,
       // Depart au plus grand, un bond « +petit » ; l'arrivee (le resultat)
       // n'est pas etiquetee.
       supportData:
@@ -1392,7 +1438,7 @@ function buildNumeration(src: ExCalcul, rng: Rng, base: Base): GeneratedExercise
       ...base,
       saisie: "chiffres",
       chiffresData: { ranks: ranks.map((rk) => ({ key: rk, label: labels[rk] })) },
-      prompt: `Decompose le nombre ${n} par rang.`,
+      prompt: `Décompose le nombre ${n} par rang.`,
       answer: n,
       verif: { op: "val", a: n, b: 0 },
       correction: `${n} = ${detail}.`,
@@ -1424,7 +1470,7 @@ function buildNumeration(src: ExCalcul, rng: Rng, base: Base): GeneratedExercise
     const nom = diviseur === 100 ? "centaines" : "dizaines";
     return {
       ...base,
-      prompt: `Combien de ${nom} entieres y a-t-il dans ${n} ?`,
+      prompt: `Combien de ${nom} entières y a-t-il dans ${n} ?`,
       answer,
       verif: { op: "div", a: n, b: diviseur },
       correction: `${n} ÷ ${diviseur} = ${answer} (il y a ${answer} ${nom} entieres).`,
@@ -1495,7 +1541,7 @@ function buildNumeration(src: ExCalcul, rng: Rng, base: Base): GeneratedExercise
     const answer = apres ? n + 1 : n - 1;
     return {
       ...base,
-      prompt: `Quel nombre vient juste ${apres ? "apres" : "avant"} ${n} ?`,
+      prompt: `Quel nombre vient juste ${apres ? "après" : "avant"} ${n} ?`,
       answer,
       verif: apres ? { op: "add", a: n, b: 1 } : { op: "sub", a: n, b: 1 },
       correction: `Juste ${apres ? "apres" : "avant"} ${n}, c'est ${answer}.`,
@@ -1532,7 +1578,7 @@ function buildNumeration(src: ExCalcul, rng: Rng, base: Base): GeneratedExercise
       ...base,
       saisie: "droite",
       droiteData: { from, to, step, at },
-      prompt: "Quel nombre est indique par la fleche ?",
+      prompt: "Quel nombre est indiqué par la flèche ?",
       answer: at,
       verif: { op: "val", a: at, b: 0 },
       correction: `La fleche est a ${at} (de ${from} a ${to}, pas de ${step}).`,

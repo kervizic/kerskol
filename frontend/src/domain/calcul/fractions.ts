@@ -71,14 +71,14 @@ export function buildFraction(src: ExCalcul, rng: Rng, base: Base): GeneratedExe
     const num = intBetween(rng, 1, den - 1);
     const shape = pick(rng, SHAPES);
     const code = fracCode(num, den);
-    const correction = `La figure est partagee en ${den} parts egales, ${num} ${num > 1 ? "sont" : "est"} coloriee${num > 1 ? "s" : ""} : c'est ${num}/${den}.`;
+    const correction = `La figure est partagée en ${den} parts égales, ${num} ${num > 1 ? "sont" : "est"} coloriée${num > 1 ? "s" : ""} : c'est ${num}/${den}.`;
     if (base.niveau <= 1) {
       return {
         ...base,
         saisie: "qcm",
         options: nommerOptions(rng, num, den),
         fractionData: { num, den, shape },
-        prompt: "Quelle fraction de la figure est coloriee ?",
+        prompt: "Quelle fraction de la figure est coloriée ?",
         answer: code,
         verif: { op: "val", a: code, b: 0 },
         correction,
@@ -88,7 +88,7 @@ export function buildFraction(src: ExCalcul, rng: Rng, base: Base): GeneratedExe
       ...base,
       saisie: "fraction_num",
       fractionData: { num, den, shape },
-      prompt: "Ecris la fraction de la figure qui est coloriee.",
+      prompt: "Écris la fraction de la figure qui est coloriée.",
       answer: code,
       verif: { op: "val", a: code, b: 0 },
       correction,
@@ -116,12 +116,12 @@ export function buildFraction(src: ExCalcul, rng: Rng, base: Base): GeneratedExe
     const den = pick(rng, dens);
     const num = intBetween(rng, 1, den + 2); // parfois > 1
     const answer = num < den ? 0 : num === den ? 1 : 2;
-    const mot = answer === 0 ? "plus petite que 1" : answer === 1 ? "egale a 1" : "plus grande que 1";
+    const mot = answer === 0 ? "plus petite que 1" : answer === 1 ? "égale à 1" : "plus grande que 1";
     return {
       ...base,
       saisie: "compare",
       compareLabels: { left: `${num}/${den}`, right: "1" },
-      prompt: `Compare la fraction ${num}/${den} a 1.`,
+      prompt: `Compare la fraction ${num}/${den} à 1.`,
       answer,
       verif: { op: "cmp", a: num, b: den },
       correction: `1 = ${den}/${den}. Comme ${num} ${answer === 0 ? "<" : answer === 1 ? "=" : ">"} ${den}, ${num}/${den} est ${mot}.`,
@@ -143,14 +143,14 @@ export function buildFraction(src: ExCalcul, rng: Rng, base: Base): GeneratedExe
     const den = pick(rng, dens);
     const num = intBetween(rng, 1, den - 1);
     const code = fracCode(num, den);
-    const correction = `La bande va de 0 a 1, partagee en ${den} parts egales. La marque est a ${num} part${num > 1 ? "s" : ""} de 0 : c'est ${num}/${den}.`;
+    const correction = `La bande va de 0 à 1, partagée en ${den} parts égales. La marque est à ${num} part${num > 1 ? "s" : ""} de 0 : c'est ${num}/${den}.`;
     if (base.niveau <= 1) {
       return {
         ...base,
         saisie: "qcm",
         options: nommerOptions(rng, num, den),
         fractionData: { num, den, shape: "bande" },
-        prompt: "Sur la bande graduee de 0 a 1, quelle fraction est marquee ?",
+        prompt: "Sur la bande graduée de 0 à 1, quelle fraction est marquée ?",
         answer: code,
         verif: { op: "val", a: code, b: 0 },
         correction,
@@ -160,7 +160,7 @@ export function buildFraction(src: ExCalcul, rng: Rng, base: Base): GeneratedExe
       ...base,
       saisie: "fraction_num",
       fractionData: { num, den, shape: "bande" },
-      prompt: "Ecris la fraction marquee sur la bande graduee de 0 a 1.",
+      prompt: "Écris la fraction marquée sur la bande graduée de 0 à 1.",
       answer: code,
       verif: { op: "val", a: code, b: 0 },
       correction,

@@ -2231,8 +2231,11 @@ export function Session({
         )}
 
         {/* Schema en barres : aide optionnelle pendant la recherche (ne revele
-            jamais la reponse : l'inconnue reste « ? »). */}
-        {(phase === "answering" || phase === "sure") && ex.barres && (
+            jamais la reponse : l'inconnue reste « ? »). Quand l'exercice a aussi
+            un indice texte, le schema est rendu DANS le bloc Indice (ci-dessous) ;
+            ce bouton autonome ne reste que pour les exercices a schema sans indice
+            texte (ex. problemes aux niveaux superieurs). */}
+        {(phase === "answering" || phase === "sure") && ex.barres && !indice && (
           <div className="kk-stack" style={{ textAlign: "center" }}>
             {!showSchema ? (
               <button type="button" className="kk-btn" onClick={() => setShowSchema(true)}>
@@ -2263,7 +2266,12 @@ export function Session({
               <Lightbulb size={16} aria-hidden="true" /> Indice
             </button>
             {showIndice && (
-              <p className="kk-indice__texte kk-muted" aria-live="polite">{indice}</p>
+              <>
+                <p className="kk-indice__texte kk-muted" aria-live="polite">{indice}</p>
+                {/* Schema adapte en INDICE (ex. barre 52 = 37 + ?) : l'inconnue
+                    reste « ? », la reponse n'est jamais revelee. */}
+                {ex.barres && <BarModelView model={ex.barres} reveal={false} />}
+              </>
             )}
           </div>
         )}

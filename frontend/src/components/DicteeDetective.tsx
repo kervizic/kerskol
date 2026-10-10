@@ -228,7 +228,7 @@ export default function DicteeDetective({ niveau, bank, ctx, onSoumettre, onCont
               const options = niveau === 2 ? propositionsDictee(mot) : [];
               return (
                 <div key={pos} className="kk-dictee__corr" style={{ textAlign: "center" }}>
-                  <span className="kk-muted">« {motAffichable(mot)} » → </span>
+                  <span className="kk-muted">À corriger : « {motAffichable(mot)} » </span>
                   {options.length >= 2 ? (
                     <span className="kk-row" style={{ display: "inline-flex", gap: 6, flexWrap: "wrap", justifyContent: "center" }}>
                       {options.map((o) => (

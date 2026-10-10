@@ -80,7 +80,7 @@ function buildHeure(src: ExCalcul, rng: Rng, base: Base): GeneratedExercise {
       const h12 = h24 - 12;
       return {
         ...base,
-        prompt: `Il est ${h24} h. Sur une horloge a aiguilles, l'apres-midi, l'aiguille des heures indique [q] h.`,
+        prompt: `Il est ${h24} h. Sur une horloge à aiguilles, l'après-midi, l'aiguille des heures indique [q] h.`,
         answer: h12,
         verif: { op: "sub", a: h24, b: 12 },
         correction: `Apres midi, on enleve 12 : ${h24} − 12 = ${h12}. ${h24} h, c'est ${h12} h de l'apres-midi.`,
@@ -90,7 +90,7 @@ function buildHeure(src: ExCalcul, rng: Rng, base: Base): GeneratedExercise {
     const h24 = h12 + 12;
     return {
       ...base,
-      prompt: `Il est ${h12} h de l'apres-midi. Sur une horloge de 24 h, c'est [q] h.`,
+      prompt: `Il est ${h12} h de l'après-midi. Sur une horloge de 24 h, c'est [q] h.`,
       answer: h24,
       verif: { op: "add", a: h12, b: 12 },
       correction: `L'apres-midi, on ajoute 12 : ${h12} + 12 = ${h24}. ${h12} h de l'apres-midi, c'est ${h24} h.`,
@@ -125,7 +125,7 @@ function buildHeure(src: ExCalcul, rng: Rng, base: Base): GeneratedExercise {
     ...base,
     saisie: "heure",
     horlogeData,
-    prompt: "Ecris l'heure indiquee par l'horloge.",
+    prompt: "Écris l'heure indiquée par l'horloge.",
     answer: mins,
     verif: { op: "val", a: mins, b: 0 },
     correction,
@@ -288,7 +288,7 @@ function buildLongueur(src: ExCalcul, rng: Rng, base: Base): GeneratedExercise {
       ...base,
       saisie: "qcm",
       options,
-      prompt: `Pour mesurer ${o.obj}, quelle unite choisis-tu ?`,
+      prompt: `Pour mesurer ${o.obj}, quelle unité choisis-tu ?`,
       answer: code,
       verif: { op: "val", a: code, b: 0 },
       correction: `${o.obj.charAt(0).toUpperCase()}${o.obj.slice(1)} se mesure en ${o.u}. Rappel : 1 cm = 10 mm, 1 m = 100 cm, 1 km = 1000 m.`,
@@ -403,7 +403,7 @@ function buildMasseContenance(src: ExCalcul, rng: Rng, base: Base): GeneratedExe
       ...base,
       saisie: "qcm",
       options,
-      prompt: `Pour mesurer ${o.obj}, quelle unite choisis-tu ?`,
+      prompt: `Pour mesurer ${o.obj}, quelle unité choisis-tu ?`,
       answer: code,
       verif: { op: "val", a: code, b: 0 },
       correction: `On exprime ${o.obj} en ${o.u}. Rappel : 1 kg = 1000 g ; 1 L = 10 dL = 100 cL.`,
