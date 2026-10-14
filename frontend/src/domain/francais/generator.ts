@@ -44,6 +44,7 @@ import {
   type TempsCm1,
 } from "./conjugaison-cm1";
 import { normaliser } from "../diagnostic/lettres";
+import { aLe } from "./elision";
 import { itemsDe } from "./grammaire";
 import { itemsLexiqueDe } from "./lexique";
 
@@ -143,12 +144,14 @@ function infMaj(verbe: string): string {
 }
 
 // Titre-consigne selon le niveau : le temps n'est nomme qu'aux N1/N2. La
-// preposition correcte : « à l'impératif », sinon « au <temps> ».
+// preposition « a + le <temps> » est contractee correctement par `aLe` :
+// « au present / au futur / au passe compose / au passe simple » mais
+// « a l'imparfait / a l'imperatif » (elision devant voyelle). Les noms de temps
+// sont tous masculins singuliers.
 function consigneDe(verbe: string, temps: TempsAff, niveau: number): string {
   const base = `Conjugue le verbe ${infMaj(verbe)}`;
   if (niveau > 2) return base;
-  const suffixe = temps === "imperatif" ? "à l'impératif" : `au ${TEMPS_NOM[temps]}`;
-  return `${base} ${suffixe}`;
+  return `${base} ${aLe(TEMPS_NOM[temps])}`;
 }
 
 // Assemble la phrase (prefixe repere + sujet + case + apres) et la phrase

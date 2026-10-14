@@ -1030,7 +1030,7 @@ function buildExercise(
       prompt: `Il manque combien à ${n} pour faire ${target} ?`,
       answer,
       verif: { op: "sub", a: target, b: n },
-      correction: `On vise ${target} (la ${rang} juste au-dessus de ${n}). ${target} − ${n} = ${answer}.`,
+      correction: `On vise ${target} (${rangMasculin(rang) ? "le" : "la"} ${rang} juste au-dessus de ${n}). ${target} − ${n} = ${answer}.`,
       supportData:
         base.support === "droite"
           ? {
@@ -1374,6 +1374,15 @@ function lectureOptions(rng: Rng, n: number, max: number): QcmOption[] {
   return shuffle(rng, [...vals]).map((v) => ({ label: enLettres(v), value: v }));
 }
 
+// Genre des noms de rang : « millier » est MASCULIN, « dizaine / centaine »
+// sont FEMININS. Sert a accorder l'article et l'interrogatif pour ne jamais
+// produire « la millier » ni « Quelle est la millier » (-> « le millier »,
+// « Quel est le millier »). Fonction declaree (hoistee) : utilisable aussi par
+// la branche « complement » situee plus haut dans ce fichier.
+function rangMasculin(nom: string): boolean {
+  return nom === "millier";
+}
+
 function buildNumeration(src: ExCalcul, rng: Rng, base: Base): GeneratedExercise {
   const p = src.params || {};
   const type = String(p.type || "");
@@ -1508,10 +1517,10 @@ function buildNumeration(src: ExCalcul, rng: Rng, base: Base): GeneratedExercise
     const nom = pas === 1000 ? "millier" : pas === 100 ? "centaine" : "dizaine";
     return {
       ...base,
-      prompt: `Quelle est la ${nom} juste en dessous de ${n} ?`,
+      prompt: `${rangMasculin(nom) ? "Quel est le" : "Quelle est la"} ${nom} juste en dessous de ${n} ?`,
       answer: inf,
       verif: { op: "sub", a: n, b: reste },
-      correction: `${n} est entre ${inf} et ${inf + pas}. La ${nom} juste en dessous est ${inf}.`,
+      correction: `${n} est entre ${inf} et ${inf + pas}. ${rangMasculin(nom) ? "Le" : "La"} ${nom} juste en dessous est ${inf}.`,
     };
   }
 

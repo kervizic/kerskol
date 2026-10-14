@@ -21,7 +21,7 @@
 import { normaliser } from "./lettres";
 import { levenshtein, decrireAccent, type Diagnostic, type Faute } from "./diagnostic";
 import {
-  CONJ, TEMPS, TEMPS_LIBELLE, PERSONNES, avecPronom, pronom, forme,
+  CONJ, TEMPS, TEMPS_LIBELLE, PERSONNES, avecPronom, forme,
   type Temps, type Personne,
 } from "../francais/conjugaison";
 import {
@@ -57,8 +57,14 @@ function prefixeCommun(a: string, b: string): number {
 function msgAccent(bonne: string): string {
   return `N'oublie pas l'accent. Regarde bien, il y a ${decrireAccent(bonne)}. On écrit : ${bonne}.`;
 }
+// Pronom NON elide pour l'introduire seul dans une phrase (« Avec je, ... »).
+// `pronom()` elide « je » en « j' » devant une voyelle, ce qui donnerait
+// « Avec j', ... » : correct colle a un verbe (« j'aime »), faux isole.
+const PRONOM_SIMPLE: Record<Personne, string> = {
+  1: "je", 2: "tu", 3: "il", 4: "nous", 5: "vous", 6: "ils",
+};
 function msgMauvaisePersonne(p: Personne, bonne: string): string {
-  return `Attention à la personne. Avec ${pronom(p, bonne)}, on écrit : ${bonne}. On dit tu chantes avec un s, mais il chante sans s.`;
+  return `Attention à la personne. Avec ${PRONOM_SIMPLE[p]}, on écrit : ${bonne}. On dit tu chantes avec un s, mais il chante sans s.`;
 }
 // Repere temporel concret pour l'enfant (pas de grammaire abstraite).
 const REPERE_TEMPS: Record<Temps, string> = {
@@ -70,7 +76,7 @@ function msgMauvaisTemps(temps: Temps, bonne: string): string {
   return `Attention au temps. Ici c'est ${TEMPS_LIBELLE[temps]}, ${REPERE_TEMPS[temps]}. On écrit : ${bonne}. On dit hier je chantais, et demain je chanterai.`;
 }
 function msgTerminaison(p: Personne, bonne: string): string {
-  return `Bon début, mauvaise fin. Avec ${pronom(p, bonne)}, on écrit : ${bonne}. On dit tu joues avec un s à la fin, mais il joue sans s.`;
+  return `Bon début, mauvaise fin. Avec ${PRONOM_SIMPLE[p]}, on écrit : ${bonne}. On dit tu joues avec un s à la fin, mais il joue sans s.`;
 }
 function msgOrthoRadical(bonne: string): string {
   return `Regarde bien les lettres. On écrit : ${bonne}.`;

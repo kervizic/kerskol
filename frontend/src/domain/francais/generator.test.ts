@@ -73,13 +73,31 @@ describe("conjugaison — nouveau format phrase a completer", () => {
     }
   });
 
-  it("indique le temps au N1/N2, pas au N3/N4", () => {
+  it("indique le temps au N1/N2 avec la BONNE preposition, pas au N3/N4", () => {
+    // La preposition « a + le » se contracte : « au present/futur/passe compose »
+    // mais « a l'imparfait » (elision devant voyelle). Jamais « au imparfait ».
+    const SUFFIXE: Record<string, string> = {
+      "FR.CONJ.PRESENT": "au présent",
+      "FR.CONJ.FUTUR": "au futur",
+      "FR.CONJ.IMPARFAIT": "à l'imparfait",
+      "FR.CONJ.PASSE_COMPOSE": "au passé composé",
+    };
     for (const comp of [...SIMPLE, "FR.CONJ.PASSE_COMPOSE"]) {
+      const suffixe = SUFFIXE[comp];
       for (const seed of SEEDS.slice(0, 10)) {
-        expect(generateExercise(src(comp, 1), seed).conjPhrase!.consigne).toContain(" au ");
-        expect(generateExercise(src(comp, 2), seed).conjPhrase!.consigne).toContain(" au ");
-        expect(generateExercise(src(comp, 3), seed).conjPhrase!.consigne).not.toContain(" au ");
-        expect(generateExercise(src(comp, 4), seed).conjPhrase!.consigne).not.toContain(" au ");
+        for (const n of [1, 2]) {
+          const c = generateExercise(src(comp, n), seed).conjPhrase!.consigne;
+          expect(c.endsWith(` ${suffixe}`), `${comp} N${n}: ${c}`).toBe(true);
+        }
+        for (const n of [3, 4]) {
+          const c = generateExercise(src(comp, n), seed).conjPhrase!.consigne;
+          expect(c, `${comp} N${n}`).toBe(`Conjugue le verbe ${
+            infinitifAffiche(
+              generateExercise(src(comp, n), seed).conj?.verbe ??
+                generateExercise(src(comp, n), seed).conjPC!.verbe
+            ).toUpperCase()
+          }`);
+        }
       }
     }
   });

@@ -21,6 +21,7 @@
 // La correction porte un SCHEMA EN BARRES (modele tout/parties ou comparaison),
 // disponible aussi comme aide optionnelle pendant la recherche.
 
+import { commenceParVoyelle, elide } from "../francais/elision";
 import { intBetween, pick, shuffle, type Rng } from "./rng";
 import type {
   BarCell,
@@ -292,7 +293,21 @@ function renderGabarit(rng: Rng, competence: string, type: string, v: Vars): str
   const all = BANK[gabaritKey(competence)] ?? [];
   const matching = all.filter((g) => g.type === type);
   const g = matching.length > 0 ? pick(rng, matching) : pick(rng, all);
-  return g.t(v);
+  let texte = g.t(v);
+  // Elisions CIBLEES sur les mots variables connus (ne touche rien d'autre du
+  // gabarit, neutre si le mot commence par une consonne) :
+  //  - « de » + objet a initiale vocalique (« de images » -> « d'images ») ;
+  //  - « que » + prenom a initiale vocalique (« que Arthur » -> « qu'Arthur »),
+  //    y compris un prenom d'enfant personnalise (« que Éva » -> « qu'Éva »).
+  if (v.obj && commenceParVoyelle(v.obj)) {
+    texte = texte.replaceAll(`de ${v.obj}`, elide("de", v.obj));
+  }
+  for (const prenom of [v.hero, v.friend]) {
+    if (prenom && commenceParVoyelle(prenom)) {
+      texte = texte.replaceAll(`que ${prenom}`, elide("que", prenom));
+    }
+  }
+  return texte;
 }
 
 function baseVars(hero: string, friend: string, obj: string, grp: string): Vars {

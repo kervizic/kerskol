@@ -88,7 +88,8 @@ export function diagnostiquerMot(correct: string, saisie: string): DiagnosticMot
 
 // Message de bilan d'une dictee avec papa ou maman (toujours valorisant).
 export function messageBilanDictee(juste: number, total: number): string {
-  if (total > 0 && juste === total) return `Bravo ! Tu as écrit les ${total} mots sans erreur !`;
+  if (total > 0 && juste === total)
+    return `Bravo ! Tu as écrit ${total > 1 ? `les ${total} mots` : "le mot"} sans erreur !`;
   if (juste === 0) return `Tu as bien essayé ! On revoit ces mots ensemble, tu vas y arriver.`;
   return `Super, tu as réussi ${juste} mot${juste > 1 ? "s" : ""} sur ${total} ! On revoit les autres ensemble.`;
 }

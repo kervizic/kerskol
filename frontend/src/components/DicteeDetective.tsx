@@ -152,7 +152,7 @@ export default function DicteeDetective({ niveau, bank, ctx, onSoumettre, onCont
       <p className="kk-lead" style={{ textAlign: "center", margin: "0 auto" }}>
         <Search size={18} aria-hidden="true" />{" "}
         {annonce
-          ? `Trouve les ${texte.nbErreurs} mot${texte.nbErreurs > 1 ? "s" : ""} piégé${texte.nbErreurs > 1 ? "s" : ""}`
+          ? `Trouve ${texte.nbErreurs > 1 ? `les ${texte.nbErreurs} mots piégés` : "le mot piégé"}`
           : "Trouve les mots piégés (il peut y en avoir un ou plusieurs)"}
         {corrige ? ", puis corrige-les." : "."}
         {lireDictee && (
