@@ -119,3 +119,48 @@ avant un point. `frontend/src/domain/francais/elision.test.ts` teste le helper.
 
 Base de données : aucune de ces fautes n'est stockée (le texte est généré côté
 client, les banques SQL authored sont saines) ; aucune migration nécessaire.
+
+## Relecture des questions à choix (QCM) — octobre 2026
+
+Défaut signalé par Manu, vu en séance réelle d'Iris : « Que font les êtres
+vivants pour avoir des petits ? » → « ils se reproduisent / ils se cassent /
+ils rouillent ». Deux problèmes : des **mauvaises réponses hors champ**
+(« se casser », « rouiller » appartiennent au monde des objets/du métal, pas du
+vivant : l'enfant élimine sans rien savoir) et une **notion abstraite** (« se
+reproduire ») posée sans exemple concret.
+
+Règles appliquées à toutes les questions à choix : (a) chaque mot de la question
+et des réponses est connu d'un enfant de 8 ans, sinon expliqué simplement ;
+(b) mauvaises réponses plausibles et du même domaine, jamais devinables par
+élimination ; (c) exemple concret quand la notion est abstraite ;
+(d) bienveillance et programme respectés. Le serveur reste seul juge : on ne
+touche QUE l'énoncé, les distracteurs et l'explication côté front ; la réponse
+`attendu` est **inchangée**, donc aucune migration SQL et les golden tests
+croisés front ↔ SQL restent verts.
+
+Garde-fou automatique transverse : `frontend/src/domain/qcm-choix.test.ts`
+collecte TOUTES les banques à choix (QM, Sciences, Histoire, Géographie, EMC,
+Grammaire, Lexique, Compréhension, Écriture, Données, Géométrie) et refuse
+(A) un mot de la liste `MOTS_HORS_CE2` dans la consigne ou une option s'il n'est
+pas expliqué dans l'explication, et (B) un distracteur hors champ (règles
+`REGLES_DISTRACTEURS` : contexte → mots interdits) ou une option « blague »
+(`OPTIONS_ABSURDES`). Les listes sont extensibles : on y ajoute chaque cas
+trouvé. Note : on n'y met jamais une notion qui EST le sujet du jour (symétrie,
+révolution, préfixe…), qui est enseignée par la séquence et reprise dans
+l'explication.
+
+Questions corrigées (3 défauts trouvés par le garde-fou + 1 amélioration) :
+
+| # | Clé | Avant | Après |
+|---|-----|-------|-------|
+| 1 | `qm-viv-car-n3-b` (Le vivant) | « Que font les êtres vivants pour avoir des petits ? » — *ils se reproduisent / ils se cassent / ils rouillent* | « La chatte a des chatons et la poule a des poussins. Comment dit-on quand les animaux ont des petits ? » — *ils se reproduisent / ils grandissent / ils se nourrissent* |
+| 2 | `st-viv-n1-b` (Sciences) | « Un animal qui pond des œufs est un animal… » — *ovipare / vivipare / minéral* (minéral hors champ, vivipare non expliqué) | mêmes mots mais *ovipare / vivipare / carnivore* + explication qui définit ovipare ET vivipare |
+| 3 | `st-viv-n2-a` (Sciences) | « …dont les petits naissent déjà formés… » — *vivipare / ovipare / végétal* (végétal hors champ, ovipare non expliqué) | *vivipare / ovipare / herbivore* + explication qui définit vivipare ET ovipare |
+| 4 | `emc-res-pol-n1-a` (EMC) | « Le matin, en arrivant… que dis-tu ? » — *bonjour / rien du tout* (non-réponse, devinable) | *bonjour / au revoir* (« au revoir » se dit quand on part : distracteur instructif) |
+
+Reste du corpus : les ~1340 autres tests (dont les golden front ↔ SQL par
+matière) restent verts ; le détecteur n'a pas trouvé d'autre distracteur hors
+champ ni mot hors CE2 non expliqué. La liste `MOTS_HORS_CE2` est volontairement
+restreinte au jargon de classification scientifique (ovipare, vivipare,
+photosynthèse, métamorphose, condensation…) qui n'a aucun sens courant pour un
+enfant et doit toujours être glosé.

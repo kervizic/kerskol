@@ -65,8 +65,8 @@ export const BANQUE_RESPECT: QmItem[] = [
   // =======================================================================
   { cle: "emc-res-pol-n1-a", competence: "EMC.RESPECT.POLITESSE", niveau: 1, format: "qcm",
     consigne: "Le matin, en arrivant dans la classe, que dis-tu ?",
-    options: ["bonjour", "rien du tout"], attendu: "bonjour",
-    explication: "On dit bonjour en arrivant : c'est une façon gentille de saluer les autres." },
+    options: ["bonjour", "au revoir"], attendu: "bonjour",
+    explication: "On dit bonjour en arrivant : c'est une façon gentille de saluer les autres. « Au revoir », lui, se dit quand on part." },
   { cle: "emc-res-pol-n1-b", competence: "EMC.RESPECT.POLITESSE", niveau: 1, format: "qcm",
     consigne: "Un camarade te prête son crayon. Que dis-tu ?",
     options: ["merci", "donne encore"], attendu: "merci",
