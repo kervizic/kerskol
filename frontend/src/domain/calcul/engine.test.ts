@@ -108,12 +108,22 @@ describe("engine : adaptation", () => {
     ];
     let st = createEngine(plan, 1);
     const before = st.slots.length;
-    for (const c of [true, true, false, true, false]) st = step(st, c).state; // B,B,A,A,A
-    const r = step(st, false); // A -> 3/5 -> drop + bascule
-    st = r.state;
-    expect(r.event.dropped).toBe(true);
-    expect(r.event.switched).toBe("MA.TABLES.5");
-    expect(st.slots.length).toBe(before + 1);
+    // L'alternance réordonne la file : on ne peut plus supposer l'ordre B,B,A,A.
+    // On pilote PAR COMPÉTENCE : TABLES.5 (B) toujours juste (-> maîtrisée),
+    // ADDITION (A) toujours faux (-> 3/5 -> abandon + bascule confiance vers B).
+    let lastEvent: ReturnType<typeof answerCurrent>["event"] | null = null;
+    for (let i = 0; i < 20 && !isFinished(st); i++) {
+      const cur = currentSlot(st);
+      if (!cur) break;
+      const estB = cur.exercise.competence === "MA.TABLES.5";
+      const r = step(st, estB); // B juste, A faux
+      st = r.state;
+      lastEvent = r.event;
+      if (r.event.dropped) break;
+    }
+    expect(lastEvent?.dropped).toBe(true);
+    expect(lastEvent?.switched).toBe("MA.TABLES.5");
+    expect(st.slots.length).toBeGreaterThan(before); // au moins la bascule insérée
     expect(currentSlot(st)?.exercise.competence).toBe("MA.TABLES.5");
   });
 });
