@@ -32,6 +32,7 @@ nécessaire que si une **bonne réponse** change (backup + dry-run BEGIN/ROLLBAC
 |---|---|---|---|---|---|---|
 | QLM / Questionner le monde (QM, CE2) | 208 | 200 | 0 | 2 | 6 | 8 |
 | Français CE2 (grammaire, lexique, compréhension, écriture, conjugaison) | 1413 | 1385 | 2 | 9 | 17 | 16 (0 migration) |
+| Maths CE2 (calcul/problèmes, géométrie, données, mesures) | 335 + gabarits | - | 2 | 9 | 6 | 13 (+2 garde-fous) |
 
 ## QLM / Questionner le monde (QM, CE2)
 
@@ -90,3 +91,31 @@ Sand (`bibliotheque.ts`) a montré que « un palais enchanté » est fidèle à
 l'œuvre : c'est le micro-texte qui avait été trop coupé. On a donc **restauré le
 texte** plutôt que de dégrader une réponse juste → **aucune migration**, `attendu`
 inchangé, golden front↔SQL verts.
+
+## Maths CE2
+
+Banques statiques relues : géométrie (136 items, recalcul coordonnées à la main),
+données/tableaux (88 items, chaque total recalculé). Générateurs relus (gabarits
+de texte, le serveur recalcule le résultat) : problèmes (95 gabarits), mesures /
+heure / grandeurs. Sous-agents : 4. **Données : 88/88 exactes.**
+
+### Tableau avant / après (principaux)
+
+| Clé / gabarit | Gravité | Critère | Avant | Après |
+|---|---|---|---|---|
+| `geo-ang-n3-droit` | **Bloquant** | 1, 8 | « Clique le sommet où l'angle est droit », figure A(25,25) B(80,40) C(40,85) : **aucun angle droit** (≈56°/61°/64°) | triangle rectangle réel en C : A(40,30) B(85,85) C(40,85), CA⊥CB |
+| problèmes : pronom « il » | **Bloquant** | 7 | « **Iris** en a-t-**il** ? », « **Il** paie », genre masculin forcé alors que l'héroïne (Iris, ou tout enfant) a un genre inconnu | tournures neutres (inversion nom-sujet « Combien de billes a Iris ? », prénom au lieu de « il ») sur ~20 gabarits |
+| problèmes : accord « 1 billes » | À corriger | 7 | « reçu **1 billes** », « 1 billes bleus » quand la quantité vaut 1 | helper `qteObj` → « 1 bille », adjectif accordé (« 1 bille bleue ») |
+| problèmes : « bocaux » | À corriger | 7 | « Chaque **bocaux** contient… », « par **bocaux** » | table de singuliers → « bocal » |
+| mesures : « après-midi » le soir | À corriger | 3, 8 | « 23 h … de l'**après-midi** », « 11 h de l'après-midi » (= 23 h) | plage restreinte à l'après-midi réel (13 h-18 h) |
+| mesures : accents | À corriger | 7 | « combien de temps **s'ecoule-t-il** », « **quantite** », « **cuillere** », « **pese** », « de 0 **a** » | « s'écoule », « quantité », « cuillère », « pèse », « à » |
+| mesures : « mesure 3 kg » | À corriger | 6, 8 | gabarit conversion « **mesure** 3 kg / 9 km » (verbe faux, taille impossible) | « Combien font 3 kg en g ? » (neutre) |
+| problèmes : « doit-il écrire » | À corriger | 7 | pronom genré | « quel nombre **faut-il** écrire » (impersonnel) |
+| problèmes : contextes absurdes | À corriger | 6, 8 | « un **arbre** porte des crayons », « a **mangé** des cailloux » | « une boîte contient… », « a **utilisé**… » |
+| `geo-voc-n3-angle-non` | À corriger | 8, 9 | explication « coin trop **ouvert** » alors que l'angle (~67°) est **fermé** | « coin trop fermé (trop pointu) » |
+| `geo-fig-n2-dev-triangle` | Suggestion | 6 | exemple « une part de **pizza** a trois côtés » (côté arrondi) | « une **équerre** a trois côtés droits » |
+
+Garde-fous ajoutés (`enonces-oraux.test.ts`, lot « Revue instituteur ») :
+(1) aucun énoncé ne dit « 1 » + objet au pluriel (accord) ; (2) aucun pronom
+masculin accordé sur un prénom de genre inconnu (tournures impersonnelles
+permises). Tests : `calcul`, `geometrie`, `donnees`, `qcm-choix` (692) + `tsc` verts.

@@ -43,6 +43,26 @@ function fmt(n: number): string {
   const grouped = s.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
   return (n < 0 ? "-" : "") + grouped;
 }
+
+// Singulier d'un contenant de GRP. `replace(/s$/)` echoue sur les pluriels
+// irreguliers (« bocaux » -> « bocal ») : on garde une table explicite.
+const GRP_SINGULIER: Record<string, string> = {
+  sachets: "sachet", "boîtes": "boîte", paquets: "paquet",
+  paniers: "panier", piles: "pile", bocaux: "bocal",
+};
+function grpSing(grp: string): string {
+  return GRP_SINGULIER[grp] ?? grp.replace(/s$/, "");
+}
+// Accord singulier/pluriel d'une quantite d'objets : « 1 bille » et non
+// « 1 billes ». Les objets sont stockes au pluriel ; seul « cailloux » est
+// irregulier. Pour n >= 2, le rendu est identique a `${fmt(n)} ${obj}`.
+const OBJ_SINGULIER: Record<string, string> = { cailloux: "caillou" };
+function objSing(obj: string): string {
+  return OBJ_SINGULIER[obj] ?? obj.replace(/s$/, "");
+}
+function qteObj(n: number, obj: string): string {
+  return `${fmt(n)} ${n <= 1 ? objSing(obj) : obj}`;
+}
 // Somme d'argent (centimes -> « 12 € » ou « 12 € 50 »).
 function euro(cents: number): string {
   const e = Math.floor(cents / 100);
@@ -123,50 +143,50 @@ export interface Gabarit {
 
 // ADD_SUB : reunion / ajout / retrait / de_plus / de_moins / etat_recu / etat_don
 const ADD_SUB_BANK: Gabarit[] = [
-  { type: "reunion", t: (v) => `${v.hero} ramasse ${fmt(v.n1)} ${v.obj} le matin et ${fmt(v.n2)} ${v.obj} l'après-midi. Combien de ${v.obj} en tout ?` },
-  { type: "reunion", t: (v) => `Dans une boîte il y a ${fmt(v.n1)} ${v.obj} rouges et ${fmt(v.n2)} ${v.obj} bleus. Combien de ${v.obj} en tout ?` },
+  { type: "reunion", t: (v) => `${v.hero} ramasse ${qteObj(v.n1, v.obj)} le matin et ${qteObj(v.n2, v.obj)} l'après-midi. Combien de ${v.obj} en tout ?` },
+  { type: "reunion", t: (v) => `Dans une boîte il y a ${qteObj(v.n1, v.obj)} rouge${v.n1 > 1 ? "s" : ""} et ${qteObj(v.n2, v.obj)} bleu${v.n2 > 1 ? "s" : ""}. Combien de ${v.obj} en tout ?` },
   { type: "reunion", t: (v) => `${v.hero} et ${v.friend} mettent leurs ${v.obj} ensemble : ${fmt(v.n1)} et ${fmt(v.n2)}. Combien en tout ?` },
-  { type: "ajout", t: (v) => `${v.hero} a ${fmt(v.n1)} ${v.obj}. ${v.friend} lui en donne ${fmt(v.n2)}. Combien ${v.hero} en a-t-il maintenant ?` },
-  { type: "ajout", t: (v) => `Il y avait ${fmt(v.n1)} ${v.obj} dans le panier. On en ajoute ${fmt(v.n2)}. Combien y en a-t-il maintenant ?` },
-  { type: "retrait", t: (v) => `${v.hero} a ${fmt(v.n1)} ${v.obj} et en donne ${fmt(v.n2)} à ${v.friend}. Combien lui en reste-t-il ?` },
-  { type: "retrait", t: (v) => `Il y avait ${fmt(v.n1)} ${v.obj} dans la boîte. On en enlève ${fmt(v.n2)}. Combien en reste-t-il ?` },
-  { type: "retrait", t: (v) => `${v.hero} avait ${fmt(v.n1)} ${v.obj}. Il en a perdu ${fmt(v.n2)}. Combien lui en reste-t-il ?` },
-  { type: "de_plus", t: (v) => `${v.hero} a ${fmt(v.n1)} ${v.obj}. ${v.friend} en a ${fmt(v.n2)} de plus. Combien ${v.friend} a-t-il de ${v.obj} ?` },
-  { type: "de_plus", t: (v) => `${v.friend} a ${fmt(v.n2)} ${v.obj} de plus que ${v.hero}, qui en a ${fmt(v.n1)}. Combien ${v.friend} en a-t-il ?` },
-  { type: "de_moins", t: (v) => `${v.hero} a ${fmt(v.n1)} ${v.obj}. ${v.friend} en a ${fmt(v.n2)} de moins. Combien ${v.friend} a-t-il de ${v.obj} ?` },
-  { type: "de_moins", t: (v) => `${v.friend} a ${fmt(v.n2)} ${v.obj} de moins que ${v.hero}, qui en a ${fmt(v.n1)}. Combien ${v.friend} en a-t-il ?` },
-  { type: "etat_recu", t: (v) => `${v.hero} a reçu ${fmt(v.n2)} ${v.obj}. Maintenant il en a ${fmt(v.n1)}. Combien en avait-il avant ?` },
-  { type: "etat_recu", t: (v) => `Après avoir gagné ${fmt(v.n2)} ${v.obj}, ${v.hero} en a ${fmt(v.n1)}. Combien en avait-il au départ ?` },
-  { type: "etat_don", t: (v) => `${v.hero} a donné ${fmt(v.n2)} ${v.obj} et il lui en reste ${fmt(v.n1)}. Combien en avait-il au début ?` },
-  { type: "etat_don", t: (v) => `${v.hero} a mangé ${fmt(v.n2)} ${v.obj}. Il lui en reste ${fmt(v.n1)}. Combien en avait-il au début ?` },
-  { type: "reunion", t: (v) => `Sur l'étagère, ${fmt(v.n1)} ${v.obj} à gauche et ${fmt(v.n2)} ${v.obj} à droite. Combien de ${v.obj} en tout ?` },
-  { type: "retrait", t: (v) => `${v.hero} a ${fmt(v.n1)} ${v.obj}. ${v.friend} lui en prend ${fmt(v.n2)}. Combien lui en reste-t-il ?` },
+  { type: "ajout", t: (v) => `${v.hero} a ${qteObj(v.n1, v.obj)}. ${v.friend} lui en donne ${fmt(v.n2)}. Combien de ${v.obj} a ${v.hero} maintenant ?` },
+  { type: "ajout", t: (v) => `Il y avait ${qteObj(v.n1, v.obj)} dans le panier. On en ajoute ${fmt(v.n2)}. Combien y en a-t-il maintenant ?` },
+  { type: "retrait", t: (v) => `${v.hero} a ${qteObj(v.n1, v.obj)} et en donne ${fmt(v.n2)} à ${v.friend}. Combien lui en reste-t-il ?` },
+  { type: "retrait", t: (v) => `Il y avait ${qteObj(v.n1, v.obj)} dans la boîte. On en enlève ${fmt(v.n2)}. Combien en reste-t-il ?` },
+  { type: "retrait", t: (v) => `${v.hero} avait ${qteObj(v.n1, v.obj)}. ${v.hero} en a perdu ${fmt(v.n2)}. Combien lui en reste-t-il ?` },
+  { type: "de_plus", t: (v) => `${v.hero} a ${qteObj(v.n1, v.obj)}. ${v.friend} en a ${fmt(v.n2)} de plus. Combien de ${v.obj} a ${v.friend} ?` },
+  { type: "de_plus", t: (v) => `${v.friend} a ${qteObj(v.n2, v.obj)} de plus que ${v.hero}, qui en a ${fmt(v.n1)}. Combien de ${v.obj} a ${v.friend} ?` },
+  { type: "de_moins", t: (v) => `${v.hero} a ${qteObj(v.n1, v.obj)}. ${v.friend} en a ${fmt(v.n2)} de moins. Combien de ${v.obj} a ${v.friend} ?` },
+  { type: "de_moins", t: (v) => `${v.friend} a ${qteObj(v.n2, v.obj)} de moins que ${v.hero}, qui en a ${fmt(v.n1)}. Combien de ${v.obj} a ${v.friend} ?` },
+  { type: "etat_recu", t: (v) => `${v.hero} a reçu ${qteObj(v.n2, v.obj)}. Maintenant ${v.hero} en a ${fmt(v.n1)}. Combien en avait ${v.hero} avant ?` },
+  { type: "etat_recu", t: (v) => `Après avoir gagné ${qteObj(v.n2, v.obj)}, ${v.hero} en a ${fmt(v.n1)}. Combien en avait ${v.hero} au départ ?` },
+  { type: "etat_don", t: (v) => `${v.hero} a donné ${qteObj(v.n2, v.obj)} et il lui en reste ${fmt(v.n1)}. Combien en avait ${v.hero} au début ?` },
+  { type: "etat_don", t: (v) => `${v.hero} a utilisé ${qteObj(v.n2, v.obj)}. Il lui en reste ${fmt(v.n1)}. Combien en avait ${v.hero} au début ?` },
+  { type: "reunion", t: (v) => `Sur l'étagère, ${qteObj(v.n1, v.obj)} à gauche et ${qteObj(v.n2, v.obj)} à droite. Combien de ${v.obj} en tout ?` },
+  { type: "retrait", t: (v) => `${v.hero} a ${qteObj(v.n1, v.obj)}. ${v.friend} lui en prend ${fmt(v.n2)}. Combien lui en reste-t-il ?` },
 ];
 
 // MULT_DIV : groupement / partage / fois_plus
 const MULT_DIV_BANK: Gabarit[] = [
-  { type: "groupement", t: (v) => `${v.hero} range ses ${v.obj} dans ${fmt(v.n1)} ${v.grp} de ${fmt(v.n2)} ${v.obj} chacun. Combien de ${v.obj} en tout ?` },
-  { type: "groupement", t: (v) => `Il y a ${fmt(v.n1)} ${v.grp}. Chaque ${v.grp.replace(/s$/, "")} contient ${fmt(v.n2)} ${v.obj}. Combien de ${v.obj} en tout ?` },
-  { type: "groupement", t: (v) => `${v.hero} fait ${fmt(v.n1)} rangées de ${fmt(v.n2)} ${v.obj}. Combien de ${v.obj} en tout ?` },
-  { type: "groupement", t: (v) => `${v.friend} achète ${fmt(v.n1)} ${v.grp} de ${fmt(v.n2)} ${v.obj}. Combien de ${v.obj} au total ?` },
-  { type: "groupement", t: (v) => `Une affiche montre ${fmt(v.n1)} fois ${fmt(v.n2)} ${v.obj}. Combien de ${v.obj} en tout ?` },
-  { type: "partage", t: (v) => `${v.hero} partage ${fmt(v.n1)} ${v.obj} entre ${fmt(v.n2)} amis, à parts égales. Combien de ${v.obj} par ami ?` },
-  { type: "partage", t: (v) => `On range ${fmt(v.n1)} ${v.obj} dans ${fmt(v.n2)} ${v.grp} identiques. Combien de ${v.obj} par ${v.grp.replace(/s$/, "")} ?` },
-  { type: "partage", t: (v) => `${fmt(v.n1)} ${v.obj} sont distribués également à ${fmt(v.n2)} enfants. Combien chacun en reçoit-il ?` },
-  { type: "partage", t: (v) => `${v.hero} met ${fmt(v.n1)} ${v.obj} en ${fmt(v.n2)} tas égaux. Combien de ${v.obj} dans chaque tas ?` },
-  { type: "fois_plus", t: (v) => `${v.hero} a ${fmt(v.n1)} ${v.obj}. ${v.friend} en a ${fmt(v.n2)} fois plus. Combien ${v.friend} a-t-il de ${v.obj} ?` },
-  { type: "fois_plus", t: (v) => `${v.friend} a ${fmt(v.n2)} fois plus de ${v.obj} que ${v.hero}, qui en a ${fmt(v.n1)}. Combien ${v.friend} en a-t-il ?` },
-  { type: "fois_plus", t: (v) => `Un arbre porte ${fmt(v.n1)} ${v.obj}. Le grand arbre d'à côté en a ${fmt(v.n2)} fois plus. Combien en a-t-il ?` },
-  { type: "groupement", t: (v) => `${v.hero} colle ${fmt(v.n2)} ${v.obj} sur chacune de ses ${fmt(v.n1)} pages. Combien de ${v.obj} en tout ?` },
-  { type: "partage", t: (v) => `${fmt(v.n1)} ${v.obj} à partager équitablement entre ${fmt(v.n2)} boîtes. Combien par boîte ?` },
-  { type: "fois_plus", t: (v) => `${v.hero} a ${fmt(v.n1)} ${v.obj}. Il veut en avoir ${fmt(v.n2)} fois plus. Combien lui en faudra-t-il ?` },
-  { type: "groupement", t: (v) => `Dans le jardin, ${fmt(v.n1)} rangs de ${fmt(v.n2)} ${v.obj}. Combien de ${v.obj} en tout ?` },
+  { type: "groupement", t: (v) => `${v.hero} range ses ${v.obj} dans ${fmt(v.n1)} ${v.grp} de ${qteObj(v.n2, v.obj)} chacun. Combien de ${v.obj} en tout ?` },
+  { type: "groupement", t: (v) => `Il y a ${fmt(v.n1)} ${v.grp}. Chaque ${grpSing(v.grp)} contient ${qteObj(v.n2, v.obj)}. Combien de ${v.obj} en tout ?` },
+  { type: "groupement", t: (v) => `${v.hero} fait ${fmt(v.n1)} rangées de ${qteObj(v.n2, v.obj)}. Combien de ${v.obj} en tout ?` },
+  { type: "groupement", t: (v) => `${v.friend} achète ${fmt(v.n1)} ${v.grp} de ${qteObj(v.n2, v.obj)}. Combien de ${v.obj} au total ?` },
+  { type: "groupement", t: (v) => `Une affiche montre ${fmt(v.n1)} fois ${qteObj(v.n2, v.obj)}. Combien de ${v.obj} en tout ?` },
+  { type: "partage", t: (v) => `${v.hero} partage ${qteObj(v.n1, v.obj)} entre ${fmt(v.n2)} amis, à parts égales. Combien de ${v.obj} par ami ?` },
+  { type: "partage", t: (v) => `On range ${qteObj(v.n1, v.obj)} dans ${fmt(v.n2)} ${v.grp} identiques. Combien de ${v.obj} par ${grpSing(v.grp)} ?` },
+  { type: "partage", t: (v) => `${qteObj(v.n1, v.obj)} sont distribués également à ${fmt(v.n2)} enfants. Combien chacun en reçoit-il ?` },
+  { type: "partage", t: (v) => `${v.hero} met ${qteObj(v.n1, v.obj)} en ${fmt(v.n2)} tas égaux. Combien de ${v.obj} dans chaque tas ?` },
+  { type: "fois_plus", t: (v) => `${v.hero} a ${qteObj(v.n1, v.obj)}. ${v.friend} en a ${fmt(v.n2)} fois plus. Combien de ${v.obj} a ${v.friend} ?` },
+  { type: "fois_plus", t: (v) => `${v.friend} a ${fmt(v.n2)} fois plus de ${v.obj} que ${v.hero}, qui en a ${fmt(v.n1)}. Combien de ${v.obj} a ${v.friend} ?` },
+  { type: "fois_plus", t: (v) => `Une boîte contient ${qteObj(v.n1, v.obj)}. Une autre boîte en a ${fmt(v.n2)} fois plus. Combien de ${v.obj} dans la grande boîte ?` },
+  { type: "groupement", t: (v) => `${v.hero} colle ${qteObj(v.n2, v.obj)} sur chacune de ses ${fmt(v.n1)} pages. Combien de ${v.obj} en tout ?` },
+  { type: "partage", t: (v) => `${qteObj(v.n1, v.obj)} à partager équitablement entre ${fmt(v.n2)} boîtes. Combien par boîte ?` },
+  { type: "fois_plus", t: (v) => `${v.hero} a ${qteObj(v.n1, v.obj)}. ${v.hero} veut en avoir ${fmt(v.n2)} fois plus. Combien lui en faudra-t-il en tout ?` },
+  { type: "groupement", t: (v) => `Dans le jardin, ${fmt(v.n1)} rangs de ${qteObj(v.n2, v.obj)}. Combien de ${v.obj} en tout ?` },
   // QUOTITION (sens GROUPEMENT de la division) : on connait le CONTENU d'un
   // paquet (n2) et le TOTAL (n1) ; on cherche le NOMBRE de paquets (n1 ÷ n2).
-  { type: "quotition", t: (v) => `${v.hero} range ${fmt(v.n1)} ${v.obj} par paquets de ${fmt(v.n2)}. Combien de paquets peut-il faire ?` },
-  { type: "quotition", t: (v) => `On met ${fmt(v.n1)} ${v.obj} dans des ${v.grp} de ${fmt(v.n2)} ${v.obj} chacun. Combien de ${v.grp} faut-il ?` },
-  { type: "quotition", t: (v) => `Avec ${fmt(v.n1)} ${v.obj}, combien de rangées de ${fmt(v.n2)} peut-on faire ?` },
-  { type: "quotition", t: (v) => `${v.hero} a ${fmt(v.n1)} ${v.obj}. Il en met ${fmt(v.n2)} dans chaque sachet. Combien de sachets remplit-il ?` },
+  { type: "quotition", t: (v) => `${v.hero} range ${qteObj(v.n1, v.obj)} par paquets de ${fmt(v.n2)}. Combien de paquets cela fait-il ?` },
+  { type: "quotition", t: (v) => `On met ${qteObj(v.n1, v.obj)} dans des ${v.grp} de ${qteObj(v.n2, v.obj)} chacun. Combien de ${v.grp} faut-il ?` },
+  { type: "quotition", t: (v) => `Avec ${qteObj(v.n1, v.obj)}, combien de rangées de ${fmt(v.n2)} peut-on faire ?` },
+  { type: "quotition", t: (v) => `${v.hero} a ${qteObj(v.n1, v.obj)}. ${v.hero} en met ${fmt(v.n2)} dans chaque sachet. Combien de sachets en tout ?` },
 ];
 
 // MONNAIE : composer / rendre / comparer
@@ -178,7 +198,7 @@ const MONNAIE_BANK: Gabarit[] = [
   { type: "composer", t: (v) => `Fais ${v.sum} avec des billets et des pièces.` },
   { type: "composer", t: (v) => `Dans sa tirelire, ${v.hero} veut mettre ${v.sum}. Compose cette somme.` },
   { type: "composer", t: (v) => `Compose ${v.sum} pour acheter ${v.item}.` },
-  { type: "rendre", t: (v) => `${v.hero} achète ${v.item} à ${v.price}. Il paie avec ${v.paid}. Combien lui rend-on ?` },
+  { type: "rendre", t: (v) => `${v.hero} achète ${v.item} à ${v.price}. ${v.hero} paie avec ${v.paid}. Combien lui rend-on ?` },
   { type: "rendre", t: (v) => `${v.item} coûte ${v.price}. ${v.hero} donne ${v.paid}. Combien le marchand rend-il ?` },
   { type: "rendre", t: (v) => `${v.hero} paie ${v.item} (${v.price}) avec un billet de ${v.paid}. Combien d'argent lui rend-on ?` },
   { type: "rendre", t: (v) => `Pour ${v.item} à ${v.price}, ${v.hero} tend ${v.paid}. Combien lui rend-on ?` },
@@ -190,36 +210,36 @@ const MONNAIE_BANK: Gabarit[] = [
 
 // DEUX_ETAPES : mul_add / mul_sub / add_div / add_sub
 const DEUX_ETAPES_BANK: Gabarit[] = [
-  { type: "mul_add", t: (v) => `${v.hero} achète ${fmt(v.n1)} ${v.grp} de ${fmt(v.n2)} ${v.obj}, puis trouve ${fmt(cFrom(v))} ${v.obj} de plus. Combien de ${v.obj} en tout ?` },
-  { type: "mul_add", t: (v) => `Dans ${fmt(v.n1)} ${v.grp} il y a ${fmt(v.n2)} ${v.obj} chacun. On ajoute ${fmt(cFrom(v))} ${v.obj}. Combien de ${v.obj} en tout ?` },
-  { type: "mul_add", t: (v) => `${v.hero} range ${fmt(v.n1)} rangées de ${fmt(v.n2)} ${v.obj}, et il en reste ${fmt(cFrom(v))} à côté. Combien de ${v.obj} en tout ?` },
-  { type: "mul_add", t: (v) => `${v.friend} a ${fmt(v.n1)} ${v.grp} de ${fmt(v.n2)} ${v.obj}, plus ${fmt(cFrom(v))} ${v.obj} dans sa poche. Combien en tout ?` },
-  { type: "mul_sub", t: (v) => `${v.hero} a ${fmt(v.n1)} ${v.grp} de ${fmt(v.n2)} ${v.obj}. Il en donne ${fmt(cFrom(v))}. Combien lui en reste-t-il ?` },
-  { type: "mul_sub", t: (v) => `Il y a ${fmt(v.n1)} ${v.grp} de ${fmt(v.n2)} ${v.obj}. On en enlève ${fmt(cFrom(v))}. Combien en reste-t-il ?` },
-  { type: "mul_sub", t: (v) => `${v.hero} prépare ${fmt(v.n1)} rangées de ${fmt(v.n2)} ${v.obj} puis en retire ${fmt(cFrom(v))}. Combien en reste-t-il ?` },
-  { type: "add_div", t: (v) => `${v.hero} a ${fmt(v.n1)} ${v.obj} et ${v.friend} en a ${fmt(v.n2)}. Ils partagent le tout entre ${fmt(cFrom(v))} boîtes égales. Combien par boîte ?` },
-  { type: "add_div", t: (v) => `On réunit ${fmt(v.n1)} et ${fmt(v.n2)} ${v.obj}, puis on les partage en ${fmt(cFrom(v))} parts égales. Combien par part ?` },
-  { type: "add_div", t: (v) => `${fmt(v.n1)} ${v.obj} rouges et ${fmt(v.n2)} ${v.obj} verts sont rangés également dans ${fmt(cFrom(v))} ${v.grp}. Combien par ${v.grp.replace(/s$/, "")} ?` },
-  { type: "add_sub", t: (v) => `${v.hero} a ${fmt(v.n1)} ${v.obj}, en gagne ${fmt(v.n2)}, puis en donne ${fmt(cFrom(v))}. Combien lui en reste-t-il ?` },
-  { type: "add_sub", t: (v) => `Il y avait ${fmt(v.n1)} ${v.obj}. On en ajoute ${fmt(v.n2)}, puis on en retire ${fmt(cFrom(v))}. Combien en reste-t-il ?` },
-  { type: "add_sub", t: (v) => `${v.hero} reçoit ${fmt(v.n1)} puis ${fmt(v.n2)} ${v.obj}, et en perd ${fmt(cFrom(v))}. Combien lui en reste-t-il ?` },
-  { type: "mul_add", t: (v) => `Une boîte contient ${fmt(v.n1)} fois ${fmt(v.n2)} ${v.obj}, et ${fmt(cFrom(v))} ${v.obj} sont posés dessus. Combien de ${v.obj} en tout ?` },
-  { type: "mul_sub", t: (v) => `${v.friend} a ${fmt(v.n1)} ${v.grp} de ${fmt(v.n2)} ${v.obj} et en mange ${fmt(cFrom(v))}. Combien lui en reste-t-il ?` },
-  { type: "add_div", t: (v) => `${v.hero} et ${v.friend} ont ${fmt(v.n1)} et ${fmt(v.n2)} ${v.obj}. Ils les partagent entre ${fmt(cFrom(v))} amis. Combien chacun en reçoit-il ?` },
+  { type: "mul_add", t: (v) => `${v.hero} achète ${fmt(v.n1)} ${v.grp} de ${qteObj(v.n2, v.obj)}, puis trouve ${qteObj(cFrom(v), v.obj)} de plus. Combien de ${v.obj} en tout ?` },
+  { type: "mul_add", t: (v) => `Dans ${fmt(v.n1)} ${v.grp} il y a ${qteObj(v.n2, v.obj)} chacun. On ajoute ${qteObj(cFrom(v), v.obj)}. Combien de ${v.obj} en tout ?` },
+  { type: "mul_add", t: (v) => `${v.hero} range ${fmt(v.n1)} rangées de ${qteObj(v.n2, v.obj)}, et il en reste ${fmt(cFrom(v))} à côté. Combien de ${v.obj} en tout ?` },
+  { type: "mul_add", t: (v) => `${v.friend} a ${fmt(v.n1)} ${v.grp} de ${qteObj(v.n2, v.obj)}, plus ${qteObj(cFrom(v), v.obj)} dans sa poche. Combien en tout ?` },
+  { type: "mul_sub", t: (v) => `${v.hero} a ${fmt(v.n1)} ${v.grp} de ${qteObj(v.n2, v.obj)}. ${v.hero} en donne ${fmt(cFrom(v))}. Combien lui en reste-t-il ?` },
+  { type: "mul_sub", t: (v) => `Il y a ${fmt(v.n1)} ${v.grp} de ${qteObj(v.n2, v.obj)}. On en enlève ${fmt(cFrom(v))}. Combien en reste-t-il ?` },
+  { type: "mul_sub", t: (v) => `${v.hero} prépare ${fmt(v.n1)} rangées de ${qteObj(v.n2, v.obj)} puis en retire ${fmt(cFrom(v))}. Combien en reste-t-il ?` },
+  { type: "add_div", t: (v) => `${v.hero} a ${qteObj(v.n1, v.obj)} et ${v.friend} en a ${fmt(v.n2)}. Ils partagent le tout entre ${fmt(cFrom(v))} boîtes égales. Combien par boîte ?` },
+  { type: "add_div", t: (v) => `On réunit ${fmt(v.n1)} et ${qteObj(v.n2, v.obj)}, puis on les partage en ${fmt(cFrom(v))} parts égales. Combien par part ?` },
+  { type: "add_div", t: (v) => `${qteObj(v.n1, v.obj)} rouge${v.n1 > 1 ? "s" : ""} et ${qteObj(v.n2, v.obj)} vert${v.n2 > 1 ? "s" : ""} sont rangés également dans ${fmt(cFrom(v))} ${v.grp}. Combien par ${grpSing(v.grp)} ?` },
+  { type: "add_sub", t: (v) => `${v.hero} a ${qteObj(v.n1, v.obj)}, en gagne ${fmt(v.n2)}, puis en donne ${fmt(cFrom(v))}. Combien lui en reste-t-il ?` },
+  { type: "add_sub", t: (v) => `Il y avait ${qteObj(v.n1, v.obj)}. On en ajoute ${fmt(v.n2)}, puis on en retire ${fmt(cFrom(v))}. Combien en reste-t-il ?` },
+  { type: "add_sub", t: (v) => `${v.hero} reçoit ${fmt(v.n1)} puis ${qteObj(v.n2, v.obj)}, et en perd ${fmt(cFrom(v))}. Combien lui en reste-t-il ?` },
+  { type: "mul_add", t: (v) => `Une boîte contient ${fmt(v.n1)} fois ${qteObj(v.n2, v.obj)}, et ${qteObj(cFrom(v), v.obj)} sont posés dessus. Combien de ${v.obj} en tout ?` },
+  { type: "mul_sub", t: (v) => `${v.friend} a ${fmt(v.n1)} ${v.grp} de ${qteObj(v.n2, v.obj)} et en mange ${fmt(cFrom(v))}. Combien lui en reste-t-il ?` },
+  { type: "add_div", t: (v) => `${v.hero} et ${v.friend} ont ${fmt(v.n1)} et ${qteObj(v.n2, v.obj)}. Ils les partagent entre ${fmt(cFrom(v))} amis. Combien chacun en reçoit-il ?` },
 
   // --- RENDU SUR PLUSIEURS ARTICLES (op2 = rsub : reponse = c - r1) ---------
   // mul_rsub : n articles a p €, paye avec c € -> rendu = c - n×p (euros entiers).
-  { type: "mul_rsub", t: (v) => `${v.hero} achète ${fmt(v.n1)} ${v.obj} à ${fmt(v.n2)} € pièce. Il paie avec un billet de ${fmt(cFrom(v))} €. Combien lui rend-on ?` },
-  { type: "mul_rsub", t: (v) => `${v.hero} prend ${fmt(v.n1)} ${v.obj} qui coûtent ${fmt(v.n2)} € chacun. Il donne ${fmt(cFrom(v))} €. Combien le marchand rend-il ?` },
+  { type: "mul_rsub", t: (v) => `${v.hero} achète ${qteObj(v.n1, v.obj)} à ${fmt(v.n2)} € pièce. ${v.hero} paie avec un billet de ${fmt(cFrom(v))} €. Combien lui rend-on ?` },
+  { type: "mul_rsub", t: (v) => `${v.hero} prend ${qteObj(v.n1, v.obj)} qui coûtent ${fmt(v.n2)} € chacun. ${v.hero} donne ${fmt(cFrom(v))} €. Combien le marchand rend-il ?` },
   { type: "mul_rsub", t: (v) => `Au marché, les ${v.obj} coûtent ${fmt(v.n2)} € l'unité. ${v.hero} en achète ${fmt(v.n1)} et paie avec ${fmt(cFrom(v))} €. Combien lui rend-on ?` },
-  { type: "mul_rsub", t: (v) => `${v.hero} achète ${fmt(v.n1)} ${v.obj} à ${fmt(v.n2)} €. Avec un billet de ${fmt(cFrom(v))} €, combien récupère-t-il ?` },
-  { type: "mul_rsub", t: (v) => `${v.friend} vend ${fmt(v.n1)} ${v.obj} à ${fmt(v.n2)} € pièce à ${v.hero}, qui tend ${fmt(cFrom(v))} €. Combien ${v.friend} rend-il ?` },
-  { type: "mul_rsub", t: (v) => `${v.hero} a ${fmt(cFrom(v))} €. Il achète ${fmt(v.n1)} ${v.obj} à ${fmt(v.n2)} € chacun. Combien lui reste-t-il ?` },
+  { type: "mul_rsub", t: (v) => `${v.hero} achète ${qteObj(v.n1, v.obj)} à ${fmt(v.n2)} €. Avec un billet de ${fmt(cFrom(v))} €, combien lui rend-on ?` },
+  { type: "mul_rsub", t: (v) => `${v.friend} vend ${qteObj(v.n1, v.obj)} à ${fmt(v.n2)} € pièce à ${v.hero}, qui tend ${fmt(cFrom(v))} €. Combien d'argent rend ${v.friend} ?` },
+  { type: "mul_rsub", t: (v) => `${v.hero} a ${fmt(cFrom(v))} €. ${v.hero} achète ${qteObj(v.n1, v.obj)} à ${fmt(v.n2)} € chacun. Combien lui reste-t-il ?` },
   // add_rsub : avec c €, on paie n1 € puis n2 € -> reste = c - (n1 + n2).
-  { type: "add_rsub", t: (v) => `${v.hero} a ${fmt(cFrom(v))} €. Il achète ${v.item} à ${fmt(v.n1)} € et ${v.item2} à ${fmt(v.n2)} €. Combien lui reste-t-il ?` },
+  { type: "add_rsub", t: (v) => `${v.hero} a ${fmt(cFrom(v))} €. ${v.hero} achète ${v.item} à ${fmt(v.n1)} € et ${v.item2} à ${fmt(v.n2)} €. Combien lui reste-t-il ?` },
   { type: "add_rsub", t: (v) => `Avec ${fmt(cFrom(v))} €, ${v.hero} dépense ${fmt(v.n1)} € le matin et ${fmt(v.n2)} € l'après-midi. Combien lui reste-t-il ?` },
-  { type: "add_rsub", t: (v) => `${v.hero} part faire des courses avec ${fmt(cFrom(v))} €. Il paie ${fmt(v.n1)} € puis ${fmt(v.n2)} €. Combien lui reste-t-il ?` },
-  { type: "add_rsub", t: (v) => `${v.hero} a ${fmt(cFrom(v))} € dans sa tirelire. Il achète ${v.item} (${fmt(v.n1)} €) et ${v.item2} (${fmt(v.n2)} €). Combien reste-t-il ?` },
+  { type: "add_rsub", t: (v) => `${v.hero} part faire des courses avec ${fmt(cFrom(v))} €. ${v.hero} paie ${fmt(v.n1)} € puis ${fmt(v.n2)} €. Combien lui reste-t-il ?` },
+  { type: "add_rsub", t: (v) => `${v.hero} a ${fmt(cFrom(v))} € dans sa tirelire. ${v.hero} achète ${v.item} (${fmt(v.n1)} €) et ${v.item2} (${fmt(v.n2)} €). Combien reste-t-il ?` },
   { type: "add_rsub", t: (v) => `${v.hero} reçoit ${fmt(cFrom(v))} €, dépense ${fmt(v.n1)} € puis ${fmt(v.n2)} €. Combien lui reste-t-il ?` },
 ];
 
@@ -238,10 +258,10 @@ function cFrom(v: Vars): number {
 // problemes).
 const MESURES_BANK: Gabarit[] = [
   // conversion (val)
-  { type: "conversion", t: (v) => `${v.hero} mesure ${v.q1}. Combien cela fait-il en ${v.uu} ? (${v.conv})` },
+  { type: "conversion", t: (v) => `Combien font ${v.q1} en ${v.uu} ? (${v.conv})` },
   { type: "conversion", t: (v) => `Convertis ${v.q1} en ${v.uu}. (${v.conv})` },
   { type: "conversion", t: (v) => `${v.q1}, c'est combien de ${v.uu} ? (${v.conv})` },
-  { type: "conversion", t: (v) => `${v.hero} veut écrire ${v.q1} en ${v.uu}. Quel nombre doit-il écrire ? (${v.conv})` },
+  { type: "conversion", t: (v) => `${v.hero} veut écrire ${v.q1} en ${v.uu}. Quel nombre faut-il écrire ? (${v.conv})` },
   // ajout (add, souvent apres conversion)
   { type: "ajout", t: (v) => `${v.hero} a ${v.q1} et ${v.q2}. Combien cela fait-il en tout, en ${v.uu} ? (${v.conv})` },
   { type: "ajout", t: (v) => `Un bout de ${v.q1} et un bout de ${v.q2} mis ensemble. Combien en ${v.uu} ? (${v.conv})` },

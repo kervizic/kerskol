@@ -76,24 +76,24 @@ function buildHeure(src: ExCalcul, rng: Rng, base: Base): GeneratedExercise {
   if (type === "ap_midi") {
     const sens = rng() < 0.5 ? "vers12" : "vers24";
     if (sens === "vers12") {
-      const h24 = intBetween(rng, 13, 23); // apres-midi / soir
+      const h24 = intBetween(rng, 13, 18); // apres-midi (13 h a 18 h)
       const h12 = h24 - 12;
       return {
         ...base,
         prompt: `Il est ${h24} h. Sur une horloge à aiguilles, l'après-midi, l'aiguille des heures indique [q] h.`,
         answer: h12,
         verif: { op: "sub", a: h24, b: 12 },
-        correction: `Apres midi, on enleve 12 : ${h24} − 12 = ${h12}. ${h24} h, c'est ${h12} h de l'apres-midi.`,
+        correction: `L'après-midi, on enlève 12 : ${h24} − 12 = ${h12}. ${h24} h, c'est ${h12} h de l'après-midi.`,
       };
     }
-    const h12 = intBetween(rng, 1, 11);
+    const h12 = intBetween(rng, 1, 6);
     const h24 = h12 + 12;
     return {
       ...base,
       prompt: `Il est ${h12} h de l'après-midi. Sur une horloge de 24 h, c'est [q] h.`,
       answer: h24,
       verif: { op: "add", a: h12, b: 12 },
-      correction: `L'apres-midi, on ajoute 12 : ${h12} + 12 = ${h24}. ${h12} h de l'apres-midi, c'est ${h24} h.`,
+      correction: `L'après-midi, on ajoute 12 : ${h12} + 12 = ${h24}. ${h12} h de l'après-midi, c'est ${h24} h.`,
     };
   }
 
@@ -178,10 +178,10 @@ function buildDuree(src: ExCalcul, rng: Rng, base: Base): GeneratedExercise {
     const endM = end % 60;
     return {
       ...base,
-      prompt: `De ${fmtHeure(startH, startM)} a ${fmtHeure(endH, endM)}, combien de temps s'ecoule-t-il ? [q] min`,
+      prompt: `De ${fmtHeure(startH, startM)} à ${fmtHeure(endH, endM)}, combien de temps s'écoule-t-il ? [q] min`,
       answer: dur,
       verif: { op: "sub", a: end, b: start },
-      correction: `De ${fmtHeure(startH, startM)} a ${fmtHeure(endH, endM)}, il s'ecoule ${fmtDuree(dur)}.`,
+      correction: `De ${fmtHeure(startH, startM)} à ${fmtHeure(endH, endM)}, il s'écoule ${fmtDuree(dur)}.`,
       horlogeData: { showHours: startH > 12 ? startH - 12 : startH, showMinutes: startM, minuteStep: step, hoursMax: 12 },
     };
   }
@@ -361,7 +361,7 @@ function buildLongueur(src: ExCalcul, rng: Rng, base: Base): GeneratedExercise {
     prompt: `Quelle est la longueur du trait rouge ? [q] cm`,
     answer: length,
     verif: { op: "val", a: length, b: 0 },
-    correction: `Le trait va de 0 a ${length} : il mesure ${length} cm.`,
+    correction: `Le trait va de 0 à ${length} : il mesure ${length} cm.`,
   };
 }
 
@@ -373,9 +373,9 @@ const MASS_OBJETS: { obj: string; u: string; opts: string[] }[] = [
   { obj: "la masse d'un stylo", u: "g", opts: ["g", "kg", "mL", "L"] },
   { obj: "la masse d'un sac de sucre", u: "kg", opts: ["g", "kg", "L", "cL"] },
   { obj: "la masse d'un enfant", u: "kg", opts: ["g", "kg", "mL", "L"] },
-  { obj: "la quantite d'eau dans un verre", u: "cL", opts: ["mL", "cL", "L", "kg"] },
-  { obj: "la quantite d'eau dans une bouteille", u: "L", opts: ["mL", "cL", "L", "g"] },
-  { obj: "une cuillere de sirop", u: "mL", opts: ["mL", "cL", "L", "kg"] },
+  { obj: "la quantité d'eau dans un verre", u: "cL", opts: ["mL", "cL", "L", "kg"] },
+  { obj: "la quantité d'eau dans une bouteille", u: "L", opts: ["mL", "cL", "L", "g"] },
+  { obj: "une cuillère de sirop", u: "mL", opts: ["mL", "cL", "L", "kg"] },
   { obj: "l'eau d'une baignoire", u: "L", opts: ["cL", "dL", "L", "g"] },
 ];
 
@@ -475,10 +475,10 @@ function buildMasseContenance(src: ExCalcul, rng: Rng, base: Base): GeneratedExe
     return {
       ...base,
       balanceData: { value, max, step, unit: "g", kind: "balance" },
-      prompt: `Combien pese l'objet sur la balance ? [q] g`,
+      prompt: `Combien pèse l'objet sur la balance ? [q] g`,
       answer: value,
       verif: { op: "val", a: value, b: 0 },
-      correction: `L'aiguille pointe sur ${value} : l'objet pese ${value} g.`,
+      correction: `L'aiguille pointe sur ${value} : l'objet pèse ${value} g.`,
     };
   }
   const max = 100;
@@ -487,7 +487,7 @@ function buildMasseContenance(src: ExCalcul, rng: Rng, base: Base): GeneratedExe
   return {
     ...base,
     balanceData: { value, max, step, unit: "cL", kind: "verre" },
-    prompt: `Quelle quantite de liquide y a-t-il dans le verre ? [q] cL`,
+    prompt: `Quelle quantité de liquide y a-t-il dans le verre ? [q] cL`,
     answer: value,
     verif: { op: "val", a: value, b: 0 },
     correction: `Le niveau atteint ${value} : il y a ${value} cL.`,

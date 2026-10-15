@@ -83,3 +83,51 @@ describe("Lot C - enonces de calcul lisibles a voix haute", () => {
     expect(SYMBOLES_INTERDITS.some((s) => "689 → 700".includes(s))).toBe(true);
   });
 });
+
+// ---------------------------------------------------------------------------
+// Garde-fous REVUE INSTITUTEUR (15/10) : defauts de generation trouves a la
+// relecture humaine des problemes.
+//   * accord singulier : « 1 billes » interdit (-> « 1 bille ») ;
+//   * pronom genre sur un PRENOM : le heros peut etre une fille (Iris) ou un
+//     garcon, et son genre est inconnu du generateur. Aucune question ne doit
+//     donc accorder un pronom au masculin sur un prenom (« Iris en a-t-il ? »).
+//     Les tournures IMPERSONNELLES restent permises (« y en a-t-il »,
+//     « combien reste-t-il », « cela fait-il », « le marchand rend-il »).
+// ---------------------------------------------------------------------------
+describe("Revue instituteur - enonces de problemes bien accordes", () => {
+  // Echantillon plus large pour couvrir les cas n = 1 et tous les gabarits.
+  const gros: GeneratedExercise[] = [];
+  for (const src of SEED_SOURCES) {
+    for (let seed = 1; seed <= 120; seed++) {
+      gros.push(generateExercise(src, seed * 104729 + src.niveau * 17));
+    }
+  }
+
+  const OBJETS_PLURIELS = [
+    "billes", "coquillages", "images", "autocollants", "noisettes", "perles",
+    "cartes", "timbres", "crayons", "cailloux", "graines", "boutons",
+  ];
+
+  it("aucun enonce ne dit « 1 » suivi d'un objet au pluriel", () => {
+    const re = new RegExp(`\\b1 (${OBJETS_PLURIELS.join("|")})\\b`);
+    for (const g of gros) {
+      const m = g.prompt.match(re);
+      expect(m, `accord singulier manquant : ${g.prompt}`).toBeNull();
+    }
+  });
+
+  it("aucun enonce n'accorde un pronom masculin sur un prenom (genre inconnu)", () => {
+    // Formes genrees bannies (celles qui portaient un prenom comme sujet).
+    const BANNIES = [/\ba-t-il de\b/, /\bavait-il\b/, /\brécupère-t-il\b/, /\bremplit-il\b/, /\bdoit-il écrire\b/];
+    for (const g of gros) {
+      for (const re of BANNIES) {
+        expect(re.test(g.prompt), `pronom genre interdit : ${g.prompt}`).toBe(false);
+      }
+      // « en a-t-il » autorise UNIQUEMENT dans « y en a-t-il » (impersonnel).
+      const idx = g.prompt.indexOf("en a-t-il");
+      if (idx >= 0) {
+        expect(g.prompt.slice(Math.max(0, idx - 2), idx + 9)).toBe("y en a-t-il");
+      }
+    }
+  });
+});
