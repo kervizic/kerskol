@@ -81,9 +81,10 @@ du pilotage par niveaux décrit plus bas.
 Kerskol traduit ces principes en règles opérationnelles.
 
 Les séances reposent sur de **petits tests** fréquents et sur la **répétition
-espacée** des compétences déjà vues. Les exercices sont **entrelacés par blocs
-de deux à trois** compétences, pour éviter la monotonie d'un bloc unique tout en
-gardant des blocs assez longs pour installer chaque notion.
+espacée** des compétences déjà vues. Les exercices **alternent** en permanence :
+on n'enchaîne **jamais** deux exercices du même type, ni deux de la même matière
+quand une autre matière active reste à placer (voir « Alternance des exercices »
+plus bas).
 
 Le niveau de l'enfant sur chaque compétence est suivi par deux moyennes
 exponentielles mobiles (EMA) : une **courte** réactive (α ≈ 0,4) et une
@@ -140,30 +141,59 @@ Règles de composition (`frontend/src/domain/calcul/composer.ts`) :
   a **plus de matières actives que de blocs** (Iris : 7 matières pour 6 blocs),
   une **rotation équitable** (pilotée par la graine) sert une matière différente
   d'une séance à l'autre : aucune n'est jamais oubliée durablement.
-- **Variété des exercices** : une compétence par **bloc de 2 items** ; une
-  compétence n'est **jamais reprise** dans la séance. On garantit ainsi « **pas
-  plus de 2 exercices du même type d'affilée**, ni plus de 2 de ce type dans la
-  séance ». Les blocs sont **entrelacés par matière** (plus de gros paquet de
-  maths suivi d'un gros paquet de français).
+- **Variété des exercices** : chaque compétence peut apparaître **deux fois** au
+  plus dans la séance, mais **jamais deux fois d'affilée** (voir « Alternance des
+  exercices » ci-dessous).
 
 Ces règles sont vérifiées par `composer.test.ts` (compatibilité) et
 `composer-equilibre.test.ts` (maths ≤ 40 %, présence de chaque matière,
 découvertes au N1, variété, et simulation du profil réel d'Iris).
 
-### Avant / après sur le profil réel d'Iris (CE2, lecture seule le 10/10/2026)
+## Alternance des exercices
 
-Iris a **7 matières actives** (maths, français, QLM, EMC, sciences, histoire,
-géographie) mais une progression **concentrée sur les maths** : 18 compétences
-de maths déjà travaillées (niveau moyen ~2,9), 1 de français, 1 d'EMC, **rien**
-ailleurs.
+> **Révision du 15 octobre 2026 (décision de Manu).** Le correctif du 10/10
+> n'empêchait pas d'enchaîner **deux fois le même type** : il posait les items
+> par **blocs de 2 d'une même compétence**, donc deux exercices identiques se
+> suivaient (relevé des séances réelles d'Iris : `IMPARFAIT, IMPARFAIT, RESPECT,
+> RESPECT, VIVANT, VIVANT, …`). Manu veut **zéro répétition consécutive**.
 
-- **Avant** (séance type de 12 exercices) : ~40 % révisions **maths** + ~40 %
-  lacunes **maths** + ~20 % nouveauté tirée au hasard → environ **9 à 10
-  exercices de maths** et **2 à 3** du reste, souvent le **même type** répété.
-- **Après** : **au plus ~4** exercices de maths, les autres répartis entre les
-  matières jamais faites (français, QLM, sciences, histoire, géo, EMC),
-  **découvertes au niveau 1**, **4 matières minimum** par séance, et jamais le
-  même type d'exercice plus de deux fois.
+Règle dure (`frontend/src/domain/calcul/variete.ts`), appliquée **après** la
+composition **et** après toute insertion en cours de séance :
+
+- **Jamais deux exercices du même TYPE à la suite.** Le type = la **compétence
+  exacte** (ex. `FR.CONJ.IMPARFAIT`) : c'est le doublon qu'on interdit.
+- **Jamais deux exercices de la même MATIÈRE à la suite** quand une **autre
+  matière active** reste à placer (on alterne maths / français / QLM / EMC /
+  sciences / histoire / géo…). Comme deux matières différentes portent forcément
+  des types différents, alterner les matières supprime du même coup les
+  répétitions de type ; il ne reste à gérer qu'une éventuelle **série forcée**
+  d'une seule matière (c'est alors « inévitable »).
+
+L'ordre est produit par un **glouton déterministe** (type *most-frequent-first*
+sur la matière, puis sur le type) : aucun aléa, donc le rejeu et la **reprise de
+séance** sont inchangés. La règle s'applique **aussi** aux exercices ajoutés
+pendant la séance : le **rattrapage** (exercice similaire après une erreur
+comprise) et la **bascule de confiance** (compétence maîtrisée après un abandon)
+réordonnent la file restante pour ne jamais créer de répétition évitable.
+
+Garantie testée (`variete.test.ts`) : sur **1000 séances simulées** et sur le
+**profil réel d'Iris**, **zéro** répétition consécutive de type et **zéro** de
+matière quand c'était évitable (côté composition comme côté moteur après
+insertions).
+
+### Avant / après sur le profil réel d'Iris (CE2, lecture seule)
+
+Relevé des séances d'Iris depuis le 10/10 (table `reponses`, ordre `repondu_le`) :
+chaque séance enchaînait des **doublons** (le « bloc de 2 »). Exemple réel du
+14/10 (séance de 8 exercices) :
+
+- **Avant** : `FR conjugaison, FR conjugaison, EMC respect, EMC respect, QLM
+  vivant, QLM vivant, FR grammaire, FR grammaire` → **4 répétitions de type** et
+  **4 de matière** d'affilée.
+- **Après** (même sélection, réordonnée) : `FR conjugaison, EMC respect, FR
+  grammaire, QLM vivant, FR conjugaison, EMC respect, FR grammaire, QLM vivant`
+  → **0 répétition** de type, **0** de matière (le français revient 4 fois mais
+  **jamais** collé à lui-même).
 
 ## Règle de correction
 

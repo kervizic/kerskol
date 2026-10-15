@@ -7,8 +7,8 @@
 //   * chaque matière active ayant un candidat est présente ;
 //   * les compétences jamais travaillées (niveau 0) sont découvertes vite, au N1 ;
 //   * lacunes favorisées SANS être exclusives (découvertes + consolidation aussi) ;
-//   * variété : pas plus de 2 exercices du même type (compétence) d'affilée, ni
-//     plus de 2 de ce type dans la séance.
+//   * variété (règle dure, prompt Manu 15/10) : JAMAIS deux exercices du même
+//     type (compétence) d'affilée, et pas plus de 2 de ce type dans la séance.
 import { describe, it, expect } from "vitest";
 import { composeSession, type ProgressionDetail } from "./composer";
 import type { Classe, Competence, Prerequis } from "../../lib/types";
@@ -118,7 +118,7 @@ describe("Lot B - composition équilibrée (profil type Iris)", () => {
     }
   });
 
-  it("variété : jamais plus de 2 du même type d'affilée, ni plus de 2 par séance", () => {
+  it("variété : JAMAIS deux fois la même compétence d'affilée, ni plus de 2 par séance", () => {
     for (let seed = 0; seed < 25; seed++) {
       const codes = compose(seed).map((p) => p.exercise.competence);
       // Total par compétence <= 2.
@@ -127,11 +127,12 @@ describe("Lot B - composition équilibrée (profil type Iris)", () => {
       for (const [c, n] of Object.entries(total)) {
         expect(n, `seed ${seed} : ${c} apparaît ${n} fois (max 2)`).toBeLessThanOrEqual(2);
       }
-      // Jamais 3 identiques d'affilée.
-      for (let i = 2; i < codes.length; i++) {
+      // Règle dure : zéro répétition consécutive de type (compétence). Toujours
+      // réalisable ici (>= 2 compétences, 2 items chacune <= moitié des items).
+      for (let i = 1; i < codes.length; i++) {
         expect(
-          codes[i] === codes[i - 1] && codes[i - 1] === codes[i - 2],
-          `seed ${seed} : 3 fois ${codes[i]} d'affilée`
+          codes[i] === codes[i - 1],
+          `seed ${seed} : ${codes[i]} répété d'affilée (pos ${i})`
         ).toBe(false);
       }
     }

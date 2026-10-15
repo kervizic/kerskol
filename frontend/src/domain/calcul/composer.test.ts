@@ -182,7 +182,7 @@ describe("composeSession : competences debloquees uniquement", () => {
     expect(codes.has("MA.CM.DIV_RESTE")).toBe(false);
   });
 
-  it("entrelace par blocs de 2 a 3 (1 si la variete est epuisee)", () => {
+  it("n'enchaine JAMAIS deux fois la meme competence (alternance dure)", () => {
     const plan = composeSession({
       competences: COMPETENCES,
       prerequis: PREREQUIS,
@@ -191,13 +191,14 @@ describe("composeSession : competences debloquees uniquement", () => {
       seed: 99,
       now: NOW,
     });
-    // Blocs de 2-3 items. Exception : une competence qui ne peut produire qu'UN
-    // seul enonce distinct (banque minuscule, p. ex. une source demo a variante
-    // unique) est reduite a 1 item par la deduplication anti-doublon (mieux vaut
-    // 1 item qu'une meme question repetee). Jamais plus de 3.
-    for (const size of blockSizes(plan.map((p) => p.exercise.competence))) {
-      expect(size).toBeGreaterThanOrEqual(1);
-      expect(size).toBeLessThanOrEqual(3);
+    // Regle dure (prompt Manu 15/10) : plus de « bloc de 2 » (a896644). Des que
+    // la seance compte >= 2 competences, aucun run consecutif d'une meme
+    // competence -> tous les blocs valent 1.
+    const codes = plan.map((p) => p.exercise.competence);
+    if (new Set(codes).size >= 2) {
+      for (const size of blockSizes(codes)) {
+        expect(size, `run consecutif ${size} > 1`).toBe(1);
+      }
     }
     // Aucune question repetee dans la seance (invariant principal du correctif).
     const sigs = plan.map((p) => exerciceSignature(p.exercise));

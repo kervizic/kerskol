@@ -13,6 +13,41 @@
 import { exerciceSignature, generateExercise, type ExCalcul, type GeneratedExercise, type ProblemContext } from "./generator";
 import { makeRng, hashSeed } from "./rng";
 import type { Category, PlannedItem } from "./composer";
+import { alterner, exerciceMatiere, exerciceType } from "./variete";
+
+// Cle d'alternance d'un slot (meme regle que le composeur : type = competence
+// exacte, matiere = 1er segment du code).
+function slotKey(s: Slot) {
+  return {
+    type: exerciceType(s.exercise.competence),
+    matiere: exerciceMatiere(s.exercise.competence),
+    niveau: s.exercise.niveau,
+  };
+}
+
+// Reordonne la file des slots JOUABLES situes apres `posRepondu` (non repondus,
+// competence non abandonnee) pour qu'aucun ne repete le type ni, si evitable, la
+// matiere du precedent. Applique APRES toute insertion (rattrapage / bascule de
+// confiance) : la regle « jamais deux du meme type d'affilee » tient meme sur les
+// exercices ajoutes en cours de seance. Les slots deja repondus et ceux d'une
+// competence abandonnee ne bougent pas (ces derniers sont de toute facon sautes).
+function reordonnerQueue(slots: Slot[], comps: Record<string, CompLive>, posRepondu: number): void {
+  const jouables: number[] = [];
+  for (let i = posRepondu + 1; i < slots.length; i++) {
+    const s = slots[i];
+    if (!s.answered && !comps[s.exercise.competence]?.dropped) jouables.push(i);
+  }
+  if (jouables.length <= 1) return;
+  const prev = posRepondu >= 0 && posRepondu < slots.length ? slotKey(slots[posRepondu]) : null;
+  const reordonnes = alterner(
+    jouables.map((i) => slots[i]),
+    slotKey,
+    prev
+  );
+  jouables.forEach((idx, k) => {
+    slots[idx] = reordonnes[k];
+  });
+}
 
 // Nombre de tirages tentes pour produire un enonce DISTINCT de ceux deja presents
 // dans la seance (reinsertion / bascule confiance / regeneration).
@@ -278,6 +313,11 @@ export function answerCurrent(
       }
     }
   }
+
+  // Alternance dure APRES insertion : la file jouable restante ne repete jamais
+  // le type (ni la matiere quand evitable) relativement au slot qu'on vient de
+  // repondre. Deterministe -> n'altere pas le rejeu / la reprise de seance.
+  reordonnerQueue(slots, comps, state.pos);
 
   const next = {
     slots,

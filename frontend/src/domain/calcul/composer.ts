@@ -15,6 +15,17 @@ import type { Classe, Competence, Prerequis, ProgressionDetail } from "../../lib
 import { exerciceSignature, generateExercise, type ExCalcul, type GeneratedExercise, type ProblemContext } from "./generator";
 import { classPlan, classUnlocks } from "./classes";
 import { hashSeed, makeRng, pick, type Rng } from "./rng";
+import { alterner, exerciceMatiere, exerciceType } from "./variete";
+
+// Cle d'alternance d'un item de seance : type (competence exacte) + matiere
+// (1er segment du code) + niveau (departage « debut facile »).
+function varieteKey(it: PlannedItem) {
+  return {
+    type: exerciceType(it.exercise.competence),
+    matiere: exerciceMatiere(it.exercise.competence),
+    niveau: it.exercise.niveau,
+  };
+}
 
 export type { ProgressionDetail };
 
@@ -105,7 +116,10 @@ function composeFirstSession(
     ci++;
   }
 
-  return materialize(specs, sources, seed, rng, ctx);
+  // Alternance dure : jamais deux exercices du meme type (ni de la meme matiere
+  // quand evitable) d'affilee, meme en 1re seance (coeur de classe souvent
+  // mono-matiere -> au moins pas deux fois la meme competence).
+  return alterner(materialize(specs, sources, seed, rng, ctx), varieteKey);
 }
 
 export function composeSession(input: ComposeInput): PlannedItem[] {
@@ -311,7 +325,10 @@ export function composeSession(input: ComposeInput): PlannedItem[] {
   });
 
   const specs = buildBlocks(specsRaw, count);
-  return materialize(specs, sources, seed, rng, input.ctx);
+  // Alternance dure appliquee APRES la composition (ordre facile->difficile en
+  // entree, l'alternance la respecte a contraintes egales) : aucune repetition
+  // de type d'affilee, aucune de matiere quand une autre matiere active reste.
+  return alterner(materialize(specs, sources, seed, rng, input.ctx), varieteKey);
 }
 
 function clampNiveau(n: number): number {
