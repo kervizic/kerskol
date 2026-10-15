@@ -45,9 +45,9 @@ export const BANQUE_MATIERE: QmItem[] = [
     attendu: "air",
     explication: "L'air est un gaz invisible, présent partout autour de nous." },
   { cle: "qm-mat-eta-n4-b", competence: "QM.MATIERE.ETATS", niveau: 4, format: "texte",
-    consigne: "La vapeur et la fumée n'ont pas de forme fixe. Elles sont à l'état... Écris le mot : solide, liquide ou gaz.",
+    consigne: "L'air et la vapeur n'ont pas de forme fixe. Ils sont à l'état... Écris le mot : solide, liquide ou gaz.",
     attendu: "gaz",
-    explication: "La vapeur et la fumée sont des gaz : elles n'ont pas de forme fixe." },
+    explication: "L'air et la vapeur sont des gaz : ils n'ont pas de forme fixe et se répandent partout." },
 
   // =======================================================================
   // QM.MATIERE.EAU — etats de l'eau et changements d'etat

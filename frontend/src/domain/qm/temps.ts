@@ -81,7 +81,7 @@ export const BANQUE_TEMPS: QmItem[] = [
     ...ordre(["le réveil", "l'école", "le coucher"]),
     explication: "Le matin le réveil, puis l'école dans la journée, puis le coucher le soir." },
   { cle: "qm-tps-fri-n4-a", competence: "QM.TEMPS.FRISE", niveau: 4, format: "ordre",
-    consigne: "Range les saisons dans l'ordre de l'année.",
+    consigne: "Range les saisons dans l'ordre, en commençant par le printemps (quand la nature se réveille).",
     ...ordre(["le printemps", "l'été", "l'automne", "l'hiver"]),
     explication: "L'année suit les saisons : le printemps, l'été, l'automne, puis l'hiver." },
   { cle: "qm-tps-fri-n4-b", competence: "QM.TEMPS.FRISE", niveau: 4, format: "ordre",
