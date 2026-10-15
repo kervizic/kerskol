@@ -2013,7 +2013,7 @@ export const BANQUE_COMPREHENSION: CompItem[] = [
     options: ["non, il n'aime pas", "oui, beaucoup", "il en reprend"], attendu: "non, il n'aime pas",
     explication: "Hugo fait la grimace et pousse l'assiette : il n'aime pas les légumes." },
   { cle: "ce1inf-n3-b", competence: "FR.LECTURE.CE1_INFERENCE", niveau: 3, format: "clic",
-    texte: ["Emma tient un grand parapluie.", "Ses bottes sont pleines d'eau."],
+    texte: ["Emma tient un grand parapluie.", "Elle court vite vers la maison."],
     consigne: "Clique sur le mot qui montre qu'il pleut.", attendu: "parapluie",
     explication: "On prend un parapluie quand il pleut : c'est l'indice." },
   { cle: "ce1inf-n3-c", competence: "FR.LECTURE.CE1_INFERENCE", niveau: 3, format: "qcm",
@@ -2031,7 +2031,7 @@ export const BANQUE_COMPREHENSION: CompItem[] = [
     explication: "La lumière est éteinte : il fait noir, et Sara a un peu peur." },
   { cle: "ce1inf-n4-c", competence: "FR.LECTURE.CE1_INFERENCE", niveau: 4, format: "texte",
     texte: ["Tom tombe de son vélo et se gratte le genou.", "Une larme coule mais il se relève tout seul."],
-    consigne: "Que ressent Tom quand il tombe ? Écris un mot.", attendu: "mal",
+    consigne: "Qu'est-ce que Tom ressent dans son genou quand il tombe ? Écris un mot.", attendu: "mal",
     explication: "Tom a une larme et se gratte le genou : il a mal, mais il est courageux." },
 ];
 

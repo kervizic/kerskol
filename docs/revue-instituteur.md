@@ -33,6 +33,9 @@ nécessaire que si une **bonne réponse** change (backup + dry-run BEGIN/ROLLBAC
 | QLM / Questionner le monde (QM, CE2) | 208 | 200 | 0 | 2 | 6 | 8 |
 | Français CE2 (grammaire, lexique, compréhension, écriture, conjugaison) | 1413 | 1385 | 2 | 9 | 17 | 16 (0 migration) |
 | Maths CE2 (calcul/problèmes, géométrie, données, mesures) | 335 + gabarits | - | 2 | 9 | 6 | 13 (+2 garde-fous) |
+| EMC CE2 | 136 | 132 | 1 | 0 | 3 | 4 |
+| Histoire / Géo / Sciences (CM1) | 150 + parcours | - | 1 | 1 | 10 | 13 |
+| CM1 / CE1 (EMC CM1, décimaux/fractions, CE1 compréhension) | 126 + gabarits | - | 0 | 6 | 1 | 7 |
 
 ## QLM / Questionner le monde (QM, CE2)
 
@@ -161,3 +164,35 @@ scientifique**, mais le défaut-signature de Manu (distracteurs d'un autre monde
 
 Corrections front-only (`attendu` inchangé). Tests `histoire`, `geographie`,
 `sciences`, `qcm-choix`, `bienveillance` (59) + `tsc` verts.
+
+## CM1 / CE1 (banques restantes)
+
+Déjà couvertes par les lots précédents (banques multi-niveaux) : grammaire,
+lexique, conjugaison (passé composé/simple, impératif), écriture CM1. Relues ici
+spécifiquement : EMC CM1 (56), calcul décimaux / fractions, et les items CE1 de
+compréhension.
+
+| Clé / gabarit | Gravité | Critère | Avant | Après |
+|---|---|---|---|---|
+| fractions `ARTICLE_DE` + égalités + comparer | À corriger | 7 | « la **moitie** », « le **cinquieme** », « est **egale a** », « **Complete l'egalite** », « au **meme denominateur** » | accents corrigés (moitié, cinquième, égale à, Complète l'égalité, même dénominateur) |
+| fractions `quantite_cm1` | À corriger | 1 | pouvait produire « **2/2** de 24 » (num = den) | `num` borné à den-1 (non unitaire seulement si den ≥ 3) |
+| `emc-dro-n1-a` | À corriger | 3, 7 | « As-tu le droit d'aller à… » + options « **au travail à l'usine** / nulle part » (grammaire cassée) | « …aller dans un lieu pour apprendre. Lequel ? » ; options « l'usine / le travail » |
+| `emc-coo-n3-a` | À corriger | 3 | consigne « **Tu** peux… » mais réponse « jouer avec **vous** » | consigne « Avec tes copains, **vous** pouvez… » (accord) |
+| `ce1inf-n3-b` | À corriger | 1 | clic « parapluie » mais « Ses bottes sont pleines d'**eau** » (2e indice) | 2e phrase neutre (« Elle court vite vers la maison ») |
+| `ce1inf-n4-c` | À corriger | 1 | réponse libre « mal » mais « triste » aussi valable | consigne ciblée « …ressent dans son **genou** » (douleur physique) |
+| `emc-lai-n3-b` | Suggestion | 4 | « exercer librement son jugement » abstrait | laissé (non faux ; changer la réponse = migration, item CM1) |
+
+Corrections front-only (`attendu` inchangé). **Suite complète : 69 fichiers,
+1349 tests verts + `tsc`.**
+
+## Bilan
+
+- **Aucune bonne réponse fausse n'a dû migrer** : le seul cas (fée Poussière) a
+  été réglé en restaurant le texte source, `attendu` fidèle. Toutes les
+  corrections sont donc front-only et les golden croisés front↔SQL restent verts.
+- **Garde-fous ajoutés** : accord « 1 + objet pluriel » et pronom masculin
+  accordé sur un prénom (genre inconnu) dans les énoncés de calcul générés.
+- **Défaut le plus grave trouvé** : les problèmes de maths accordaient « il » sur
+  l'héroïne (Iris) — visible à chaque séance ; corrigé par des tournures neutres.
+- **Classe de défaut la plus fréquente** : distracteurs d'un autre monde (le
+  défaut-signature de Manu), surtout en sciences — ramenés dans le domaine.

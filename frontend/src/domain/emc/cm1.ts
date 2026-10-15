@@ -19,8 +19,8 @@ import { type QmItem, tri } from "../qm/types";
 export const BANQUE_EMC_CM1: QmItem[] = [
   // ===== EMC.DROITS =====
   { cle: "emc-dro-n1-a", competence: "EMC.DROITS", niveau: 1, format: "qcm",
-    consigne: "Chaque enfant a des droits. As-tu le droit d'aller à...",
-    options: ["l'école", "au travail à l'usine", "nulle part"], attendu: "l'école",
+    consigne: "Chaque enfant a le droit d'aller dans un lieu pour apprendre. Lequel ?",
+    options: ["l'école", "l'usine", "le travail"], attendu: "l'école",
     explication: "Tous les enfants ont le droit d'aller à l'école pour apprendre." },
   { cle: "emc-dro-n1-b", competence: "EMC.DROITS", niveau: 1, format: "qcm",
     consigne: "Quel est un droit très important de chaque enfant ?",
@@ -101,8 +101,8 @@ export const BANQUE_EMC_CM1: QmItem[] = [
     options: ["coopération", "chance seulement", "triche"], attendu: "coopération",
     explication: "La coopération, c'est unir ses efforts pour réussir ensemble." },
   { cle: "emc-coo-n3-a", competence: "EMC.COOPERATION", niveau: 3, format: "qcm",
-    consigne: "Un camarade est tout seul dans la cour et semble triste. Tu peux...",
-    options: ["l'inviter à jouer avec vous", "faire comme si tu ne voyais rien", "lui dire de partir"], attendu: "l'inviter à jouer avec vous",
+    consigne: "Un camarade est tout seul dans la cour et semble triste. Avec tes copains, vous pouvez...",
+    options: ["l'inviter à jouer avec vous", "faire comme si vous ne voyiez rien", "lui dire de partir"], attendu: "l'inviter à jouer avec vous",
     explication: "Inviter un camarade seul à jouer, c'est gentil et ça fait plaisir à tout le monde." },
   { cle: "emc-coo-n3-b", competence: "EMC.COOPERATION", niveau: 3, format: "qcm",
     consigne: "Si quelqu'un t'embête souvent à l'école, le plus important est d'...",

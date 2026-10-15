@@ -25,7 +25,7 @@ function fracCode(num: number, den: number): number {
   return num * 100 + den;
 }
 const ARTICLE_DE: Record<number, string> = {
-  2: "la moitie de", 3: "le tiers de", 4: "le quart de", 5: "le cinquieme de", 10: "le dixieme de",
+  2: "la moitié de", 3: "le tiers de", 4: "le quart de", 5: "le cinquième de", 10: "le dixième de",
 };
 
 // Trois distracteurs plausibles pour « quelle fraction ? », distincts, valides
@@ -204,7 +204,7 @@ export function buildFraction(src: ExCalcul, rng: Rng, base: Base): GeneratedExe
       prompt: `Compare les deux fractions : ${n1}/${d1} et ${n2}/${d2}.`,
       answer,
       verif: { op: "cmp", a, b },
-      correction: `On met au meme denominateur : ${n1}/${d1} = ${a}/${d1 * d2} et ${n2}/${d2} = ${b}/${d1 * d2}. Comme ${a} ${signe} ${b}, alors ${n1}/${d1} ${signe} ${n2}/${d2}.`,
+      correction: `On met au même dénominateur : ${n1}/${d1} = ${a}/${d1 * d2} et ${n2}/${d2} = ${b}/${d1 * d2}. Comme ${a} ${signe} ${b}, alors ${n1}/${d1} ${signe} ${n2}/${d2}.`,
     };
   }
 
@@ -219,7 +219,7 @@ export function buildFraction(src: ExCalcul, rng: Rng, base: Base): GeneratedExe
     const num1 = intBetween(rng, 1, den1 - 1);
     const den2 = den1 * f;
     const num2 = num1 * f;
-    const correction = `Pour aller de ${den1} a ${den2}, on multiplie par ${f}. On multiplie donc aussi le haut : ${num1} × ${f} = ${num2}. Donc ${num1}/${den1} = ${num2}/${den2}.`;
+    const correction = `Pour aller de ${den1} à ${den2}, on multiplie par ${f}. On multiplie donc aussi le haut : ${num1} × ${f} = ${num2}. Donc ${num1}/${den1} = ${num2}/${den2}.`;
     if (base.niveau <= 1) {
       const opts = new Set<number>([num2]);
       for (const d of [num1, num2 + 1, Math.max(1, num2 - 1), num1 * (f + 1)]) {
@@ -232,7 +232,7 @@ export function buildFraction(src: ExCalcul, rng: Rng, base: Base): GeneratedExe
         ...base,
         saisie: "qcm",
         options: shuffle(rng, [...opts]).map((v) => ({ label: `${v}/${den2}`, value: v })),
-        prompt: `Quelle fraction est egale a ${num1}/${den1} ?`,
+        prompt: `Quelle fraction est égale à ${num1}/${den1} ?`,
         answer: num2,
         verif: { op: "val", a: num2, b: 0 },
         correction,
@@ -240,7 +240,7 @@ export function buildFraction(src: ExCalcul, rng: Rng, base: Base): GeneratedExe
     }
     return {
       ...base,
-      prompt: `Complete l'egalite : ${num1}/${den1} = [q]/${den2}`,
+      prompt: `Complète l'égalité : ${num1}/${den1} = [q]/${den2}`,
       answer: num2,
       verif: { op: "val", a: num2, b: 0 },
       correction,
@@ -253,7 +253,7 @@ export function buildFraction(src: ExCalcul, rng: Rng, base: Base): GeneratedExe
     const k = intBetween(rng, 2, 12);
     const quantite = den * k;
     const nonUnit = base.niveau >= 3;
-    const num = nonUnit ? intBetween(rng, 2, den - 1 >= 2 ? den - 1 : 2) : 1;
+    const num = nonUnit && den >= 3 ? intBetween(rng, 2, den - 1) : 1;
     if (num <= 1) {
       return {
         ...base,
