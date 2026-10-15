@@ -119,3 +119,19 @@ Garde-fous ajoutés (`enonces-oraux.test.ts`, lot « Revue instituteur ») :
 (1) aucun énoncé ne dit « 1 » + objet au pluriel (accord) ; (2) aucun pronom
 masculin accordé sur un prénom de genre inconnu (tournures impersonnelles
 permises). Tests : `calcul`, `geometrie`, `donnees`, `qcm-choix` (692) + `tsc` verts.
+
+## EMC CE2
+
+Banques relues : émotions (24), république (32), écrans (32), respect (48).
+Sous-agent : 1. **132/136 OK** ; faits civiques majeurs exacts, ton bienveillant
+et neutre.
+
+| Clé | Gravité | Critère | Avant | Après |
+|---|---|---|---|---|
+| `emc-rep-com-n3-b` | **Bloquant** | 1, 8 | explication « les habitants choisissent qui dirige la commune » (le maire est élu par le conseil, pas directement) | « Le maire est élu grâce à un vote, lors des élections de la commune. » |
+| `emc-rep-sym-n2-a` | Suggestion | 4 | mot « devise » non expliqué | glose ajoutée (« la petite phrase de la France ») |
+| `emc-rep-com-n3-a` | Suggestion | 4 | explication introduit « l'état civil » (inconnu à 8 ans) | retiré |
+| `emc-rep-vot-n1-a` | Suggestion | 3 | consigne bancale « Comment fait-on, c'est le plus juste ? » | « Comment faire, de la façon la plus juste ? » |
+
+Corrections front-only (`attendu` inchangé). Tests `emc`, `qcm-choix`,
+`bienveillance` (29) + `tsc` verts.

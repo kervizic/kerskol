@@ -72,7 +72,7 @@ export const BANQUE_REPUBLIQUE: QmItem[] = [
     consigne: "Quelle est la devise de la République française ?",
     options: ["Liberté, Égalité, Fraternité", "Un pour tous, tous pour un", "Toujours plus haut"],
     attendu: "Liberté, Égalité, Fraternité",
-    explication: "La devise de la France est : Liberté, Égalité, Fraternité. On la lit sur les mairies." },
+    explication: "La devise, c'est la petite phrase de la France : Liberté, Égalité, Fraternité. On la lit sur les mairies." },
   { cle: "emc-rep-sym-n2-b", competence: "EMC.REPUBLIQUE.SYMBOLES", niveau: 2, format: "tri",
     consigne: "Classe : est-ce un symbole de la République, ou non ?",
     ...tri(["symbole de la République", "pas un symbole"], [
@@ -129,12 +129,12 @@ export const BANQUE_REPUBLIQUE: QmItem[] = [
     consigne: "À quoi sert la mairie de ta commune ?",
     options: ["s'occuper de l'école, des routes et des fêtes", "vendre des jouets", "garder les animaux"],
     attendu: "s'occuper de l'école, des routes et des fêtes",
-    explication: "La mairie s'occupe de la vie de la commune : les écoles, les routes, les fêtes, l'état civil." },
+    explication: "La mairie s'occupe de la vie de la commune : les écoles, les routes, les fêtes." },
   { cle: "emc-rep-com-n3-b", competence: "EMC.REPUBLIQUE.COMMUNE", niveau: 3, format: "qcm",
     consigne: "Comment devient-on maire d'une commune ?",
     options: ["on est élu par un vote", "on est le plus grand", "on paie pour l'être"],
     attendu: "on est élu par un vote",
-    explication: "Le maire est élu grâce à un vote. Les habitants choisissent qui dirige la commune." },
+    explication: "Le maire est élu grâce à un vote, lors des élections de la commune." },
   { cle: "emc-rep-com-n4-a", competence: "EMC.REPUBLIQUE.COMMUNE", niveau: 4, format: "texte",
     consigne: "La personne qui dirige la commune s'appelle le... Écris le mot (maire).",
     attendu: "maire",
@@ -148,7 +148,7 @@ export const BANQUE_REPUBLIQUE: QmItem[] = [
   // EMC.REPUBLIQUE.VOTER — voter pour choisir (election de delegues)
   // =======================================================================
   { cle: "emc-rep-vot-n1-a", competence: "EMC.REPUBLIQUE.VOTER", niveau: 1, format: "qcm",
-    consigne: "La classe doit choisir un délégué. Comment fait-on, c'est le plus juste ?",
+    consigne: "La classe doit choisir un délégué. Comment faire, de la façon la plus juste ?",
     options: ["on vote", "on se bagarre"], attendu: "on vote",
     explication: "On vote : chacun choisit. C'est la façon la plus juste de décider ensemble." },
   { cle: "emc-rep-vot-n1-b", competence: "EMC.REPUBLIQUE.VOTER", niveau: 1, format: "qcm",
