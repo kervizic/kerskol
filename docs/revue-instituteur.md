@@ -31,7 +31,7 @@ nécessaire que si une **bonne réponse** change (backup + dry-run BEGIN/ROLLBAC
 | Matière | Items relus | OK | Bloquants | À corriger | Suggestions | Corrigés |
 |---|---|---|---|---|---|---|
 | QLM / Questionner le monde (QM, CE2) | 208 | 200 | 0 | 2 | 6 | 8 |
-| Français CE2 (grammaire, lexique, compréhension, écriture, conjugaison) | 1413 | 1385 | 2 | 9 | 17 | 15 (+1 migration SQL) |
+| Français CE2 (grammaire, lexique, compréhension, écriture, conjugaison) | 1413 | 1385 | 2 | 9 | 17 | 16 (0 migration) |
 
 ## QLM / Questionner le monde (QM, CE2)
 
@@ -82,8 +82,11 @@ réponses correctes), traités front-only.
 | `lec-bib-florine-info-n4` | À corriger | 1 | clic « fleurs » ambigu avec « guirlandes » | consigne « les petites plantes colorées… » (vise fleurs) |
 | `homo-n3-ces` | Suggestion | 5 | « Regarde … belles fleurs dans le jardin ! » | « …, juste là devant toi ! » (renforce le démonstratif) |
 | `ce1inf-n3-b/n4-a/n4-b` | Suggestion | 3, 7 | « **Clique le mot**… » | « **Clique sur le mot**… » |
-| `lec-bib-poussiere-inf-n3` | À corriger | 1 | bonne réponse « …dans un **palais enchanté** » alors que le texte dit « jardin » | **migration SQL** → « …dans un **jardin merveilleux** » |
+| `lec-bib-poussiere-inf-n3` | À corriger | 1 | bonne réponse « …dans un **palais enchanté** » absente du micro-texte affiché (coupé) alors qu'elle est fidèle à l'œuvre | **texte restauré** : « …un immense jardin **au milieu duquel s'élevait un palais enchanté**… » (front-only, `attendu` fidèle inchangé) |
 
-Corrections front-only (tests `francais`, `qcm-choix`, `bienveillance`, `tsc`
-verts). Un seul changement de bonne réponse (`lec-bib-poussiere-inf-n3`) traité
-par migration SQL (backup + dry-run), ci-dessous.
+Toutes les corrections sont front-only. Le cas `poussiere` semblait exiger une
+migration (changer la bonne réponse), mais l'inspection du texte source George
+Sand (`bibliotheque.ts`) a montré que « un palais enchanté » est fidèle à
+l'œuvre : c'est le micro-texte qui avait été trop coupé. On a donc **restauré le
+texte** plutôt que de dégrader une réponse juste → **aucune migration**, `attendu`
+inchangé, golden front↔SQL verts.
