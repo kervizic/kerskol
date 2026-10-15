@@ -219,7 +219,7 @@ const CH_INEGALITES: ParcoursChapitre = {
       format: "texte",
       consigne: "Écris le mot : la carte qui représente toute la Terre à plat s'appelle un...",
       attendu: "planisphère",
-      explication: "Un planisphère montre toute la Terre à plat. On y voit les continents et les océans.",
+      explication: "Un planisphère montre toute la Terre à plat. On y voit les continents, séparés par les océans.",
     },
   ],
   frise: [],

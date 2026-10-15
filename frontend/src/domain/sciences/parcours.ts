@@ -122,7 +122,7 @@ const CH_ETATS: ParcoursChapitre = {
       competence: "ST.MATIERE.ETATS",
       niveau: 3,
       format: "qcm",
-      consigne: "Un mélange transparent où l'on ne voit plus les morceaux, comme l'eau sucrée, est un mélange... ?",
+      consigne: "Un mélange où l'on ne voit plus les morceaux, où tout se mélange pareil, comme l'eau sucrée, est un mélange... ?",
       options: ["homogène", "hétérogène", "solide"],
       attendu: "homogène",
       explication: "Dans un mélange homogène (eau sucrée), on ne distingue plus les éléments mélangés.",

@@ -434,7 +434,7 @@ const CH_EXPLORATIONS: ParcoursChapitre = {
 // ==========================================================================
 const CH_TRAITE: ParcoursChapitre = {
   cle: "traite",
-  theme: "Explorations et conquêtes (XVe-XVIe siècle)",
+  theme: "La traite et l'esclavage (XVe-XVIIIe siècle)",
   titre: "La traite et l'esclavage",
   competence: "HIST.EXPLORATIONS",
   personnage: "Kofi, un jeune homme enlevé en Afrique au XVIIe siècle",

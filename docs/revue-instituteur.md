@@ -135,3 +135,29 @@ et neutre.
 
 Corrections front-only (`attendu` inchangé). Tests `emc`, `qcm-choix`,
 `bienveillance` (29) + `tsc` verts.
+
+## Histoire, Géographie, Sciences (CM1)
+
+Sous-agents : 3. **Histoire : aucune date ni attribution fausse** (vérif date par
+date). **Géographie : 32/32, aucun fait faux.** **Sciences : aucune erreur
+scientifique**, mais le défaut-signature de Manu (distracteurs d'un autre monde)
+était très présent.
+
+| Clé | Gravité | Critère | Avant | Après |
+|---|---|---|---|---|
+| `st-lum-n1-b` | **Bloquant** | 5 | ombre vs « une musique / une odeur » (son, odorat) | « un reflet / une tache de lumière » (optique) |
+| `st-eco-n1-b` | À corriger | 5 | besoins plante vs « bonbons / musique » | « obscurité totale / viande » |
+| `st-obj-n1-b` | À corriger | 5 | programme vs « gâteau / paysage » | « circuit / capteur » (technique) |
+| `st-viv-n3-a` | À corriger | 5 | clé de détermination vs « carte au trésor / recette » | « carte d'identité / arbre de classification » |
+| `st-eco-n3-a` | À corriger | 5 | réseau alimentaire vs « dessin animé / emploi du temps » | « cycle de l'eau / relief du sol » |
+| `st-viv-n1-a` | À corriger | 5 | espèce vs « ville / équipe » | « famille / troupeau » |
+| `st-eco-n1-a` | À corriger | 5 | écosystème vs « ordinateur / immeuble » | « paysage / habitat » |
+| `st-lum-n1-a` | À corriger | 5 | transparent vs « mou » (texture) | « coloré » (optique) |
+| `st-lum-n3-b` | À corriger | 5 | mètre vs « entonnoir » | « balance » (instrument de mesure) |
+| `st-eco-n2-a` | À corriger | 5 | « le mange » vs « dort / chante » | « le fuit / le soigne » (chaîne) |
+| `st-mat-n4-a` + `ps-eta-q3` | Suggestion | 1, 9 | « mélange **transparent** » = homogène (faux : lait homogène mais opaque) | « où l'on ne voit plus les morceaux, où tout se mélange pareil » |
+| histoire `CH_TRAITE` | À corriger | 1, 9 | thème affiché « Explorations et conquêtes (XVe-XVIe) » pour un chapitre traite/esclavage (XVIIe-XVIIIe) | « La traite et l'esclavage (XVe-XVIIIe siècle) » |
+| géo planisphère `pg-ine-q4` | Suggestion | 1 | « on y voit les continents et les océans » (océans non étiquetés) | « les continents, séparés par les océans » |
+
+Corrections front-only (`attendu` inchangé). Tests `histoire`, `geographie`,
+`sciences`, `qcm-choix`, `bienveillance` (59) + `tsc` verts.
