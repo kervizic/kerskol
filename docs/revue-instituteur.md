@@ -31,6 +31,7 @@ nécessaire que si une **bonne réponse** change (backup + dry-run BEGIN/ROLLBAC
 | Matière | Items relus | OK | Bloquants | À corriger | Suggestions | Corrigés |
 |---|---|---|---|---|---|---|
 | QLM / Questionner le monde (QM, CE2) | 208 | 200 | 0 | 2 | 6 | 8 |
+| Français CE2 (grammaire, lexique, compréhension, écriture, conjugaison) | 1413 | 1385 | 2 | 9 | 17 | 15 (+1 migration SQL) |
 
 ## QLM / Questionner le monde (QM, CE2)
 
@@ -54,3 +55,35 @@ scientifiques et repères spatio-temporels exacts.
 
 Toutes les corrections sont front-only (`attendu` inchangé). Tests verts :
 `qm`, `qcm-choix`, `bienveillance`, `tsc --noEmit`.
+
+## Français CE2
+
+Banques relues : grammaire (198), lexique (164), compréhension (257, textes
+inclus), écriture (32), conjugaison présent/futur/imparfait/passé composé/passé
+simple/impératif (688 formes vérifiées). Sous-agents : 6.
+**Conjugaison : 688 formes toutes exactes.** Deux bloquants (QCM/clic à deux
+réponses correctes), traités front-only.
+
+### Tableau avant / après (principaux)
+
+| Clé | Gravité | Critère | Avant | Après |
+|---|---|---|---|---|
+| `nature-n3-determinant` | **Bloquant** | 1, 5 | « Mon grand frère lit **une** histoire. » clic « déterminant » : *mon* ET *une* sont déterminants, un seul accepté | phrase « Mon grand frère lit **tranquillement**. » (un seul déterminant) |
+| `lec-bib-coche-sens-n2` | **Bloquant** | 1, 4 | question « qu'est-ce qu'un **coche** ? » mais texte sur une mouche (mot *coche* absent) | texte « Six forts chevaux tiraient un coche sur un chemin en pente. » |
+| `agn-n3-cdn` | À corriger | 1, 5 | « un collier de perles blanches/blanc » : *blanc* (le collier) aussi correct | consigne « Choisis l'adjectif qui décrit **les perles**. » |
+| `voc-syn-n4-5` | À corriger | 7 | « le contraire **de ouvrir** » (élision manquante) | « le contraire **d'ouvrir** » (consigne + phrase) |
+| `homo-n4-sest` | À corriger | 9 | explication « Léa s'est **lavée** » (accord faux ici, COD après) | « On écrit Léa s'est **lavé** les mains » |
+| `ecr-guide-n2-a` | À corriger | 5 | « Le chat boit du … » : lait / **vélo / nuage** (hors domaine) | lait / **jus / café** (boissons) |
+| `ecr-guide-n2-b` | À corriger | 5 | « Nina plante une … » : fleur / **voiture / chaise** (hors domaine) | fleur / **brouette / pelle** (jardin) |
+| `lec-bib-fourmis-sens-n2` | À corriger | 1, 4 | texte « Et il y en a ! » (aucune info) | texte décrivant les fourmis à la file |
+| `lec-bib-gland-info-n1` | À corriger | 1, 2 | INFO N1 sans nommer la citrouille | texte nommant la citrouille |
+| `lec-inf-n4-c` | À corriger | 1, 9 | indices de **trac** mais réponse libre attendue « impatiente » | texte réorienté vers l'impatience (« c'est bientôt à moi ? », temps trop long) |
+| `lec-bib-paon-inf-n3` | À corriger | 1, 5 | « Pourquoi crie-t-il Léon ? » non déductible du texte | consigne contextualisée « Le paon attend sa fiancée pour la fête… » |
+| `lec-bib-florine-info-n4` | À corriger | 1 | clic « fleurs » ambigu avec « guirlandes » | consigne « les petites plantes colorées… » (vise fleurs) |
+| `homo-n3-ces` | Suggestion | 5 | « Regarde … belles fleurs dans le jardin ! » | « …, juste là devant toi ! » (renforce le démonstratif) |
+| `ce1inf-n3-b/n4-a/n4-b` | Suggestion | 3, 7 | « **Clique le mot**… » | « **Clique sur le mot**… » |
+| `lec-bib-poussiere-inf-n3` | À corriger | 1 | bonne réponse « …dans un **palais enchanté** » alors que le texte dit « jardin » | **migration SQL** → « …dans un **jardin merveilleux** » |
+
+Corrections front-only (tests `francais`, `qcm-choix`, `bienveillance`, `tsc`
+verts). Un seul changement de bonne réponse (`lec-bib-poussiere-inf-n3`) traité
+par migration SQL (backup + dry-run), ci-dessous.
