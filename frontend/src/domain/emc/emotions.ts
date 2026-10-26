@@ -78,7 +78,7 @@ export const BANQUE_EMOTIONS: QmItem[] = [
     ]),
     explication: "Respirer et demander un câlin aident à se calmer. Casser ou insulter rend les choses pires." },
   { cle: "emc-emo-cal-n3-a", competence: "EMC.EMOTIONS.CALME", niveau: 3, format: "ordre",
-    consigne: "Tu es très en colère. Range dans l'ordre ce qui aide à se calmer.",
+    consigne: "Tu es très en colère. Remets dans l'ordre ce qui t'aide à te calmer. Qu'est-ce que tu fais d'abord ?",
     ...ordre(["je m'arrête", "je respire doucement", "je parle calmement"]),
     explication: "D'abord on s'arrête, puis on respire, puis on parle calmement. La colère redescend." },
   { cle: "emc-emo-cal-n3-b", competence: "EMC.EMOTIONS.CALME", niveau: 3, format: "qcm",

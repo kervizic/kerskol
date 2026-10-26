@@ -161,7 +161,7 @@ export const BANQUE_REPUBLIQUE: QmItem[] = [
     attendu: "celui qui a le plus de voix",
     explication: "On compte les voix : celui qui en a le plus est élu délégué. Chacun a voté." },
   { cle: "emc-rep-vot-n2-b", competence: "EMC.REPUBLIQUE.VOTER", niveau: 2, format: "ordre",
-    consigne: "Range dans l'ordre les étapes d'une élection de délégué.",
+    consigne: "Dans ta classe, on élit un délégué. Remets les étapes dans l'ordre. Qu'est-ce qui se passe d'abord ?",
     ...ordre(["on présente les candidats", "chacun vote", "on compte les voix"]),
     explication: "D'abord les candidats se présentent, puis chacun vote, puis on compte les voix." },
   { cle: "emc-rep-vot-n3-a", competence: "EMC.REPUBLIQUE.VOTER", niveau: 3, format: "qcm",

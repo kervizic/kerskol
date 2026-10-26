@@ -90,7 +90,7 @@ export const BANQUE_RESPECT: QmItem[] = [
     options: ["pardon", "c'est pas moi", "tant pis pour toi"], attendu: "pardon",
     explication: "On dit pardon quand on bouscule quelqu'un, même sans le faire exprès." },
   { cle: "emc-res-pol-n3-b", competence: "EMC.RESPECT.POLITESSE", niveau: 3, format: "ordre",
-    consigne: "Range cette petite scène polie dans l'ordre.",
+    consigne: "Tu n'arrives pas à ouvrir ta boîte. Remets l'histoire dans l'ordre. Qu'est-ce que tu fais d'abord ?",
     ...ordre(["tu demandes de l'aide, s'il te plaît", "on t'aide", "tu dis merci"]),
     explication: "On demande poliment, on reçoit de l'aide, puis on dit merci. C'est complet et gentil." },
   { cle: "emc-res-pol-n4-a", competence: "EMC.RESPECT.POLITESSE", niveau: 4, format: "texte",

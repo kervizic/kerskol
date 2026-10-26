@@ -1355,3 +1355,24 @@ Le texte entre guillemets ci-dessous est le texte À DIRE (déjà nettoyé pour 
 | `dictee:159:s1` | Le matin, la brume enveloppe doucement le sous-bois et les oiseaux sont déjà réveillés, chantant pour accueillir le jour nouveau. | `b32d5ce59a52ce38.mp3` |
 | `dictee:160:s0` | Avant la compétition, les jeunes gymnastes s'entraînent chaque jour avec leur entraîneuse pour progresser rapidement. | `211f44ca1c15860d.mp3` |
 | `dictee:160:s1` | Ils doivent encore travailler leur équilibre, et plusieurs signaux du jury indiquent déjà que la finale approche, mais ils restent concentrés malgré la pression. | `17b609fa109065f9.mp3` |
+
+
+<!-- ============================================================
+     SECTION MANUELLE (refonte « remettre dans l'ordre », 2026-10-26)
+     Ajoutée à la main, hors génération catalogue.py. À CONSERVER lors
+     d'une régénération automatique (ou à reporter dans la source).
+     NE PAS générer ici : la voix tourne sur un autre job.
+     ============================================================ -->
+
+## Consignes d'ordre (voix `C1_s33`)
+
+Nouveaux énoncés à faire dire (consignes des exercices « remettre dans l'ordre »
+réécrites le 2026-10-26). Texte À DIRE ci-dessous. La génération et le calcul des
+noms de fichiers (`clip_id`) sont réalisés par le job TTS dédié (voix `C1_s33`),
+pas ici.
+
+| Item (clé) | Texte à dire |
+|---|---|
+| `emc-res-pol-n3-b` | Tu n'arrives pas à ouvrir ta boîte. Remets l'histoire dans l'ordre. Qu'est-ce que tu fais d'abord ? |
+| `emc-emo-cal-n3-a` | Tu es très en colère. Remets dans l'ordre ce qui t'aide à te calmer. Qu'est-ce que tu fais d'abord ? |
+| `emc-rep-vot-n2-b` | Dans ta classe, on élit un délégué. Remets les étapes dans l'ordre. Qu'est-ce qui se passe d'abord ? |
