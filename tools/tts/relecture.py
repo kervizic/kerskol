@@ -110,13 +110,18 @@ def main() -> int:
     print(f"[{datetime.now():%H:%M:%S}] relecture {len(clips)} clips (Whisper large-v3 cpu int8)")
     model = WhisperModel(a.model, device="cpu", compute_type="int8")
 
-    def transcrire(p: Path) -> str:
-        segs, _ = model.transcribe(str(p), language="fr", beam_size=5,
-                                   word_timestamps=True, vad_filter=False,
-                                   condition_on_previous_text=False, temperature=0.0)
-        return " ".join(s.text for s in segs).strip()
+    SEUIL_FR = 0.5  # en-deca (ou langue != fr), on soupconne un accent non francais
 
-    rapport, briques_ecart, a_regen = [], [], []
+    def transcrire(p: Path):
+        # langue AUTO-DETECTEE : sert a reperer un accent non francais (graphies
+        # de respelling hors lexique fr). Renvoie (texte, langue, proba_langue).
+        segs, info = model.transcribe(str(p), language=None, beam_size=5,
+                                      word_timestamps=True, vad_filter=False,
+                                      condition_on_previous_text=False, temperature=0.0)
+        return (" ".join(s.text for s in segs).strip(),
+                info.language, float(info.language_probability))
+
+    rapport, briques_ecart, a_regen, accent_suspect = [], [], [], []
     for cid, info in clips:
         wavp = vdir / f"{cid}.wav"
         if not wavp.exists():
@@ -127,16 +132,24 @@ def main() -> int:
         pk, rms_db = _niveau(wav)
         cl_niv = _classe_niveau(pk, rms_db, duree, len(texte))
         attendu = toks(texte)
-        entendu = toks(transcrire(wavp))
+        entendu_txt, lang, lang_prob = transcrire(wavp)
+        entendu = toks(entendu_txt)
         wer = _wer(attendu, entendu)
         couv = (len(entendu) / len(attendu)) if attendu else 1.0
         cl = _classe_wer(wer, couv)
         key = cid2key.get(cid, "?")
+        accent = (lang != "fr") or (lang_prob < SEUIL_FR)
         ligne = {"cid": cid, "key": key, "cat": info.get("cat", "?"),
                  "wer": round(wer, 3), "classe": cl, "couverture": round(couv, 3),
                  "niveau": cl_niv, "crete_db": round(pk, 1), "rms_db": round(rms_db, 1),
+                 "lang": lang, "lang_prob": round(lang_prob, 3), "accent_suspect": accent,
                  "attendu": texte, "entendu": " ".join(entendu)}
         rapport.append(ligne)
+        # accent non francais : on ne le met en alerte que pour les PHRASES (>1 mot) ;
+        # les briques d'un seul mot ont une detection de langue peu fiable (clip court).
+        if accent and len(attendu) > 1:
+            accent_suspect.append({"key": key, "lang": lang, "lang_prob": round(lang_prob, 3),
+                                   "attendu": texte, "entendu": " ".join(entendu)})
         if len(attendu) <= 1:
             if cl != "OK" or cl_niv in ("MUET", "QUASI_MUET"):
                 briques_ecart.append(ligne)
@@ -149,10 +162,12 @@ def main() -> int:
              "SUSPECT": sum(1 for r in rapport if r["classe"] == "SUSPECT"),
              "FAUTIF": sum(1 for r in rapport if r["classe"] == "FAUTIF"),
              "TRONQUE": sum(1 for r in rapport if r["classe"] == "TRONQUE"),
-             "briques_ecart": len(briques_ecart), "a_regen": len(a_regen)}
+             "briques_ecart": len(briques_ecart), "a_regen": len(a_regen),
+             "accent_suspect": len(accent_suspect), "seuil_fr": SEUIL_FR}
     (out / "relecture.json").write_text(json.dumps(
         {"synthese": synth, "a_regen": a_regen, "briques_ecart": briques_ecart,
-         "rapport": rapport}, ensure_ascii=False, indent=2), encoding="utf-8")
+         "accent_suspect": accent_suspect, "rapport": rapport}, ensure_ascii=False, indent=2),
+        encoding="utf-8")
     print(f"[{datetime.now():%H:%M:%S}] {json.dumps(synth, ensure_ascii=False)}")
     return 0
 
