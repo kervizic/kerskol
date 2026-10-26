@@ -12,10 +12,11 @@
 // sert qu'au feedback (surlignage) et au mode demo. Feedback TOUJOURS valorisant.
 
 import { useMemo, useState } from "react";
-import { Check, Undo2 } from "lucide-react";
+import { Check } from "lucide-react";
 import type { QmRender, QmScene, QmSceneEl } from "../domain/qm/types";
 import { comparerQm } from "../domain/qm/types";
 import { illustrationPourCle } from "../domain/images";
+import RemiseEnOrdre from "./RemiseEnOrdre";
 
 interface Props {
   item: QmRender;
@@ -24,27 +25,6 @@ interface Props {
 }
 
 const OK = "#16a34a"; // vert de correction
-
-// Melange DETERMINISTE (graine = cle de l'item) pour que l'ordre d'affichage
-// des etapes soit stable entre deux rendus, mais different de l'ordre correct.
-function hash(s: string): number {
-  let h = 2166136261;
-  for (let i = 0; i < s.length; i++) {
-    h ^= s.charCodeAt(i);
-    h = Math.imul(h, 16777619);
-  }
-  return h >>> 0;
-}
-function shuffleStable<T>(arr: T[], seed: number): T[] {
-  const a = arr.slice();
-  let s = seed || 1;
-  for (let i = a.length - 1; i > 0; i--) {
-    s = (Math.imul(s, 1664525) + 1013904223) >>> 0;
-    const j = s % (i + 1);
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
 
 // --------------------------------------------------------------------------
 // Scene SVG maison (format clic) : dessine les primitives puis des zones
@@ -129,7 +109,6 @@ function SceneView({
 export default function QuestionnerLeMonde({ item, onSoumettre, onContinuer }: Props) {
   const [choix, setChoix] = useState<string | null>(null); // qcm / clic
   const [saisie, setSaisie] = useState(""); // texte
-  const [seq, setSeq] = useState<string[]>([]); // ordre : etapes rangees
   const [classe, setClasse] = useState<Record<string, string>>({}); // tri : item -> categorie
   const [busy, setBusy] = useState(false);
   const [res, setRes] = useState<{ correct: boolean } | null>(null);
@@ -139,27 +118,19 @@ export default function QuestionnerLeMonde({ item, onSoumettre, onContinuer }: P
   const bins = item.bins ?? [];
   const scene = item.figure && item.figure.kind === "scene" ? item.figure : null;
 
-  // Ordre : les etiquettes melangees (stable par cle), et celles pas encore placees.
-  const melange = useMemo(
-    () => (item.format === "ordre" ? shuffleStable(options, hash(item.cle)) : options),
-    [item.format, item.cle, options],
-  );
-  const restantes = melange.filter((o) => !seq.includes(o));
-
-  // Reponse courante envoyee au serveur, selon le format.
+  // Reponse courante envoyee au serveur, selon le format. Le format « ordre » est
+  // delegue a RemiseEnOrdre (early return ci-dessous) : il gere sa propre reponse.
   const reponse = useMemo(() => {
     if (item.format === "qcm" || item.format === "clic") return choix ?? "";
     if (item.format === "texte") return saisie;
-    if (item.format === "ordre") return seq.join(">");
     if (item.format === "tri") return options.map((o) => `${o}=${classe[o] ?? ""}`).join(";");
     return "";
-  }, [item.format, choix, saisie, seq, classe, options]);
+  }, [item.format, choix, saisie, classe, options]);
 
   const complet = useMemo(() => {
-    if (item.format === "ordre") return seq.length === melange.length && melange.length > 0;
     if (item.format === "tri") return options.length > 0 && options.every((o) => classe[o]);
     return reponse.trim().length > 0;
-  }, [item.format, seq, melange, options, classe, reponse]);
+  }, [item.format, options, classe, reponse]);
 
   const peutValider = complet && !res && !busy;
 
@@ -180,6 +151,23 @@ export default function QuestionnerLeMonde({ item, onSoumettre, onContinuer }: P
   // Illustration libre de droit (lot 2), associee a la cle de l'item. Purement
   // pedagogique : n'intervient JAMAIS dans le jugement (serveur seul juge).
   const illus = illustrationPourCle(item.cle);
+
+  // Format « ordre » : composant partage dedie (cases numerotees + banque de
+  // cartes). Remplace l'ancien rendu « touche les etiquettes » (aucune case,
+  // rien ne bouge au toucher) que les enfants ne comprenaient pas.
+  if (item.format === "ordre") {
+    return (
+      <RemiseEnOrdre
+        cle={item.cle}
+        consigne={item.consigne}
+        labels={options}
+        attendu={item.attendu}
+        explication={item.explication}
+        onSoumettre={(rep) => onSoumettre(item.cle, rep)}
+        onContinuer={onContinuer}
+      />
+    );
+  }
 
   return (
     <div className="kk-stack kk-geo kk-qm">
@@ -222,39 +210,6 @@ export default function QuestionnerLeMonde({ item, onSoumettre, onContinuer }: P
               </button>
             );
           })}
-        </div>
-      )}
-
-      {/* ORDRE : on touche les etapes dans l'ordre ; on peut defaire la derniere. */}
-      {item.format === "ordre" && (
-        <div className="kk-qm__ordre">
-          <ol className="kk-qm__seq" aria-label="étapes rangées">
-            {seq.map((o, i) => {
-              const bon = res ? comparerQm("ordre", seq.slice(0, i + 1).join(">"),
-                item.attendu.split(">").slice(0, i + 1).join(">")) : false;
-              return (
-                <li key={i} className={`kk-qm__seqitem${res ? (bon ? " kk-qm__seqitem--ok" : " kk-qm__seqitem--ko") : ""}`}>
-                  <span className="kk-qm__rank">{i + 1}</span> {o}
-                </li>
-              );
-            })}
-            {seq.length === 0 && <li className="kk-qm__seqvide">Touche les étiquettes dans l'ordre.</li>}
-          </ol>
-          {!res && (
-            <>
-              <div className="kk-qcm kk-qm__pool">
-                {restantes.map((o, i) => (
-                  <button key={i} type="button" className="kk-btn kk-qcm__opt"
-                    onClick={() => setSeq((s) => [...s, o])}>{o}</button>
-                ))}
-              </div>
-              {seq.length > 0 && (
-                <button type="button" className="kk-btn kk-qm__undo" onClick={() => setSeq((s) => s.slice(0, -1))}>
-                  <Undo2 size={18} aria-hidden="true" /> Défaire
-                </button>
-              )}
-            </>
-          )}
         </div>
       )}
 
