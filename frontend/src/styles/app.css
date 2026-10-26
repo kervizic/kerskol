@@ -751,3 +751,11 @@ button.kk-don__picto-row { cursor: pointer; }
 
 /* Contenu de support au-dessus des cases (ex : texte a lire en comprehension). */
 .kk-ord__support { width: 100%; }
+
+/* Picto (emoji) par etiquette : grande image au-dessus du texte dans la carte,
+   plus petite a cote du texte dans la case. */
+.kk-ord__carte { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.kk-ord__carte .kk-ord__picto { font-size: 1.9rem; line-height: 1; }
+.kk-ord__contenu { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.kk-ord__contenu .kk-ord__picto { font-size: 1.5rem; line-height: 1; }
+.kk-ord__picto { font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif; }

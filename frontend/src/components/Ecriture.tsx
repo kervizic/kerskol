@@ -23,6 +23,7 @@ import {
   type EcrCheck,
 } from "../domain/francais/ecriture";
 import { normaliserMot } from "../domain/francais/dictee";
+import RemiseEnOrdre from "./RemiseEnOrdre";
 
 export interface EcrRender {
   cle: string;
@@ -70,26 +71,22 @@ function conseilCheck(saisie: string, check: EcrCheck): string {
 export default function Ecriture({ item, indice, onSoumettre, onContinuer }: Props) {
   const [saisie, setSaisie] = useState("");
   const [choix, setChoix] = useState<string | null>(null); // qcm
-  const [seq, setSeq] = useState<string[]>([]); // ordre
   const [cacheModele, setCacheModele] = useState(false); // copie différée
   const [busy, setBusy] = useState(false);
   const [res, setRes] = useState<{ correct: boolean } | null>(null);
   const [erreurReseau, setErreurReseau] = useState(false);
   const [montrerIndice, setMontrerIndice] = useState(false);
 
-  const etiquettes = item.etiquettes ?? [];
   const img = item.image ? IMAGES[item.image] : undefined;
 
+  // Le format « ordre » (remettre des mots en phrase) est delegue a RemiseEnOrdre
+  // (early return plus bas) : il gere sa propre reponse.
   const reponse = useMemo(() => {
     if (item.format === "qcm") return choix ?? "";
-    if (item.format === "ordre") return seq.join(" ");
     return saisie; // copie / transform / libre
-  }, [item.format, choix, seq, saisie]);
+  }, [item.format, choix, saisie]);
 
-  const complet =
-    item.format === "ordre"
-      ? seq.length === etiquettes.length && etiquettes.length > 0
-      : reponse.trim().length > 0;
+  const complet = reponse.trim().length > 0;
   const peutValider = complet && !res && !busy;
 
   const soumettre = async () => {
@@ -110,17 +107,7 @@ export default function Ecriture({ item, indice, onSoumettre, onContinuer }: Pro
     if (res) return;
     setSaisie("");
     setChoix(null);
-    setSeq([]);
   };
-
-  const toggleEtiquette = (mot: string, idx: number) => {
-    if (res) return;
-    const key = `${idx}:${mot}`;
-    setSeq((s) => (s.includes(key) ? s.filter((x) => x !== key) : [...s, key]));
-  };
-  // Phrase reconstruite à partir des étiquettes (clés "idx:mot" -> mot).
-  const seqMots = seq.map((k) => k.slice(k.indexOf(":") + 1));
-  const reponseOrdre = seqMots.join(" ");
 
   // Message de feedback (toujours valorisant).
   const messageWrong = (() => {
@@ -128,6 +115,25 @@ export default function Ecriture({ item, indice, onSoumettre, onContinuer }: Pro
     if (item.format === "libre" && item.check) return conseilCheck(reponse, item.check);
     return "Ce n'est pas encore ça, mais tu y es presque.";
   })();
+
+  // Format « ordre » : remettre des MOTS en phrase. Variante « ligne + banque de
+  // mots » du composant partage. L'ordre correct = la phrase attendue decoupee
+  // sur les espaces (les etiquettes portent deja la ponctuation). Le serveur
+  // reste SEUL JUGE (reponse = mots joints par un espace, comme avant).
+  if (item.format === "ordre") {
+    return (
+      <RemiseEnOrdre
+        cle={item.cle}
+        consigne={item.consigne}
+        labels={item.attendu.split(" ")}
+        separateur=" "
+        variante="ligne"
+        explication={item.explication}
+        onSoumettre={(rep) => onSoumettre(item.cle, rep)}
+        onContinuer={onContinuer}
+      />
+    );
+  }
 
   return (
     <div className="kk-stack kk-lecture">
@@ -190,27 +196,6 @@ export default function Ecriture({ item, indice, onSoumettre, onContinuer }: Pro
       )}
 
       {/* ORDRE : étiquettes-mots à ranger. */}
-      {item.format === "ordre" && (
-        <div className="kk-stack kk-lecture__ordre">
-          {reponseOrdre && (
-            <p className="kk-support kk-lecture__p" aria-live="polite" style={{ textAlign: "center", fontSize: "1.2rem", minHeight: "1.5em" }}>{reponseOrdre}</p>
-          )}
-          <div className="kk-qcm">
-            {etiquettes.map((mot, i) => {
-              const key = `${i}:${mot}`;
-              const rang = seq.indexOf(key);
-              const pris = rang >= 0;
-              const extra = pris ? " kk-qcm__opt--active" : "";
-              return (
-                <button key={i} type="button" className={`kk-btn kk-qcm__opt${extra}`} disabled={Boolean(res)} aria-pressed={pris} onClick={() => toggleEtiquette(mot, i)}>
-                  <span className="kk-lecture__rang" aria-hidden="true">{pris ? rang + 1 : "•"}</span> {mot}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      )}
-
       {/* COPIE / TRANSFORM / LIBRE : saisie clavier. */}
       {(item.format === "copie" || item.format === "transform") && (
         <div className="kk-row" style={{ justifyContent: "center" }}>

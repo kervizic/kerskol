@@ -28,6 +28,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { Check, RotateCcw, Star } from "lucide-react";
 import { SpeakerButton } from "./SpeakerButton";
+import { pictoPourEtiquette } from "../domain/pictos";
 
 // Mots du temps affiches SOUS les cases (variante "cases"). Jamais dans les
 // etiquettes elles-memes (regle editoriale) : ils vivent uniquement ici.
@@ -311,7 +312,14 @@ export default function RemiseEnOrdre({
           <span className="kk-ord__rang" aria-hidden="true">
             {i + 1}
           </span>
-          {lab ? <span className="kk-ord__texte">{lab}</span> : <span className="kk-ord__placeholder" aria-hidden="true" />}
+          {lab ? (
+            <span className="kk-ord__contenu">
+              <span className="kk-ord__picto" aria-hidden="true">{pictoPourEtiquette(lab)}</span>
+              <span className="kk-ord__texte">{lab}</span>
+            </span>
+          ) : (
+            <span className="kk-ord__placeholder" aria-hidden="true" />
+          )}
         </div>
         {variante === "cases" && <span className="kk-ord__tempo">{titreCase(i)}</span>}
       </div>
@@ -363,7 +371,8 @@ export default function RemiseEnOrdre({
                 }}
                 onClick={() => antiDoubleTap(`carte-${lab}`) && placerCarte(lab)}
               >
-                {lab}
+                <span className="kk-ord__picto" aria-hidden="true">{pictoPourEtiquette(lab)}</span>
+                <span className="kk-ord__texte">{lab}</span>
               </button>
             ))}
             {reserve.length === 0 && !complet && <span className="kk-ord__reserve-vide" />}
