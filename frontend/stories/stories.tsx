@@ -221,15 +221,29 @@ export const STORIES: Story[] = [
   // Refonte « remettre dans l'ordre » : l'item EMC politesse EXACT de la photo
   // d'Iris, mais avec le nouveau composant (cases numerotees + grandes cartes).
   // La demo (petite main) est desactivee ici pour une capture stable.
-  { id: "ordre-emc-politesse", label: "Ordre — EMC politesse (refonte, écran de l'élève)",
+  { id: "ordre-emc-politesse", label: "Ordre — EMC politesse (refonte + pictos, écran de l'élève)",
     node: (() => {
       try { localStorage.setItem("kk-demo-ordre", "1"); } catch { /* noop */ }
       return (
         <RemiseEnOrdre
           cle="emc-res-pol-n3-b"
-          consigne="Tom a laissé tomber ses crayons. Remets l'histoire dans l'ordre. Qu'est-ce qui se passe d'abord ?"
-          labels={["Tom demande : « Tu m'aides, s'il te plaît ? »", "Léa ramasse les crayons avec Tom", "Tom dit : « Merci Léa ! »"]}
-          explication="On demande d'abord de l'aide, puis on aide, et on dit merci à la fin."
+          consigne="Léo n'arrive pas à ouvrir sa boîte. Remets son histoire dans l'ordre. Qu'est-ce qui se passe d'abord ?"
+          labels={["Léo demande de l'aide", "Maman aide Léo", "Léo dit merci"]}
+          explication="D'abord Léo demande de l'aide, puis Maman l'aide, puis Léo dit merci."
+          onSoumettre={noopSubmit}
+          onContinuer={noop}
+        />
+      );
+    })() },
+  { id: "ordre-qm-grenouille", label: "Ordre — cycle de la grenouille (pictos, Questionner le monde)",
+    node: (() => {
+      try { localStorage.setItem("kk-demo-ordre", "1"); } catch { /* noop */ }
+      return (
+        <RemiseEnOrdre
+          cle="qm-viv-cyc-n4-a"
+          consigne="Range dans l'ordre toutes les étapes de la vie de la grenouille."
+          labels={["l'œuf dans l'eau", "le têtard", "le têtard à pattes", "la grenouille"]}
+          explication="L'œuf dans l'eau, puis le têtard, puis le têtard qui a des pattes, puis la grenouille adulte."
           onSoumettre={noopSubmit}
           onContinuer={noop}
         />
