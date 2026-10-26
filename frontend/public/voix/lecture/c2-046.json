@@ -1,0 +1,533 @@
+{
+  "id": "c2-046",
+  "outil": "aeneas (forced alignment, espeak-ng, CPU)",
+  "audio": {
+    "opus": "c2-046.opus",
+    "m4a": "c2-046.m4a",
+    "duree_ms": 31626
+  },
+  "mots": [
+    {
+      "mot": "Lorsqu’elle",
+      "debut_ms": 150,
+      "fin_ms": 390,
+      "index": 0
+    },
+    {
+      "mot": "ne",
+      "debut_ms": 390,
+      "fin_ms": 670,
+      "index": 1
+    },
+    {
+      "mot": "les",
+      "debut_ms": 670,
+      "fin_ms": 950,
+      "index": 2
+    },
+    {
+      "mot": "vit",
+      "debut_ms": 950,
+      "fin_ms": 1190,
+      "index": 3
+    },
+    {
+      "mot": "plus",
+      "debut_ms": 1190,
+      "fin_ms": 1270,
+      "index": 4
+    },
+    {
+      "mot": "elle",
+      "debut_ms": 1270,
+      "fin_ms": 1510,
+      "index": 5
+    },
+    {
+      "mot": "se",
+      "debut_ms": 1510,
+      "fin_ms": 1590,
+      "index": 6
+    },
+    {
+      "mot": "mit",
+      "debut_ms": 1590,
+      "fin_ms": 1910,
+      "index": 7
+    },
+    {
+      "mot": "à",
+      "debut_ms": 1910,
+      "fin_ms": 2670,
+      "index": 8
+    },
+    {
+      "mot": "pleurer",
+      "debut_ms": 2670,
+      "fin_ms": 3710,
+      "index": 9
+    },
+    {
+      "mot": "Sa",
+      "debut_ms": 3710,
+      "fin_ms": 3950,
+      "index": 10
+    },
+    {
+      "mot": "marraine",
+      "debut_ms": 3950,
+      "fin_ms": 4390,
+      "index": 11
+    },
+    {
+      "mot": "qui",
+      "debut_ms": 4390,
+      "fin_ms": 4590,
+      "index": 12
+    },
+    {
+      "mot": "la",
+      "debut_ms": 4590,
+      "fin_ms": 4710,
+      "index": 13
+    },
+    {
+      "mot": "vit",
+      "debut_ms": 4710,
+      "fin_ms": 5070,
+      "index": 14
+    },
+    {
+      "mot": "tout",
+      "debut_ms": 5070,
+      "fin_ms": 5510,
+      "index": 15
+    },
+    {
+      "mot": "en",
+      "debut_ms": 5510,
+      "fin_ms": 5630,
+      "index": 16
+    },
+    {
+      "mot": "pleurs",
+      "debut_ms": 5630,
+      "fin_ms": 6230,
+      "index": 17
+    },
+    {
+      "mot": "lui",
+      "debut_ms": 6230,
+      "fin_ms": 6430,
+      "index": 18
+    },
+    {
+      "mot": "demanda",
+      "debut_ms": 6430,
+      "fin_ms": 6790,
+      "index": 19
+    },
+    {
+      "mot": "ce",
+      "debut_ms": 6790,
+      "fin_ms": 6950,
+      "index": 20
+    },
+    {
+      "mot": "qu’elle",
+      "debut_ms": 6950,
+      "fin_ms": 7470,
+      "index": 21
+    },
+    {
+      "mot": "avait",
+      "debut_ms": 7470,
+      "fin_ms": 7910,
+      "index": 22
+    },
+    {
+      "mot": "Je",
+      "debut_ms": 7910,
+      "fin_ms": 8190,
+      "index": 23
+    },
+    {
+      "mot": "voudrais",
+      "debut_ms": 8190,
+      "fin_ms": 8510,
+      "index": 24
+    },
+    {
+      "mot": "bien",
+      "debut_ms": 8510,
+      "fin_ms": 10070,
+      "index": 25
+    },
+    {
+      "mot": "je",
+      "debut_ms": 10070,
+      "fin_ms": 10550,
+      "index": 26
+    },
+    {
+      "mot": "voudrais",
+      "debut_ms": 10550,
+      "fin_ms": 10710,
+      "index": 27
+    },
+    {
+      "mot": "bien",
+      "debut_ms": 10710,
+      "fin_ms": 11910,
+      "index": 28
+    },
+    {
+      "mot": "Elle",
+      "debut_ms": 11910,
+      "fin_ms": 12030,
+      "index": 29
+    },
+    {
+      "mot": "pleurait",
+      "debut_ms": 12030,
+      "fin_ms": 12430,
+      "index": 30
+    },
+    {
+      "mot": "si",
+      "debut_ms": 12430,
+      "fin_ms": 13110,
+      "index": 31
+    },
+    {
+      "mot": "fort",
+      "debut_ms": 13110,
+      "fin_ms": 13310,
+      "index": 32
+    },
+    {
+      "mot": "qu’elle",
+      "debut_ms": 13310,
+      "fin_ms": 13630,
+      "index": 33
+    },
+    {
+      "mot": "ne",
+      "debut_ms": 13630,
+      "fin_ms": 13670,
+      "index": 34
+    },
+    {
+      "mot": "put",
+      "debut_ms": 13670,
+      "fin_ms": 13830,
+      "index": 35
+    },
+    {
+      "mot": "achever",
+      "debut_ms": 13830,
+      "fin_ms": 14990,
+      "index": 36
+    },
+    {
+      "mot": "Sa",
+      "debut_ms": 14990,
+      "fin_ms": 15430,
+      "index": 37
+    },
+    {
+      "mot": "marraine",
+      "debut_ms": 15430,
+      "fin_ms": 15670,
+      "index": 38
+    },
+    {
+      "mot": "qui",
+      "debut_ms": 15670,
+      "fin_ms": 15910,
+      "index": 39
+    },
+    {
+      "mot": "était",
+      "debut_ms": 15910,
+      "fin_ms": 15950,
+      "index": 40
+    },
+    {
+      "mot": "fée",
+      "debut_ms": 15950,
+      "fin_ms": 16390,
+      "index": 41
+    },
+    {
+      "mot": "lui",
+      "debut_ms": 16390,
+      "fin_ms": 16670,
+      "index": 42
+    },
+    {
+      "mot": "dit",
+      "debut_ms": 16670,
+      "fin_ms": 16830,
+      "index": 43
+    },
+    {
+      "mot": "Tu",
+      "debut_ms": 16830,
+      "fin_ms": 17510,
+      "index": 44
+    },
+    {
+      "mot": "voudrais",
+      "debut_ms": 17510,
+      "fin_ms": 18030,
+      "index": 45
+    },
+    {
+      "mot": "bien",
+      "debut_ms": 18030,
+      "fin_ms": 18230,
+      "index": 46
+    },
+    {
+      "mot": "aller",
+      "debut_ms": 18230,
+      "fin_ms": 18270,
+      "index": 47
+    },
+    {
+      "mot": "au",
+      "debut_ms": 18270,
+      "fin_ms": 18310,
+      "index": 48
+    },
+    {
+      "mot": "bal",
+      "debut_ms": 18310,
+      "fin_ms": 18550,
+      "index": 49
+    },
+    {
+      "mot": "n’est-ce",
+      "debut_ms": 18550,
+      "fin_ms": 18830,
+      "index": 50
+    },
+    {
+      "mot": "pas",
+      "debut_ms": 18830,
+      "fin_ms": 20150,
+      "index": 51
+    },
+    {
+      "mot": "Hélas",
+      "debut_ms": 20150,
+      "fin_ms": 21190,
+      "index": 52
+    },
+    {
+      "mot": "oui",
+      "debut_ms": 21190,
+      "fin_ms": 21630,
+      "index": 53
+    },
+    {
+      "mot": "dit",
+      "debut_ms": 21630,
+      "fin_ms": 21670,
+      "index": 54
+    },
+    {
+      "mot": "Cendrillon",
+      "debut_ms": 21670,
+      "fin_ms": 22590,
+      "index": 55
+    },
+    {
+      "mot": "en",
+      "debut_ms": 22590,
+      "fin_ms": 22710,
+      "index": 56
+    },
+    {
+      "mot": "soupirant",
+      "debut_ms": 22710,
+      "fin_ms": 24230,
+      "index": 57
+    },
+    {
+      "mot": "Eh",
+      "debut_ms": 24230,
+      "fin_ms": 24430,
+      "index": 58
+    },
+    {
+      "mot": "bien",
+      "debut_ms": 24430,
+      "fin_ms": 25390,
+      "index": 59
+    },
+    {
+      "mot": "seras-tu",
+      "debut_ms": 25390,
+      "fin_ms": 25790,
+      "index": 60
+    },
+    {
+      "mot": "bonne",
+      "debut_ms": 25790,
+      "fin_ms": 25830,
+      "index": 61
+    },
+    {
+      "mot": "fille",
+      "debut_ms": 25830,
+      "fin_ms": 26030,
+      "index": 62
+    },
+    {
+      "mot": "dit",
+      "debut_ms": 26030,
+      "fin_ms": 26070,
+      "index": 63
+    },
+    {
+      "mot": "sa",
+      "debut_ms": 26070,
+      "fin_ms": 26110,
+      "index": 64
+    },
+    {
+      "mot": "marraine",
+      "debut_ms": 26110,
+      "fin_ms": 26230,
+      "index": 65
+    },
+    {
+      "mot": "je",
+      "debut_ms": 26230,
+      "fin_ms": 26710,
+      "index": 66
+    },
+    {
+      "mot": "t’y",
+      "debut_ms": 26710,
+      "fin_ms": 27230,
+      "index": 67
+    },
+    {
+      "mot": "ferai",
+      "debut_ms": 27230,
+      "fin_ms": 27790,
+      "index": 68
+    },
+    {
+      "mot": "aller",
+      "debut_ms": 27790,
+      "fin_ms": 28070,
+      "index": 69
+    },
+    {
+      "mot": "Elle",
+      "debut_ms": 28070,
+      "fin_ms": 28230,
+      "index": 70
+    },
+    {
+      "mot": "la",
+      "debut_ms": 28230,
+      "fin_ms": 28270,
+      "index": 71
+    },
+    {
+      "mot": "mena",
+      "debut_ms": 28270,
+      "fin_ms": 28310,
+      "index": 72
+    },
+    {
+      "mot": "dans",
+      "debut_ms": 28310,
+      "fin_ms": 28350,
+      "index": 73
+    },
+    {
+      "mot": "sa",
+      "debut_ms": 28350,
+      "fin_ms": 28630,
+      "index": 74
+    },
+    {
+      "mot": "chambre",
+      "debut_ms": 28630,
+      "fin_ms": 29310,
+      "index": 75
+    },
+    {
+      "mot": "et",
+      "debut_ms": 29310,
+      "fin_ms": 29430,
+      "index": 76
+    },
+    {
+      "mot": "lui",
+      "debut_ms": 29430,
+      "fin_ms": 29470,
+      "index": 77
+    },
+    {
+      "mot": "dit",
+      "debut_ms": 29470,
+      "fin_ms": 29510,
+      "index": 78
+    },
+    {
+      "mot": "Va",
+      "debut_ms": 29510,
+      "fin_ms": 29550,
+      "index": 79
+    },
+    {
+      "mot": "dans",
+      "debut_ms": 29550,
+      "fin_ms": 29590,
+      "index": 80
+    },
+    {
+      "mot": "le",
+      "debut_ms": 29590,
+      "fin_ms": 29630,
+      "index": 81
+    },
+    {
+      "mot": "jardin",
+      "debut_ms": 29630,
+      "fin_ms": 29670,
+      "index": 82
+    },
+    {
+      "mot": "et",
+      "debut_ms": 29670,
+      "fin_ms": 30070,
+      "index": 83
+    },
+    {
+      "mot": "apporte-moi",
+      "debut_ms": 30070,
+      "fin_ms": 30710,
+      "index": 84
+    },
+    {
+      "mot": "une",
+      "debut_ms": 30710,
+      "fin_ms": 30830,
+      "index": 85
+    },
+    {
+      "mot": "citrouille",
+      "debut_ms": 30830,
+      "fin_ms": 31470,
+      "index": 86
+    }
+  ]
+}

@@ -1,0 +1,695 @@
+{
+  "id": "c2-052",
+  "outil": "aeneas (forced alignment, espeak-ng, CPU)",
+  "audio": {
+    "opus": "c2-052.opus",
+    "m4a": "c2-052.m4a",
+    "duree_ms": 41906
+  },
+  "mots": [
+    {
+      "mot": "Que",
+      "debut_ms": 150,
+      "fin_ms": 470,
+      "index": 0
+    },
+    {
+      "mot": "la",
+      "debut_ms": 470,
+      "fin_ms": 670,
+      "index": 1
+    },
+    {
+      "mot": "campagne",
+      "debut_ms": 670,
+      "fin_ms": 1070,
+      "index": 2
+    },
+    {
+      "mot": "était",
+      "debut_ms": 1070,
+      "fin_ms": 1390,
+      "index": 3
+    },
+    {
+      "mot": "belle",
+      "debut_ms": 1390,
+      "fin_ms": 2510,
+      "index": 4
+    },
+    {
+      "mot": "On",
+      "debut_ms": 2510,
+      "fin_ms": 2830,
+      "index": 5
+    },
+    {
+      "mot": "était",
+      "debut_ms": 2830,
+      "fin_ms": 3270,
+      "index": 6
+    },
+    {
+      "mot": "au",
+      "debut_ms": 3270,
+      "fin_ms": 3390,
+      "index": 7
+    },
+    {
+      "mot": "milieu",
+      "debut_ms": 3390,
+      "fin_ms": 3750,
+      "index": 8
+    },
+    {
+      "mot": "de",
+      "debut_ms": 3750,
+      "fin_ms": 3990,
+      "index": 9
+    },
+    {
+      "mot": "l’été",
+      "debut_ms": 3990,
+      "fin_ms": 4510,
+      "index": 10
+    },
+    {
+      "mot": "les",
+      "debut_ms": 4510,
+      "fin_ms": 4670,
+      "index": 11
+    },
+    {
+      "mot": "blés",
+      "debut_ms": 4670,
+      "fin_ms": 4950,
+      "index": 12
+    },
+    {
+      "mot": "agitaient",
+      "debut_ms": 4950,
+      "fin_ms": 5310,
+      "index": 13
+    },
+    {
+      "mot": "des",
+      "debut_ms": 5310,
+      "fin_ms": 5430,
+      "index": 14
+    },
+    {
+      "mot": "épis",
+      "debut_ms": 5430,
+      "fin_ms": 5670,
+      "index": 15
+    },
+    {
+      "mot": "d’un",
+      "debut_ms": 5670,
+      "fin_ms": 5750,
+      "index": 16
+    },
+    {
+      "mot": "jaune",
+      "debut_ms": 5750,
+      "fin_ms": 6430,
+      "index": 17
+    },
+    {
+      "mot": "magnifique",
+      "debut_ms": 6430,
+      "fin_ms": 7310,
+      "index": 18
+    },
+    {
+      "mot": "l’avoine",
+      "debut_ms": 7310,
+      "fin_ms": 7870,
+      "index": 19
+    },
+    {
+      "mot": "était",
+      "debut_ms": 7870,
+      "fin_ms": 8310,
+      "index": 20
+    },
+    {
+      "mot": "verte",
+      "debut_ms": 8310,
+      "fin_ms": 9030,
+      "index": 21
+    },
+    {
+      "mot": "et",
+      "debut_ms": 9030,
+      "fin_ms": 9110,
+      "index": 22
+    },
+    {
+      "mot": "dans",
+      "debut_ms": 9110,
+      "fin_ms": 9310,
+      "index": 23
+    },
+    {
+      "mot": "les",
+      "debut_ms": 9310,
+      "fin_ms": 9350,
+      "index": 24
+    },
+    {
+      "mot": "prairies",
+      "debut_ms": 9350,
+      "fin_ms": 9710,
+      "index": 25
+    },
+    {
+      "mot": "le",
+      "debut_ms": 9710,
+      "fin_ms": 9830,
+      "index": 26
+    },
+    {
+      "mot": "foin",
+      "debut_ms": 9830,
+      "fin_ms": 10190,
+      "index": 27
+    },
+    {
+      "mot": "s’élevait",
+      "debut_ms": 10190,
+      "fin_ms": 10550,
+      "index": 28
+    },
+    {
+      "mot": "en",
+      "debut_ms": 10550,
+      "fin_ms": 10910,
+      "index": 29
+    },
+    {
+      "mot": "monceaux",
+      "debut_ms": 10910,
+      "fin_ms": 11510,
+      "index": 30
+    },
+    {
+      "mot": "odorants",
+      "debut_ms": 11510,
+      "fin_ms": 11950,
+      "index": 31
+    },
+    {
+      "mot": "la",
+      "debut_ms": 11950,
+      "fin_ms": 12510,
+      "index": 32
+    },
+    {
+      "mot": "cigogne",
+      "debut_ms": 12510,
+      "fin_ms": 12950,
+      "index": 33
+    },
+    {
+      "mot": "se",
+      "debut_ms": 12950,
+      "fin_ms": 13110,
+      "index": 34
+    },
+    {
+      "mot": "promenait",
+      "debut_ms": 13110,
+      "fin_ms": 13550,
+      "index": 35
+    },
+    {
+      "mot": "sur",
+      "debut_ms": 13550,
+      "fin_ms": 13710,
+      "index": 36
+    },
+    {
+      "mot": "ses",
+      "debut_ms": 13710,
+      "fin_ms": 14030,
+      "index": 37
+    },
+    {
+      "mot": "longues",
+      "debut_ms": 14030,
+      "fin_ms": 14230,
+      "index": 38
+    },
+    {
+      "mot": "jambes",
+      "debut_ms": 14230,
+      "fin_ms": 14670,
+      "index": 39
+    },
+    {
+      "mot": "rouges",
+      "debut_ms": 14670,
+      "fin_ms": 15470,
+      "index": 40
+    },
+    {
+      "mot": "en",
+      "debut_ms": 15470,
+      "fin_ms": 15590,
+      "index": 41
+    },
+    {
+      "mot": "bavardant",
+      "debut_ms": 15590,
+      "fin_ms": 15870,
+      "index": 42
+    },
+    {
+      "mot": "de",
+      "debut_ms": 15870,
+      "fin_ms": 16030,
+      "index": 43
+    },
+    {
+      "mot": "l’égyptien",
+      "debut_ms": 16030,
+      "fin_ms": 17070,
+      "index": 44
+    },
+    {
+      "mot": "langue",
+      "debut_ms": 17070,
+      "fin_ms": 17430,
+      "index": 45
+    },
+    {
+      "mot": "qu’elle",
+      "debut_ms": 17430,
+      "fin_ms": 17790,
+      "index": 46
+    },
+    {
+      "mot": "avait",
+      "debut_ms": 17790,
+      "fin_ms": 17910,
+      "index": 47
+    },
+    {
+      "mot": "apprise",
+      "debut_ms": 17910,
+      "fin_ms": 18150,
+      "index": 48
+    },
+    {
+      "mot": "de",
+      "debut_ms": 18150,
+      "fin_ms": 18230,
+      "index": 49
+    },
+    {
+      "mot": "madame",
+      "debut_ms": 18230,
+      "fin_ms": 18550,
+      "index": 50
+    },
+    {
+      "mot": "sa",
+      "debut_ms": 18550,
+      "fin_ms": 18830,
+      "index": 51
+    },
+    {
+      "mot": "mère",
+      "debut_ms": 18830,
+      "fin_ms": 20550,
+      "index": 52
+    },
+    {
+      "mot": "Autour",
+      "debut_ms": 20550,
+      "fin_ms": 20710,
+      "index": 53
+    },
+    {
+      "mot": "des",
+      "debut_ms": 20710,
+      "fin_ms": 21070,
+      "index": 54
+    },
+    {
+      "mot": "champs",
+      "debut_ms": 21070,
+      "fin_ms": 21550,
+      "index": 55
+    },
+    {
+      "mot": "et",
+      "debut_ms": 21550,
+      "fin_ms": 21630,
+      "index": 56
+    },
+    {
+      "mot": "des",
+      "debut_ms": 21630,
+      "fin_ms": 21670,
+      "index": 57
+    },
+    {
+      "mot": "prairies",
+      "debut_ms": 21670,
+      "fin_ms": 22070,
+      "index": 58
+    },
+    {
+      "mot": "s’étendaient",
+      "debut_ms": 22070,
+      "fin_ms": 22670,
+      "index": 59
+    },
+    {
+      "mot": "de",
+      "debut_ms": 22670,
+      "fin_ms": 22910,
+      "index": 60
+    },
+    {
+      "mot": "grandes",
+      "debut_ms": 22910,
+      "fin_ms": 23070,
+      "index": 61
+    },
+    {
+      "mot": "forêts",
+      "debut_ms": 23070,
+      "fin_ms": 23470,
+      "index": 62
+    },
+    {
+      "mot": "coupées",
+      "debut_ms": 23470,
+      "fin_ms": 23670,
+      "index": 63
+    },
+    {
+      "mot": "de",
+      "debut_ms": 23670,
+      "fin_ms": 24030,
+      "index": 64
+    },
+    {
+      "mot": "lacs",
+      "debut_ms": 24030,
+      "fin_ms": 24310,
+      "index": 65
+    },
+    {
+      "mot": "profonds",
+      "debut_ms": 24310,
+      "fin_ms": 25670,
+      "index": 66
+    },
+    {
+      "mot": "Oui",
+      "debut_ms": 25670,
+      "fin_ms": 26190,
+      "index": 67
+    },
+    {
+      "mot": "vraiment",
+      "debut_ms": 26190,
+      "fin_ms": 26750,
+      "index": 68
+    },
+    {
+      "mot": "la",
+      "debut_ms": 26750,
+      "fin_ms": 26910,
+      "index": 69
+    },
+    {
+      "mot": "campagne",
+      "debut_ms": 26910,
+      "fin_ms": 27230,
+      "index": 70
+    },
+    {
+      "mot": "était",
+      "debut_ms": 27230,
+      "fin_ms": 27430,
+      "index": 71
+    },
+    {
+      "mot": "bien",
+      "debut_ms": 27430,
+      "fin_ms": 27710,
+      "index": 72
+    },
+    {
+      "mot": "belle",
+      "debut_ms": 27710,
+      "fin_ms": 28070,
+      "index": 73
+    },
+    {
+      "mot": "Les",
+      "debut_ms": 28070,
+      "fin_ms": 28710,
+      "index": 74
+    },
+    {
+      "mot": "rayons",
+      "debut_ms": 28710,
+      "fin_ms": 29230,
+      "index": 75
+    },
+    {
+      "mot": "du",
+      "debut_ms": 29230,
+      "fin_ms": 29310,
+      "index": 76
+    },
+    {
+      "mot": "soleil",
+      "debut_ms": 29310,
+      "fin_ms": 29830,
+      "index": 77
+    },
+    {
+      "mot": "éclairaient",
+      "debut_ms": 29830,
+      "fin_ms": 30390,
+      "index": 78
+    },
+    {
+      "mot": "de",
+      "debut_ms": 30390,
+      "fin_ms": 30510,
+      "index": 79
+    },
+    {
+      "mot": "tout",
+      "debut_ms": 30510,
+      "fin_ms": 30710,
+      "index": 80
+    },
+    {
+      "mot": "leur",
+      "debut_ms": 30710,
+      "fin_ms": 31150,
+      "index": 81
+    },
+    {
+      "mot": "éclat",
+      "debut_ms": 31150,
+      "fin_ms": 31550,
+      "index": 82
+    },
+    {
+      "mot": "un",
+      "debut_ms": 31550,
+      "fin_ms": 31670,
+      "index": 83
+    },
+    {
+      "mot": "vieux",
+      "debut_ms": 31670,
+      "fin_ms": 31950,
+      "index": 84
+    },
+    {
+      "mot": "domaine",
+      "debut_ms": 31950,
+      "fin_ms": 32470,
+      "index": 85
+    },
+    {
+      "mot": "entouré",
+      "debut_ms": 32470,
+      "fin_ms": 32910,
+      "index": 86
+    },
+    {
+      "mot": "de",
+      "debut_ms": 32910,
+      "fin_ms": 33030,
+      "index": 87
+    },
+    {
+      "mot": "larges",
+      "debut_ms": 33030,
+      "fin_ms": 33390,
+      "index": 88
+    },
+    {
+      "mot": "fossés",
+      "debut_ms": 33390,
+      "fin_ms": 33990,
+      "index": 89
+    },
+    {
+      "mot": "et",
+      "debut_ms": 33990,
+      "fin_ms": 34270,
+      "index": 90
+    },
+    {
+      "mot": "de",
+      "debut_ms": 34270,
+      "fin_ms": 34390,
+      "index": 91
+    },
+    {
+      "mot": "grandes",
+      "debut_ms": 34390,
+      "fin_ms": 34590,
+      "index": 92
+    },
+    {
+      "mot": "feuilles",
+      "debut_ms": 34590,
+      "fin_ms": 35350,
+      "index": 93
+    },
+    {
+      "mot": "de",
+      "debut_ms": 35350,
+      "fin_ms": 35390,
+      "index": 94
+    },
+    {
+      "mot": "bardane",
+      "debut_ms": 35390,
+      "fin_ms": 36030,
+      "index": 95
+    },
+    {
+      "mot": "descendaient",
+      "debut_ms": 36030,
+      "fin_ms": 36550,
+      "index": 96
+    },
+    {
+      "mot": "du",
+      "debut_ms": 36550,
+      "fin_ms": 36590,
+      "index": 97
+    },
+    {
+      "mot": "mur",
+      "debut_ms": 36590,
+      "fin_ms": 37030,
+      "index": 98
+    },
+    {
+      "mot": "jusques",
+      "debut_ms": 37030,
+      "fin_ms": 37350,
+      "index": 99
+    },
+    {
+      "mot": "dans",
+      "debut_ms": 37350,
+      "fin_ms": 37630,
+      "index": 100
+    },
+    {
+      "mot": "l’eau",
+      "debut_ms": 37630,
+      "fin_ms": 37910,
+      "index": 101
+    },
+    {
+      "mot": "elles",
+      "debut_ms": 37910,
+      "fin_ms": 38430,
+      "index": 102
+    },
+    {
+      "mot": "étaient",
+      "debut_ms": 38430,
+      "fin_ms": 38710,
+      "index": 103
+    },
+    {
+      "mot": "si",
+      "debut_ms": 38710,
+      "fin_ms": 39230,
+      "index": 104
+    },
+    {
+      "mot": "hautes",
+      "debut_ms": 39230,
+      "fin_ms": 39590,
+      "index": 105
+    },
+    {
+      "mot": "que",
+      "debut_ms": 39590,
+      "fin_ms": 39830,
+      "index": 106
+    },
+    {
+      "mot": "les",
+      "debut_ms": 39830,
+      "fin_ms": 39990,
+      "index": 107
+    },
+    {
+      "mot": "petits",
+      "debut_ms": 39990,
+      "fin_ms": 40230,
+      "index": 108
+    },
+    {
+      "mot": "enfants",
+      "debut_ms": 40230,
+      "fin_ms": 40550,
+      "index": 109
+    },
+    {
+      "mot": "pouvaient",
+      "debut_ms": 40550,
+      "fin_ms": 40830,
+      "index": 110
+    },
+    {
+      "mot": "se",
+      "debut_ms": 40830,
+      "fin_ms": 40990,
+      "index": 111
+    },
+    {
+      "mot": "cacher",
+      "debut_ms": 40990,
+      "fin_ms": 41390,
+      "index": 112
+    },
+    {
+      "mot": "dessous",
+      "debut_ms": 41390,
+      "fin_ms": 41750,
+      "index": 113
+    }
+  ]
+}
