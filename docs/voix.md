@@ -1,8 +1,10 @@
 # Voix française (TTS) — conception
 
 Lecture à voix haute des consignes, dictées, messages et énoncés de calcul.
-Moteur **Qwen3-TTS** (voix clonée **Naf**, LibriVox, Public Domain Mark 1.0),
-exécuté **uniquement** sur le PC Windows de Manu (GPU NVIDIA, SSH via Tailscale).
+Moteur **Qwen3-TTS** (Apache 2.0). Voix **C1_s33** : voix **inventée par
+description** (mode VoiceDesign, aucune personne réelle), puis **clonée** depuis
+une courte référence C1_s33 propre (empreinte unique, comme l'ancienne voix Naf).
+Exécuté **uniquement** sur le PC Windows de Manu (GPU NVIDIA, SSH via Tailscale).
 Le Mac et le VPS ne génèrent jamais d'audio.
 
 ## 1. Principe : catalogue = source unique
@@ -100,7 +102,7 @@ cache-first, noms immuables). Si la voix manque, l'app fonctionne normalement.
 
 Réutilise la chaîne éprouvée `C:\Audiobooks\pipeline` (`core.py`, `voix.py`) :
 Qwen3-TTS-12Hz-1.7B-**Base**, `device_map="cuda:0"`, `dtype=bfloat16`,
-`attn_implementation="sdpa"` ; empreinte `ref_naf_D` calculée **une fois** ;
+`attn_implementation="sdpa"` ; empreinte `ref_c1s33` calculée **une fois** ;
 `seed 1234` avant chaque bloc ; `cap = max(256, int(1.4*(len/20.3)*12)+96)`.
 
 Contrôles par bloc :

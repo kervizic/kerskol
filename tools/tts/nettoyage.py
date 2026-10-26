@@ -13,7 +13,7 @@ from __future__ import annotations
 import hashlib
 import re
 
-VOICE_VERSION = "naf_D-v1"
+VOICE_VERSION = "c1s33-v1"
 
 
 def nettoyer(t: str) -> str:

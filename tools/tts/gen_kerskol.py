@@ -84,11 +84,12 @@ def _encoder_mp3(wav: Path, mp3: Path, core) -> None:
     os.replace(tmp, mp3)
 
 
-def generer(out_dir: Path, pilot: bool, only: set[str] | None, force: bool = False) -> dict:
+def generer(out_dir: Path, pilot: bool, only: set[str] | None, force: bool = False,
+            ref_json: str | None = None, voice: str | None = None) -> dict:
     import core
     from voix import VoixEngine
 
-    voice = VOICE_VERSION
+    voice = voice or VOICE_VERSION
     vdir = out_dir / voice
     vdir.mkdir(parents=True, exist_ok=True)
     manifest_path = out_dir / "manifest.json"
@@ -108,7 +109,7 @@ def generer(out_dir: Path, pilot: bool, only: set[str] | None, force: bool = Fal
         clips = [c for c in clips if c["key"] in only]
     _log(f"catalogue : {len(clips)} cles ({'pilote' if pilot else 'complet'})")
 
-    engine = VoixEngine()        # charge modele + empreinte a la 1re generation
+    engine = VoixEngine(ref_json=ref_json) if ref_json else VoixEngine()  # modele + empreinte a la 1re gen
     journal = {"maj": None, "faits": 0, "total": len(clips),
                "muets": [], "emballes": [], "suspects": [], "echecs": []}
     t0 = time.time()
@@ -117,7 +118,7 @@ def generer(out_dir: Path, pilot: bool, only: set[str] | None, force: bool = Fal
 
     for idx, c in enumerate(clips, 1):
         key, cat = c["key"], c["cat"]
-        texte = nettoyer(c["text"])
+        texte = nettoyer(c.get("spoken") or c["text"])
         cid = clip_id(texte, voice)
         manifest["keys"][key] = cid
         mp3 = vdir / f"{cid}.mp3"
@@ -197,9 +198,13 @@ def main(argv=None) -> int:
     ap.add_argument("--only", default=None, help="cles separees par des virgules")
     ap.add_argument("--force", action="store_true",
                     help="regenere meme si deja present (regen pilotee par relecture)")
+    ap.add_argument("--ref", default=None,
+                    help="fiche voix JSON (clonage). Defaut : ref_naf_D. Pour C1_s33 : ref_c1s33.json")
+    ap.add_argument("--voice", default=None,
+                    help="version de voix (sous-dossier + manifest.voice). Defaut : VOICE_VERSION")
     a = ap.parse_args(argv)
     only = set(x.strip() for x in a.only.split(",") if x.strip()) if a.only else None
-    generer(Path(a.out), a.pilot, only, force=a.force)
+    generer(Path(a.out), a.pilot, only, force=a.force, ref_json=a.ref, voice=a.voice)
     return 0
 
 

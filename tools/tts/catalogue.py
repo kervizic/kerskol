@@ -23,6 +23,7 @@ from pathlib import Path
 from dictees import charger_dictees
 from nettoyage import clip_id, nettoyer
 from nombres_fr import nombre_en_lettres, nombres_atomiques
+from respelling import respeller
 
 _DATA = Path(__file__).resolve().parent / "data" / "phrases.json"
 
@@ -68,6 +69,10 @@ def construire(pilot: bool = False) -> list[dict]:
         for i, phrase in enumerate(d["phrases"]):
             clips.append({"key": f"dictee:{d['id']}:s{i}", "text": phrase, "cat": "dictee"})
 
+    # texte PRONONCE (respelling des defauts d'ecoute) ; l'affichage reste c["text"].
+    for c in clips:
+        c["spoken"] = respeller(c["key"], c["cat"], c["text"])
+
     return clips
 
 
@@ -76,7 +81,7 @@ def comptes(clips: list[dict]) -> dict:
     ids = set()
     for c in clips:
         par_cat[c["cat"]] = par_cat.get(c["cat"], 0) + 1
-        ids.add(clip_id(nettoyer(c["text"])))
+        ids.add(clip_id(nettoyer(c.get("spoken") or c["text"])))
     return {"total_cles": len(clips), "par_categorie": par_cat,
             "clips_physiques_uniques": len(ids)}
 
