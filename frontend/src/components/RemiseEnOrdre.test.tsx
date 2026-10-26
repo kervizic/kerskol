@@ -90,12 +90,13 @@ describe("<RemiseEnOrdre>", () => {
     expect(valider).toBeEnabled();
   });
 
-  it("9 : deux touchers quasi simultanes -> un seul placement", () => {
+  it("9 : double-toucher la MEME carte -> un seul placement", () => {
     monter();
-    fireEvent.click(carte(LABELS[0]));
-    fireEvent.click(carte(LABELS[1])); // < 300 ms : ignore
+    const btn = carte(LABELS[0]);
+    fireEvent.click(btn);
+    fireEvent.click(btn); // 2e toucher < 300 ms sur la meme carte : ignore
     expect(casePleine(1)).toHaveTextContent(LABELS[0]);
-    expect(caseVide(2)).toBeInTheDocument();
+    expect(caseVide(2)).toBeInTheDocument(); // aucun second placement
   });
 
   it("12 : reussite -> relecture d'abord/ensuite/enfin + Continuer(true)", async () => {

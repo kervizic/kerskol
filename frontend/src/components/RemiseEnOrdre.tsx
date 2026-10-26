@@ -135,7 +135,7 @@ export default function RemiseEnOrdre({
   const [solutionMontree, setSolutionMontree] = useState(false);
   const [demo, setDemo] = useState(() => !demoDejaVue());
 
-  const dernierTap = useRef(0); // garde anti double-toucher (< 300 ms)
+  const dernierTap = useRef<{ cible: string; t: number }>({ cible: "", t: 0 }); // garde anti double-toucher
   const dragLabel = useRef<string | null>(null); // etiquette en cours de glisser
 
   // La demo se joue une fois puis se retire d'elle-meme (pas de fenetre a fermer).
@@ -152,10 +152,13 @@ export default function RemiseEnOrdre({
   const complet = prochaineLibre === -1;
   const peutValider = complet && !res && !busy;
 
-  const antiDoubleTap = useCallback((): boolean => {
+  // Ignore un SECOND toucher sur LA MEME cible dans les 300 ms (evite le
+  // double-placement sur tablette), sans gener l'enfant qui enchaine vite des
+  // cartes DIFFERENTES.
+  const antiDoubleTap = useCallback((cible: string): boolean => {
     const t = Date.now();
-    if (t - dernierTap.current < 300) return false;
-    dernierTap.current = t;
+    if (dernierTap.current.cible === cible && t - dernierTap.current.t < 300) return false;
+    dernierTap.current = { cible, t };
     return true;
   }, []);
 
@@ -281,7 +284,7 @@ export default function RemiseEnOrdre({
           role="button"
           tabIndex={lab && !verrou[i] ? 0 : -1}
           aria-label={lab ? `Case ${i + 1} : ${lab}. Touche pour renvoyer.` : `Case ${i + 1}, vide`}
-          onClick={() => lab && antiDoubleTap() && retirerCarte(i)}
+          onClick={() => lab && antiDoubleTap(`case-${i}`) && retirerCarte(i)}
           onKeyDown={(e) => {
             if ((e.key === "Enter" || e.key === " ") && lab) {
               e.preventDefault();
@@ -350,7 +353,7 @@ export default function RemiseEnOrdre({
                 onDragEnd={() => {
                   dragLabel.current = null;
                 }}
-                onClick={() => antiDoubleTap() && placerCarte(lab)}
+                onClick={() => antiDoubleTap(`carte-${lab}`) && placerCarte(lab)}
               >
                 {lab}
               </button>
