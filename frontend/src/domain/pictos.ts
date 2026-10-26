@@ -81,10 +81,10 @@ const REGLES: Array<[RegExp, string]> = [
   [/arrete|arreter/, "✋"],
   [/respire/, "😮‍💨"],
   [/parle|dire|dis\b/, "🗣️"],
-  // Politesse / entraide (scene Leo)
-  [/demande de l.?aide|aide\b|aides/, "🙋"],
+  // Politesse / entraide (scene Leo) : « maman aide » AVANT « aide » seul.
   [/\bmaman\b|aide leo/, "🤝"],
   [/merci/, "🙏"],
+  [/demande de l.?aide|aide\b|aides/, "🙋"],
   // Election / republique
   [/candidat/, "🗣️"],
   [/vote/, "🗳️"],
@@ -103,12 +103,15 @@ const REGLES: Array<[RegExp, string]> = [
   [/declaration|droits/, "📜"],
 ];
 
-const GENERIQUE = "🔖"; // dernier recours : une etiquette a toujours un picto
-
+// Renvoie un picto PERTINENT, ou "" si l'etiquette n'en a pas (ex. un mot-outil
+// « le », « les » d'une phrase a remettre en variante « ligne »). Le composant
+// n'affiche alors aucune image. Pour les exercices d'ordre a « scene », toutes
+// les etiquettes sont couvertes (garde-fou : test ordre-regles « picto par
+// etiquette »).
 export function pictoPourEtiquette(label: string): string {
   const n = norm(label);
   for (const [re, emoji] of REGLES) {
     if (re.test(n)) return emoji;
   }
-  return GENERIQUE;
+  return "";
 }

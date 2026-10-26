@@ -314,7 +314,9 @@ export default function RemiseEnOrdre({
           </span>
           {lab ? (
             <span className="kk-ord__contenu">
-              <span className="kk-ord__picto" aria-hidden="true">{pictoPourEtiquette(lab)}</span>
+              {pictoPourEtiquette(lab) && (
+                <span className="kk-ord__picto" aria-hidden="true">{pictoPourEtiquette(lab)}</span>
+              )}
               <span className="kk-ord__texte">{lab}</span>
             </span>
           ) : (
@@ -371,7 +373,9 @@ export default function RemiseEnOrdre({
                 }}
                 onClick={() => antiDoubleTap(`carte-${lab}`) && placerCarte(lab)}
               >
-                <span className="kk-ord__picto" aria-hidden="true">{pictoPourEtiquette(lab)}</span>
+                {pictoPourEtiquette(lab) && (
+                  <span className="kk-ord__picto" aria-hidden="true">{pictoPourEtiquette(lab)}</span>
+                )}
                 <span className="kk-ord__texte">{lab}</span>
               </button>
             ))}
