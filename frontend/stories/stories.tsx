@@ -16,6 +16,7 @@ import Ecriture from "../src/components/Ecriture";
 import Geometrie from "../src/components/Geometrie";
 import Parcours from "../src/components/Parcours";
 import Frise from "../src/components/Frise";
+import RemiseEnOrdre from "../src/components/RemiseEnOrdre";
 import { chapitreParCle, friseCartesToutes } from "../src/domain/histoire/parcours";
 import { chapitreGeoParCle } from "../src/domain/geographie/parcours";
 import { chapitreSciencesParCle } from "../src/domain/sciences/parcours";
@@ -217,6 +218,24 @@ const homophone: GramRender = {
 
 // Registre. Ajouter une entree par nouveau composant d'UI.
 export const STORIES: Story[] = [
+  // Refonte « remettre dans l'ordre » : l'item EMC politesse EXACT de la photo
+  // d'Iris, mais avec le nouveau composant (cases numerotees + grandes cartes).
+  // La demo (petite main) est desactivee ici pour une capture stable.
+  { id: "ordre-emc-politesse", label: "Ordre — EMC politesse (refonte, écran de l'élève)",
+    node: (() => {
+      try { localStorage.setItem("kk-demo-ordre", "1"); } catch { /* noop */ }
+      return (
+        <RemiseEnOrdre
+          cle="emc-res-pol-n3-b"
+          consigne="Tom a laissé tomber ses crayons. Remets l'histoire dans l'ordre. Qu'est-ce qui se passe d'abord ?"
+          labels={["Tom demande : « Tu m'aides, s'il te plaît ? »", "Léa ramasse les crayons avec Tom", "Tom dit : « Merci Léa ! »"]}
+          attendu={"Tom demande : « Tu m'aides, s'il te plaît ? »>Léa ramasse les crayons avec Tom>Tom dit : « Merci Léa ! »"}
+          explication="On demande d'abord de l'aide, puis on aide, et on dit merci à la fin."
+          onSoumettre={noopSubmit}
+          onContinuer={noop}
+        />
+      );
+    })() },
   { id: "donnees-hasard-qcm", label: "Données — hasard (QCM, lot 7)",
     node: <Donnees item={hasard} onSoumettre={noopSubmit} onContinuer={noop} /> },
   { id: "donnees-lire-cm1-tableau", label: "Données — compléter un tableau CM1 (lot 7)",
