@@ -115,7 +115,7 @@ describe("spot-check croise front <-> SQL", () => {
     ["hi-exp-n2-b", "ordre", "de l'Europe vers l'Afrique>de l'Afrique vers l'Amérique>de l'Amérique vers l'Europe"],
     ["hi-exp-n3-a", "qcm", "la traite des esclaves"],
     ["hi-exp-n3-b", "qcm", "le Code noir"],
-    ["hi-rev-n3-b", "ordre", "la réunion des États généraux>la prise de la Bastille>la Déclaration des droits de l'Homme et du citoyen"],
+    ["hi-rev-n3-b", "ordre", "la réunion des États généraux>la prise de la Bastille>la Déclaration des droits"],
     ["hi-fri-n3-a", "qcm", "XVIe siècle"],
     ["hi-fri-n4-b", "texte", "XVI"],
   ];

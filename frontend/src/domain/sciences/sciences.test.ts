@@ -108,7 +108,7 @@ describe("spot-check croise front <-> SQL", () => {
     ["st-mat-n4-b", "texte", "tare"],
     ["st-lum-n2-a", "tri", "une vitre propre=transparent;du papier calque=translucide;un mur en pierre=opaque;un livre fermé=opaque"],
     ["st-lum-n4-a", "texte", "translucide"],
-    ["st-viv-n3-b", "ordre", "la fécondation>le développement dans l'œuf>l'éclosion"],
+    ["st-viv-n3-b", "ordre", "la fécondation>le développement dans l'œuf>la sortie de l'œuf"],
     ["st-eco-n2-b", "ordre", "l'herbe>le lapin>le renard"],
     ["st-eco-n3-b", "tri", "l'abeille butine la fleur et la pollinise=coopération;le poisson-clown et l'anémone se protègent=coopération;le renard chasse le lapin pour se nourrir=prédation;la coccinelle se nourrit de pucerons=prédation"],
     ["st-cor-n4-b", "texte", "puberté"],

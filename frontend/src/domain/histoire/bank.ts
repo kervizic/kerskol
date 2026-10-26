@@ -155,7 +155,7 @@ export const BANQUE_HISTOIRE: QmItem[] = [
     explication: "La Déclaration des droits de l'Homme et du citoyen affirme la liberté et l'égalité devant la loi. C'est un texte très important encore aujourd'hui." },
   { cle: "hi-rev-n3-b", competence: "HIST.REVOLUTION", niveau: 3, format: "ordre",
     consigne: "Range ces trois événements de l'année 1789 dans l'ordre.",
-    ...ordre(["la réunion des États généraux", "la prise de la Bastille", "la Déclaration des droits de l'Homme et du citoyen"]),
+    ...ordre(["la réunion des États généraux", "la prise de la Bastille", "la Déclaration des droits"]),
     explication: "États généraux (mai), prise de la Bastille (14 juillet), Déclaration des droits (août). En octobre, des femmes marchent sur Versailles pour ramener le roi à Paris." },
   { cle: "hi-rev-n4-a", competence: "HIST.REVOLUTION", niveau: 4, format: "texte",
     consigne: "Le 14 juillet 1789, les Parisiens prennent la... Écris le mot.",

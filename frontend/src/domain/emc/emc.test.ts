@@ -145,7 +145,7 @@ describe("estJusteEmc / itemEmcParCle", () => {
 describe("spot-check croise front <-> SQL", () => {
   const SPOT: Array<[string, string, string]> = [
     ["emc-res-reg-n2-b", "tri", "ranger son matériel=on le fait;écouter la maîtresse=on le fait;se moquer d'un camarade=on ne le fait pas;jeter du papier par terre=on ne le fait pas"],
-    ["emc-res-pol-n3-b", "ordre", "tu demandes de l'aide, s'il te plaît>on t'aide>tu dis merci"],
+    ["emc-res-pol-n3-b", "ordre", "Léo demande de l'aide>Maman aide Léo>Léo dit merci"],
     ["emc-res-moq-n2-a", "qcm", "défendre Sami et prévenir un adulte"],
     ["emc-res-moq-n4-a", "texte", "adulte"],
     ["emc-emo-rec-n2-b", "tri", "c'est mon anniversaire=joie;on a cassé mon jouet exprès=colère;je suis seul dans le noir=peur"],

@@ -1373,6 +1373,6 @@ pas ici.
 
 | Item (clé) | Texte à dire |
 |---|---|
-| `emc-res-pol-n3-b` | Tu n'arrives pas à ouvrir ta boîte. Remets l'histoire dans l'ordre. Qu'est-ce que tu fais d'abord ? |
+| `emc-res-pol-n3-b` | Léo n'arrive pas à ouvrir sa boîte. Remets son histoire dans l'ordre. Qu'est-ce qui se passe d'abord ? |
 | `emc-emo-cal-n3-a` | Tu es très en colère. Remets dans l'ordre ce qui t'aide à te calmer. Qu'est-ce que tu fais d'abord ? |
 | `emc-rep-vot-n2-b` | Dans ta classe, on élit un délégué. Remets les étapes dans l'ordre. Qu'est-ce qui se passe d'abord ? |
