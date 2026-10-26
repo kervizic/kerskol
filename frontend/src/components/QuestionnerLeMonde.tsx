@@ -161,7 +161,6 @@ export default function QuestionnerLeMonde({ item, onSoumettre, onContinuer }: P
         cle={item.cle}
         consigne={item.consigne}
         labels={options}
-        attendu={item.attendu}
         explication={item.explication}
         onSoumettre={(rep) => onSoumettre(item.cle, rep)}
         onContinuer={onContinuer}

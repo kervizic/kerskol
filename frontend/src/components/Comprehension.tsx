@@ -14,9 +14,10 @@
 // feedback (surlignage) et au mode demo. Feedback TOUJOURS valorisant.
 
 import { useMemo, useState } from "react";
-import { Check, Lightbulb, RotateCcw } from "lucide-react";
+import { Check, Lightbulb } from "lucide-react";
 import type { CompRender } from "../domain/francais/comprehension";
 import { comparerComprehension, SEP_ORDRE } from "../domain/francais/comprehension";
+import RemiseEnOrdre from "./RemiseEnOrdre";
 
 interface Props {
   item: CompRender;
@@ -84,24 +85,21 @@ export default function Comprehension({ item, indice, onSoumettre, onContinuer }
   const [saisie, setSaisie] = useState(""); // texte
   const [clicKey, setClicKey] = useState<string | null>(null); // clic : mot touche (cle li-wi)
   const [clicMot, setClicMot] = useState<string | null>(null); // clic : mot touche (texte brut)
-  const [seq, setSeq] = useState<string[]>([]); // ordre : evenements ranges
   const [busy, setBusy] = useState(false);
   const [res, setRes] = useState<{ correct: boolean } | null>(null);
   const [erreurReseau, setErreurReseau] = useState(false);
   const [montrerIndice, setMontrerIndice] = useState(false);
 
-  const evenements = item.evenements ?? [];
-
-  // Reponse courante envoyee au serveur, selon le format.
+  // Reponse courante envoyee au serveur, selon le format. Le format « ordre » est
+  // delegue a RemiseEnOrdre (early return ci-dessous) : il gere sa propre reponse.
   const reponse = useMemo(() => {
     if (item.format === "qcm") return choix ?? "";
     if (item.format === "texte") return saisie;
     if (item.format === "clic") return clicMot ?? "";
-    return seq.join(SEP_ORDRE); // ordre
-  }, [item.format, choix, saisie, clicMot, seq]);
+    return "";
+  }, [item.format, choix, saisie, clicMot]);
 
-  const complet =
-    item.format === "ordre" ? seq.length === evenements.length && evenements.length > 0 : reponse.trim().length > 0;
+  const complet = reponse.trim().length > 0;
   const peutValider = complet && !res && !busy;
 
   const soumettre = async () => {
@@ -118,13 +116,55 @@ export default function Comprehension({ item, indice, onSoumettre, onContinuer }
     }
   };
 
-  // ordre : touche un evenement -> l'ajoute a la suite (ou le retire si deja pris).
-  const toggleEvenement = (ev: string) => {
-    if (res) return;
-    setSeq((s) => (s.includes(ev) ? s.filter((x) => x !== ev) : [...s, ev]));
-  };
-
   const clickableTexte = item.format === "clic";
+
+  // Format « ordre » (remettre des evenements de l'histoire dans l'ordre) :
+  // composant partage (cases numerotees + banque de cartes), avec le texte a
+  // lire affiche au-dessus. Le serveur reste SEUL JUGE (reponse jointe par « | »).
+  if (item.format === "ordre") {
+    const support = (
+      <>
+        <TexteView
+          texte={item.texte}
+          clickable={false}
+          selectedKey={null}
+          chosen={null}
+          onPick={() => {}}
+          attendu={item.attendu}
+          corrige={false}
+        />
+        {item.glossaire && item.glossaire.length > 0 && (
+          <details className="kk-lecture__gloss">
+            <summary className="kk-btn">Mots difficiles</summary>
+            <ul className="kk-lecture__gloss-list">
+              {item.glossaire.map((g, i) => (
+                <li key={i}>
+                  <strong>{g.mot}</strong> : {g.sens}
+                </li>
+              ))}
+            </ul>
+          </details>
+        )}
+        {item.source && (
+          <p className="kk-lecture__source kk-muted" style={{ textAlign: "center", fontSize: "0.85rem", margin: 0 }}>
+            {item.source} — domaine public
+          </p>
+        )}
+      </>
+    );
+    return (
+      <RemiseEnOrdre
+        cle={item.cle}
+        consigne={item.consigne}
+        labels={item.attendu.split(SEP_ORDRE)}
+        separateur={SEP_ORDRE}
+        explication={item.explication}
+        support={support}
+        onSoumettre={(rep) => onSoumettre(item.cle, rep)}
+        onContinuer={onContinuer}
+      />
+    );
+  }
 
   return (
     <div className="kk-stack kk-lecture">
@@ -220,38 +260,6 @@ export default function Comprehension({ item, indice, onSoumettre, onContinuer }
             autoCorrect="off"
             spellCheck={false}
           />
-        </div>
-      )}
-
-      {/* ORDRE : toucher les evenements dans le bon ordre. */}
-      {item.format === "ordre" && (
-        <div className="kk-stack kk-lecture__ordre">
-          <div className="kk-qcm">
-            {evenements.map((ev, i) => {
-              const rang = seq.indexOf(ev);
-              const pris = rang >= 0;
-              const extra = pris ? " kk-qcm__opt--active" : "";
-              return (
-                <button
-                  key={i}
-                  type="button"
-                  className={`kk-btn kk-qcm__opt${extra}`}
-                  disabled={Boolean(res)}
-                  onClick={() => toggleEvenement(ev)}
-                  aria-pressed={pris}
-                >
-                  <span className="kk-lecture__rang" aria-hidden="true">{pris ? rang + 1 : "•"}</span> {ev}
-                </button>
-              );
-            })}
-          </div>
-          {seq.length > 0 && !res && (
-            <div className="kk-row" style={{ justifyContent: "center" }}>
-              <button type="button" className="kk-btn" onClick={() => setSeq([])}>
-                <RotateCcw size={16} aria-hidden="true" /> Recommencer
-              </button>
-            </div>
-          )}
         </div>
       )}
 

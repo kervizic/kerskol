@@ -229,7 +229,6 @@ export const STORIES: Story[] = [
           cle="emc-res-pol-n3-b"
           consigne="Tom a laissé tomber ses crayons. Remets l'histoire dans l'ordre. Qu'est-ce qui se passe d'abord ?"
           labels={["Tom demande : « Tu m'aides, s'il te plaît ? »", "Léa ramasse les crayons avec Tom", "Tom dit : « Merci Léa ! »"]}
-          attendu={"Tom demande : « Tu m'aides, s'il te plaît ? »>Léa ramasse les crayons avec Tom>Tom dit : « Merci Léa ! »"}
           explication="On demande d'abord de l'aide, puis on aide, et on dit merci à la fin."
           onSoumettre={noopSubmit}
           onContinuer={noop}

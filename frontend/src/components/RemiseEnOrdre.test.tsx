@@ -23,7 +23,6 @@ function monter(onSoumettre = vi.fn().mockResolvedValue({ correct: true }), onCo
       cle="emc-res-pol-n3-b"
       consigne="Léo n'arrive pas à ouvrir sa boîte. Remets son histoire dans l'ordre."
       labels={LABELS}
-      attendu={ATTENDU}
       explication="D'abord Léo demande de l'aide, puis Maman ouvre, puis Léo dit merci."
       onSoumettre={onSoumettre}
       onContinuer={onContinuer}

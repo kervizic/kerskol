@@ -748,3 +748,6 @@ button.kk-don__picto-row { cursor: pointer; }
   .kk-ord__case--prochaine, .kk-ord__carte--demo, .kk-ord__main { animation: none; }
   .kk-ord__case--secousse { animation: none; }
 }
+
+/* Contenu de support au-dessus des cases (ex : texte a lire en comprehension). */
+.kk-ord__support { width: 100%; }

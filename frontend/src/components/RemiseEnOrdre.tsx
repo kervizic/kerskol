@@ -25,7 +25,7 @@
 // ne sert qu'au feedback local (quelles cartes rester en vert / reviennent) et a
 // montrer la solution au 3e echec ; il n'intervient jamais dans le jugement.
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { Check, RotateCcw, Star } from "lucide-react";
 import { SpeakerButton } from "./SpeakerButton";
 
@@ -42,12 +42,16 @@ export interface VoixOrdre {
 export interface RemiseEnOrdreProps {
   cle: string; // identifiant stable de l'item (graine du melange + cle de demo)
   consigne: string;
-  // Etiquettes DANS L'ORDRE CORRECT (telles que stockees cote serveur). Le
-  // composant les melange pour l'affichage.
+  // Etiquettes DANS L'ORDRE CORRECT (ce que le serveur attend). Le composant les
+  // melange pour l'affichage et en deduit l'ordre correct (feedback + solution).
   labels: string[];
-  attendu: string; // ordre correct « a>b>c » (feedback + solution, jamais juge)
+  // Separateur utilise pour reconstruire la reponse envoyee au serveur : « > »
+  // par defaut (EMC/QM/sciences), « | » pour la comprehension, « espace » pour
+  // une phrase a remettre. Le serveur reste SEUL JUGE : on ne change que le rendu.
+  separateur?: string;
   explication: string; // correction valorisante (sert aussi d'indice au 2e/3e echec)
   variante?: "cases" | "ligne";
+  support?: ReactNode; // contenu affiche au-dessus des cases (ex : texte a lire)
   voix?: VoixOrdre | null;
   onSoumettre: (reponse: string) => Promise<{ correct: boolean } | null>;
   onContinuer: (correct: boolean) => void;
@@ -111,16 +115,18 @@ export default function RemiseEnOrdre({
   cle,
   consigne,
   labels,
-  attendu,
+  separateur = ">",
   explication,
   variante = "cases",
+  support,
   voix,
   onSoumettre,
   onContinuer,
 }: RemiseEnOrdreProps) {
   const n = labels.length;
   const melange = useMemo(() => melanger(labels, hash(cle)), [labels, cle]);
-  const ordreCorrect = useMemo(() => attendu.split(">").map(normaliser), [attendu]);
+  // L'ordre correct est DIRECTEMENT la liste `labels` (deja dans le bon ordre).
+  const ordreCorrect = useMemo(() => labels.map(normaliser), [labels]);
 
   // placement[i] = etiquette dans la case i, ou null. Les cartes « verrouillees »
   // (bien placees apres un echec, ou solution montree) ne peuvent plus bouger.
@@ -202,7 +208,7 @@ export default function RemiseEnOrdre({
   const soumettre = useCallback(async () => {
     if (!peutValider) return;
     setBusy(true);
-    const reponse = placement.join(">");
+    const reponse = placement.join(separateur);
     try {
       const r = await onSoumettre(reponse);
       if (!r) {
@@ -246,7 +252,7 @@ export default function RemiseEnOrdre({
     } finally {
       setBusy(false);
     }
-  }, [peutValider, placement, onSoumettre, n, essais, ordreCorrect, labels, explication, voix]);
+  }, [peutValider, placement, separateur, onSoumettre, n, essais, ordreCorrect, labels, explication, voix]);
 
   // Phrase relue a la reussite : « D'abord X, ensuite Y, enfin Z. »
   const relecture = useMemo(() => {
@@ -322,6 +328,8 @@ export default function RemiseEnOrdre({
           <SpeakerButton onClick={voix.relire} disponible={voix.disponible} jouable={voix.jouable} />
         )}
       </div>
+
+      {support && <div className="kk-ord__support">{support}</div>}
 
       {/* Les cases d'arrivee, reliees par des fleches (variante "cases"). */}
       <div className="kk-ord__cases" aria-label="cases à remplir dans l'ordre">
