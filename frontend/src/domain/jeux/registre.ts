@@ -64,10 +64,16 @@ export function fruitDef(id: string): FruitDef {
 }
 
 // ------------------------------- Jeux --------------------------------------
-export type JeuId = "relie-les-fruits";
+export type JeuId = "relie-les-fruits" | "les-briques";
+
+// Type de jeu : « grille » (Relie les fruits, difficulte adaptative par palier
+// 1..5) ou « arcade » (Les briques, partie chronometree a 3 min / blocage). Le
+// type decide du branchement dans la Maison des jeux.
+export type JeuType = "grille" | "arcade";
 
 export interface JeuDef {
   id: JeuId;
+  type: JeuType;
   titre: string;
   description: string;
   emoji: string; // petite vignette (emoji systeme, decoratif)
@@ -76,8 +82,16 @@ export interface JeuDef {
 export const JEUX: JeuDef[] = [
   {
     id: "relie-les-fruits",
+    type: "grille",
     titre: "Relie les fruits",
     description: "Relie les fruits pareils et remplis toutes les cases.",
     emoji: "🍓",
+  },
+  {
+    id: "les-briques",
+    type: "arcade",
+    titre: "Les briques",
+    description: "Empile les briques qui tombent et complète des lignes.",
+    emoji: "🧱",
   },
 ];

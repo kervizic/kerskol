@@ -11,6 +11,7 @@ import {
   getDefiResume,
   getEcritureProductions,
   getPartiesJeu,
+  getPartiesBriques,
   getJournal,
   listLiensEnAttente,
   reauthGoogle,
@@ -35,6 +36,12 @@ import {
   palierDef,
   type Partie as JeuPartie,
 } from "../domain/jeux/difficulte";
+import {
+  meilleurScore,
+  partiesJouees,
+  dernieresParties,
+  type PartieBriques,
+} from "../domain/jeux/briques/progression";
 import DicteeMaitresse from "../components/DicteeMaitresse";
 import { FEATURE_DICTEE_PARENT } from "../domain/featureFlags";
 import { MatieresEditor } from "../components/MatieresEditor";
@@ -148,6 +155,41 @@ function JeuxSummary({ profilId }: { profilId: string }) {
       {temps.length > 0 && (
         <p className="kk-muted" style={{ margin: "4px 0 0" }}>
           Derniers temps : {temps.map((t) => `${Math.round(t / 1000)} s`).join(" · ")}
+        </p>
+      )}
+    </div>
+  );
+}
+
+// Maison des jeux : « Les briques ». Meilleur score, parties jouees et dernieres
+// parties (lignes · score), en lecture seule.
+function BriquesSummary({ profilId }: { profilId: string }) {
+  const [parties, setParties] = useState<PartieBriques[] | null>(null);
+  useEffect(() => {
+    let alive = true;
+    getPartiesBriques(profilId, "les-briques")
+      .then((r) => alive && setParties(r))
+      .catch(() => alive && setParties([]));
+    return () => {
+      alive = false;
+    };
+  }, [profilId]);
+  if (parties === null) return null;
+  if (parties.length === 0) {
+    return <p className="kk-muted" style={{ margin: 0 }}>Les briques : aucune partie jouée pour l’instant.</p>;
+  }
+  const jouees = partiesJouees(parties);
+  const record = meilleurScore(parties);
+  const recentes = dernieresParties(parties, 5);
+  return (
+    <div>
+      <h3 style={{ margin: "0 0 6px" }}>Maison des jeux — Les briques</h3>
+      <p className="kk-muted" style={{ margin: 0 }}>
+        Meilleur score : {record} · {jouees} partie{jouees > 1 ? "s" : ""} jouée{jouees > 1 ? "s" : ""}.
+      </p>
+      {recentes.length > 0 && (
+        <p className="kk-muted" style={{ margin: "4px 0 0" }}>
+          Dernières parties : {recentes.map((p) => `${p.lignes} l. (${p.score} pts)`).join(" · ")}
         </p>
       )}
     </div>
@@ -838,6 +880,7 @@ export function ParentSpace({
             />
             <DefiSummary profilId={p.id} />
             <JeuxSummary profilId={p.id} />
+            <BriquesSummary profilId={p.id} />
             <EcritureSummary profilId={p.id} />
           </div>
         ))}

@@ -913,6 +913,7 @@ export async function getTempsAujourdhuiS(profilId: string): Promise<number> {
 // journalise chaque grille terminee pour la difficulte adaptative (derivee
 // cote client) et l'espace parent. Voir supabase/migrations/0130.
 import type { Partie } from "../domain/jeux/difficulte";
+import type { PartieBriques } from "../domain/jeux/briques/progression";
 
 // Vrai si l'erreur serveur signale un solde insuffisant.
 export function estSoldeInsuffisant(e: unknown): boolean {
@@ -920,8 +921,14 @@ export function estSoldeInsuffisant(e: unknown): boolean {
   return typeof m === "string" && m.includes("pas_assez_de_bonbons");
 }
 
-// Historique de jeu en mode demo (volatil, memoire du navigateur).
-const DEMO_PARTIES: Array<Partie & { jeu: string }> = [];
+// Historique de jeu en mode demo (volatil, memoire du navigateur). On stocke les
+// colonnes communes a tous les jeux (dont score/lignes, utiles aux jeux arcade).
+interface DemoPartie extends Partie {
+  jeu: string;
+  score: number;
+  lignes: number;
+}
+const DEMO_PARTIES: DemoPartie[] = [];
 
 // Debite le prix d'une partie. Renvoie le nouveau solde. Leve si insuffisant.
 export async function jouerPartieJeu(profilId: string, jeu: string): Promise<{ monnaie: number }> {
@@ -938,7 +945,9 @@ export async function jouerPartieJeu(profilId: string, jeu: string): Promise<{ m
   return { monnaie: Number(d.monnaie ?? 0) };
 }
 
-// Journalise une grille terminee (reussie ou abandonnee).
+// Journalise une partie terminee (reussie ou abandonnee). `score` et `lignes`
+// ne concernent que les jeux arcade (ex. « Les briques ») ; ils valent 0 pour
+// les jeux de grille (« Relie les fruits »).
 export async function terminerPartieJeu(params: {
   profilId: string;
   jeu: string;
@@ -948,7 +957,11 @@ export async function terminerPartieJeu(params: {
   avecIndice: boolean;
   abandon: boolean;
   reussi: boolean;
+  score?: number;
+  lignes?: number;
 }): Promise<void> {
+  const score = params.score ?? 0;
+  const lignes = params.lignes ?? 0;
   if (isDemo()) {
     DEMO_PARTIES.push({
       jeu: params.jeu,
@@ -958,6 +971,8 @@ export async function terminerPartieJeu(params: {
       avec_indice: params.avecIndice,
       abandon: params.abandon,
       reussi: params.reussi,
+      score,
+      lignes,
     });
     return;
   }
@@ -970,6 +985,8 @@ export async function terminerPartieJeu(params: {
     p_avec_indice: params.avecIndice,
     p_abandon: params.abandon,
     p_reussi: params.reussi,
+    p_score: score,
+    p_lignes: lignes,
   });
   if (error) throw error;
 }
@@ -994,6 +1011,43 @@ export async function getPartiesJeu(profilId: string, jeu: string): Promise<Part
       grille_id: row.grille_id,
       temps_ms: Number(row.temps_ms ?? 0),
       avec_indice: Boolean(row.avec_indice),
+      abandon: Boolean(row.abandon),
+      reussi: Boolean(row.reussi),
+    };
+  });
+}
+
+// Historique d'un jeu arcade (« Les briques ») pour un profil (chronologique).
+// Expose score / lignes / duree / palier atteint (vitesse) utiles au jeu et a
+// l'espace parent.
+export async function getPartiesBriques(profilId: string, jeu: string): Promise<PartieBriques[]> {
+  if (isDemo()) {
+    return DEMO_PARTIES.filter((p) => p.jeu === jeu).map((p) => ({
+      palier: p.palier,
+      score: p.score,
+      lignes: p.lignes,
+      dureeMs: p.temps_ms,
+      reussi: p.reussi,
+      abandon: p.abandon,
+    }));
+  }
+  const { data, error } = await supabase()
+    .from("jeu_parties")
+    .select("palier, score, lignes, temps_ms, abandon, reussi")
+    .eq("profil_id", profilId)
+    .eq("jeu", jeu)
+    .order("cree_le", { ascending: true });
+  if (error) throw error;
+  return (data ?? []).map((r) => {
+    const row = r as {
+      palier: number; score: number; lignes: number;
+      temps_ms: number; abandon: boolean; reussi: boolean;
+    };
+    return {
+      palier: Number(row.palier),
+      score: Number(row.score ?? 0),
+      lignes: Number(row.lignes ?? 0),
+      dureeMs: Number(row.temps_ms ?? 0),
       abandon: Boolean(row.abandon),
       reussi: Boolean(row.reussi),
     };
