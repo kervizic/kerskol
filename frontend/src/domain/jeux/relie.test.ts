@@ -92,8 +92,24 @@ describe("relie — cycle de base", () => {
 // s'appuie sur les REGLES (toute solution couvrante est acceptee, pas de
 // comparaison a la solution stockee).
 // --------------------------------------------------------------------------
+// ANCIENNE grille p2-038 (figee) : celle de la capture d'Iris. Les grilles ont
+// depuis ete regenerees « sans raccourci », donc p2-038 n'a plus cette geometrie
+// dans le JSON — on la fige ici pour documenter le comportement historique.
+const ANCIENNE_P2_038: GrilleRelie = {
+  id: "p2-038",
+  palier: 2,
+  w: 5,
+  h: 5,
+  paires: [
+    { fruit: "citron", chemin: [[4, 4], [4, 3], [4, 2], [4, 1], [4, 0], [3, 0], [3, 1]] },
+    { fruit: "banane", chemin: [[3, 2], [2, 2], [2, 1], [2, 0]] },
+    { fruit: "orange-fruit", chemin: [[1, 0], [0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [1, 4], [2, 4], [3, 4], [3, 3]] },
+    { fruit: "pasteque", chemin: [[2, 3], [1, 3], [1, 2], [1, 1]] },
+  ],
+};
+
 describe("relie — cas capture Iris (p2-038)", () => {
-  const G38 = (grillesP2 as GrilleRelie[]).find((g) => g.id === "p2-038")!;
+  const G38 = ANCIENNE_P2_038;
   const ci = (r: number, c: number) => cellIndex(r, c, G38.w);
   const tracer = (s: EtatJeu, cells: number[][]): EtatJeu => {
     s = commencer(s, ci(cells[0][0], cells[0][1]));

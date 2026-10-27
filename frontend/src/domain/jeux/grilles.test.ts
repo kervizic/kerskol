@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { PALIERS } from "./difficulte";
 import { grillesDuPalier, nbGrillesParPalier, FRUITS } from "./registre";
-import { compterSolutions, boutsDeGrille } from "./solveur";
+import { compterSolutions, compterSolutionsRelache, boutsDeGrille } from "./solveur";
 import type { GrilleRelie } from "./relie";
 
 function integrite(g: GrilleRelie, palierDef: { w: number; h: number; nPaires: number }) {
@@ -76,4 +76,59 @@ describe("grilles livrees — solution unique (verifiee par solveur)", () => {
       expect(fautives).toEqual([]);
     }, 120_000);
   }
+});
+
+describe("grilles livrees — SANS RACCOURCI (solution unique meme sans remplissage)", () => {
+  // Exigence de Manu : il ne doit exister AUCUNE facon de relier toutes les
+  // paires (chemins simples disjoints) qui laisse une case vide. Equivalent : la
+  // solution reste UNIQUE meme sans la regle « remplir toutes les cases », et
+  // elle couvre 100 % de la grille. Le solveur RELACHE doit donc compter
+  // EXACTEMENT 1 solution pour CHAQUE grille servie.
+  for (const def of PALIERS) {
+    const toutes = grillesDuPalier(def.palier);
+    it(`palier ${def.palier} : les ${toutes.length} grilles sont sans raccourci (relache = 1)`, () => {
+      const fautives: string[] = [];
+      for (const g of toutes) {
+        const n = compterSolutionsRelache(g.w, g.h, boutsDeGrille(g), 2);
+        if (n !== 1) fautives.push(`${g.id}=${n}`);
+      }
+      expect(fautives).toEqual([]);
+    }, 120_000);
+  }
+});
+
+describe("verificateur sans raccourci — regression p2-038", () => {
+  // L'ANCIENNE grille p2-038 (figee ici) laissait relier les 4 paires en laissant
+  // 2 cases vides (le citron prenait un raccourci). Le verificateur DOIT la
+  // rejeter : le solveur relache y trouve au moins 2 solutions.
+  const ancienneP2_038: GrilleRelie = {
+    id: "p2-038",
+    palier: 2,
+    w: 5,
+    h: 5,
+    paires: [
+      { fruit: "citron", chemin: [[4, 4], [4, 3], [4, 2], [4, 1], [4, 0], [3, 0], [3, 1]] },
+      { fruit: "banane", chemin: [[3, 2], [2, 2], [2, 1], [2, 0]] },
+      { fruit: "orange-fruit", chemin: [[1, 0], [0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [1, 4], [2, 4], [3, 4], [3, 3]] },
+      { fruit: "pasteque", chemin: [[2, 3], [1, 3], [1, 2], [1, 1]] },
+    ],
+  };
+  it("l'ancienne p2-038 a plusieurs solutions relachees (rejetee)", () => {
+    const n = compterSolutionsRelache(
+      ancienneP2_038.w,
+      ancienneP2_038.h,
+      boutsDeGrille(ancienneP2_038),
+      3
+    );
+    expect(n).toBeGreaterThanOrEqual(2);
+  });
+  it("sa solution couvrante reste pourtant unique (le piege : couvrante=1, relache>=2)", () => {
+    const n = compterSolutions(
+      ancienneP2_038.w,
+      ancienneP2_038.h,
+      boutsDeGrille(ancienneP2_038),
+      2
+    );
+    expect(n).toBe(1);
+  });
 });

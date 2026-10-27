@@ -115,6 +115,88 @@ export function compterSolutions(
   return cap ? -1 : solutions;
 }
 
+// Compte les solutions en mode RELACHE : chaque paire reliee par un chemin
+// simple de cases vides, SANS exiger de remplir la grille (les cases restantes
+// peuvent demeurer vides). Plafonne a `limit`, -1 si le plafond de noeuds est
+// atteint (non prouve).
+//
+// Usage : une grille est « sans raccourci » ssi ce compte vaut EXACTEMENT 1.
+// Alors la solution couvrante stockee est la SEULE possible, donc il n'existe
+// AUCUNE facon de relier toutes les paires en laissant une case vide (c'etait le
+// defaut de p2-038 : l'enfant pouvait tout relier en laissant 2 cases vides).
+// Prunes A/B seulement (surs en relache) ; pas de prune « vide atteignable » ni
+// de verif de couverture : laisser du vide est justement permis ici.
+export function compterSolutionsRelache(
+  w: number,
+  h: number,
+  endpoints: Array<[number, number]>,
+  limit = 2
+): number {
+  const { n, adj } = makeGrid(w, h);
+  const owner = new Int16Array(n).fill(-1);
+  const nPairs = endpoints.length;
+  for (let i = 0; i < nPairs; i++) {
+    owner[endpoints[i][0]] = i;
+    owner[endpoints[i][1]] = i;
+  }
+  let solutions = 0;
+  let nodes = 0;
+  let cap = false;
+
+  function relieViaVide(a: number, b: number): boolean {
+    if (adj[a].includes(b)) return true;
+    const seen = new Uint8Array(n);
+    const stack: number[] = [];
+    for (const x of adj[a]) if (owner[x] === -1) { seen[x] = 1; stack.push(x); }
+    while (stack.length) {
+      const c = stack.pop()!;
+      if (adj[c].includes(b)) return true;
+      for (const x of adj[c]) if (owner[x] === -1 && !seen[x]) { seen[x] = 1; stack.push(x); }
+    }
+    return false;
+  }
+
+  function prunes(head: number, curPair: number, target: number): boolean {
+    if (!relieViaVide(head, target)) return false;
+    for (let j = curPair + 1; j < nPairs; j++) {
+      if (!relieViaVide(endpoints[j][0], endpoints[j][1])) return false;
+    }
+    return true;
+  }
+
+  function croit(i: number, head: number): void {
+    if (++nodes > NODE_CAP) { cap = true; return; }
+    if (solutions >= limit || cap) return;
+    const target = endpoints[i][1];
+    if (head === target) {
+      if (i + 1 >= nPairs) { solutions += 1; return; }
+      croit(i + 1, endpoints[i + 1][0]);
+      return;
+    }
+    for (const nb of adj[head]) {
+      if (nb === target) {
+        croit(i, nb);
+        if (solutions >= limit || cap) return;
+        continue;
+      }
+      if (owner[nb] !== -1) continue;
+      owner[nb] = i;
+      if (prunes(nb, i, target)) croit(i, nb);
+      owner[nb] = -1;
+      if (solutions >= limit || cap) return;
+    }
+  }
+
+  croit(0, endpoints[0][0]);
+  return cap ? -1 : solutions;
+}
+
+// Une grille est-elle « sans raccourci » ? (solution unique meme sans la regle
+// de remplissage -> aucune variante ne laisse de case vide).
+export function sansRaccourci(g: GrilleRelie): boolean {
+  return compterSolutionsRelache(g.w, g.h, boutsDeGrille(g), 2) === 1;
+}
+
 // Les bouts d'une grille, en index de cases.
 export function boutsDeGrille(g: GrilleRelie): Array<[number, number]> {
   return g.paires.map((p) => {

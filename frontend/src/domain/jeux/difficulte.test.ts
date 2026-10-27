@@ -19,7 +19,7 @@ function abandon(palier: number, id: string): Partie {
 describe("difficulte — cible", () => {
   it("cible par defaut sous 3 echantillons", () => {
     expect(cibleMs(1, [])).toBe(30_000);
-    expect(cibleMs(3, [10_000, 20_000])).toBe(60_000);
+    expect(cibleMs(3, [10_000, 20_000])).toBe(75_000); // < 3 echantillons -> cible par defaut du palier 3
   });
   it("cible ajustee a la mediane des temps reussis (>= 3)", () => {
     expect(cibleMs(1, [10_000, 12_000, 14_000])).toBe(12_000);

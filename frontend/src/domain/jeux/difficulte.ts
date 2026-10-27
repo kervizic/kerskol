@@ -1,11 +1,15 @@
 // Difficulte adaptative du jeu « Relie les fruits » (logique PURE, testable).
 //
 // Paliers (taille de grille / nombre de paires) :
-//   1 = 4x4 / 3 paires
-//   2 = 5x5 / 4 paires
-//   3 = 6x6 / 5 paires
-//   4 = 7x7 / 6 paires
-//   5 = 7x7 / 7 paires (chemins tortueux)
+//   1 = 4x4 / 4 paires
+//   2 = 5x5 / 5 paires
+//   3 = 6x6 / 7 paires
+//   4 = 7x7 / 10 paires
+//   5 = 7x7 / 12 paires (chemins serres)
+// Le nombre de paires a ete RELEVE (origine 3/4/5/6/7) : c'est la condition pour
+// disposer de grilles « sans raccourci » (solution unique MEME sans la regle de
+// remplissage). Avec peu de paires, presque toutes les grilles laissaient un
+// raccourci possible (cas p2-038). Voir tools/jeux/generate.mjs.
 //
 // Montee : 3 grilles reussies d'affilee SOUS le temps cible, SANS indice.
 // Descente (douce) : 2 « difficultes » d'affilee (abandon, ou grille reussie en
@@ -24,11 +28,11 @@ export interface PalierDef {
 }
 
 export const PALIERS: PalierDef[] = [
-  { palier: 1, w: 4, h: 4, nPaires: 3, cibleDefautMs: 30_000 },
-  { palier: 2, w: 5, h: 5, nPaires: 4, cibleDefautMs: 45_000 },
-  { palier: 3, w: 6, h: 6, nPaires: 5, cibleDefautMs: 60_000 },
-  { palier: 4, w: 7, h: 7, nPaires: 6, cibleDefautMs: 90_000 },
-  { palier: 5, w: 7, h: 7, nPaires: 7, cibleDefautMs: 90_000 },
+  { palier: 1, w: 4, h: 4, nPaires: 4, cibleDefautMs: 30_000 },
+  { palier: 2, w: 5, h: 5, nPaires: 5, cibleDefautMs: 45_000 },
+  { palier: 3, w: 6, h: 6, nPaires: 7, cibleDefautMs: 75_000 },
+  { palier: 4, w: 7, h: 7, nPaires: 10, cibleDefautMs: 120_000 },
+  { palier: 5, w: 7, h: 7, nPaires: 12, cibleDefautMs: 120_000 },
 ];
 
 export const PALIER_MIN = 1;

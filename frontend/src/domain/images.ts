@@ -93,6 +93,13 @@ export const IMAGES: Record<string, ImageInfo> = {
   citron:      fluent("Lemon", "citron.svg", "Un citron jaune."),
   orangeFruit: fluent("Tangerine", "orange-fruit.svg", "Une orange."),
   pasteque:    fluent("Watermelon", "pasteque.svg", "Une part de pastèque."),
+  // Fruits supplementaires (paliers 4 et 5 : jusqu'a 12 paires -> 12 emojis
+  // distincts). Toujours Fluent Emoji Flat (MIT), choisis pour des teintes bien
+  // separees : ananas (jaune dore), myrtille (bleu), pomme verte (vert), peche (rose).
+  ananas:      fluent("Pineapple", "ananas.svg", "Un ananas."),
+  myrtille:    fluent("Blueberries", "myrtille.svg", "Des myrtilles bleues."),
+  pommeVerte:  fluent("Green apple", "pomme-verte.svg", "Une pomme verte."),
+  peche:       fluent("Peach", "peche.svg", "Une pêche."),
 };
 
 // Association CLE d'item -> image. Seules ces cles affichent une illustration.

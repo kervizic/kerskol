@@ -62,6 +62,12 @@ export const FRUITS: Record<string, FruitDef> = {
   citron: { id: "citron", image: "citron", label: "citron", couleur: "#8FA81F" },
   "orange-fruit": { id: "orange-fruit", image: "orangeFruit", label: "orange", couleur: "#DC6B22" },
   pasteque: { id: "pasteque", image: "pasteque", label: "pastèque", couleur: "#4E8D6A" },
+  // Fruits supplementaires (paliers 4/5, jusqu'a 12 paires). Teintes choisies
+  // distinctes des 8 precedentes : ambre, bleu, vert clair, rose peche.
+  ananas: { id: "ananas", image: "ananas", label: "ananas", couleur: "#C9971B" },
+  myrtille: { id: "myrtille", image: "myrtille", label: "myrtille", couleur: "#4C6FB1" },
+  "pomme-verte": { id: "pomme-verte", image: "pommeVerte", label: "pomme verte", couleur: "#6FA23B" },
+  peche: { id: "peche", image: "peche", label: "pêche", couleur: "#E08A6E" },
 };
 
 export function fruitDef(id: string): FruitDef {

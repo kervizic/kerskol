@@ -113,10 +113,17 @@ lot 5.
 | `img/emoji/citron.svg` | Lemon | paire « citron » (Relie les fruits) | Un citron jaune. |
 | `img/emoji/orange-fruit.svg` | Tangerine | paire « orange » (Relie les fruits) | Une orange. |
 | `img/emoji/pasteque.svg` | Watermelon | paire « pastèque » (Relie les fruits) | Une part de pastèque. |
+| `img/emoji/ananas.svg` | Pineapple | paire « ananas » (paliers 4/5) | Un ananas. |
+| `img/emoji/myrtille.svg` | Blueberries | paire « myrtille » (paliers 4/5) | Des myrtilles bleues. |
+| `img/emoji/pomme-verte.svg` | Green apple | paire « pomme verte » (paliers 4/5) | Une pomme verte. |
+| `img/emoji/peche.svg` | Peach | paire « pêche » (paliers 4/5) | Une pêche. |
 
-Ces SVG proviennent du jeu Fluent Emoji (style « Flat », 32×32), récupérés via
-l'API Iconify (`fluent-emoji-flat`) qui redistribue la collection sous la même
-licence MIT ; ils sont hébergés dans le dépôt, aucun chargement tiers.
+Ces SVG proviennent du jeu Fluent Emoji (style « Flat », 32×32). Les sept
+premiers ont été récupérés via l'API Iconify (`fluent-emoji-flat`) ; les quatre
+derniers (ananas, myrtille, pomme verte, pêche), ajoutés pour disposer de 12
+repères distincts aux paliers 4 et 5, proviennent directement du dépôt
+`microsoft/fluentui-emoji` (dossier `assets/<Nom>/Flat`). Même licence MIT,
+hébergés dans le dépôt, aucun chargement tiers.
 
 ## Sources autorisées pour les lots suivants
 

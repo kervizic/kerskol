@@ -26,18 +26,29 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const OUT_DIR = resolve(__dirname, "../../frontend/src/domain/jeux/grilles");
 
 // Paliers : doit rester aligne avec frontend/src/domain/jeux/difficulte.ts
+// Nombre de paires RELEVE par rapport a l'origine (3/4/5/6/7) : les grilles
+// « sans raccourci » (voir plus bas) n'existent en quantite que quand les bouts
+// sont assez nombreux pour epingler une solution UNIQUE meme sans la regle
+// « remplir toutes les cases ». Avec peu de paires, presque toutes les grilles
+// admettent un raccourci laissant une case vide (ce qui a casse la grille
+// p2-038 pour Iris).
 const PALIERS = [
-  { palier: 1, w: 4, h: 4, nPaires: 3 },
-  { palier: 2, w: 5, h: 5, nPaires: 4 },
-  { palier: 3, w: 6, h: 6, nPaires: 5 },
-  { palier: 4, w: 7, h: 7, nPaires: 6 },
-  { palier: 5, w: 7, h: 7, nPaires: 7 },
+  { palier: 1, w: 4, h: 4, nPaires: 4 },
+  { palier: 2, w: 5, h: 5, nPaires: 5 },
+  { palier: 3, w: 6, h: 6, nPaires: 7 },
+  { palier: 4, w: 7, h: 7, nPaires: 10 },
+  { palier: 5, w: 7, h: 7, nPaires: 12 },
 ];
 
-// Fruits disponibles (cles d'emoji Fluent, voir frontend/src/domain/images.ts).
-const FRUITS = ["pomme", "banane", "fraise", "cerise", "raisin", "citron", "orange-fruit", "pasteque"];
+// Fruits disponibles (cles d'emoji Fluent, voir frontend/src/domain/images.ts
+// et le registre FRUITS de domain/jeux/registre.ts). 12 fruits distincts : il
+// FAUT au moins `nPaires` fruits distincts (palier 5 = 12 paires).
+const FRUITS = [
+  "pomme", "banane", "fraise", "cerise", "raisin", "citron",
+  "orange-fruit", "pasteque", "ananas", "myrtille", "pomme-verte", "peche",
+];
 
-const NODE_CAP = 1_500_000; // plafond de noeuds du solveur (securite / vitesse)
+const NODE_CAP = 4_000_000; // plafond de noeuds du solveur (securite / vitesse)
 
 // --------------------------- RNG deterministe ------------------------------
 function mulberry32(seed) {
@@ -246,6 +257,74 @@ function compterSolutions(w, h, endpoints, limit) {
   return nodes > NODE_CAP ? -1 : solutions; // -1 = non prouve (plafond atteint)
 }
 
+// --------------------------- Solveur RELACHE (sans raccourci) --------------
+// Compte les solutions SANS exiger de remplir la grille : chaque paire reliee
+// par un chemin simple de cases vides, les cases restantes peuvent demeurer
+// vides. Une grille est « sans raccourci » ssi ce compte vaut EXACTEMENT 1 :
+// alors la solution couvrante stockee est la seule possible, donc il n'existe
+// AUCUNE facon de tout relier en laissant une case vide. Prunes A/B seuls (surs
+// en mode relache) ; on retire le prune « composante de vide atteignable » et
+// la verif de couverture (laisser du vide est justement permis ici).
+function compterSolutionsRelache(w, h, endpoints, limit) {
+  const { n, adj } = makeGrid(w, h);
+  const owner = new Int16Array(n).fill(-1);
+  const nPairs = endpoints.length;
+  for (let i = 0; i < nPairs; i++) {
+    owner[endpoints[i][0]] = i;
+    owner[endpoints[i][1]] = i;
+  }
+  let solutions = 0;
+  let nodes = 0;
+  let cap = false;
+
+  function relieViaVide(a, b) {
+    if (adj[a].includes(b)) return true;
+    const seen = new Uint8Array(n);
+    const stack = [];
+    for (const x of adj[a]) if (owner[x] === -1) { seen[x] = 1; stack.push(x); }
+    while (stack.length) {
+      const c = stack.pop();
+      if (adj[c].includes(b)) return true;
+      for (const x of adj[c]) if (owner[x] === -1 && !seen[x]) { seen[x] = 1; stack.push(x); }
+    }
+    return false;
+  }
+
+  function prunes(head, curPair, target) {
+    if (!relieViaVide(head, target)) return false;
+    for (let j = curPair + 1; j < nPairs; j++) {
+      if (!relieViaVide(endpoints[j][0], endpoints[j][1])) return false;
+    }
+    return true;
+  }
+
+  function croit(i, head) {
+    if (++nodes > NODE_CAP) { cap = true; return; }
+    if (solutions >= limit || cap) return;
+    const target = endpoints[i][1];
+    if (head === target) {
+      if (i + 1 >= nPairs) { solutions += 1; return; }
+      croit(i + 1, endpoints[i + 1][0]);
+      return;
+    }
+    for (const nb of adj[head]) {
+      if (nb === target) {
+        croit(i, nb);
+        if (solutions >= limit || cap) return;
+        continue;
+      }
+      if (owner[nb] !== -1) continue;
+      owner[nb] = i;
+      if (prunes(nb, i, target)) croit(i, nb);
+      owner[nb] = -1;
+      if (solutions >= limit || cap) return;
+    }
+  }
+
+  croit(0, endpoints[0][0]);
+  return cap ? -1 : solutions;
+}
+
 // --------------------------- Signature (dedup) -----------------------------
 function signature(segs) {
   // Canonique : chaque segment par sa paire de bouts triee, puis l'ensemble trie.
@@ -277,7 +356,10 @@ function genererPalier(def, count, seed) {
     const sig = signature(segs);
     if (vus.has(sig)) continue;
     const endpoints = segs.map((s) => [s[0], s[s.length - 1]]);
-    const n = compterSolutions(w, h, endpoints, 2);
+    // « Sans raccourci » : UNE seule solution MEME sans la regle de remplissage.
+    // Cela implique deja l'unicite de la solution couvrante stockee, donc inutile
+    // de rappeler compterSolutions (strict) : relache==1 => strict==1 & couvrant.
+    const n = compterSolutionsRelache(w, h, endpoints, 2);
     if (n !== 1) continue; // 0, >=2, ou -1 (non prouve) : rejete
     vus.add(sig);
     const fruits = shuffle(FRUITS, rng).slice(0, nPaires);
@@ -318,7 +400,7 @@ function main() {
       const segs = decouper(ham, def.nPaires, rng);
       if (!segs) { bad++; continue; }
       const endpoints = segs.map((s) => [s[0], s[s.length - 1]]);
-      const r = compterSolutions(def.w, def.h, endpoints, 2);
+      const r = compterSolutionsRelache(def.w, def.h, endpoints, 2);
       if (r === 1) uniq++; else if (r === 0) zero++; else if (r === -1) unproven++; else multi++;
     }
     const dt = (Date.now() - t0) / 1000;
