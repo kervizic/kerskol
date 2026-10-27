@@ -267,13 +267,24 @@ export function paireComplete(etat: EtatJeu, i: number): boolean {
   return true;
 }
 
-// Victoire = toutes les paires reliees ET toutes les cases remplies (sans
-// chevauchement, garanti par la mecanique de coupe).
-export function estGagne(etat: EtatJeu): boolean {
+// Toutes les paires sont-elles reliees correctement (bout a bout) ? Independant
+// de la couverture : sert a detecter le cas « tous les fruits sont relies mais
+// il reste des cases vides » (retour doux « Presque ! »).
+export function toutesPairesReliees(etat: EtatJeu): boolean {
   const { grille } = etat;
   for (let i = 0; i < grille.paires.length; i++) {
     if (!paireComplete(etat, i)) return false;
   }
+  return true;
+}
+
+// Victoire = toutes les paires reliees ET toutes les cases remplies. On NE
+// compare JAMAIS a la solution stockee : seules les REGLES comptent, donc toute
+// solution couvrante valide est acceptee (sans chevauchement, garanti par la
+// mecanique de coupe).
+export function estGagne(etat: EtatJeu): boolean {
+  if (!toutesPairesReliees(etat)) return false;
+  const { grille } = etat;
   const couvertes = new Set<Cell>();
   for (const t of etat.traces) for (const c of t) couvertes.add(c);
   return couvertes.size === grille.w * grille.h;

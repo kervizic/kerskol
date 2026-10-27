@@ -60,17 +60,20 @@ describe("grilles livrees — integrite (toutes)", () => {
 });
 
 describe("grilles livrees — solution unique (verifiee par solveur)", () => {
+  // Verification INDEPENDANTE de la generation : pour CHAQUE grille, le solveur
+  // doit trouver exactement UNE solution couvrante. Ainsi la victoire basee sur
+  // les regles (toute solution couvrante acceptee) correspond a la solution que
+  // l'enfant doit trouver, et l'indice (chemin stocke) est compatible avec elle.
+  // Le solveur est rapide (toutes les grilles en < 1 s), on les verifie TOUTES.
   for (const def of PALIERS) {
-    // Paliers 1-3 : toutes ; paliers 4-5 (7x7, verification plus couteuse) : un
-    // echantillon suffisant pour garder le test rapide (la generation a deja
-    // prouve l'unicite de TOUTES les grilles livrees).
     const toutes = grillesDuPalier(def.palier);
-    const lot = def.palier <= 3 ? toutes : toutes.slice(0, 6);
-    it(`palier ${def.palier} : ${lot.length} grilles a solution unique`, () => {
-      for (const g of lot) {
+    it(`palier ${def.palier} : les ${toutes.length} grilles ont une solution couvrante UNIQUE`, () => {
+      const fautives: string[] = [];
+      for (const g of toutes) {
         const n = compterSolutions(g.w, g.h, boutsDeGrille(g), 2);
-        expect(n).toBe(1);
+        if (n !== 1) fautives.push(`${g.id}=${n}`);
       }
-    });
+      expect(fautives).toEqual([]);
+    }, 120_000);
   }
 });

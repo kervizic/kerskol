@@ -14,6 +14,7 @@ import {
   indice as appliquerIndice,
   estGagne,
   casesRemplies,
+  toutesPairesReliees,
   paireDuBout,
   cellIndex,
   type EtatJeu,
@@ -174,6 +175,9 @@ export function RelieLesFruits({ grille, profil, onTermine }: Props) {
 
   const total = grille.w * grille.h;
   const remplies = casesRemplies(etat);
+  // « Presque ! » : tous les fruits sont relies mais il reste des cases vides.
+  // Sans ce retour, l'enfant croit avoir fini et le jeu refuse en silence.
+  const presque = remplies < total && toutesPairesReliees(etat);
 
   return (
     <div className="kk-relie">
@@ -239,8 +243,15 @@ export function RelieLesFruits({ grille, profil, onTermine }: Props) {
         })}
       </div>
 
-      <p className="kk-relie__jauge" aria-live="polite">
-        {remplies === total ? "Toutes les cases sont remplies !" : `${remplies} / ${total} cases remplies`}
+      <p
+        className={`kk-relie__jauge${presque ? " kk-relie__jauge--presque" : ""}`}
+        aria-live="polite"
+      >
+        {presque
+          ? "Presque ! Il reste des cases vides : tous les tuyaux doivent remplir la grille."
+          : remplies === total
+            ? "Toutes les cases sont remplies !"
+            : `${remplies} / ${total} cases remplies`}
       </p>
 
       <div className="kk-relie__actions kk-stack">

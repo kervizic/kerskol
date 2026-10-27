@@ -49,13 +49,18 @@ export interface FruitDef {
 }
 
 export const FRUITS: Record<string, FruitDef> = {
+  // Teintes CHOISIES pour etre nettement distinctes deux a deux (le trio
+  // banane/citron/orange etait trop proche : ocre/olive/brun). On couvre des
+  // familles de teintes differentes (rouge, orange, jaune dore, vert-jaune,
+  // vert, rose, pourpre, lie-de-vin) tout en restant dans une palette douce et
+  // chaleureuse. La couleur reste un APPOINT : le fruit (emoji) est le repere.
   pomme: { id: "pomme", image: "pomme", label: "pomme", couleur: "#C0514B" },
-  banane: { id: "banane", image: "banane", label: "banane", couleur: "#B98A1E" },
+  banane: { id: "banane", image: "banane", label: "banane", couleur: "#D9A410" },
   fraise: { id: "fraise", image: "fraise", label: "fraise", couleur: "#CE6A86" },
   cerise: { id: "cerise", image: "cerise", label: "cerise", couleur: "#9A3B4E" },
   raisin: { id: "raisin", image: "raisin", label: "raisin", couleur: "#7E5AA2" },
-  citron: { id: "citron", image: "citron", label: "citron", couleur: "#9A8B22" },
-  "orange-fruit": { id: "orange-fruit", image: "orangeFruit", label: "orange", couleur: "#CC7A33" },
+  citron: { id: "citron", image: "citron", label: "citron", couleur: "#8FA81F" },
+  "orange-fruit": { id: "orange-fruit", image: "orangeFruit", label: "orange", couleur: "#DC6B22" },
   pasteque: { id: "pasteque", image: "pasteque", label: "pastèque", couleur: "#4E8D6A" },
 };
 
