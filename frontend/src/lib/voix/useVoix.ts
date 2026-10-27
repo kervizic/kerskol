@@ -10,6 +10,8 @@ import {
   chargerManifest,
   clesManquantes,
   sequenceJouable,
+  texteProseJouable,
+  urlPourTexte,
   urlsPourCles,
   type Alignement,
   type VoixManifest,
@@ -41,9 +43,15 @@ export interface Voix {
   couper: () => void;
   direCles: (cles: string[], opts?: { auto?: boolean; gapMs?: number }) => void;
   direEnonce: (prompt: string, opts?: { auto?: boolean }) => void;
+  // Lit un TEXTE affiche quelconque (enonce de calcul en briques, sinon clip
+  // prose entier : consigne, indice, phrase, message...). Ne joue RIEN si aucun
+  // audio ne correspond (jamais de faux son).
+  direTexte: (texte: string, opts?: { auto?: boolean }) => void;
   // true si l'enonce peut etre lu EN ENTIER (toutes ses briques existent) ; sert
   // a griser le bouton audio plutot que de jouer une phrase incomplete.
   enonceJouable: (prompt: string) => boolean;
+  // true si un texte affiche (prose ou calcul) est lisible en entier.
+  texteJouable: (texte: string) => boolean;
   direDictee: (
     id: number,
     opts?: { auto?: boolean; mode?: "simple" | "dictee" } & KaraokeCallbacks
@@ -108,6 +116,24 @@ export function useVoix(profil: { id?: string; lecture_auto?: boolean | null } |
     if (!next) stop();
   }, [lectureAuto, profilId]);
 
+  // Joue une liste d'URL (briques assemblees en Web Audio, ou 1 clip prose en
+  // HTMLAudio), en respectant la bascule auto et le geste iOS. Ne joue rien si la
+  // liste est vide (jamais de faux son).
+  const jouerUrls = useCallback(
+    (urls: string[], opts: { auto?: boolean; gapMs?: number; brique?: boolean }) => {
+      const hasClips = urls.length > 0;
+      const ok = opts.auto
+        ? shouldAutoPlay(lectureAuto, activeRef.current, hasClips)
+        : shouldPlayManual(hasClips);
+      if (!ok) return;
+      if (!opts.auto) activer();
+      stop();
+      if (opts.brique && urls.length > 1 && webAudioDisponible()) void jouerBriques(urls);
+      else void playUrls(urls, opts.gapMs ?? GAP_NOMBRE);
+    },
+    [lectureAuto, activer]
+  );
+
   const direCles = useCallback(
     (cles: string[], opts?: { auto?: boolean; gapMs?: number }) => {
       // Regle d'or : ne JAMAIS lire une phrase incomplete. Si une seule brique
@@ -117,33 +143,39 @@ export function useVoix(profil: { id?: string; lecture_auto?: boolean | null } |
         signalerBriquesManquantes(manquantes);
         return;
       }
-      const urls = urlsPourCles(manifest, cles);
-      const hasClips = urls.length > 0;
-      const ok = opts?.auto
-        ? shouldAutoPlay(lectureAuto, activeRef.current, hasClips)
-        : shouldPlayManual(hasClips);
-      if (!ok) return;
-      if (!opts?.auto) activer();
-      // Briques assemblées serré en Web Audio (gap 0 + fondu) ; repli HTMLAudio.
-      stop();
-      if (webAudioDisponible()) void jouerBriques(urls);
-      else void playUrls(urls, opts?.gapMs ?? GAP_NOMBRE);
+      jouerUrls(urlsPourCles(manifest, cles), { auto: opts?.auto, gapMs: opts?.gapMs ?? GAP_NOMBRE, brique: true });
     },
-    [manifest, lectureAuto, activer]
+    [manifest, jouerUrls]
+  );
+
+  // Lit n'importe quel texte affiche : calcul en briques si jouable, sinon clip
+  // prose entier s'il existe, sinon RIEN (bouton grise cote appelant).
+  const direTexte = useCallback(
+    (texte: string, opts?: { auto?: boolean }) => {
+      const cles = enonceEnCles(texte);
+      if (sequenceJouable(manifest, cles)) {
+        jouerUrls(urlsPourCles(manifest, cles), { auto: opts?.auto, gapMs: GAP_NOMBRE, brique: true });
+        return;
+      }
+      const url = urlPourTexte(manifest, texte);
+      if (url) jouerUrls([url], { auto: opts?.auto, brique: false });
+    },
+    [manifest, jouerUrls]
   );
 
   const direEnonce = useCallback(
-    (prompt: string, opts?: { auto?: boolean }) => {
-      direCles(enonceEnCles(prompt), { auto: opts?.auto, gapMs: GAP_NOMBRE });
-    },
-    [direCles]
+    (prompt: string, opts?: { auto?: boolean }) => direTexte(prompt, opts),
+    [direTexte]
   );
 
-  // Un enonce est jouable si toutes ses briques existent (sinon bouton grise).
-  const enonceJouable = useCallback(
-    (prompt: string) => sequenceJouable(manifest, enonceEnCles(prompt)),
+  // Jouable si toutes les briques de calcul existent, OU si un clip prose au meme
+  // texte existe (sinon bouton grise, jamais de lecture partielle).
+  const texteJouable = useCallback(
+    (texte: string) =>
+      sequenceJouable(manifest, enonceEnCles(texte)) || texteProseJouable(manifest, texte),
     [manifest]
   );
+  const enonceJouable = texteJouable;
 
   const direDictee = useCallback(
     (id: number, opts?: { auto?: boolean; mode?: "simple" | "dictee" } & KaraokeCallbacks) => {
@@ -217,7 +249,7 @@ export function useVoix(profil: { id?: string; lecture_auto?: boolean | null } |
   }, [manifest]);
 
   return useMemo(
-    () => ({ disponible, lectureAutoActive: lectureAuto, basculerLectureAuto, activer, couper, direCles, direEnonce, enonceJouable, direDictee }),
-    [disponible, lectureAuto, basculerLectureAuto, activer, couper, direCles, direEnonce, enonceJouable, direDictee]
+    () => ({ disponible, lectureAutoActive: lectureAuto, basculerLectureAuto, activer, couper, direCles, direEnonce, direTexte, enonceJouable, texteJouable, direDictee }),
+    [disponible, lectureAuto, basculerLectureAuto, activer, couper, direCles, direEnonce, direTexte, enonceJouable, texteJouable, direDictee]
   );
 }

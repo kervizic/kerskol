@@ -1465,6 +1465,23 @@ export function Session({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ex?.key, voix.disponible]);
 
+  // Lecture de l'INDICE quand l'enfant l'ouvre (geste manuel). Rien si aucun
+  // clip ne correspond (bouton d'indice toujours visible, voix en bonus).
+  useEffect(() => {
+    if (!voix.disponible || !showIndice || !ex) return;
+    const texte = indicePour(ex.competence, ex.niveau);
+    if (texte) voix.direTexte(texte);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [showIndice, ex?.key, voix.disponible]);
+
+  // Messages de reussite / erreur : lus a la correction (respecte lecture_auto).
+  useEffect(() => {
+    if (!voix.disponible) return;
+    if (phase === "correct") voix.direTexte("Bravo, c'est juste !", { auto: true });
+    else if (phase === "wrong") voix.direTexte("Ce n'est pas ca, voici comment trouver", { auto: true });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [phase, voix.disponible]);
+
   const persist = useCallback(
     (eng: EngineState) => {
       saveSnapshot(profil.id, {

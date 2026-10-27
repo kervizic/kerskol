@@ -83,6 +83,39 @@ export async function chargerAlignement(): Promise<Alignement | null> {
   return alnEnCours;
 }
 
+// --- Lecture d'un texte en PROSE (clip entier) ----------------------------
+// Un texte affiche en prose (enonce EMC/conjugaison, consigne, indice, phrase,
+// message...) est lu par UN clip entier dont le texte PRONONCE nettoye est
+// identique a `nettoyer(texteAffiche)`. On indexe clips[].text -> clip_id pour
+// retrouver ce clip sans hash ni cle logique (cf. docs/voix.md). Aucun
+// respelling sur la prose : clips[].text == nettoyer(affichage).
+import { nettoyer } from "./nettoyage";
+
+const idxCache = new WeakMap<VoixManifest, Map<string, string>>();
+
+function indexTextes(manifest: VoixManifest): Map<string, string> {
+  let idx = idxCache.get(manifest);
+  if (idx) return idx;
+  idx = new Map<string, string>();
+  for (const [id, info] of Object.entries(manifest.clips)) {
+    const cle = nettoyer(info.text);
+    if (cle && !idx.has(cle)) idx.set(cle, id);
+  }
+  idxCache.set(manifest, idx);
+  return idx;
+}
+
+// URL du clip prose pour un texte affiche, ou null si aucun clip ne correspond.
+export function urlPourTexte(manifest: VoixManifest | null, texte: string): string | null {
+  if (!manifest) return null;
+  const id = indexTextes(manifest).get(nettoyer(texte));
+  return id ? `${AUDIO_BASE}/${manifest.voice}/${id}.mp3` : null;
+}
+
+export function texteProseJouable(manifest: VoixManifest | null, texte: string): boolean {
+  return urlPourTexte(manifest, texte) !== null;
+}
+
 // URL du fichier audio pour une cle logique, ou null si absente du manifest.
 export function urlPourCle(manifest: VoixManifest | null, cle: string): string | null {
   if (!manifest) return null;
