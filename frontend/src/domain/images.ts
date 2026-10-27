@@ -84,6 +84,15 @@ export const IMAGES: Record<string, ImageInfo> = {
   fleur:      fluent("Cherry blossom", "fleur.svg", "Une fleur."),
   glace:      fluent("Soft ice cream", "glace.svg", "Une glace en cornet."),
   etoile:     fluent("Star", "etoile.svg", "Une étoile."),
+  // Fruits — jeu « Relie les fruits » de la Maison des jeux (la pomme est
+  // reutilisee de la rubrique problemes). Repere principal de chaque paire.
+  banane:      fluent("Banana", "banane.svg", "Une banane jaune."),
+  fraise:      fluent("Strawberry", "fraise.svg", "Une fraise rouge."),
+  cerise:      fluent("Cherries", "cerise.svg", "Deux cerises rouges."),
+  raisin:      fluent("Grapes", "raisin.svg", "Une grappe de raisin."),
+  citron:      fluent("Lemon", "citron.svg", "Un citron jaune."),
+  orangeFruit: fluent("Tangerine", "orange-fruit.svg", "Une orange."),
+  pasteque:    fluent("Watermelon", "pasteque.svg", "Une part de pastèque."),
 };
 
 // Association CLE d'item -> image. Seules ces cles affichent une illustration.

@@ -20,7 +20,7 @@ export function Feedback({
   kind,
   children,
 }: {
-  kind: "error" | "success";
+  kind: "error" | "success" | "info";
   children: ReactNode;
 }) {
   return (

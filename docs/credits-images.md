@@ -98,6 +98,26 @@ symboles sans emoji homogène (billes, autocollants) gardent le dessin génériq
 L'URL exacte de chaque emoji est reconstruite dans `images.ts`
 (`https://github.com/microsoft/fluentui-emoji/tree/main/assets/<Nom>/Flat`).
 
+## Lot 7 — Maison des jeux : « Relie les fruits » (toujours Microsoft Fluent Emoji, MIT)
+
+Les fruits servent de repère principal pour distinguer chaque paire du puzzle
+(la couleur du tuyau n'est qu'un appoint). La `pomme` réutilise le fichier du
+lot 5.
+
+| Fichier (dans le dépôt) | Emoji Fluent d'origine | Utilisé pour | Texte alternatif |
+| --- | --- | --- | --- |
+| `img/emoji/banane.svg` | Banana | paire « banane » (Relie les fruits) | Une banane jaune. |
+| `img/emoji/fraise.svg` | Strawberry | paire « fraise » (Relie les fruits) | Une fraise rouge. |
+| `img/emoji/cerise.svg` | Cherries | paire « cerise » (Relie les fruits) | Deux cerises rouges. |
+| `img/emoji/raisin.svg` | Grapes | paire « raisin » (Relie les fruits) | Une grappe de raisin. |
+| `img/emoji/citron.svg` | Lemon | paire « citron » (Relie les fruits) | Un citron jaune. |
+| `img/emoji/orange-fruit.svg` | Tangerine | paire « orange » (Relie les fruits) | Une orange. |
+| `img/emoji/pasteque.svg` | Watermelon | paire « pastèque » (Relie les fruits) | Une part de pastèque. |
+
+Ces SVG proviennent du jeu Fluent Emoji (style « Flat », 32×32), récupérés via
+l'API Iconify (`fluent-emoji-flat`) qui redistribue la collection sous la même
+licence MIT ; ils sont hébergés dans le dépôt, aucun chargement tiers.
+
 ## Sources autorisées pour les lots suivants
 
 En priorité **Fluent Emoji** (MIT, style homogène). Également autorisés : Noto

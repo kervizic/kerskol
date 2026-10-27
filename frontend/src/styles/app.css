@@ -759,3 +759,56 @@ button.kk-don__picto-row { cursor: pointer; }
 .kk-ord__contenu { display: flex; flex-direction: column; align-items: center; gap: 2px; }
 .kk-ord__contenu .kk-ord__picto { font-size: 1.5rem; line-height: 1; }
 .kk-ord__picto { font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif; }
+
+/* ----------------------------- Maison des jeux -------------------------- */
+/* Chrome (cartes, boutons, compteur) : tokens du site. Les couleurs des tuyaux
+   du jeu sont definies inline (teintes douces, voir domain/jeux/registre). */
+.kk-feedback--info { background: var(--kk-surface); color: var(--kk-text); border: 1px solid var(--kk-border); }
+
+.kk-jeux { display: flex; flex-direction: column; gap: 14px; }
+.kk-jeu { display: flex; flex-direction: column; gap: 12px; }
+.kk-jeu__entete { display: flex; gap: 12px; align-items: center; }
+.kk-jeu__emoji { font-size: 2.4rem; line-height: 1;
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif; }
+
+/* ----------------------------- Relie les fruits ------------------------- */
+.kk-relie { display: flex; flex-direction: column; }
+.kk-relie__consigne { display: flex; gap: 8px; align-items: center; justify-content: center;
+  margin-bottom: 12px; text-align: center; }
+.kk-relie__board {
+  display: grid;
+  grid-template-columns: repeat(var(--kk-cols), 1fr);
+  gap: 3px;
+  width: min(100%, 440px);     /* respecte le padding du conteneur */
+  margin: 0 auto;
+  touch-action: none;           /* pas de scroll pendant le trace */
+  -webkit-user-select: none;
+  user-select: none;
+}
+.kk-relie__cell {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  min-width: 48px;              /* cases >= 48 px (>= 390 px de large) */
+  background: var(--kk-surface);
+  border: 1px solid var(--kk-border);
+  border-radius: 6px;
+}
+.kk-relie__pipe { position: absolute; inset: 0; z-index: 1; }
+.kk-relie__dot {
+  position: absolute; top: 50%; left: 50%;
+  width: 46%; height: 46%;
+  transform: translate(-50%, -50%);
+  border-radius: 38%;
+}
+.kk-relie__bar { position: absolute; top: 50%; left: 50%; border-radius: 4px; }
+.kk-relie__bar--droite { transform: translateY(-50%); width: 52%; height: 34%; }
+.kk-relie__bar--gauche { left: auto; right: 50%; transform: translateY(-50%); width: 52%; height: 34%; }
+.kk-relie__bar--bas { transform: translateX(-50%); height: 52%; width: 34%; }
+.kk-relie__bar--haut { top: auto; bottom: 50%; transform: translateX(-50%); height: 52%; width: 34%; }
+.kk-relie__fruit {
+  position: absolute; z-index: 2;
+  width: 74%; height: 74%; top: 13%; left: 13%;
+  pointer-events: none;
+}
+.kk-relie__jauge { text-align: center; color: var(--kk-text-2); margin: 12px 0; }
+.kk-relie__actions { margin-top: 4px; }

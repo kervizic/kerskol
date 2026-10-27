@@ -10,6 +10,7 @@ import {
   demanderLienEnfant,
   getDefiResume,
   getEcritureProductions,
+  getPartiesJeu,
   getJournal,
   listLiensEnAttente,
   reauthGoogle,
@@ -28,6 +29,12 @@ import {
   type HistoriqueDictee,
 } from "../lib/api";
 import { DEFI_THEMES } from "../domain/calcul/defi";
+import {
+  calculerProgression,
+  derniersTemps,
+  palierDef,
+  type Partie as JeuPartie,
+} from "../domain/jeux/difficulte";
 import DicteeMaitresse from "../components/DicteeMaitresse";
 import { FEATURE_DICTEE_PARENT } from "../domain/featureFlags";
 import { MatieresEditor } from "../components/MatieresEditor";
@@ -106,6 +113,43 @@ function EcritureSummary({ profilId }: { profilId: string }) {
           </li>
         ))}
       </ul>
+    </div>
+  );
+}
+
+// Maison des jeux : palier atteint et derniers temps (lecture seule). Le temps
+// est mesure discretement pendant le jeu (aucun chrono affiche cote enfant).
+function JeuxSummary({ profilId }: { profilId: string }) {
+  const [parties, setParties] = useState<JeuPartie[] | null>(null);
+  useEffect(() => {
+    let alive = true;
+    getPartiesJeu(profilId, "relie-les-fruits")
+      .then((r) => alive && setParties(r))
+      .catch(() => alive && setParties([]));
+    return () => {
+      alive = false;
+    };
+  }, [profilId]);
+  if (parties === null) return null;
+  if (parties.length === 0) {
+    return <p className="kk-muted" style={{ margin: 0 }}>Maison des jeux : aucune partie jouée pour l’instant.</p>;
+  }
+  const prog = calculerProgression(parties);
+  const def = palierDef(prog.palier);
+  const temps = derniersTemps(parties, prog.palier, 5);
+  const reussies = parties.filter((p) => p.reussi && !p.abandon).length;
+  return (
+    <div>
+      <h3 style={{ margin: "0 0 6px" }}>Maison des jeux — Relie les fruits</h3>
+      <p className="kk-muted" style={{ margin: 0 }}>
+        Niveau actuel : grille {def.w}×{def.h} ({def.nPaires} paires) · {reussies} grille
+        {reussies > 1 ? "s" : ""} réussie{reussies > 1 ? "s" : ""}.
+      </p>
+      {temps.length > 0 && (
+        <p className="kk-muted" style={{ margin: "4px 0 0" }}>
+          Derniers temps : {temps.map((t) => `${Math.round(t / 1000)} s`).join(" · ")}
+        </p>
+      )}
     </div>
   );
 }
@@ -793,6 +837,7 @@ export function ParentSpace({
               onReload={reloadLiens}
             />
             <DefiSummary profilId={p.id} />
+            <JeuxSummary profilId={p.id} />
             <EcritureSummary profilId={p.id} />
           </div>
         ))}

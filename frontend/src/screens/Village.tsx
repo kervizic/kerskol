@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BookOpen, FlaskConical, Globe, PencilLine, ScrollText, Settings, Timer } from "lucide-react";
+import { BookOpen, FlaskConical, Gamepad2, Globe, PencilLine, ScrollText, Settings, Timer } from "lucide-react";
 import { AvatarView } from "../domain/avatars";
 import {
   AVATAR_COLORS,
@@ -45,6 +45,7 @@ export function Village({
   onHistoire,
   onGeoParcours,
   onSciencesParcours,
+  onMaisonJeux,
   onProfilChange,
 }: {
   profil: Profil;
@@ -57,6 +58,7 @@ export function Village({
   onHistoire: () => void;
   onGeoParcours: () => void;
   onSciencesParcours: () => void;
+  onMaisonJeux: () => void;
   onProfilChange: (p: Profil) => void;
 }) {
   const [progression, setProgression] = useState<Progression[] | null>(null);
@@ -259,6 +261,13 @@ export function Village({
           title="Un jeu de rapidité, sur ce que tu maîtrises déjà"
         >
           <Timer size={20} aria-hidden="true" /> Défi chrono
+        </button>
+        <button
+          className="kk-btn kk-btn--block"
+          onClick={onMaisonJeux}
+          title="Des jeux pour s'amuser avec tes bonbons"
+        >
+          <Gamepad2 size={20} aria-hidden="true" /> Maison des jeux
         </button>
         <button
           className="kk-btn kk-btn--block"

@@ -12,6 +12,7 @@ import { Bibliotheque } from "./screens/Bibliotheque";
 import { Histoire } from "./screens/Histoire";
 import { GeographieParcours } from "./screens/GeographieParcours";
 import { SciencesParcours } from "./screens/SciencesParcours";
+import { MaisonDesJeux } from "./screens/MaisonDesJeux";
 import DicteeMaitresse from "./components/DicteeMaitresse";
 import { ChildTheme } from "./components/ChildTheme";
 import { FEATURE_DICTEE_PARENT } from "./domain/featureFlags";
@@ -48,7 +49,7 @@ function currentPath(): string {
 // que si son drapeau est actif : sinon l'URL directe ne matche pas et retombe
 // sur la selection de profil (fonctionnalite masquee mais code conserve).
 const CHILD_RE = new RegExp(
-  "^/enfant/([^/]+)/(village|seance|defi|bibliotheque|histoire|geo-parcours|sciences-parcours" +
+  "^/enfant/([^/]+)/(village|seance|defi|bibliotheque|histoire|geo-parcours|sciences-parcours|maison-jeux" +
     (FEATURE_DICTEE_PARENT ? "|dictee-maitresse" : "") +
     ")$"
 );
@@ -350,6 +351,7 @@ export function App() {
               onHistoire={() => navigate(`/enfant/${prof.id}/histoire`)}
               onGeoParcours={() => navigate(`/enfant/${prof.id}/geo-parcours`)}
               onSciencesParcours={() => navigate(`/enfant/${prof.id}/sciences-parcours`)}
+              onMaisonJeux={() => navigate(`/enfant/${prof.id}/maison-jeux`)}
               onProfilChange={upsertProfil}
             />
           </ChildTheme>
@@ -382,6 +384,13 @@ export function App() {
         return (
           <ChildTheme couleur={couleur}>
             <SciencesParcours profil={prof} onExit={() => navigate(`/enfant/${prof.id}/village`)} />
+          </ChildTheme>
+        );
+      }
+      if (m[2] === "maison-jeux") {
+        return (
+          <ChildTheme couleur={couleur}>
+            <MaisonDesJeux profil={prof} onExit={() => navigate(`/enfant/${prof.id}/village`)} />
           </ChildTheme>
         );
       }

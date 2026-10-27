@@ -908,6 +908,98 @@ export async function getTempsAujourdhuiS(profilId: string): Promise<number> {
   return (data ?? []).reduce((s, r) => s + Number((r as { duree_s: number }).duree_s ?? 0), 0);
 }
 
+// -------------------------------- Maison des jeux ------------------------
+// Une partie = une grille = PRIX_PARTIE bonbons (debit serveur atomique). On
+// journalise chaque grille terminee pour la difficulte adaptative (derivee
+// cote client) et l'espace parent. Voir supabase/migrations/0130.
+import type { Partie } from "../domain/jeux/difficulte";
+
+// Vrai si l'erreur serveur signale un solde insuffisant.
+export function estSoldeInsuffisant(e: unknown): boolean {
+  const m = (e as { message?: unknown } | null)?.message;
+  return typeof m === "string" && m.includes("pas_assez_de_bonbons");
+}
+
+// Historique de jeu en mode demo (volatil, memoire du navigateur).
+const DEMO_PARTIES: Array<Partie & { jeu: string }> = [];
+
+// Debite le prix d'une partie. Renvoie le nouveau solde. Leve si insuffisant.
+export async function jouerPartieJeu(profilId: string, jeu: string): Promise<{ monnaie: number }> {
+  if (isDemo()) {
+    const p = DEMO_PROFILS.find((x) => x.id === profilId);
+    const prix = 10;
+    if (!p || p.monnaie < prix) throw new Error("pas_assez_de_bonbons");
+    p.monnaie -= prix;
+    return { monnaie: p.monnaie };
+  }
+  const { data, error } = await supabase().rpc("jeu_jouer", { p_profil: profilId, p_jeu: jeu });
+  if (error) throw error;
+  const d = (data ?? {}) as { monnaie?: number };
+  return { monnaie: Number(d.monnaie ?? 0) };
+}
+
+// Journalise une grille terminee (reussie ou abandonnee).
+export async function terminerPartieJeu(params: {
+  profilId: string;
+  jeu: string;
+  palier: number;
+  grilleId: string;
+  tempsMs: number;
+  avecIndice: boolean;
+  abandon: boolean;
+  reussi: boolean;
+}): Promise<void> {
+  if (isDemo()) {
+    DEMO_PARTIES.push({
+      jeu: params.jeu,
+      palier: params.palier,
+      grille_id: params.grilleId,
+      temps_ms: params.tempsMs,
+      avec_indice: params.avecIndice,
+      abandon: params.abandon,
+      reussi: params.reussi,
+    });
+    return;
+  }
+  const { error } = await supabase().rpc("jeu_terminer", {
+    p_profil: params.profilId,
+    p_jeu: params.jeu,
+    p_palier: params.palier,
+    p_grille_id: params.grilleId,
+    p_temps_ms: params.tempsMs,
+    p_avec_indice: params.avecIndice,
+    p_abandon: params.abandon,
+    p_reussi: params.reussi,
+  });
+  if (error) throw error;
+}
+
+// Historique de jeu d'un profil (ordre chronologique) pour un jeu donne.
+export async function getPartiesJeu(profilId: string, jeu: string): Promise<Partie[]> {
+  if (isDemo()) return DEMO_PARTIES.filter((p) => p.jeu === jeu).map(({ jeu: _j, ...rest }) => rest);
+  const { data, error } = await supabase()
+    .from("jeu_parties")
+    .select("palier, grille_id, temps_ms, avec_indice, abandon, reussi")
+    .eq("profil_id", profilId)
+    .eq("jeu", jeu)
+    .order("cree_le", { ascending: true });
+  if (error) throw error;
+  return (data ?? []).map((r) => {
+    const row = r as {
+      palier: number; grille_id: string; temps_ms: number;
+      avec_indice: boolean; abandon: boolean; reussi: boolean;
+    };
+    return {
+      palier: Number(row.palier),
+      grille_id: row.grille_id,
+      temps_ms: Number(row.temps_ms ?? 0),
+      avec_indice: Boolean(row.avec_indice),
+      abandon: Boolean(row.abandon),
+      reussi: Boolean(row.reussi),
+    };
+  });
+}
+
 // -------------------------------- Seances --------------------------------
 export async function createSeance(id: string, profilId: string): Promise<void> {
   if (isDemo()) return;

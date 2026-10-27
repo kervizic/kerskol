@@ -4,3 +4,6 @@ public/theme/
 # Build et deps
 dist/
 node_modules/
+
+# Captures Playwright (revue visuelle, hors git)
+docs/captures/

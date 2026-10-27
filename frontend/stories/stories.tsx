@@ -17,6 +17,8 @@ import Geometrie from "../src/components/Geometrie";
 import Parcours from "../src/components/Parcours";
 import Frise from "../src/components/Frise";
 import RemiseEnOrdre from "../src/components/RemiseEnOrdre";
+import { RelieLesFruits } from "../src/components/RelieLesFruits";
+import { grillesDuPalier } from "../src/domain/jeux/registre";
 import { chapitreParCle, friseCartesToutes } from "../src/domain/histoire/parcours";
 import { chapitreGeoParCle } from "../src/domain/geographie/parcours";
 import { chapitreSciencesParCle } from "../src/domain/sciences/parcours";
@@ -393,4 +395,11 @@ export const STORIES: Story[] = [
   { id: "parcours-recit-cathedrale", label: "Parcours Histoire — récit « Perrine et la cathédrale » (CM1)",
     node: <Parcours chapitre={chapitreParCle("moyen_age_cathedrale")!} frisePlacees={[]}
       onSoumettre={noopSubmit} onPlacerFrise={noopSubmit} onTermine={noop} /> },
+
+  // Maison des jeux — « Relie les fruits ». Palier 1 (4x4) et palier 5 (7x7,
+  // grille la plus grande : on verifie que les cases restent >= 48 px a 390 px).
+  { id: "relie-fruits-p1", label: "Relie les fruits — palier 1 (4×4)",
+    node: <RelieLesFruits grille={grillesDuPalier(1)[0]} profil={null} onTermine={noop} /> },
+  { id: "relie-fruits-p5", label: "Relie les fruits — palier 5 (7×7)",
+    node: <RelieLesFruits grille={grillesDuPalier(5)[0]} profil={null} onTermine={noop} /> },
 ];

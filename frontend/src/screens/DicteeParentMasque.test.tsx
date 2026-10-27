@@ -36,6 +36,7 @@ describe("Lot D - dictée avec papa ou maman masquée", () => {
         onHistoire={noop}
         onGeoParcours={noop}
         onSciencesParcours={noop}
+        onMaisonJeux={noop}
         onProfilChange={noop}
       />
     );
