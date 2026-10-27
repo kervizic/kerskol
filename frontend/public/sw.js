@@ -13,7 +13,7 @@
  */
 "use strict";
 
-var CACHE = "kerskol-assets-v1";
+var CACHE = "kerskol-assets-v2";
 
 self.addEventListener("install", function () {
   self.skipWaiting();
@@ -57,6 +57,21 @@ self.addEventListener("fetch", function (event) {
   if (url.origin !== self.location.origin) return;      // pas d'API tierce
   if (url.pathname.indexOf("/rest/") === 0 || url.pathname.indexOf("/auth/") === 0) {
     return;                                              // jamais l'API Supabase
+  }
+
+  // Manifest(s) voix : liste des clips disponibles. TOUJOURS le reseau (jamais
+  // de cache colle), pour qu'une bascule de voix ou l'ajout de clips soit vu des
+  // la prochaine ouverture. On ne met JAMAIS ce fichier en cache ; repli cache
+  // uniquement si le reseau est indisponible (hors ligne). Les clips eux-memes
+  // (/audio/) restent immuables, caches par hash. (Bug prod du 27/10 : un vieux
+  // manifest incomplet faisait lire « moins » sans les nombres.)
+  if (url.pathname === "/voix/manifest.json" || url.pathname === "/voix/lecture/manifest.json") {
+    event.respondWith(
+      fetch(req).catch(function () {
+        return caches.match(req);
+      })
+    );
+    return;
   }
 
   // Assets empreintes : cache-first.

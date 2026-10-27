@@ -54,13 +54,20 @@ export function enonceEnCles(prompt: string): string[] {
     }
   }
 
-  // jetons : nombres entiers et glyphes d'operateur
-  const jetons = prompt.match(/\d+|[+\-−×÷*/=]/g) || [];
+  // jetons : nombres entiers (en tolerant les separateurs de milliers que fmt()
+  // insere : « 1 234 », « 12 500 » avec espace U+0020, insecable U+00A0 ou fin
+  // U+202F) et glyphes d'operateur.
+  const jetons = prompt.match(/\d{1,3}(?:[\u0020\u00a0\u202f]\d{3})+|\d+|[+\-−×÷*/=]/g) || [];
   for (const j of jetons) {
-    if (/^\d+$/.test(j)) {
-      const n = parseInt(j, 10);
-      if (n <= MAX_NOMBRE) cles.push(...nombreEnCles(n));
-      // un nombre > 10000 n'a pas de clip : on l'omet (pas de voix sur ce jeton)
+    if (/\d/.test(j)) {
+      const n = parseInt(j.replace(/[\u0020\u00a0\u202f]/g, ""), 10);
+      const sousCles = nombreEnCles(n);
+      // Un nombre hors catalogue (> MAX_NOMBRE) n'a pas de brique. On NE l'omet
+      // PAS : on pousse une cle volontairement absente du manifest, pour que la
+      // phrase entiere devienne non jouable (bouton grise) plutot que de lire
+      // l'operateur sans son nombre (bug prod du 27/10 : la voix disait « moins »
+      // sans les nombres sur un ancien catalogue incomplet).
+      cles.push(...(sousCles.length ? sousCles : [`num:${n}`]));
     } else {
       const op = OP_GLYPHS[j];
       if (op) cles.push(op);
