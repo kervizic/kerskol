@@ -98,6 +98,7 @@ def main() -> int:
     ap.add_argument("--device", default="cpu", help="cpu ou cuda")
     ap.add_argument("--compute-type", default=None, help="int8 (cpu) ou float16 (cuda)")
     ap.add_argument("--beam", type=int, default=5, help="beam_size (1 = plus rapide, pour un controle CPU)")
+    ap.add_argument("--keys", default=None, help="liste de cles logiques (virgules) a controler UNIQUEMENT")
     a = ap.parse_args()
 
     from faster_whisper import WhisperModel
@@ -111,6 +112,9 @@ def main() -> int:
     clips = list(man["clips"].items())
     if a.prefix:
         clips = [(cid, info) for cid, info in clips if cid2key.get(cid, "").startswith(a.prefix)]
+    if a.keys:
+        want = set(k.strip() for k in a.keys.split(",") if k.strip())
+        clips = [(cid, info) for cid, info in clips if cid2key.get(cid, "") in want]
     if a.limit:
         clips = clips[: a.limit]
 
