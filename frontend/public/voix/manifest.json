@@ -7408,6 +7408,2131 @@
       "text": "Elle est allée à l'école.",
       "ms": 2000,
       "cat": "enonce"
+    },
+    "65925eb10f498e36": {
+      "text": "Au lieu de taper, pour régler un problème, on utilise des... Écris le mot, mots.",
+      "ms": 5920,
+      "cat": "enonce"
+    },
+    "6cc22a689b218bca": {
+      "text": "Avant de croire une information, il vaut mieux la... Écris le mot, vérifier.",
+      "ms": 6000,
+      "cat": "enonce"
+    },
+    "a7fafe039098769c": {
+      "text": "Avant de parler en classe, on lève le... Écris le mot.",
+      "ms": 4400,
+      "cat": "enonce"
+    },
+    "d185b4f67d3f913a": {
+      "text": "C'est l'élection du délégué. Qui est choisi ?",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "3a58cc7066ea1900": {
+      "text": "Classe : c'est possible pour de vrai, ou c'est sûrement truqué ?",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "49fd0c8db5769f3c": {
+      "text": "Classe : est-ce qu'on peut donner cette information sur Internet, ou pas ?",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "0bc7d86934fd1c0c": {
+      "text": "Classe : est-ce un symbole de la République, ou non ?",
+      "ms": 3600,
+      "cat": "enonce"
+    },
+    "b444b3cd14120502": {
+      "text": "Classe : qui s'en occupe dans la commune, le maire, ou pas le maire ?",
+      "ms": 4400,
+      "cat": "enonce"
+    },
+    "9f1b6b4f73a65639": {
+      "text": "Classe chaque action : on le fait en classe, ou on ne le fait pas ?",
+      "ms": 5040,
+      "cat": "enonce"
+    },
+    "4761faac9f373c03": {
+      "text": "Classe chaque activité : avec un écran, ou sans écran ?",
+      "ms": 4320,
+      "cat": "enonce"
+    },
+    "4b739a8fc835b20c": {
+      "text": "Classe chaque message : poli, ou pas poli ?",
+      "ms": 2880,
+      "cat": "enonce"
+    },
+    "5324f3b9c75d2dbf": {
+      "text": "Classe chaque mot : mot poli, ou pas poli ?",
+      "ms": 3600,
+      "cat": "enonce"
+    },
+    "0ec4d44f7e4824e3": {
+      "text": "Classe chaque phrase : c'est un droit de l'enfant, ou un devoir à l'école ?",
+      "ms": 4640,
+      "cat": "enonce"
+    },
+    "7e74906e137f541e": {
+      "text": "Classe chaque phrase : elle fait du bien, ou elle fait de la peine ?",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "3ed0e97010dbe817": {
+      "text": "Classe chaque réaction : elle calme, ou elle ne calme pas ?",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "5fdb51dfbb77a00b": {
+      "text": "Classe chaque situation avec la bonne émotion.",
+      "ms": 3360,
+      "cat": "enonce"
+    },
+    "11d34ccb4bf413f0": {
+      "text": "Comment devient-on maire d'une commune ?",
+      "ms": 2160,
+      "cat": "enonce"
+    },
+    "c18a695f372ae86d": {
+      "text": "Comment s'appelle l'hymne de la France, le chant de la République ?",
+      "ms": 3760,
+      "cat": "enonce"
+    },
+    "a5c24e9b0fe5976d": {
+      "text": "Comment s'appelle la personne qui dirige une commune, un village ou une ville ?",
+      "ms": 4400,
+      "cat": "enonce"
+    },
+    "fb26b161f192af29": {
+      "text": "Comment savoir si une information vue sur Internet est vraie ?",
+      "ms": 4000,
+      "cat": "enonce"
+    },
+    "3c1e25e99f6a368b": {
+      "text": "Comprendre ce que ressent l'autre, c'est se mettre à sa... Écris le mot, place.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "fa86a3e93c4d97b8": {
+      "text": "Dans le couloir de l'école, comment se déplace-t-on ?",
+      "ms": 2480,
+      "cat": "enonce"
+    },
+    "89b3d573ae203b39": {
+      "text": "Dans ta classe, on élit un délégué. Remets les étapes dans l'ordre. Qu'est-ce qui se passe d'abord ?",
+      "ms": 5600,
+      "cat": "enonce"
+    },
+    "eeebd40a381a9c8a": {
+      "text": "Dans un jeu en ligne, quelqu'un insulte un autre joueur. Que fais-tu ?",
+      "ms": 4640,
+      "cat": "enonce"
+    },
+    "38f2939bc99977b1": {
+      "text": "De quelles couleurs est le drapeau français ?",
+      "ms": 2160,
+      "cat": "enonce"
+    },
+    "778e6ce258c3d27d": {
+      "text": "Derrière chaque message, il y a une vraie... qui a des émotions. Écris le mot, personne.",
+      "ms": 6240,
+      "cat": "enonce"
+    },
+    "8333998bfbe4e98c": {
+      "text": "Des enfants se moquent des lunettes de Sami. Que fais-tu ?",
+      "ms": 3760,
+      "cat": "enonce"
+    },
+    "18242c358a9077e2": {
+      "text": "Deux camarades n'ont pas la même religion que toi. Que penses-tu ?",
+      "ms": 4000,
+      "cat": "enonce"
+    },
+    "125a563927204ac7": {
+      "text": "En classe, faire son travail et respecter les autres, c'est un... Écris le mot, devoir.",
+      "ms": 6960,
+      "cat": "enonce"
+    },
+    "643798c0e94ac62c": {
+      "text": "En classe, tu veux dire quelque chose à la maîtresse. Que fais-tu ?",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "353613834d0f46db": {
+      "text": "Il fait beau dehors et tes amis t'appellent pour jouer. Que choisis-tu ?",
+      "ms": 4800,
+      "cat": "enonce"
+    },
+    "fec1325da18ef797": {
+      "text": "Il fait tout noir et tu entends un bruit bizarre. Quelle émotion ?",
+      "ms": 4160,
+      "cat": "enonce"
+    },
+    "29ea0a0aa2f83e2d": {
+      "text": "La classe doit choisir un délégué. Comment faire, de la façon la plus juste ?",
+      "ms": 6000,
+      "cat": "enonce"
+    },
+    "9cc1d804207412c9": {
+      "text": "La personne qui dirige la commune s'appelle le... Écris le mot, maire.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "d5051b42e1d45441": {
+      "text": "Le chant de la République française s'appelle la... Écris le mot, Marseillaise.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "d691d836fe61cbd1": {
+      "text": "Le foot, c'est pour qui ?",
+      "ms": 1760,
+      "cat": "enonce"
+    },
+    "4d406bea94a423ab": {
+      "text": "Le maire travaille dans un bâtiment qui s'appelle la... Écris le mot, mairie.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "eb278ea509197750": {
+      "text": "Le matin, en arrivant dans la classe, que dis-tu ?",
+      "ms": 3280,
+      "cat": "enonce"
+    },
+    "5d2546699d750f87": {
+      "text": "Le premier mot de la devise..., Égalité, Fraternité. Écris le mot, Liberté.",
+      "ms": 5920,
+      "cat": "enonce"
+    },
+    "13311c9b2b87cb4e": {
+      "text": "Le soir, avant de dormir, on doit... les écrans. Écris le mot, éteindre.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "5368b0908cf514e7": {
+      "text": "Le soir, juste avant de dormir, qu'est-ce qui est mieux ?",
+      "ms": 3840,
+      "cat": "enonce"
+    },
+    "2a8d141ed50b5e88": {
+      "text": "Les filles et les garçons ont les mêmes droits : ils sont... Écris le mot, égaux.",
+      "ms": 5680,
+      "cat": "enonce"
+    },
+    "56bd20bc6414cc4f": {
+      "text": "Les règles de la classe sont faites pour que tout le monde se sente... Écris le mot, bien.",
+      "ms": 6080,
+      "cat": "enonce"
+    },
+    "797322cc6e671436": {
+      "text": "Léo a fini son travail avant les autres. Que peut-il faire sans déranger ?",
+      "ms": 5200,
+      "cat": "enonce"
+    },
+    "ef740596d41fae2f": {
+      "text": "Léo n'arrive pas à ouvrir sa boîte. Remets son histoire dans l'ordre. Qu'est-ce qui se passe d'abord ?",
+      "ms": 7600,
+      "cat": "enonce"
+    },
+    "5e8b32561b0a2030": {
+      "text": "Léo se moque de Sami parce qu'il porte de vieilles chaussures. Que peux-tu faire ?",
+      "ms": 4960,
+      "cat": "enonce"
+    },
+    "341c18e4591dc6a6": {
+      "text": "Marianne est un symbole de la République. Que représente-t-elle ?",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "33c0bc39884025db": {
+      "text": "Même sur un écran, pour bien écrire aux autres, on reste... Écris le mot, poli.",
+      "ms": 5520,
+      "cat": "enonce"
+    },
+    "c1477e34c9e879b2": {
+      "text": "On ne donne jamais son mot de passe : il reste... Écris le mot, secret.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "8eee8e15b67c0ffd": {
+      "text": "On t'embête tous les jours à la récré et tu as peur d'en parler. Que faire ?",
+      "ms": 4640,
+      "cat": "enonce"
+    },
+    "4fbf5a1608c26ca8": {
+      "text": "On te fait une fête alors que tu ne t'y attendais pas du tout. Quelle émotion ?",
+      "ms": 5840,
+      "cat": "enonce"
+    },
+    "3ada279798090364": {
+      "text": "Où travaille le maire ?",
+      "ms": 1840,
+      "cat": "enonce"
+    },
+    "eec84f9431bb7678": {
+      "text": "Pour calmer une grosse colère, on peut d'abord... doucement. Écris le mot, respirer.",
+      "ms": 6800,
+      "cat": "enonce"
+    },
+    "9c597cd497fc20c5": {
+      "text": "Pour choisir un délégué de façon juste, la classe doit... Écris le mot, voter.",
+      "ms": 6080,
+      "cat": "enonce"
+    },
+    "8900715fabf34a97": {
+      "text": "Pour ranger la classe, qui peut porter les chaises ?",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "6e3f859bd86d7d78": {
+      "text": "Pourquoi faut-il être poli dans les messages, comme dans la vraie vie ?",
+      "ms": 4160,
+      "cat": "enonce"
+    },
+    "c5acbaffc69b693a": {
+      "text": "Pourquoi l'école est-elle importante pour les enfants ?",
+      "ms": 3440,
+      "cat": "enonce"
+    },
+    "0c0b1f16d4f0158b": {
+      "text": "Pourquoi le vote est-il secret ?",
+      "ms": 2400,
+      "cat": "enonce"
+    },
+    "d9c0f77f662c3a11": {
+      "text": "Pourquoi ne faut-il pas donner son adresse à un inconnu sur Internet ?",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "3bf1a92154b02b50": {
+      "text": "Pourquoi vaut-il mieux ne pas passer trop de temps devant les écrans ?",
+      "ms": 3760,
+      "cat": "enonce"
+    },
+    "75c2fb2a317f67a1": {
+      "text": "Pourquoi y a-t-il des règles dans la classe ?",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "e9e96d5a29844384": {
+      "text": "Quand les yeux fatiguent devant l'écran, on fait une... Écris le mot, pause.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "f302df5b1593fd17": {
+      "text": "Quand on t'embête souvent, tu en parles à un... de confiance. Écris le mot.",
+      "ms": 5600,
+      "cat": "enonce"
+    },
+    "ba64c43c27cc6266": {
+      "text": "Quand on te rend service, tu dis... Écris le mot.",
+      "ms": 3680,
+      "cat": "enonce"
+    },
+    "000374bf10ba5c90": {
+      "text": "Quand on vote, combien de voix a chaque enfant ?",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "21dda34cca7f149d": {
+      "text": "Quand quelque chose t'énerve très fort, tu ressens de la... Écris le mot, colère.",
+      "ms": 6400,
+      "cat": "enonce"
+    },
+    "f557d23449572c7a": {
+      "text": "Quand tu bouscules quelqu'un sans le vouloir, tu dis... Écris le mot.",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "656361733c789f30": {
+      "text": "Quand tu es très content, tu ressens de la... Écris le mot, joie.",
+      "ms": 4480,
+      "cat": "enonce"
+    },
+    "64b67dc8ec30cf42": {
+      "text": "Quand tu écris un message à un ami, comment lui parles-tu ?",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "eb0ac2bfbdfb45f0": {
+      "text": "Quelle est la devise de la République française ?",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "503fd8e5b15d6c04": {
+      "text": "Quelle est la grande fête nationale de la France ?",
+      "ms": 3600,
+      "cat": "enonce"
+    },
+    "2d36334499113927": {
+      "text": "Quelqu'un t'embête souvent et ça te fait de la peine. À qui en parles-tu ?",
+      "ms": 4800,
+      "cat": "enonce"
+    },
+    "b86f9a23ffad557a": {
+      "text": "Qui peut faire ces métiers ? Classe chaque phrase.",
+      "ms": 3280,
+      "cat": "enonce"
+    },
+    "37cfa5a459d2277d": {
+      "text": "Qui peut t'aider à décider combien de temps tu passes devant l'écran ?",
+      "ms": 4000,
+      "cat": "enonce"
+    },
+    "348b44419cdc52df": {
+      "text": "Rire méchamment de quelqu'un, c'est se... de lui. Écris le mot, moquer.",
+      "ms": 5840,
+      "cat": "enonce"
+    },
+    "3d96a86cd3f9a5c8": {
+      "text": "Sans le vouloir, tu bouscules quelqu'un dans la cour. Que dis-tu ?",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "965130d30cd2c1c4": {
+      "text": "Se mettre à la place de l'autre, ça veut dire...",
+      "ms": 2880,
+      "cat": "enonce"
+    },
+    "9dbdda000b01a156": {
+      "text": "Sur Internet, en cas de doute, on demande toujours à un... Écris le mot, adulte.",
+      "ms": 6240,
+      "cat": "enonce"
+    },
+    "9e95b95188d16d07": {
+      "text": "Sur Internet, il ne faut pas tout... ce qu'on voit. Écris le mot, croire.",
+      "ms": 5840,
+      "cat": "enonce"
+    },
+    "d0b27eec3d18b290": {
+      "text": "Sur Internet, tout ce qu'on voit est-il toujours vrai ?",
+      "ms": 3680,
+      "cat": "enonce"
+    },
+    "617dd6a329f01e5d": {
+      "text": "Sur Internet, un jeu te demande ton adresse et ton école. Que fais-tu ?",
+      "ms": 5120,
+      "cat": "enonce"
+    },
+    "59ff7a973ef18cf8": {
+      "text": "Ton ami a gagné un prix et il saute partout. Comment se sent-il ?",
+      "ms": 5200,
+      "cat": "enonce"
+    },
+    "0b483499f24ab823": {
+      "text": "Ton cœur bat vite, tu as chaud et tu as très envie de crier. Quelle émotion est la plus forte ?",
+      "ms": 6080,
+      "cat": "enonce"
+    },
+    "ab64bed4d93fd35d": {
+      "text": "Ton meilleur ami déménage très loin. Quelle émotion ressens-tu ?",
+      "ms": 4480,
+      "cat": "enonce"
+    },
+    "1dde42ac97360b80": {
+      "text": "Tous les enfants ont le droit d'aller à l'... pour apprendre. Écris le mot.",
+      "ms": 5840,
+      "cat": "enonce"
+    },
+    "a348ab8ea6b95962": {
+      "text": "Tous les enfants ont le droit d'aller à...",
+      "ms": 2160,
+      "cat": "enonce"
+    },
+    "de34c0304b55eb2a": {
+      "text": "Tu as dit quelque chose qui a blessé ton ami. Que fais-tu ?",
+      "ms": 3600,
+      "cat": "enonce"
+    },
+    "bea0684d1782fa59": {
+      "text": "Tu as joué très longtemps à la tablette et tu as mal aux yeux. Que fais-tu ?",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "069905d11d059a04": {
+      "text": "Tu as le droit de jouer. Mais en classe, quel est ton devoir ?",
+      "ms": 3680,
+      "cat": "enonce"
+    },
+    "327e51dc71eb4b21": {
+      "text": "Tu es triste après une dispute. Qu'est-ce qui peut t'aider ?",
+      "ms": 3440,
+      "cat": "enonce"
+    },
+    "6d56f869e95bc8ac": {
+      "text": "Tu es très en colère. Qu'est-ce qui aide à se calmer ?",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "0d24442e9046988e": {
+      "text": "Tu es très en colère. Remets dans l'ordre ce qui t'aide à te calmer. Qu'est-ce que tu fais d'abord ?",
+      "ms": 6800,
+      "cat": "enonce"
+    },
+    "dc0c8f1affa0a0c5": {
+      "text": "Tu es très énervé. Que peux-tu faire de bien ?",
+      "ms": 3760,
+      "cat": "enonce"
+    },
+    "87f29cd56b1eb0ba": {
+      "text": "Tu n'es pas d'accord avec une règle de la classe. Que peux-tu faire ?",
+      "ms": 3920,
+      "cat": "enonce"
+    },
+    "9321b7a3902c46fc": {
+      "text": "Tu reçois un cadeau que tu adores. Quelle émotion ressens-tu ?",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "c74d42f58c309906": {
+      "text": "Tu veux emprunter la gomme de Sami. Comment le demandes-tu ?",
+      "ms": 3920,
+      "cat": "enonce"
+    },
+    "799d32f3903b095c": {
+      "text": "Tu vois quelque chose qui te gêne sur un écran. Que fais-tu ?",
+      "ms": 3920,
+      "cat": "enonce"
+    },
+    "490096c08ad58055": {
+      "text": "Un camarade a pris ton ballon sans demander. Tu es en colère. Que fais-tu ?",
+      "ms": 5120,
+      "cat": "enonce"
+    },
+    "df995df9f42eb54f": {
+      "text": "Un camarade est tout seul et triste à la récré. Que peux-tu faire ?",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "f6870af03bf97538": {
+      "text": "Un camarade pleure parce qu'il est tombé. Comment est-il ?",
+      "ms": 4000,
+      "cat": "enonce"
+    },
+    "0795abee079d218a": {
+      "text": "Un camarade reçoit des messages méchants. On appelle ça...",
+      "ms": 3600,
+      "cat": "enonce"
+    },
+    "d59a8fd93b01d917": {
+      "text": "Un camarade te prête son crayon. Que dis-tu ?",
+      "ms": 3360,
+      "cat": "enonce"
+    },
+    "34671433eb3c3ab0": {
+      "text": "Un enfant a surtout besoin de quoi pour grandir ?",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "e1f23342d5842471": {
+      "text": "Un message dit partage vite ou il t'arrivera malheur. Que fais-tu ?",
+      "ms": 4640,
+      "cat": "enonce"
+    },
+    "56858f6b1909c992": {
+      "text": "Un mot de passe, est-ce qu'on le donne à n'importe qui ?",
+      "ms": 3280,
+      "cat": "enonce"
+    },
+    "001da64d8888a0d4": {
+      "text": "Un nouvel élève arrive et il a l'air stressé et seul. Que peux-tu faire ?",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "8f818fe2c67c8b7d": {
+      "text": "Un nouvel élève ne parle pas encore bien français. Que fais-tu ?",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "44ff7705e5b861d5": {
+      "text": "Une camarade a oublié son goûter et elle a faim. Que peux-tu faire ?",
+      "ms": 4480,
+      "cat": "enonce"
+    },
+    "7d4788c2e8a36971": {
+      "text": "Une camarade est en fauteuil roulant. Comment joues-tu avec elle ?",
+      "ms": 4480,
+      "cat": "enonce"
+    },
+    "82aac7c4e9357c55": {
+      "text": "Une commune, c'est...",
+      "ms": 1520,
+      "cat": "enonce"
+    },
+    "5b3910dda86b5c34": {
+      "text": "Une image montre un chat aussi grand qu'une maison. Qu'en penses-tu ?",
+      "ms": 4320,
+      "cat": "enonce"
+    },
+    "ca5c69833e10374e": {
+      "text": "Une personne inconnue t'écrit sur un jeu et veut te rencontrer. Que fais-tu ?",
+      "ms": 5040,
+      "cat": "enonce"
+    },
+    "085ee2b210f4935e": {
+      "text": "Une vidéo dit une chose bizarre et tu ne sais pas si c'est vrai. Que fais-tu ?",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "65a55641513bc88e": {
+      "text": "À l'école, c'est un devoir de...",
+      "ms": 2080,
+      "cat": "enonce"
+    },
+    "70e6b7ef69ebdf31": {
+      "text": "À quoi sert la mairie de ta commune ?",
+      "ms": 2480,
+      "cat": "enonce"
+    },
+    "f7d83935b7bfa072": {
+      "text": "À quoi sert le délégué de la classe ?",
+      "ms": 2240,
+      "cat": "enonce"
+    },
+    "a30e6d9dc5f400a3": {
+      "text": "Écrire en MAJUSCULES et avec des gros mots, qu'est-ce que ça fait ?",
+      "ms": 4320,
+      "cat": "enonce"
+    },
+    "6f61223fb032ed42": {
+      "text": "Au tout début d'une chaîne alimentaire, il y a toujours une... Écris le mot.",
+      "ms": 6240,
+      "cat": "enonce"
+    },
+    "f03a332276ab16e1": {
+      "text": "Autrefois, avant l'électricité, avec quoi s'éclairait-on ?",
+      "ms": 4640,
+      "cat": "enonce"
+    },
+    "0f6228c31e82f2ff": {
+      "text": "Autrefois, pour laver le linge, où allait-on ?",
+      "ms": 3440,
+      "cat": "enonce"
+    },
+    "8ab6bf95a9c5efb9": {
+      "text": "Autrefois, à l'école, on écrivait sur l'ardoise avec de la... Écris le mot.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "8747d0f874e51dec": {
+      "text": "Avant d'utiliser longtemps un écran, je demande à un... Écris le mot.",
+      "ms": 5040,
+      "cat": "enonce"
+    },
+    "45273395c9888500": {
+      "text": "Avant l'électricité, on s'éclairait avec une... Écris le mot.",
+      "ms": 4560,
+      "cat": "enonce"
+    },
+    "4b134019a1568ea5": {
+      "text": "Avec quoi entends-tu les sons ?",
+      "ms": 2160,
+      "cat": "enonce"
+    },
+    "008c43a8790293fc": {
+      "text": "Avec quoi vois-tu les choses ?",
+      "ms": 2240,
+      "cat": "enonce"
+    },
+    "8fd90d354039edc4": {
+      "text": "Avec quoi écrivait-on à l'école autrefois, avant le stylo ?",
+      "ms": 4320,
+      "cat": "enonce"
+    },
+    "702ca9a46bf4cacb": {
+      "text": "C'est dangereux : on ne met jamais les doigts dans une... électrique de la maison. Écris le mot.",
+      "ms": 6560,
+      "cat": "enonce"
+    },
+    "67d1bee56db543bd": {
+      "text": "Classe : de quoi la plante a besoin, ou pas besoin, pour vivre.",
+      "ms": 4400,
+      "cat": "enonce"
+    },
+    "6e4528722120cbe5": {
+      "text": "Classe : de quoi une plante a besoin, ou pas besoin.",
+      "ms": 3680,
+      "cat": "enonce"
+    },
+    "cd0691d88ba9d456": {
+      "text": "Classe : est-ce que ça se dissout dans l'eau ?",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "46d8e37517bda52c": {
+      "text": "Classe chaque animal : herbivore mange des plantes, carnivore mange de la viande.",
+      "ms": 6000,
+      "cat": "enonce"
+    },
+    "fd0b7fd7e3267cdd": {
+      "text": "Classe chaque chose : autrefois ou aujourd'hui ?",
+      "ms": 3520,
+      "cat": "enonce"
+    },
+    "f7cfc14b0618e4a5": {
+      "text": "Classe chaque chose : montagne ou littoral ?",
+      "ms": 3360,
+      "cat": "enonce"
+    },
+    "31cf98088916c17e": {
+      "text": "Classe chaque chose : solide ou liquide.",
+      "ms": 2880,
+      "cat": "enonce"
+    },
+    "6ac5d7893439d530": {
+      "text": "Classe chaque chose : solide, liquide ou gaz.",
+      "ms": 3760,
+      "cat": "enonce"
+    },
+    "357f5cd1c4a8c2c2": {
+      "text": "Classe chaque chose : ville ou campagne ?",
+      "ms": 3360,
+      "cat": "enonce"
+    },
+    "f78e50f5ed491786": {
+      "text": "Classe chaque chose : vivante ou non vivante.",
+      "ms": 3680,
+      "cat": "enonce"
+    },
+    "0506f8fed2beba4c": {
+      "text": "Classe chaque habitude : bon ou mauvais usage des écrans.",
+      "ms": 4160,
+      "cat": "enonce"
+    },
+    "c8eaef784b1d9537": {
+      "text": "Classe chaque habitude : bonne ou pas bonne pour la santé.",
+      "ms": 4000,
+      "cat": "enonce"
+    },
+    "41b650ffe111b68c": {
+      "text": "Classe chaque objet : autrefois ou aujourd'hui ?",
+      "ms": 3920,
+      "cat": "enonce"
+    },
+    "5aba16c87fe38581": {
+      "text": "Clique sur l'Afrique sur le planisphère.",
+      "ms": 2480,
+      "cat": "enonce"
+    },
+    "a849d44f49308bd5": {
+      "text": "Clique sur l'Asie, le plus grand continent.",
+      "ms": 2720,
+      "cat": "enonce"
+    },
+    "c87848bd571f229b": {
+      "text": "Clique sur l'objet qui donne le courant électrique.",
+      "ms": 2880,
+      "cat": "enonce"
+    },
+    "84990e5fa972b606": {
+      "text": "Clique sur l'objet qui ouvre et ferme le circuit.",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "3b7c2188b0a12ddc": {
+      "text": "Combien de temps durent ensemble un jour et une nuit ?",
+      "ms": 3360,
+      "cat": "enonce"
+    },
+    "c5c67bf595ca7d29": {
+      "text": "Combien y a-t-il de jours dans une semaine ?",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "5ca3cb552584b19b": {
+      "text": "Combien y a-t-il de mois dans une année ?",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "a1de7b0341ec1a06": {
+      "text": "Comment séparer le sable de l'eau ?",
+      "ms": 1920,
+      "cat": "enonce"
+    },
+    "4609313d4efa3ed8": {
+      "text": "Dans l'école d'autrefois, sur quoi les élèves écrivaient-ils ?",
+      "ms": 3360,
+      "cat": "enonce"
+    },
+    "f0ad416937a6599e": {
+      "text": "Dans quel pays habites-tu ?",
+      "ms": 1680,
+      "cat": "enonce"
+    },
+    "6e8a30160b10a641": {
+      "text": "De quoi ton corps a-t-il besoin la nuit pour se reposer ?",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "378ec094551ea726": {
+      "text": "De quoi une ampoule a-t-elle besoin pour s'allumer dans un circuit ?",
+      "ms": 3440,
+      "cat": "enonce"
+    },
+    "75284e9fcbac7cb9": {
+      "text": "De quoi une plante a-t-elle besoin pour vivre ?",
+      "ms": 2880,
+      "cat": "enonce"
+    },
+    "e41e65d6625b1325": {
+      "text": "Est-ce que l'air prend de la place ?",
+      "ms": 2080,
+      "cat": "enonce"
+    },
+    "040c721f3ac08a33": {
+      "text": "Hier et demain : lequel est déjà passé ?",
+      "ms": 3040,
+      "cat": "enonce"
+    },
+    "81e332775ed25bab": {
+      "text": "Il fait jour puis nuit parce que la Terre... sur elle-même. Écris le mot.",
+      "ms": 4960,
+      "cat": "enonce"
+    },
+    "e1d8e92770373646": {
+      "text": "L'air et la vapeur n'ont pas de forme fixe. Ils sont à l'état... Écris le mot : solide, liquide ou gaz.",
+      "ms": 8000,
+      "cat": "enonce"
+    },
+    "9c010ed661823688": {
+      "text": "L'air, quand est-ce qu'on le sent ?",
+      "ms": 2720,
+      "cat": "enonce"
+    },
+    "752c560e05551eb8": {
+      "text": "L'astre qui éclaire la Terre le jour s'appelle le... Écris le mot.",
+      "ms": 4880,
+      "cat": "enonce"
+    },
+    "d76055bd4f3ab9d8": {
+      "text": "L'eau d'une flaque qui disparaît au soleil : comment s'appelle ce changement ?",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "dfd1f736f6749f85": {
+      "text": "L'eau dans un verre, c'est un solide, un liquide ou un gaz ?",
+      "ms": 4480,
+      "cat": "enonce"
+    },
+    "94a43c697a6300a7": {
+      "text": "L'eau liquide qui gèle et devient de la glace : comment s'appelle ce changement ?",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "2b1536cb0d38eac4": {
+      "text": "L'endroit où l'os se plie, comme le coude ou le genou, s'appelle...",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "dd820a01d01d6fec": {
+      "text": "L'objet qui sert à balayer la poussière par terre s'appelle un... Écris le mot.",
+      "ms": 6480,
+      "cat": "enonce"
+    },
+    "52125fa7d09e700d": {
+      "text": "L'objet qui sert à ouvrir une porte fermée s'appelle une... Écris le mot.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "fadf4a2d585dba41": {
+      "text": "L'écran fatigue surtout une partie du visage : les... Écris le mot.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "1d1a1e7e258d8ff0": {
+      "text": "La barre qui aide à soulever une lourde charge s'appelle un... Écris le mot.",
+      "ms": 5680,
+      "cat": "enonce"
+    },
+    "1ee169b21d8e0b46": {
+      "text": "La boule qui représente la Terre s'appelle un... Écris le mot.",
+      "ms": 4560,
+      "cat": "enonce"
+    },
+    "88a6105309c2e4b1": {
+      "text": "La capitale de la France est... Écris le mot.",
+      "ms": 3520,
+      "cat": "enonce"
+    },
+    "c03058fa1feaa9ad": {
+      "text": "La chatte a des chatons et la poule a des poussins. Comment dit-on quand les animaux ont des petits ?",
+      "ms": 6400,
+      "cat": "enonce"
+    },
+    "ba6c61a868a4d2d0": {
+      "text": "La glace qui chauffe et redevient de l'eau liquide : comment s'appelle ce changement ?",
+      "ms": 5040,
+      "cat": "enonce"
+    },
+    "deba5a1ca14e5f5e": {
+      "text": "La maman de ta maman, c'est ta...",
+      "ms": 2480,
+      "cat": "enonce"
+    },
+    "036683b3586584ca": {
+      "text": "La partie de la plante qui boit l'eau dans la terre s'appelle les... Écris le mot.",
+      "ms": 5600,
+      "cat": "enonce"
+    },
+    "a850cf55eaf30e4a": {
+      "text": "La petite reproduction en volume d'un bâtiment s'appelle une... Écris le mot.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "1cc8140f4f5041bf": {
+      "text": "La saison la plus froide, avec parfois de la neige, s'appelle l'... Écris le mot.",
+      "ms": 6240,
+      "cat": "enonce"
+    },
+    "2548a3f507aea8a3": {
+      "text": "La vapeur qui se refroidit et redevient des gouttes d'eau, comme la buée sur une vitre : ce changement s'appelle la... Écris le mot.",
+      "ms": 9040,
+      "cat": "enonce"
+    },
+    "a452fffb41e249bf": {
+      "text": "Le bord de la mer s'appelle le... Écris le mot.",
+      "ms": 3520,
+      "cat": "enonce"
+    },
+    "b70facf99771706a": {
+      "text": "Le bord de la mer, avec ses plages, s'appelle le...",
+      "ms": 3520,
+      "cat": "enonce"
+    },
+    "e4da70d566f757ed": {
+      "text": "Le continent où se trouve la France s'appelle l'... Écris le mot.",
+      "ms": 5040,
+      "cat": "enonce"
+    },
+    "19b940e1b554c13a": {
+      "text": "Le dessin d'un lieu vu d'en haut, avec les rues, s'appelle un... Écris le mot.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "8ecb1e62a5966183": {
+      "text": "Le fleuve qui traverse Paris est la... Écris le mot.",
+      "ms": 3600,
+      "cat": "enonce"
+    },
+    "645a83c7c152d466": {
+      "text": "Le frère de ton papa ou de ta maman est ton... Écris le mot.",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "34c15ec866605a4e": {
+      "text": "Le lapin mange de l'herbe et des carottes. Que mange-t-il ?",
+      "ms": 4480,
+      "cat": "enonce"
+    },
+    "c8eb81b43b323e81": {
+      "text": "Le lion mange d'autres animaux. Que mange-t-il ?",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "20ce6a2d221fd17b": {
+      "text": "Le matin, de quel côté se lève le soleil ?",
+      "ms": 3040,
+      "cat": "enonce"
+    },
+    "be30b35f80688664": {
+      "text": "Le matin, le soleil se lève à l'... Écris le mot.",
+      "ms": 4000,
+      "cat": "enonce"
+    },
+    "88563afc3995d35d": {
+      "text": "Le papa de ton papa, c'est ton...",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "f0551a3909dfd022": {
+      "text": "Le point cardinal opposé au nord s'appelle le... Écris le mot.",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "deacfc06ab7b0918": {
+      "text": "Le point cardinal situé en face de l'est s'appelle l'...",
+      "ms": 3520,
+      "cat": "enonce"
+    },
+    "1c256f923199f150": {
+      "text": "Le premier mois de l'année s'appelle... Écris le mot.",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "ff2ff10bc509f906": {
+      "text": "Le sens qui te sert à sentir les odeurs avec ton nez s'appelle l'... Écris le mot.",
+      "ms": 5840,
+      "cat": "enonce"
+    },
+    "621e1e8370a43a8c": {
+      "text": "Le soir, de quel côté se couche le soleil ?",
+      "ms": 3280,
+      "cat": "enonce"
+    },
+    "197aec35f851be27": {
+      "text": "Le vent, qu'est-ce que c'est ?",
+      "ms": 1840,
+      "cat": "enonce"
+    },
+    "86b6049876a77b3b": {
+      "text": "Les parents de tes parents sont tes grands-... Écris le mot.",
+      "ms": 4960,
+      "cat": "enonce"
+    },
+    "fab33fe37da65fff": {
+      "text": "Les parents de tes parents sont tes...",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "729eebbd81fbb8d4": {
+      "text": "On ne le voit pas, il est partout autour de nous et on le respire : c'est l'... Écris le mot.",
+      "ms": 6800,
+      "cat": "enonce"
+    },
+    "e38d8f77b1bb4347": {
+      "text": "On surnomme la France d'après la forme de son contour. C'est...",
+      "ms": 4320,
+      "cat": "enonce"
+    },
+    "e12ec28bd15712ca": {
+      "text": "Où grandit le têtard, le bébé de la grenouille ?",
+      "ms": 3440,
+      "cat": "enonce"
+    },
+    "cb5886639681d043": {
+      "text": "Par où la plante boit-elle l'eau de la terre ?",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "b7460bc905971150": {
+      "text": "Parmi ces choses, laquelle est vivante ?",
+      "ms": 2720,
+      "cat": "enonce"
+    },
+    "8c833989f9abde55": {
+      "text": "Peut-on tout croire de ce qu'on voit sur Internet ?",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "ecaecf7865d8787e": {
+      "text": "Pour que l'ampoule s'allume, le circuit doit être fermé et former une... Écris le mot.",
+      "ms": 6000,
+      "cat": "enonce"
+    },
+    "344c85868f588960": {
+      "text": "Pour séparer le sable de l'eau, on verse le mélange dans un... Écris le mot.",
+      "ms": 6320,
+      "cat": "enonce"
+    },
+    "ec32fb53156406a8": {
+      "text": "Pour trouver son chemin dans une ville, qu'est-ce qu'on regarde ?",
+      "ms": 3600,
+      "cat": "enonce"
+    },
+    "c6d041e1fcf940a6": {
+      "text": "Pour être en forme, que faut-il faire chaque jour ?",
+      "ms": 3440,
+      "cat": "enonce"
+    },
+    "b7f7aa887cfccde9": {
+      "text": "Pourquoi fait-il jour puis nuit ?",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "69f3c1b97b3cb47c": {
+      "text": "Pourquoi faut-il faire des pauses devant un écran ?",
+      "ms": 2960,
+      "cat": "enonce"
+    },
+    "8001fc5239d274a3": {
+      "text": "Qu'est-ce qu'on voit souvent dans le ciel la nuit ?",
+      "ms": 2960,
+      "cat": "enonce"
+    },
+    "e88217f213edf275": {
+      "text": "Qu'est-ce qui aide la plante à grandir ?",
+      "ms": 2080,
+      "cat": "enonce"
+    },
+    "6b14f4bed9d3e6b2": {
+      "text": "Qu'est-ce qui couvre la plus grande partie de la Terre ?",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "5d83ecd51e514ff4": {
+      "text": "Qu'est-ce qui garde toujours sa forme ?",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "ecb212e4b8680381": {
+      "text": "Qu'est-ce qui n'est pas vivant ?",
+      "ms": 2000,
+      "cat": "enonce"
+    },
+    "fe5c9c633c771f86": {
+      "text": "Qu'est-ce qui soutient ton corps et te tient debout ?",
+      "ms": 3040,
+      "cat": "enonce"
+    },
+    "36b0f52949b6cba9": {
+      "text": "Qu'est-ce qui te permet de bouger et de plier ton bras ?",
+      "ms": 2960,
+      "cat": "enonce"
+    },
+    "4c0c49740840b849": {
+      "text": "Qu'est-ce qui vient avant dans la journée ?",
+      "ms": 2480,
+      "cat": "enonce"
+    },
+    "fd7e4aae0c9d5c94": {
+      "text": "Qu'est-ce qui éclaire le ciel le jour ?",
+      "ms": 2160,
+      "cat": "enonce"
+    },
+    "2bc54a019b199a4c": {
+      "text": "Qu'y a-t-il dans un ballon de baudruche gonflé ?",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "0a730127b8e22c31": {
+      "text": "Qu'y a-t-il tout au début de la vie d'une poule ?",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "b22b864cf0f91930": {
+      "text": "Quand il fait nuit chez nous, de l'autre côté de la Terre, il fait...",
+      "ms": 4400,
+      "cat": "enonce"
+    },
+    "186feff34b7bd407": {
+      "text": "Quand l'air bouge dehors, on l'appelle le... Écris le mot.",
+      "ms": 3760,
+      "cat": "enonce"
+    },
+    "6aaa1fd2280c26f4": {
+      "text": "Quand l'eau devient très froide, en quoi se transforme-t-elle ?",
+      "ms": 3600,
+      "cat": "enonce"
+    },
+    "2ce4f49f266cda3d": {
+      "text": "Quand le sucre se mélange complètement à l'eau et disparaît, on dit qu'il se... Écris le mot.",
+      "ms": 5600,
+      "cat": "enonce"
+    },
+    "0c85a2d9e68f6319": {
+      "text": "Quand les deux plateaux d'une balance sont au même niveau, on dit qu'elle est en... Écris le mot.",
+      "ms": 5440,
+      "cat": "enonce"
+    },
+    "8ba8879b9a21fb44": {
+      "text": "Quand on chauffe de l'eau très fort, en quoi se transforme-t-elle ?",
+      "ms": 4000,
+      "cat": "enonce"
+    },
+    "9aab0ce1afb8fe5d": {
+      "text": "Quand on mélange de l'eau et de l'huile, que se passe-t-il ?",
+      "ms": 3520,
+      "cat": "enonce"
+    },
+    "09ff514c4c39e590": {
+      "text": "Quand tu souffles dans l'eau avec une paille, que vois-tu ?",
+      "ms": 3040,
+      "cat": "enonce"
+    },
+    "8bccf31c2ef991f5": {
+      "text": "Que faut-il faire avant d'utiliser longtemps une tablette ?",
+      "ms": 3280,
+      "cat": "enonce"
+    },
+    "4963c031658c8e67": {
+      "text": "Que faut-il faire pour garder des dents en bonne santé ?",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "d6a577e8c23305d6": {
+      "text": "Que font tous les êtres vivants, du bébé à l'adulte ?",
+      "ms": 3520,
+      "cat": "enonce"
+    },
+    "863026ad8e05e22f": {
+      "text": "Que se passe-t-il pour une plante qui ne reçoit ni eau ni lumière ?",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "a4b25ead1e18e089": {
+      "text": "Quel est le plus long fleuve de France ?",
+      "ms": 2880,
+      "cat": "enonce"
+    },
+    "fbbc48a1737f8459": {
+      "text": "Quel fleuve traverse Paris ?",
+      "ms": 1920,
+      "cat": "enonce"
+    },
+    "3b9bef3c66c22c2b": {
+      "text": "Quel jour vient juste après le lundi ?",
+      "ms": 2480,
+      "cat": "enonce"
+    },
+    "fb7bb0096fe0352c": {
+      "text": "Quel objet sert à savoir l'heure ?",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "9f03451395d25f84": {
+      "text": "Quel objet sert à se déplacer ?",
+      "ms": 2080,
+      "cat": "enonce"
+    },
+    "6b7e181e977126d8": {
+      "text": "Quelle est la capitale de la France ?",
+      "ms": 2240,
+      "cat": "enonce"
+    },
+    "d4c894c4a719002f": {
+      "text": "Quelle est la forme de la Terre ?",
+      "ms": 1840,
+      "cat": "enonce"
+    },
+    "00c15c2a9dbcf01e": {
+      "text": "Quelle grande ville de France est au bord de la mer Méditerranée ?",
+      "ms": 3920,
+      "cat": "enonce"
+    },
+    "ef4d1ee9e249926c": {
+      "text": "Qui est le plus âgé dans une famille ?",
+      "ms": 2240,
+      "cat": "enonce"
+    },
+    "633236da31b44b13": {
+      "text": "Range ces moments d'une journée d'école dans l'ordre.",
+      "ms": 2960,
+      "cat": "enonce"
+    },
+    "6dfcc55456f214f7": {
+      "text": "Range ces trois mots dans l'ordre du temps.",
+      "ms": 2480,
+      "cat": "enonce"
+    },
+    "ce026636d102b45e": {
+      "text": "Range chaque changement avec son résultat.",
+      "ms": 2640,
+      "cat": "enonce"
+    },
+    "9ddb0aeec843c18e": {
+      "text": "Range chaque chose au bon endroit : vivante ou non vivante.",
+      "ms": 4160,
+      "cat": "enonce"
+    },
+    "23c2272975139055": {
+      "text": "Range chaque objet avec ce à quoi il sert.",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "e093493ee6adea2a": {
+      "text": "Range chaque objet avec sa fonction.",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "59fcee3a5d912124": {
+      "text": "Range chaque partie du corps avec ce qu'elle sert à faire.",
+      "ms": 3520,
+      "cat": "enonce"
+    },
+    "f35a6648428a3529": {
+      "text": "Range dans l'ordre la vie d'une plante, de la graine au fruit.",
+      "ms": 4000,
+      "cat": "enonce"
+    },
+    "7c1e59cd5f52b371": {
+      "text": "Range dans l'ordre la vie d'une plante, de la graine à la fleur.",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "1980e6aa6bf1c663": {
+      "text": "Range dans l'ordre la vie de la grenouille.",
+      "ms": 2640,
+      "cat": "enonce"
+    },
+    "df45aabd4f51bf2d": {
+      "text": "Range dans l'ordre la vie de la poule, du début à la fin.",
+      "ms": 3680,
+      "cat": "enonce"
+    },
+    "694986750e93ec83": {
+      "text": "Range dans l'ordre la vie du papillon.",
+      "ms": 2240,
+      "cat": "enonce"
+    },
+    "a6a932a66c70989d": {
+      "text": "Range dans l'ordre les moments d'une journée.",
+      "ms": 2720,
+      "cat": "enonce"
+    },
+    "a47a8f77b152da3b": {
+      "text": "Range dans l'ordre les étapes pour faire un gâteau.",
+      "ms": 3040,
+      "cat": "enonce"
+    },
+    "e18539ad9faf7014": {
+      "text": "Range dans l'ordre toutes les étapes de la vie de la grenouille.",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "21201106d8814fdd": {
+      "text": "Range l'eau du plus froid au plus chaud.",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "9d2524bf37823b04": {
+      "text": "Range la chaîne alimentaire : qui est mangé par qui. Commence par la plante.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "a65aaf2059265de7": {
+      "text": "Range la chaîne alimentaire, du début à la fin.",
+      "ms": 3040,
+      "cat": "enonce"
+    },
+    "808460f9d284fc79": {
+      "text": "Range la chaîne alimentaire. Commence par la plante.",
+      "ms": 3600,
+      "cat": "enonce"
+    },
+    "93551cc2a860d873": {
+      "text": "Range la famille du plus âgé au plus jeune.",
+      "ms": 2880,
+      "cat": "enonce"
+    },
+    "aa67c87913f0b910": {
+      "text": "Range les générations, de la plus ancienne à la plus récente.",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "50e1c397f6778a33": {
+      "text": "Range les moments de la journée dans l'ordre.",
+      "ms": 2400,
+      "cat": "enonce"
+    },
+    "1d5aeb1bac17d53d": {
+      "text": "Range les saisons dans l'ordre, en commençant par le printemps, quand la nature se réveille.",
+      "ms": 5520,
+      "cat": "enonce"
+    },
+    "e1b2f67f50d65f0a": {
+      "text": "Range les âges de la vie dans l'ordre.",
+      "ms": 2400,
+      "cat": "enonce"
+    },
+    "74b02943b41df6ad": {
+      "text": "Regarde le circuit. L'interrupteur est fermé. L'ampoule s'allume-t-elle ?",
+      "ms": 5040,
+      "cat": "enonce"
+    },
+    "c1c096c0415e48d1": {
+      "text": "Regarde le circuit. L'interrupteur est ouvert. L'ampoule s'allume-t-elle ?",
+      "ms": 5680,
+      "cat": "enonce"
+    },
+    "c67f6a677c2bbb9b": {
+      "text": "Regarde le circuit. Un fil est coupé. L'ampoule s'allume-t-elle ?",
+      "ms": 5360,
+      "cat": "enonce"
+    },
+    "9249a414e40bfc23": {
+      "text": "Rester très longtemps devant un écran, c'est...",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "fe953dfc239f1838": {
+      "text": "Si une personne inconnue t'écrit sur un écran, que fais-tu ?",
+      "ms": 3760,
+      "cat": "enonce"
+    },
+    "bc78bcf9a272b25d": {
+      "text": "Sur la rose des vents, clique sur le nord.",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "af49a748466b20d5": {
+      "text": "Sur la rose des vents, clique sur le sud.",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "2f2484eed6bb05fe": {
+      "text": "Sur le calendrier, clique sur la colonne du mercredi.",
+      "ms": 3360,
+      "cat": "enonce"
+    },
+    "6c8603f5b4d3f879": {
+      "text": "Sur le calendrier, clique sur la colonne du samedi.",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "6a5cf13ceb69690c": {
+      "text": "Sur un plan, comment voit-on les objets ?",
+      "ms": 3040,
+      "cat": "enonce"
+    },
+    "3563d95f3e0dde01": {
+      "text": "Sur un plan, le petit cadre qui explique les symboles et les couleurs s'appelle...",
+      "ms": 5120,
+      "cat": "enonce"
+    },
+    "358dec2345cbb24b": {
+      "text": "Sur une balance, que fait le plateau le plus lourd ?",
+      "ms": 3600,
+      "cat": "enonce"
+    },
+    "83ec8645b6185952": {
+      "text": "Sur une bascule, qui descend ?",
+      "ms": 1840,
+      "cat": "enonce"
+    },
+    "81a891005d001f0f": {
+      "text": "Sur une carte, où se trouve toujours le nord ?",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "9d11b26d7b23237b": {
+      "text": "Tous tes os ensemble forment ton... Écris le mot.",
+      "ms": 3680,
+      "cat": "enonce"
+    },
+    "95c0890a52f2ebba": {
+      "text": "Tu mets du sable dans l'eau. Que fait le sable ?",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "3204be58dbe6de9a": {
+      "text": "Tu mets du sucre dans l'eau et tu remues. Que se passe-t-il ?",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "543dcfe0dc584cae": {
+      "text": "Un animal qui mange des plantes et de la viande, comment s'appelle-t-il ?",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "b95bef40ce05d0e1": {
+      "text": "Un dessin qui montre une ville vue de très haut, comme si on volait, s'appelle...",
+      "ms": 5040,
+      "cat": "enonce"
+    },
+    "cbba0d12d3de4f99": {
+      "text": "Un endroit avec beaucoup d'immeubles, de rues et de magasins, c'est...",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "2c89ca1b20d36708": {
+      "text": "Un endroit avec des champs, des fermes et des animaux, c'est...",
+      "ms": 4160,
+      "cat": "enonce"
+    },
+    "f85b8baf06cfc4fe": {
+      "text": "Un gaz qu'on respire et qui est partout autour de nous, c'est l'... Écris le mot.",
+      "ms": 4800,
+      "cat": "enonce"
+    },
+    "53adb50d39502113": {
+      "text": "Un glaçon, qu'est-ce que c'est ?",
+      "ms": 2080,
+      "cat": "enonce"
+    },
+    "f317f9788bb2909c": {
+      "text": "Un lapin mange de l'herbe. Quand un animal mange, on dit qu'il se... Écris le mot.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "162609e3c5cda01f": {
+      "text": "Un liquide versé dans une bouteille, que fait-il ?",
+      "ms": 3360,
+      "cat": "enonce"
+    },
+    "b941e4e51c1bec7e": {
+      "text": "Un mélange où on ne voit plus ce qu'on a ajouté s'appelle...",
+      "ms": 3680,
+      "cat": "enonce"
+    },
+    "20077d6accb5feb4": {
+      "text": "Un paysage avec de hauts sommets parfois couverts de neige, c'est...",
+      "ms": 4480,
+      "cat": "enonce"
+    },
+    "accc02a1362a1972": {
+      "text": "Un paysage avec de très hauts sommets s'appelle la... Écris le mot.",
+      "ms": 4640,
+      "cat": "enonce"
+    },
+    "6b3210ac092fff2f": {
+      "text": "Un repas équilibré contient des fruits et des... Écris le mot.",
+      "ms": 4000,
+      "cat": "enonce"
+    },
+    "59c68cd4f7c871a8": {
+      "text": "Un sac en plastique gonflé puis fermé est...",
+      "ms": 3040,
+      "cat": "enonce"
+    },
+    "0321cd291b684c51": {
+      "text": "Un très grand morceau de terre sur la Terre s'appelle un...",
+      "ms": 3520,
+      "cat": "enonce"
+    },
+    "f6a24119c307a860": {
+      "text": "Un être vivant naît, grandit, se nourrit, se reproduit, puis à la fin de sa vie il... Écris le mot.",
+      "ms": 7760,
+      "cat": "enonce"
+    },
+    "f47b427e52ac4c99": {
+      "text": "Une balance est équilibrée quand les deux côtés ont...",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "66bd83328dca03f9": {
+      "text": "Une petite reproduction en volume d'une maison ou d'une ville s'appelle...",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "494d30c087af371a": {
+      "text": "Une photo prise depuis un avion, qui montre le sol vu d'en haut, s'appelle une photo...",
+      "ms": 6240,
+      "cat": "enonce"
+    },
+    "f2fbf131b11444d0": {
+      "text": "Une plante fabrique sa nourriture grâce à la lumière du... Écris le mot.",
+      "ms": 4880,
+      "cat": "enonce"
+    },
+    "9832d24953305f1c": {
+      "text": "Une très grande étendue d'eau salée s'appelle un...",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "d42097f57b66cc8f": {
+      "text": "À quoi sert un levier ?",
+      "ms": 1600,
+      "cat": "enonce"
+    },
+    "d7d15edc4cce406b": {
+      "text": "À quoi sert un parapluie ?",
+      "ms": 2000,
+      "cat": "enonce"
+    },
+    "7f9e840c85ba1f51": {
+      "text": "À quoi sert une paire de ciseaux ?",
+      "ms": 2160,
+      "cat": "enonce"
+    },
+    "ce7e71002396b059": {
+      "text": "Ajoute le préfixe dé devant le mot faire pour dire le contraire. Écris le mot.",
+      "ms": 5600,
+      "cat": "enonce"
+    },
+    "7e03649224ac29dd": {
+      "text": "Ajoute le préfixe re devant le mot faire pour dire faire encore. Écris le mot.",
+      "ms": 5600,
+      "cat": "enonce"
+    },
+    "7f5e900ef22d8766": {
+      "text": "Ajoute le préfixe re devant le mot lire pour dire lire encore. Écris le mot.",
+      "ms": 5360,
+      "cat": "enonce"
+    },
+    "9b8952f63224353c": {
+      "text": "As-tu ___ fini ton travail ?",
+      "ms": 2160,
+      "cat": "enonce"
+    },
+    "04a553bb98e3b6e7": {
+      "text": "As-tu vu le chat",
+      "ms": 1280,
+      "cat": "enonce"
+    },
+    "1cfbd082708a8d16": {
+      "text": "Au loin brille une étoile.",
+      "ms": 1760,
+      "cat": "enonce"
+    },
+    "0c74e57e91aab767": {
+      "text": "Au restaurant, le serveur apporte la carte.",
+      "ms": 3360,
+      "cat": "enonce"
+    },
+    "ec8d2035ff4ef1c5": {
+      "text": "Autrefois, il parlait doucement.",
+      "ms": 2160,
+      "cat": "enonce"
+    },
+    "be848f02799e7ed0": {
+      "text": "Autrefois, ils aimaient les animaux.",
+      "ms": 2160,
+      "cat": "enonce"
+    },
+    "328fbd8665d92633": {
+      "text": "Autrefois, ils avaient faim.",
+      "ms": 2320,
+      "cat": "enonce"
+    },
+    "e931f3ba9bac883c": {
+      "text": "Autrefois, ils donnaient un cadeau.",
+      "ms": 2880,
+      "cat": "enonce"
+    },
+    "303a36db208ed17c": {
+      "text": "Autrefois, ils finissaient le jeu.",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "36e89b8bcbc45562": {
+      "text": "Autrefois, ils plaçaient les pions.",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "493da09bb55e8515": {
+      "text": "Autrefois, ils trouvaient un trésor.",
+      "ms": 2160,
+      "cat": "enonce"
+    },
+    "939012638f8e5614": {
+      "text": "Autrefois, je donnais un cadeau.",
+      "ms": 2240,
+      "cat": "enonce"
+    },
+    "7023f0c3785b6f4e": {
+      "text": "Autrefois, je pouvais courir vite.",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "02a87d64dcf84c7c": {
+      "text": "Autrefois, je trouvais un trésor.",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "9a69468f64658cc4": {
+      "text": "Autrefois, la fille faisait un gâteau.",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "938de733169f4ab4": {
+      "text": "Autrefois, la fille plaçait les pions.",
+      "ms": 3040,
+      "cat": "enonce"
+    },
+    "1b062ca6f192c959": {
+      "text": "Autrefois, la fille trouvait un trésor.",
+      "ms": 2960,
+      "cat": "enonce"
+    },
+    "6a45975b2bb7e8b5": {
+      "text": "Autrefois, le garçon avait faim.",
+      "ms": 2640,
+      "cat": "enonce"
+    },
+    "852ba786a8cd73f9": {
+      "text": "Autrefois, le garçon venait avec nous.",
+      "ms": 3040,
+      "cat": "enonce"
+    },
+    "bb8819268e883942": {
+      "text": "Autrefois, les enfants trouvaient un trésor.",
+      "ms": 3680,
+      "cat": "enonce"
+    },
+    "8c55139c6c8c8be0": {
+      "text": "Autrefois, les oiseaux mangeaient une pomme.",
+      "ms": 3280,
+      "cat": "enonce"
+    },
+    "07a6eb0c9c7ddda8": {
+      "text": "Autrefois, les oiseaux regardaient les étoiles.",
+      "ms": 3760,
+      "cat": "enonce"
+    },
+    "022c8666a00edf64": {
+      "text": "Autrefois, nous chantions une chanson.",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "408fd6b6873ccd5c": {
+      "text": "Autrefois, nous jouions au ballon.",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "251cfcf38575b6c0": {
+      "text": "Autrefois, nous trouvions un trésor.",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "db13f2eefc781836": {
+      "text": "Autrefois, tu mangeais une pomme.",
+      "ms": 2480,
+      "cat": "enonce"
+    },
+    "4f1186a745d9b8c8": {
+      "text": "Autrefois, tu parlais doucement.",
+      "ms": 2400,
+      "cat": "enonce"
+    },
+    "26c9fab74e4ac325": {
+      "text": "Autrefois, vous aviez faim.",
+      "ms": 1920,
+      "cat": "enonce"
+    },
+    "725215537af83b2a": {
+      "text": "Autrefois, vous chantiez une chanson.",
+      "ms": 3040,
+      "cat": "enonce"
+    },
+    "55ebb5ebcb57c22a": {
+      "text": "Autrefois, vous jouiez au ballon.",
+      "ms": 2640,
+      "cat": "enonce"
+    },
+    "a43f55d45b2c746f": {
+      "text": "Autrefois, vous parliez doucement.",
+      "ms": 1920,
+      "cat": "enonce"
+    },
+    "390b87623baa2990": {
+      "text": "Autrefois, vous regardiez les étoiles.",
+      "ms": 2640,
+      "cat": "enonce"
+    },
+    "e0ad3ba8f5c46b21": {
+      "text": "Bientôt, elles arriveront à la maison.",
+      "ms": 2640,
+      "cat": "enonce"
+    },
+    "aed2b32416144c5d": {
+      "text": "Ce groupe est au singulier ou au pluriel ?",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "8ce1565715f68a97": {
+      "text": "Ce groupe est masculin ou féminin ?",
+      "ms": 2640,
+      "cat": "enonce"
+    },
+    "528041580f4de588": {
+      "text": "Ce matin, le petit chien court vers son ami.",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "10e1f165bc710187": {
+      "text": "Ce matin, le petit chien…",
+      "ms": 1440,
+      "cat": "enonce"
+    },
+    "7df4d2303081b8c6": {
+      "text": "Ce sac est ___ lourd.",
+      "ms": 1600,
+      "cat": "enonce"
+    },
+    "13a9943a2b03a031": {
+      "text": "Ces oiseaux chantent dans l'arbre.",
+      "ms": 2000,
+      "cat": "enonce"
+    },
+    "87ecc8bf3d62a160": {
+      "text": "Cette phrase dit oui ou dit non ?",
+      "ms": 2000,
+      "cat": "enonce"
+    },
+    "bcee9d348bdcb99d": {
+      "text": "Cette phrase est à quelle forme ?",
+      "ms": 2240,
+      "cat": "enonce"
+    },
+    "0577e272ca691b51": {
+      "text": "Chaque fourmi travaille toute seule, sans s'occuper des autres. Réponds vrai ou faux.",
+      "ms": 5520,
+      "cat": "enonce"
+    },
+    "84b54d615a7cfc03": {
+      "text": "Choisis le mot bien écrit pour compléter la phrase.",
+      "ms": 3360,
+      "cat": "enonce"
+    },
+    "3d2c605dc3f9c630": {
+      "text": "Choisis le mot qui va bien dans la phrase.",
+      "ms": 2400,
+      "cat": "enonce"
+    },
+    "4af5aa4beb2f9876": {
+      "text": "Clique dans le texte sur le grand oiseau qui se promène sur de longues jambes rouges.",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "780985d90b3e86ff": {
+      "text": "Clique dans le texte sur le légume que la marraine demande d'aller chercher.",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "21d6b7cc38445886": {
+      "text": "Clique dans le texte sur le mot qui aide à comprendre que délicieux veut dire très bon.",
+      "ms": 4800,
+      "cat": "enonce"
+    },
+    "987ec70aef73dede": {
+      "text": "Clique dans le texte sur le mot qui aide à comprendre que le vent était très fort.",
+      "ms": 4560,
+      "cat": "enonce"
+    },
+    "ab292e818648e5a4": {
+      "text": "Clique dans le texte sur le mot qui aide à comprendre que sombre veut dire sans lumière.",
+      "ms": 4960,
+      "cat": "enonce"
+    },
+    "1f29f2795e377497": {
+      "text": "Clique dans le texte sur le mot qui dit ce que ressent Jacques, c'est-à-dire un grand...",
+      "ms": 4960,
+      "cat": "enonce"
+    },
+    "0099e4698834eeef": {
+      "text": "Clique dans le texte sur le mot qui dit où Nina range ses jouets.",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "dedebe1cc0233706": {
+      "text": "Clique dans le texte sur le mot qui dit où l'enfant comprend le mieux la vie des gens.",
+      "ms": 5200,
+      "cat": "enonce"
+    },
+    "f7c7342fbab4ce4b": {
+      "text": "Clique dans le texte sur le mot qui désigne celui qui dit de belles choses pour tromper.",
+      "ms": 4800,
+      "cat": "enonce"
+    },
+    "180a119f18f6f91a": {
+      "text": "Clique dans le texte sur le mot qui montre que Toby-Chien est impatient d'arriver.",
+      "ms": 4560,
+      "cat": "enonce"
+    },
+    "6c436a60fad56843": {
+      "text": "Clique dans le texte sur le mot qui montre que les deux sœurs s'aiment très fort.",
+      "ms": 4800,
+      "cat": "enonce"
+    },
+    "57963ab2120557b1": {
+      "text": "Clique dans le texte sur le nom de l'oiseau qui vient se poser sur la perche.",
+      "ms": 4640,
+      "cat": "enonce"
+    },
+    "1885e51a0c6cfd6c": {
+      "text": "Clique dans le texte sur le petit animal qui vient aider le lion.",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "3f269b3649bc61d3": {
+      "text": "Clique dans le texte sur le petit cours d'eau qui passe près de la maison.",
+      "ms": 3920,
+      "cat": "enonce"
+    },
+    "69a82a57e743882f": {
+      "text": "Clique dans le texte sur le récipient à long col dans lequel la cigogne sert le repas.",
+      "ms": 5600,
+      "cat": "enonce"
+    },
+    "ce1a38b7690c46e0": {
+      "text": "Clique dans le texte sur les petites plantes colorées que Florine met dans ses cheveux.",
+      "ms": 5440,
+      "cat": "enonce"
+    },
+    "638f2bf09db6b94b": {
+      "text": "Clique sur l'adjectif.",
+      "ms": 1840,
+      "cat": "enonce"
+    },
+    "9c068592d1c37eea": {
+      "text": "Clique sur l'arbre dont on voit la silhouette dans l'étang.",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "f268ad5cf42bd7ee": {
+      "text": "Clique sur le déterminant.",
+      "ms": 1920,
+      "cat": "enonce"
+    },
+    "8e9b31f01f6d7873": {
+      "text": "Clique sur le mot de la même famille que chant.",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "e5d8b4d3eb5b01a9": {
+      "text": "Clique sur le mot de la même famille que fort.",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "ca368efabedddcac": {
+      "text": "Clique sur le mot de la même famille que glace.",
+      "ms": 3360,
+      "cat": "enonce"
+    },
+    "5791f6d207fb6146": {
+      "text": "Clique sur le mot de la même famille que lent.",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "c16b604597493328": {
+      "text": "Clique sur le mot de la même famille que mer.",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "de5c476579896ff6": {
+      "text": "Clique sur le mot qui commence par le préfixe dé.",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "2dc403b8ab2d6fad": {
+      "text": "Clique sur le mot qui commence par le préfixe re.",
+      "ms": 3360,
+      "cat": "enonce"
+    },
+    "a478c14437af832b": {
+      "text": "Clique sur le mot qui dit le contraire de possible.",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "c51166c1e314ad19": {
+      "text": "Clique sur le mot qui dit à qui est le livre.",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "7a9988fa1dced059": {
+      "text": "Clique sur le mot qui doit commencer par une majuscule.",
+      "ms": 3600,
+      "cat": "enonce"
+    },
+    "bdb345f3ca34a902": {
+      "text": "Clique sur le mot qui n'est pas de la même famille que les autres.",
+      "ms": 3600,
+      "cat": "enonce"
+    },
+    "f4ac4d01231729f7": {
+      "text": "Clique sur le mot qui n'est pas un animal.",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "b777bb29998c67eb": {
+      "text": "Clique sur le mot qui n'est pas un fruit.",
+      "ms": 2480,
+      "cat": "enonce"
+    },
+    "9815d5f6df7381a5": {
+      "text": "Clique sur le mot qui n'est pas un légume.",
+      "ms": 2320,
+      "cat": "enonce"
+    },
+    "9da45c755c386a49": {
+      "text": "Clique sur le mot qui n'est pas un vêtement.",
+      "ms": 2480,
+      "cat": "enonce"
+    },
+    "a6c0572c55760953": {
+      "text": "Clique sur le mot qui n'est pas une couleur.",
+      "ms": 2400,
+      "cat": "enonce"
+    },
+    "68c9ae7d27865aa4": {
+      "text": "Clique sur le mot qui se termine par ette et veut dire petit.",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "6cc7813a5580e82d": {
+      "text": "Clique sur le mot qui se termine par eur, la personne qui fait l'action.",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "55bce652dc2bda2a": {
+      "text": "Clique sur le mot qui vient en premier dans le dictionnaire.",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "f8a4c006ef214afd": {
+      "text": "Clique sur le nom le plus important du groupe.",
+      "ms": 2720,
+      "cat": "enonce"
+    },
+    "315aec20ac778f4a": {
+      "text": "Clique sur le nom.",
+      "ms": 1200,
+      "cat": "enonce"
+    },
+    "ac07731a170e3eee": {
+      "text": "Clique sur le pronom.",
+      "ms": 1360,
+      "cat": "enonce"
+    },
+    "8bc5210efa83d57c": {
+      "text": "Clique sur le sujet.",
+      "ms": 1440,
+      "cat": "enonce"
+    },
+    "da6059d594b84a0a": {
+      "text": "Clique sur le verbe.",
+      "ms": 1440,
+      "cat": "enonce"
+    },
+    "8c1a3b9205c56375": {
+      "text": "Combien d'enfants y a-t-il en tout dans la famille ?",
+      "ms": 3040,
+      "cat": "enonce"
+    },
+    "6117759bbdcf8ff6": {
+      "text": "Combien de brebis Catherine garde-t-elle ?",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "27e225a59dc95f63": {
+      "text": "Combien la maman renarde a-t-elle de petits ?",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "6b6f541c8c08ef57": {
+      "text": "Comme c'est beau !",
+      "ms": 1040,
+      "cat": "enonce"
+    },
+    "fe57a7fe40a24d6b": {
+      "text": "Comme tu as grandi !",
+      "ms": 1440,
+      "cat": "enonce"
+    },
+    "86e807af1b27d5a3": {
+      "text": "Comment la cuisinière appelle-t-elle le petit chat ?",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "c380f4d37550ed7c": {
+      "text": "Comment s'appelle le chat du gardien du phare ?",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "776ab67e784d7c13": {
+      "text": "Comment s'appelle le petit âne dans ce texte ?",
+      "ms": 2720,
+      "cat": "enonce"
+    },
+    "c6fa9b71b99e4863": {
+      "text": "Comment s'appelle le plus petit garçon de la famille ?",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "67697c6145e055af": {
+      "text": "Comment s'entendent les deux sœurs ?",
+      "ms": 1840,
+      "cat": "enonce"
+    },
+    "7361fc7b94d892c3": {
+      "text": "Comment se passe la promenade des enfants ?",
+      "ms": 2480,
+      "cat": "enonce"
+    },
+    "37a916a848cf1475": {
+      "text": "Comment se sent Maël ?",
+      "ms": 1760,
+      "cat": "enonce"
+    },
+    "8cac53f79a3e31cd": {
+      "text": "Comment se sent sans doute Lucas ?",
+      "ms": 2480,
+      "cat": "enonce"
+    },
+    "ed063085c514b052": {
+      "text": "Continue l'histoire en une belle phrase.",
+      "ms": 2720,
+      "cat": "enonce"
+    },
+    "b4458a30459090b7": {
+      "text": "D'abord je me lève, ___ je m'habille.",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "bd00442f26438308": {
+      "text": "Dans ce texte, qu'est-ce qu'un festin ?",
+      "ms": 2480,
+      "cat": "enonce"
+    },
+    "dcf75bcdc944b493": {
+      "text": "Dans ce texte, qu'est-ce qu'un garde-chasse ?",
+      "ms": 2880,
+      "cat": "enonce"
+    },
+    "334aa0a9681ccdd7": {
+      "text": "Dans ce texte, qu'est-ce qu'un monceau ?",
+      "ms": 2480,
+      "cat": "enonce"
+    },
+    "005c18e2b72a208f": {
+      "text": "Dans ce texte, qu'est-ce qu'un ruisseau ?",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "564ee8e67660e9e6": {
+      "text": "Dans ce texte, qu'est-ce qu'une aigrette ?",
+      "ms": 2320,
+      "cat": "enonce"
+    },
+    "9e92a8a2ac02bfe0": {
+      "text": "Dans ce texte, que sont des pierreries ?",
+      "ms": 2480,
+      "cat": "enonce"
+    },
+    "41006f824d2c3a2d": {
+      "text": "Dans ce texte, que sont des rets ?",
+      "ms": 2000,
+      "cat": "enonce"
+    },
+    "0c2e027054becbb4": {
+      "text": "Dans ce texte, que veut dire carillonner ?",
+      "ms": 2720,
+      "cat": "enonce"
+    },
+    "6c49541ab7c65b69": {
+      "text": "Dans ce texte, que veut dire contempler ?",
+      "ms": 2480,
+      "cat": "enonce"
+    },
+    "af8ae6fcbfbf6bc0": {
+      "text": "Dans ce texte, que veut dire glissante ?",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "eb45f01e3985c40c": {
+      "text": "Dans ce texte, que veut dire guette ?",
+      "ms": 2240,
+      "cat": "enonce"
+    },
+    "7a6d2c78ae4181f9": {
+      "text": "Dans ce texte, que veut dire humé ?",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "2ba36e5807a164a7": {
+      "text": "Dans ce texte, que veut dire immobile ?",
+      "ms": 2720,
+      "cat": "enonce"
+    },
+    "cab13a314197d6cc": {
+      "text": "Dans ce texte, que veut dire le mot coffre ?",
+      "ms": 2880,
+      "cat": "enonce"
+    },
+    "d27629b188207706": {
+      "text": "Dans ce texte, que veut dire leste ?",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "38523b0e244f7add": {
+      "text": "Dans ce texte, que veut dire luisant ?",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "c5ef6d8300b19956": {
+      "text": "Dans ce texte, que veut dire tout bas ?",
+      "ms": 2240,
+      "cat": "enonce"
     }
   },
   "keys": {
@@ -8891,6 +11016,431 @@
     "txt:c912bc9ea37f5d6d": "c912bc9ea37f5d6d",
     "txt:115c8d1d88758a21": "115c8d1d88758a21",
     "txt:b357aec14b22b1b2": "b357aec14b22b1b2",
-    "txt:05f08b868c823140": "05f08b868c823140"
+    "txt:05f08b868c823140": "05f08b868c823140",
+    "txt:65925eb10f498e36": "65925eb10f498e36",
+    "txt:6cc22a689b218bca": "6cc22a689b218bca",
+    "txt:a7fafe039098769c": "a7fafe039098769c",
+    "txt:d185b4f67d3f913a": "d185b4f67d3f913a",
+    "txt:3a58cc7066ea1900": "3a58cc7066ea1900",
+    "txt:49fd0c8db5769f3c": "49fd0c8db5769f3c",
+    "txt:0bc7d86934fd1c0c": "0bc7d86934fd1c0c",
+    "txt:b444b3cd14120502": "b444b3cd14120502",
+    "txt:9f1b6b4f73a65639": "9f1b6b4f73a65639",
+    "txt:4761faac9f373c03": "4761faac9f373c03",
+    "txt:4b739a8fc835b20c": "4b739a8fc835b20c",
+    "txt:5324f3b9c75d2dbf": "5324f3b9c75d2dbf",
+    "txt:0ec4d44f7e4824e3": "0ec4d44f7e4824e3",
+    "txt:7e74906e137f541e": "7e74906e137f541e",
+    "txt:3ed0e97010dbe817": "3ed0e97010dbe817",
+    "txt:5fdb51dfbb77a00b": "5fdb51dfbb77a00b",
+    "txt:11d34ccb4bf413f0": "11d34ccb4bf413f0",
+    "txt:c18a695f372ae86d": "c18a695f372ae86d",
+    "txt:a5c24e9b0fe5976d": "a5c24e9b0fe5976d",
+    "txt:fb26b161f192af29": "fb26b161f192af29",
+    "txt:3c1e25e99f6a368b": "3c1e25e99f6a368b",
+    "txt:fa86a3e93c4d97b8": "fa86a3e93c4d97b8",
+    "txt:89b3d573ae203b39": "89b3d573ae203b39",
+    "txt:eeebd40a381a9c8a": "eeebd40a381a9c8a",
+    "txt:38f2939bc99977b1": "38f2939bc99977b1",
+    "txt:778e6ce258c3d27d": "778e6ce258c3d27d",
+    "txt:8333998bfbe4e98c": "8333998bfbe4e98c",
+    "txt:18242c358a9077e2": "18242c358a9077e2",
+    "txt:125a563927204ac7": "125a563927204ac7",
+    "txt:643798c0e94ac62c": "643798c0e94ac62c",
+    "txt:353613834d0f46db": "353613834d0f46db",
+    "txt:fec1325da18ef797": "fec1325da18ef797",
+    "txt:29ea0a0aa2f83e2d": "29ea0a0aa2f83e2d",
+    "txt:9cc1d804207412c9": "9cc1d804207412c9",
+    "txt:d5051b42e1d45441": "d5051b42e1d45441",
+    "txt:d691d836fe61cbd1": "d691d836fe61cbd1",
+    "txt:4d406bea94a423ab": "4d406bea94a423ab",
+    "txt:eb278ea509197750": "eb278ea509197750",
+    "txt:5d2546699d750f87": "5d2546699d750f87",
+    "txt:13311c9b2b87cb4e": "13311c9b2b87cb4e",
+    "txt:5368b0908cf514e7": "5368b0908cf514e7",
+    "txt:2a8d141ed50b5e88": "2a8d141ed50b5e88",
+    "txt:56bd20bc6414cc4f": "56bd20bc6414cc4f",
+    "txt:797322cc6e671436": "797322cc6e671436",
+    "txt:ef740596d41fae2f": "ef740596d41fae2f",
+    "txt:5e8b32561b0a2030": "5e8b32561b0a2030",
+    "txt:341c18e4591dc6a6": "341c18e4591dc6a6",
+    "txt:33c0bc39884025db": "33c0bc39884025db",
+    "txt:c1477e34c9e879b2": "c1477e34c9e879b2",
+    "txt:8eee8e15b67c0ffd": "8eee8e15b67c0ffd",
+    "txt:4fbf5a1608c26ca8": "4fbf5a1608c26ca8",
+    "txt:3ada279798090364": "3ada279798090364",
+    "txt:eec84f9431bb7678": "eec84f9431bb7678",
+    "txt:9c597cd497fc20c5": "9c597cd497fc20c5",
+    "txt:8900715fabf34a97": "8900715fabf34a97",
+    "txt:6e3f859bd86d7d78": "6e3f859bd86d7d78",
+    "txt:c5acbaffc69b693a": "c5acbaffc69b693a",
+    "txt:0c0b1f16d4f0158b": "0c0b1f16d4f0158b",
+    "txt:d9c0f77f662c3a11": "d9c0f77f662c3a11",
+    "txt:3bf1a92154b02b50": "3bf1a92154b02b50",
+    "txt:75c2fb2a317f67a1": "75c2fb2a317f67a1",
+    "txt:e9e96d5a29844384": "e9e96d5a29844384",
+    "txt:f302df5b1593fd17": "f302df5b1593fd17",
+    "txt:ba64c43c27cc6266": "ba64c43c27cc6266",
+    "txt:000374bf10ba5c90": "000374bf10ba5c90",
+    "txt:21dda34cca7f149d": "21dda34cca7f149d",
+    "txt:f557d23449572c7a": "f557d23449572c7a",
+    "txt:656361733c789f30": "656361733c789f30",
+    "txt:64b67dc8ec30cf42": "64b67dc8ec30cf42",
+    "txt:eb0ac2bfbdfb45f0": "eb0ac2bfbdfb45f0",
+    "txt:503fd8e5b15d6c04": "503fd8e5b15d6c04",
+    "txt:2d36334499113927": "2d36334499113927",
+    "txt:b86f9a23ffad557a": "b86f9a23ffad557a",
+    "txt:37cfa5a459d2277d": "37cfa5a459d2277d",
+    "txt:348b44419cdc52df": "348b44419cdc52df",
+    "txt:3d96a86cd3f9a5c8": "3d96a86cd3f9a5c8",
+    "txt:965130d30cd2c1c4": "965130d30cd2c1c4",
+    "txt:9dbdda000b01a156": "9dbdda000b01a156",
+    "txt:9e95b95188d16d07": "9e95b95188d16d07",
+    "txt:d0b27eec3d18b290": "d0b27eec3d18b290",
+    "txt:617dd6a329f01e5d": "617dd6a329f01e5d",
+    "txt:59ff7a973ef18cf8": "59ff7a973ef18cf8",
+    "txt:0b483499f24ab823": "0b483499f24ab823",
+    "txt:ab64bed4d93fd35d": "ab64bed4d93fd35d",
+    "txt:1dde42ac97360b80": "1dde42ac97360b80",
+    "txt:a348ab8ea6b95962": "a348ab8ea6b95962",
+    "txt:de34c0304b55eb2a": "de34c0304b55eb2a",
+    "txt:bea0684d1782fa59": "bea0684d1782fa59",
+    "txt:069905d11d059a04": "069905d11d059a04",
+    "txt:327e51dc71eb4b21": "327e51dc71eb4b21",
+    "txt:6d56f869e95bc8ac": "6d56f869e95bc8ac",
+    "txt:0d24442e9046988e": "0d24442e9046988e",
+    "txt:dc0c8f1affa0a0c5": "dc0c8f1affa0a0c5",
+    "txt:87f29cd56b1eb0ba": "87f29cd56b1eb0ba",
+    "txt:9321b7a3902c46fc": "9321b7a3902c46fc",
+    "txt:c74d42f58c309906": "c74d42f58c309906",
+    "txt:799d32f3903b095c": "799d32f3903b095c",
+    "txt:490096c08ad58055": "490096c08ad58055",
+    "txt:df995df9f42eb54f": "df995df9f42eb54f",
+    "txt:f6870af03bf97538": "f6870af03bf97538",
+    "txt:0795abee079d218a": "0795abee079d218a",
+    "txt:d59a8fd93b01d917": "d59a8fd93b01d917",
+    "txt:34671433eb3c3ab0": "34671433eb3c3ab0",
+    "txt:e1f23342d5842471": "e1f23342d5842471",
+    "txt:56858f6b1909c992": "56858f6b1909c992",
+    "txt:001da64d8888a0d4": "001da64d8888a0d4",
+    "txt:8f818fe2c67c8b7d": "8f818fe2c67c8b7d",
+    "txt:44ff7705e5b861d5": "44ff7705e5b861d5",
+    "txt:7d4788c2e8a36971": "7d4788c2e8a36971",
+    "txt:82aac7c4e9357c55": "82aac7c4e9357c55",
+    "txt:5b3910dda86b5c34": "5b3910dda86b5c34",
+    "txt:ca5c69833e10374e": "ca5c69833e10374e",
+    "txt:085ee2b210f4935e": "085ee2b210f4935e",
+    "txt:65a55641513bc88e": "65a55641513bc88e",
+    "txt:70e6b7ef69ebdf31": "70e6b7ef69ebdf31",
+    "txt:f7d83935b7bfa072": "f7d83935b7bfa072",
+    "txt:a30e6d9dc5f400a3": "a30e6d9dc5f400a3",
+    "txt:6f61223fb032ed42": "6f61223fb032ed42",
+    "txt:f03a332276ab16e1": "f03a332276ab16e1",
+    "txt:0f6228c31e82f2ff": "0f6228c31e82f2ff",
+    "txt:8ab6bf95a9c5efb9": "8ab6bf95a9c5efb9",
+    "txt:8747d0f874e51dec": "8747d0f874e51dec",
+    "txt:45273395c9888500": "45273395c9888500",
+    "txt:4b134019a1568ea5": "4b134019a1568ea5",
+    "txt:008c43a8790293fc": "008c43a8790293fc",
+    "txt:8fd90d354039edc4": "8fd90d354039edc4",
+    "txt:702ca9a46bf4cacb": "702ca9a46bf4cacb",
+    "txt:67d1bee56db543bd": "67d1bee56db543bd",
+    "txt:6e4528722120cbe5": "6e4528722120cbe5",
+    "txt:cd0691d88ba9d456": "cd0691d88ba9d456",
+    "txt:46d8e37517bda52c": "46d8e37517bda52c",
+    "txt:fd0b7fd7e3267cdd": "fd0b7fd7e3267cdd",
+    "txt:f7cfc14b0618e4a5": "f7cfc14b0618e4a5",
+    "txt:31cf98088916c17e": "31cf98088916c17e",
+    "txt:6ac5d7893439d530": "6ac5d7893439d530",
+    "txt:357f5cd1c4a8c2c2": "357f5cd1c4a8c2c2",
+    "txt:f78e50f5ed491786": "f78e50f5ed491786",
+    "txt:0506f8fed2beba4c": "0506f8fed2beba4c",
+    "txt:c8eaef784b1d9537": "c8eaef784b1d9537",
+    "txt:41b650ffe111b68c": "41b650ffe111b68c",
+    "txt:5aba16c87fe38581": "5aba16c87fe38581",
+    "txt:a849d44f49308bd5": "a849d44f49308bd5",
+    "txt:c87848bd571f229b": "c87848bd571f229b",
+    "txt:84990e5fa972b606": "84990e5fa972b606",
+    "txt:3b7c2188b0a12ddc": "3b7c2188b0a12ddc",
+    "txt:c5c67bf595ca7d29": "c5c67bf595ca7d29",
+    "txt:5ca3cb552584b19b": "5ca3cb552584b19b",
+    "txt:a1de7b0341ec1a06": "a1de7b0341ec1a06",
+    "txt:4609313d4efa3ed8": "4609313d4efa3ed8",
+    "txt:f0ad416937a6599e": "f0ad416937a6599e",
+    "txt:6e8a30160b10a641": "6e8a30160b10a641",
+    "txt:378ec094551ea726": "378ec094551ea726",
+    "txt:75284e9fcbac7cb9": "75284e9fcbac7cb9",
+    "txt:e41e65d6625b1325": "e41e65d6625b1325",
+    "txt:040c721f3ac08a33": "040c721f3ac08a33",
+    "txt:81e332775ed25bab": "81e332775ed25bab",
+    "txt:e1d8e92770373646": "e1d8e92770373646",
+    "txt:9c010ed661823688": "9c010ed661823688",
+    "txt:752c560e05551eb8": "752c560e05551eb8",
+    "txt:d76055bd4f3ab9d8": "d76055bd4f3ab9d8",
+    "txt:dfd1f736f6749f85": "dfd1f736f6749f85",
+    "txt:94a43c697a6300a7": "94a43c697a6300a7",
+    "txt:2b1536cb0d38eac4": "2b1536cb0d38eac4",
+    "txt:dd820a01d01d6fec": "dd820a01d01d6fec",
+    "txt:52125fa7d09e700d": "52125fa7d09e700d",
+    "txt:fadf4a2d585dba41": "fadf4a2d585dba41",
+    "txt:1d1a1e7e258d8ff0": "1d1a1e7e258d8ff0",
+    "txt:1ee169b21d8e0b46": "1ee169b21d8e0b46",
+    "txt:88a6105309c2e4b1": "88a6105309c2e4b1",
+    "txt:c03058fa1feaa9ad": "c03058fa1feaa9ad",
+    "txt:ba6c61a868a4d2d0": "ba6c61a868a4d2d0",
+    "txt:deba5a1ca14e5f5e": "deba5a1ca14e5f5e",
+    "txt:036683b3586584ca": "036683b3586584ca",
+    "txt:a850cf55eaf30e4a": "a850cf55eaf30e4a",
+    "txt:1cc8140f4f5041bf": "1cc8140f4f5041bf",
+    "txt:2548a3f507aea8a3": "2548a3f507aea8a3",
+    "txt:a452fffb41e249bf": "a452fffb41e249bf",
+    "txt:b70facf99771706a": "b70facf99771706a",
+    "txt:e4da70d566f757ed": "e4da70d566f757ed",
+    "txt:19b940e1b554c13a": "19b940e1b554c13a",
+    "txt:8ecb1e62a5966183": "8ecb1e62a5966183",
+    "txt:645a83c7c152d466": "645a83c7c152d466",
+    "txt:34c15ec866605a4e": "34c15ec866605a4e",
+    "txt:c8eb81b43b323e81": "c8eb81b43b323e81",
+    "txt:20ce6a2d221fd17b": "20ce6a2d221fd17b",
+    "txt:be30b35f80688664": "be30b35f80688664",
+    "txt:88563afc3995d35d": "88563afc3995d35d",
+    "txt:f0551a3909dfd022": "f0551a3909dfd022",
+    "txt:deacfc06ab7b0918": "deacfc06ab7b0918",
+    "txt:1c256f923199f150": "1c256f923199f150",
+    "txt:ff2ff10bc509f906": "ff2ff10bc509f906",
+    "txt:621e1e8370a43a8c": "621e1e8370a43a8c",
+    "txt:197aec35f851be27": "197aec35f851be27",
+    "txt:86b6049876a77b3b": "86b6049876a77b3b",
+    "txt:fab33fe37da65fff": "fab33fe37da65fff",
+    "txt:729eebbd81fbb8d4": "729eebbd81fbb8d4",
+    "txt:e38d8f77b1bb4347": "e38d8f77b1bb4347",
+    "txt:e12ec28bd15712ca": "e12ec28bd15712ca",
+    "txt:cb5886639681d043": "cb5886639681d043",
+    "txt:b7460bc905971150": "b7460bc905971150",
+    "txt:8c833989f9abde55": "8c833989f9abde55",
+    "txt:ecaecf7865d8787e": "ecaecf7865d8787e",
+    "txt:344c85868f588960": "344c85868f588960",
+    "txt:ec32fb53156406a8": "ec32fb53156406a8",
+    "txt:c6d041e1fcf940a6": "c6d041e1fcf940a6",
+    "txt:b7f7aa887cfccde9": "b7f7aa887cfccde9",
+    "txt:69f3c1b97b3cb47c": "69f3c1b97b3cb47c",
+    "txt:8001fc5239d274a3": "8001fc5239d274a3",
+    "txt:e88217f213edf275": "e88217f213edf275",
+    "txt:6b14f4bed9d3e6b2": "6b14f4bed9d3e6b2",
+    "txt:5d83ecd51e514ff4": "5d83ecd51e514ff4",
+    "txt:ecb212e4b8680381": "ecb212e4b8680381",
+    "txt:fe5c9c633c771f86": "fe5c9c633c771f86",
+    "txt:36b0f52949b6cba9": "36b0f52949b6cba9",
+    "txt:4c0c49740840b849": "4c0c49740840b849",
+    "txt:fd7e4aae0c9d5c94": "fd7e4aae0c9d5c94",
+    "txt:2bc54a019b199a4c": "2bc54a019b199a4c",
+    "txt:0a730127b8e22c31": "0a730127b8e22c31",
+    "txt:b22b864cf0f91930": "b22b864cf0f91930",
+    "txt:186feff34b7bd407": "186feff34b7bd407",
+    "txt:6aaa1fd2280c26f4": "6aaa1fd2280c26f4",
+    "txt:2ce4f49f266cda3d": "2ce4f49f266cda3d",
+    "txt:0c85a2d9e68f6319": "0c85a2d9e68f6319",
+    "txt:8ba8879b9a21fb44": "8ba8879b9a21fb44",
+    "txt:9aab0ce1afb8fe5d": "9aab0ce1afb8fe5d",
+    "txt:09ff514c4c39e590": "09ff514c4c39e590",
+    "txt:8bccf31c2ef991f5": "8bccf31c2ef991f5",
+    "txt:4963c031658c8e67": "4963c031658c8e67",
+    "txt:d6a577e8c23305d6": "d6a577e8c23305d6",
+    "txt:863026ad8e05e22f": "863026ad8e05e22f",
+    "txt:a4b25ead1e18e089": "a4b25ead1e18e089",
+    "txt:fbbc48a1737f8459": "fbbc48a1737f8459",
+    "txt:3b9bef3c66c22c2b": "3b9bef3c66c22c2b",
+    "txt:fb7bb0096fe0352c": "fb7bb0096fe0352c",
+    "txt:9f03451395d25f84": "9f03451395d25f84",
+    "txt:6b7e181e977126d8": "6b7e181e977126d8",
+    "txt:d4c894c4a719002f": "d4c894c4a719002f",
+    "txt:00c15c2a9dbcf01e": "00c15c2a9dbcf01e",
+    "txt:ef4d1ee9e249926c": "ef4d1ee9e249926c",
+    "txt:633236da31b44b13": "633236da31b44b13",
+    "txt:6dfcc55456f214f7": "6dfcc55456f214f7",
+    "txt:ce026636d102b45e": "ce026636d102b45e",
+    "txt:9ddb0aeec843c18e": "9ddb0aeec843c18e",
+    "txt:23c2272975139055": "23c2272975139055",
+    "txt:e093493ee6adea2a": "e093493ee6adea2a",
+    "txt:59fcee3a5d912124": "59fcee3a5d912124",
+    "txt:f35a6648428a3529": "f35a6648428a3529",
+    "txt:7c1e59cd5f52b371": "7c1e59cd5f52b371",
+    "txt:1980e6aa6bf1c663": "1980e6aa6bf1c663",
+    "txt:df45aabd4f51bf2d": "df45aabd4f51bf2d",
+    "txt:694986750e93ec83": "694986750e93ec83",
+    "txt:a6a932a66c70989d": "a6a932a66c70989d",
+    "txt:a47a8f77b152da3b": "a47a8f77b152da3b",
+    "txt:e18539ad9faf7014": "e18539ad9faf7014",
+    "txt:21201106d8814fdd": "21201106d8814fdd",
+    "txt:9d2524bf37823b04": "9d2524bf37823b04",
+    "txt:a65aaf2059265de7": "a65aaf2059265de7",
+    "txt:808460f9d284fc79": "808460f9d284fc79",
+    "txt:93551cc2a860d873": "93551cc2a860d873",
+    "txt:aa67c87913f0b910": "aa67c87913f0b910",
+    "txt:50e1c397f6778a33": "50e1c397f6778a33",
+    "txt:1d5aeb1bac17d53d": "1d5aeb1bac17d53d",
+    "txt:e1b2f67f50d65f0a": "e1b2f67f50d65f0a",
+    "txt:74b02943b41df6ad": "74b02943b41df6ad",
+    "txt:c1c096c0415e48d1": "c1c096c0415e48d1",
+    "txt:c67f6a677c2bbb9b": "c67f6a677c2bbb9b",
+    "txt:9249a414e40bfc23": "9249a414e40bfc23",
+    "txt:fe953dfc239f1838": "fe953dfc239f1838",
+    "txt:bc78bcf9a272b25d": "bc78bcf9a272b25d",
+    "txt:af49a748466b20d5": "af49a748466b20d5",
+    "txt:2f2484eed6bb05fe": "2f2484eed6bb05fe",
+    "txt:6c8603f5b4d3f879": "6c8603f5b4d3f879",
+    "txt:6a5cf13ceb69690c": "6a5cf13ceb69690c",
+    "txt:3563d95f3e0dde01": "3563d95f3e0dde01",
+    "txt:358dec2345cbb24b": "358dec2345cbb24b",
+    "txt:83ec8645b6185952": "83ec8645b6185952",
+    "txt:81a891005d001f0f": "81a891005d001f0f",
+    "txt:9d11b26d7b23237b": "9d11b26d7b23237b",
+    "txt:95c0890a52f2ebba": "95c0890a52f2ebba",
+    "txt:3204be58dbe6de9a": "3204be58dbe6de9a",
+    "txt:543dcfe0dc584cae": "543dcfe0dc584cae",
+    "txt:b95bef40ce05d0e1": "b95bef40ce05d0e1",
+    "txt:cbba0d12d3de4f99": "cbba0d12d3de4f99",
+    "txt:2c89ca1b20d36708": "2c89ca1b20d36708",
+    "txt:f85b8baf06cfc4fe": "f85b8baf06cfc4fe",
+    "txt:53adb50d39502113": "53adb50d39502113",
+    "txt:f317f9788bb2909c": "f317f9788bb2909c",
+    "txt:162609e3c5cda01f": "162609e3c5cda01f",
+    "txt:b941e4e51c1bec7e": "b941e4e51c1bec7e",
+    "txt:20077d6accb5feb4": "20077d6accb5feb4",
+    "txt:accc02a1362a1972": "accc02a1362a1972",
+    "txt:6b3210ac092fff2f": "6b3210ac092fff2f",
+    "txt:59c68cd4f7c871a8": "59c68cd4f7c871a8",
+    "txt:0321cd291b684c51": "0321cd291b684c51",
+    "txt:f6a24119c307a860": "f6a24119c307a860",
+    "txt:f47b427e52ac4c99": "f47b427e52ac4c99",
+    "txt:66bd83328dca03f9": "66bd83328dca03f9",
+    "txt:494d30c087af371a": "494d30c087af371a",
+    "txt:f2fbf131b11444d0": "f2fbf131b11444d0",
+    "txt:9832d24953305f1c": "9832d24953305f1c",
+    "txt:d42097f57b66cc8f": "d42097f57b66cc8f",
+    "txt:d7d15edc4cce406b": "d7d15edc4cce406b",
+    "txt:7f9e840c85ba1f51": "7f9e840c85ba1f51",
+    "txt:ce7e71002396b059": "ce7e71002396b059",
+    "txt:7e03649224ac29dd": "7e03649224ac29dd",
+    "txt:7f5e900ef22d8766": "7f5e900ef22d8766",
+    "txt:9b8952f63224353c": "9b8952f63224353c",
+    "txt:04a553bb98e3b6e7": "04a553bb98e3b6e7",
+    "txt:1cfbd082708a8d16": "1cfbd082708a8d16",
+    "txt:0c74e57e91aab767": "0c74e57e91aab767",
+    "txt:ec8d2035ff4ef1c5": "ec8d2035ff4ef1c5",
+    "txt:be848f02799e7ed0": "be848f02799e7ed0",
+    "txt:328fbd8665d92633": "328fbd8665d92633",
+    "txt:e931f3ba9bac883c": "e931f3ba9bac883c",
+    "txt:303a36db208ed17c": "303a36db208ed17c",
+    "txt:36e89b8bcbc45562": "36e89b8bcbc45562",
+    "txt:493da09bb55e8515": "493da09bb55e8515",
+    "txt:939012638f8e5614": "939012638f8e5614",
+    "txt:7023f0c3785b6f4e": "7023f0c3785b6f4e",
+    "txt:02a87d64dcf84c7c": "02a87d64dcf84c7c",
+    "txt:9a69468f64658cc4": "9a69468f64658cc4",
+    "txt:938de733169f4ab4": "938de733169f4ab4",
+    "txt:1b062ca6f192c959": "1b062ca6f192c959",
+    "txt:6a45975b2bb7e8b5": "6a45975b2bb7e8b5",
+    "txt:852ba786a8cd73f9": "852ba786a8cd73f9",
+    "txt:bb8819268e883942": "bb8819268e883942",
+    "txt:8c55139c6c8c8be0": "8c55139c6c8c8be0",
+    "txt:07a6eb0c9c7ddda8": "07a6eb0c9c7ddda8",
+    "txt:022c8666a00edf64": "022c8666a00edf64",
+    "txt:408fd6b6873ccd5c": "408fd6b6873ccd5c",
+    "txt:251cfcf38575b6c0": "251cfcf38575b6c0",
+    "txt:db13f2eefc781836": "db13f2eefc781836",
+    "txt:4f1186a745d9b8c8": "4f1186a745d9b8c8",
+    "txt:26c9fab74e4ac325": "26c9fab74e4ac325",
+    "txt:725215537af83b2a": "725215537af83b2a",
+    "txt:55ebb5ebcb57c22a": "55ebb5ebcb57c22a",
+    "txt:a43f55d45b2c746f": "a43f55d45b2c746f",
+    "txt:390b87623baa2990": "390b87623baa2990",
+    "txt:e0ad3ba8f5c46b21": "e0ad3ba8f5c46b21",
+    "txt:aed2b32416144c5d": "aed2b32416144c5d",
+    "txt:8ce1565715f68a97": "8ce1565715f68a97",
+    "txt:528041580f4de588": "528041580f4de588",
+    "txt:10e1f165bc710187": "10e1f165bc710187",
+    "txt:7df4d2303081b8c6": "7df4d2303081b8c6",
+    "txt:13a9943a2b03a031": "13a9943a2b03a031",
+    "txt:87ecc8bf3d62a160": "87ecc8bf3d62a160",
+    "txt:bcee9d348bdcb99d": "bcee9d348bdcb99d",
+    "txt:0577e272ca691b51": "0577e272ca691b51",
+    "txt:84b54d615a7cfc03": "84b54d615a7cfc03",
+    "txt:3d2c605dc3f9c630": "3d2c605dc3f9c630",
+    "txt:4af5aa4beb2f9876": "4af5aa4beb2f9876",
+    "txt:780985d90b3e86ff": "780985d90b3e86ff",
+    "txt:21d6b7cc38445886": "21d6b7cc38445886",
+    "txt:987ec70aef73dede": "987ec70aef73dede",
+    "txt:ab292e818648e5a4": "ab292e818648e5a4",
+    "txt:1f29f2795e377497": "1f29f2795e377497",
+    "txt:0099e4698834eeef": "0099e4698834eeef",
+    "txt:dedebe1cc0233706": "dedebe1cc0233706",
+    "txt:f7c7342fbab4ce4b": "f7c7342fbab4ce4b",
+    "txt:180a119f18f6f91a": "180a119f18f6f91a",
+    "txt:6c436a60fad56843": "6c436a60fad56843",
+    "txt:57963ab2120557b1": "57963ab2120557b1",
+    "txt:1885e51a0c6cfd6c": "1885e51a0c6cfd6c",
+    "txt:3f269b3649bc61d3": "3f269b3649bc61d3",
+    "txt:69a82a57e743882f": "69a82a57e743882f",
+    "txt:ce1a38b7690c46e0": "ce1a38b7690c46e0",
+    "txt:638f2bf09db6b94b": "638f2bf09db6b94b",
+    "txt:9c068592d1c37eea": "9c068592d1c37eea",
+    "txt:f268ad5cf42bd7ee": "f268ad5cf42bd7ee",
+    "txt:8e9b31f01f6d7873": "8e9b31f01f6d7873",
+    "txt:e5d8b4d3eb5b01a9": "e5d8b4d3eb5b01a9",
+    "txt:ca368efabedddcac": "ca368efabedddcac",
+    "txt:5791f6d207fb6146": "5791f6d207fb6146",
+    "txt:c16b604597493328": "c16b604597493328",
+    "txt:de5c476579896ff6": "de5c476579896ff6",
+    "txt:2dc403b8ab2d6fad": "2dc403b8ab2d6fad",
+    "txt:a478c14437af832b": "a478c14437af832b",
+    "txt:c51166c1e314ad19": "c51166c1e314ad19",
+    "txt:7a9988fa1dced059": "7a9988fa1dced059",
+    "txt:bdb345f3ca34a902": "bdb345f3ca34a902",
+    "txt:f4ac4d01231729f7": "f4ac4d01231729f7",
+    "txt:b777bb29998c67eb": "b777bb29998c67eb",
+    "txt:9815d5f6df7381a5": "9815d5f6df7381a5",
+    "txt:9da45c755c386a49": "9da45c755c386a49",
+    "txt:a6c0572c55760953": "a6c0572c55760953",
+    "txt:68c9ae7d27865aa4": "68c9ae7d27865aa4",
+    "txt:6cc7813a5580e82d": "6cc7813a5580e82d",
+    "txt:55bce652dc2bda2a": "55bce652dc2bda2a",
+    "txt:f8a4c006ef214afd": "f8a4c006ef214afd",
+    "txt:315aec20ac778f4a": "315aec20ac778f4a",
+    "txt:ac07731a170e3eee": "ac07731a170e3eee",
+    "txt:8bc5210efa83d57c": "8bc5210efa83d57c",
+    "txt:da6059d594b84a0a": "da6059d594b84a0a",
+    "txt:8c1a3b9205c56375": "8c1a3b9205c56375",
+    "txt:6117759bbdcf8ff6": "6117759bbdcf8ff6",
+    "txt:27e225a59dc95f63": "27e225a59dc95f63",
+    "txt:6b6f541c8c08ef57": "6b6f541c8c08ef57",
+    "txt:fe57a7fe40a24d6b": "fe57a7fe40a24d6b",
+    "txt:86e807af1b27d5a3": "86e807af1b27d5a3",
+    "txt:c380f4d37550ed7c": "c380f4d37550ed7c",
+    "txt:776ab67e784d7c13": "776ab67e784d7c13",
+    "txt:c6fa9b71b99e4863": "c6fa9b71b99e4863",
+    "txt:67697c6145e055af": "67697c6145e055af",
+    "txt:7361fc7b94d892c3": "7361fc7b94d892c3",
+    "txt:37a916a848cf1475": "37a916a848cf1475",
+    "txt:8cac53f79a3e31cd": "8cac53f79a3e31cd",
+    "txt:ed063085c514b052": "ed063085c514b052",
+    "txt:b4458a30459090b7": "b4458a30459090b7",
+    "txt:bd00442f26438308": "bd00442f26438308",
+    "txt:dcf75bcdc944b493": "dcf75bcdc944b493",
+    "txt:334aa0a9681ccdd7": "334aa0a9681ccdd7",
+    "txt:005c18e2b72a208f": "005c18e2b72a208f",
+    "txt:564ee8e67660e9e6": "564ee8e67660e9e6",
+    "txt:9e92a8a2ac02bfe0": "9e92a8a2ac02bfe0",
+    "txt:41006f824d2c3a2d": "41006f824d2c3a2d",
+    "txt:0c2e027054becbb4": "0c2e027054becbb4",
+    "txt:6c49541ab7c65b69": "6c49541ab7c65b69",
+    "txt:af8ae6fcbfbf6bc0": "af8ae6fcbfbf6bc0",
+    "txt:eb45f01e3985c40c": "eb45f01e3985c40c",
+    "txt:7a6d2c78ae4181f9": "7a6d2c78ae4181f9",
+    "txt:2ba36e5807a164a7": "2ba36e5807a164a7",
+    "txt:cab13a314197d6cc": "cab13a314197d6cc",
+    "txt:d27629b188207706": "d27629b188207706",
+    "txt:38523b0e244f7add": "38523b0e244f7add",
+    "txt:c5ef6d8300b19956": "c5ef6d8300b19956"
   }
 }
