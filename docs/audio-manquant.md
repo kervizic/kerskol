@@ -42,3 +42,15 @@ python gen_kerskol.py --out C:\kerskol-tts\sortie_c1s33 \
 Reprise automatique (saute les clips déjà encodés). Contrôle ASR :
 `relecture.py --out C:\kerskol-tts\sortie_c1s33` ; alignement karaoké :
 `alignement.py --out C:\kerskol-tts\sortie_c1s33`.
+
+## Relance du lot complet (5 170 clips) si le Mac redémarre
+
+Le lanceur `C:\kerskol-tts\gen_full.cmd` sur manu-win est reprenable et attend le
+GPU libre (`--wait-gpu`, ne tue jamais de processus) : il suffit de le relancer,
+depuis le Mac, dans une session détachée qui survit à la fermeture du SSH :
+```
+nohup caffeinate -i ssh -o BatchMode=yes -o ServerAliveInterval=30 -o ServerAliveCountMax=10 \
+  manu-win "cmd /c C:\kerskol-tts\gen_full.cmd" > ~/Library/Logs/kerskol_gen_full.log 2>&1 &
+```
+Vérifier l'avancement : `nvidia-smi` sur manu-win (GPU chargé) ou compter les
+`.wav` dans `C:\kerskol-tts\sortie_c1s33`.
