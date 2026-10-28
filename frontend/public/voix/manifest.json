@@ -16238,6 +16238,3436 @@
       "text": "La fille",
       "ms": 1200,
       "cat": "choix"
+    },
+    "8786047c6e461bfb": {
+      "text": "La virgule",
+      "ms": 1840,
+      "cat": "choix"
+    },
+    "6d38c377fb7a3737": {
+      "text": "Le point",
+      "ms": 1120,
+      "cat": "choix"
+    },
+    "81bc8684269659b8": {
+      "text": "Le point d'interrogation",
+      "ms": 1520,
+      "cat": "choix"
+    },
+    "5e38e56dceb35211": {
+      "text": "Les grands arbres",
+      "ms": 1360,
+      "cat": "choix"
+    },
+    "56cf5d1384a21396": {
+      "text": "Lina arrose la graine",
+      "ms": 1680,
+      "cat": "choix"
+    },
+    "b9e92c51e60e51dd": {
+      "text": "Lina plante la graine",
+      "ms": 2400,
+      "cat": "choix"
+    },
+    "583b761a5b1d774b": {
+      "text": "Léa",
+      "ms": 1520,
+      "cat": "choix"
+    },
+    "6ddccf84c83afa71": {
+      "text": "Masculin",
+      "ms": 1120,
+      "cat": "choix"
+    },
+    "48b9228c03aad175": {
+      "text": "Minet",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "07a987a34a9d33a7": {
+      "text": "Minou",
+      "ms": 720,
+      "cat": "choix"
+    },
+    "27b3d059dd04e1bd": {
+      "text": "Moumou",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "e5330d5e225987ec": {
+      "text": "Négative",
+      "ms": 1520,
+      "cat": "choix"
+    },
+    "b4057616efb77d86": {
+      "text": "Petit Ours part explorer la forêt",
+      "ms": 2720,
+      "cat": "choix"
+    },
+    "9afc6c64581fc1fe": {
+      "text": "Sacha met son manteau",
+      "ms": 1440,
+      "cat": "choix"
+    },
+    "9d9c564eb91b296f": {
+      "text": "Sacha part à l'école",
+      "ms": 1520,
+      "cat": "choix"
+    },
+    "79d91c031cb19757": {
+      "text": "a",
+      "ms": 560,
+      "cat": "choix"
+    },
+    "0eb35e8f23625fab": {
+      "text": "a aimé",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "36d064e0a30e508d": {
+      "text": "a allé",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "114f87f76ce8cffc": {
+      "text": "a chanté",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "a104188c82afe5a3": {
+      "text": "a donné",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "c8caa233dd87adfb": {
+      "text": "a eu",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "72454bbcdb105ca2": {
+      "text": "a joué",
+      "ms": 1440,
+      "cat": "choix"
+    },
+    "0934f41f21bb1ece": {
+      "text": "a mangé",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "c8de147faa7777f7": {
+      "text": "a parlé",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "ababf0302ba9beb1": {
+      "text": "a trouvé",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "5261ac8ab628ae6d": {
+      "text": "aboie",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "e5f9efde69f6df85": {
+      "text": "ai",
+      "ms": 640,
+      "cat": "choix"
+    },
+    "534151d8d6c9dd1d": {
+      "text": "ai allé",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "8fa5c765de6730e7": {
+      "text": "ai donné",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "5c5dbe4230287de1": {
+      "text": "ai joué",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "8b2ae7e88d2bdca4": {
+      "text": "ai mangé",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "affa8b4e1b7a4615": {
+      "text": "ai venu",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "c3264b5e8daa9acc": {
+      "text": "aima",
+      "ms": 720,
+      "cat": "choix"
+    },
+    "ba54395d7da70f4e": {
+      "text": "aimable",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "d2f473496d559bbd": {
+      "text": "aimaient",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "2106686049a63280": {
+      "text": "aimais",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "18eb3cef83f80c4a": {
+      "text": "aimait",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "cd06bbfde2ea6a59": {
+      "text": "aime",
+      "ms": 720,
+      "cat": "choix"
+    },
+    "6111b96848418c88": {
+      "text": "aiment",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "4b62484592149c49": {
+      "text": "aimera",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "c9ab67c436fb99ec": {
+      "text": "aimerai",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "12a5ef9370809f87": {
+      "text": "aimeras",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "da683a6724cdd114": {
+      "text": "aimerez",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "5b7d39dac8d7b578": {
+      "text": "aimerons",
+      "ms": 1120,
+      "cat": "choix"
+    },
+    "11083ef0a9c9dbaf": {
+      "text": "aimeront",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "f026759f7dcc14bf": {
+      "text": "aimes",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "524c9371d3f7b55a": {
+      "text": "aimez",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "35f0c98770c081f6": {
+      "text": "aimiez",
+      "ms": 1360,
+      "cat": "choix"
+    },
+    "c4b21663d1d94004": {
+      "text": "aimions",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "7fdaba7e1c752654": {
+      "text": "aimons",
+      "ms": 720,
+      "cat": "choix"
+    },
+    "5604c1fe3527b5e4": {
+      "text": "aimèrent",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "27ff05e81a8a9336": {
+      "text": "alla",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "6b29db7a2a65868b": {
+      "text": "allaient",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "71b6d166b7e9e795": {
+      "text": "allais",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "40f4fb38abec981f": {
+      "text": "allait",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "ae0cfc413ae8083b": {
+      "text": "allez",
+      "ms": 720,
+      "cat": "choix"
+    },
+    "b4ecc880d46e30e2": {
+      "text": "alliez",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "5bf275fab34752b3": {
+      "text": "allons",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "7721987c211cb725": {
+      "text": "allumer un grand feu",
+      "ms": 1600,
+      "cat": "choix"
+    },
+    "e4c22a91e497196e": {
+      "text": "allèrent",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "daeb3dda3fdb3766": {
+      "text": "amusant",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "7496d51113de4ac2": {
+      "text": "ancore",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "7e816481d125e096": {
+      "text": "animaux",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "fdb192c47e7ce0e6": {
+      "text": "arbre",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "64d97d95eaf7cb11": {
+      "text": "armoire",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "6a0fd9043dcf02dd": {
+      "text": "as",
+      "ms": 720,
+      "cat": "choix"
+    },
+    "e3a357bdea762dbe": {
+      "text": "as aimé",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "d394e26624817a13": {
+      "text": "as allé",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "cdb17e11bf357b2f": {
+      "text": "as donné",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "b9895dd86a5d6f9f": {
+      "text": "as eu",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "21359ffd3ccc5f98": {
+      "text": "as joué",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "50fac8e46eae05c2": {
+      "text": "as mangé",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "56c5835d02f86edc": {
+      "text": "as parlé",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "28f0cf190882b38d": {
+      "text": "as regardé",
+      "ms": 1120,
+      "cat": "choix"
+    },
+    "9590666fbd692e3a": {
+      "text": "asez",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "57e04392f3ace14d": {
+      "text": "assez",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "920e80dcb2ae57c1": {
+      "text": "assé",
+      "ms": 720,
+      "cat": "choix"
+    },
+    "1643c007113c29c6": {
+      "text": "aura",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "b08c6320476f421b": {
+      "text": "aurai",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "c13105da7e0eb4cf": {
+      "text": "auras",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "cdcd629ee995c380": {
+      "text": "aurez",
+      "ms": 1360,
+      "cat": "choix"
+    },
+    "ea2b6db5cdf1160e": {
+      "text": "aurons",
+      "ms": 1440,
+      "cat": "choix"
+    },
+    "71578487437ac8bd": {
+      "text": "auront",
+      "ms": 1600,
+      "cat": "choix"
+    },
+    "a8da842009012dfe": {
+      "text": "ausi",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "216e718290c15120": {
+      "text": "aussi",
+      "ms": 1120,
+      "cat": "choix"
+    },
+    "294a967def8dbfb5": {
+      "text": "auto",
+      "ms": 1920,
+      "cat": "choix"
+    },
+    "1234a7829c3bfc27": {
+      "text": "avaient",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "1f1dedda8f1dbc07": {
+      "text": "avais",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "d6c8267f5dc5f147": {
+      "text": "avait",
+      "ms": 1120,
+      "cat": "choix"
+    },
+    "bb9c6a3d86d0a6a8": {
+      "text": "avc",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "6960fec91ec33342": {
+      "text": "avec",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "1613747fcb7cfbaf": {
+      "text": "avek",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "cf8fce8a01596ec8": {
+      "text": "avez",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "95aceac99dfba0e6": {
+      "text": "avez allés",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "f62c659b4d3d83fd": {
+      "text": "avez chanté",
+      "ms": 1520,
+      "cat": "choix"
+    },
+    "320a6c79015bfe3d": {
+      "text": "avez donné",
+      "ms": 1120,
+      "cat": "choix"
+    },
+    "7ece6eef39f994ef": {
+      "text": "avez eu",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "be4fe2e50371cd92": {
+      "text": "avez joué",
+      "ms": 1120,
+      "cat": "choix"
+    },
+    "07a679ee612730d0": {
+      "text": "avez parlé",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "20a30a7cb6b0c09d": {
+      "text": "aviez",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "4c7ed0affb263ed8": {
+      "text": "avions",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "f6c98a30a9d1bed1": {
+      "text": "avons",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "a2683b3049a50a39": {
+      "text": "avons aimé",
+      "ms": 1520,
+      "cat": "choix"
+    },
+    "a6e5987ff9a01a7f": {
+      "text": "avons chanté",
+      "ms": 1280,
+      "cat": "choix"
+    },
+    "554640d4b548da61": {
+      "text": "avons regardé",
+      "ms": 1360,
+      "cat": "choix"
+    },
+    "1ab077e99199b42f": {
+      "text": "avons trouvé",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "fd3f1d96222732e8": {
+      "text": "ballon",
+      "ms": 640,
+      "cat": "choix"
+    },
+    "91e162cb41b850e8": {
+      "text": "banane",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "75b2ad64635f9256": {
+      "text": "beau",
+      "ms": 640,
+      "cat": "choix"
+    },
+    "128ed496fc7437ad": {
+      "text": "beaucou",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "7d32464b7b026935": {
+      "text": "beaucoup",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "7ff91b504fedcf14": {
+      "text": "biento",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "29e5fdd96b2cc951": {
+      "text": "bientot",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "c08852b14988f5a0": {
+      "text": "bientôt",
+      "ms": 720,
+      "cat": "choix"
+    },
+    "88e5ed4e44823fa6": {
+      "text": "blanche",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "74b410893adfce05": {
+      "text": "bleu",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "ac91a44176cb8992": {
+      "text": "bocoup",
+      "ms": 720,
+      "cat": "choix"
+    },
+    "abe0ea05689e3948": {
+      "text": "bougent",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "0f19bdb4663a462c": {
+      "text": "brouette",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "277a40c4f2267c1c": {
+      "text": "café",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "1f9fc716aca92382": {
+      "text": "carotte",
+      "ms": 1920,
+      "cat": "choix"
+    },
+    "c09a0c71df2f2950": {
+      "text": "ce qui ferme un vêtement",
+      "ms": 1760,
+      "cat": "choix"
+    },
+    "dbd9d1549ffae28b": {
+      "text": "celui qui surveille une forêt et ses animaux",
+      "ms": 3360,
+      "cat": "choix"
+    },
+    "197a3c1fad06bc6d": {
+      "text": "cerise",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "ba76e0d08f8ad6fa": {
+      "text": "chaise",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "fb71b3a14f31da2d": {
+      "text": "chanson",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "6d2f830ce764f6d5": {
+      "text": "chanta",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "7ad0c69d052031ae": {
+      "text": "chantaient",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "a77629ffc1f3281b": {
+      "text": "chantais",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "f58e5f2962b07531": {
+      "text": "chantait",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "088aa9f221df7840": {
+      "text": "chante",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "9827e96b1f944487": {
+      "text": "chantent",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "eb9b3a6841e2a0f0": {
+      "text": "chanter",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "8981942d9ca6162d": {
+      "text": "chantera",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "2a04fcc2fd50ad79": {
+      "text": "chanterai",
+      "ms": 1120,
+      "cat": "choix"
+    },
+    "90fc5ca3cc41c6e7": {
+      "text": "chanteras",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "0da3105dccde29a5": {
+      "text": "chanterez",
+      "ms": 1520,
+      "cat": "choix"
+    },
+    "c50603a4567cb5ad": {
+      "text": "chanterons",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "d30a0aba7076a192": {
+      "text": "chanteront",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "5565b1f05374dabf": {
+      "text": "chantes",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "36e483722339dc95": {
+      "text": "chanteur",
+      "ms": 1520,
+      "cat": "choix"
+    },
+    "a80a58cfe53abeef": {
+      "text": "chantez",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "5271d6e385b57b9d": {
+      "text": "chantiez",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "b35ab5f60feb3bc5": {
+      "text": "chantions",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "bc5bdfcd7eb9f26a": {
+      "text": "chantons",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "5c7351f5c3a68541": {
+      "text": "chantèrent",
+      "ms": 1360,
+      "cat": "choix"
+    },
+    "7cf668e8d4be2a6b": {
+      "text": "chien",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "2b28e2aa69105379": {
+      "text": "cinq ans",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "57848bd92e14b0fd": {
+      "text": "classer",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "f47f5ffdfb708500": {
+      "text": "cloche",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "0c5ffce20d42abe6": {
+      "text": "clochette",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "b497a1bec7650847": {
+      "text": "colorier",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "1ab366a4962d8159": {
+      "text": "content",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "c879d93b550d3a1e": {
+      "text": "couleurs",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "91d2ec7069eb6535": {
+      "text": "courir",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "b654eea536f6d71d": {
+      "text": "courir loin",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "4455f289e4f628a5": {
+      "text": "courir très vite",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "9af8b780c7dc61fb": {
+      "text": "court",
+      "ms": 720,
+      "cat": "choix"
+    },
+    "ecbcf1f4a99187a8": {
+      "text": "cuisine",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "addcdbee784548a2": {
+      "text": "dan",
+      "ms": 480,
+      "cat": "choix"
+    },
+    "2f818060a18b17b3": {
+      "text": "dans",
+      "ms": 480,
+      "cat": "choix"
+    },
+    "577bacd09b8db11d": {
+      "text": "dans leur poche",
+      "ms": 1120,
+      "cat": "choix"
+    },
+    "54bb0fe8fcc2d992": {
+      "text": "dans un grand bocal d'eau",
+      "ms": 1840,
+      "cat": "choix"
+    },
+    "28cb28b8ecac10b0": {
+      "text": "dans une grande ville",
+      "ms": 1520,
+      "cat": "choix"
+    },
+    "61eb6930d41d74f3": {
+      "text": "dans une petite boîte en papier",
+      "ms": 2160,
+      "cat": "choix"
+    },
+    "ee1e0961827cbfcc": {
+      "text": "danse",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "5f84699eb1639784": {
+      "text": "danser",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "3fd5479e6f43fe8a": {
+      "text": "danseur",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "d66904c910d5cae7": {
+      "text": "dauphin",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "59311c79f9a3a722": {
+      "text": "de grandes dents",
+      "ms": 1280,
+      "cat": "choix"
+    },
+    "cd95edf4f6e12f16": {
+      "text": "de gros cailloux gris",
+      "ms": 1360,
+      "cat": "choix"
+    },
+    "b874a058d0932dfb": {
+      "text": "deja",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "204c73874737dd24": {
+      "text": "dens",
+      "ms": 720,
+      "cat": "choix"
+    },
+    "b2573266e8df8c27": {
+      "text": "dentiste",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "7c641e9d18720654": {
+      "text": "depui",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "20b762deafc0c5d2": {
+      "text": "depuis",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "69d0493571d4d7d9": {
+      "text": "depuit",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "bbc71ce77c4e6a06": {
+      "text": "des morceaux de pain",
+      "ms": 1440,
+      "cat": "choix"
+    },
+    "dd6300acb2666d37": {
+      "text": "des pierres précieuses, comme les diamants",
+      "ms": 2560,
+      "cat": "choix"
+    },
+    "6df7b0022d93318d": {
+      "text": "des pousses vertes apparaissent",
+      "ms": 1840,
+      "cat": "choix"
+    },
+    "f07267dbcf378282": {
+      "text": "descendre",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "2e5076c83c279763": {
+      "text": "diras",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "71d12e572237f148": {
+      "text": "dis",
+      "ms": 480,
+      "cat": "choix"
+    },
+    "c17524f3d6dc1fea": {
+      "text": "disons",
+      "ms": 640,
+      "cat": "choix"
+    },
+    "365722ba0e42a655": {
+      "text": "dites",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "124d032b21a94c9e": {
+      "text": "donna",
+      "ms": 640,
+      "cat": "choix"
+    },
+    "d4c195c9e467a6c4": {
+      "text": "donnaient",
+      "ms": 720,
+      "cat": "choix"
+    },
+    "a2767b1b5900e956": {
+      "text": "donnais",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "4e81e349650bfb8c": {
+      "text": "donnait",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "4cb52393d30bf4ce": {
+      "text": "donne",
+      "ms": 720,
+      "cat": "choix"
+    },
+    "29cc5f103e7dd582": {
+      "text": "donnent",
+      "ms": 640,
+      "cat": "choix"
+    },
+    "70ea484f0c0a93f7": {
+      "text": "donner à manger aux vaches",
+      "ms": 1520,
+      "cat": "choix"
+    },
+    "5ad886d86833c905": {
+      "text": "donnera",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "23789ef1ea5e5940": {
+      "text": "donnerai",
+      "ms": 720,
+      "cat": "choix"
+    },
+    "b59b61ee1f59df53": {
+      "text": "donneras",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "f6c1c81efb5ce175": {
+      "text": "donnerez",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "43e14431e9d43a88": {
+      "text": "donnerons",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "c6abca3167302584": {
+      "text": "donneront",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "9ff8fb871ff6453a": {
+      "text": "donnes",
+      "ms": 640,
+      "cat": "choix"
+    },
+    "7b97b4207dc917f2": {
+      "text": "donnez",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "390955f7715d120f": {
+      "text": "donniez",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "9a80e59af3d45688": {
+      "text": "donnions",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "012ecd39583306e5": {
+      "text": "donnons",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "34a09244e7330291": {
+      "text": "donnèrent",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "f18ac0951a0b3e45": {
+      "text": "dormir",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "45a5d1fca8a7713f": {
+      "text": "dormir longtemps",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "6f35b5c9df9d9c54": {
+      "text": "dort",
+      "ms": 640,
+      "cat": "choix"
+    },
+    "644212685c848502": {
+      "text": "dort profondément",
+      "ms": 1360,
+      "cat": "choix"
+    },
+    "0b03f6651ff825ff": {
+      "text": "doux",
+      "ms": 480,
+      "cat": "choix"
+    },
+    "8b1413907aba1f17": {
+      "text": "décolorier",
+      "ms": 1120,
+      "cat": "choix"
+    },
+    "19a73255f34f1fa3": {
+      "text": "défaire",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "6bdb9111023d981f": {
+      "text": "déja",
+      "ms": 720,
+      "cat": "choix"
+    },
+    "e403606b3fe7d65a": {
+      "text": "déjà",
+      "ms": 640,
+      "cat": "choix"
+    },
+    "97dacfefff8698eb": {
+      "text": "déménager",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "cbf0bdeedb22ee89": {
+      "text": "déplier",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "a0f825a14e1a8342": {
+      "text": "déranger",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "818bcb2d00806af4": {
+      "text": "elle",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "b5b6594ac4fd1bbc": {
+      "text": "elle se transforme en chrysalide",
+      "ms": 2240,
+      "cat": "choix"
+    },
+    "3c99ce644a1d0e40": {
+      "text": "elles chantent dans la nuit",
+      "ms": 1840,
+      "cat": "choix"
+    },
+    "275e1e075375052c": {
+      "text": "elles construisent un nid",
+      "ms": 1680,
+      "cat": "choix"
+    },
+    "035b282e6a9e188e": {
+      "text": "elles ne se parlent pas",
+      "ms": 1520,
+      "cat": "choix"
+    },
+    "e29840dc2fee5952": {
+      "text": "elles se rassemblent pour le départ",
+      "ms": 2720,
+      "cat": "choix"
+    },
+    "dcb07f147712fb4a": {
+      "text": "en chantant",
+      "ms": 1120,
+      "cat": "choix"
+    },
+    "856b7ddd0b92a58b": {
+      "text": "en criant très fort",
+      "ms": 1520,
+      "cat": "choix"
+    },
+    "99b992bc4465e4b1": {
+      "text": "en un petit nuage gris",
+      "ms": 1840,
+      "cat": "choix"
+    },
+    "57ba3e42db8aba52": {
+      "text": "en une dame resplendissante dans un palais enchanté",
+      "ms": 3360,
+      "cat": "choix"
+    },
+    "1e9152d94fcb5b5b": {
+      "text": "en une pluie d'orage",
+      "ms": 1280,
+      "cat": "choix"
+    },
+    "5cbd34ed79d14870": {
+      "text": "encor",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "7bddf3fb29ed38f2": {
+      "text": "encore",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "89ddfa0b5aec21da": {
+      "text": "enfants",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "8a559469bff30e1b": {
+      "text": "entre arbre et avion",
+      "ms": 1920,
+      "cat": "choix"
+    },
+    "d562aa100669003c": {
+      "text": "entre arbre et chat",
+      "ms": 1520,
+      "cat": "choix"
+    },
+    "512f1d91bdc364e5": {
+      "text": "entre arbre et pomme",
+      "ms": 1520,
+      "cat": "choix"
+    },
+    "1cf58924257e4c49": {
+      "text": "entre banane et dent",
+      "ms": 1440,
+      "cat": "choix"
+    },
+    "2c69fd9faf8bd646": {
+      "text": "entre livre et mardi",
+      "ms": 1360,
+      "cat": "choix"
+    },
+    "256ff8bde0c445da": {
+      "text": "entre moto et orange",
+      "ms": 2000,
+      "cat": "choix"
+    },
+    "ca0de020c630dc86": {
+      "text": "entre pomme et table",
+      "ms": 1360,
+      "cat": "choix"
+    },
+    "b12a6038270b38f4": {
+      "text": "entre reine et table",
+      "ms": 1600,
+      "cat": "choix"
+    },
+    "a4e44e19f0a3bce0": {
+      "text": "entre table et vélo",
+      "ms": 1520,
+      "cat": "choix"
+    },
+    "a943bb4cd07e0576": {
+      "text": "entre école et gare",
+      "ms": 1520,
+      "cat": "choix"
+    },
+    "b196e1c6a74a7dcf": {
+      "text": "es",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "aa9c10762ebd725f": {
+      "text": "es aimé",
+      "ms": 1120,
+      "cat": "choix"
+    },
+    "8d9252ff0dc94eb0": {
+      "text": "es allé",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "aedc473c7baaa001": {
+      "text": "es donné",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "1bd4d108d922a51c": {
+      "text": "es joué",
+      "ms": 1120,
+      "cat": "choix"
+    },
+    "cb50e2f1fd936b7b": {
+      "text": "es regardé",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "19e6d2d713837724": {
+      "text": "es venu",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "dce44a60d24c4e6c": {
+      "text": "est",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "b26f7853404ff839": {
+      "text": "est aimé",
+      "ms": 1600,
+      "cat": "choix"
+    },
+    "0ed9b914ffc59126": {
+      "text": "est allé",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "bba6a7a5aceab877": {
+      "text": "est allée",
+      "ms": 1280,
+      "cat": "choix"
+    },
+    "e290ec176a77161b": {
+      "text": "est chanté",
+      "ms": 1440,
+      "cat": "choix"
+    },
+    "1023f24f6897f8f6": {
+      "text": "est donné",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "3c32effa1d333333": {
+      "text": "est eu",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "bb4fbb489233c6c0": {
+      "text": "est joué",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "882d8cb55ce79fe3": {
+      "text": "est trouvé",
+      "ms": 1280,
+      "cat": "choix"
+    },
+    "a92d0f49752234e4": {
+      "text": "est venue",
+      "ms": 1120,
+      "cat": "choix"
+    },
+    "201ac61835718f13": {
+      "text": "fabriquer",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "02a92afb94f236f6": {
+      "text": "facile",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "745cedb54f54c268": {
+      "text": "faire",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "7e2db57f73d5aad4": {
+      "text": "faire sonner joyeusement les cloches",
+      "ms": 2400,
+      "cat": "choix"
+    },
+    "89171906bb9989d2": {
+      "text": "faisaient",
+      "ms": 1360,
+      "cat": "choix"
+    },
+    "43d3bf6960a0d419": {
+      "text": "faisions",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "74ae68e2a4862ad0": {
+      "text": "faisons",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "d922d077f85dcdbb": {
+      "text": "faites",
+      "ms": 720,
+      "cat": "choix"
+    },
+    "4303d8c3f38b7f1e": {
+      "text": "fatigué",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "5660c94be4a62e18": {
+      "text": "faux",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "0ea76659126be36c": {
+      "text": "ferons",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "7bee0a01818d1e94": {
+      "text": "feront",
+      "ms": 1120,
+      "cat": "choix"
+    },
+    "73ab80faf8664035": {
+      "text": "fille",
+      "ms": 1120,
+      "cat": "choix"
+    },
+    "c98bb79727ea85f0": {
+      "text": "finiras",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "8f72528dd59abb3f": {
+      "text": "finirez",
+      "ms": 1120,
+      "cat": "choix"
+    },
+    "8a26da42dbef2697": {
+      "text": "finiront",
+      "ms": 1280,
+      "cat": "choix"
+    },
+    "f21966b4b4aae8d7": {
+      "text": "finis",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "d502b1446a8f3ee8": {
+      "text": "finissaient",
+      "ms": 1520,
+      "cat": "choix"
+    },
+    "f2ca4e339818f028": {
+      "text": "finissais",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "8b9431a7d714ff18": {
+      "text": "finissent",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "6b6913981208909a": {
+      "text": "finissez",
+      "ms": 1280,
+      "cat": "choix"
+    },
+    "1877bd4ac3b4ee30": {
+      "text": "finissiez",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "7501da1f729994d3": {
+      "text": "finissions",
+      "ms": 1360,
+      "cat": "choix"
+    },
+    "20b22b480d4a9623": {
+      "text": "finissons",
+      "ms": 1280,
+      "cat": "choix"
+    },
+    "21b0d67e1b21d13b": {
+      "text": "firent",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "0f94d3378865541f": {
+      "text": "fit",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "e287fa8dbedbf52b": {
+      "text": "fleur",
+      "ms": 1120,
+      "cat": "choix"
+    },
+    "c006c9622a85c3a1": {
+      "text": "fleuriste",
+      "ms": 1520,
+      "cat": "choix"
+    },
+    "40eca585c13bc344": {
+      "text": "fleurs",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "7845c1b56755ed82": {
+      "text": "font",
+      "ms": 640,
+      "cat": "choix"
+    },
+    "b2e9e05b5e28813f": {
+      "text": "fraise",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "173f22c98a3bfe7a": {
+      "text": "froid",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "5f393d10548fc2dc": {
+      "text": "fruits",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "18c58a5a84f0d746": {
+      "text": "furent",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "6da7bdbb5fefe938": {
+      "text": "fut",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "25c9a873103cd9c9": {
+      "text": "girafe",
+      "ms": 1440,
+      "cat": "choix"
+    },
+    "db08460e65fca992": {
+      "text": "grand",
+      "ms": 480,
+      "cat": "choix"
+    },
+    "fcd4cfdce1b461c2": {
+      "text": "grande",
+      "ms": 640,
+      "cat": "choix"
+    },
+    "bab6d2c7885fa583": {
+      "text": "grands",
+      "ms": 640,
+      "cat": "choix"
+    },
+    "748835df95d75397": {
+      "text": "gros",
+      "ms": 640,
+      "cat": "choix"
+    },
+    "ce350350db43133c": {
+      "text": "gâteau",
+      "ms": 640,
+      "cat": "choix"
+    },
+    "8290afd60aa87f2b": {
+      "text": "haut",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "63e362665a3116f1": {
+      "text": "heureux",
+      "ms": 1520,
+      "cat": "choix"
+    },
+    "eb378facd69640a0": {
+      "text": "il a couru dans toute la maison",
+      "ms": 2400,
+      "cat": "choix"
+    },
+    "74b6d9b509b58d63": {
+      "text": "il a faim",
+      "ms": 1440,
+      "cat": "choix"
+    },
+    "dc437c7d56173e6e": {
+      "text": "il a froid",
+      "ms": 1360,
+      "cat": "choix"
+    },
+    "c0125bbe34b77c61": {
+      "text": "il a mangé son repas",
+      "ms": 1360,
+      "cat": "choix"
+    },
+    "9fa07fc8e81d6f0b": {
+      "text": "il a peur du facteur",
+      "ms": 1440,
+      "cat": "choix"
+    },
+    "e8812e409869893a": {
+      "text": "il a sommeil",
+      "ms": 1520,
+      "cat": "choix"
+    },
+    "62c256870c1997c8": {
+      "text": "il a trouvé un ami",
+      "ms": 1360,
+      "cat": "choix"
+    },
+    "0d7354f58f280a6e": {
+      "text": "il ajoute sa trousse",
+      "ms": 1600,
+      "cat": "choix"
+    },
+    "c96c4e5a992b992f": {
+      "text": "il appelle sa fiancée",
+      "ms": 1600,
+      "cat": "choix"
+    },
+    "a0ed3809a2b6e10e": {
+      "text": "il bat les œufs",
+      "ms": 1120,
+      "cat": "choix"
+    },
+    "7d9d797b51fa3c0b": {
+      "text": "il casse les œufs",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "40e3d6301baee454": {
+      "text": "il fait cuire l'omelette",
+      "ms": 1920,
+      "cat": "choix"
+    },
+    "fc6289edc965e0e6": {
+      "text": "il ferme le sac",
+      "ms": 1760,
+      "cat": "choix"
+    },
+    "45b3bf7a8143b24d": {
+      "text": "il met ses cahiers",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "6a06513ca140de18": {
+      "text": "il plante le clou dans le mur",
+      "ms": 2080,
+      "cat": "choix"
+    },
+    "be4aae2721db5d6b": {
+      "text": "il redescend de l'échelle",
+      "ms": 2000,
+      "cat": "choix"
+    },
+    "8a5969ea5c7b33ac": {
+      "text": "il rencontre un renard",
+      "ms": 1440,
+      "cat": "choix"
+    },
+    "dd57dbb4485438d9": {
+      "text": "il s'est rendormi",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "e3b9c93fb9fbfb39": {
+      "text": "il veut manger",
+      "ms": 1280,
+      "cat": "choix"
+    },
+    "42b1f2909f9cb047": {
+      "text": "ils dormaient",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "ab6e8f55669940d5": {
+      "text": "ils mangeaient l'herbe",
+      "ms": 1680,
+      "cat": "choix"
+    },
+    "436b91ae5db7546d": {
+      "text": "ils nageaient",
+      "ms": 1360,
+      "cat": "choix"
+    },
+    "68857f7b575d5d2f": {
+      "text": "ils trouvent un arbre plein de miel",
+      "ms": 2640,
+      "cat": "choix"
+    },
+    "da90b818fb933136": {
+      "text": "impossible",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "5606ac7a54e0013e": {
+      "text": "ira",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "cfc5c679b02a9c27": {
+      "text": "irai",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "f121af0cbb1ea946": {
+      "text": "irez",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "611cc79362535b81": {
+      "text": "iront",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "e21ab637f2bc9726": {
+      "text": "jamai",
+      "ms": 1840,
+      "cat": "choix"
+    },
+    "d5434c147560038f": {
+      "text": "jamais",
+      "ms": 1680,
+      "cat": "choix"
+    },
+    "d83485f3748869a9": {
+      "text": "jamès",
+      "ms": 1600,
+      "cat": "choix"
+    },
+    "8dbe2a8667a80e7b": {
+      "text": "jardinier",
+      "ms": 1840,
+      "cat": "choix"
+    },
+    "5df7a863c0033c48": {
+      "text": "jeté au loin",
+      "ms": 1600,
+      "cat": "choix"
+    },
+    "65411887c8482ed0": {
+      "text": "joua",
+      "ms": 1840,
+      "cat": "choix"
+    },
+    "ec671e207992f5ce": {
+      "text": "jouaient",
+      "ms": 1680,
+      "cat": "choix"
+    },
+    "f70d3c9ff9682672": {
+      "text": "jouais",
+      "ms": 1520,
+      "cat": "choix"
+    },
+    "b455513cd90be0a3": {
+      "text": "jouait",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "d75ce0724332eac1": {
+      "text": "joue",
+      "ms": 1760,
+      "cat": "choix"
+    },
+    "2c1fb9ea5354937a": {
+      "text": "jouent",
+      "ms": 1120,
+      "cat": "choix"
+    },
+    "5f67318dcbb1bcf5": {
+      "text": "jouer",
+      "ms": 1440,
+      "cat": "choix"
+    },
+    "1edfb2c750873d17": {
+      "text": "jouera",
+      "ms": 1680,
+      "cat": "choix"
+    },
+    "0a678da8f7ed6c18": {
+      "text": "jouerai",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "e38786a653111ac9": {
+      "text": "joueras",
+      "ms": 1760,
+      "cat": "choix"
+    },
+    "fb9e943aefb5c2b8": {
+      "text": "jouerez",
+      "ms": 1600,
+      "cat": "choix"
+    },
+    "6d5cd40c258aa83b": {
+      "text": "jouerons",
+      "ms": 1760,
+      "cat": "choix"
+    },
+    "83ded8d488070ff8": {
+      "text": "joueront",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "4402a2d4692fc4df": {
+      "text": "joues",
+      "ms": 1120,
+      "cat": "choix"
+    },
+    "39117e9429b827c6": {
+      "text": "jouet",
+      "ms": 1520,
+      "cat": "choix"
+    },
+    "4b8a076a4b23a011": {
+      "text": "jouets",
+      "ms": 1520,
+      "cat": "choix"
+    },
+    "828db0e6bcca326c": {
+      "text": "joueur",
+      "ms": 1440,
+      "cat": "choix"
+    },
+    "ab43069a846addef": {
+      "text": "jouez",
+      "ms": 1440,
+      "cat": "choix"
+    },
+    "331630b0b5280e16": {
+      "text": "jouiez",
+      "ms": 1520,
+      "cat": "choix"
+    },
+    "ac6dae72c297b9d9": {
+      "text": "jouions",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "0610f6dce802a8bf": {
+      "text": "jouons",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "b068ad5220009df9": {
+      "text": "jouèrent",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "7b0b8650e7d63bae": {
+      "text": "joyeux",
+      "ms": 1760,
+      "cat": "choix"
+    },
+    "2ded3a9ce067747d": {
+      "text": "jus",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "65951efea19773f3": {
+      "text": "l'eau gelée du lac",
+      "ms": 1360,
+      "cat": "choix"
+    },
+    "492a9bb2b3bdf857": {
+      "text": "l'homme monte à l'échelle",
+      "ms": 1680,
+      "cat": "choix"
+    },
+    "23ca336051828f71": {
+      "text": "la chenille mange des feuilles",
+      "ms": 2240,
+      "cat": "choix"
+    },
+    "82d6cf345a978f3c": {
+      "text": "la femme plante le grain",
+      "ms": 1760,
+      "cat": "choix"
+    },
+    "0a6ab3abceb137e6": {
+      "text": "la femme va voir la sorcière",
+      "ms": 2080,
+      "cat": "choix"
+    },
+    "89ad2d9c90d13fe1": {
+      "text": "la liste des plats",
+      "ms": 1360,
+      "cat": "choix"
+    },
+    "f61c9f5b8e179352": {
+      "text": "la partie de l'ordinateur",
+      "ms": 1840,
+      "cat": "choix"
+    },
+    "c4fa49579f8a762b": {
+      "text": "la partie verte de l'arbre",
+      "ms": 1760,
+      "cat": "choix"
+    },
+    "ca55d226632662b7": {
+      "text": "la phrase A",
+      "ms": 1440,
+      "cat": "choix"
+    },
+    "bee5a76450304a75": {
+      "text": "la phrase B",
+      "ms": 1520,
+      "cat": "choix"
+    },
+    "8dc99bcfb279af86": {
+      "text": "la règle d'un jeu",
+      "ms": 1360,
+      "cat": "choix"
+    },
+    "db1cfc205180ba11": {
+      "text": "la sorcière donne un grain d'orge",
+      "ms": 2160,
+      "cat": "choix"
+    },
+    "1a73d00469813761": {
+      "text": "laid",
+      "ms": 1520,
+      "cat": "choix"
+    },
+    "05db650c110f5b00": {
+      "text": "lait",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "6e3c0237b2f2d113": {
+      "text": "laitier",
+      "ms": 1840,
+      "cat": "choix"
+    },
+    "4983efca6a4636a6": {
+      "text": "laver les vaches",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "3787d403d6a35a48": {
+      "text": "le",
+      "ms": 640,
+      "cat": "choix"
+    },
+    "1f4b8c12b30f04ea": {
+      "text": "le boulanger",
+      "ms": 1120,
+      "cat": "choix"
+    },
+    "7538a6febfe772f5": {
+      "text": "le bouquet de plumes sur sa tête",
+      "ms": 1920,
+      "cat": "choix"
+    },
+    "9b3996cb854a6902": {
+      "text": "le corbeau ouvre son bec pour chanter",
+      "ms": 2720,
+      "cat": "choix"
+    },
+    "4cbed3a552c34eda": {
+      "text": "le facteur Jacquot",
+      "ms": 1360,
+      "cat": "choix"
+    },
+    "9eccba7a0b83ee9b": {
+      "text": "le gros chien",
+      "ms": 1280,
+      "cat": "choix"
+    },
+    "066e4760a09634bb": {
+      "text": "le jus d'orange",
+      "ms": 1120,
+      "cat": "choix"
+    },
+    "cdf5d8a3cfa493d7": {
+      "text": "le long d'une rivière",
+      "ms": 1520,
+      "cat": "choix"
+    },
+    "c1d044c8644b253d": {
+      "text": "le maître d'école",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "688e419bc26d31f7": {
+      "text": "le premier feu de la saison",
+      "ms": 1840,
+      "cat": "choix"
+    },
+    "e5f517604d0dba3b": {
+      "text": "le renard attrape le fromage tombé",
+      "ms": 2160,
+      "cat": "choix"
+    },
+    "552ec737b1d1a4de": {
+      "text": "le renard dit bonjour et flatte le corbeau",
+      "ms": 2960,
+      "cat": "choix"
+    },
+    "450a53d644525a4d": {
+      "text": "le roi",
+      "ms": 1280,
+      "cat": "choix"
+    },
+    "ecb2034809d75213": {
+      "text": "lent",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "6195b73cd3f19480": {
+      "text": "les deux",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "dc5bd7bdc336dbe3": {
+      "text": "les perce-neiges",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "95ee7888e658f36a": {
+      "text": "les roses",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "927b5c44b7a9e86c": {
+      "text": "les tulipes",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "f6dfecf762e657ec": {
+      "text": "lire",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "53192645b1794de6": {
+      "text": "lourd et lent",
+      "ms": 1440,
+      "cat": "choix"
+    },
+    "8ae9d2362a6bd1a2": {
+      "text": "lune",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "2e89dff320fed9e4": {
+      "text": "légumes",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "72172803e392f0df": {
+      "text": "maintenan",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "1c1184ea7a933c8d": {
+      "text": "maintenant",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "bc4ef1e6d48168e5": {
+      "text": "maison",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "58b306907c2a87bf": {
+      "text": "maisonnette",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "1b751046d28a48cb": {
+      "text": "malheureux",
+      "ms": 1120,
+      "cat": "choix"
+    },
+    "ab05c5b98308ecb0": {
+      "text": "mange",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "2575c395f482e221": {
+      "text": "mange tranquillement",
+      "ms": 1520,
+      "cat": "choix"
+    },
+    "e89153756142e5b4": {
+      "text": "mangea",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "8f7c050dbf269955": {
+      "text": "mangeaient",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "5b2df3a5139f8141": {
+      "text": "mangeais",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "c3644c0c747eac4c": {
+      "text": "mangent",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "2c8b91afb6cf9740": {
+      "text": "mangeons",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "1b99a6fee68faea0": {
+      "text": "manger",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "3cb69329d88781f5": {
+      "text": "manger des graines",
+      "ms": 1360,
+      "cat": "choix"
+    },
+    "fa211947c9760df4": {
+      "text": "manger vite",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "6c360ccec025f8d8": {
+      "text": "mangera",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "34e844637bcadfd3": {
+      "text": "mangerai",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "2cd3cf13540f4997": {
+      "text": "mangeras",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "f412df59d671778d": {
+      "text": "mangeront",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "8aa940ae2758728e": {
+      "text": "manges",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "927482f06d62e610": {
+      "text": "mangez",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "652c065f3f635703": {
+      "text": "mangiez",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "939d87ac6cfc570a": {
+      "text": "mangèrent",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "1a22945040df78f8": {
+      "text": "mangé très vite",
+      "ms": 1120,
+      "cat": "choix"
+    },
+    "31b75d8c05ca0566": {
+      "text": "manteau",
+      "ms": 640,
+      "cat": "choix"
+    },
+    "5f392b0ec095a85b": {
+      "text": "marcher lentement",
+      "ms": 1280,
+      "cat": "choix"
+    },
+    "36650e5360089e28": {
+      "text": "matin",
+      "ms": 720,
+      "cat": "choix"
+    },
+    "f65da36bd483912f": {
+      "text": "mets les graines sur le coton",
+      "ms": 2000,
+      "cat": "choix"
+    },
+    "6ff8a0a7298d809a": {
+      "text": "mintenant",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "d86372bc5a383e1c": {
+      "text": "montagne",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "ee456f8753e0cde4": {
+      "text": "moto",
+      "ms": 720,
+      "cat": "choix"
+    },
+    "f7c553850c8dedd6": {
+      "text": "méchant",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "4be10b7388b44602": {
+      "text": "noir",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "f6b46caff50511c2": {
+      "text": "nombres",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "03ab6c7f2006dd40": {
+      "text": "nuage",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "f8d81aa108c84ee8": {
+      "text": "nuit",
+      "ms": 640,
+      "cat": "choix"
+    },
+    "0896327cc1b68285": {
+      "text": "on fait une grande fête",
+      "ms": 1840,
+      "cat": "choix"
+    },
+    "9a3189dc049398dc": {
+      "text": "on prépare un grand départ",
+      "ms": 2160,
+      "cat": "choix"
+    },
+    "8cc8260aed255639": {
+      "text": "on repeint les murs",
+      "ms": 1520,
+      "cat": "choix"
+    },
+    "a0e174e778f093bc": {
+      "text": "ont",
+      "ms": 640,
+      "cat": "choix"
+    },
+    "5ce5bb2fd0ab5076": {
+      "text": "ont aimé",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "100c596fdce0d2b7": {
+      "text": "ont allées",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "caa4d388af349f17": {
+      "text": "ont donné",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "a7d6c87544a83963": {
+      "text": "ont eu",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "7bd2678f5b9eca8f": {
+      "text": "ont fait",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "bbe60e793f321271": {
+      "text": "ont fini",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "d50aa6cae4feb3aa": {
+      "text": "ont mangé",
+      "ms": 1120,
+      "cat": "choix"
+    },
+    "9a6e658b6f58a7ec": {
+      "text": "ont placé",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "199fddadf1aad645": {
+      "text": "ont regardé",
+      "ms": 1280,
+      "cat": "choix"
+    },
+    "6824849a5127a51e": {
+      "text": "ont trouvé",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "0af7b729a4d627c6": {
+      "text": "orange",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "8f74750d35371589": {
+      "text": "osi",
+      "ms": 1680,
+      "cat": "choix"
+    },
+    "1eea794632135fb7": {
+      "text": "où l'on glisse facilement",
+      "ms": 1840,
+      "cat": "choix"
+    },
+    "49c56421aa35b5e2": {
+      "text": "pandant",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "5ece783519a91d4b": {
+      "text": "parce qu'elle dort",
+      "ms": 1440,
+      "cat": "choix"
+    },
+    "35ef8bbfa1cec50b": {
+      "text": "parce qu'elle est malade",
+      "ms": 2000,
+      "cat": "choix"
+    },
+    "cd6f06349d0f6932": {
+      "text": "parce qu'elle habite un château d'or",
+      "ms": 2400,
+      "cat": "choix"
+    },
+    "ec219a6fab5f9465": {
+      "text": "parce qu'elle n'a pas de jouets",
+      "ms": 1840,
+      "cat": "choix"
+    },
+    "45d71c321db91a0a": {
+      "text": "parce qu'elle n'a pas faim",
+      "ms": 1920,
+      "cat": "choix"
+    },
+    "538518d92368b3d8": {
+      "text": "parce qu'elle porte une robe en or",
+      "ms": 2480,
+      "cat": "choix"
+    },
+    "68cae73dc612ab5f": {
+      "text": "parce qu'elles brillaient la nuit",
+      "ms": 1920,
+      "cat": "choix"
+    },
+    "7ecf69a5735799a4": {
+      "text": "parce qu'elles faisaient du bruit",
+      "ms": 2080,
+      "cat": "choix"
+    },
+    "0efa5033825f523e": {
+      "text": "parce qu'elles faisaient travailler son imagination",
+      "ms": 2960,
+      "cat": "choix"
+    },
+    "52f84a8a458b23e9": {
+      "text": "parce qu'elles étaient toutes petites",
+      "ms": 2320,
+      "cat": "choix"
+    },
+    "99bde0e84e563eea": {
+      "text": "parce qu'elles étaient à manger",
+      "ms": 2160,
+      "cat": "choix"
+    },
+    "5867d46f5d12ebd9": {
+      "text": "parce qu'il a peur",
+      "ms": 1440,
+      "cat": "choix"
+    },
+    "605f679622eddbe2": {
+      "text": "parce qu'il pleut",
+      "ms": 1280,
+      "cat": "choix"
+    },
+    "bb282b17e737e853": {
+      "text": "parce qu'ils aiment sa chaleur et sa lumière",
+      "ms": 3040,
+      "cat": "choix"
+    },
+    "954a69ae8999442d": {
+      "text": "parce qu'ils ont très faim",
+      "ms": 1920,
+      "cat": "choix"
+    },
+    "04e8dee521dfe02f": {
+      "text": "parce qu'ils veulent jouer au ballon",
+      "ms": 2320,
+      "cat": "choix"
+    },
+    "9f87f1b539f86133": {
+      "text": "parce que Jacques crie très fort",
+      "ms": 2640,
+      "cat": "choix"
+    },
+    "dde5780094d2b986": {
+      "text": "parce que Jacques est doux et gentil avec lui",
+      "ms": 3520,
+      "cat": "choix"
+    },
+    "36b7fc6ba5b43d63": {
+      "text": "parce que les feuilles étaient très hautes",
+      "ms": 2880,
+      "cat": "choix"
+    },
+    "45c5f0c031964093": {
+      "text": "parce que ses cheveux sont plus fins et plus blonds que l'or",
+      "ms": 3680,
+      "cat": "choix"
+    },
+    "605d684ba9919afc": {
+      "text": "parce que son long bec n'y arrive pas",
+      "ms": 2720,
+      "cat": "choix"
+    },
+    "53070bc5ade93b17": {
+      "text": "parla",
+      "ms": 640,
+      "cat": "choix"
+    },
+    "48520af56939a315": {
+      "text": "parlaient",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "70b5a57b30b9ff0e": {
+      "text": "parlais",
+      "ms": 1760,
+      "cat": "choix"
+    },
+    "86778bf0cb88565b": {
+      "text": "parlait",
+      "ms": 1120,
+      "cat": "choix"
+    },
+    "a0377c84a5f47562": {
+      "text": "parle",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "8d77bde64ea85937": {
+      "text": "parlent",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "10810e6b246bec76": {
+      "text": "parlera",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "9ab5f6dcce206483": {
+      "text": "parlerai",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "31504e95a57b3410": {
+      "text": "parleras",
+      "ms": 1680,
+      "cat": "choix"
+    },
+    "4cfd6f51bd346f7b": {
+      "text": "parlerez",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "09123cbce81cc048": {
+      "text": "parleront",
+      "ms": 1280,
+      "cat": "choix"
+    },
+    "f9cc91a10de07d34": {
+      "text": "parles",
+      "ms": 720,
+      "cat": "choix"
+    },
+    "c5101e9cabf89cbd": {
+      "text": "parlez",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "d1014bf0d9ab24da": {
+      "text": "parliez",
+      "ms": 1840,
+      "cat": "choix"
+    },
+    "aa9d18dfc9f8607d": {
+      "text": "parlions",
+      "ms": 1840,
+      "cat": "choix"
+    },
+    "b9bfa7e481d2c837": {
+      "text": "parlons",
+      "ms": 640,
+      "cat": "choix"
+    },
+    "7a030bf9b4ddbc54": {
+      "text": "parlèrent",
+      "ms": 1520,
+      "cat": "choix"
+    },
+    "5ce9b3cb1aa913bd": {
+      "text": "pelle",
+      "ms": 720,
+      "cat": "choix"
+    },
+    "2d47747a9e74c0cb": {
+      "text": "pendan",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "c897317eca585185": {
+      "text": "pendant",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "a9fd94cfad13fa10": {
+      "text": "permis",
+      "ms": 720,
+      "cat": "choix"
+    },
+    "410ed6a5c7118ee8": {
+      "text": "petit",
+      "ms": 720,
+      "cat": "choix"
+    },
+    "c3bac17b98bc3fc4": {
+      "text": "place",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "7347b614fc23e754": {
+      "text": "placent",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "9835fbf0cbafdff6": {
+      "text": "placeras",
+      "ms": 1520,
+      "cat": "choix"
+    },
+    "1d5feafb6da5c80d": {
+      "text": "placerez",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "e1f2113fe08092ae": {
+      "text": "placeront",
+      "ms": 1680,
+      "cat": "choix"
+    },
+    "cad226110161c01f": {
+      "text": "places",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "67504045456c0eb4": {
+      "text": "placez",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "431ce0f2bae453c1": {
+      "text": "placiez",
+      "ms": 1120,
+      "cat": "choix"
+    },
+    "0f2bc8abf7bc9791": {
+      "text": "placèrent",
+      "ms": 1120,
+      "cat": "choix"
+    },
+    "e57a7aa89df4020d": {
+      "text": "plaça",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "58f3f28efdbe2e4e": {
+      "text": "plaçaient",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "19195b741861753a": {
+      "text": "plaçais",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "083ae514fc968346": {
+      "text": "plaçait",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "fa0ea05585c8b158": {
+      "text": "plaçons",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "24121b82e04b0c27": {
+      "text": "plisser",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "1de07ee0d8385d3d": {
+      "text": "poire",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "d3cd7e50eba1a560": {
+      "text": "poireau",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "c7ce431c0d943304": {
+      "text": "pomme",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "3f790f0c8794f496": {
+      "text": "pose du coton dans le pot",
+      "ms": 1920,
+      "cat": "choix"
+    },
+    "47013b0b3cf441dd": {
+      "text": "poser",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "2b83f7aa63e5e6bc": {
+      "text": "prendrez",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "6f5da4c86e2b10de": {
+      "text": "prends",
+      "ms": 480,
+      "cat": "choix"
+    },
+    "0dfc12ce24146fad": {
+      "text": "prenez",
+      "ms": 720,
+      "cat": "choix"
+    },
+    "4095470cdb8ab8ed": {
+      "text": "preniez",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "2e86a0049cf08c88": {
+      "text": "qui brille",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "5114fe45bf5961a2": {
+      "text": "qui court",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "bccfef70fda48d88": {
+      "text": "qui court vite",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "0f5cb7053b9e07de": {
+      "text": "qui dort",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "eac5f29e87559002": {
+      "text": "qui ne bouge pas du tout",
+      "ms": 1440,
+      "cat": "choix"
+    },
+    "8d17391760ac5e68": {
+      "text": "qui parle fort",
+      "ms": 1520,
+      "cat": "choix"
+    },
+    "5ffa813f4aff24da": {
+      "text": "quinze ans",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "87fffbfc6ceca717": {
+      "text": "ranger",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "3b8997f14bad36fa": {
+      "text": "rapide",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "f8284f44c606328f": {
+      "text": "recolorier",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "f70cea947057e402": {
+      "text": "refaire",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "ef0505b70fdecb80": {
+      "text": "regarda",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "d6a0d5b390535f13": {
+      "text": "regardaient",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "cbb1d2545f615b89": {
+      "text": "regardais",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "f06797305a33e841": {
+      "text": "regardait",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "ec74dfbc802f59fd": {
+      "text": "regarde",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "ddfc57821e6614a4": {
+      "text": "regardent",
+      "ms": 1120,
+      "cat": "choix"
+    },
+    "b0a43f1e5c5b8226": {
+      "text": "regarder longtemps avec plaisir",
+      "ms": 2080,
+      "cat": "choix"
+    },
+    "e807e9883962c22c": {
+      "text": "regardera",
+      "ms": 1600,
+      "cat": "choix"
+    },
+    "6d1f7059a7c35b4d": {
+      "text": "regarderai",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "263091cd394cab36": {
+      "text": "regarderas",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "ca48a2ed9e310ac3": {
+      "text": "regarderez",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "ad0635f391e7f5f6": {
+      "text": "regarderons",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "3ce8c8720415191c": {
+      "text": "regarderont",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "847c7d07319bd244": {
+      "text": "regardes",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "b504eed1db629d66": {
+      "text": "regardez",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "ed72e2850ef04bf2": {
+      "text": "regardiez",
+      "ms": 1120,
+      "cat": "choix"
+    },
+    "752789e22b172506": {
+      "text": "regardions",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "9fd6dc5c3b882bae": {
+      "text": "regardons",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "107d8d84d4066d7b": {
+      "text": "regardèrent",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "1a5eea32a4b98fba": {
+      "text": "relire",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "d4ff65f1b7204591": {
+      "text": "renard",
+      "ms": 1120,
+      "cat": "choix"
+    },
+    "d89f96e81525defc": {
+      "text": "respiré pour sentir l'odeur",
+      "ms": 2240,
+      "cat": "choix"
+    },
+    "c3bc35526124f9a9": {
+      "text": "rester tranquilles en place",
+      "ms": 2080,
+      "cat": "choix"
+    },
+    "fd0e616b3400ffd0": {
+      "text": "rien du tout",
+      "ms": 1440,
+      "cat": "choix"
+    },
+    "856b8e6cc033e1b1": {
+      "text": "rouge",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "0f717d5d678a4a0d": {
+      "text": "route",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "7c6f46013c66e1e1": {
+      "text": "sa marraine la fée",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "ec278556e1c41397": {
+      "text": "sa maîtresse",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "cd2819d1c2d9377a": {
+      "text": "sa queue",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "3c784fbe6d6efb95": {
+      "text": "sa voisine",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "80fbd1454e85427d": {
+      "text": "saute",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "62e9d6f9140d0302": {
+      "text": "sauter",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "82084b5cca4de83d": {
+      "text": "se marier",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "ad0bd577b60bc084": {
+      "text": "sera",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "d2e05b607a45d9de": {
+      "text": "serai",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "5bb0f4a1bd97b555": {
+      "text": "seras",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "32ac8a03ee154471": {
+      "text": "serez",
+      "ms": 1120,
+      "cat": "choix"
+    },
+    "1945f27914fd3821": {
+      "text": "serons",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "65f3affc64f0d54c": {
+      "text": "seront",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "0516a93afb74b4ab": {
+      "text": "ses dents",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "32d7c452122e772f": {
+      "text": "ses griffes",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "a0b8620224f472c2": {
+      "text": "soir",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "8b3833e35ab46bc7": {
+      "text": "sommes",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "24f46b3539e4546d": {
+      "text": "sommes aimé",
+      "ms": 1520,
+      "cat": "choix"
+    },
+    "5ec6e2e6bf99fba0": {
+      "text": "sommes regardé",
+      "ms": 1520,
+      "cat": "choix"
+    },
+    "1956b3087db37feb": {
+      "text": "sommes trouvé",
+      "ms": 1360,
+      "cat": "choix"
+    },
+    "b5abff4f016bb5e5": {
+      "text": "son maître est rentré",
+      "ms": 1440,
+      "cat": "choix"
+    },
+    "1e813fd81346fd4a": {
+      "text": "sonnette",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "e5055b14de7d83f5": {
+      "text": "sont",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "bdde34349da5f006": {
+      "text": "sont allées",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "591af8fc394622ea": {
+      "text": "sont allés",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "da392a6510379223": {
+      "text": "sont partis",
+      "ms": 1440,
+      "cat": "choix"
+    },
+    "5e32063dce7b4059": {
+      "text": "sont regardé",
+      "ms": 1520,
+      "cat": "choix"
+    },
+    "9bd3a9b9322a62d1": {
+      "text": "sont venues",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "c9458883747696f6": {
+      "text": "sont venus",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "4e3ffc92a807ea04": {
+      "text": "souris",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "17cd1476382ab522": {
+      "text": "souvant",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "69a7ded6d7732708": {
+      "text": "souven",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "02cc26f4d7a3559e": {
+      "text": "souvent",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "b920e26b525a0833": {
+      "text": "suis",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "d3d0633cffc254ba": {
+      "text": "suis allé",
+      "ms": 1280,
+      "cat": "choix"
+    },
+    "521a434bce5a4ada": {
+      "text": "suis donné",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "f4e881c9596ca7c9": {
+      "text": "suis joué",
+      "ms": 1120,
+      "cat": "choix"
+    },
+    "3ad2f4dc70ac1439": {
+      "text": "suis venu",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "969beac8bdf17f50": {
+      "text": "sur la perche de la ligne",
+      "ms": 1840,
+      "cat": "choix"
+    },
+    "8f5bf272d3060625": {
+      "text": "sur une fleur",
+      "ms": 1360,
+      "cat": "choix"
+    },
+    "1b4fd1d3ca38ab8e": {
+      "text": "sur une grande branche",
+      "ms": 1680,
+      "cat": "choix"
+    },
+    "ff537bbcc588c740": {
+      "text": "sur une montagne",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "378f583c741504d3": {
+      "text": "surveille avec attention",
+      "ms": 2000,
+      "cat": "choix"
+    },
+    "a1ba9865a299b59f": {
+      "text": "sérieux",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "9cb9aee2f8f4c14f": {
+      "text": "table",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "f973056c4fbe1775": {
+      "text": "tableau",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "70215d4c8edf153a": {
+      "text": "tarte",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "17961c70ebcd22b3": {
+      "text": "tartelette",
+      "ms": 1680,
+      "cat": "choix"
+    },
+    "e641e40697284ae9": {
+      "text": "terrain",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "2fafa2ba596429c1": {
+      "text": "tirer le lait des vaches",
+      "ms": 1760,
+      "cat": "choix"
+    },
+    "1ee82cc14d997ccf": {
+      "text": "tiède",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "a71cad4bbe610fbc": {
+      "text": "toujour",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "f2b455d170cec725": {
+      "text": "toujours",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "b7e5a32a065e99ff": {
+      "text": "toulours",
+      "ms": 1120,
+      "cat": "choix"
+    },
+    "982c1a98a59019c3": {
+      "text": "tout triste",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "c06089553813e319": {
+      "text": "toute droite",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "50e73fafaed00add": {
+      "text": "triste",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "17ad371e0e1b5065": {
+      "text": "tro",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "1dc639b6d9c92eff": {
+      "text": "trop",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "18690c3bbb58c241": {
+      "text": "trops",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "be5cf88dd37a5d25": {
+      "text": "trouva",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "1de61cacc46087d2": {
+      "text": "trouvaient",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "c1d5b3773584d357": {
+      "text": "trouvais",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "864336e56f44594d": {
+      "text": "trouvait",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "e80ab6887efb0217": {
+      "text": "trouve",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "9683469dd795e92e": {
+      "text": "trouvent",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "90c57ea37339b49e": {
+      "text": "trouvera",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "ace1d5069a121a09": {
+      "text": "trouverai",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "4018a0672ba23235": {
+      "text": "trouveras",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "603cec3b1f01c6b8": {
+      "text": "trouverez",
+      "ms": 1120,
+      "cat": "choix"
+    },
+    "993e4113c9e08d5a": {
+      "text": "trouverons",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "3cbee73f4101cb52": {
+      "text": "trouveront",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "e240066f1a5aaafd": {
+      "text": "trouves",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "192a751e06e15576": {
+      "text": "trouvez",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "0fec589bfd00b568": {
+      "text": "trouviez",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "074e7a41b8fb5cbb": {
+      "text": "trouvions",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "b884df0c379e269f": {
+      "text": "trouvons",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "43ae708e722b0472": {
+      "text": "trouvèrent",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "89d23d07127041d0": {
+      "text": "très agréable, pleine de petits plaisirs",
+      "ms": 3200,
+      "cat": "choix"
+    },
+    "a79e016d664becc2": {
+      "text": "très bien, elles ne se disputent jamais",
+      "ms": 2640,
+      "cat": "choix"
+    },
+    "f1781d67606706b8": {
+      "text": "très ennuyeuse",
+      "ms": 1520,
+      "cat": "choix"
+    },
+    "80d4d45e2cfcf379": {
+      "text": "très fatigante et triste",
+      "ms": 1840,
+      "cat": "choix"
+    },
+    "a00ce19dc4d7430b": {
+      "text": "très large",
+      "ms": 1360,
+      "cat": "choix"
+    },
+    "df77d2c4eb205617": {
+      "text": "très mal, elles crient tout le temps",
+      "ms": 2480,
+      "cat": "choix"
+    },
+    "bae4c242860fc450": {
+      "text": "tu coupes l'orange en deux",
+      "ms": 1920,
+      "cat": "choix"
+    },
+    "90252e744480dd52": {
+      "text": "tu presses chaque moitié",
+      "ms": 1840,
+      "cat": "choix"
+    },
+    "4f0b59b1f7aa1c26": {
+      "text": "un animal",
+      "ms": 1360,
+      "cat": "choix"
+    },
+    "853ea22509b6f426": {
+      "text": "un autre chat, comme un frère",
+      "ms": 2320,
+      "cat": "choix"
+    },
+    "7378c18688c1c909": {
+      "text": "un bateau",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "440e747a7150a287": {
+      "text": "un bouton de fleur",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "cb61828d7aa071de": {
+      "text": "un bouton sur la peau",
+      "ms": 1520,
+      "cat": "choix"
+    },
+    "baf27a5dda967482": {
+      "text": "un chien",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "8ab0f93d251e6a15": {
+      "text": "un dessert froid et sucré",
+      "ms": 2000,
+      "cat": "choix"
+    },
+    "9d58b1d57521a9ca": {
+      "text": "un dessin du pays",
+      "ms": 1360,
+      "cat": "choix"
+    },
+    "a7181a64db818997": {
+      "text": "un filet pour attraper les animaux",
+      "ms": 2240,
+      "cat": "choix"
+    },
+    "ca443bf0020cc155": {
+      "text": "un fruit",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "6df360c4b486033a": {
+      "text": "un grand bâtiment haut",
+      "ms": 1840,
+      "cat": "choix"
+    },
+    "d74b1d616eea7205": {
+      "text": "un gros orage",
+      "ms": 1520,
+      "cat": "choix"
+    },
+    "d1df603a9da521de": {
+      "text": "un gros poisson",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "f7b28ddae81b4c7f": {
+      "text": "un gros rocher",
+      "ms": 1360,
+      "cat": "choix"
+    },
+    "1b01e237ad097d09": {
+      "text": "un gros tas",
+      "ms": 1440,
+      "cat": "choix"
+    },
+    "d44502718eb48d63": {
+      "text": "un gâteau",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "6d2221bd78cec64a": {
+      "text": "un légume",
+      "ms": 1120,
+      "cat": "choix"
+    },
+    "0b543165873f4bd2": {
+      "text": "un marchand de pain",
+      "ms": 1440,
+      "cat": "choix"
+    },
+    "6b38c77dbba49b9c": {
+      "text": "un maître d'école",
+      "ms": 1120,
+      "cat": "choix"
+    },
+    "59afa4eca965f9bd": {
+      "text": "un miroir",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "1b070d743f041332": {
+      "text": "un morceau",
+      "ms": 1120,
+      "cat": "choix"
+    },
+    "f70135477b9fd051": {
+      "text": "un objet plat pour tracer",
+      "ms": 1920,
+      "cat": "choix"
+    },
+    "6633ff40732132e4": {
+      "text": "un oiseau",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "7bdbf9cc2cce95b1": {
+      "text": "un oiseau rare",
+      "ms": 1360,
+      "cat": "choix"
+    },
+    "2b51cc9f33838bed": {
+      "text": "un papillon s'envole",
+      "ms": 1520,
+      "cat": "choix"
+    },
+    "d916fe7dce236706": {
+      "text": "un petit animal",
+      "ms": 1520,
+      "cat": "choix"
+    },
+    "76922ac7817ca049": {
+      "text": "un petit cours d'eau",
+      "ms": 1440,
+      "cat": "choix"
+    },
+    "0c215e56b42247b2": {
+      "text": "un petit escargot",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "763df55f5ac43ad2": {
+      "text": "un petit oiseau",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "9067da1f185e61cc": {
+      "text": "un petit poisson",
+      "ms": 1280,
+      "cat": "choix"
+    },
+    "aa320ec3f2ac452a": {
+      "text": "un petit voyage",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "a2a4a674d038fa63": {
+      "text": "un pêcheur",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "9905c77be541af18": {
+      "text": "un roi très gentil",
+      "ms": 1360,
+      "cat": "choix"
+    },
+    "e850043daf75fcdf": {
+      "text": "un ticket de train",
+      "ms": 1280,
+      "cat": "choix"
+    },
+    "7a90347577b8e781": {
+      "text": "un tour de magie",
+      "ms": 1120,
+      "cat": "choix"
+    },
+    "1855fc668985c5e3": {
+      "text": "un très bon repas de fête",
+      "ms": 1920,
+      "cat": "choix"
+    },
+    "6ab4855bd04c7ee7": {
+      "text": "une bougie",
+      "ms": 1280,
+      "cat": "choix"
+    },
+    "09d4823b02618fc1": {
+      "text": "une carte de France",
+      "ms": 1360,
+      "cat": "choix"
+    },
+    "2bc0ea1ba8b1d1fc": {
+      "text": "une carte à jouer",
+      "ms": 1280,
+      "cat": "choix"
+    },
+    "2036e5871788965a": {
+      "text": "une couleur",
+      "ms": 1280,
+      "cat": "choix"
+    },
+    "645f988683496ea9": {
+      "text": "une feuille de papier",
+      "ms": 1600,
+      "cat": "choix"
+    },
+    "cc27b7793d48ced0": {
+      "text": "une fleur pousse",
+      "ms": 1760,
+      "cat": "choix"
+    },
+    "c1dc25efd8cbcfad": {
+      "text": "une grande boîte",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "e48ffe8dc6606a80": {
+      "text": "une grande lampe",
+      "ms": 1280,
+      "cat": "choix"
+    },
+    "bda37b558f4ed3be": {
+      "text": "une grosse pierre",
+      "ms": 1120,
+      "cat": "choix"
+    },
+    "948116b7ca0054d3": {
+      "text": "une grosse souris",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "f91863379fc70614": {
+      "text": "une loi",
+      "ms": 1040,
+      "cat": "choix"
     }
   },
   "keys": {
@@ -19487,6 +22917,692 @@
     "txt:43599b1ccc585a78": "43599b1ccc585a78",
     "txt:ee1a30f88af7c68b": "ee1a30f88af7c68b",
     "txt:ffc627fd1fdeda09": "ffc627fd1fdeda09",
-    "txt:165a9c4bb7418e84": "165a9c4bb7418e84"
+    "txt:165a9c4bb7418e84": "165a9c4bb7418e84",
+    "txt:8786047c6e461bfb": "8786047c6e461bfb",
+    "txt:6d38c377fb7a3737": "6d38c377fb7a3737",
+    "txt:81bc8684269659b8": "81bc8684269659b8",
+    "txt:5e38e56dceb35211": "5e38e56dceb35211",
+    "txt:56cf5d1384a21396": "56cf5d1384a21396",
+    "txt:b9e92c51e60e51dd": "b9e92c51e60e51dd",
+    "txt:583b761a5b1d774b": "583b761a5b1d774b",
+    "txt:6ddccf84c83afa71": "6ddccf84c83afa71",
+    "txt:48b9228c03aad175": "48b9228c03aad175",
+    "txt:07a987a34a9d33a7": "07a987a34a9d33a7",
+    "txt:27b3d059dd04e1bd": "27b3d059dd04e1bd",
+    "txt:e5330d5e225987ec": "e5330d5e225987ec",
+    "txt:b4057616efb77d86": "b4057616efb77d86",
+    "txt:9afc6c64581fc1fe": "9afc6c64581fc1fe",
+    "txt:9d9c564eb91b296f": "9d9c564eb91b296f",
+    "txt:79d91c031cb19757": "79d91c031cb19757",
+    "txt:0eb35e8f23625fab": "0eb35e8f23625fab",
+    "txt:36d064e0a30e508d": "36d064e0a30e508d",
+    "txt:114f87f76ce8cffc": "114f87f76ce8cffc",
+    "txt:a104188c82afe5a3": "a104188c82afe5a3",
+    "txt:c8caa233dd87adfb": "c8caa233dd87adfb",
+    "txt:72454bbcdb105ca2": "72454bbcdb105ca2",
+    "txt:0934f41f21bb1ece": "0934f41f21bb1ece",
+    "txt:c8de147faa7777f7": "c8de147faa7777f7",
+    "txt:ababf0302ba9beb1": "ababf0302ba9beb1",
+    "txt:5261ac8ab628ae6d": "5261ac8ab628ae6d",
+    "txt:e5f9efde69f6df85": "e5f9efde69f6df85",
+    "txt:534151d8d6c9dd1d": "534151d8d6c9dd1d",
+    "txt:8fa5c765de6730e7": "8fa5c765de6730e7",
+    "txt:5c5dbe4230287de1": "5c5dbe4230287de1",
+    "txt:8b2ae7e88d2bdca4": "8b2ae7e88d2bdca4",
+    "txt:affa8b4e1b7a4615": "affa8b4e1b7a4615",
+    "txt:c3264b5e8daa9acc": "c3264b5e8daa9acc",
+    "txt:ba54395d7da70f4e": "ba54395d7da70f4e",
+    "txt:d2f473496d559bbd": "d2f473496d559bbd",
+    "txt:2106686049a63280": "2106686049a63280",
+    "txt:18eb3cef83f80c4a": "18eb3cef83f80c4a",
+    "txt:cd06bbfde2ea6a59": "cd06bbfde2ea6a59",
+    "txt:6111b96848418c88": "6111b96848418c88",
+    "txt:4b62484592149c49": "4b62484592149c49",
+    "txt:c9ab67c436fb99ec": "c9ab67c436fb99ec",
+    "txt:12a5ef9370809f87": "12a5ef9370809f87",
+    "txt:da683a6724cdd114": "da683a6724cdd114",
+    "txt:5b7d39dac8d7b578": "5b7d39dac8d7b578",
+    "txt:11083ef0a9c9dbaf": "11083ef0a9c9dbaf",
+    "txt:f026759f7dcc14bf": "f026759f7dcc14bf",
+    "txt:524c9371d3f7b55a": "524c9371d3f7b55a",
+    "txt:35f0c98770c081f6": "35f0c98770c081f6",
+    "txt:c4b21663d1d94004": "c4b21663d1d94004",
+    "txt:7fdaba7e1c752654": "7fdaba7e1c752654",
+    "txt:5604c1fe3527b5e4": "5604c1fe3527b5e4",
+    "txt:27ff05e81a8a9336": "27ff05e81a8a9336",
+    "txt:6b29db7a2a65868b": "6b29db7a2a65868b",
+    "txt:71b6d166b7e9e795": "71b6d166b7e9e795",
+    "txt:40f4fb38abec981f": "40f4fb38abec981f",
+    "txt:ae0cfc413ae8083b": "ae0cfc413ae8083b",
+    "txt:b4ecc880d46e30e2": "b4ecc880d46e30e2",
+    "txt:5bf275fab34752b3": "5bf275fab34752b3",
+    "txt:7721987c211cb725": "7721987c211cb725",
+    "txt:e4c22a91e497196e": "e4c22a91e497196e",
+    "txt:daeb3dda3fdb3766": "daeb3dda3fdb3766",
+    "txt:7496d51113de4ac2": "7496d51113de4ac2",
+    "txt:7e816481d125e096": "7e816481d125e096",
+    "txt:fdb192c47e7ce0e6": "fdb192c47e7ce0e6",
+    "txt:64d97d95eaf7cb11": "64d97d95eaf7cb11",
+    "txt:6a0fd9043dcf02dd": "6a0fd9043dcf02dd",
+    "txt:e3a357bdea762dbe": "e3a357bdea762dbe",
+    "txt:d394e26624817a13": "d394e26624817a13",
+    "txt:cdb17e11bf357b2f": "cdb17e11bf357b2f",
+    "txt:b9895dd86a5d6f9f": "b9895dd86a5d6f9f",
+    "txt:21359ffd3ccc5f98": "21359ffd3ccc5f98",
+    "txt:50fac8e46eae05c2": "50fac8e46eae05c2",
+    "txt:56c5835d02f86edc": "56c5835d02f86edc",
+    "txt:28f0cf190882b38d": "28f0cf190882b38d",
+    "txt:9590666fbd692e3a": "9590666fbd692e3a",
+    "txt:57e04392f3ace14d": "57e04392f3ace14d",
+    "txt:920e80dcb2ae57c1": "920e80dcb2ae57c1",
+    "txt:1643c007113c29c6": "1643c007113c29c6",
+    "txt:b08c6320476f421b": "b08c6320476f421b",
+    "txt:c13105da7e0eb4cf": "c13105da7e0eb4cf",
+    "txt:cdcd629ee995c380": "cdcd629ee995c380",
+    "txt:ea2b6db5cdf1160e": "ea2b6db5cdf1160e",
+    "txt:71578487437ac8bd": "71578487437ac8bd",
+    "txt:a8da842009012dfe": "a8da842009012dfe",
+    "txt:216e718290c15120": "216e718290c15120",
+    "txt:294a967def8dbfb5": "294a967def8dbfb5",
+    "txt:1234a7829c3bfc27": "1234a7829c3bfc27",
+    "txt:1f1dedda8f1dbc07": "1f1dedda8f1dbc07",
+    "txt:d6c8267f5dc5f147": "d6c8267f5dc5f147",
+    "txt:bb9c6a3d86d0a6a8": "bb9c6a3d86d0a6a8",
+    "txt:6960fec91ec33342": "6960fec91ec33342",
+    "txt:1613747fcb7cfbaf": "1613747fcb7cfbaf",
+    "txt:cf8fce8a01596ec8": "cf8fce8a01596ec8",
+    "txt:95aceac99dfba0e6": "95aceac99dfba0e6",
+    "txt:f62c659b4d3d83fd": "f62c659b4d3d83fd",
+    "txt:320a6c79015bfe3d": "320a6c79015bfe3d",
+    "txt:7ece6eef39f994ef": "7ece6eef39f994ef",
+    "txt:be4fe2e50371cd92": "be4fe2e50371cd92",
+    "txt:07a679ee612730d0": "07a679ee612730d0",
+    "txt:20a30a7cb6b0c09d": "20a30a7cb6b0c09d",
+    "txt:4c7ed0affb263ed8": "4c7ed0affb263ed8",
+    "txt:f6c98a30a9d1bed1": "f6c98a30a9d1bed1",
+    "txt:a2683b3049a50a39": "a2683b3049a50a39",
+    "txt:a6e5987ff9a01a7f": "a6e5987ff9a01a7f",
+    "txt:554640d4b548da61": "554640d4b548da61",
+    "txt:1ab077e99199b42f": "1ab077e99199b42f",
+    "txt:fd3f1d96222732e8": "fd3f1d96222732e8",
+    "txt:91e162cb41b850e8": "91e162cb41b850e8",
+    "txt:75b2ad64635f9256": "75b2ad64635f9256",
+    "txt:128ed496fc7437ad": "128ed496fc7437ad",
+    "txt:7d32464b7b026935": "7d32464b7b026935",
+    "txt:7ff91b504fedcf14": "7ff91b504fedcf14",
+    "txt:29e5fdd96b2cc951": "29e5fdd96b2cc951",
+    "txt:c08852b14988f5a0": "c08852b14988f5a0",
+    "txt:88e5ed4e44823fa6": "88e5ed4e44823fa6",
+    "txt:74b410893adfce05": "74b410893adfce05",
+    "txt:ac91a44176cb8992": "ac91a44176cb8992",
+    "txt:abe0ea05689e3948": "abe0ea05689e3948",
+    "txt:0f19bdb4663a462c": "0f19bdb4663a462c",
+    "txt:277a40c4f2267c1c": "277a40c4f2267c1c",
+    "txt:1f9fc716aca92382": "1f9fc716aca92382",
+    "txt:c09a0c71df2f2950": "c09a0c71df2f2950",
+    "txt:dbd9d1549ffae28b": "dbd9d1549ffae28b",
+    "txt:197a3c1fad06bc6d": "197a3c1fad06bc6d",
+    "txt:ba76e0d08f8ad6fa": "ba76e0d08f8ad6fa",
+    "txt:fb71b3a14f31da2d": "fb71b3a14f31da2d",
+    "txt:6d2f830ce764f6d5": "6d2f830ce764f6d5",
+    "txt:7ad0c69d052031ae": "7ad0c69d052031ae",
+    "txt:a77629ffc1f3281b": "a77629ffc1f3281b",
+    "txt:f58e5f2962b07531": "f58e5f2962b07531",
+    "txt:088aa9f221df7840": "088aa9f221df7840",
+    "txt:9827e96b1f944487": "9827e96b1f944487",
+    "txt:eb9b3a6841e2a0f0": "eb9b3a6841e2a0f0",
+    "txt:8981942d9ca6162d": "8981942d9ca6162d",
+    "txt:2a04fcc2fd50ad79": "2a04fcc2fd50ad79",
+    "txt:90fc5ca3cc41c6e7": "90fc5ca3cc41c6e7",
+    "txt:0da3105dccde29a5": "0da3105dccde29a5",
+    "txt:c50603a4567cb5ad": "c50603a4567cb5ad",
+    "txt:d30a0aba7076a192": "d30a0aba7076a192",
+    "txt:5565b1f05374dabf": "5565b1f05374dabf",
+    "txt:36e483722339dc95": "36e483722339dc95",
+    "txt:a80a58cfe53abeef": "a80a58cfe53abeef",
+    "txt:5271d6e385b57b9d": "5271d6e385b57b9d",
+    "txt:b35ab5f60feb3bc5": "b35ab5f60feb3bc5",
+    "txt:bc5bdfcd7eb9f26a": "bc5bdfcd7eb9f26a",
+    "txt:5c7351f5c3a68541": "5c7351f5c3a68541",
+    "txt:7cf668e8d4be2a6b": "7cf668e8d4be2a6b",
+    "txt:2b28e2aa69105379": "2b28e2aa69105379",
+    "txt:57848bd92e14b0fd": "57848bd92e14b0fd",
+    "txt:f47f5ffdfb708500": "f47f5ffdfb708500",
+    "txt:0c5ffce20d42abe6": "0c5ffce20d42abe6",
+    "txt:b497a1bec7650847": "b497a1bec7650847",
+    "txt:1ab366a4962d8159": "1ab366a4962d8159",
+    "txt:c879d93b550d3a1e": "c879d93b550d3a1e",
+    "txt:91d2ec7069eb6535": "91d2ec7069eb6535",
+    "txt:b654eea536f6d71d": "b654eea536f6d71d",
+    "txt:4455f289e4f628a5": "4455f289e4f628a5",
+    "txt:9af8b780c7dc61fb": "9af8b780c7dc61fb",
+    "txt:ecbcf1f4a99187a8": "ecbcf1f4a99187a8",
+    "txt:addcdbee784548a2": "addcdbee784548a2",
+    "txt:2f818060a18b17b3": "2f818060a18b17b3",
+    "txt:577bacd09b8db11d": "577bacd09b8db11d",
+    "txt:54bb0fe8fcc2d992": "54bb0fe8fcc2d992",
+    "txt:28cb28b8ecac10b0": "28cb28b8ecac10b0",
+    "txt:61eb6930d41d74f3": "61eb6930d41d74f3",
+    "txt:ee1e0961827cbfcc": "ee1e0961827cbfcc",
+    "txt:5f84699eb1639784": "5f84699eb1639784",
+    "txt:3fd5479e6f43fe8a": "3fd5479e6f43fe8a",
+    "txt:d66904c910d5cae7": "d66904c910d5cae7",
+    "txt:59311c79f9a3a722": "59311c79f9a3a722",
+    "txt:cd95edf4f6e12f16": "cd95edf4f6e12f16",
+    "txt:b874a058d0932dfb": "b874a058d0932dfb",
+    "txt:204c73874737dd24": "204c73874737dd24",
+    "txt:b2573266e8df8c27": "b2573266e8df8c27",
+    "txt:7c641e9d18720654": "7c641e9d18720654",
+    "txt:20b762deafc0c5d2": "20b762deafc0c5d2",
+    "txt:69d0493571d4d7d9": "69d0493571d4d7d9",
+    "txt:bbc71ce77c4e6a06": "bbc71ce77c4e6a06",
+    "txt:dd6300acb2666d37": "dd6300acb2666d37",
+    "txt:6df7b0022d93318d": "6df7b0022d93318d",
+    "txt:f07267dbcf378282": "f07267dbcf378282",
+    "txt:2e5076c83c279763": "2e5076c83c279763",
+    "txt:71d12e572237f148": "71d12e572237f148",
+    "txt:c17524f3d6dc1fea": "c17524f3d6dc1fea",
+    "txt:365722ba0e42a655": "365722ba0e42a655",
+    "txt:124d032b21a94c9e": "124d032b21a94c9e",
+    "txt:d4c195c9e467a6c4": "d4c195c9e467a6c4",
+    "txt:a2767b1b5900e956": "a2767b1b5900e956",
+    "txt:4e81e349650bfb8c": "4e81e349650bfb8c",
+    "txt:4cb52393d30bf4ce": "4cb52393d30bf4ce",
+    "txt:29cc5f103e7dd582": "29cc5f103e7dd582",
+    "txt:70ea484f0c0a93f7": "70ea484f0c0a93f7",
+    "txt:5ad886d86833c905": "5ad886d86833c905",
+    "txt:23789ef1ea5e5940": "23789ef1ea5e5940",
+    "txt:b59b61ee1f59df53": "b59b61ee1f59df53",
+    "txt:f6c1c81efb5ce175": "f6c1c81efb5ce175",
+    "txt:43e14431e9d43a88": "43e14431e9d43a88",
+    "txt:c6abca3167302584": "c6abca3167302584",
+    "txt:9ff8fb871ff6453a": "9ff8fb871ff6453a",
+    "txt:7b97b4207dc917f2": "7b97b4207dc917f2",
+    "txt:390955f7715d120f": "390955f7715d120f",
+    "txt:9a80e59af3d45688": "9a80e59af3d45688",
+    "txt:012ecd39583306e5": "012ecd39583306e5",
+    "txt:34a09244e7330291": "34a09244e7330291",
+    "txt:f18ac0951a0b3e45": "f18ac0951a0b3e45",
+    "txt:45a5d1fca8a7713f": "45a5d1fca8a7713f",
+    "txt:6f35b5c9df9d9c54": "6f35b5c9df9d9c54",
+    "txt:644212685c848502": "644212685c848502",
+    "txt:0b03f6651ff825ff": "0b03f6651ff825ff",
+    "txt:8b1413907aba1f17": "8b1413907aba1f17",
+    "txt:19a73255f34f1fa3": "19a73255f34f1fa3",
+    "txt:6bdb9111023d981f": "6bdb9111023d981f",
+    "txt:e403606b3fe7d65a": "e403606b3fe7d65a",
+    "txt:97dacfefff8698eb": "97dacfefff8698eb",
+    "txt:cbf0bdeedb22ee89": "cbf0bdeedb22ee89",
+    "txt:a0f825a14e1a8342": "a0f825a14e1a8342",
+    "txt:818bcb2d00806af4": "818bcb2d00806af4",
+    "txt:b5b6594ac4fd1bbc": "b5b6594ac4fd1bbc",
+    "txt:3c99ce644a1d0e40": "3c99ce644a1d0e40",
+    "txt:275e1e075375052c": "275e1e075375052c",
+    "txt:035b282e6a9e188e": "035b282e6a9e188e",
+    "txt:e29840dc2fee5952": "e29840dc2fee5952",
+    "txt:dcb07f147712fb4a": "dcb07f147712fb4a",
+    "txt:856b7ddd0b92a58b": "856b7ddd0b92a58b",
+    "txt:99b992bc4465e4b1": "99b992bc4465e4b1",
+    "txt:57ba3e42db8aba52": "57ba3e42db8aba52",
+    "txt:1e9152d94fcb5b5b": "1e9152d94fcb5b5b",
+    "txt:5cbd34ed79d14870": "5cbd34ed79d14870",
+    "txt:7bddf3fb29ed38f2": "7bddf3fb29ed38f2",
+    "txt:89ddfa0b5aec21da": "89ddfa0b5aec21da",
+    "txt:8a559469bff30e1b": "8a559469bff30e1b",
+    "txt:d562aa100669003c": "d562aa100669003c",
+    "txt:512f1d91bdc364e5": "512f1d91bdc364e5",
+    "txt:1cf58924257e4c49": "1cf58924257e4c49",
+    "txt:2c69fd9faf8bd646": "2c69fd9faf8bd646",
+    "txt:256ff8bde0c445da": "256ff8bde0c445da",
+    "txt:ca0de020c630dc86": "ca0de020c630dc86",
+    "txt:b12a6038270b38f4": "b12a6038270b38f4",
+    "txt:a4e44e19f0a3bce0": "a4e44e19f0a3bce0",
+    "txt:a943bb4cd07e0576": "a943bb4cd07e0576",
+    "txt:b196e1c6a74a7dcf": "b196e1c6a74a7dcf",
+    "txt:aa9c10762ebd725f": "aa9c10762ebd725f",
+    "txt:8d9252ff0dc94eb0": "8d9252ff0dc94eb0",
+    "txt:aedc473c7baaa001": "aedc473c7baaa001",
+    "txt:1bd4d108d922a51c": "1bd4d108d922a51c",
+    "txt:cb50e2f1fd936b7b": "cb50e2f1fd936b7b",
+    "txt:19e6d2d713837724": "19e6d2d713837724",
+    "txt:dce44a60d24c4e6c": "dce44a60d24c4e6c",
+    "txt:b26f7853404ff839": "b26f7853404ff839",
+    "txt:0ed9b914ffc59126": "0ed9b914ffc59126",
+    "txt:bba6a7a5aceab877": "bba6a7a5aceab877",
+    "txt:e290ec176a77161b": "e290ec176a77161b",
+    "txt:1023f24f6897f8f6": "1023f24f6897f8f6",
+    "txt:3c32effa1d333333": "3c32effa1d333333",
+    "txt:bb4fbb489233c6c0": "bb4fbb489233c6c0",
+    "txt:882d8cb55ce79fe3": "882d8cb55ce79fe3",
+    "txt:a92d0f49752234e4": "a92d0f49752234e4",
+    "txt:201ac61835718f13": "201ac61835718f13",
+    "txt:02a92afb94f236f6": "02a92afb94f236f6",
+    "txt:745cedb54f54c268": "745cedb54f54c268",
+    "txt:7e2db57f73d5aad4": "7e2db57f73d5aad4",
+    "txt:89171906bb9989d2": "89171906bb9989d2",
+    "txt:43d3bf6960a0d419": "43d3bf6960a0d419",
+    "txt:74ae68e2a4862ad0": "74ae68e2a4862ad0",
+    "txt:d922d077f85dcdbb": "d922d077f85dcdbb",
+    "txt:4303d8c3f38b7f1e": "4303d8c3f38b7f1e",
+    "txt:5660c94be4a62e18": "5660c94be4a62e18",
+    "txt:0ea76659126be36c": "0ea76659126be36c",
+    "txt:7bee0a01818d1e94": "7bee0a01818d1e94",
+    "txt:73ab80faf8664035": "73ab80faf8664035",
+    "txt:c98bb79727ea85f0": "c98bb79727ea85f0",
+    "txt:8f72528dd59abb3f": "8f72528dd59abb3f",
+    "txt:8a26da42dbef2697": "8a26da42dbef2697",
+    "txt:f21966b4b4aae8d7": "f21966b4b4aae8d7",
+    "txt:d502b1446a8f3ee8": "d502b1446a8f3ee8",
+    "txt:f2ca4e339818f028": "f2ca4e339818f028",
+    "txt:8b9431a7d714ff18": "8b9431a7d714ff18",
+    "txt:6b6913981208909a": "6b6913981208909a",
+    "txt:1877bd4ac3b4ee30": "1877bd4ac3b4ee30",
+    "txt:7501da1f729994d3": "7501da1f729994d3",
+    "txt:20b22b480d4a9623": "20b22b480d4a9623",
+    "txt:21b0d67e1b21d13b": "21b0d67e1b21d13b",
+    "txt:0f94d3378865541f": "0f94d3378865541f",
+    "txt:e287fa8dbedbf52b": "e287fa8dbedbf52b",
+    "txt:c006c9622a85c3a1": "c006c9622a85c3a1",
+    "txt:40eca585c13bc344": "40eca585c13bc344",
+    "txt:7845c1b56755ed82": "7845c1b56755ed82",
+    "txt:b2e9e05b5e28813f": "b2e9e05b5e28813f",
+    "txt:173f22c98a3bfe7a": "173f22c98a3bfe7a",
+    "txt:5f393d10548fc2dc": "5f393d10548fc2dc",
+    "txt:18c58a5a84f0d746": "18c58a5a84f0d746",
+    "txt:6da7bdbb5fefe938": "6da7bdbb5fefe938",
+    "txt:25c9a873103cd9c9": "25c9a873103cd9c9",
+    "txt:db08460e65fca992": "db08460e65fca992",
+    "txt:fcd4cfdce1b461c2": "fcd4cfdce1b461c2",
+    "txt:bab6d2c7885fa583": "bab6d2c7885fa583",
+    "txt:748835df95d75397": "748835df95d75397",
+    "txt:ce350350db43133c": "ce350350db43133c",
+    "txt:8290afd60aa87f2b": "8290afd60aa87f2b",
+    "txt:63e362665a3116f1": "63e362665a3116f1",
+    "txt:eb378facd69640a0": "eb378facd69640a0",
+    "txt:74b6d9b509b58d63": "74b6d9b509b58d63",
+    "txt:dc437c7d56173e6e": "dc437c7d56173e6e",
+    "txt:c0125bbe34b77c61": "c0125bbe34b77c61",
+    "txt:9fa07fc8e81d6f0b": "9fa07fc8e81d6f0b",
+    "txt:e8812e409869893a": "e8812e409869893a",
+    "txt:62c256870c1997c8": "62c256870c1997c8",
+    "txt:0d7354f58f280a6e": "0d7354f58f280a6e",
+    "txt:c96c4e5a992b992f": "c96c4e5a992b992f",
+    "txt:a0ed3809a2b6e10e": "a0ed3809a2b6e10e",
+    "txt:7d9d797b51fa3c0b": "7d9d797b51fa3c0b",
+    "txt:40e3d6301baee454": "40e3d6301baee454",
+    "txt:fc6289edc965e0e6": "fc6289edc965e0e6",
+    "txt:45b3bf7a8143b24d": "45b3bf7a8143b24d",
+    "txt:6a06513ca140de18": "6a06513ca140de18",
+    "txt:be4aae2721db5d6b": "be4aae2721db5d6b",
+    "txt:8a5969ea5c7b33ac": "8a5969ea5c7b33ac",
+    "txt:dd57dbb4485438d9": "dd57dbb4485438d9",
+    "txt:e3b9c93fb9fbfb39": "e3b9c93fb9fbfb39",
+    "txt:42b1f2909f9cb047": "42b1f2909f9cb047",
+    "txt:ab6e8f55669940d5": "ab6e8f55669940d5",
+    "txt:436b91ae5db7546d": "436b91ae5db7546d",
+    "txt:68857f7b575d5d2f": "68857f7b575d5d2f",
+    "txt:da90b818fb933136": "da90b818fb933136",
+    "txt:5606ac7a54e0013e": "5606ac7a54e0013e",
+    "txt:cfc5c679b02a9c27": "cfc5c679b02a9c27",
+    "txt:f121af0cbb1ea946": "f121af0cbb1ea946",
+    "txt:611cc79362535b81": "611cc79362535b81",
+    "txt:e21ab637f2bc9726": "e21ab637f2bc9726",
+    "txt:d5434c147560038f": "d5434c147560038f",
+    "txt:d83485f3748869a9": "d83485f3748869a9",
+    "txt:8dbe2a8667a80e7b": "8dbe2a8667a80e7b",
+    "txt:5df7a863c0033c48": "5df7a863c0033c48",
+    "txt:65411887c8482ed0": "65411887c8482ed0",
+    "txt:ec671e207992f5ce": "ec671e207992f5ce",
+    "txt:f70d3c9ff9682672": "f70d3c9ff9682672",
+    "txt:b455513cd90be0a3": "b455513cd90be0a3",
+    "txt:d75ce0724332eac1": "d75ce0724332eac1",
+    "txt:2c1fb9ea5354937a": "2c1fb9ea5354937a",
+    "txt:5f67318dcbb1bcf5": "5f67318dcbb1bcf5",
+    "txt:1edfb2c750873d17": "1edfb2c750873d17",
+    "txt:0a678da8f7ed6c18": "0a678da8f7ed6c18",
+    "txt:e38786a653111ac9": "e38786a653111ac9",
+    "txt:fb9e943aefb5c2b8": "fb9e943aefb5c2b8",
+    "txt:6d5cd40c258aa83b": "6d5cd40c258aa83b",
+    "txt:83ded8d488070ff8": "83ded8d488070ff8",
+    "txt:4402a2d4692fc4df": "4402a2d4692fc4df",
+    "txt:39117e9429b827c6": "39117e9429b827c6",
+    "txt:4b8a076a4b23a011": "4b8a076a4b23a011",
+    "txt:828db0e6bcca326c": "828db0e6bcca326c",
+    "txt:ab43069a846addef": "ab43069a846addef",
+    "txt:331630b0b5280e16": "331630b0b5280e16",
+    "txt:ac6dae72c297b9d9": "ac6dae72c297b9d9",
+    "txt:0610f6dce802a8bf": "0610f6dce802a8bf",
+    "txt:b068ad5220009df9": "b068ad5220009df9",
+    "txt:7b0b8650e7d63bae": "7b0b8650e7d63bae",
+    "txt:2ded3a9ce067747d": "2ded3a9ce067747d",
+    "txt:65951efea19773f3": "65951efea19773f3",
+    "txt:492a9bb2b3bdf857": "492a9bb2b3bdf857",
+    "txt:23ca336051828f71": "23ca336051828f71",
+    "txt:82d6cf345a978f3c": "82d6cf345a978f3c",
+    "txt:0a6ab3abceb137e6": "0a6ab3abceb137e6",
+    "txt:89ad2d9c90d13fe1": "89ad2d9c90d13fe1",
+    "txt:f61c9f5b8e179352": "f61c9f5b8e179352",
+    "txt:c4fa49579f8a762b": "c4fa49579f8a762b",
+    "txt:ca55d226632662b7": "ca55d226632662b7",
+    "txt:bee5a76450304a75": "bee5a76450304a75",
+    "txt:8dc99bcfb279af86": "8dc99bcfb279af86",
+    "txt:db1cfc205180ba11": "db1cfc205180ba11",
+    "txt:1a73d00469813761": "1a73d00469813761",
+    "txt:05db650c110f5b00": "05db650c110f5b00",
+    "txt:6e3c0237b2f2d113": "6e3c0237b2f2d113",
+    "txt:4983efca6a4636a6": "4983efca6a4636a6",
+    "txt:3787d403d6a35a48": "3787d403d6a35a48",
+    "txt:1f4b8c12b30f04ea": "1f4b8c12b30f04ea",
+    "txt:7538a6febfe772f5": "7538a6febfe772f5",
+    "txt:9b3996cb854a6902": "9b3996cb854a6902",
+    "txt:4cbed3a552c34eda": "4cbed3a552c34eda",
+    "txt:9eccba7a0b83ee9b": "9eccba7a0b83ee9b",
+    "txt:066e4760a09634bb": "066e4760a09634bb",
+    "txt:cdf5d8a3cfa493d7": "cdf5d8a3cfa493d7",
+    "txt:c1d044c8644b253d": "c1d044c8644b253d",
+    "txt:688e419bc26d31f7": "688e419bc26d31f7",
+    "txt:e5f517604d0dba3b": "e5f517604d0dba3b",
+    "txt:552ec737b1d1a4de": "552ec737b1d1a4de",
+    "txt:450a53d644525a4d": "450a53d644525a4d",
+    "txt:ecb2034809d75213": "ecb2034809d75213",
+    "txt:6195b73cd3f19480": "6195b73cd3f19480",
+    "txt:dc5bd7bdc336dbe3": "dc5bd7bdc336dbe3",
+    "txt:95ee7888e658f36a": "95ee7888e658f36a",
+    "txt:927b5c44b7a9e86c": "927b5c44b7a9e86c",
+    "txt:f6dfecf762e657ec": "f6dfecf762e657ec",
+    "txt:53192645b1794de6": "53192645b1794de6",
+    "txt:8ae9d2362a6bd1a2": "8ae9d2362a6bd1a2",
+    "txt:2e89dff320fed9e4": "2e89dff320fed9e4",
+    "txt:72172803e392f0df": "72172803e392f0df",
+    "txt:1c1184ea7a933c8d": "1c1184ea7a933c8d",
+    "txt:bc4ef1e6d48168e5": "bc4ef1e6d48168e5",
+    "txt:58b306907c2a87bf": "58b306907c2a87bf",
+    "txt:1b751046d28a48cb": "1b751046d28a48cb",
+    "txt:ab05c5b98308ecb0": "ab05c5b98308ecb0",
+    "txt:2575c395f482e221": "2575c395f482e221",
+    "txt:e89153756142e5b4": "e89153756142e5b4",
+    "txt:8f7c050dbf269955": "8f7c050dbf269955",
+    "txt:5b2df3a5139f8141": "5b2df3a5139f8141",
+    "txt:c3644c0c747eac4c": "c3644c0c747eac4c",
+    "txt:2c8b91afb6cf9740": "2c8b91afb6cf9740",
+    "txt:1b99a6fee68faea0": "1b99a6fee68faea0",
+    "txt:3cb69329d88781f5": "3cb69329d88781f5",
+    "txt:fa211947c9760df4": "fa211947c9760df4",
+    "txt:6c360ccec025f8d8": "6c360ccec025f8d8",
+    "txt:34e844637bcadfd3": "34e844637bcadfd3",
+    "txt:2cd3cf13540f4997": "2cd3cf13540f4997",
+    "txt:f412df59d671778d": "f412df59d671778d",
+    "txt:8aa940ae2758728e": "8aa940ae2758728e",
+    "txt:927482f06d62e610": "927482f06d62e610",
+    "txt:652c065f3f635703": "652c065f3f635703",
+    "txt:939d87ac6cfc570a": "939d87ac6cfc570a",
+    "txt:1a22945040df78f8": "1a22945040df78f8",
+    "txt:31b75d8c05ca0566": "31b75d8c05ca0566",
+    "txt:5f392b0ec095a85b": "5f392b0ec095a85b",
+    "txt:36650e5360089e28": "36650e5360089e28",
+    "txt:f65da36bd483912f": "f65da36bd483912f",
+    "txt:6ff8a0a7298d809a": "6ff8a0a7298d809a",
+    "txt:d86372bc5a383e1c": "d86372bc5a383e1c",
+    "txt:ee456f8753e0cde4": "ee456f8753e0cde4",
+    "txt:f7c553850c8dedd6": "f7c553850c8dedd6",
+    "txt:4be10b7388b44602": "4be10b7388b44602",
+    "txt:f6b46caff50511c2": "f6b46caff50511c2",
+    "txt:03ab6c7f2006dd40": "03ab6c7f2006dd40",
+    "txt:f8d81aa108c84ee8": "f8d81aa108c84ee8",
+    "txt:0896327cc1b68285": "0896327cc1b68285",
+    "txt:9a3189dc049398dc": "9a3189dc049398dc",
+    "txt:8cc8260aed255639": "8cc8260aed255639",
+    "txt:a0e174e778f093bc": "a0e174e778f093bc",
+    "txt:5ce5bb2fd0ab5076": "5ce5bb2fd0ab5076",
+    "txt:100c596fdce0d2b7": "100c596fdce0d2b7",
+    "txt:caa4d388af349f17": "caa4d388af349f17",
+    "txt:a7d6c87544a83963": "a7d6c87544a83963",
+    "txt:7bd2678f5b9eca8f": "7bd2678f5b9eca8f",
+    "txt:bbe60e793f321271": "bbe60e793f321271",
+    "txt:d50aa6cae4feb3aa": "d50aa6cae4feb3aa",
+    "txt:9a6e658b6f58a7ec": "9a6e658b6f58a7ec",
+    "txt:199fddadf1aad645": "199fddadf1aad645",
+    "txt:6824849a5127a51e": "6824849a5127a51e",
+    "txt:0af7b729a4d627c6": "0af7b729a4d627c6",
+    "txt:8f74750d35371589": "8f74750d35371589",
+    "txt:1eea794632135fb7": "1eea794632135fb7",
+    "txt:49c56421aa35b5e2": "49c56421aa35b5e2",
+    "txt:5ece783519a91d4b": "5ece783519a91d4b",
+    "txt:35ef8bbfa1cec50b": "35ef8bbfa1cec50b",
+    "txt:cd6f06349d0f6932": "cd6f06349d0f6932",
+    "txt:ec219a6fab5f9465": "ec219a6fab5f9465",
+    "txt:45d71c321db91a0a": "45d71c321db91a0a",
+    "txt:538518d92368b3d8": "538518d92368b3d8",
+    "txt:68cae73dc612ab5f": "68cae73dc612ab5f",
+    "txt:7ecf69a5735799a4": "7ecf69a5735799a4",
+    "txt:0efa5033825f523e": "0efa5033825f523e",
+    "txt:52f84a8a458b23e9": "52f84a8a458b23e9",
+    "txt:99bde0e84e563eea": "99bde0e84e563eea",
+    "txt:5867d46f5d12ebd9": "5867d46f5d12ebd9",
+    "txt:605f679622eddbe2": "605f679622eddbe2",
+    "txt:bb282b17e737e853": "bb282b17e737e853",
+    "txt:954a69ae8999442d": "954a69ae8999442d",
+    "txt:04e8dee521dfe02f": "04e8dee521dfe02f",
+    "txt:9f87f1b539f86133": "9f87f1b539f86133",
+    "txt:dde5780094d2b986": "dde5780094d2b986",
+    "txt:36b7fc6ba5b43d63": "36b7fc6ba5b43d63",
+    "txt:45c5f0c031964093": "45c5f0c031964093",
+    "txt:605d684ba9919afc": "605d684ba9919afc",
+    "txt:53070bc5ade93b17": "53070bc5ade93b17",
+    "txt:48520af56939a315": "48520af56939a315",
+    "txt:70b5a57b30b9ff0e": "70b5a57b30b9ff0e",
+    "txt:86778bf0cb88565b": "86778bf0cb88565b",
+    "txt:a0377c84a5f47562": "a0377c84a5f47562",
+    "txt:8d77bde64ea85937": "8d77bde64ea85937",
+    "txt:10810e6b246bec76": "10810e6b246bec76",
+    "txt:9ab5f6dcce206483": "9ab5f6dcce206483",
+    "txt:31504e95a57b3410": "31504e95a57b3410",
+    "txt:4cfd6f51bd346f7b": "4cfd6f51bd346f7b",
+    "txt:09123cbce81cc048": "09123cbce81cc048",
+    "txt:f9cc91a10de07d34": "f9cc91a10de07d34",
+    "txt:c5101e9cabf89cbd": "c5101e9cabf89cbd",
+    "txt:d1014bf0d9ab24da": "d1014bf0d9ab24da",
+    "txt:aa9d18dfc9f8607d": "aa9d18dfc9f8607d",
+    "txt:b9bfa7e481d2c837": "b9bfa7e481d2c837",
+    "txt:7a030bf9b4ddbc54": "7a030bf9b4ddbc54",
+    "txt:5ce9b3cb1aa913bd": "5ce9b3cb1aa913bd",
+    "txt:2d47747a9e74c0cb": "2d47747a9e74c0cb",
+    "txt:c897317eca585185": "c897317eca585185",
+    "txt:a9fd94cfad13fa10": "a9fd94cfad13fa10",
+    "txt:410ed6a5c7118ee8": "410ed6a5c7118ee8",
+    "txt:c3bac17b98bc3fc4": "c3bac17b98bc3fc4",
+    "txt:7347b614fc23e754": "7347b614fc23e754",
+    "txt:9835fbf0cbafdff6": "9835fbf0cbafdff6",
+    "txt:1d5feafb6da5c80d": "1d5feafb6da5c80d",
+    "txt:e1f2113fe08092ae": "e1f2113fe08092ae",
+    "txt:cad226110161c01f": "cad226110161c01f",
+    "txt:67504045456c0eb4": "67504045456c0eb4",
+    "txt:431ce0f2bae453c1": "431ce0f2bae453c1",
+    "txt:0f2bc8abf7bc9791": "0f2bc8abf7bc9791",
+    "txt:e57a7aa89df4020d": "e57a7aa89df4020d",
+    "txt:58f3f28efdbe2e4e": "58f3f28efdbe2e4e",
+    "txt:19195b741861753a": "19195b741861753a",
+    "txt:083ae514fc968346": "083ae514fc968346",
+    "txt:fa0ea05585c8b158": "fa0ea05585c8b158",
+    "txt:24121b82e04b0c27": "24121b82e04b0c27",
+    "txt:1de07ee0d8385d3d": "1de07ee0d8385d3d",
+    "txt:d3cd7e50eba1a560": "d3cd7e50eba1a560",
+    "txt:c7ce431c0d943304": "c7ce431c0d943304",
+    "txt:3f790f0c8794f496": "3f790f0c8794f496",
+    "txt:47013b0b3cf441dd": "47013b0b3cf441dd",
+    "txt:2b83f7aa63e5e6bc": "2b83f7aa63e5e6bc",
+    "txt:6f5da4c86e2b10de": "6f5da4c86e2b10de",
+    "txt:0dfc12ce24146fad": "0dfc12ce24146fad",
+    "txt:4095470cdb8ab8ed": "4095470cdb8ab8ed",
+    "txt:2e86a0049cf08c88": "2e86a0049cf08c88",
+    "txt:5114fe45bf5961a2": "5114fe45bf5961a2",
+    "txt:bccfef70fda48d88": "bccfef70fda48d88",
+    "txt:0f5cb7053b9e07de": "0f5cb7053b9e07de",
+    "txt:eac5f29e87559002": "eac5f29e87559002",
+    "txt:8d17391760ac5e68": "8d17391760ac5e68",
+    "txt:5ffa813f4aff24da": "5ffa813f4aff24da",
+    "txt:87fffbfc6ceca717": "87fffbfc6ceca717",
+    "txt:3b8997f14bad36fa": "3b8997f14bad36fa",
+    "txt:f8284f44c606328f": "f8284f44c606328f",
+    "txt:f70cea947057e402": "f70cea947057e402",
+    "txt:ef0505b70fdecb80": "ef0505b70fdecb80",
+    "txt:d6a0d5b390535f13": "d6a0d5b390535f13",
+    "txt:cbb1d2545f615b89": "cbb1d2545f615b89",
+    "txt:f06797305a33e841": "f06797305a33e841",
+    "txt:ec74dfbc802f59fd": "ec74dfbc802f59fd",
+    "txt:ddfc57821e6614a4": "ddfc57821e6614a4",
+    "txt:b0a43f1e5c5b8226": "b0a43f1e5c5b8226",
+    "txt:e807e9883962c22c": "e807e9883962c22c",
+    "txt:6d1f7059a7c35b4d": "6d1f7059a7c35b4d",
+    "txt:263091cd394cab36": "263091cd394cab36",
+    "txt:ca48a2ed9e310ac3": "ca48a2ed9e310ac3",
+    "txt:ad0635f391e7f5f6": "ad0635f391e7f5f6",
+    "txt:3ce8c8720415191c": "3ce8c8720415191c",
+    "txt:847c7d07319bd244": "847c7d07319bd244",
+    "txt:b504eed1db629d66": "b504eed1db629d66",
+    "txt:ed72e2850ef04bf2": "ed72e2850ef04bf2",
+    "txt:752789e22b172506": "752789e22b172506",
+    "txt:9fd6dc5c3b882bae": "9fd6dc5c3b882bae",
+    "txt:107d8d84d4066d7b": "107d8d84d4066d7b",
+    "txt:1a5eea32a4b98fba": "1a5eea32a4b98fba",
+    "txt:d4ff65f1b7204591": "d4ff65f1b7204591",
+    "txt:d89f96e81525defc": "d89f96e81525defc",
+    "txt:c3bc35526124f9a9": "c3bc35526124f9a9",
+    "txt:fd0e616b3400ffd0": "fd0e616b3400ffd0",
+    "txt:856b8e6cc033e1b1": "856b8e6cc033e1b1",
+    "txt:0f717d5d678a4a0d": "0f717d5d678a4a0d",
+    "txt:7c6f46013c66e1e1": "7c6f46013c66e1e1",
+    "txt:ec278556e1c41397": "ec278556e1c41397",
+    "txt:cd2819d1c2d9377a": "cd2819d1c2d9377a",
+    "txt:3c784fbe6d6efb95": "3c784fbe6d6efb95",
+    "txt:80fbd1454e85427d": "80fbd1454e85427d",
+    "txt:62e9d6f9140d0302": "62e9d6f9140d0302",
+    "txt:82084b5cca4de83d": "82084b5cca4de83d",
+    "txt:ad0bd577b60bc084": "ad0bd577b60bc084",
+    "txt:d2e05b607a45d9de": "d2e05b607a45d9de",
+    "txt:5bb0f4a1bd97b555": "5bb0f4a1bd97b555",
+    "txt:32ac8a03ee154471": "32ac8a03ee154471",
+    "txt:1945f27914fd3821": "1945f27914fd3821",
+    "txt:65f3affc64f0d54c": "65f3affc64f0d54c",
+    "txt:0516a93afb74b4ab": "0516a93afb74b4ab",
+    "txt:32d7c452122e772f": "32d7c452122e772f",
+    "txt:a0b8620224f472c2": "a0b8620224f472c2",
+    "txt:8b3833e35ab46bc7": "8b3833e35ab46bc7",
+    "txt:24f46b3539e4546d": "24f46b3539e4546d",
+    "txt:5ec6e2e6bf99fba0": "5ec6e2e6bf99fba0",
+    "txt:1956b3087db37feb": "1956b3087db37feb",
+    "txt:b5abff4f016bb5e5": "b5abff4f016bb5e5",
+    "txt:1e813fd81346fd4a": "1e813fd81346fd4a",
+    "txt:e5055b14de7d83f5": "e5055b14de7d83f5",
+    "txt:bdde34349da5f006": "bdde34349da5f006",
+    "txt:591af8fc394622ea": "591af8fc394622ea",
+    "txt:da392a6510379223": "da392a6510379223",
+    "txt:5e32063dce7b4059": "5e32063dce7b4059",
+    "txt:9bd3a9b9322a62d1": "9bd3a9b9322a62d1",
+    "txt:c9458883747696f6": "c9458883747696f6",
+    "txt:4e3ffc92a807ea04": "4e3ffc92a807ea04",
+    "txt:17cd1476382ab522": "17cd1476382ab522",
+    "txt:69a7ded6d7732708": "69a7ded6d7732708",
+    "txt:02cc26f4d7a3559e": "02cc26f4d7a3559e",
+    "txt:b920e26b525a0833": "b920e26b525a0833",
+    "txt:d3d0633cffc254ba": "d3d0633cffc254ba",
+    "txt:521a434bce5a4ada": "521a434bce5a4ada",
+    "txt:f4e881c9596ca7c9": "f4e881c9596ca7c9",
+    "txt:3ad2f4dc70ac1439": "3ad2f4dc70ac1439",
+    "txt:969beac8bdf17f50": "969beac8bdf17f50",
+    "txt:8f5bf272d3060625": "8f5bf272d3060625",
+    "txt:1b4fd1d3ca38ab8e": "1b4fd1d3ca38ab8e",
+    "txt:ff537bbcc588c740": "ff537bbcc588c740",
+    "txt:378f583c741504d3": "378f583c741504d3",
+    "txt:a1ba9865a299b59f": "a1ba9865a299b59f",
+    "txt:9cb9aee2f8f4c14f": "9cb9aee2f8f4c14f",
+    "txt:f973056c4fbe1775": "f973056c4fbe1775",
+    "txt:70215d4c8edf153a": "70215d4c8edf153a",
+    "txt:17961c70ebcd22b3": "17961c70ebcd22b3",
+    "txt:e641e40697284ae9": "e641e40697284ae9",
+    "txt:2fafa2ba596429c1": "2fafa2ba596429c1",
+    "txt:1ee82cc14d997ccf": "1ee82cc14d997ccf",
+    "txt:a71cad4bbe610fbc": "a71cad4bbe610fbc",
+    "txt:f2b455d170cec725": "f2b455d170cec725",
+    "txt:b7e5a32a065e99ff": "b7e5a32a065e99ff",
+    "txt:982c1a98a59019c3": "982c1a98a59019c3",
+    "txt:c06089553813e319": "c06089553813e319",
+    "txt:50e73fafaed00add": "50e73fafaed00add",
+    "txt:17ad371e0e1b5065": "17ad371e0e1b5065",
+    "txt:1dc639b6d9c92eff": "1dc639b6d9c92eff",
+    "txt:18690c3bbb58c241": "18690c3bbb58c241",
+    "txt:be5cf88dd37a5d25": "be5cf88dd37a5d25",
+    "txt:1de61cacc46087d2": "1de61cacc46087d2",
+    "txt:c1d5b3773584d357": "c1d5b3773584d357",
+    "txt:864336e56f44594d": "864336e56f44594d",
+    "txt:e80ab6887efb0217": "e80ab6887efb0217",
+    "txt:9683469dd795e92e": "9683469dd795e92e",
+    "txt:90c57ea37339b49e": "90c57ea37339b49e",
+    "txt:ace1d5069a121a09": "ace1d5069a121a09",
+    "txt:4018a0672ba23235": "4018a0672ba23235",
+    "txt:603cec3b1f01c6b8": "603cec3b1f01c6b8",
+    "txt:993e4113c9e08d5a": "993e4113c9e08d5a",
+    "txt:3cbee73f4101cb52": "3cbee73f4101cb52",
+    "txt:e240066f1a5aaafd": "e240066f1a5aaafd",
+    "txt:192a751e06e15576": "192a751e06e15576",
+    "txt:0fec589bfd00b568": "0fec589bfd00b568",
+    "txt:074e7a41b8fb5cbb": "074e7a41b8fb5cbb",
+    "txt:b884df0c379e269f": "b884df0c379e269f",
+    "txt:43ae708e722b0472": "43ae708e722b0472",
+    "txt:89d23d07127041d0": "89d23d07127041d0",
+    "txt:a79e016d664becc2": "a79e016d664becc2",
+    "txt:f1781d67606706b8": "f1781d67606706b8",
+    "txt:80d4d45e2cfcf379": "80d4d45e2cfcf379",
+    "txt:a00ce19dc4d7430b": "a00ce19dc4d7430b",
+    "txt:df77d2c4eb205617": "df77d2c4eb205617",
+    "txt:bae4c242860fc450": "bae4c242860fc450",
+    "txt:90252e744480dd52": "90252e744480dd52",
+    "txt:4f0b59b1f7aa1c26": "4f0b59b1f7aa1c26",
+    "txt:853ea22509b6f426": "853ea22509b6f426",
+    "txt:7378c18688c1c909": "7378c18688c1c909",
+    "txt:440e747a7150a287": "440e747a7150a287",
+    "txt:cb61828d7aa071de": "cb61828d7aa071de",
+    "txt:baf27a5dda967482": "baf27a5dda967482",
+    "txt:8ab0f93d251e6a15": "8ab0f93d251e6a15",
+    "txt:9d58b1d57521a9ca": "9d58b1d57521a9ca",
+    "txt:a7181a64db818997": "a7181a64db818997",
+    "txt:ca443bf0020cc155": "ca443bf0020cc155",
+    "txt:6df360c4b486033a": "6df360c4b486033a",
+    "txt:d74b1d616eea7205": "d74b1d616eea7205",
+    "txt:d1df603a9da521de": "d1df603a9da521de",
+    "txt:f7b28ddae81b4c7f": "f7b28ddae81b4c7f",
+    "txt:1b01e237ad097d09": "1b01e237ad097d09",
+    "txt:d44502718eb48d63": "d44502718eb48d63",
+    "txt:6d2221bd78cec64a": "6d2221bd78cec64a",
+    "txt:0b543165873f4bd2": "0b543165873f4bd2",
+    "txt:6b38c77dbba49b9c": "6b38c77dbba49b9c",
+    "txt:59afa4eca965f9bd": "59afa4eca965f9bd",
+    "txt:1b070d743f041332": "1b070d743f041332",
+    "txt:f70135477b9fd051": "f70135477b9fd051",
+    "txt:6633ff40732132e4": "6633ff40732132e4",
+    "txt:7bdbf9cc2cce95b1": "7bdbf9cc2cce95b1",
+    "txt:2b51cc9f33838bed": "2b51cc9f33838bed",
+    "txt:d916fe7dce236706": "d916fe7dce236706",
+    "txt:76922ac7817ca049": "76922ac7817ca049",
+    "txt:0c215e56b42247b2": "0c215e56b42247b2",
+    "txt:763df55f5ac43ad2": "763df55f5ac43ad2",
+    "txt:9067da1f185e61cc": "9067da1f185e61cc",
+    "txt:aa320ec3f2ac452a": "aa320ec3f2ac452a",
+    "txt:a2a4a674d038fa63": "a2a4a674d038fa63",
+    "txt:9905c77be541af18": "9905c77be541af18",
+    "txt:e850043daf75fcdf": "e850043daf75fcdf",
+    "txt:7a90347577b8e781": "7a90347577b8e781",
+    "txt:1855fc668985c5e3": "1855fc668985c5e3",
+    "txt:6ab4855bd04c7ee7": "6ab4855bd04c7ee7",
+    "txt:09d4823b02618fc1": "09d4823b02618fc1",
+    "txt:2bc0ea1ba8b1d1fc": "2bc0ea1ba8b1d1fc",
+    "txt:2036e5871788965a": "2036e5871788965a",
+    "txt:645f988683496ea9": "645f988683496ea9",
+    "txt:cc27b7793d48ced0": "cc27b7793d48ced0",
+    "txt:c1dc25efd8cbcfad": "c1dc25efd8cbcfad",
+    "txt:e48ffe8dc6606a80": "e48ffe8dc6606a80",
+    "txt:bda37b558f4ed3be": "bda37b558f4ed3be",
+    "txt:948116b7ca0054d3": "948116b7ca0054d3",
+    "txt:f91863379fc70614": "f91863379fc70614"
   }
 }
