@@ -93,6 +93,11 @@ def main() -> int:
     ap.add_argument("--out", required=True)
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--model", default=r"C:\Audiobooks\models_asr\large-v3")
+    ap.add_argument("--prefix", default=None,
+                    help="ne controle que les clips dont la cle logique commence par ce prefixe (ex. txt:)")
+    ap.add_argument("--device", default="cpu", help="cpu ou cuda")
+    ap.add_argument("--compute-type", default=None, help="int8 (cpu) ou float16 (cuda)")
+    ap.add_argument("--beam", type=int, default=5, help="beam_size (1 = plus rapide, pour un controle CPU)")
     a = ap.parse_args()
 
     from faster_whisper import WhisperModel
@@ -100,23 +105,26 @@ def main() -> int:
     out = Path(a.out)
     man = json.loads((out / "manifest.json").read_text(encoding="utf-8"))
     vdir = out / man["voice"]
-    clips = list(man["clips"].items())
-    if a.limit:
-        clips = clips[: a.limit]
     cid2key = {}
     for k, cid in man["keys"].items():
         cid2key.setdefault(cid, k)
+    clips = list(man["clips"].items())
+    if a.prefix:
+        clips = [(cid, info) for cid, info in clips if cid2key.get(cid, "").startswith(a.prefix)]
+    if a.limit:
+        clips = clips[: a.limit]
 
-    print(f"[{datetime.now():%H:%M:%S}] relecture {len(clips)} clips (Whisper large-v3 cpu int8)")
-    model = WhisperModel(a.model, device="cpu", compute_type="int8")
+    ctype = a.compute_type or ("float16" if a.device == "cuda" else "int8")
+    print(f"[{datetime.now():%H:%M:%S}] relecture {len(clips)} clips (Whisper {a.device} {ctype})")
+    model = WhisperModel(a.model, device=a.device, compute_type=ctype)
 
     SEUIL_FR = 0.5  # en-deca (ou langue != fr), on soupconne un accent non francais
 
     def transcrire(p: Path):
         # langue AUTO-DETECTEE : sert a reperer un accent non francais (graphies
         # de respelling hors lexique fr). Renvoie (texte, langue, proba_langue).
-        segs, info = model.transcribe(str(p), language=None, beam_size=5,
-                                      word_timestamps=True, vad_filter=False,
+        segs, info = model.transcribe(str(p), language=None, beam_size=a.beam,
+                                      word_timestamps=False, vad_filter=False,
                                       condition_on_previous_text=False, temperature=0.0)
         return (" ".join(s.text for s in segs).strip(),
                 info.language, float(info.language_probability))

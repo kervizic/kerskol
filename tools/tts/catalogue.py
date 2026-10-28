@@ -60,6 +60,17 @@ def construire(pilot: bool = False) -> list[dict]:
     if not pilot:
         _ajouter("titre", None)
         _ajouter("indice", None)
+        # 2bis) clips PROSE des exercices (enonces/consignes/indices/choix/
+        # messages generes), enumerees cote front (voix-couverture) : un clip
+        # entier par texte affiche. Cle logique stable = txt:<hash du texte
+        # nettoye> ; le front retrouve le clip via clips[].text (pas de respelling
+        # sur la prose). Ordre de priorite deja applique dans le fichier.
+        prose_path = _DATA.parent / "voix-a-generer.json"
+        if prose_path.exists():
+            for e in json.loads(prose_path.read_text(encoding="utf-8")):
+                texte = e["texte"]
+                key = "txt:" + clip_id(nettoyer(texte))
+                clips.append({"key": key, "text": texte, "cat": e.get("cat", "enonce")})
 
     # 3) dictees (version CORRIGEE, une phrase = un clip)
     dictees = charger_dictees()

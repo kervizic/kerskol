@@ -6743,6 +6743,656 @@
       "text": "Relis toute la phrase où se trouve le mot. Les autres mots autour t'aident à deviner ce qu'il veut dire.",
       "ms": 6480,
       "cat": "indice"
+    },
+    "0d00824cf8fa9082": {
+      "text": "Bravo, c'est juste !",
+      "ms": 1520,
+      "cat": "message"
+    },
+    "88dc24eade7b18c8": {
+      "text": "Ce n'est pas ca, voici comment trouver",
+      "ms": 3040,
+      "cat": "message"
+    },
+    "d731cabd209f805c": {
+      "text": "Autrefois, c'était il y a longtemps : la plume, la bougie, l'ardoise. Aujourd'hui : l'ordinateur, l'électricité.",
+      "ms": 8560,
+      "cat": "indice"
+    },
+    "35d5ba139a642de0": {
+      "text": "Chacun est différent et c'est très bien. Les filles et les garçons ont les mêmes droits et peuvent tout faire.",
+      "ms": 6800,
+      "cat": "indice"
+    },
+    "9ce8eb62bdb68d84": {
+      "text": "Chaque partie du corps a un rôle. Les yeux voient, les oreilles entendent, les os tiennent le corps debout.",
+      "ms": 6880,
+      "cat": "indice"
+    },
+    "581cfed8631b8609": {
+      "text": "Cherche ce qui se passe en premier, puis ensuite. Le matin vient avant le soir, hier avant demain.",
+      "ms": 6880,
+      "cat": "indice"
+    },
+    "da192ba8656e1337": {
+      "text": "Cherche d'abord le tout début, par exemple l'œuf ou la graine. Puis suis ce qui grandit, étape par étape.",
+      "ms": 7440,
+      "cat": "indice"
+    },
+    "29f775f6b416c914": {
+      "text": "Commence toujours par la plante. Ensuite, c'est l'animal qui la mange, puis l'animal plus grand qui mange le premier.",
+      "ms": 7280,
+      "cat": "indice"
+    },
+    "ff45f9624428754a": {
+      "text": "Demande-toi à quoi sert l'objet, ce qu'on fait avec. Les ciseaux coupent, le stylo écrit, la montre donne l'heure.",
+      "ms": 7520,
+      "cat": "indice"
+    },
+    "294a7ceb5e126ff0": {
+      "text": "Derrière l'écran, il y a une vraie personne. On reste poli dans les messages, comme quand on se parle en vrai.",
+      "ms": 5840,
+      "cat": "indice"
+    },
+    "83f2fc618b777062": {
+      "text": "Devant un écran, on demande à un adulte, on fait des pauses pour les yeux, et on ne parle jamais à un inconnu.",
+      "ms": 6560,
+      "cat": "indice"
+    },
+    "8a1010ce0a0642f5": {
+      "text": "Imagine ce que l'autre ressent. S'il est triste, on le console. S'il a besoin d'aide, on l'aide.",
+      "ms": 6160,
+      "cat": "indice"
+    },
+    "6220242352e8af77": {
+      "text": "L'ampoule s'allume seulement si le chemin fait une boucle complète. Si l'interrupteur est ouvert ou si un fil est coupé, le courant ne passe pas.",
+      "ms": 9600,
+      "cat": "indice"
+    },
+    "f5d513df95dfa812": {
+      "text": "L'impératif, c'est pour donner un ordre. Avec tu et un verbe en er, il n'y a pas de s à la fin, comme range. Avec nous, le verbe finit par ons. Avec vous, par ez.",
+      "ms": 11680,
+      "cat": "indice"
+    },
+    "ca60efc4f72faabc": {
+      "text": "La Terre est une boule. Les grands morceaux de terre sont les continents, les grandes étendues d'eau sont les océans.",
+      "ms": 7760,
+      "cat": "indice"
+    },
+    "5edf1256f0cb6892": {
+      "text": "La commune, c'est ton village ou ta ville. La personne qui la dirige est le maire, et il travaille à la mairie.",
+      "ms": 6880,
+      "cat": "indice"
+    },
+    "f689decd478c662c": {
+      "text": "La ville a des immeubles, la campagne des champs, la montagne de hauts sommets, le littoral le bord de la mer.",
+      "ms": 7120,
+      "cat": "indice"
+    },
+    "d30a6729b0c2156d": {
+      "text": "Le froid rend l'eau dure, c'est la glace. La chaleur la change en vapeur. Pense à ce que fait le froid et ce que fait le chaud.",
+      "ms": 8480,
+      "cat": "indice"
+    },
+    "0b98b85b47034672": {
+      "text": "Le jour, le soleil éclaire. La nuit, on voit la lune. Il fait jour puis nuit parce que la Terre tourne.",
+      "ms": 8080,
+      "cat": "indice"
+    },
+    "de5c093611a87717": {
+      "text": "Le passé simple, c'est le passé des histoires. Pour il, souvent le verbe finit par a, comme il chanta. Pour ils, souvent par èrent, comme ils chantèrent.",
+      "ms": 10000,
+      "cat": "indice"
+    },
+    "7a66723e3fc36589": {
+      "text": "Le soleil se lève à l'est et se couche à l'ouest. Sur une carte, le nord est en haut.",
+      "ms": 5680,
+      "cat": "indice"
+    },
+    "82a0ef3fcb6a59ff": {
+      "text": "Le sucre se cache dans l'eau, il se dissout. Le sable, lui, tombe au fond. Demande-toi si on voit encore ce qu'on a ajouté.",
+      "ms": 9360,
+      "cat": "indice"
+    },
+    "47c75c9539ccab7c": {
+      "text": "Les enfants ont des droits, comme aller à l'école. À l'école, ils ont aussi des devoirs, comme écouter et respecter les autres.",
+      "ms": 8240,
+      "cat": "indice"
+    },
+    "fed781dbe4d47c69": {
+      "text": "Les grands-parents sont nés avant les parents, et les parents avant les enfants. Le plus âgé, c'est le grand-parent.",
+      "ms": 6880,
+      "cat": "indice"
+    },
+    "ed6c9900dfd77af0": {
+      "text": "Les mots gentils font du bien. On dit bonjour, merci, s'il te plaît et pardon.",
+      "ms": 5200,
+      "cat": "indice"
+    },
+    "705f0aae4ec3f104": {
+      "text": "Les écrans, c'est bien mais pas trop longtemps. On fait des pauses, on bouge, et on les éteint avant de dormir.",
+      "ms": 7920,
+      "cat": "indice"
+    },
+    "29e61b5a7c8109ed": {
+      "text": "Nous habitons en France. Sa capitale est Paris, et la Seine traverse Paris.",
+      "ms": 5680,
+      "cat": "indice"
+    },
+    "b1f5841c0edd5fc6": {
+      "text": "On ne rit jamais méchamment de quelqu'un. Si on t'embête ou si tu vois une moquerie, parle à un adulte de confiance.",
+      "ms": 7840,
+      "cat": "indice"
+    },
+    "8338a4a90a6c5385": {
+      "text": "On ne voit pas l'air, mais il prend de la place : il gonfle un ballon. Quand il bouge, c'est le vent.",
+      "ms": 6480,
+      "cat": "indice"
+    },
+    "6cbafce010deb1d5": {
+      "text": "Pense à ce qu'on voit sur la mairie. Le drapeau est bleu, blanc, rouge. Le chant de la France est la Marseillaise.",
+      "ms": 7440,
+      "cat": "indice"
+    },
+    "dd9f99358c6f8ee0": {
+      "text": "Pense à ce qui tombe du ciel et à ce qui brille le jour. Une plante a besoin d'eau et de lumière.",
+      "ms": 7040,
+      "cat": "indice"
+    },
+    "bb98147139d157d2": {
+      "text": "Pense à la règle qui aide tout le monde. En classe, on lève le doigt pour parler et on écoute les autres.",
+      "ms": 6960,
+      "cat": "indice"
+    },
+    "54b2a26fbeca9b01": {
+      "text": "Place-toi à côté de l'objet. Ce qui est de ton côté de la main qui écrit est à droite, l'autre côté est à gauche.",
+      "ms": 6880,
+      "cat": "indice"
+    },
+    "fc7b4ff97c45f124": {
+      "text": "Pour choisir sans se disputer, on vote. Chacun a une voix, et celui qui a le plus de voix est élu.",
+      "ms": 7680,
+      "cat": "indice"
+    },
+    "b37d5fccd98f6fb0": {
+      "text": "Pour être en forme, on mange des fruits et des légumes, on bouge, on dort assez et on se brosse les dents.",
+      "ms": 7200,
+      "cat": "indice"
+    },
+    "8e55cbbd6d55a2f4": {
+      "text": "Quand une émotion est forte, on s'arrête et on respire doucement. On utilise des mots, jamais les mains.",
+      "ms": 6560,
+      "cat": "indice"
+    },
+    "ef83f7b32f9a178c": {
+      "text": "Sur Internet, tout n'est pas vrai. Avant de croire une chose, on réfléchit et on vérifie avec un adulte.",
+      "ms": 7120,
+      "cat": "indice"
+    },
+    "e92747eb1299634b": {
+      "text": "Sur une balance, le côté le plus lourd descend. Elle est équilibrée quand les deux côtés ont le même poids.",
+      "ms": 7520,
+      "cat": "indice"
+    },
+    "2b589437e4d0115e": {
+      "text": "Ton adresse et ton mot de passe restent secrets. Si on te demande tes informations, préviens un adulte.",
+      "ms": 6400,
+      "cat": "indice"
+    },
+    "dbffad11d082f9d8": {
+      "text": "Un plan montre les lieux vus d'en haut, comme si on volait. La maquette est un petit modèle en volume.",
+      "ms": 6000,
+      "cat": "indice"
+    },
+    "25175909891766d7": {
+      "text": "Un solide garde sa forme, comme un caillou. Un liquide coule et prend la forme du verre. Un gaz, comme l'air, est partout et invisible.",
+      "ms": 10880,
+      "cat": "indice"
+    },
+    "2227528fca1f6c0e": {
+      "text": "Un être vivant naît, grandit, mange et aura des petits. Une chose qui ne grandit pas et ne mange pas n'est pas vivante.",
+      "ms": 8160,
+      "cat": "indice"
+    },
+    "3f3aa68ee35dcaf8": {
+      "text": "Écoute ton corps. La joie fait sourire, la peur fait battre le cœur, la colère donne chaud, la tristesse donne envie de pleurer.",
+      "ms": 8000,
+      "cat": "indice"
+    },
+    "e295475aad39c080": {
+      "text": "Combien de fois faut-il appeler la fée pour la voir en rêve ? Écris le nombre en lettres.",
+      "ms": 5040,
+      "cat": "consigne"
+    },
+    "f960a581e50869f4": {
+      "text": "Combien de fois par jour faut-il se brosser les dents ?",
+      "ms": 2960,
+      "cat": "consigne"
+    },
+    "9f3874e1b14f21d8": {
+      "text": "futur : demain",
+      "ms": 2400,
+      "cat": "consigne"
+    },
+    "67332338429fd748": {
+      "text": "imparfait : avant, autrefois",
+      "ms": 2320,
+      "cat": "consigne"
+    },
+    "23f2de3a829279a9": {
+      "text": "impératif : c'est un ordre, chante !, mangeons !",
+      "ms": 3600,
+      "cat": "consigne"
+    },
+    "3fa0e1e88e9b3808": {
+      "text": "passé composé : hier, c'est déjà fait",
+      "ms": 3040,
+      "cat": "consigne"
+    },
+    "62232d66d31a72a2": {
+      "text": "passé simple : dans les histoires, autrefois, il chanta",
+      "ms": 4480,
+      "cat": "consigne"
+    },
+    "ddd5b4c5f86038ef": {
+      "text": "présent : aujourd'hui, en ce moment",
+      "ms": 2720,
+      "cat": "consigne"
+    },
+    "0b79176e24ba58ae": {
+      "text": "Conjugue le verbe AIMER",
+      "ms": 1920,
+      "cat": "enonce"
+    },
+    "2ee34b503bbc4e77": {
+      "text": "Conjugue le verbe AIMER au futur",
+      "ms": 2480,
+      "cat": "enonce"
+    },
+    "9069fbd38c589fcb": {
+      "text": "Conjugue le verbe AIMER au passé composé",
+      "ms": 3040,
+      "cat": "enonce"
+    },
+    "09280621c365a04e": {
+      "text": "Conjugue le verbe AIMER au passé simple",
+      "ms": 2960,
+      "cat": "enonce"
+    },
+    "ab48fbc43508a9af": {
+      "text": "Conjugue le verbe AIMER au présent",
+      "ms": 2480,
+      "cat": "enonce"
+    },
+    "0a4c67111114d89c": {
+      "text": "Conjugue le verbe AIMER à l'imparfait",
+      "ms": 2880,
+      "cat": "enonce"
+    },
+    "25d99882c2e6227a": {
+      "text": "Conjugue le verbe AIMER à l'impératif",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "fcd23c4d3c991e12": {
+      "text": "Conjugue le verbe ALLER",
+      "ms": 1680,
+      "cat": "enonce"
+    },
+    "5a1970536b1d419e": {
+      "text": "Conjugue le verbe ALLER au passé composé",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "2d021257f3bb919e": {
+      "text": "Conjugue le verbe ALLER au passé simple",
+      "ms": 2720,
+      "cat": "enonce"
+    },
+    "10c999e5073cc909": {
+      "text": "Conjugue le verbe AVOIR",
+      "ms": 1760,
+      "cat": "enonce"
+    },
+    "767092d0e675c601": {
+      "text": "Conjugue le verbe AVOIR au futur",
+      "ms": 2640,
+      "cat": "enonce"
+    },
+    "9729d8842eff43f6": {
+      "text": "Conjugue le verbe AVOIR au passé composé",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "8e74c3164aac17fd": {
+      "text": "Conjugue le verbe AVOIR au présent",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "a561e87ba85ef9c5": {
+      "text": "Conjugue le verbe AVOIR à l'imparfait",
+      "ms": 3040,
+      "cat": "enonce"
+    },
+    "cf10293cbd5fef9b": {
+      "text": "Conjugue le verbe CHANTER",
+      "ms": 2000,
+      "cat": "enonce"
+    },
+    "69e11fd0a53516fa": {
+      "text": "Conjugue le verbe CHANTER au futur",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "dba4d9682d296aec": {
+      "text": "Conjugue le verbe CHANTER au passé composé",
+      "ms": 3040,
+      "cat": "enonce"
+    },
+    "c04bb7964108910f": {
+      "text": "Conjugue le verbe CHANTER au passé simple",
+      "ms": 2720,
+      "cat": "enonce"
+    },
+    "80a60c6dc5cc0c92": {
+      "text": "Conjugue le verbe CHANTER au présent",
+      "ms": 2480,
+      "cat": "enonce"
+    },
+    "381989b057d1f55f": {
+      "text": "Conjugue le verbe CHANTER à l'imparfait",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "bf50177b282c6a9c": {
+      "text": "Conjugue le verbe CHANTER à l'impératif",
+      "ms": 2720,
+      "cat": "enonce"
+    },
+    "ed7ea5c89e0f9a43": {
+      "text": "Conjugue le verbe DIRE",
+      "ms": 1840,
+      "cat": "enonce"
+    },
+    "cb9eb5530eb3e817": {
+      "text": "Conjugue le verbe DONNER",
+      "ms": 1920,
+      "cat": "enonce"
+    },
+    "0d61b923a97e28be": {
+      "text": "Conjugue le verbe DONNER au futur",
+      "ms": 2400,
+      "cat": "enonce"
+    },
+    "1ac55c1f6004703e": {
+      "text": "Conjugue le verbe DONNER au passé composé",
+      "ms": 2880,
+      "cat": "enonce"
+    },
+    "07e54a8bf26ecce3": {
+      "text": "Conjugue le verbe DONNER au passé simple",
+      "ms": 2880,
+      "cat": "enonce"
+    },
+    "db6bd396c5000278": {
+      "text": "Conjugue le verbe DONNER au présent",
+      "ms": 2400,
+      "cat": "enonce"
+    },
+    "b2be71566924a318": {
+      "text": "Conjugue le verbe DONNER à l'imparfait",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "3a160ee951275a71": {
+      "text": "Conjugue le verbe DONNER à l'impératif",
+      "ms": 2880,
+      "cat": "enonce"
+    },
+    "9af71ad30810748b": {
+      "text": "Conjugue le verbe FAIRE",
+      "ms": 1760,
+      "cat": "enonce"
+    },
+    "87ebf6d0dee2083d": {
+      "text": "Conjugue le verbe FINIR",
+      "ms": 1920,
+      "cat": "enonce"
+    },
+    "8fdb28c1b148add6": {
+      "text": "Conjugue le verbe FINIR à l'impératif",
+      "ms": 3040,
+      "cat": "enonce"
+    },
+    "b57cc96e85b3586f": {
+      "text": "Conjugue le verbe JOUER",
+      "ms": 1680,
+      "cat": "enonce"
+    },
+    "a6134f6c22c9e702": {
+      "text": "Conjugue le verbe JOUER au futur",
+      "ms": 2640,
+      "cat": "enonce"
+    },
+    "3980cafeb68065b6": {
+      "text": "Conjugue le verbe JOUER au passé composé",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "51e38fea0ec2afbd": {
+      "text": "Conjugue le verbe JOUER au passé simple",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "d2341f65e3023ed3": {
+      "text": "Conjugue le verbe JOUER au présent",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "eff289cf808286da": {
+      "text": "Conjugue le verbe JOUER à l'imparfait",
+      "ms": 2880,
+      "cat": "enonce"
+    },
+    "01f21668b950f9fb": {
+      "text": "Conjugue le verbe JOUER à l'impératif",
+      "ms": 2880,
+      "cat": "enonce"
+    },
+    "4a72e2656eea4a16": {
+      "text": "Conjugue le verbe MANGER",
+      "ms": 1840,
+      "cat": "enonce"
+    },
+    "5e8f952cefdce3e9": {
+      "text": "Conjugue le verbe MANGER au passé simple",
+      "ms": 2960,
+      "cat": "enonce"
+    },
+    "f464c63e8bf7444d": {
+      "text": "Conjugue le verbe MANGER à l'impératif",
+      "ms": 3040,
+      "cat": "enonce"
+    },
+    "39e4e6c0191759a7": {
+      "text": "Conjugue le verbe PARLER",
+      "ms": 1760,
+      "cat": "enonce"
+    },
+    "da3372c642c46550": {
+      "text": "Conjugue le verbe PARLER au futur",
+      "ms": 2720,
+      "cat": "enonce"
+    },
+    "51ac86418b8c167f": {
+      "text": "Conjugue le verbe PARLER au passé simple",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "86ff838966cc12b5": {
+      "text": "Conjugue le verbe PARLER au présent",
+      "ms": 2720,
+      "cat": "enonce"
+    },
+    "f4967e4b356f02b6": {
+      "text": "Conjugue le verbe PARLER à l'imparfait",
+      "ms": 2720,
+      "cat": "enonce"
+    },
+    "bc3753504e9e78fa": {
+      "text": "Conjugue le verbe PARLER à l'impératif",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "974e5e5967fd57cf": {
+      "text": "Conjugue le verbe PLACER",
+      "ms": 1920,
+      "cat": "enonce"
+    },
+    "0047d77c2a03ffe7": {
+      "text": "Conjugue le verbe PLACER au passé simple",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "6fdab48812782d1d": {
+      "text": "Conjugue le verbe PLACER à l'impératif",
+      "ms": 2880,
+      "cat": "enonce"
+    },
+    "4e26b0a974c480a4": {
+      "text": "Conjugue le verbe POUVOIR",
+      "ms": 1840,
+      "cat": "enonce"
+    },
+    "40f54290a3af3b38": {
+      "text": "Conjugue le verbe PRENDRE",
+      "ms": 1920,
+      "cat": "enonce"
+    },
+    "20e27af5383a297f": {
+      "text": "Conjugue le verbe REGARDER",
+      "ms": 1920,
+      "cat": "enonce"
+    },
+    "739312663773f375": {
+      "text": "Conjugue le verbe REGARDER au futur",
+      "ms": 2720,
+      "cat": "enonce"
+    },
+    "0ce9d2453a3ff3bd": {
+      "text": "Conjugue le verbe REGARDER au passé composé",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "c27be40807799513": {
+      "text": "Conjugue le verbe REGARDER au passé simple",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "334bdc5e60d69998": {
+      "text": "Conjugue le verbe REGARDER au présent",
+      "ms": 2480,
+      "cat": "enonce"
+    },
+    "902a87deef41b974": {
+      "text": "Conjugue le verbe REGARDER à l'imparfait",
+      "ms": 2880,
+      "cat": "enonce"
+    },
+    "c1f2dd13d637ada9": {
+      "text": "Conjugue le verbe REGARDER à l'impératif",
+      "ms": 3040,
+      "cat": "enonce"
+    },
+    "b6a93cdaf13ce78c": {
+      "text": "Conjugue le verbe TROUVER",
+      "ms": 1840,
+      "cat": "enonce"
+    },
+    "2b16502a38ea9d2b": {
+      "text": "Conjugue le verbe TROUVER au futur",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "a2f83b2a5883ce6e": {
+      "text": "Conjugue le verbe TROUVER au passé composé",
+      "ms": 2880,
+      "cat": "enonce"
+    },
+    "86ff8f1cdbbadef5": {
+      "text": "Conjugue le verbe TROUVER au passé simple",
+      "ms": 3040,
+      "cat": "enonce"
+    },
+    "9f3926bc817273eb": {
+      "text": "Conjugue le verbe TROUVER au présent",
+      "ms": 2640,
+      "cat": "enonce"
+    },
+    "93e3ae63968fe0ee": {
+      "text": "Conjugue le verbe TROUVER à l'imparfait",
+      "ms": 2880,
+      "cat": "enonce"
+    },
+    "9b3fc983ebe56324": {
+      "text": "Conjugue le verbe TROUVER à l'impératif",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "f31bd8a7d17967b2": {
+      "text": "Conjugue le verbe VENIR",
+      "ms": 1840,
+      "cat": "enonce"
+    },
+    "5ecabb8e89de6ffd": {
+      "text": "Conjugue le verbe VENIR au passé composé",
+      "ms": 3040,
+      "cat": "enonce"
+    },
+    "e2ae9fa286c9c294": {
+      "text": "Conjugue le verbe VOIR",
+      "ms": 1680,
+      "cat": "enonce"
+    },
+    "9ac0bcaa9fed0b10": {
+      "text": "Conjugue le verbe ÊTRE",
+      "ms": 1680,
+      "cat": "enonce"
+    },
+    "97d9d359f3756b26": {
+      "text": "Conjugue le verbe ÊTRE au futur",
+      "ms": 2480,
+      "cat": "enonce"
+    },
+    "da408b107adeb57b": {
+      "text": "Conjugue le verbe ÊTRE au présent",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "f7c258112e97c397": {
+      "text": "Conjugue le verbe ÊTRE à l'imparfait",
+      "ms": 2960,
+      "cat": "enonce"
+    },
+    "3c419151715cfc71": {
+      "text": "Elle a allumé dans la cheminée le premier feu de la saison.",
+      "ms": 3520,
+      "cat": "enonce"
+    },
+    "7b1f61c582fa6085": {
+      "text": "Elle a très envie que le rideau s'ouvre enfin.",
+      "ms": 3680,
+      "cat": "enonce"
+    },
+    "db51b56c6e8ea51a": {
+      "text": "Elle aimait les robes de taffetas, avec des guirlandes de fleurs qui faisaient un effet admirable dans ses beaux cheveux.",
+      "ms": 6720,
+      "cat": "enonce"
+    },
+    "c912bc9ea37f5d6d": {
+      "text": "Elle aimait les robes de taffetas, avec quelques agrafes de pierreries et des guirlandes de fleurs.",
+      "ms": 5760,
+      "cat": "enonce"
     }
   },
   "keys": {
@@ -8093,6 +8743,136 @@
     "indice:fr-lecture-inference": "7faf2e0cf795495e",
     "indice:fr-lecture-ordre": "69141b1fd7643291",
     "indice:fr-lecture-vraifaux": "137594aed0bac966",
-    "indice:fr-lecture-sens-mot": "430242f1e8fb95f7"
+    "indice:fr-lecture-sens-mot": "430242f1e8fb95f7",
+    "txt:0d00824cf8fa9082": "0d00824cf8fa9082",
+    "txt:88dc24eade7b18c8": "88dc24eade7b18c8",
+    "txt:d731cabd209f805c": "d731cabd209f805c",
+    "txt:35d5ba139a642de0": "35d5ba139a642de0",
+    "txt:9ce8eb62bdb68d84": "9ce8eb62bdb68d84",
+    "txt:581cfed8631b8609": "581cfed8631b8609",
+    "txt:da192ba8656e1337": "da192ba8656e1337",
+    "txt:29f775f6b416c914": "29f775f6b416c914",
+    "txt:ff45f9624428754a": "ff45f9624428754a",
+    "txt:294a7ceb5e126ff0": "294a7ceb5e126ff0",
+    "txt:83f2fc618b777062": "83f2fc618b777062",
+    "txt:8a1010ce0a0642f5": "8a1010ce0a0642f5",
+    "txt:6220242352e8af77": "6220242352e8af77",
+    "txt:f5d513df95dfa812": "f5d513df95dfa812",
+    "txt:ca60efc4f72faabc": "ca60efc4f72faabc",
+    "txt:5edf1256f0cb6892": "5edf1256f0cb6892",
+    "txt:f689decd478c662c": "f689decd478c662c",
+    "txt:d30a6729b0c2156d": "d30a6729b0c2156d",
+    "txt:0b98b85b47034672": "0b98b85b47034672",
+    "txt:de5c093611a87717": "de5c093611a87717",
+    "txt:7a66723e3fc36589": "7a66723e3fc36589",
+    "txt:82a0ef3fcb6a59ff": "82a0ef3fcb6a59ff",
+    "txt:47c75c9539ccab7c": "47c75c9539ccab7c",
+    "txt:fed781dbe4d47c69": "fed781dbe4d47c69",
+    "txt:ed6c9900dfd77af0": "ed6c9900dfd77af0",
+    "txt:705f0aae4ec3f104": "705f0aae4ec3f104",
+    "txt:29e61b5a7c8109ed": "29e61b5a7c8109ed",
+    "txt:b1f5841c0edd5fc6": "b1f5841c0edd5fc6",
+    "txt:8338a4a90a6c5385": "8338a4a90a6c5385",
+    "txt:6cbafce010deb1d5": "6cbafce010deb1d5",
+    "txt:dd9f99358c6f8ee0": "dd9f99358c6f8ee0",
+    "txt:bb98147139d157d2": "bb98147139d157d2",
+    "txt:54b2a26fbeca9b01": "54b2a26fbeca9b01",
+    "txt:fc7b4ff97c45f124": "fc7b4ff97c45f124",
+    "txt:b37d5fccd98f6fb0": "b37d5fccd98f6fb0",
+    "txt:8e55cbbd6d55a2f4": "8e55cbbd6d55a2f4",
+    "txt:ef83f7b32f9a178c": "ef83f7b32f9a178c",
+    "txt:e92747eb1299634b": "e92747eb1299634b",
+    "txt:2b589437e4d0115e": "2b589437e4d0115e",
+    "txt:dbffad11d082f9d8": "dbffad11d082f9d8",
+    "txt:25175909891766d7": "25175909891766d7",
+    "txt:2227528fca1f6c0e": "2227528fca1f6c0e",
+    "txt:3f3aa68ee35dcaf8": "3f3aa68ee35dcaf8",
+    "txt:e295475aad39c080": "e295475aad39c080",
+    "txt:f960a581e50869f4": "f960a581e50869f4",
+    "txt:9f3874e1b14f21d8": "9f3874e1b14f21d8",
+    "txt:67332338429fd748": "67332338429fd748",
+    "txt:23f2de3a829279a9": "23f2de3a829279a9",
+    "txt:3fa0e1e88e9b3808": "3fa0e1e88e9b3808",
+    "txt:62232d66d31a72a2": "62232d66d31a72a2",
+    "txt:ddd5b4c5f86038ef": "ddd5b4c5f86038ef",
+    "txt:0b79176e24ba58ae": "0b79176e24ba58ae",
+    "txt:2ee34b503bbc4e77": "2ee34b503bbc4e77",
+    "txt:9069fbd38c589fcb": "9069fbd38c589fcb",
+    "txt:09280621c365a04e": "09280621c365a04e",
+    "txt:ab48fbc43508a9af": "ab48fbc43508a9af",
+    "txt:0a4c67111114d89c": "0a4c67111114d89c",
+    "txt:25d99882c2e6227a": "25d99882c2e6227a",
+    "txt:fcd23c4d3c991e12": "fcd23c4d3c991e12",
+    "txt:5a1970536b1d419e": "5a1970536b1d419e",
+    "txt:2d021257f3bb919e": "2d021257f3bb919e",
+    "txt:10c999e5073cc909": "10c999e5073cc909",
+    "txt:767092d0e675c601": "767092d0e675c601",
+    "txt:9729d8842eff43f6": "9729d8842eff43f6",
+    "txt:8e74c3164aac17fd": "8e74c3164aac17fd",
+    "txt:a561e87ba85ef9c5": "a561e87ba85ef9c5",
+    "txt:cf10293cbd5fef9b": "cf10293cbd5fef9b",
+    "txt:69e11fd0a53516fa": "69e11fd0a53516fa",
+    "txt:dba4d9682d296aec": "dba4d9682d296aec",
+    "txt:c04bb7964108910f": "c04bb7964108910f",
+    "txt:80a60c6dc5cc0c92": "80a60c6dc5cc0c92",
+    "txt:381989b057d1f55f": "381989b057d1f55f",
+    "txt:bf50177b282c6a9c": "bf50177b282c6a9c",
+    "txt:ed7ea5c89e0f9a43": "ed7ea5c89e0f9a43",
+    "txt:cb9eb5530eb3e817": "cb9eb5530eb3e817",
+    "txt:0d61b923a97e28be": "0d61b923a97e28be",
+    "txt:1ac55c1f6004703e": "1ac55c1f6004703e",
+    "txt:07e54a8bf26ecce3": "07e54a8bf26ecce3",
+    "txt:db6bd396c5000278": "db6bd396c5000278",
+    "txt:b2be71566924a318": "b2be71566924a318",
+    "txt:3a160ee951275a71": "3a160ee951275a71",
+    "txt:9af71ad30810748b": "9af71ad30810748b",
+    "txt:87ebf6d0dee2083d": "87ebf6d0dee2083d",
+    "txt:8fdb28c1b148add6": "8fdb28c1b148add6",
+    "txt:b57cc96e85b3586f": "b57cc96e85b3586f",
+    "txt:a6134f6c22c9e702": "a6134f6c22c9e702",
+    "txt:3980cafeb68065b6": "3980cafeb68065b6",
+    "txt:51e38fea0ec2afbd": "51e38fea0ec2afbd",
+    "txt:d2341f65e3023ed3": "d2341f65e3023ed3",
+    "txt:eff289cf808286da": "eff289cf808286da",
+    "txt:01f21668b950f9fb": "01f21668b950f9fb",
+    "txt:4a72e2656eea4a16": "4a72e2656eea4a16",
+    "txt:5e8f952cefdce3e9": "5e8f952cefdce3e9",
+    "txt:f464c63e8bf7444d": "f464c63e8bf7444d",
+    "txt:39e4e6c0191759a7": "39e4e6c0191759a7",
+    "txt:da3372c642c46550": "da3372c642c46550",
+    "txt:51ac86418b8c167f": "51ac86418b8c167f",
+    "txt:86ff838966cc12b5": "86ff838966cc12b5",
+    "txt:f4967e4b356f02b6": "f4967e4b356f02b6",
+    "txt:bc3753504e9e78fa": "bc3753504e9e78fa",
+    "txt:974e5e5967fd57cf": "974e5e5967fd57cf",
+    "txt:0047d77c2a03ffe7": "0047d77c2a03ffe7",
+    "txt:6fdab48812782d1d": "6fdab48812782d1d",
+    "txt:4e26b0a974c480a4": "4e26b0a974c480a4",
+    "txt:40f54290a3af3b38": "40f54290a3af3b38",
+    "txt:20e27af5383a297f": "20e27af5383a297f",
+    "txt:739312663773f375": "739312663773f375",
+    "txt:0ce9d2453a3ff3bd": "0ce9d2453a3ff3bd",
+    "txt:c27be40807799513": "c27be40807799513",
+    "txt:334bdc5e60d69998": "334bdc5e60d69998",
+    "txt:902a87deef41b974": "902a87deef41b974",
+    "txt:c1f2dd13d637ada9": "c1f2dd13d637ada9",
+    "txt:b6a93cdaf13ce78c": "b6a93cdaf13ce78c",
+    "txt:2b16502a38ea9d2b": "2b16502a38ea9d2b",
+    "txt:a2f83b2a5883ce6e": "a2f83b2a5883ce6e",
+    "txt:86ff8f1cdbbadef5": "86ff8f1cdbbadef5",
+    "txt:9f3926bc817273eb": "9f3926bc817273eb",
+    "txt:93e3ae63968fe0ee": "93e3ae63968fe0ee",
+    "txt:9b3fc983ebe56324": "9b3fc983ebe56324",
+    "txt:f31bd8a7d17967b2": "f31bd8a7d17967b2",
+    "txt:5ecabb8e89de6ffd": "5ecabb8e89de6ffd",
+    "txt:e2ae9fa286c9c294": "e2ae9fa286c9c294",
+    "txt:9ac0bcaa9fed0b10": "9ac0bcaa9fed0b10",
+    "txt:97d9d359f3756b26": "97d9d359f3756b26",
+    "txt:da408b107adeb57b": "da408b107adeb57b",
+    "txt:f7c258112e97c397": "f7c258112e97c397",
+    "txt:3c419151715cfc71": "3c419151715cfc71",
+    "txt:7b1f61c582fa6085": "7b1f61c582fa6085",
+    "txt:db51b56c6e8ea51a": "db51b56c6e8ea51a",
+    "txt:c912bc9ea37f5d6d": "c912bc9ea37f5d6d"
   }
 }
