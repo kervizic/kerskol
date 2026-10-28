@@ -157,31 +157,43 @@ def main() -> int:
     return 0
 
 
+ASR_CACHE = r"C:\kerskol-tts\models_asr"  # cache modeles whisper (jamais C:\Audiobooks)
+
+
 def asr_controle(cids: list[str], new: dict, tmp: Path) -> set:
-    """ASR whisper small sur GPU si libre, sinon CPU, UNIQUEMENT sur les nouveaux.
+    """ASR whisper SMALL sur GPU si libre (meme garde-fou que la generation :
+    util <= 25%), sinon CPU avec beam=1, UNIQUEMENT sur les nouveaux. Le modele
+    est mis en cache dans ASR_CACHE (telecharge une seule fois si absent) ; repli
+    sur BASE si small est indisponible (pas de reseau, etc.).
     Retourne l'ensemble des cid a ECARTER (muet / tronque / accent anglais)."""
     keys = [k for k, c in new.items() if c in set(cids)]
-    # GPU libre ? (util <= 25)
+    # GPU libre ? (util <= 25, meme garde-fou que _wait_for_gpu de la generation)
     u = ssh_win("nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits")
     try:
         gpu_free = int(u.stdout.strip().splitlines()[0]) <= 25
     except Exception:
         gpu_free = False
     device = "cuda" if gpu_free else "cpu"
-    # modele : small si present (offline), sinon large-v3-turbo
-    chk = ssh_win(r"if (Test-Path C:\Audiobooks\models_asr\small) {'small'} else {'turbo'}")
-    model = (r"C:\Audiobooks\models_asr\small" if "small" in chk.stdout
-             else r"C:\Audiobooks\models_asr\large-v3-turbo")
     keycsv = ",".join(keys)
-    log(f"ASR : {len(keys)} nouveaux clips, device={device}, model={Path(model).name}")
-    ps = (f'cd C:\\kerskol-tts; $env:HF_HUB_OFFLINE="1"; $env:TRANSFORMERS_OFFLINE="1"; '
-          f'& C:\\Audiobooks\\venv_asr\\Scripts\\python.exe -u relecture.py '
-          f'--out {WIN_OUT} --keys "{keycsv}" --model {model} --device {device} --beam 1')
-    r = ssh_win(ps)
-    if device == "cuda" and ("cublas" in r.stderr.lower() or "cuda" in r.stderr.lower()
-                             and r.returncode != 0):
+
+    def run_asr(model: str, dev: str):
+        ps = (f'cd C:\\kerskol-tts; '
+              f'& C:\\Audiobooks\\venv_asr\\Scripts\\python.exe -u relecture.py '
+              f'--out {WIN_OUT} --keys "{keycsv}" --model {model} '
+              f'--download-root {ASR_CACHE} --device {dev} --beam 1')
+        return ssh_win(ps)
+
+    model = "small"
+    log(f"ASR : {len(keys)} nouveaux clips, device={device}, model={model}")
+    r = run_asr(model, device)
+    if device == "cuda" and r.returncode != 0:
         log("ASR GPU indisponible, repli CPU.")
-        r = ssh_win(ps.replace("--device cuda", "--device cpu"))
+        device = "cpu"
+        r = run_asr(model, device)
+    if r.returncode != 0:
+        log("ASR modele small indisponible (telechargement ?), repli base.")
+        model = "base"
+        r = run_asr(model, device)
     # lire relecture.json (scp pour conserver l'UTF-8, pas de Get-Content cp1252)
     rjf = tmp / "relecture.json"
     run(["scp", *WIN_OPTS, f"{WIN}:C:/kerskol-tts/sortie_c1s33/relecture.json", str(rjf)])
