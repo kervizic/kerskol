@@ -7393,6 +7393,21 @@
       "text": "Elle aimait les robes de taffetas, avec quelques agrafes de pierreries et des guirlandes de fleurs.",
       "ms": 5760,
       "cat": "enonce"
+    },
+    "115c8d1d88758a21": {
+      "text": "Elle alla trouver une vieille sorcière et lui dit : Je voudrais avoir un petit enfant.",
+      "ms": 4800,
+      "cat": "enonce"
+    },
+    "b357aec14b22b1b2": {
+      "text": "Elle danse.",
+      "ms": 1120,
+      "cat": "enonce"
+    },
+    "05f08b868c823140": {
+      "text": "Elle est allée à l'école.",
+      "ms": 2000,
+      "cat": "enonce"
     }
   },
   "keys": {
@@ -8873,6 +8888,9 @@
     "txt:3c419151715cfc71": "3c419151715cfc71",
     "txt:7b1f61c582fa6085": "7b1f61c582fa6085",
     "txt:db51b56c6e8ea51a": "db51b56c6e8ea51a",
-    "txt:c912bc9ea37f5d6d": "c912bc9ea37f5d6d"
+    "txt:c912bc9ea37f5d6d": "c912bc9ea37f5d6d",
+    "txt:115c8d1d88758a21": "115c8d1d88758a21",
+    "txt:b357aec14b22b1b2": "b357aec14b22b1b2",
+    "txt:05f08b868c823140": "05f08b868c823140"
   }
 }
