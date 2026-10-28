@@ -116,8 +116,8 @@ export interface CouvertureResult {
   parMatiere: Record<string, BucketStat>;
   parKind: Record<string, BucketStat>;
   global: BucketStat;
-  // Clips PROSE a generer (digit-free), dedupes par texte nettoye.
-  aGenerer: { texte: string; cat: string; exemples: string[] }[];
+  // Clips PROSE a generer (digit-free ET avec chiffres), dedupes par texte nettoye.
+  aGenerer: { texte: string; cat: string; matiere: string; kind: ChampKind; chiffres: boolean; exemples: string[] }[];
   // Textes prose AVEC chiffres non lisibles (lot ulterieur), dedupes.
   proseAvecChiffres: string[];
   // Cles de briques manquantes (num:/op:), dedupees.
@@ -161,7 +161,7 @@ export function mesurerCouverture(
 
   // Dedup : on compte chaque (kind, texte-nettoye) UNE fois par matiere.
   const vus = new Set<string>();
-  const aGenerer = new Map<string, { texte: string; cat: string; exemples: Set<string> }>();
+  const aGenerer = new Map<string, { texte: string; cat: string; matiere: string; kind: ChampKind; chiffres: boolean; exemples: Set<string> }>();
   const proseAvecChiffres = new Set<string>();
   const briquesManquantes = new Set<string>();
   let nbExercices = 0;
@@ -190,14 +190,14 @@ export function mesurerCouverture(
       void voie;
       return;
     }
-    if (aDesChiffres(cle)) {
+    const chiffres = aDesChiffres(cle);
+    if (chiffres) {
       bump(mat, "manquants_chiffres"); bump(kd, "manquants_chiffres"); bump(global, "manquants_chiffres");
       proseAvecChiffres.add(cle);
-      return;
+    } else {
+      bump(mat, "manquants_prose"); bump(kd, "manquants_prose"); bump(global, "manquants_prose");
     }
-    // prose digit-free : generable maintenant
-    bump(mat, "manquants_prose"); bump(kd, "manquants_prose"); bump(global, "manquants_prose");
-    const g = aGenerer.get(cle) ?? { texte: cle, cat: catPour(kind), exemples: new Set<string>() };
+    const g = aGenerer.get(cle) ?? { texte: cle, cat: catPour(kind), matiere, kind, chiffres, exemples: new Set<string>() };
     if (g.exemples.size < 3) g.exemples.add(`${matiere}/${kind}`);
     aGenerer.set(cle, g);
   };
@@ -223,7 +223,7 @@ export function mesurerCouverture(
     parMatiere,
     parKind,
     global,
-    aGenerer: [...aGenerer.values()].map((g) => ({ texte: g.texte, cat: g.cat, exemples: [...g.exemples] })),
+    aGenerer: [...aGenerer.values()].map((g) => ({ texte: g.texte, cat: g.cat, matiere: g.matiere, kind: g.kind, chiffres: g.chiffres, exemples: [...g.exemples] })),
     proseAvecChiffres: [...proseAvecChiffres].sort(),
     briquesManquantes: [...briquesManquantes].sort(),
   };

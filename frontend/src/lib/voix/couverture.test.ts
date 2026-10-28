@@ -45,7 +45,7 @@ describe("Couverture voix CE2 (mesure)", () => {
     // uniquement sur demande (VOIX_WRITE=1) pour ne pas muter l'arbre en CI.
     if (process.env.VOIX_WRITE) {
       writeFileSync(url("./__fixtures__/voix-a-generer.json"),
-        JSON.stringify(res.aGenerer.map((g) => ({ texte: g.texte, cat: g.cat })), null, 2), "utf8");
+        JSON.stringify(res.aGenerer.map((g) => ({ texte: g.texte, cat: g.cat, matiere: g.matiere, kind: g.kind, chiffres: g.chiffres })), null, 2), "utf8");
       writeFileSync(url("./__fixtures__/voix-rapport.json"),
         JSON.stringify({ parMatiere: res.parMatiere, parKind: res.parKind, global: res.global,
           proseAvecChiffres: res.proseAvecChiffres, briquesManquantes: res.briquesManquantes }, null, 2), "utf8");

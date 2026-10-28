@@ -57,6 +57,41 @@ def _log(msg: str) -> None:
     print(f"[{datetime.now().strftime('%H:%M:%S')}] {msg}", flush=True)
 
 
+def _gpu_util() -> int | None:
+    """Utilisation GPU en % (None si nvidia-smi indisponible)."""
+    try:
+        out = subprocess.run(
+            ["nvidia-smi", "--query-gpu=utilization.gpu", "--format=csv,noheader,nounits"],
+            capture_output=True, text=True, timeout=10)
+        return int(out.stdout.strip().splitlines()[0])
+    except Exception:
+        return None
+
+
+def _wait_for_gpu(thresh: int = 25, interval: float = 5.0, cap_s: float = 1800.0) -> None:
+    """Attend que le GPU soit LIBRE (util <= thresh sur 2 lectures) avant de
+    generer. Ne tue JAMAIS aucun processus : on patiente poliment. Notre propre
+    process est inactif entre deux clips (util ~0) ; on n'attend donc que lorsqu'un
+    processus ETRANGER occupe le GPU. Repli : apres cap_s, on continue quand meme."""
+    t0 = time.time()
+    bas = 0
+    annonce = False
+    while time.time() - t0 < cap_s:
+        u = _gpu_util()
+        if u is None:
+            return
+        if u <= thresh:
+            bas += 1
+            if bas >= 2:
+                return
+        else:
+            bas = 0
+            if not annonce:
+                _log(f"GPU occupe ({u}%) par un autre process : attente (aucun kill)...")
+                annonce = True
+        time.sleep(interval)
+
+
 def _bornes_suspect(n_signes: int, att: float, cat: str = "") -> tuple[float, float]:
     """Intervalle de duree acceptable (s).
 
@@ -85,7 +120,8 @@ def _encoder_mp3(wav: Path, mp3: Path, core) -> None:
 
 
 def generer(out_dir: Path, pilot: bool, only: set[str] | None, force: bool = False,
-            ref_json: str | None = None, voice: str | None = None) -> dict:
+            ref_json: str | None = None, voice: str | None = None,
+            wait_gpu: bool = False) -> dict:
     import core
     from voix import VoixEngine
 
@@ -130,6 +166,9 @@ def generer(out_dir: Path, pilot: bool, only: set[str] | None, force: bool = Fal
 
         att = len(texte) / core.SIG_PER_SEC
         lo, hi = _bornes_suspect(len(texte), att, cat)
+
+        if wait_gpu:
+            _wait_for_gpu()
 
         meilleur = None
         for sd in SEEDS:
@@ -202,9 +241,12 @@ def main(argv=None) -> int:
                     help="fiche voix JSON (clonage). Defaut : ref_naf_D. Pour C1_s33 : ref_c1s33.json")
     ap.add_argument("--voice", default=None,
                     help="version de voix (sous-dossier + manifest.voice). Defaut : VOICE_VERSION")
+    ap.add_argument("--wait-gpu", action="store_true",
+                    help="attendre que le GPU soit libre avant chaque clip (ne tue jamais)")
     a = ap.parse_args(argv)
     only = set(x.strip() for x in a.only.split(",") if x.strip()) if a.only else None
-    generer(Path(a.out), a.pilot, only, force=a.force, ref_json=a.ref, voice=a.voice)
+    generer(Path(a.out), a.pilot, only, force=a.force, ref_json=a.ref, voice=a.voice,
+            wait_gpu=a.wait_gpu)
     return 0
 
 
