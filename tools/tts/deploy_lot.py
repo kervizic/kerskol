@@ -49,7 +49,8 @@ GEN_LIST = REPO / "tools/tts/data/voix-a-generer.json"
 
 
 def run(cmd, **kw):
-    return subprocess.run(cmd, text=True, capture_output=True, **kw)
+    return subprocess.run(cmd, text=True, capture_output=True,
+                          encoding="utf-8", errors="replace", **kw)
 
 
 def log(m):
@@ -110,7 +111,7 @@ def main() -> int:
         # b2. ASR sur les NOUVEAUX uniquement (sauf SKIP_ASR). Exclut MUET /
         # TRONQUE / accent anglais ; jamais pour une faute d'orthographe.
         if not os.environ.get("SKIP_ASR") and retenus:
-            exclus = asr_controle(sorted(retenus), new)
+            exclus = asr_controle(sorted(retenus), new, tmp)
             if exclus:
                 log(f"ecartes par ASR (muet/tronque/accent) : {len(exclus)}")
             retenus -= exclus
@@ -156,7 +157,7 @@ def main() -> int:
     return 0
 
 
-def asr_controle(cids: list[str], new: dict) -> set:
+def asr_controle(cids: list[str], new: dict, tmp: Path) -> set:
     """ASR whisper small sur GPU si libre, sinon CPU, UNIQUEMENT sur les nouveaux.
     Retourne l'ensemble des cid a ECARTER (muet / tronque / accent anglais)."""
     keys = [k for k, c in new.items() if c in set(cids)]
@@ -181,12 +182,12 @@ def asr_controle(cids: list[str], new: dict) -> set:
                              and r.returncode != 0):
         log("ASR GPU indisponible, repli CPU.")
         r = ssh_win(ps.replace("--device cuda", "--device cpu"))
-    # lire relecture.json
-    rj = run(["ssh", *WIN_OPTS, WIN,
-              f"Get-Content {WIN_OUT}\\relecture.json -Raw"])
+    # lire relecture.json (scp pour conserver l'UTF-8, pas de Get-Content cp1252)
+    rjf = tmp / "relecture.json"
+    run(["scp", *WIN_OPTS, f"{WIN}:C:/kerskol-tts/sortie_c1s33/relecture.json", str(rjf)])
     exclus = set()
     try:
-        rep = json.loads(rj.stdout)
+        rep = json.loads(rjf.read_text(encoding="utf-8"))
         cid_de = {}
         for row in rep.get("rapport", []):
             cid_de[row["key"]] = row
