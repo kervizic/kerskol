@@ -27213,6 +27213,31 @@
       "text": "3890 = 3890.",
       "ms": 3600,
       "cat": "enonce"
+    },
+    "6f149416fa74c139": {
+      "text": "3893 ÷ 100 = 38, il y a 38 centaines entieres.",
+      "ms": 5840,
+      "cat": "enonce"
+    },
+    "77aeaca268606221": {
+      "text": "39 + 61 = 100 : on complete d'abord a la dizaine, puis a 100.",
+      "ms": 6240,
+      "cat": "enonce"
+    },
+    "cb4fd2d9c8bd8c30": {
+      "text": "390 + 610 = 1000 : on complete a 1000.",
+      "ms": 6000,
+      "cat": "enonce"
+    },
+    "1b50e133e32a2eb5": {
+      "text": "3939 s'écrit trois mille neuf cent trente-neuf.",
+      "ms": 3520,
+      "cat": "enonce"
+    },
+    "da1e0e00b57db4e1": {
+      "text": "3990 − 100 = 3890.",
+      "ms": 4080,
+      "cat": "enonce"
     }
   },
   "keys": {
@@ -32657,6 +32682,11 @@
     "txt:4c9abb44b270e9b9": "4c9abb44b270e9b9",
     "txt:ed62d0da79302c6b": "ed62d0da79302c6b",
     "txt:7fc80df15828118c": "7fc80df15828118c",
-    "txt:83641a5ad231d9ea": "83641a5ad231d9ea"
+    "txt:83641a5ad231d9ea": "83641a5ad231d9ea",
+    "txt:6f149416fa74c139": "6f149416fa74c139",
+    "txt:77aeaca268606221": "77aeaca268606221",
+    "txt:cb4fd2d9c8bd8c30": "cb4fd2d9c8bd8c30",
+    "txt:1b50e133e32a2eb5": "1b50e133e32a2eb5",
+    "txt:da1e0e00b57db4e1": "da1e0e00b57db4e1"
   }
 }
