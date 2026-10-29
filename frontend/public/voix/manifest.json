@@ -25083,6 +25083,696 @@
       "text": "maison, manteau et marin commencent par ma. Ensuite : i, n, r. i vient en premier, donc maison est le premier.",
       "ms": 8800,
       "cat": "enonce"
+    },
+    "7d84e9a37dd22128": {
+      "text": "nuage commence par n. moto est un mot en m, orange est un mot en o. n vient entre m et o.",
+      "ms": 8560,
+      "cat": "enonce"
+    },
+    "6408d9f712d8c885": {
+      "text": "orange a deux sens. Ici, on en fait du jus : c'est le fruit. orange est aussi une couleur, comme la carotte.",
+      "ms": 7120,
+      "cat": "enonce"
+    },
+    "8945e627b8f69fe1": {
+      "text": "pièce a deux sens. Ici, c'est une salle de la maison, comme la cuisine. Dans le porte-monnaie, une pièce sert à payer.",
+      "ms": 8160,
+      "cat": "enonce"
+    },
+    "1e79c2d97c07cd43": {
+      "text": "poire, pomme et poule commencent par po. Ensuite : i, m, u. i vient en premier, donc poire est le premier.",
+      "ms": 8720,
+      "cat": "enonce"
+    },
+    "9545c93aedcdb8fd": {
+      "text": "règle a deux sens. Pour tracer un trait, la règle est l'objet plat. Dans un jeu, la règle dit ce qu'on a le droit de faire.",
+      "ms": 8560,
+      "cat": "enonce"
+    },
+    "246392689f12c196": {
+      "text": "sapin, souris et sucre commencent par s. Ensuite on regarde la deuxième lettre : a, o, u. a vient en premier, donc sapin est le premier.",
+      "ms": 10800,
+      "cat": "enonce"
+    },
+    "b5e5006feb8a5d99": {
+      "text": "souris commence par s. reine est un mot en r, table est un mot en t. s vient entre r et t.",
+      "ms": 7520,
+      "cat": "enonce"
+    },
+    "da7d47939c2b9c29": {
+      "text": "terre, terrain et atterrir parlent de la terre. banane est l'intrus.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "53030f03361b1504": {
+      "text": "tour a deux sens. Ici, c'est le grand bâtiment très haut d'où on voit loin. Un tour de magie, c'est quelque chose de différent.",
+      "ms": 8080,
+      "cat": "enonce"
+    },
+    "d7310aa34236086b": {
+      "text": "vague, ville et voler commencent par v. Ensuite la deuxième lettre : a, i, o. a vient en premier, donc le premier est vague.",
+      "ms": 8400,
+      "cat": "enonce"
+    },
+    "071773fd54f07a71": {
+      "text": "voiture et auto veulent dire la même chose.",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "b5610795dc439a70": {
+      "text": "À cause du verglas, on glisse sur la route : glissante veut dire où l'on glisse facilement.",
+      "ms": 5680,
+      "cat": "enonce"
+    },
+    "894f41cf3daa6e66": {
+      "text": "À force de faire le difficile, le héron ne mange plus qu'un limaçon, c'est-à-dire un escargot.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "b371017b3d491714": {
+      "text": "À la fin de dans, il y a un s qu'on n'entend pas. On écrit d, a, n, s.",
+      "ms": 7200,
+      "cat": "enonce"
+    },
+    "708be2cc64498d82": {
+      "text": "À la fin de depuis, il y a un s qu'on n'entend pas.",
+      "ms": 3840,
+      "cat": "enonce"
+    },
+    "7121a4680a2e138d": {
+      "text": "À la fin de jamais, il y a un s qu'on n'entend pas.",
+      "ms": 3680,
+      "cat": "enonce"
+    },
+    "a6c4c71b9a9ecf0e": {
+      "text": "À la fin de maintenant, il y a un t qu'on n'entend pas. Au milieu, on écrit a, i, n.",
+      "ms": 6560,
+      "cat": "enonce"
+    },
+    "7e1c22b65c524a10": {
+      "text": "À la fin de pendant, il y a un t qu'on n'entend pas.",
+      "ms": 3520,
+      "cat": "enonce"
+    },
+    "236143772deda733": {
+      "text": "À la fin de souvent, il y a un t qu'on n'entend pas.",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "ba8d120c19cb6ead": {
+      "text": "À la fin de toujours, il y a un s qu'on n'entend pas.",
+      "ms": 4000,
+      "cat": "enonce"
+    },
+    "295423739d214013": {
+      "text": "À la fin de trop, il y a un p qu'on n'entend pas.",
+      "ms": 3520,
+      "cat": "enonce"
+    },
+    "0dfe92f6c187f542": {
+      "text": "C'est un rectangle de trois carreaux sur deux. Tu peux le tracer n'importe où, c'est la même figure.",
+      "ms": 5920,
+      "cat": "enonce"
+    },
+    "3e5b074616afc566": {
+      "text": "C'est un triangle rectangle : un côté de trois carreaux, un côté de deux carreaux, et un angle droit entre les deux.",
+      "ms": 7840,
+      "cat": "enonce"
+    },
+    "edfcf0c6bef50f69": {
+      "text": "Ce coin est trop fermé, trop pointu, il n'est pas bien carré : ce n'est pas un angle droit.",
+      "ms": 6000,
+      "cat": "enonce"
+    },
+    "4c8eb6a8b8a8da40": {
+      "text": "Cette figure a quatre côtés de la même longueur et quatre coins bien droits : c'est un carré.",
+      "ms": 5840,
+      "cat": "enonce"
+    },
+    "a252a7a027f5f583": {
+      "text": "Cette figure a trois côtés et trois coins : c'est un triangle.",
+      "ms": 4160,
+      "cat": "enonce"
+    },
+    "e5a6c841898fa527": {
+      "text": "Compte les carreaux de chaque côté comme sur le modèle. Tu peux la tracer un peu plus loin, c'est la même figure.",
+      "ms": 6000,
+      "cat": "enonce"
+    },
+    "b4718c66e5d394e1": {
+      "text": "Deux côtés longs de quatre carreaux, deux côtés courts de deux carreaux, et quatre angles droits : c'est un rectangle.",
+      "ms": 6400,
+      "cat": "enonce"
+    },
+    "ceb1e3cec9be3ed7": {
+      "text": "Deux côtés longs de six carreaux, deux côtés courts de trois carreaux, et quatre angles droits : c'est un rectangle.",
+      "ms": 6800,
+      "cat": "enonce"
+    },
+    "08de68fe7dfdc33d": {
+      "text": "Deux ronds plats et un tour rond, comme une boîte de conserve : c'est un cylindre.",
+      "ms": 5440,
+      "cat": "enonce"
+    },
+    "edd5ac2abac2491b": {
+      "text": "En pliant sur le trait du milieu, chaque case retrouve sa jumelle de l'autre côté : il y a un axe de symétrie.",
+      "ms": 7040,
+      "cat": "enonce"
+    },
+    "ce610b4fbfc6f94f": {
+      "text": "En pliant, les cases ne retombent pas l'une sur l'autre : cette figure n'a pas d'axe de symétrie.",
+      "ms": 5920,
+      "cat": "enonce"
+    },
+    "3056ee0497fab51f": {
+      "text": "Il a deux ronds plats et un tour rond, comme une boîte de conserve : c'est un cylindre.",
+      "ms": 5680,
+      "cat": "enonce"
+    },
+    "7db1e08b0fe332ea": {
+      "text": "Il a un rond plat en bas et une pointe en haut, comme un chapeau de fête : c'est un cône.",
+      "ms": 6320,
+      "cat": "enonce"
+    },
+    "2d3e8f050f8012bc": {
+      "text": "Il a une base et des faces triangles qui montent vers un sommet : c'est une pyramide.",
+      "ms": 5360,
+      "cat": "enonce"
+    },
+    "c1307ad24c863d08": {
+      "text": "Il est tout rond comme un ballon : c'est une boule, on dit aussi une sphère.",
+      "ms": 5360,
+      "cat": "enonce"
+    },
+    "83fea28b997d1d2a": {
+      "text": "Il y a le carré du dessous et quatre triangles sur les côtés : cela fait cinq faces.",
+      "ms": 5120,
+      "cat": "enonce"
+    },
+    "490ad019cb21b475": {
+      "text": "L'angle droit est bien carré, comme le coin d'une feuille. Ici c'est le coin A, en bas à gauche.",
+      "ms": 7440,
+      "cat": "enonce"
+    },
+    "c8b32cb246e5fc7a": {
+      "text": "La boîte a des faces rectangles : c'est un pavé, on dit aussi un pavé droit.",
+      "ms": 5120,
+      "cat": "enonce"
+    },
+    "2e4181de32e396fe": {
+      "text": "La fleur est en bas, du côté de l'entrée : elle est devant la maison. L'arbre, lui, est derrière.",
+      "ms": 7600,
+      "cat": "enonce"
+    },
+    "ae27cdce86e3cdf9": {
+      "text": "La pointe est sur O. On écarte le compas jusqu'à A : le cercle passe alors juste par A.",
+      "ms": 6880,
+      "cat": "enonce"
+    },
+    "7b1a7a93fd475092": {
+      "text": "La pointe reste sur O et le compas s'écarte jusqu'à A. Le cercle passe par A, même quand A est en biais.",
+      "ms": 8320,
+      "cat": "enonce"
+    },
+    "e96cfb59d45aab26": {
+      "text": "La porte est à gauche et la fenêtre à droite : pour aller de l'une à l'autre, on va vers la droite.",
+      "ms": 5840,
+      "cat": "enonce"
+    },
+    "8658ca49f64824f5": {
+      "text": "La règle ne peut pas toucher les trois points à la fois : ils ne sont pas alignés.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "4435876bf162b5d4": {
+      "text": "Le ballon est tout rond : il a la forme d'une boule, une sphère.",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "b82ee80566ce2910": {
+      "text": "Le banc est à droite et le toboggan à gauche : pour aller de l'un à l'autre, on va vers la gauche.",
+      "ms": 5840,
+      "cat": "enonce"
+    },
+    "b7cc5c0edcc74cac": {
+      "text": "Le coin où deux côtés se rejoignent s'appelle un sommet.",
+      "ms": 3600,
+      "cat": "enonce"
+    },
+    "bd588f1ac2973a61": {
+      "text": "Le cube a douze arêtes : quatre en haut, quatre en bas, et quatre debout.",
+      "ms": 4960,
+      "cat": "enonce"
+    },
+    "0cf66b845d818446": {
+      "text": "Le dé a six faces carrées pareilles : c'est un cube.",
+      "ms": 3680,
+      "cat": "enonce"
+    },
+    "fffe7fef0e787c16": {
+      "text": "Le haut et le bas sont pareils autour du trait : c'est bien un axe de symétrie.",
+      "ms": 5920,
+      "cat": "enonce"
+    },
+    "402170b5d0f89f34": {
+      "text": "Le point du milieu du cercle s'appelle le centre. On le marque souvent avec la lettre O.",
+      "ms": 5600,
+      "cat": "enonce"
+    },
+    "9bc2dbc90b843766": {
+      "text": "Le premier se replie bien en cube. Le deuxième a quatre cases en carré : deux faces se poseraient l'une sur l'autre.",
+      "ms": 7040,
+      "cat": "enonce"
+    },
+    "0670e1ed21e451d3": {
+      "text": "Le quatrième coin est en face. Les côtés opposés d'un rectangle ont la même longueur.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "339f9b242d2ed38f": {
+      "text": "Le quatrième coin ferme le carré. Place-le en face, pour que les quatre côtés soient égaux.",
+      "ms": 6560,
+      "cat": "enonce"
+    },
+    "bde1688aa428023a": {
+      "text": "Le rectangle a deux côtés longs de cinq carreaux et deux côtés courts de trois carreaux, avec quatre angles droits.",
+      "ms": 7200,
+      "cat": "enonce"
+    },
+    "7b1080077cae1c46": {
+      "text": "Le rectangle a quatre bords droits, donc quatre côtés.",
+      "ms": 4320,
+      "cat": "enonce"
+    },
+    "b498cd31794e7efb": {
+      "text": "Le trait du centre jusqu'au bord s'appelle le rayon. Tous les rayons d'un cercle ont la même longueur.",
+      "ms": 6320,
+      "cat": "enonce"
+    },
+    "40676a7c5d4cae8f": {
+      "text": "Le triangle a trois bords droits, donc trois côtés.",
+      "ms": 3520,
+      "cat": "enonce"
+    },
+    "67d9c8c7bc107ddd": {
+      "text": "Les coins A et B sont bien carrés : ce sont des angles droits. Les coins C et D sont penchés, ce ne sont pas des angles droits.",
+      "ms": 8320,
+      "cat": "enonce"
+    },
+    "cca0a7bb51395869": {
+      "text": "Les coins A et E, en bas, sont bien carrés : ce sont des angles droits. Le toit, B, C, D, est penché, ce ne sont pas des angles droits.",
+      "ms": 10480,
+      "cat": "enonce"
+    },
+    "55b253d435f9546d": {
+      "text": "Les deux côtés du trait ne sont pas pareils : ce n'est pas un axe de symétrie.",
+      "ms": 4400,
+      "cat": "enonce"
+    },
+    "c4f0a557362141b2": {
+      "text": "Les deux traits forment un coin bien carré : c'est un angle droit. On peut le vérifier avec l'équerre.",
+      "ms": 6720,
+      "cat": "enonce"
+    },
+    "ca98983660e499e1": {
+      "text": "Les élèves regardent vers le haut du plan, où se trouve le tableau : le tableau est devant eux.",
+      "ms": 7120,
+      "cat": "enonce"
+    },
+    "04e8da05bb988501": {
+      "text": "Non. Deux carrés se poseraient sur la même face et il resterait un trou : ce n'est pas un patron de cube.",
+      "ms": 7440,
+      "cat": "enonce"
+    },
+    "6ea7cf70c5fa40d3": {
+      "text": "Oui ! En repliant les carrés un par un, on referme bien un cube. Chaque carré devient une face.",
+      "ms": 6880,
+      "cat": "enonce"
+    },
+    "c2944e2fd6823ee9": {
+      "text": "Quatre angles droits mais des côtés de deux longueurs différentes : c'est un rectangle. Par exemple, une porte a la forme d'un rectangle.",
+      "ms": 8400,
+      "cat": "enonce"
+    },
+    "fef95d0ff27c23fa": {
+      "text": "Quatre côtés égaux et quatre angles droits : c'est un carré. Le rectangle, lui, n'a pas tous ses côtés égaux.",
+      "ms": 8400,
+      "cat": "enonce"
+    },
+    "35e89d17e4b4c68d": {
+      "text": "Seul le premier se replie en cube. Les deux autres ont un carré de quatre cases qui se superposeraient.",
+      "ms": 6560,
+      "cat": "enonce"
+    },
+    "1f4c44954d220560": {
+      "text": "Si on pose la règle, elle touche les trois points en même temps : ils sont alignés.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "82303f6cb075c13a": {
+      "text": "Suis le contour du modèle, un nœud après l'autre. Compte bien les carreaux à chaque coin.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "695de557095675ed": {
+      "text": "Toute ronde, sans aucun coin : c'est un cercle. Par exemple, une assiette ronde a la forme d'un cercle.",
+      "ms": 6720,
+      "cat": "enonce"
+    },
+    "f96cc66a54357284": {
+      "text": "Toutes ses faces sont des carrés pareils : c'est un cube, comme un dé.",
+      "ms": 4480,
+      "cat": "enonce"
+    },
+    "ebfa7fed161216a9": {
+      "text": "Trois côtés et trois sommets : c'est un triangle. Par exemple, une équerre a trois côtés droits.",
+      "ms": 6800,
+      "cat": "enonce"
+    },
+    "b6bc5dba57292048": {
+      "text": "Trois côtés et un angle droit : c'est un triangle rectangle. On peut vérifier l'angle droit avec l'équerre.",
+      "ms": 7520,
+      "cat": "enonce"
+    },
+    "4b7cd9a4058acc4c": {
+      "text": "Un carré a ses quatre côtés égaux. Ici, chaque côté mesure quatre carreaux.",
+      "ms": 5680,
+      "cat": "enonce"
+    },
+    "729c214dadf80814": {
+      "text": "Un carré a ses quatre côtés égaux. Ici, chaque côté mesure trois carreaux et chaque coin est un angle droit.",
+      "ms": 7440,
+      "cat": "enonce"
+    },
+    "e613fb7fcf9a7e1d": {
+      "text": "Un carré a ses quatre côtés égaux. Ici, il y a deux côtés longs et deux côtés courts : c'est un rectangle, pas un carré.",
+      "ms": 9280,
+      "cat": "enonce"
+    },
+    "5ecbdaecc1bfaaae": {
+      "text": "Un cube a six faces. Son patron est fait de six carrés, un pour chaque face.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "2bc1c41554cf2cf3": {
+      "text": "Un côté, c'est un bord droit de la figure. Le carré a quatre côtés.",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "428cfec547e62d4e": {
+      "text": "Un patron, c'est le cube déplié à plat. Quand on le replie, il redonne le cube.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "a19bdc439ae2dce1": {
+      "text": "Un sommet, c'est un coin du solide. Le cube a huit coins.",
+      "ms": 4160,
+      "cat": "enonce"
+    },
+    "770bfd686f1f1361": {
+      "text": "Un sommet, c'est un coin, là où deux côtés se rejoignent. Le triangle a trois sommets.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "25c1c51e12133808": {
+      "text": "Un sommet, c'est un coin. Le pavé droit a huit coins, tout comme le cube.",
+      "ms": 5120,
+      "cat": "enonce"
+    },
+    "8148e4102658b898": {
+      "text": "Un sommet, c'est un coin. Le sommet B est le coin en haut à droite.",
+      "ms": 4960,
+      "cat": "enonce"
+    },
+    "02bb1f57fc6620e1": {
+      "text": "Un trait bien droit, long de quatre carreaux. Compte bien quatre carreaux entre les deux points.",
+      "ms": 6000,
+      "cat": "enonce"
+    },
+    "6b69a58bdcb7861a": {
+      "text": "Un trait bien droit, long de trois carreaux. Tu peux le tracer vers le haut, vers le bas ou sur le côté.",
+      "ms": 6640,
+      "cat": "enonce"
+    },
+    "683f7cbdf5a14c31": {
+      "text": "Un triangle rectangle a trois côtés et un coin bien carré. Par exemple, pars d'un coin, va tout droit, puis remonte.",
+      "ms": 7840,
+      "cat": "enonce"
+    },
+    "6d0f6e8d54cb641c": {
+      "text": "Une arête, c'est le trait où deux faces se rejoignent. Le cube a douze arêtes.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "212bf7363e2227b7": {
+      "text": "Une face, c'est un côté plat du solide. Le cube a six faces carrées.",
+      "ms": 5200,
+      "cat": "enonce"
+    },
+    "6435a04ef27ae870": {
+      "text": "À droite de la table, juste à côté, il y a la fenêtre.",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "6c9fdb888abfb38b": {
+      "text": "À droite du lit, juste à côté, il y a la lampe.",
+      "ms": 3920,
+      "cat": "enonce"
+    },
+    "cd25fcb9a237a283": {
+      "text": "À gauche de la maison, juste à côté, il y a l'arbre.",
+      "ms": 3840,
+      "cat": "enonce"
+    },
+    "4d48e970616cc0bc": {
+      "text": "À gauche de la table, juste à côté, il y a la chaise.",
+      "ms": 3520,
+      "cat": "enonce"
+    },
+    "6930ffa0cdcb719d": {
+      "text": "1 + 1, c'est un double : 2.",
+      "ms": 2880,
+      "cat": "enonce"
+    },
+    "5b2846c52f8ea86a": {
+      "text": "1 + 2, c'est presque un double : 1 + 1 = 2, puis + 1 = 3.",
+      "ms": 6640,
+      "cat": "enonce"
+    },
+    "a3efe0ddb6c64699": {
+      "text": "1 = 10/10. Comme 4 < 10, 4/10 est plus petite que 1.",
+      "ms": 5200,
+      "cat": "enonce"
+    },
+    "9d602cf9adab7957": {
+      "text": "1 = 10/10. Comme 7 < 10, 7/10 est plus petite que 1.",
+      "ms": 5600,
+      "cat": "enonce"
+    },
+    "00be4047b7100010": {
+      "text": "1 = 5/5. Comme 4 < 5, 4/5 est plus petite que 1.",
+      "ms": 5600,
+      "cat": "enonce"
+    },
+    "30abc3c878201989": {
+      "text": "1 L = 10 dL, donc 2 L = 2 × 10 = 20 dL.",
+      "ms": 6720,
+      "cat": "enonce"
+    },
+    "fefa21e91223c659": {
+      "text": "1 L = 10 dL, donc 4 L = 4 × 10 = 40 dL.",
+      "ms": 7200,
+      "cat": "enonce"
+    },
+    "157408280a759503": {
+      "text": "1 L = 10 dL, donc 5 L = 5 × 10 = 50 dL.",
+      "ms": 5520,
+      "cat": "enonce"
+    },
+    "6bbb22e365509642": {
+      "text": "1 L = 10 dL, donc 6 L = 6 × 10 = 60 dL.",
+      "ms": 6240,
+      "cat": "enonce"
+    },
+    "1d62a85834f397e5": {
+      "text": "1 L = 10 dL, donc 8 L = 8 × 10 = 80 dL.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "48222c5e1d262d15": {
+      "text": "1 L = 10 dL, donc 9 L = 9 × 10 = 90 dL.",
+      "ms": 7200,
+      "cat": "enonce"
+    },
+    "077de6ad4e122c01": {
+      "text": "1 L = 100 cL, donc 1 L = 1 × 100 = 100 cL.",
+      "ms": 6880,
+      "cat": "enonce"
+    },
+    "15dd6f4b470f9688": {
+      "text": "1 L = 100 cL, donc 4 L = 4 × 100 = 400 cL.",
+      "ms": 7280,
+      "cat": "enonce"
+    },
+    "df0315ba1b3fdea4": {
+      "text": "1 L = 100 cL, donc 5 L = 5 × 100 = 500 cL.",
+      "ms": 5520,
+      "cat": "enonce"
+    },
+    "3c52b775e9262fdc": {
+      "text": "1 cm = 10 mm, donc 1 cm = 1 × 10 = 10 mm.",
+      "ms": 5920,
+      "cat": "enonce"
+    },
+    "2e17fc43820d321c": {
+      "text": "1 cm = 10 mm, donc 12 cm = 12 × 10 = 120 mm.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "92ce42e41f7cedc9": {
+      "text": "1 cm = 10 mm, donc 2 cm = 2 × 10 = 20 mm.",
+      "ms": 7840,
+      "cat": "enonce"
+    },
+    "d5ebf075bb54f84f": {
+      "text": "1 h = 60 min, donc 1 h = 1 × 60 = 60 min.",
+      "ms": 7280,
+      "cat": "enonce"
+    },
+    "92590a741235246e": {
+      "text": "1 h = 60 min, donc 2 h = 120 min. Puis 120 + 10 = 130 min.",
+      "ms": 8960,
+      "cat": "enonce"
+    },
+    "2f15c428d2f9147e": {
+      "text": "1 h = 60 min, donc 2 h = 120 min. Puis 120 + 37 = 157 min.",
+      "ms": 8880,
+      "cat": "enonce"
+    },
+    "3dda387511d9f6d6": {
+      "text": "1 h = 60 min, donc 2 h = 120 min. Puis 120 + 46 = 166 min.",
+      "ms": 9760,
+      "cat": "enonce"
+    },
+    "2a9b19c78aa4db0b": {
+      "text": "1 h = 60 min, donc 2 h = 120 min. Puis 120 − 33 = 87 min.",
+      "ms": 8160,
+      "cat": "enonce"
+    },
+    "07e9441c6c5dfa46": {
+      "text": "1 h = 60 min, donc 2 h = 2 × 60 = 120 min.",
+      "ms": 7600,
+      "cat": "enonce"
+    },
+    "92d36e8f0c52afc2": {
+      "text": "1 h = 60 min, donc 3 h = 180 min. Puis 180 + 27 = 207 min.",
+      "ms": 9760,
+      "cat": "enonce"
+    },
+    "a9e6c1e0d4c9685e": {
+      "text": "1 h = 60 min, donc 3 h = 180 min. Puis 180 + 52 = 232 min.",
+      "ms": 9360,
+      "cat": "enonce"
+    },
+    "a9fcdf35028a34f5": {
+      "text": "1 h = 60 min, donc 3 h = 180 min. Puis 180 − 24 = 156 min.",
+      "ms": 8880,
+      "cat": "enonce"
+    },
+    "e0d2305a05d4b797": {
+      "text": "1 h = 60 min, donc 3 h = 180 min. Puis 180 − 46 = 134 min.",
+      "ms": 8240,
+      "cat": "enonce"
+    },
+    "e321bc98a7e3a5eb": {
+      "text": "1 h = 60 min, donc 3 h = 180 min. Puis 180 − 57 = 123 min.",
+      "ms": 9600,
+      "cat": "enonce"
+    },
+    "ecef886337edb662": {
+      "text": "1 h = 60 min, donc 3 h = 3 × 60 = 180 min.",
+      "ms": 7760,
+      "cat": "enonce"
+    },
+    "c4551c3de4ae51e7": {
+      "text": "1 h = 60 min, donc 4 h = 240 min. Puis 240 − 7 = 233 min.",
+      "ms": 9200,
+      "cat": "enonce"
+    },
+    "7a4265da841d9973": {
+      "text": "1 h = 60 min, donc 4 h = 4 × 60 = 240 min.",
+      "ms": 7120,
+      "cat": "enonce"
+    },
+    "c3cc1aa1cf5283b7": {
+      "text": "1 h = 60 min, donc 5 h = 300 min. Puis 300 − 11 = 289 min.",
+      "ms": 8800,
+      "cat": "enonce"
+    },
+    "bca3abb8d63d4f25": {
+      "text": "1 h = 60 min, donc 5 h = 300 min. Puis 300 − 5 = 295 min.",
+      "ms": 9600,
+      "cat": "enonce"
+    },
+    "f28590f64271f3c9": {
+      "text": "1 h = 60 min, donc 7 h = 7 × 60 = 420 min.",
+      "ms": 7040,
+      "cat": "enonce"
+    },
+    "31b9a2c1d5a89887": {
+      "text": "1 h = 60 min, et 30 min de plus : 60 + 30 = 90 min.",
+      "ms": 7520,
+      "cat": "enonce"
+    },
+    "db033c219fc09447": {
+      "text": "1 kg = 1 000 g, donc 2 kg = 2 000 g. Puis 2 000 + 792 = 2 792 g.",
+      "ms": 10880,
+      "cat": "enonce"
+    },
+    "cbb2ac3f4f24adab": {
+      "text": "1 kg = 1 000 g, donc 2 kg = 2 000 g. Puis 2 000 + 909 = 2 909 g.",
+      "ms": 8240,
+      "cat": "enonce"
+    },
+    "f4f24775d9e4b662": {
+      "text": "1 kg = 1 000 g, donc 2 kg = 2 000 g. Puis 2 000 − 173 = 1 827 g.",
+      "ms": 8720,
+      "cat": "enonce"
+    },
+    "dca5cf1e5c49672b": {
+      "text": "1 kg = 1 000 g, donc 2 kg = 2 × 1 000 = 2 000 g.",
+      "ms": 8320,
+      "cat": "enonce"
+    },
+    "bade59424d331640": {
+      "text": "1 kg = 1 000 g, donc 3 kg = 3 000 g. Puis 3 000 + 303 = 3 303 g.",
+      "ms": 10640,
+      "cat": "enonce"
+    },
+    "5f442548804bc532": {
+      "text": "1 kg = 1 000 g, donc 3 kg = 3 × 1 000 = 3 000 g.",
+      "ms": 7040,
+      "cat": "enonce"
+    },
+    "18d6ff3649d3958a": {
+      "text": "1 kg = 1 000 g, donc 4 kg = 4 000 g. Puis 4 000 − 810 = 3 190 g.",
+      "ms": 8320,
+      "cat": "enonce"
+    },
+    "02405cd6bc9b5af6": {
+      "text": "1 kg = 1 000 g, donc 4 kg = 4 × 1 000 = 4 000 g.",
+      "ms": 7920,
+      "cat": "enonce"
+    },
+    "80e68eaad172749c": {
+      "text": "1 kg = 1 000 g, donc 5 kg = 5 000 g. Puis 5 000 − 336 = 4 664 g.",
+      "ms": 12720,
+      "cat": "enonce"
+    },
+    "465e3b6adff9ce22": {
+      "text": "1 kg = 1 000 g, donc 6 kg = 6 × 1 000 = 6 000 g.",
+      "ms": 6880,
+      "cat": "enonce"
     }
   },
   "keys": {
@@ -30101,6 +30791,144 @@
     "txt:3a96ee8e40e201e1": "3a96ee8e40e201e1",
     "txt:a7cf469e23bab032": "a7cf469e23bab032",
     "txt:3eceee47eb2098b8": "3eceee47eb2098b8",
-    "txt:4c4c9e38eccd7d19": "4c4c9e38eccd7d19"
+    "txt:4c4c9e38eccd7d19": "4c4c9e38eccd7d19",
+    "txt:7d84e9a37dd22128": "7d84e9a37dd22128",
+    "txt:6408d9f712d8c885": "6408d9f712d8c885",
+    "txt:8945e627b8f69fe1": "8945e627b8f69fe1",
+    "txt:1e79c2d97c07cd43": "1e79c2d97c07cd43",
+    "txt:9545c93aedcdb8fd": "9545c93aedcdb8fd",
+    "txt:246392689f12c196": "246392689f12c196",
+    "txt:b5e5006feb8a5d99": "b5e5006feb8a5d99",
+    "txt:da7d47939c2b9c29": "da7d47939c2b9c29",
+    "txt:53030f03361b1504": "53030f03361b1504",
+    "txt:d7310aa34236086b": "d7310aa34236086b",
+    "txt:071773fd54f07a71": "071773fd54f07a71",
+    "txt:b5610795dc439a70": "b5610795dc439a70",
+    "txt:894f41cf3daa6e66": "894f41cf3daa6e66",
+    "txt:b371017b3d491714": "b371017b3d491714",
+    "txt:708be2cc64498d82": "708be2cc64498d82",
+    "txt:7121a4680a2e138d": "7121a4680a2e138d",
+    "txt:a6c4c71b9a9ecf0e": "a6c4c71b9a9ecf0e",
+    "txt:7e1c22b65c524a10": "7e1c22b65c524a10",
+    "txt:236143772deda733": "236143772deda733",
+    "txt:ba8d120c19cb6ead": "ba8d120c19cb6ead",
+    "txt:295423739d214013": "295423739d214013",
+    "txt:0dfe92f6c187f542": "0dfe92f6c187f542",
+    "txt:3e5b074616afc566": "3e5b074616afc566",
+    "txt:edfcf0c6bef50f69": "edfcf0c6bef50f69",
+    "txt:4c8eb6a8b8a8da40": "4c8eb6a8b8a8da40",
+    "txt:a252a7a027f5f583": "a252a7a027f5f583",
+    "txt:e5a6c841898fa527": "e5a6c841898fa527",
+    "txt:b4718c66e5d394e1": "b4718c66e5d394e1",
+    "txt:ceb1e3cec9be3ed7": "ceb1e3cec9be3ed7",
+    "txt:08de68fe7dfdc33d": "08de68fe7dfdc33d",
+    "txt:edd5ac2abac2491b": "edd5ac2abac2491b",
+    "txt:ce610b4fbfc6f94f": "ce610b4fbfc6f94f",
+    "txt:3056ee0497fab51f": "3056ee0497fab51f",
+    "txt:7db1e08b0fe332ea": "7db1e08b0fe332ea",
+    "txt:2d3e8f050f8012bc": "2d3e8f050f8012bc",
+    "txt:c1307ad24c863d08": "c1307ad24c863d08",
+    "txt:83fea28b997d1d2a": "83fea28b997d1d2a",
+    "txt:490ad019cb21b475": "490ad019cb21b475",
+    "txt:c8b32cb246e5fc7a": "c8b32cb246e5fc7a",
+    "txt:2e4181de32e396fe": "2e4181de32e396fe",
+    "txt:ae27cdce86e3cdf9": "ae27cdce86e3cdf9",
+    "txt:7b1a7a93fd475092": "7b1a7a93fd475092",
+    "txt:e96cfb59d45aab26": "e96cfb59d45aab26",
+    "txt:8658ca49f64824f5": "8658ca49f64824f5",
+    "txt:4435876bf162b5d4": "4435876bf162b5d4",
+    "txt:b82ee80566ce2910": "b82ee80566ce2910",
+    "txt:b7cc5c0edcc74cac": "b7cc5c0edcc74cac",
+    "txt:bd588f1ac2973a61": "bd588f1ac2973a61",
+    "txt:0cf66b845d818446": "0cf66b845d818446",
+    "txt:fffe7fef0e787c16": "fffe7fef0e787c16",
+    "txt:402170b5d0f89f34": "402170b5d0f89f34",
+    "txt:9bc2dbc90b843766": "9bc2dbc90b843766",
+    "txt:0670e1ed21e451d3": "0670e1ed21e451d3",
+    "txt:339f9b242d2ed38f": "339f9b242d2ed38f",
+    "txt:bde1688aa428023a": "bde1688aa428023a",
+    "txt:7b1080077cae1c46": "7b1080077cae1c46",
+    "txt:b498cd31794e7efb": "b498cd31794e7efb",
+    "txt:40676a7c5d4cae8f": "40676a7c5d4cae8f",
+    "txt:67d9c8c7bc107ddd": "67d9c8c7bc107ddd",
+    "txt:cca0a7bb51395869": "cca0a7bb51395869",
+    "txt:55b253d435f9546d": "55b253d435f9546d",
+    "txt:c4f0a557362141b2": "c4f0a557362141b2",
+    "txt:ca98983660e499e1": "ca98983660e499e1",
+    "txt:04e8da05bb988501": "04e8da05bb988501",
+    "txt:6ea7cf70c5fa40d3": "6ea7cf70c5fa40d3",
+    "txt:c2944e2fd6823ee9": "c2944e2fd6823ee9",
+    "txt:fef95d0ff27c23fa": "fef95d0ff27c23fa",
+    "txt:35e89d17e4b4c68d": "35e89d17e4b4c68d",
+    "txt:1f4c44954d220560": "1f4c44954d220560",
+    "txt:82303f6cb075c13a": "82303f6cb075c13a",
+    "txt:695de557095675ed": "695de557095675ed",
+    "txt:f96cc66a54357284": "f96cc66a54357284",
+    "txt:ebfa7fed161216a9": "ebfa7fed161216a9",
+    "txt:b6bc5dba57292048": "b6bc5dba57292048",
+    "txt:4b7cd9a4058acc4c": "4b7cd9a4058acc4c",
+    "txt:729c214dadf80814": "729c214dadf80814",
+    "txt:e613fb7fcf9a7e1d": "e613fb7fcf9a7e1d",
+    "txt:5ecbdaecc1bfaaae": "5ecbdaecc1bfaaae",
+    "txt:2bc1c41554cf2cf3": "2bc1c41554cf2cf3",
+    "txt:428cfec547e62d4e": "428cfec547e62d4e",
+    "txt:a19bdc439ae2dce1": "a19bdc439ae2dce1",
+    "txt:770bfd686f1f1361": "770bfd686f1f1361",
+    "txt:25c1c51e12133808": "25c1c51e12133808",
+    "txt:8148e4102658b898": "8148e4102658b898",
+    "txt:02bb1f57fc6620e1": "02bb1f57fc6620e1",
+    "txt:6b69a58bdcb7861a": "6b69a58bdcb7861a",
+    "txt:683f7cbdf5a14c31": "683f7cbdf5a14c31",
+    "txt:6d0f6e8d54cb641c": "6d0f6e8d54cb641c",
+    "txt:212bf7363e2227b7": "212bf7363e2227b7",
+    "txt:6435a04ef27ae870": "6435a04ef27ae870",
+    "txt:6c9fdb888abfb38b": "6c9fdb888abfb38b",
+    "txt:cd25fcb9a237a283": "cd25fcb9a237a283",
+    "txt:4d48e970616cc0bc": "4d48e970616cc0bc",
+    "txt:6930ffa0cdcb719d": "6930ffa0cdcb719d",
+    "txt:5b2846c52f8ea86a": "5b2846c52f8ea86a",
+    "txt:a3efe0ddb6c64699": "a3efe0ddb6c64699",
+    "txt:9d602cf9adab7957": "9d602cf9adab7957",
+    "txt:00be4047b7100010": "00be4047b7100010",
+    "txt:30abc3c878201989": "30abc3c878201989",
+    "txt:fefa21e91223c659": "fefa21e91223c659",
+    "txt:157408280a759503": "157408280a759503",
+    "txt:6bbb22e365509642": "6bbb22e365509642",
+    "txt:1d62a85834f397e5": "1d62a85834f397e5",
+    "txt:48222c5e1d262d15": "48222c5e1d262d15",
+    "txt:077de6ad4e122c01": "077de6ad4e122c01",
+    "txt:15dd6f4b470f9688": "15dd6f4b470f9688",
+    "txt:df0315ba1b3fdea4": "df0315ba1b3fdea4",
+    "txt:3c52b775e9262fdc": "3c52b775e9262fdc",
+    "txt:2e17fc43820d321c": "2e17fc43820d321c",
+    "txt:92ce42e41f7cedc9": "92ce42e41f7cedc9",
+    "txt:d5ebf075bb54f84f": "d5ebf075bb54f84f",
+    "txt:92590a741235246e": "92590a741235246e",
+    "txt:2f15c428d2f9147e": "2f15c428d2f9147e",
+    "txt:3dda387511d9f6d6": "3dda387511d9f6d6",
+    "txt:2a9b19c78aa4db0b": "2a9b19c78aa4db0b",
+    "txt:07e9441c6c5dfa46": "07e9441c6c5dfa46",
+    "txt:92d36e8f0c52afc2": "92d36e8f0c52afc2",
+    "txt:a9e6c1e0d4c9685e": "a9e6c1e0d4c9685e",
+    "txt:a9fcdf35028a34f5": "a9fcdf35028a34f5",
+    "txt:e0d2305a05d4b797": "e0d2305a05d4b797",
+    "txt:e321bc98a7e3a5eb": "e321bc98a7e3a5eb",
+    "txt:ecef886337edb662": "ecef886337edb662",
+    "txt:c4551c3de4ae51e7": "c4551c3de4ae51e7",
+    "txt:7a4265da841d9973": "7a4265da841d9973",
+    "txt:c3cc1aa1cf5283b7": "c3cc1aa1cf5283b7",
+    "txt:bca3abb8d63d4f25": "bca3abb8d63d4f25",
+    "txt:f28590f64271f3c9": "f28590f64271f3c9",
+    "txt:31b9a2c1d5a89887": "31b9a2c1d5a89887",
+    "txt:db033c219fc09447": "db033c219fc09447",
+    "txt:cbb2ac3f4f24adab": "cbb2ac3f4f24adab",
+    "txt:f4f24775d9e4b662": "f4f24775d9e4b662",
+    "txt:dca5cf1e5c49672b": "dca5cf1e5c49672b",
+    "txt:bade59424d331640": "bade59424d331640",
+    "txt:5f442548804bc532": "5f442548804bc532",
+    "txt:18d6ff3649d3958a": "18d6ff3649d3958a",
+    "txt:02405cd6bc9b5af6": "02405cd6bc9b5af6",
+    "txt:80e68eaad172749c": "80e68eaad172749c",
+    "txt:465e3b6adff9ce22": "465e3b6adff9ce22"
   }
 }
