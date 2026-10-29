@@ -19668,6 +19668,2021 @@
       "text": "une loi",
       "ms": 1040,
       "cat": "choix"
+    },
+    "521e27a0fe7d2c74": {
+      "text": "une montagne",
+      "ms": 1520,
+      "cat": "choix"
+    },
+    "d28bcee22c69dc7a": {
+      "text": "une personne qui aime trop l'argent",
+      "ms": 2800,
+      "cat": "choix"
+    },
+    "1db1b2a73e326894": {
+      "text": "une petite lettre d'amour",
+      "ms": 2000,
+      "cat": "choix"
+    },
+    "577c27f46fdbe719": {
+      "text": "une petite promenade",
+      "ms": 1520,
+      "cat": "choix"
+    },
+    "6f705023fee90265": {
+      "text": "une pièce de monnaie",
+      "ms": 1600,
+      "cat": "choix"
+    },
+    "bb05ada1d509d18b": {
+      "text": "une rivière",
+      "ms": 1360,
+      "cat": "choix"
+    },
+    "a899e06f06e2e9da": {
+      "text": "une salle de la maison",
+      "ms": 1760,
+      "cat": "choix"
+    },
+    "c7b7e617de0bb941": {
+      "text": "une souris",
+      "ms": 1280,
+      "cat": "choix"
+    },
+    "9d35ba03c422d011": {
+      "text": "une vieille sorcière",
+      "ms": 1360,
+      "cat": "choix"
+    },
+    "1a83023c5c347419": {
+      "text": "va",
+      "ms": 400,
+      "cat": "choix"
+    },
+    "422feaf8bde42663": {
+      "text": "venez",
+      "ms": 720,
+      "cat": "choix"
+    },
+    "a47e842481d1b3d7": {
+      "text": "veniez",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "c806d0258e184899": {
+      "text": "verte",
+      "ms": 640,
+      "cat": "choix"
+    },
+    "9d518ce4cb11f7a9": {
+      "text": "viendra",
+      "ms": 720,
+      "cat": "choix"
+    },
+    "9adfe12e5c786677": {
+      "text": "viendras",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "4970b06d6fd46b8c": {
+      "text": "viendrez",
+      "ms": 720,
+      "cat": "choix"
+    },
+    "0c8bbc9d363c4be0": {
+      "text": "viens",
+      "ms": 720,
+      "cat": "choix"
+    },
+    "fc49ad2b6d352626": {
+      "text": "vient",
+      "ms": 560,
+      "cat": "choix"
+    },
+    "20c48f40a8aa7574": {
+      "text": "vif et rapide",
+      "ms": 1440,
+      "cat": "choix"
+    },
+    "d5dfb2e9a14bcb4a": {
+      "text": "vingt ans",
+      "ms": 720,
+      "cat": "choix"
+    },
+    "60b39d43a7bc95ff": {
+      "text": "vite",
+      "ms": 640,
+      "cat": "choix"
+    },
+    "4d7eec0b48dd1e4a": {
+      "text": "voiture",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "886d4f43c06001a7": {
+      "text": "vole",
+      "ms": 640,
+      "cat": "choix"
+    },
+    "60113d5fd0ee2544": {
+      "text": "voler dans le ciel",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "91e175e8a43d191a": {
+      "text": "voler légèrement de-ci de-là",
+      "ms": 1920,
+      "cat": "choix"
+    },
+    "8e4f35816d772d68": {
+      "text": "vont",
+      "ms": 480,
+      "cat": "choix"
+    },
+    "91931557e975956a": {
+      "text": "vrai",
+      "ms": 560,
+      "cat": "choix"
+    },
+    "f80fdb3676696179": {
+      "text": "véhicules",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "352153a73ac7ae8f": {
+      "text": "vélo",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "d28046d1de883950": {
+      "text": "à des nuages",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "4d0e5e4461ccadb5": {
+      "text": "à des voitures",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "3cc8e01b18909b23": {
+      "text": "à voix très douce, en chuchotant",
+      "ms": 2480,
+      "cat": "choix"
+    },
+    "ee28d7bee86eea50": {
+      "text": "élire",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "cd72722663598a8b": {
+      "text": "étiez",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "e8dcf48ec9f6ec86": {
+      "text": "étions",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "e4568dbf54ece499": {
+      "text": "êtes allés",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "bfede4d270bde11e": {
+      "text": "êtes chanté",
+      "ms": 1360,
+      "cat": "choix"
+    },
+    "d1506ef5c7386be8": {
+      "text": "êtes venus",
+      "ms": 1120,
+      "cat": "choix"
+    },
+    "716faeba0d506114": {
+      "text": "derrière",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "8b21b6927d8ba128": {
+      "text": "des poires",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "1086fff90f7d24ed": {
+      "text": "des pommes",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "954cc660853ca938": {
+      "text": "devant",
+      "ms": 640,
+      "cat": "choix"
+    },
+    "1d61cfb5ade49f22": {
+      "text": "elle a trois côtés",
+      "ms": 1360,
+      "cat": "choix"
+    },
+    "10002e21b438ea83": {
+      "text": "elle n'a pas d'angle droit",
+      "ms": 1840,
+      "cat": "choix"
+    },
+    "8f3eb5655c5a15da": {
+      "text": "la boîte qui contient le cube",
+      "ms": 2160,
+      "cat": "choix"
+    },
+    "72365de8fbd87be3": {
+      "text": "la chaise",
+      "ms": 1920,
+      "cat": "choix"
+    },
+    "d01fd5f91d0fc01b": {
+      "text": "la fenêtre",
+      "ms": 1760,
+      "cat": "choix"
+    },
+    "62f3ded553e22e8d": {
+      "text": "la lampe",
+      "ms": 1840,
+      "cat": "choix"
+    },
+    "c2d1680d23512a68": {
+      "text": "la porte",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "f2acb0aea676cd08": {
+      "text": "le centre",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "066b1630d03e6d70": {
+      "text": "le cube dessiné en volume",
+      "ms": 1760,
+      "cat": "choix"
+    },
+    "696e1bf5bf85703b": {
+      "text": "le côté",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "49774d0f0992cd5e": {
+      "text": "le placard",
+      "ms": 1840,
+      "cat": "choix"
+    },
+    "2ee44d8544385300": {
+      "text": "le rayon",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "f0aa6a5a4d1c3a3e": {
+      "text": "le sommet",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "2d65d2d3421895e7": {
+      "text": "m",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "b2e1aa5880f04144": {
+      "text": "non",
+      "ms": 480,
+      "cat": "choix"
+    },
+    "78caa4d52a6bea05": {
+      "text": "ses côtés ne sont pas tous égaux",
+      "ms": 2480,
+      "cat": "choix"
+    },
+    "53f9d6e1e58d3305": {
+      "text": "un carré",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "8d425435cccc205d": {
+      "text": "un cercle",
+      "ms": 1120,
+      "cat": "choix"
+    },
+    "0028c44db710f47c": {
+      "text": "un cube",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "46e1ab8fbd920083": {
+      "text": "un cylindre",
+      "ms": 1280,
+      "cat": "choix"
+    },
+    "f57f429d4e892790": {
+      "text": "un dessin à plat qui se replie en cube",
+      "ms": 3040,
+      "cat": "choix"
+    },
+    "9753d706a3026f74": {
+      "text": "un pavé",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "3b99872b132a8a7e": {
+      "text": "un rectangle",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "eef32c8b0fcf8378": {
+      "text": "un triangle",
+      "ms": 1200,
+      "cat": "choix"
+    },
+    "3abbda2bf7ea0ad3": {
+      "text": "un triangle rectangle",
+      "ms": 1360,
+      "cat": "choix"
+    },
+    "326d86a550ae9ce0": {
+      "text": "une boule",
+      "ms": 1840,
+      "cat": "choix"
+    },
+    "d03f0e2064b6d544": {
+      "text": "une pyramide",
+      "ms": 1520,
+      "cat": "choix"
+    },
+    "df8628b555c1b385": {
+      "text": "vers la droite",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "8b3e43d546b0e071": {
+      "text": "vers la gauche",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "296d8191c5314ea4": {
+      "text": "vingt-deux",
+      "ms": 960,
+      "cat": "choix"
+    },
+    "086cd10a33d096f1": {
+      "text": "vingt-et-un",
+      "ms": 880,
+      "cat": "choix"
+    },
+    "0654a916c4b456b1": {
+      "text": "vingt-huit",
+      "ms": 720,
+      "cat": "choix"
+    },
+    "526c099e6c604fdb": {
+      "text": "vingt-six",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "97329a8547b4ea74": {
+      "text": "Aller à l'école est un droit pour tous les enfants.",
+      "ms": 2960,
+      "cat": "enonce"
+    },
+    "a1e48a983d826ee9": {
+      "text": "Certaines images sont possibles, d'autres sont truquées. On réfléchit avant de croire.",
+      "ms": 5920,
+      "cat": "enonce"
+    },
+    "65f50c4414926bc5": {
+      "text": "Ces messages qui font peur sont faux. On ne les partage pas et on en parle à un adulte.",
+      "ms": 5040,
+      "cat": "enonce"
+    },
+    "ad12d44461e0bbb8": {
+      "text": "Chaque enfant a une seule voix : tout le monde est égal devant le vote.",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "d488393f9f0fc7fe": {
+      "text": "Consoler un camarade triste, c'est lui montrer qu'il n'est pas seul.",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "981cdc8d0fe41650": {
+      "text": "D'abord Léo demande de l'aide, puis Maman l'aide, puis Léo dit merci.",
+      "ms": 4640,
+      "cat": "enonce"
+    },
+    "c77487e173eb88b5": {
+      "text": "D'abord les candidats se présentent, puis chacun vote, puis on compte les voix.",
+      "ms": 4960,
+      "cat": "enonce"
+    },
+    "2478331df3051ef5": {
+      "text": "D'abord on s'arrête, puis on respire, puis on parle calmement. La colère redescend.",
+      "ms": 5680,
+      "cat": "enonce"
+    },
+    "0b12a7113b6f7512": {
+      "text": "Derrière l'écran, il y a une vraie personne : on reste poli avec elle.",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "1810f421f3a6ef52": {
+      "text": "Derrière l'écran, il y a une vraie personne qui a des émotions. On reste poli avec elle.",
+      "ms": 5680,
+      "cat": "enonce"
+    },
+    "e668a168e5e207ef": {
+      "text": "Des messages méchants qui se répètent, c'est du harcèlement. On en parle à un adulte de confiance.",
+      "ms": 6320,
+      "cat": "enonce"
+    },
+    "771ca2c10b5e23fc": {
+      "text": "En cas de doute sur Internet, on demande à un adulte de confiance.",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "1c5d1ed72e256885": {
+      "text": "Faire son travail et respecter les autres sont des devoirs de l'élève.",
+      "ms": 4400,
+      "cat": "enonce"
+    },
+    "1524bd9fa392a48e": {
+      "text": "Filles et garçons sont égaux : chacun aide à son tour, sans différence.",
+      "ms": 5360,
+      "cat": "enonce"
+    },
+    "a994b16893e69093": {
+      "text": "Filles et garçons sont égaux : ils ont les mêmes droits et peuvent faire les mêmes choses.",
+      "ms": 5600,
+      "cat": "enonce"
+    },
+    "1859f130449ea71b": {
+      "text": "Gagner un prix rend très heureux. Tu peux te réjouir avec lui.",
+      "ms": 3680,
+      "cat": "enonce"
+    },
+    "bc934daa5b292b6d": {
+      "text": "Il y a des activités avec écran et beaucoup sans écran. C'est bien de varier.",
+      "ms": 5120,
+      "cat": "enonce"
+    },
+    "acfe8a0c59502989": {
+      "text": "Inviter quelqu'un à jouer, c'est un beau geste. Personne ne doit rester seul contre son gré.",
+      "ms": 5920,
+      "cat": "enonce"
+    },
+    "e8f8cf342f4432cf": {
+      "text": "Jouer dehors fait du bien au corps. L'écran peut attendre un autre moment.",
+      "ms": 5360,
+      "cat": "enonce"
+    },
+    "6f408b5d13c96cc5": {
+      "text": "L'anniversaire donne de la joie, un jouet cassé exprès peut mettre en colère, le noir peut faire peur.",
+      "ms": 6400,
+      "cat": "enonce"
+    },
+    "c39fe0f26d752daf": {
+      "text": "L'hymne national s'appelle la Marseillaise.",
+      "ms": 3600,
+      "cat": "enonce"
+    },
+    "e35a20d9c769e6aa": {
+      "text": "L'hymne national s'appelle la Marseillaise. On l'entend lors des grandes occasions.",
+      "ms": 5920,
+      "cat": "enonce"
+    },
+    "244cfe1221a1fd43": {
+      "text": "L'école aide à apprendre, à comprendre le monde et à vivre avec les autres.",
+      "ms": 5840,
+      "cat": "enonce"
+    },
+    "2298f9da68aa5d70": {
+      "text": "La devise de la France est : Liberté, Égalité, Fraternité.",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "3780f1ebeac0f04d": {
+      "text": "La devise, c'est la petite phrase de la France : Liberté, Égalité, Fraternité. On la lit sur les mairies.",
+      "ms": 8160,
+      "cat": "enonce"
+    },
+    "93043657fbc9fce4": {
+      "text": "La mairie est la maison commune où travaille le maire.",
+      "ms": 3600,
+      "cat": "enonce"
+    },
+    "c3f3a9666caa69f0": {
+      "text": "La mairie s'occupe de la vie de la commune : les écoles, les routes, les fêtes.",
+      "ms": 5440,
+      "cat": "enonce"
+    },
+    "09000d7eabdc6cca": {
+      "text": "Le cœur qui bat vite et l'envie de crier, c'est souvent la colère. La reconnaître aide à se calmer.",
+      "ms": 6800,
+      "cat": "enonce"
+    },
+    "21d2a3198865412a": {
+      "text": "Le drapeau français est bleu, blanc et rouge. On le voit sur les mairies.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "f728023dd768c8fb": {
+      "text": "Le drapeau, Marianne et la Marseillaise sont des symboles de la République.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "5dd34ef797034f75": {
+      "text": "Le délégué est élu par la classe pour la représenter.",
+      "ms": 3440,
+      "cat": "enonce"
+    },
+    "59fd495cd2dea3f6": {
+      "text": "Le délégué représente la classe : il parle au nom des élèves pour donner leurs idées.",
+      "ms": 4800,
+      "cat": "enonce"
+    },
+    "f93fc1c204e70062": {
+      "text": "Le maire dirige la commune et travaille à la mairie.",
+      "ms": 3600,
+      "cat": "enonce"
+    },
+    "1b05ced211dd9150": {
+      "text": "Le maire dirige la commune. Il travaille à la mairie.",
+      "ms": 3440,
+      "cat": "enonce"
+    },
+    "698a38ee57fdb8a0": {
+      "text": "Le maire est élu grâce à un vote, lors des élections de la commune.",
+      "ms": 4160,
+      "cat": "enonce"
+    },
+    "97c8f86efa140a88": {
+      "text": "Le maire s'occupe de la commune : les écoles, les fêtes, les routes. Pas de ta vie à la maison.",
+      "ms": 5920,
+      "cat": "enonce"
+    },
+    "efd7d5ddcb60abb6": {
+      "text": "Le maire travaille à la mairie, la maison commune du village ou de la ville.",
+      "ms": 4560,
+      "cat": "enonce"
+    },
+    "07665690cd0f9fd4": {
+      "text": "Le mot de passe reste secret : on le garde pour soi.",
+      "ms": 3760,
+      "cat": "enonce"
+    },
+    "c4e751bddc75889b": {
+      "text": "Le noir et les bruits bizarres peuvent faire peur. C'est normal, ça arrive à tout le monde.",
+      "ms": 6000,
+      "cat": "enonce"
+    },
+    "91cef43d8f0f21ce": {
+      "text": "Le vote est secret pour que chacun choisisse en toute liberté, sans être influencé.",
+      "ms": 5920,
+      "cat": "enonce"
+    },
+    "99660a051b252786": {
+      "text": "Les enfants ont le droit d'être protégés, soignés et d'aller à l'école.",
+      "ms": 4800,
+      "cat": "enonce"
+    },
+    "d191ffb2d1221ed2": {
+      "text": "Les jeux et les sports sont pour les filles comme pour les garçons.",
+      "ms": 3520,
+      "cat": "enonce"
+    },
+    "9a4542248d9525ce": {
+      "text": "Les mots gentils font du bien. Les moqueries font de la peine : on les évite.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "0c0b9929852dd00d": {
+      "text": "Les règles aident chacun à se sentir bien et en sécurité à l'école.",
+      "ms": 5120,
+      "cat": "enonce"
+    },
+    "a3cfb2c87e0e7b1f": {
+      "text": "Les règles protègent chacun : on travaille et on joue mieux quand tout le monde les respecte.",
+      "ms": 6640,
+      "cat": "enonce"
+    },
+    "02fbb511c2147e55": {
+      "text": "Lire sans bruit laisse les autres finir. C'est une belle idée pour patienter.",
+      "ms": 5040,
+      "cat": "enonce"
+    },
+    "e582a0329e3f5cdd": {
+      "text": "Marianne représente la République française et ses valeurs. Son buste est souvent dans les mairies.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "6e3fd8b775265312": {
+      "text": "Merci, s'il te plaît et pardon sont des mots polis. Tais-toi fait de la peine.",
+      "ms": 6400,
+      "cat": "enonce"
+    },
+    "69f5673a3b8e88a5": {
+      "text": "On a des droits, être soigné, jouer, et des devoirs, travailler, respecter le matériel.",
+      "ms": 6560,
+      "cat": "enonce"
+    },
+    "9ea03849a41a218c": {
+      "text": "On a le droit de jouer à la récré, et le devoir de travailler en classe. Droits et devoirs vont ensemble.",
+      "ms": 6400,
+      "cat": "enonce"
+    },
+    "3f727a7769bc8fc4": {
+      "text": "On aide celui qui apprend : chacun a le droit d'être bien accueilli.",
+      "ms": 4480,
+      "cat": "enonce"
+    },
+    "f33cc2689ab0fa3c": {
+      "text": "On compte les voix : celui qui en a le plus est élu délégué. Chacun a voté.",
+      "ms": 6240,
+      "cat": "enonce"
+    },
+    "334c71548f9ff87b": {
+      "text": "On demande gentiment avec s'il te plaît. C'est plus agréable que d'exiger.",
+      "ms": 5120,
+      "cat": "enonce"
+    },
+    "e7e4159605576b00": {
+      "text": "On dit bonjour en arrivant : c'est une façon gentille de saluer les autres. Au revoir, lui, se dit quand on part.",
+      "ms": 7440,
+      "cat": "enonce"
+    },
+    "eb5433074656d54f": {
+      "text": "On dit merci : ça montre qu'on apprécie le geste de l'autre.",
+      "ms": 3680,
+      "cat": "enonce"
+    },
+    "00b7299a2052b6e1": {
+      "text": "On dit merci quand on nous rend service : ça fait plaisir à l'autre.",
+      "ms": 3680,
+      "cat": "enonce"
+    },
+    "7c4b908895eebc91": {
+      "text": "On dit pardon : on reconnaît gentiment qu'on a gêné l'autre.",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "e0c6eaf03a440a2b": {
+      "text": "On dit pardon quand on bouscule quelqu'un, même sans le faire exprès.",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "de56f14548ab17bd": {
+      "text": "On défend celui qu'on embête et on prévient un adulte de confiance. Tu n'es pas tout seul.",
+      "ms": 6000,
+      "cat": "enonce"
+    },
+    "93acb411c31bf3d3": {
+      "text": "On en parle à un adulte de confiance : un parent, la maîtresse. Il est là pour t'aider.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "bf9d30f1cca0c68b": {
+      "text": "On fait une pause pour reposer les yeux et le corps.",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "fdaa726e45421611": {
+      "text": "On fait une pause quand les yeux fatiguent. Les écrans, c'est bien, mais pas trop longtemps.",
+      "ms": 5120,
+      "cat": "enonce"
+    },
+    "edaf40736370e12c": {
+      "text": "On garde pour soi l'adresse et le mot de passe. On peut parler de ses goûts sans danger.",
+      "ms": 5120,
+      "cat": "enonce"
+    },
+    "fc15b616f008d9c6": {
+      "text": "On lève le doigt et on attend son tour : comme ça, chacun peut parler tranquillement.",
+      "ms": 5360,
+      "cat": "enonce"
+    },
+    "fe9d15ff383a7a85": {
+      "text": "On lève le doigt et on attend son tour pour parler : chacun est écouté.",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "0c49abc59a1486e0": {
+      "text": "On marche doucement dans le couloir : personne ne tombe et ne se fait mal.",
+      "ms": 4880,
+      "cat": "enonce"
+    },
+    "b871f0ea9ef87c3a": {
+      "text": "On ne croit pas tout sur Internet : on réfléchit et on vérifie.",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "4d9b21c54eb06117": {
+      "text": "On ne donne pas ses informations personnelles. On prévient un adulte en cas de doute.",
+      "ms": 5200,
+      "cat": "enonce"
+    },
+    "794aef52e26234a9": {
+      "text": "On ne participe pas aux insultes : on reste poli et on prévient un adulte si ça continue.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "4af5086b3c3d6540": {
+      "text": "On ne rit pas de quelqu'un : on le console. Tu peux aussi en parler à un adulte.",
+      "ms": 5840,
+      "cat": "enonce"
+    },
+    "562e14622f7369dd": {
+      "text": "On peut dire calmement ce qui nous dérange. Les mots règlent mieux les choses que les coups.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "a173b1a258131bfa": {
+      "text": "On peut discuter calmement d'une règle. Parler, c'est mieux que se fâcher.",
+      "ms": 4640,
+      "cat": "enonce"
+    },
+    "019456b6ca3fcb06": {
+      "text": "On peut être amis même si on est différents : nos différences nous rendent plus riches.",
+      "ms": 5520,
+      "cat": "enonce"
+    },
+    "c22ead0fe905622c": {
+      "text": "On protège ses informations pour rester en sécurité. En cas de doute, on demande à un adulte.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "5adc8791bda70b81": {
+      "text": "On prévient un adulte quand un inconnu insiste. Un adulte de confiance saura quoi faire.",
+      "ms": 5600,
+      "cat": "enonce"
+    },
+    "fffa00fe1d3f874c": {
+      "text": "On reste poli en ligne, comme dans la vraie vie.",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "5279d56cc979b44b": {
+      "text": "On reste poli et gentil dans les messages, exactement comme quand on se parle en vrai.",
+      "ms": 5440,
+      "cat": "enonce"
+    },
+    "9e1b6910f1d73499": {
+      "text": "On trouve un jeu pour tout le monde : chacun a sa place dans le groupe.",
+      "ms": 5360,
+      "cat": "enonce"
+    },
+    "3dc92314a53f7840": {
+      "text": "On utilise des mots pour dire ce qu'on ressent : c'est plus fort que les coups.",
+      "ms": 4480,
+      "cat": "enonce"
+    },
+    "8849db0d90c0ed6d": {
+      "text": "On vote : chacun choisit. C'est la façon la plus juste de décider ensemble.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "1cb62759de657224": {
+      "text": "On vote pour choisir : c'est la façon juste de décider ensemble.",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "907fb7da79309d7c": {
+      "text": "On vérifie une information avant de la croire, avec un adulte ou un livre sérieux.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "b1d9637e177c5fc4": {
+      "text": "On vérifie une information avec un adulte ou une source sérieuse avant de la croire.",
+      "ms": 5200,
+      "cat": "enonce"
+    },
+    "e95dbf3d87700985": {
+      "text": "On écrit des messages gentils. Les insultes font de la peine, même par écran.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "ba5658b0bf888e50": {
+      "text": "On éteint les écrans avant de dormir : on s'endort mieux et on est en forme le lendemain.",
+      "ms": 5600,
+      "cat": "enonce"
+    },
+    "210deecca27cd8cb": {
+      "text": "On éteint les écrans avant de dormir pour bien se reposer.",
+      "ms": 3600,
+      "cat": "enonce"
+    },
+    "618b2c0a02c6eea2": {
+      "text": "Parler de sa tristesse à quelqu'un de confiance fait du bien et aide à se sentir mieux.",
+      "ms": 5680,
+      "cat": "enonce"
+    },
+    "035424001751e6c8": {
+      "text": "Quand il se passe quelque chose d'inattendu, on ressent de la surprise.",
+      "ms": 4160,
+      "cat": "enonce"
+    },
+    "3d9d43468951751d": {
+      "text": "Quand on blesse quelqu'un, on s'excuse. Cela montre qu'on comprend sa peine.",
+      "ms": 4960,
+      "cat": "enonce"
+    },
+    "13a6ef9fdcdf823d": {
+      "text": "Quand on doute, on demande à un adulte. Il aide à savoir si c'est vrai.",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "c1d57f85c38d8437": {
+      "text": "Quand on est très content, on ressent de la joie.",
+      "ms": 2880,
+      "cat": "enonce"
+    },
+    "0b186603614f94d6": {
+      "text": "Quand on tombe et qu'on pleure, on a mal et on est triste. On peut le consoler.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "6b368b8632396794": {
+      "text": "Quand quelqu'un qu'on aime part, on ressent de la tristesse. On a le droit d'être triste.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "08809c71a880ec2e": {
+      "text": "Quand quelque chose nous énerve très fort, on ressent de la colère. C'est une émotion normale.",
+      "ms": 6240,
+      "cat": "enonce"
+    },
+    "6d2c746e0d02435d": {
+      "text": "Quand quelque chose te gêne sur un écran, tu en parles à un adulte de confiance. Il t'aidera.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "71f168be55345575": {
+      "text": "Quand ça se répète, c'est du harcèlement. On en parle à un adulte de confiance : ce n'est pas rapporter, c'est se protéger.",
+      "ms": 8240,
+      "cat": "enonce"
+    },
+    "3812300888a50d1a": {
+      "text": "Ranger et écouter aident toute la classe. Se moquer ou salir, non : on évite.",
+      "ms": 6400,
+      "cat": "enonce"
+    },
+    "974eefbd41f84f4b": {
+      "text": "Respecter les autres est un devoir : cela permet à chacun d'être bien à l'école.",
+      "ms": 5840,
+      "cat": "enonce"
+    },
+    "9daae514226b0387": {
+      "text": "Respecter les autres, c'est accepter leurs différences avec gentillesse.",
+      "ms": 4960,
+      "cat": "enonce"
+    },
+    "1c54ffc7f981c5d7": {
+      "text": "Respirer doucement aide le corps à se calmer. Taper ne règle rien et fait mal.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "4275241e91354df5": {
+      "text": "Respirer doucement et lentement aide le corps et la tête à se calmer.",
+      "ms": 5200,
+      "cat": "enonce"
+    },
+    "addd068f8417c8ba": {
+      "text": "Respirer et demander un câlin aident à se calmer. Casser ou insulter rend les choses pires.",
+      "ms": 6800,
+      "cat": "enonce"
+    },
+    "6a68750780e98962": {
+      "text": "Se mettre à la place de l'autre aide à être gentil et à comprendre ses émotions.",
+      "ms": 5120,
+      "cat": "enonce"
+    },
+    "e49da4ba7bfd6397": {
+      "text": "Se mettre à la place de l'autre, c'est imaginer ses émotions pour mieux le comprendre.",
+      "ms": 5120,
+      "cat": "enonce"
+    },
+    "37989e8718145610": {
+      "text": "Se mettre à sa place, c'est comprendre sa faim. Partager est un geste généreux.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "121d984f0b6b72df": {
+      "text": "Se mettre à sa place, c'est deviner qu'il a besoin d'aide. L'accueillir le rassure.",
+      "ms": 5520,
+      "cat": "enonce"
+    },
+    "1908942340dfcdbf": {
+      "text": "Se moquer fait de la peine. On préfère des mots gentils, et on prévient un adulte si ça continue.",
+      "ms": 6880,
+      "cat": "enonce"
+    },
+    "8cb06b12c91f3159": {
+      "text": "Sur Internet, tout n'est pas vrai. On réfléchit avant de croire ce qu'on voit.",
+      "ms": 5200,
+      "cat": "enonce"
+    },
+    "fee26e9e507c75ef": {
+      "text": "Tous les enfants ont le droit d'aller à l'école pour apprendre.",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "d3201545c3cd54d8": {
+      "text": "Tous les métiers sont ouverts aux filles et aux garçons. Chacun choisit ce qu'il aime.",
+      "ms": 4800,
+      "cat": "enonce"
+    },
+    "e4177990f980e47d": {
+      "text": "Trop d'écran laisse moins de temps pour bouger, dormir et voir ses amis. On équilibre.",
+      "ms": 6000,
+      "cat": "enonce"
+    },
+    "713a6002a56a8958": {
+      "text": "Un adulte t'aide à choisir un bon temps d'écran. On peut en parler ensemble.",
+      "ms": 4800,
+      "cat": "enonce"
+    },
+    "f9f383964cd6dca8": {
+      "text": "Un cadeau qu'on adore donne de la joie : on a envie de sourire.",
+      "ms": 4480,
+      "cat": "enonce"
+    },
+    "3f21bb99e753bdb9": {
+      "text": "Un mot de passe reste secret. On le garde pour soi, comme la clé de la maison.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "7d9d40f5136fc2cf": {
+      "text": "Une commune est un village ou une ville. Chaque commune a un maire et une mairie.",
+      "ms": 5680,
+      "cat": "enonce"
+    },
+    "056bdfb902babe10": {
+      "text": "Une image peut être truquée avec un ordinateur. Un chat géant, ça n'existe pas pour de vrai.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "21afe32ea7b109b4": {
+      "text": "Écrire méchamment fait de la peine. Même derrière un écran, on reste poli.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "6e050cdbc3edea7b": {
+      "text": "Après lundi vient mardi.",
+      "ms": 1520,
+      "cat": "enonce"
+    },
+    "d62919843a031593": {
+      "text": "Au début d'une chaîne alimentaire, il y a toujours une plante, car elle fabrique sa propre nourriture.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "da54150e2c562c28": {
+      "text": "Autrefois, les élèves écrivaient à la craie sur une ardoise.",
+      "ms": 4640,
+      "cat": "enonce"
+    },
+    "54e8cda782a7c990": {
+      "text": "Autrefois, on lavait le linge à la main au lavoir, près de la rivière.",
+      "ms": 4960,
+      "cat": "enonce"
+    },
+    "4d67c62d12d25adb": {
+      "text": "Autrefois, à l'école, on écrivait avec une plume trempée dans l'encre.",
+      "ms": 5120,
+      "cat": "enonce"
+    },
+    "c7f84d7ed3bccc21": {
+      "text": "Avant l'électricité, la bougie donnait de la lumière.",
+      "ms": 3600,
+      "cat": "enonce"
+    },
+    "7186d7455d629438": {
+      "text": "Avant l'électricité, on s'éclairait avec des bougies ou des lampes à huile.",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "6249c09f6ec35d87": {
+      "text": "Avec le nez, tu sens les odeurs : c'est le sens de l'odorat.",
+      "ms": 4400,
+      "cat": "enonce"
+    },
+    "68e9b42e4308e4d6": {
+      "text": "Boire de l'eau et bien dormir aident ton corps. Manger trop salé ou se coucher très tard le fatiguent.",
+      "ms": 5840,
+      "cat": "enonce"
+    },
+    "481b4c2115b70b60": {
+      "text": "Bouger chaque jour, comme marcher ou jouer dehors, garde ton corps en forme.",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "1e305710aec2244d": {
+      "text": "D'abord l'œuf dans l'eau, puis le têtard, puis la grenouille.",
+      "ms": 3920,
+      "cat": "enonce"
+    },
+    "f68ed16058bd1916": {
+      "text": "D'abord l'œuf, puis le poussin qui en sort, puis la poule qui a grandi.",
+      "ms": 4480,
+      "cat": "enonce"
+    },
+    "f811c3ca3c0eab5c": {
+      "text": "D'abord le matin, puis le midi, puis le soir.",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "e297cbede1196bec": {
+      "text": "D'abord on prépare la pâte, puis on fait cuire au four, puis on mange.",
+      "ms": 4960,
+      "cat": "enonce"
+    },
+    "038b9f9e067d1a95": {
+      "text": "Dans la journée, le matin vient avant le soir.",
+      "ms": 3040,
+      "cat": "enonce"
+    },
+    "0edd0962d8836ae1": {
+      "text": "Face à un inconnu sur un écran, on en parle toujours à un adulte.",
+      "ms": 4640,
+      "cat": "enonce"
+    },
+    "06c4b4fd4c95afa6": {
+      "text": "Faire des pauses et demander à un adulte, c'est un bon usage. Jouer toute la journée ou la nuit, non.",
+      "ms": 6560,
+      "cat": "enonce"
+    },
+    "c4a73b4e9cb84fb1": {
+      "text": "Grâce à la lumière du soleil, la plante fabrique sa nourriture dans ses feuilles.",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "48a3118f4d7d598f": {
+      "text": "Hier est déjà passé. Demain n'est pas encore arrivé.",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "92b950dbb73d4c6f": {
+      "text": "Hier est passé, aujourd'hui c'est maintenant, demain n'est pas encore là.",
+      "ms": 4480,
+      "cat": "enonce"
+    },
+    "6e9a8ec7ded8f792": {
+      "text": "Immeubles et voitures : la ville. Champs et vaches : la campagne.",
+      "ms": 4560,
+      "cat": "enonce"
+    },
+    "f8524aa740e48389": {
+      "text": "L'Afrique est le grand continent au centre de la carte.",
+      "ms": 3040,
+      "cat": "enonce"
+    },
+    "8d58e9330b7c6796": {
+      "text": "L'Asie est le plus grand continent, à droite sur la carte.",
+      "ms": 3680,
+      "cat": "enonce"
+    },
+    "1fa838b05efa8f22": {
+      "text": "L'air est partout autour de nous ; on le respire pour vivre.",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "424e3e8fec789847": {
+      "text": "L'air est un gaz invisible, présent partout autour de nous.",
+      "ms": 3920,
+      "cat": "enonce"
+    },
+    "3e8145086dff8411": {
+      "text": "L'air et la vapeur sont des gaz : ils n'ont pas de forme fixe et se répandent partout.",
+      "ms": 5920,
+      "cat": "enonce"
+    },
+    "e850cbc542a20708": {
+      "text": "L'air prend de la place : il gonfle un ballon, un pneu ou une bouée.",
+      "ms": 5520,
+      "cat": "enonce"
+    },
+    "91c7d1fff201257f": {
+      "text": "L'année commence par le mois de janvier.",
+      "ms": 2480,
+      "cat": "enonce"
+    },
+    "5f0b613f51e1d395": {
+      "text": "L'année suit les saisons : le printemps, l'été, l'automne, puis l'hiver.",
+      "ms": 5360,
+      "cat": "enonce"
+    },
+    "5925b6206213cb83": {
+      "text": "L'eau chauffée se transforme en vapeur, qui est un gaz.",
+      "ms": 3680,
+      "cat": "enonce"
+    },
+    "bd1a155509144124": {
+      "text": "L'eau coule et prend la forme du verre : c'est un liquide.",
+      "ms": 3840,
+      "cat": "enonce"
+    },
+    "61a0feafdf2db139": {
+      "text": "L'eau liquide chauffée part dans l'air sous forme de vapeur : c'est l'évaporation.",
+      "ms": 5520,
+      "cat": "enonce"
+    },
+    "3ed670cdff33a9ce": {
+      "text": "L'herbe est mangée par le lapin, et le lapin est mangé par le renard.",
+      "ms": 5120,
+      "cat": "enonce"
+    },
+    "33c44a7f7c327ee1": {
+      "text": "L'hiver est la saison la plus froide de l'année.",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "b25ae57bdce2f925": {
+      "text": "L'huile reste au-dessus de l'eau : l'eau et l'huile ne se mélangent pas.",
+      "ms": 5600,
+      "cat": "enonce"
+    },
+    "ba14a600cfabbe80": {
+      "text": "L'interrupteur est ouvert : la boucle est coupée, le courant ne passe pas, l'ampoule reste éteinte.",
+      "ms": 7680,
+      "cat": "enonce"
+    },
+    "106cd2969b53279f": {
+      "text": "L'interrupteur ouvre et ferme le circuit : il allume ou éteint l'ampoule.",
+      "ms": 5680,
+      "cat": "enonce"
+    },
+    "d5ee7d6e40dc2dd3": {
+      "text": "L'ours mange des plantes et des animaux : il est omnivore. Toi aussi, tu es omnivore.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "9efe742967292570": {
+      "text": "L'écran fatigue surtout les yeux : il faut faire des pauses pour les reposer.",
+      "ms": 5200,
+      "cat": "enonce"
+    },
+    "0dc01e7b90bf2669": {
+      "text": "L'œuf dans l'eau, puis le têtard, puis le têtard qui a des pattes, puis la grenouille adulte.",
+      "ms": 6640,
+      "cat": "enonce"
+    },
+    "5bbf93aa51827e5e": {
+      "text": "L'œuf donne une chenille, la chenille se transforme en chrysalide, puis le papillon en sort.",
+      "ms": 6880,
+      "cat": "enonce"
+    },
+    "5629cb693f7c7783": {
+      "text": "La France se trouve en Europe.",
+      "ms": 2160,
+      "cat": "enonce"
+    },
+    "a31f4e3a9a9b91bb": {
+      "text": "La Loire est le plus long fleuve de France.",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "342596f09cb2befa": {
+      "text": "La Seine est le fleuve qui traverse Paris.",
+      "ms": 2640,
+      "cat": "enonce"
+    },
+    "6824490bd32377fc": {
+      "text": "La Seine traverse Paris.",
+      "ms": 1840,
+      "cat": "enonce"
+    },
+    "b73ebc57fb5f2191": {
+      "text": "La Terre est ronde, comme une grosse boule. Le globe en est une petite copie.",
+      "ms": 5600,
+      "cat": "enonce"
+    },
+    "fee35bd5f1136c70": {
+      "text": "La Terre tourne sur elle-même : le côté face au soleil a le jour, l'autre a la nuit.",
+      "ms": 5440,
+      "cat": "enonce"
+    },
+    "cd8cd86e228b6d69": {
+      "text": "La Terre tourne sur elle-même, ce qui fait se succéder le jour et la nuit.",
+      "ms": 4800,
+      "cat": "enonce"
+    },
+    "ff8381c4bfe8f3f9": {
+      "text": "La balance est équilibrée quand les deux plateaux ont le même poids.",
+      "ms": 3920,
+      "cat": "enonce"
+    },
+    "125f9200fadd3114": {
+      "text": "La campagne a des champs, des fermes et des animaux.",
+      "ms": 3600,
+      "cat": "enonce"
+    },
+    "0927e9cfaf20e8a9": {
+      "text": "La clé sert à ouvrir ou fermer une serrure.",
+      "ms": 3520,
+      "cat": "enonce"
+    },
+    "12163282733cedab": {
+      "text": "La feuille est mangée par la chenille, et la chenille est mangée par l'oiseau.",
+      "ms": 4800,
+      "cat": "enonce"
+    },
+    "fc1be4e578261e83": {
+      "text": "La graine germe et donne une pousse, qui grandit en plante, puis fait une fleur.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "5a081fe4b1ed83a3": {
+      "text": "La graine, la pousse, la plante, la fleur, et enfin le fruit qui contient de nouvelles graines.",
+      "ms": 7120,
+      "cat": "enonce"
+    },
+    "a8228e4e8499eb9d": {
+      "text": "La légende explique ce que veulent dire les couleurs et les dessins du plan.",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "4f47a90e0216f146": {
+      "text": "La maman de ta maman, ou de ton papa, est ta grand-mère.",
+      "ms": 4000,
+      "cat": "enonce"
+    },
+    "162cf86226fec323": {
+      "text": "La maquette est un petit modèle en volume qu'on peut regarder de tous les côtés.",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "84e06195cc82f0c2": {
+      "text": "La maquette est un petit modèle en volume.",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "9a8442241c25e2ac": {
+      "text": "La montagne a de hauts sommets, parfois couverts de neige.",
+      "ms": 3360,
+      "cat": "enonce"
+    },
+    "793c474a81e441aa": {
+      "text": "La montagne a de très hauts sommets.",
+      "ms": 2640,
+      "cat": "enonce"
+    },
+    "e45299867c763672": {
+      "text": "La montre sert à lire l'heure.",
+      "ms": 2240,
+      "cat": "enonce"
+    },
+    "a8dc8fe3b08123f7": {
+      "text": "La nuit, on voit souvent la lune et les étoiles.",
+      "ms": 3680,
+      "cat": "enonce"
+    },
+    "12a4cc2037ba8002": {
+      "text": "La nuit, ton corps a besoin de dormir pour se reposer et grandir.",
+      "ms": 4960,
+      "cat": "enonce"
+    },
+    "844f2b2faa9bf2b1": {
+      "text": "La photo aérienne est prise d'en haut, depuis un avion ou un satellite.",
+      "ms": 4560,
+      "cat": "enonce"
+    },
+    "c611e581538fabff": {
+      "text": "La pile est la source d'électricité : elle pousse le courant dans les fils.",
+      "ms": 4640,
+      "cat": "enonce"
+    },
+    "d540c96eee3ab7c8": {
+      "text": "La pile fournit le courant électrique qui fait briller l'ampoule.",
+      "ms": 3760,
+      "cat": "enonce"
+    },
+    "059279b5d3bda0f8": {
+      "text": "La plante a besoin d'air et de terre. Elle n'a pas besoin de neige ni de musique.",
+      "ms": 6000,
+      "cat": "enonce"
+    },
+    "395c7b1b356cad0b": {
+      "text": "La plante a besoin d'eau et de lumière. Elle n'a pas besoin de chocolat ni de télévision.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "c117ceca342a2f9c": {
+      "text": "La plante a besoin de lumière. C'est le soleil qui l'aide à grandir.",
+      "ms": 5120,
+      "cat": "enonce"
+    },
+    "fbeb538ec2a2ee86": {
+      "text": "La plume et la bougie, c'est autrefois. L'ordinateur et la lampe électrique, c'est aujourd'hui.",
+      "ms": 6880,
+      "cat": "enonce"
+    },
+    "351528d917c37459": {
+      "text": "La solidification donne un solide, la fusion donne un liquide, l'évaporation donne un gaz.",
+      "ms": 6640,
+      "cat": "enonce"
+    },
+    "fb4eef8f8a820a55": {
+      "text": "La vache et le lapin mangent des plantes. Le loup et le renard mangent de la viande.",
+      "ms": 5600,
+      "cat": "enonce"
+    },
+    "a21f07984cb3db48": {
+      "text": "La vie de la poule commence par un œuf. Ensuite, le poussin en sort.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "d431968d8eefa642": {
+      "text": "La ville a beaucoup d'immeubles, de rues et de magasins.",
+      "ms": 3760,
+      "cat": "enonce"
+    },
+    "c0ddfca87799d77c": {
+      "text": "Le balai sert à ramasser la poussière par terre.",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "bcdde37fc77a93f1": {
+      "text": "Le ballon est gonflé d'air. L'air prend de la place, même si on ne le voit pas.",
+      "ms": 5520,
+      "cat": "enonce"
+    },
+    "9831089cbcf6c668": {
+      "text": "Le bois est solide, l'eau est liquide, l'air est un gaz.",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "89003df4afdd2345": {
+      "text": "Le cheval et la lettre, c'est plutôt autrefois. La voiture et le message sur écran, c'est aujourd'hui.",
+      "ms": 7360,
+      "cat": "enonce"
+    },
+    "6066a4016b86cc04": {
+      "text": "Le circuit est fermé : le courant passe dans toute la boucle, l'ampoule s'allume.",
+      "ms": 5920,
+      "cat": "enonce"
+    },
+    "207b7e07c4c131e0": {
+      "text": "Le coude et le genou sont des articulations : c'est là que les os se plient.",
+      "ms": 4800,
+      "cat": "enonce"
+    },
+    "7526a359672ec4ac": {
+      "text": "Le filtre laisse passer l'eau et retient le sable.",
+      "ms": 3440,
+      "cat": "enonce"
+    },
+    "fb201ab0b299f2df": {
+      "text": "Le frère de ton papa ou de ta maman est ton oncle.",
+      "ms": 3360,
+      "cat": "enonce"
+    },
+    "1f6935b6c892675f": {
+      "text": "Le globe est une boule qui représente la Terre.",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "6e30e538eb555b52": {
+      "text": "Le grand-père est le plus âgé : c'est le papa du papa ou de la maman.",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "962dd6dca3cfae3d": {
+      "text": "Le grand-père, puis le père, puis l'enfant : trois générations.",
+      "ms": 4400,
+      "cat": "enonce"
+    },
+    "b2a371ee3e96e2b4": {
+      "text": "Le jour, c'est le soleil qui éclaire le ciel.",
+      "ms": 3280,
+      "cat": "enonce"
+    },
+    "fa61ab459ea7eb4d": {
+      "text": "Le lapin mange des plantes : c'est un herbivore.",
+      "ms": 3520,
+      "cat": "enonce"
+    },
+    "a36bedbf9a6189e8": {
+      "text": "Le levier est une barre qui aide à soulever une charge lourde avec moins d'effort.",
+      "ms": 5120,
+      "cat": "enonce"
+    },
+    "fc2a57ac21c9550a": {
+      "text": "Le lion mange de la viande : c'est un carnivore.",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "87bae2fa7e7842ad": {
+      "text": "Le littoral est le bord de la mer, avec ses plages.",
+      "ms": 3600,
+      "cat": "enonce"
+    },
+    "e8e62170d1c09047": {
+      "text": "Le littoral est le bord de la mer.",
+      "ms": 2400,
+      "cat": "enonce"
+    },
+    "729661c63bf6bd69": {
+      "text": "Le matin le réveil, puis l'école dans la journée, puis le coucher le soir.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "a2a2e054551a2fc5": {
+      "text": "Le nord est en haut de la rose des vents.",
+      "ms": 2240,
+      "cat": "enonce"
+    },
+    "76bfbdc058fce5f1": {
+      "text": "Le papa de ton papa, ou de ta maman, est ton grand-père.",
+      "ms": 3680,
+      "cat": "enonce"
+    },
+    "a481e53cfd58c555": {
+      "text": "Le parapluie sert à se protéger de la pluie.",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "d41cb3231f3cea69": {
+      "text": "Le plan de la ville montre les rues vues d'en haut pour trouver son chemin.",
+      "ms": 3760,
+      "cat": "enonce"
+    },
+    "f4749e3009fa745a": {
+      "text": "Le plan montre un lieu vu d'en haut, avec ses rues.",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "e141e21ee145c0b3": {
+      "text": "Le plateau le plus lourd descend, le plus léger monte.",
+      "ms": 3440,
+      "cat": "enonce"
+    },
+    "08d0085263198ac1": {
+      "text": "Le sable ne se dissout pas : il tombe au fond du verre.",
+      "ms": 3760,
+      "cat": "enonce"
+    },
+    "33e5871e18278157": {
+      "text": "Le sac gonflé est rempli d'air : l'air occupe tout l'espace à l'intérieur.",
+      "ms": 5920,
+      "cat": "enonce"
+    },
+    "f76c0ba1f220cf7b": {
+      "text": "Le savon sert à se laver, la lampe à s'éclairer, la voiture à se déplacer.",
+      "ms": 5680,
+      "cat": "enonce"
+    },
+    "91e6638206949381": {
+      "text": "Le soleil se couche à l'ouest le soir.",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "28e6e7bb4a926554": {
+      "text": "Le soleil se lève à l'est le matin.",
+      "ms": 2640,
+      "cat": "enonce"
+    },
+    "5aa6ad78e5f57655": {
+      "text": "Le soleil se lève à l'est.",
+      "ms": 1920,
+      "cat": "enonce"
+    },
+    "22710dd0e3e3c279": {
+      "text": "Le soleil se lève, puis c'est le midi, puis il se couche, puis vient la nuit.",
+      "ms": 5680,
+      "cat": "enonce"
+    },
+    "b6504112dac3c129": {
+      "text": "Le soleil éclaire la Terre le jour.",
+      "ms": 2480,
+      "cat": "enonce"
+    },
+    "d23bf0964dd65b4c": {
+      "text": "Le squelette, c'est tous tes os ensemble. Il soutient ton corps comme les piliers d'une maison.",
+      "ms": 5360,
+      "cat": "enonce"
+    },
+    "beff1707828a4bd2": {
+      "text": "Le stylo sert à écrire, le couteau à couper, la fourchette à manger.",
+      "ms": 5200,
+      "cat": "enonce"
+    },
+    "b70c2c8c30df1070": {
+      "text": "Le sucre et le sel se dissolvent dans l'eau. Le sable et l'huile ne se dissolvent pas.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "d9dc919b8c44c24a": {
+      "text": "Le sucre se dissout dans l'eau et forme une solution.",
+      "ms": 3600,
+      "cat": "enonce"
+    },
+    "a0fa08c3949a80da": {
+      "text": "Le sucre se mélange à l'eau et on ne le voit plus : il se dissout. On a fait une solution.",
+      "ms": 6560,
+      "cat": "enonce"
+    },
+    "9f6d11387ae6bc39": {
+      "text": "Le sud est en bas, à l'opposé du nord.",
+      "ms": 2880,
+      "cat": "enonce"
+    },
+    "2d08d45d68816a2b": {
+      "text": "Le sud est à l'opposé du nord.",
+      "ms": 2240,
+      "cat": "enonce"
+    },
+    "2feb6ff79decb4f7": {
+      "text": "Le têtard grandit dans l'eau, puis il devient une grenouille.",
+      "ms": 5040,
+      "cat": "enonce"
+    },
+    "d8a53bdb618df7b9": {
+      "text": "Le vent, c'est de l'air en mouvement.",
+      "ms": 2400,
+      "cat": "enonce"
+    },
+    "de23d7ee30786cef": {
+      "text": "Le vent, c'est de l'air qui se déplace.",
+      "ms": 2880,
+      "cat": "enonce"
+    },
+    "18a9e9b42771884e": {
+      "text": "Le vélo sert à se déplacer.",
+      "ms": 2320,
+      "cat": "enonce"
+    },
+    "9fe5d322bdac645a": {
+      "text": "Les bulles montrent que l'air sort de la paille : l'air existe bel et bien.",
+      "ms": 6000,
+      "cat": "enonce"
+    },
+    "1b36f0c15879cb10": {
+      "text": "Les ciseaux servent à couper le papier ou le tissu.",
+      "ms": 3440,
+      "cat": "enonce"
+    },
+    "9ccdf5ebe395a52e": {
+      "text": "Les graines sont mangées par la souris, la souris par le serpent, et le serpent par l'aigle.",
+      "ms": 5920,
+      "cat": "enonce"
+    },
+    "b574354fb31ce92f": {
+      "text": "Les grands-parents sont nés avant les parents, qui sont nés avant les enfants.",
+      "ms": 4640,
+      "cat": "enonce"
+    },
+    "c615edfb594badd6": {
+      "text": "Les muscles se contractent et tirent sur les os pour te faire bouger.",
+      "ms": 4320,
+      "cat": "enonce"
+    },
+    "cf6a8b21b6150205": {
+      "text": "Les océans couvrent la plus grande partie de la Terre : il y a plus d'eau que de terre.",
+      "ms": 5120,
+      "cat": "enonce"
+    },
+    "4b71c8f5e3cc7b6f": {
+      "text": "Les parents de tes parents sont tes grands-parents.",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "44ddfac461cd308f": {
+      "text": "Les pauses reposent les yeux et le corps.",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "39a100cd68723fce": {
+      "text": "Les quatre points cardinaux sont le nord, le sud, l'est et l'ouest.",
+      "ms": 5040,
+      "cat": "enonce"
+    },
+    "484084eb15a72a02": {
+      "text": "Les racines boivent l'eau dans la terre et la font monter dans toute la plante.",
+      "ms": 4480,
+      "cat": "enonce"
+    },
+    "45c9897f457c9bd0": {
+      "text": "Les racines s'enfoncent dans la terre et boivent l'eau pour toute la plante.",
+      "ms": 4480,
+      "cat": "enonce"
+    },
+    "b9008cf3521906a5": {
+      "text": "Les yeux servent à voir, les oreilles à entendre, le nez à sentir les odeurs.",
+      "ms": 5680,
+      "cat": "enonce"
+    },
+    "df4e36cb4a0e0e4b": {
+      "text": "Manger des légumes et bouger sont bons pour la santé. Trop de bonbons et rester assis ne le sont pas.",
+      "ms": 6560,
+      "cat": "enonce"
+    },
+    "c28599b283dd723e": {
+      "text": "Marseille est une grande ville du sud, au bord de la mer Méditerranée.",
+      "ms": 4480,
+      "cat": "enonce"
+    },
+    "d6d2068a80e083ba": {
+      "text": "Mercredi est le troisième jour de la semaine, après lundi et mardi.",
+      "ms": 4640,
+      "cat": "enonce"
+    },
+    "e6e417732ae4d975": {
+      "text": "Nous habitons en France.",
+      "ms": 1840,
+      "cat": "enonce"
+    },
+    "951ee59959437cf1": {
+      "text": "On demande toujours à un adulte avant d'utiliser longtemps un écran.",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "1844541cfbe770fe": {
+      "text": "On demande à un adulte avant d'utiliser longtemps un écran.",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "fa4140519e4581e9": {
+      "text": "On grandit : d'abord bébé, puis enfant, puis adolescent, puis adulte.",
+      "ms": 5680,
+      "cat": "enonce"
+    },
+    "d68379e96be30549": {
+      "text": "On ne met jamais les doigts ni un objet dans une prise : l'électricité de la maison est dangereuse.",
+      "ms": 6240,
+      "cat": "enonce"
+    },
+    "a18c28e5533bcc31": {
+      "text": "On ne voit pas l'air, mais on le sent quand le vent souffle sur le visage.",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "de930f40786fca7a": {
+      "text": "On se brosse les dents deux fois par jour, le matin et le soir.",
+      "ms": 4480,
+      "cat": "enonce"
+    },
+    "fffbff89c7375c10": {
+      "text": "On se brosse les dents matin et soir pour enlever les microbes et garder des dents saines.",
+      "ms": 5360,
+      "cat": "enonce"
+    },
+    "1a2e9c439b95a8db": {
+      "text": "On surnomme la France l'hexagone car son contour a six côtés.",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "ee829a8edb61677a": {
+      "text": "On verse dans un filtre : l'eau passe à travers, le sable reste. C'est la filtration.",
+      "ms": 6560,
+      "cat": "enonce"
+    },
+    "dd87c24513bd483f": {
+      "text": "On écrivait à la craie sur l'ardoise, puis on effaçait pour recommencer.",
+      "ms": 4800,
+      "cat": "enonce"
+    },
+    "a9ca360395bc0bc9": {
+      "text": "Paris est la capitale de la France.",
+      "ms": 2320,
+      "cat": "enonce"
+    },
+    "e671bc1ad327ee24": {
+      "text": "Pendant qu'il fait nuit chez nous, il fait jour de l'autre côté de la Terre.",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "1f5006039fd20e0a": {
+      "text": "Quand des animaux ont des petits, on dit qu'ils se reproduisent. La chatte se reproduit : elle a des chatons.",
+      "ms": 6560,
+      "cat": "enonce"
+    },
+    "eb5d51f3e6555eb1": {
+      "text": "Quand l'eau gèle, elle devient de la glace, qui est un solide.",
+      "ms": 3760,
+      "cat": "enonce"
+    },
+    "0b24fa7edafcd68d": {
+      "text": "Quand la vapeur se refroidit et redevient liquide, c'est la condensation, comme la buée sur une vitre froide.",
+      "ms": 7040,
+      "cat": "enonce"
+    },
+    "9c5a69c722f5f014": {
+      "text": "Quand le sucre a disparu dans l'eau, on obtient une solution.",
+      "ms": 3600,
+      "cat": "enonce"
+    },
+    "dd20e5801ec287ee": {
+      "text": "Quand les deux côtés ont le même poids, la balance est en équilibre.",
+      "ms": 3840,
+      "cat": "enonce"
+    },
+    "26c61026b5cac48c": {
+      "text": "Quand un animal mange, il se nourrit. Se nourrir, c'est un signe du vivant.",
+      "ms": 5520,
+      "cat": "enonce"
+    },
+    "978a24438d3b8217": {
+      "text": "Quand un liquide gèle et devient solide, c'est la solidification.",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "4d3b8b975ccef0ee": {
+      "text": "Quand un solide fond et devient liquide, c'est la fusion. La glace fond et devient de l'eau.",
+      "ms": 5920,
+      "cat": "enonce"
+    },
+    "db73f3548f9490de": {
+      "text": "Samedi est juste avant dimanche : c'est le week-end.",
+      "ms": 3680,
+      "cat": "enonce"
+    },
+    "224ee4cdc88da58c": {
+      "text": "Sans eau ni lumière, la plante se fane : ses feuilles tombent doucement. Elle a besoin des deux pour bien pousser.",
+      "ms": 8480,
+      "cat": "enonce"
+    },
+    "9ed3fc59ea33c9ae": {
+      "text": "Sommets et pistes de ski : la montagne. Plages et bateaux : le littoral.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "c45da0df15e7a818": {
+      "text": "Sur Internet, tout n'est pas vrai : on vérifie avec un adulte ou dans un livre.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "ff42c83c925d7b08": {
+      "text": "Sur un plan, on regarde tout d'en haut, vu de dessus.",
+      "ms": 4000,
+      "cat": "enonce"
+    },
+    "0ff2a4a23c1dda24": {
+      "text": "Sur une bascule, le côté le plus lourd descend.",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "0b42ce73ca73fcb6": {
+      "text": "Sur une carte, le nord est toujours en haut.",
+      "ms": 3040,
+      "cat": "enonce"
+    },
+    "54ccafa32af70867": {
+      "text": "Tous les êtres vivants grandissent, comme toi qui deviens plus grand chaque année.",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "7c36c3f78a6fad77": {
+      "text": "Tous tes os ensemble forment ton squelette, qui tient ton corps debout.",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "03d0de4d6fb651e8": {
+      "text": "Trop d'écran fatigue les yeux et le sommeil : il faut faire des pauses.",
+      "ms": 4480,
+      "cat": "enonce"
+    },
+    "953061dc0fea2abd": {
+      "text": "Très froid : la glace. Normal : l'eau liquide. Très chaud : la vapeur.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "00e9166f1a6d6afd": {
+      "text": "Tu entends avec tes oreilles. C'est le sens de l'ouïe.",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "b52f17a28a752cf9": {
+      "text": "Tu vois avec tes yeux. C'est le sens de la vue.",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "81dc831232aea3a4": {
+      "text": "Un arbre et un poisson sont vivants : ils grandissent et se nourrissent. Une voiture et un caillou ne sont pas vivants.",
+      "ms": 7440,
+      "cat": "enonce"
+    },
+    "ceeea1ff22fdee3b": {
+      "text": "Un ballon n'est pas vivant : il ne mange pas et ne grandit pas. Une fleur et un oiseau, eux, sont vivants.",
+      "ms": 6880,
+      "cat": "enonce"
+    },
+    "87aec85eaa297227": {
+      "text": "Un caillou et un crayon gardent leur forme : ce sont des solides. Le lait et le jus coulent : ce sont des liquides.",
+      "ms": 8240,
+      "cat": "enonce"
+    },
+    "73812fb5b20e41d3": {
+      "text": "Un champignon et une abeille sont vivants. Un nuage et une table ne le sont pas.",
+      "ms": 4800,
+      "cat": "enonce"
+    },
+    "fc8e9d2781b08a0e": {
+      "text": "Un chat est vivant : il naît, il grandit, il mange et il aura des petits. Un caillou ne grandit pas.",
+      "ms": 7200,
+      "cat": "enonce"
+    },
+    "e4a154ea8eed143a": {
+      "text": "Un circuit fermé forme une boucle complète : le courant peut tourner et l'ampoule s'allume.",
+      "ms": 6560,
+      "cat": "enonce"
+    },
+    "aad8801c0679703c": {
+      "text": "Un continent est un très grand morceau de terre, comme l'Europe ou l'Afrique.",
+      "ms": 4880,
+      "cat": "enonce"
+    },
+    "00702578e1472a3b": {
+      "text": "Un enfant a besoin de beaucoup de sommeil, environ dix heures par nuit, pour grandir et être en forme.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "c637f9bfb08fd04f": {
+      "text": "Un fil coupé interrompt la boucle : le courant ne passe plus, l'ampoule reste éteinte.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "bbe233ed10750bfa": {
+      "text": "Un glaçon est dur et garde sa forme : c'est un solide.",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "c60109d0fee3dd54": {
+      "text": "Un levier, comme une barre glissée sous un gros caillou, aide à soulever plus facilement.",
+      "ms": 5600,
+      "cat": "enonce"
+    },
+    "6df9e6ac7ffe2a69": {
+      "text": "Un liquide prend la forme du récipient qui le contient.",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "6822a7b63e7eff52": {
+      "text": "Un océan est une très grande étendue d'eau salée, comme l'océan Atlantique.",
+      "ms": 4960,
+      "cat": "enonce"
+    },
+    "38c1b51890574b58": {
+      "text": "Un plan montre les choses vues d'en haut, comme si on volait au-dessus.",
+      "ms": 4160,
+      "cat": "enonce"
+    },
+    "8b3daf041a590c22": {
+      "text": "Un repas équilibré a des fruits et des légumes, qui donnent des vitamines à ton corps.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "a3328ec5b8e0c1a3": {
+      "text": "Un solide, comme une bille, garde sa forme. Un liquide prend la forme de son récipient.",
+      "ms": 5840,
+      "cat": "enonce"
+    },
+    "89bd1bd52ce789ea": {
+      "text": "Une plante a besoin d'eau. Sans eau, elle se dessèche.",
+      "ms": 4320,
+      "cat": "enonce"
+    },
+    "199889371da80f41": {
+      "text": "À la fin de sa vie, un être vivant meurt. C'est la dernière étape de la vie.",
+      "ms": 5360,
+      "cat": "enonce"
+    },
+    "b4fbd65efc4e1669": {
+      "text": "Ainsi, ses ennemis ont beaucoup de mal à le repérer.",
+      "ms": 3600,
+      "cat": "enonce"
+    },
+    "f50db9d05ef39bc9": {
+      "text": "Appelle-moi par trois fois cette nuit, aussitôt que tu seras endormie.",
+      "ms": 4640,
+      "cat": "enonce"
+    },
+    "801472b191678add": {
+      "text": "Apprenez que tout flatteur",
+      "ms": 1840,
+      "cat": "enonce"
+    },
+    "ada61f9ced1bd5be": {
+      "text": "Au lieu de demander un bâton pour me faire avancer, il n'avait songé qu'aux moyens de douceur et d'amitié. Aussi je me mis en marche.",
+      "ms": 8800,
+      "cat": "enonce"
+    },
+    "6567476d4c8430c5": {
+      "text": "Avec ses grands yeux, elle voit très bien dans le noir.",
+      "ms": 3920,
+      "cat": "enonce"
+    },
+    "f2c8dd3689755894": {
+      "text": "Avec son long bec, la cigogne ne peut rien prendre dans une assiette plate. Le renard, lui, lape tout.",
+      "ms": 7120,
+      "cat": "enonce"
+    },
+    "58efe44d431ff12a": {
+      "text": "Bien joué ! Le soleil brille. Trois étiquettes bien rangées.",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "b65573b280079248": {
+      "text": "Bien joué ! Mon école, avec l'accent sur le é.",
+      "ms": 3600,
+      "cat": "enonce"
+    },
+    "7397bf16830e639e": {
+      "text": "Bravo ! Au passé composé : J'ai mangé une pomme. On utilise ai et le verbe en é.",
+      "ms": 6640,
+      "cat": "enonce"
+    },
+    "7366fcca761ad066": {
+      "text": "Bravo ! Au pluriel : les chats noirs. On ajoute un s à chaque mot.",
+      "ms": 4800,
+      "cat": "enonce"
+    },
+    "b1a6495ce3b9f06d": {
+      "text": "Bravo ! L'oiseau vole dans le ciel. Le mot vole va très bien ici.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "d964516dfc4815f4": {
+      "text": "Bravo ! La phrase est : Le chat dort. Elle commence par une majuscule et finit par un point.",
+      "ms": 6240,
+      "cat": "enonce"
+    },
+    "09eaf0181ba4a9ae": {
+      "text": "Bravo ! Le chat boit du lait. C'est le mot qui a du sens dans la phrase.",
+      "ms": 4960,
+      "cat": "enonce"
+    },
+    "b894bcd63e412eda": {
+      "text": "Bravo ! Le mot était jardin. Tu as regardé chaque lettre dans l'ordre.",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "70cbd994bc9dde77": {
+      "text": "Bravo ! Les oiseaux chantent le matin. Tu as bien recopié.",
+      "ms": 3920,
+      "cat": "enonce"
+    },
+    "d869f98969505dac": {
+      "text": "Bravo ! Trois phrases, chacune avec une majuscule et un point. Regarder puis écrire, c'est un vrai entraînement de champion.",
+      "ms": 7520,
+      "cat": "enonce"
+    },
+    "2b5f1c2abdb78a0e": {
+      "text": "Bravo ! Tu as recopié les trois mots : le petit chat.",
+      "ms": 4160,
+      "cat": "enonce"
+    },
+    "6bfc3e89a4c12579": {
+      "text": "Bravo ! Une phrase avec une majuscule, un point, et les mots chat et jardin. Par exemple : Le chat joue dans le jardin.",
+      "ms": 7760,
+      "cat": "enonce"
+    },
+    "2c29ca4fe37c4f5c": {
+      "text": "Bravo ! Une phrase avec une majuscule, un point, et les mots fleur et soleil. Par exemple : La fleur aime le soleil.",
+      "ms": 8560,
+      "cat": "enonce"
+    },
+    "d639d6bd76c79374": {
+      "text": "Bravo ! Une phrase commence par une majuscule et finit par un point.",
+      "ms": 4400,
+      "cat": "enonce"
+    },
+    "3df2400444e5b801": {
+      "text": "C'est dans la rue que l'enfant comprend la vie des gens. Le mot rue montre l'endroit.",
+      "ms": 5520,
+      "cat": "enonce"
+    },
+    "d2f8226bf2e94cbf": {
+      "text": "C'est la cigogne, un grand oiseau à longues pattes. Le mot cigogne la nomme.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "7f58e7163af42984": {
+      "text": "C'est le mot carte. C'est la carte à jouer, et aussi la carte qui montre le pays.",
+      "ms": 5440,
+      "cat": "enonce"
+    },
+    "700aabd7ac1fe9ce": {
+      "text": "C'est le mot feuille. C'est le papier, et aussi la feuille verte de l'arbre.",
+      "ms": 4880,
+      "cat": "enonce"
+    },
+    "87c9056624ed4507": {
+      "text": "C'est le mot glace. On mange une glace, le dessert. Et sur le lac, la glace est l'eau gelée. Le même mot a deux sens.",
+      "ms": 9360,
+      "cat": "enonce"
+    },
+    "a077b253f782697e": {
+      "text": "C'est le mot orange. C'est le fruit, et aussi la couleur.",
+      "ms": 4560,
+      "cat": "enonce"
+    },
+    "82788d30e6430d2f": {
+      "text": "C'est le mot souris. C'est l'animal, et aussi l'objet de l'ordinateur.",
+      "ms": 5280,
+      "cat": "enonce"
     }
   },
   "keys": {
@@ -23603,6 +25618,409 @@
     "txt:e48ffe8dc6606a80": "e48ffe8dc6606a80",
     "txt:bda37b558f4ed3be": "bda37b558f4ed3be",
     "txt:948116b7ca0054d3": "948116b7ca0054d3",
-    "txt:f91863379fc70614": "f91863379fc70614"
+    "txt:f91863379fc70614": "f91863379fc70614",
+    "txt:521e27a0fe7d2c74": "521e27a0fe7d2c74",
+    "txt:d28bcee22c69dc7a": "d28bcee22c69dc7a",
+    "txt:1db1b2a73e326894": "1db1b2a73e326894",
+    "txt:577c27f46fdbe719": "577c27f46fdbe719",
+    "txt:6f705023fee90265": "6f705023fee90265",
+    "txt:bb05ada1d509d18b": "bb05ada1d509d18b",
+    "txt:a899e06f06e2e9da": "a899e06f06e2e9da",
+    "txt:c7b7e617de0bb941": "c7b7e617de0bb941",
+    "txt:9d35ba03c422d011": "9d35ba03c422d011",
+    "txt:1a83023c5c347419": "1a83023c5c347419",
+    "txt:422feaf8bde42663": "422feaf8bde42663",
+    "txt:a47e842481d1b3d7": "a47e842481d1b3d7",
+    "txt:c806d0258e184899": "c806d0258e184899",
+    "txt:9d518ce4cb11f7a9": "9d518ce4cb11f7a9",
+    "txt:9adfe12e5c786677": "9adfe12e5c786677",
+    "txt:4970b06d6fd46b8c": "4970b06d6fd46b8c",
+    "txt:0c8bbc9d363c4be0": "0c8bbc9d363c4be0",
+    "txt:fc49ad2b6d352626": "fc49ad2b6d352626",
+    "txt:20c48f40a8aa7574": "20c48f40a8aa7574",
+    "txt:d5dfb2e9a14bcb4a": "d5dfb2e9a14bcb4a",
+    "txt:60b39d43a7bc95ff": "60b39d43a7bc95ff",
+    "txt:4d7eec0b48dd1e4a": "4d7eec0b48dd1e4a",
+    "txt:886d4f43c06001a7": "886d4f43c06001a7",
+    "txt:60113d5fd0ee2544": "60113d5fd0ee2544",
+    "txt:91e175e8a43d191a": "91e175e8a43d191a",
+    "txt:8e4f35816d772d68": "8e4f35816d772d68",
+    "txt:91931557e975956a": "91931557e975956a",
+    "txt:f80fdb3676696179": "f80fdb3676696179",
+    "txt:352153a73ac7ae8f": "352153a73ac7ae8f",
+    "txt:d28046d1de883950": "d28046d1de883950",
+    "txt:4d0e5e4461ccadb5": "4d0e5e4461ccadb5",
+    "txt:3cc8e01b18909b23": "3cc8e01b18909b23",
+    "txt:ee28d7bee86eea50": "ee28d7bee86eea50",
+    "txt:cd72722663598a8b": "cd72722663598a8b",
+    "txt:e8dcf48ec9f6ec86": "e8dcf48ec9f6ec86",
+    "txt:e4568dbf54ece499": "e4568dbf54ece499",
+    "txt:bfede4d270bde11e": "bfede4d270bde11e",
+    "txt:d1506ef5c7386be8": "d1506ef5c7386be8",
+    "txt:716faeba0d506114": "716faeba0d506114",
+    "txt:8b21b6927d8ba128": "8b21b6927d8ba128",
+    "txt:1086fff90f7d24ed": "1086fff90f7d24ed",
+    "txt:954cc660853ca938": "954cc660853ca938",
+    "txt:1d61cfb5ade49f22": "1d61cfb5ade49f22",
+    "txt:10002e21b438ea83": "10002e21b438ea83",
+    "txt:8f3eb5655c5a15da": "8f3eb5655c5a15da",
+    "txt:72365de8fbd87be3": "72365de8fbd87be3",
+    "txt:d01fd5f91d0fc01b": "d01fd5f91d0fc01b",
+    "txt:62f3ded553e22e8d": "62f3ded553e22e8d",
+    "txt:c2d1680d23512a68": "c2d1680d23512a68",
+    "txt:f2acb0aea676cd08": "f2acb0aea676cd08",
+    "txt:066b1630d03e6d70": "066b1630d03e6d70",
+    "txt:696e1bf5bf85703b": "696e1bf5bf85703b",
+    "txt:49774d0f0992cd5e": "49774d0f0992cd5e",
+    "txt:2ee44d8544385300": "2ee44d8544385300",
+    "txt:f0aa6a5a4d1c3a3e": "f0aa6a5a4d1c3a3e",
+    "txt:2d65d2d3421895e7": "2d65d2d3421895e7",
+    "txt:b2e1aa5880f04144": "b2e1aa5880f04144",
+    "txt:78caa4d52a6bea05": "78caa4d52a6bea05",
+    "txt:53f9d6e1e58d3305": "53f9d6e1e58d3305",
+    "txt:8d425435cccc205d": "8d425435cccc205d",
+    "txt:0028c44db710f47c": "0028c44db710f47c",
+    "txt:46e1ab8fbd920083": "46e1ab8fbd920083",
+    "txt:f57f429d4e892790": "f57f429d4e892790",
+    "txt:9753d706a3026f74": "9753d706a3026f74",
+    "txt:3b99872b132a8a7e": "3b99872b132a8a7e",
+    "txt:eef32c8b0fcf8378": "eef32c8b0fcf8378",
+    "txt:3abbda2bf7ea0ad3": "3abbda2bf7ea0ad3",
+    "txt:326d86a550ae9ce0": "326d86a550ae9ce0",
+    "txt:d03f0e2064b6d544": "d03f0e2064b6d544",
+    "txt:df8628b555c1b385": "df8628b555c1b385",
+    "txt:8b3e43d546b0e071": "8b3e43d546b0e071",
+    "txt:296d8191c5314ea4": "296d8191c5314ea4",
+    "txt:086cd10a33d096f1": "086cd10a33d096f1",
+    "txt:0654a916c4b456b1": "0654a916c4b456b1",
+    "txt:526c099e6c604fdb": "526c099e6c604fdb",
+    "txt:97329a8547b4ea74": "97329a8547b4ea74",
+    "txt:a1e48a983d826ee9": "a1e48a983d826ee9",
+    "txt:65f50c4414926bc5": "65f50c4414926bc5",
+    "txt:ad12d44461e0bbb8": "ad12d44461e0bbb8",
+    "txt:d488393f9f0fc7fe": "d488393f9f0fc7fe",
+    "txt:981cdc8d0fe41650": "981cdc8d0fe41650",
+    "txt:c77487e173eb88b5": "c77487e173eb88b5",
+    "txt:2478331df3051ef5": "2478331df3051ef5",
+    "txt:0b12a7113b6f7512": "0b12a7113b6f7512",
+    "txt:1810f421f3a6ef52": "1810f421f3a6ef52",
+    "txt:e668a168e5e207ef": "e668a168e5e207ef",
+    "txt:771ca2c10b5e23fc": "771ca2c10b5e23fc",
+    "txt:1c5d1ed72e256885": "1c5d1ed72e256885",
+    "txt:1524bd9fa392a48e": "1524bd9fa392a48e",
+    "txt:a994b16893e69093": "a994b16893e69093",
+    "txt:1859f130449ea71b": "1859f130449ea71b",
+    "txt:bc934daa5b292b6d": "bc934daa5b292b6d",
+    "txt:acfe8a0c59502989": "acfe8a0c59502989",
+    "txt:e8f8cf342f4432cf": "e8f8cf342f4432cf",
+    "txt:6f408b5d13c96cc5": "6f408b5d13c96cc5",
+    "txt:c39fe0f26d752daf": "c39fe0f26d752daf",
+    "txt:e35a20d9c769e6aa": "e35a20d9c769e6aa",
+    "txt:244cfe1221a1fd43": "244cfe1221a1fd43",
+    "txt:2298f9da68aa5d70": "2298f9da68aa5d70",
+    "txt:3780f1ebeac0f04d": "3780f1ebeac0f04d",
+    "txt:93043657fbc9fce4": "93043657fbc9fce4",
+    "txt:c3f3a9666caa69f0": "c3f3a9666caa69f0",
+    "txt:09000d7eabdc6cca": "09000d7eabdc6cca",
+    "txt:21d2a3198865412a": "21d2a3198865412a",
+    "txt:f728023dd768c8fb": "f728023dd768c8fb",
+    "txt:5dd34ef797034f75": "5dd34ef797034f75",
+    "txt:59fd495cd2dea3f6": "59fd495cd2dea3f6",
+    "txt:f93fc1c204e70062": "f93fc1c204e70062",
+    "txt:1b05ced211dd9150": "1b05ced211dd9150",
+    "txt:698a38ee57fdb8a0": "698a38ee57fdb8a0",
+    "txt:97c8f86efa140a88": "97c8f86efa140a88",
+    "txt:efd7d5ddcb60abb6": "efd7d5ddcb60abb6",
+    "txt:07665690cd0f9fd4": "07665690cd0f9fd4",
+    "txt:c4e751bddc75889b": "c4e751bddc75889b",
+    "txt:91cef43d8f0f21ce": "91cef43d8f0f21ce",
+    "txt:99660a051b252786": "99660a051b252786",
+    "txt:d191ffb2d1221ed2": "d191ffb2d1221ed2",
+    "txt:9a4542248d9525ce": "9a4542248d9525ce",
+    "txt:0c0b9929852dd00d": "0c0b9929852dd00d",
+    "txt:a3cfb2c87e0e7b1f": "a3cfb2c87e0e7b1f",
+    "txt:02fbb511c2147e55": "02fbb511c2147e55",
+    "txt:e582a0329e3f5cdd": "e582a0329e3f5cdd",
+    "txt:6e3fd8b775265312": "6e3fd8b775265312",
+    "txt:69f5673a3b8e88a5": "69f5673a3b8e88a5",
+    "txt:9ea03849a41a218c": "9ea03849a41a218c",
+    "txt:3f727a7769bc8fc4": "3f727a7769bc8fc4",
+    "txt:f33cc2689ab0fa3c": "f33cc2689ab0fa3c",
+    "txt:334c71548f9ff87b": "334c71548f9ff87b",
+    "txt:e7e4159605576b00": "e7e4159605576b00",
+    "txt:eb5433074656d54f": "eb5433074656d54f",
+    "txt:00b7299a2052b6e1": "00b7299a2052b6e1",
+    "txt:7c4b908895eebc91": "7c4b908895eebc91",
+    "txt:e0c6eaf03a440a2b": "e0c6eaf03a440a2b",
+    "txt:de56f14548ab17bd": "de56f14548ab17bd",
+    "txt:93acb411c31bf3d3": "93acb411c31bf3d3",
+    "txt:bf9d30f1cca0c68b": "bf9d30f1cca0c68b",
+    "txt:fdaa726e45421611": "fdaa726e45421611",
+    "txt:edaf40736370e12c": "edaf40736370e12c",
+    "txt:fc15b616f008d9c6": "fc15b616f008d9c6",
+    "txt:fe9d15ff383a7a85": "fe9d15ff383a7a85",
+    "txt:0c49abc59a1486e0": "0c49abc59a1486e0",
+    "txt:b871f0ea9ef87c3a": "b871f0ea9ef87c3a",
+    "txt:4d9b21c54eb06117": "4d9b21c54eb06117",
+    "txt:794aef52e26234a9": "794aef52e26234a9",
+    "txt:4af5086b3c3d6540": "4af5086b3c3d6540",
+    "txt:562e14622f7369dd": "562e14622f7369dd",
+    "txt:a173b1a258131bfa": "a173b1a258131bfa",
+    "txt:019456b6ca3fcb06": "019456b6ca3fcb06",
+    "txt:c22ead0fe905622c": "c22ead0fe905622c",
+    "txt:5adc8791bda70b81": "5adc8791bda70b81",
+    "txt:fffa00fe1d3f874c": "fffa00fe1d3f874c",
+    "txt:5279d56cc979b44b": "5279d56cc979b44b",
+    "txt:9e1b6910f1d73499": "9e1b6910f1d73499",
+    "txt:3dc92314a53f7840": "3dc92314a53f7840",
+    "txt:8849db0d90c0ed6d": "8849db0d90c0ed6d",
+    "txt:1cb62759de657224": "1cb62759de657224",
+    "txt:907fb7da79309d7c": "907fb7da79309d7c",
+    "txt:b1d9637e177c5fc4": "b1d9637e177c5fc4",
+    "txt:e95dbf3d87700985": "e95dbf3d87700985",
+    "txt:ba5658b0bf888e50": "ba5658b0bf888e50",
+    "txt:210deecca27cd8cb": "210deecca27cd8cb",
+    "txt:618b2c0a02c6eea2": "618b2c0a02c6eea2",
+    "txt:035424001751e6c8": "035424001751e6c8",
+    "txt:3d9d43468951751d": "3d9d43468951751d",
+    "txt:13a6ef9fdcdf823d": "13a6ef9fdcdf823d",
+    "txt:c1d57f85c38d8437": "c1d57f85c38d8437",
+    "txt:0b186603614f94d6": "0b186603614f94d6",
+    "txt:6b368b8632396794": "6b368b8632396794",
+    "txt:08809c71a880ec2e": "08809c71a880ec2e",
+    "txt:6d2c746e0d02435d": "6d2c746e0d02435d",
+    "txt:71f168be55345575": "71f168be55345575",
+    "txt:3812300888a50d1a": "3812300888a50d1a",
+    "txt:974eefbd41f84f4b": "974eefbd41f84f4b",
+    "txt:9daae514226b0387": "9daae514226b0387",
+    "txt:1c54ffc7f981c5d7": "1c54ffc7f981c5d7",
+    "txt:4275241e91354df5": "4275241e91354df5",
+    "txt:addd068f8417c8ba": "addd068f8417c8ba",
+    "txt:6a68750780e98962": "6a68750780e98962",
+    "txt:e49da4ba7bfd6397": "e49da4ba7bfd6397",
+    "txt:37989e8718145610": "37989e8718145610",
+    "txt:121d984f0b6b72df": "121d984f0b6b72df",
+    "txt:1908942340dfcdbf": "1908942340dfcdbf",
+    "txt:8cb06b12c91f3159": "8cb06b12c91f3159",
+    "txt:fee26e9e507c75ef": "fee26e9e507c75ef",
+    "txt:d3201545c3cd54d8": "d3201545c3cd54d8",
+    "txt:e4177990f980e47d": "e4177990f980e47d",
+    "txt:713a6002a56a8958": "713a6002a56a8958",
+    "txt:f9f383964cd6dca8": "f9f383964cd6dca8",
+    "txt:3f21bb99e753bdb9": "3f21bb99e753bdb9",
+    "txt:7d9d40f5136fc2cf": "7d9d40f5136fc2cf",
+    "txt:056bdfb902babe10": "056bdfb902babe10",
+    "txt:21afe32ea7b109b4": "21afe32ea7b109b4",
+    "txt:6e050cdbc3edea7b": "6e050cdbc3edea7b",
+    "txt:d62919843a031593": "d62919843a031593",
+    "txt:da54150e2c562c28": "da54150e2c562c28",
+    "txt:54e8cda782a7c990": "54e8cda782a7c990",
+    "txt:4d67c62d12d25adb": "4d67c62d12d25adb",
+    "txt:c7f84d7ed3bccc21": "c7f84d7ed3bccc21",
+    "txt:7186d7455d629438": "7186d7455d629438",
+    "txt:6249c09f6ec35d87": "6249c09f6ec35d87",
+    "txt:68e9b42e4308e4d6": "68e9b42e4308e4d6",
+    "txt:481b4c2115b70b60": "481b4c2115b70b60",
+    "txt:1e305710aec2244d": "1e305710aec2244d",
+    "txt:f68ed16058bd1916": "f68ed16058bd1916",
+    "txt:f811c3ca3c0eab5c": "f811c3ca3c0eab5c",
+    "txt:e297cbede1196bec": "e297cbede1196bec",
+    "txt:038b9f9e067d1a95": "038b9f9e067d1a95",
+    "txt:0edd0962d8836ae1": "0edd0962d8836ae1",
+    "txt:06c4b4fd4c95afa6": "06c4b4fd4c95afa6",
+    "txt:c4a73b4e9cb84fb1": "c4a73b4e9cb84fb1",
+    "txt:48a3118f4d7d598f": "48a3118f4d7d598f",
+    "txt:92b950dbb73d4c6f": "92b950dbb73d4c6f",
+    "txt:6e9a8ec7ded8f792": "6e9a8ec7ded8f792",
+    "txt:f8524aa740e48389": "f8524aa740e48389",
+    "txt:8d58e9330b7c6796": "8d58e9330b7c6796",
+    "txt:1fa838b05efa8f22": "1fa838b05efa8f22",
+    "txt:424e3e8fec789847": "424e3e8fec789847",
+    "txt:3e8145086dff8411": "3e8145086dff8411",
+    "txt:e850cbc542a20708": "e850cbc542a20708",
+    "txt:91c7d1fff201257f": "91c7d1fff201257f",
+    "txt:5f0b613f51e1d395": "5f0b613f51e1d395",
+    "txt:5925b6206213cb83": "5925b6206213cb83",
+    "txt:bd1a155509144124": "bd1a155509144124",
+    "txt:61a0feafdf2db139": "61a0feafdf2db139",
+    "txt:3ed670cdff33a9ce": "3ed670cdff33a9ce",
+    "txt:33c44a7f7c327ee1": "33c44a7f7c327ee1",
+    "txt:b25ae57bdce2f925": "b25ae57bdce2f925",
+    "txt:ba14a600cfabbe80": "ba14a600cfabbe80",
+    "txt:106cd2969b53279f": "106cd2969b53279f",
+    "txt:d5ee7d6e40dc2dd3": "d5ee7d6e40dc2dd3",
+    "txt:9efe742967292570": "9efe742967292570",
+    "txt:0dc01e7b90bf2669": "0dc01e7b90bf2669",
+    "txt:5bbf93aa51827e5e": "5bbf93aa51827e5e",
+    "txt:5629cb693f7c7783": "5629cb693f7c7783",
+    "txt:a31f4e3a9a9b91bb": "a31f4e3a9a9b91bb",
+    "txt:342596f09cb2befa": "342596f09cb2befa",
+    "txt:6824490bd32377fc": "6824490bd32377fc",
+    "txt:b73ebc57fb5f2191": "b73ebc57fb5f2191",
+    "txt:fee35bd5f1136c70": "fee35bd5f1136c70",
+    "txt:cd8cd86e228b6d69": "cd8cd86e228b6d69",
+    "txt:ff8381c4bfe8f3f9": "ff8381c4bfe8f3f9",
+    "txt:125f9200fadd3114": "125f9200fadd3114",
+    "txt:0927e9cfaf20e8a9": "0927e9cfaf20e8a9",
+    "txt:12163282733cedab": "12163282733cedab",
+    "txt:fc1be4e578261e83": "fc1be4e578261e83",
+    "txt:5a081fe4b1ed83a3": "5a081fe4b1ed83a3",
+    "txt:a8228e4e8499eb9d": "a8228e4e8499eb9d",
+    "txt:4f47a90e0216f146": "4f47a90e0216f146",
+    "txt:162cf86226fec323": "162cf86226fec323",
+    "txt:84e06195cc82f0c2": "84e06195cc82f0c2",
+    "txt:9a8442241c25e2ac": "9a8442241c25e2ac",
+    "txt:793c474a81e441aa": "793c474a81e441aa",
+    "txt:e45299867c763672": "e45299867c763672",
+    "txt:a8dc8fe3b08123f7": "a8dc8fe3b08123f7",
+    "txt:12a4cc2037ba8002": "12a4cc2037ba8002",
+    "txt:844f2b2faa9bf2b1": "844f2b2faa9bf2b1",
+    "txt:c611e581538fabff": "c611e581538fabff",
+    "txt:d540c96eee3ab7c8": "d540c96eee3ab7c8",
+    "txt:059279b5d3bda0f8": "059279b5d3bda0f8",
+    "txt:395c7b1b356cad0b": "395c7b1b356cad0b",
+    "txt:c117ceca342a2f9c": "c117ceca342a2f9c",
+    "txt:fbeb538ec2a2ee86": "fbeb538ec2a2ee86",
+    "txt:351528d917c37459": "351528d917c37459",
+    "txt:fb4eef8f8a820a55": "fb4eef8f8a820a55",
+    "txt:a21f07984cb3db48": "a21f07984cb3db48",
+    "txt:d431968d8eefa642": "d431968d8eefa642",
+    "txt:c0ddfca87799d77c": "c0ddfca87799d77c",
+    "txt:bcdde37fc77a93f1": "bcdde37fc77a93f1",
+    "txt:9831089cbcf6c668": "9831089cbcf6c668",
+    "txt:89003df4afdd2345": "89003df4afdd2345",
+    "txt:6066a4016b86cc04": "6066a4016b86cc04",
+    "txt:207b7e07c4c131e0": "207b7e07c4c131e0",
+    "txt:7526a359672ec4ac": "7526a359672ec4ac",
+    "txt:fb201ab0b299f2df": "fb201ab0b299f2df",
+    "txt:1f6935b6c892675f": "1f6935b6c892675f",
+    "txt:6e30e538eb555b52": "6e30e538eb555b52",
+    "txt:962dd6dca3cfae3d": "962dd6dca3cfae3d",
+    "txt:b2a371ee3e96e2b4": "b2a371ee3e96e2b4",
+    "txt:fa61ab459ea7eb4d": "fa61ab459ea7eb4d",
+    "txt:a36bedbf9a6189e8": "a36bedbf9a6189e8",
+    "txt:fc2a57ac21c9550a": "fc2a57ac21c9550a",
+    "txt:87bae2fa7e7842ad": "87bae2fa7e7842ad",
+    "txt:e8e62170d1c09047": "e8e62170d1c09047",
+    "txt:729661c63bf6bd69": "729661c63bf6bd69",
+    "txt:a2a2e054551a2fc5": "a2a2e054551a2fc5",
+    "txt:76bfbdc058fce5f1": "76bfbdc058fce5f1",
+    "txt:a481e53cfd58c555": "a481e53cfd58c555",
+    "txt:d41cb3231f3cea69": "d41cb3231f3cea69",
+    "txt:f4749e3009fa745a": "f4749e3009fa745a",
+    "txt:e141e21ee145c0b3": "e141e21ee145c0b3",
+    "txt:08d0085263198ac1": "08d0085263198ac1",
+    "txt:33e5871e18278157": "33e5871e18278157",
+    "txt:f76c0ba1f220cf7b": "f76c0ba1f220cf7b",
+    "txt:91e6638206949381": "91e6638206949381",
+    "txt:28e6e7bb4a926554": "28e6e7bb4a926554",
+    "txt:5aa6ad78e5f57655": "5aa6ad78e5f57655",
+    "txt:22710dd0e3e3c279": "22710dd0e3e3c279",
+    "txt:b6504112dac3c129": "b6504112dac3c129",
+    "txt:d23bf0964dd65b4c": "d23bf0964dd65b4c",
+    "txt:beff1707828a4bd2": "beff1707828a4bd2",
+    "txt:b70c2c8c30df1070": "b70c2c8c30df1070",
+    "txt:d9dc919b8c44c24a": "d9dc919b8c44c24a",
+    "txt:a0fa08c3949a80da": "a0fa08c3949a80da",
+    "txt:9f6d11387ae6bc39": "9f6d11387ae6bc39",
+    "txt:2d08d45d68816a2b": "2d08d45d68816a2b",
+    "txt:2feb6ff79decb4f7": "2feb6ff79decb4f7",
+    "txt:d8a53bdb618df7b9": "d8a53bdb618df7b9",
+    "txt:de23d7ee30786cef": "de23d7ee30786cef",
+    "txt:18a9e9b42771884e": "18a9e9b42771884e",
+    "txt:9fe5d322bdac645a": "9fe5d322bdac645a",
+    "txt:1b36f0c15879cb10": "1b36f0c15879cb10",
+    "txt:9ccdf5ebe395a52e": "9ccdf5ebe395a52e",
+    "txt:b574354fb31ce92f": "b574354fb31ce92f",
+    "txt:c615edfb594badd6": "c615edfb594badd6",
+    "txt:cf6a8b21b6150205": "cf6a8b21b6150205",
+    "txt:4b71c8f5e3cc7b6f": "4b71c8f5e3cc7b6f",
+    "txt:44ddfac461cd308f": "44ddfac461cd308f",
+    "txt:39a100cd68723fce": "39a100cd68723fce",
+    "txt:484084eb15a72a02": "484084eb15a72a02",
+    "txt:45c9897f457c9bd0": "45c9897f457c9bd0",
+    "txt:b9008cf3521906a5": "b9008cf3521906a5",
+    "txt:df4e36cb4a0e0e4b": "df4e36cb4a0e0e4b",
+    "txt:c28599b283dd723e": "c28599b283dd723e",
+    "txt:d6d2068a80e083ba": "d6d2068a80e083ba",
+    "txt:e6e417732ae4d975": "e6e417732ae4d975",
+    "txt:951ee59959437cf1": "951ee59959437cf1",
+    "txt:1844541cfbe770fe": "1844541cfbe770fe",
+    "txt:fa4140519e4581e9": "fa4140519e4581e9",
+    "txt:d68379e96be30549": "d68379e96be30549",
+    "txt:a18c28e5533bcc31": "a18c28e5533bcc31",
+    "txt:de930f40786fca7a": "de930f40786fca7a",
+    "txt:fffbff89c7375c10": "fffbff89c7375c10",
+    "txt:1a2e9c439b95a8db": "1a2e9c439b95a8db",
+    "txt:ee829a8edb61677a": "ee829a8edb61677a",
+    "txt:dd87c24513bd483f": "dd87c24513bd483f",
+    "txt:a9ca360395bc0bc9": "a9ca360395bc0bc9",
+    "txt:e671bc1ad327ee24": "e671bc1ad327ee24",
+    "txt:1f5006039fd20e0a": "1f5006039fd20e0a",
+    "txt:eb5d51f3e6555eb1": "eb5d51f3e6555eb1",
+    "txt:0b24fa7edafcd68d": "0b24fa7edafcd68d",
+    "txt:9c5a69c722f5f014": "9c5a69c722f5f014",
+    "txt:dd20e5801ec287ee": "dd20e5801ec287ee",
+    "txt:26c61026b5cac48c": "26c61026b5cac48c",
+    "txt:978a24438d3b8217": "978a24438d3b8217",
+    "txt:4d3b8b975ccef0ee": "4d3b8b975ccef0ee",
+    "txt:db73f3548f9490de": "db73f3548f9490de",
+    "txt:224ee4cdc88da58c": "224ee4cdc88da58c",
+    "txt:9ed3fc59ea33c9ae": "9ed3fc59ea33c9ae",
+    "txt:c45da0df15e7a818": "c45da0df15e7a818",
+    "txt:ff42c83c925d7b08": "ff42c83c925d7b08",
+    "txt:0ff2a4a23c1dda24": "0ff2a4a23c1dda24",
+    "txt:0b42ce73ca73fcb6": "0b42ce73ca73fcb6",
+    "txt:54ccafa32af70867": "54ccafa32af70867",
+    "txt:7c36c3f78a6fad77": "7c36c3f78a6fad77",
+    "txt:03d0de4d6fb651e8": "03d0de4d6fb651e8",
+    "txt:953061dc0fea2abd": "953061dc0fea2abd",
+    "txt:00e9166f1a6d6afd": "00e9166f1a6d6afd",
+    "txt:b52f17a28a752cf9": "b52f17a28a752cf9",
+    "txt:81dc831232aea3a4": "81dc831232aea3a4",
+    "txt:ceeea1ff22fdee3b": "ceeea1ff22fdee3b",
+    "txt:87aec85eaa297227": "87aec85eaa297227",
+    "txt:73812fb5b20e41d3": "73812fb5b20e41d3",
+    "txt:fc8e9d2781b08a0e": "fc8e9d2781b08a0e",
+    "txt:e4a154ea8eed143a": "e4a154ea8eed143a",
+    "txt:aad8801c0679703c": "aad8801c0679703c",
+    "txt:00702578e1472a3b": "00702578e1472a3b",
+    "txt:c637f9bfb08fd04f": "c637f9bfb08fd04f",
+    "txt:bbe233ed10750bfa": "bbe233ed10750bfa",
+    "txt:c60109d0fee3dd54": "c60109d0fee3dd54",
+    "txt:6df9e6ac7ffe2a69": "6df9e6ac7ffe2a69",
+    "txt:6822a7b63e7eff52": "6822a7b63e7eff52",
+    "txt:38c1b51890574b58": "38c1b51890574b58",
+    "txt:8b3daf041a590c22": "8b3daf041a590c22",
+    "txt:a3328ec5b8e0c1a3": "a3328ec5b8e0c1a3",
+    "txt:89bd1bd52ce789ea": "89bd1bd52ce789ea",
+    "txt:199889371da80f41": "199889371da80f41",
+    "txt:b4fbd65efc4e1669": "b4fbd65efc4e1669",
+    "txt:f50db9d05ef39bc9": "f50db9d05ef39bc9",
+    "txt:801472b191678add": "801472b191678add",
+    "txt:ada61f9ced1bd5be": "ada61f9ced1bd5be",
+    "txt:6567476d4c8430c5": "6567476d4c8430c5",
+    "txt:f2c8dd3689755894": "f2c8dd3689755894",
+    "txt:58efe44d431ff12a": "58efe44d431ff12a",
+    "txt:b65573b280079248": "b65573b280079248",
+    "txt:7397bf16830e639e": "7397bf16830e639e",
+    "txt:7366fcca761ad066": "7366fcca761ad066",
+    "txt:b1a6495ce3b9f06d": "b1a6495ce3b9f06d",
+    "txt:d964516dfc4815f4": "d964516dfc4815f4",
+    "txt:09eaf0181ba4a9ae": "09eaf0181ba4a9ae",
+    "txt:b894bcd63e412eda": "b894bcd63e412eda",
+    "txt:70cbd994bc9dde77": "70cbd994bc9dde77",
+    "txt:d869f98969505dac": "d869f98969505dac",
+    "txt:2b5f1c2abdb78a0e": "2b5f1c2abdb78a0e",
+    "txt:6bfc3e89a4c12579": "6bfc3e89a4c12579",
+    "txt:2c29ca4fe37c4f5c": "2c29ca4fe37c4f5c",
+    "txt:d639d6bd76c79374": "d639d6bd76c79374",
+    "txt:3df2400444e5b801": "3df2400444e5b801",
+    "txt:d2f8226bf2e94cbf": "d2f8226bf2e94cbf",
+    "txt:7f58e7163af42984": "7f58e7163af42984",
+    "txt:700aabd7ac1fe9ce": "700aabd7ac1fe9ce",
+    "txt:87c9056624ed4507": "87c9056624ed4507",
+    "txt:a077b253f782697e": "a077b253f782697e",
+    "txt:82788d30e6430d2f": "82788d30e6430d2f"
   }
 }
