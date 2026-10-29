@@ -21683,6 +21683,1766 @@
       "text": "C'est le mot souris. C'est l'animal, et aussi l'objet de l'ordinateur.",
       "ms": 5280,
       "cat": "enonce"
+    },
+    "6e6704b482bdf89b": {
+      "text": "C'est le rat qui accourt et libère le lion. Le mot rat nomme ce petit héros.",
+      "ms": 5680,
+      "cat": "enonce"
+    },
+    "f277d095cc959b81": {
+      "text": "C'est le saule : l'étang reflète la silhouette du saule noir.",
+      "ms": 4160,
+      "cat": "enonce"
+    },
+    "a78c943b654fc5e6": {
+      "text": "C'est sa marraine, qui est une fée, qui lui parle. Une fée peut faire des choses merveilleuses.",
+      "ms": 5840,
+      "cat": "enonce"
+    },
+    "505ba36d4d8ab317": {
+      "text": "Camille voudrait le garder, mais ses parents disent non.",
+      "ms": 3520,
+      "cat": "enonce"
+    },
+    "03ae0a961c4dddd7": {
+      "text": "Carillonner, c'est faire sonner joyeusement les cloches. Elles sonnent gaîment pour la fête.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "e923645d2a2fafcf": {
+      "text": "Catherine avait trois brebis à garder.",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "7e8c4610a158e7e3": {
+      "text": "Ce billet doux plié en deux cherche une adresse de fleur.",
+      "ms": 3520,
+      "cat": "enonce"
+    },
+    "64af889002da3ae9": {
+      "text": "Ce lion fut pris dans des rets, Dont ses rugissements ne le purent défaire.",
+      "ms": 4800,
+      "cat": "enonce"
+    },
+    "a301caccb84665ce": {
+      "text": "Ce n'est pas un poisson : c'est un mammifère.",
+      "ms": 3680,
+      "cat": "enonce"
+    },
+    "847a6e8762c86fc7": {
+      "text": "Cette phrase dit non. Les petits mots ne et jamais entourent le verbe, c'est une phrase négative.",
+      "ms": 6800,
+      "cat": "enonce"
+    },
+    "c0b0ac93f86203c9": {
+      "text": "Cette phrase dit non. Les petits mots ne et pas entourent le verbe, c'est une phrase négative.",
+      "ms": 6400,
+      "cat": "enonce"
+    },
+    "1b8778405dbba965": {
+      "text": "Cette phrase dit oui. Il n'y a pas les mots ne et pas, c'est une phrase affirmative.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "0934e4a66eaeb3e0": {
+      "text": "Cette phrase donne un ordre : c'est une phrase impérative, comme dans ferme la porte.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "9b6547297f0441c6": {
+      "text": "Cette phrase donne un ordre : c'est une phrase impérative, comme dans viens ici.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "d39e9bd9d8201851": {
+      "text": "Cette phrase donne un ordre. Elle dit ce qu'il faut faire : ranger la chambre.",
+      "ms": 5520,
+      "cat": "enonce"
+    },
+    "d191465b522ee651": {
+      "text": "Cette phrase est pressante et forte. On met un point d'exclamation à la fin.",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "c9a14eb3ce720de0": {
+      "text": "Cette phrase montre une émotion forte : c'est une phrase exclamative.",
+      "ms": 5120,
+      "cat": "enonce"
+    },
+    "6b23c52a134f1e48": {
+      "text": "Cette phrase montre une émotion forte. On met un point d'exclamation à la fin.",
+      "ms": 5600,
+      "cat": "enonce"
+    },
+    "1119a550ba8030a2": {
+      "text": "Cette phrase montre une émotion forte. On sent la joie, comme un cri de surprise.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "b291b91d8b94ee62": {
+      "text": "Cette phrase pose une question : c'est une phrase interrogative, comme dans où habites-tu.",
+      "ms": 6240,
+      "cat": "enonce"
+    },
+    "50056e2e8bd282eb": {
+      "text": "Cette phrase pose une question : c'est une phrase interrogative.",
+      "ms": 3760,
+      "cat": "enonce"
+    },
+    "aa95af4b6f13e7ab": {
+      "text": "Cette phrase pose une question. On le voit, elle attend une réponse.",
+      "ms": 4800,
+      "cat": "enonce"
+    },
+    "bf7e2878c7a02cf2": {
+      "text": "Cette phrase pose une question. On met un point d'interrogation à la fin.",
+      "ms": 4560,
+      "cat": "enonce"
+    },
+    "9d5fecfdd36498fd": {
+      "text": "Cette phrase raconte quelque chose : c'est une phrase déclarative.",
+      "ms": 4400,
+      "cat": "enonce"
+    },
+    "16be97f5871f92ab": {
+      "text": "Cette phrase raconte quelque chose. Elle dit une information : le soleil brille.",
+      "ms": 6320,
+      "cat": "enonce"
+    },
+    "9f2a3e9d53f076fd": {
+      "text": "Cette phrase raconte quelque chose. On met un point à la fin.",
+      "ms": 4400,
+      "cat": "enonce"
+    },
+    "ca16e948f45bcbe8": {
+      "text": "Chaque matin, il voiture le facteur Jacquot qui distribue le pain, la viande et quelques journaux.",
+      "ms": 6560,
+      "cat": "enonce"
+    },
+    "3c944d21a6ec12e5": {
+      "text": "Chaque matin, l'âne promène le facteur Jacquot, qui apporte le courrier aux villages.",
+      "ms": 5840,
+      "cat": "enonce"
+    },
+    "0e3bf3775d7a1527": {
+      "text": "Cloches, carillonnez gaîment !",
+      "ms": 2240,
+      "cat": "enonce"
+    },
+    "77715c63533969e7": {
+      "text": "Comme je tenais ma perche de ligne tendue, un martin-pêcheur est venu s'y poser.",
+      "ms": 4640,
+      "cat": "enonce"
+    },
+    "fad573a79a34d260": {
+      "text": "Contempler, c'est regarder longtemps avec plaisir. Les deux animaux admirent le feu.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "55a677c233bba051": {
+      "text": "D'abord Sacha met son manteau, puis il part à l'école.",
+      "ms": 3440,
+      "cat": "enonce"
+    },
+    "280ee6d2f02b166c": {
+      "text": "D'abord elle va voir la sorcière, puis elle reçoit le grain, puis elle le plante dans un pot.",
+      "ms": 5600,
+      "cat": "enonce"
+    },
+    "08f532003689113b": {
+      "text": "D'abord, Sacha met son manteau.",
+      "ms": 2320,
+      "cat": "enonce"
+    },
+    "9c621a99826ab423": {
+      "text": "D'abord, il met ses cahiers.",
+      "ms": 1920,
+      "cat": "enonce"
+    },
+    "9f3781cef6b7e7e7": {
+      "text": "Dans assez, il y a deux s. À la fin, il y a un z qu'on n'entend pas.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "1170616da3b19dec": {
+      "text": "Dans aussi, il y a deux s au milieu.",
+      "ms": 2480,
+      "cat": "enonce"
+    },
+    "ad2d371ce559dadd": {
+      "text": "Dans beaucoup, on écrit b, e, a, u, puis coup avec un p à la fin qu'on n'entend pas.",
+      "ms": 5920,
+      "cat": "enonce"
+    },
+    "ca7aee9f50071767": {
+      "text": "Dans la phrase A, elle mange du fromage : c'est l'animal. Dans la phrase B, c'est l'objet de l'ordinateur.",
+      "ms": 6720,
+      "cat": "enonce"
+    },
+    "6f5ea493a7449bf3": {
+      "text": "Dans la phrase A, on la pose pour jouer : c'est la carte à jouer. Dans la phrase B, elle montre les routes.",
+      "ms": 6960,
+      "cat": "enonce"
+    },
+    "9cbeba582c41276b": {
+      "text": "Dans la phrase A, on écrit dessus : c'est le papier. Dans la phrase B, elle tombe de l'arbre : c'est la feuille verte.",
+      "ms": 7760,
+      "cat": "enonce"
+    },
+    "2ff18aa4e4601cc4": {
+      "text": "Dans la phrase B, on la mange au chocolat : c'est le dessert. Dans la phrase A, la glace est l'eau gelée du lac.",
+      "ms": 7760,
+      "cat": "enonce"
+    },
+    "947533c406f4ff08": {
+      "text": "Dans la phrase B, on le recoud sur le manteau : il ferme le vêtement. Dans la phrase A, c'est le bouton sur lequel on appuie.",
+      "ms": 8080,
+      "cat": "enonce"
+    },
+    "5527ed03a8d9664a": {
+      "text": "Dans le dictionnaire, on range les mots par la première lettre. a vient avant c et avant p, donc arbre est le premier.",
+      "ms": 7840,
+      "cat": "enonce"
+    },
+    "5eb9dbd9e4baeb7e": {
+      "text": "Dans le rêve, la petite vieille poudreuse devient une dame resplendissante dans un palais enchanté.",
+      "ms": 6000,
+      "cat": "enonce"
+    },
+    "daf00d54b860b420": {
+      "text": "Dans les prairies le foin s'élevait en monceaux odorants.",
+      "ms": 3600,
+      "cat": "enonce"
+    },
+    "61bbd250d2e53355": {
+      "text": "Dans une liste, on sépare les mots par des virgules. Ici, il faut une virgule entre pommes et poires.",
+      "ms": 6720,
+      "cat": "enonce"
+    },
+    "484a7c97eefc7561": {
+      "text": "De grandes feuilles de bardane descendaient du mur jusque dans l'eau ; elles étaient si hautes que les petits enfants pouvaient se cacher dessous.",
+      "ms": 7120,
+      "cat": "enonce"
+    },
+    "c17ce251efac2e65": {
+      "text": "De temps en temps on s'asseyait, on causait, on cueillait des fleurs, on trouvait quelques fraises.",
+      "ms": 5360,
+      "cat": "enonce"
+    },
+    "6b5f7921c3f284b3": {
+      "text": "Dehors, les branches pliaient sous la tempête.",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "94dbc4b5c116f4fe": {
+      "text": "Depuis le matin, les moutons paissaient : ils mangeaient l'herbe dans les champs.",
+      "ms": 4480,
+      "cat": "enonce"
+    },
+    "f345dd2b94fb9e02": {
+      "text": "Des pierreries, ce sont des pierres précieuses, comme les diamants. Florine aime les belles robes brillantes.",
+      "ms": 6640,
+      "cat": "enonce"
+    },
+    "b996ff3a68729afd": {
+      "text": "Des rets, c'est un filet pour attraper les animaux. Le lion est pris dedans.",
+      "ms": 4640,
+      "cat": "enonce"
+    },
+    "a18ea61db6b4eafd": {
+      "text": "Elle la mena dans sa chambre, et lui dit : Va dans le jardin, et apporte-moi une citrouille.",
+      "ms": 6000,
+      "cat": "enonce"
+    },
+    "178aba5815a33a69": {
+      "text": "Elle met ses livres sur l'étagère et ses jouets dans le grand coffre.",
+      "ms": 3840,
+      "cat": "enonce"
+    },
+    "03945e3d1c5a2e66": {
+      "text": "Elle n'avait que quinze ans lorsque le roi se remaria.",
+      "ms": 3040,
+      "cat": "enonce"
+    },
+    "a0b7af3097219508": {
+      "text": "Elle va voir une vieille sorcière, une femme qui connaît des formules magiques.",
+      "ms": 4400,
+      "cat": "enonce"
+    },
+    "4271927bd5d35a25": {
+      "text": "Elle vit dans une ruche avec des milliers d'autres abeilles.",
+      "ms": 3600,
+      "cat": "enonce"
+    },
+    "d8b5f7c4b03fca40": {
+      "text": "Elles s'assemblent par centaines, se concertant pour le départ.",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "dad9de336e21b128": {
+      "text": "En extase, Kiki-la-Doucette et Toby-Chien, couchés côte à côte au coin du marbre tiède, s'éblouissent à contempler la flamme.",
+      "ms": 8560,
+      "cat": "enonce"
+    },
+    "31c861896c20ecd3": {
+      "text": "Espagne est le nom d'un pays. Un nom de pays prend toujours une majuscule.",
+      "ms": 5200,
+      "cat": "enonce"
+    },
+    "b7b2f6adf2fb45c1": {
+      "text": "Et plante le clou pointu - toc, toc, toc",
+      "ms": 3920,
+      "cat": "enonce"
+    },
+    "bb8025c42e979dc6": {
+      "text": "Florine aime mettre des guirlandes de fleurs dans ses cheveux. Le mot fleurs le montre.",
+      "ms": 5440,
+      "cat": "enonce"
+    },
+    "ec8cc314c92956fe": {
+      "text": "Humer, c'est respirer doucement pour sentir une odeur. Comme quand tu sens la bonne odeur d'un gâteau.",
+      "ms": 6320,
+      "cat": "enonce"
+    },
+    "53c054f566406b91": {
+      "text": "Ici, le coffre est une grande boîte où l'on garde des objets, comme les pièces d'or.",
+      "ms": 5200,
+      "cat": "enonce"
+    },
+    "7f1845ef13eaaa61": {
+      "text": "Il a cru que je continuais le mur parce que je reste immobile.",
+      "ms": 3680,
+      "cat": "enonce"
+    },
+    "1e54ca65954275fd": {
+      "text": "Il avait une jolie maison au beau milieu de la forêt, au bord d'un joli ruisseau.",
+      "ms": 5600,
+      "cat": "enonce"
+    },
+    "f914d887817384ca": {
+      "text": "Il broute, il se repose ; Il s'amuse à toute autre chose Qu'à la gageure.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "b2b0f8a5147b574a": {
+      "text": "Il donne de la lumière et de la chaleur.",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "116f8ec2c1acf162": {
+      "text": "Il décide de partir explorer la forêt.",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "124074801b4fecd5": {
+      "text": "Il faut appeler la fée trois fois pendant la nuit.",
+      "ms": 2640,
+      "cat": "enonce"
+    },
+    "eaa14e5eafef9a5e": {
+      "text": "Il faut qu'il ait humé l'air de la rue.",
+      "ms": 2720,
+      "cat": "enonce"
+    },
+    "df1f633a0c8ff3ed": {
+      "text": "Il jette son cri : Léon ! Léon !",
+      "ms": 3440,
+      "cat": "enonce"
+    },
+    "833e07874c9475ea": {
+      "text": "Il met l'éteignoir sur la chandelle pour éteindre la lumière.",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "20431b9320f314bd": {
+      "text": "Il met ses cahiers, puis sa trousse, et enfin il ferme le sac.",
+      "ms": 4960,
+      "cat": "enonce"
+    },
+    "46bc8d8adf04fcbd": {
+      "text": "Il monte à l'échelle, il plante le clou, puis il redescend. Chaque chose arrive l'une après l'autre.",
+      "ms": 7440,
+      "cat": "enonce"
+    },
+    "2dd7dc53b345f552": {
+      "text": "Il n'a rien mangé et il attend le repas avec impatience.",
+      "ms": 3840,
+      "cat": "enonce"
+    },
+    "65986177c1dd7020": {
+      "text": "Il ne sait pas voler, mais il nage très bien.",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "c7a1ab565888e9f4": {
+      "text": "Il ouvre un large bec, laisse tomber sa proie.",
+      "ms": 3280,
+      "cat": "enonce"
+    },
+    "c77655c54103ac25": {
+      "text": "Il partage sa maison avec un chat roux appelé Biscuit.",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "1f26a61f025ead67": {
+      "text": "Il pleut très fort et elle ne peut pas aller jouer dehors.",
+      "ms": 4160,
+      "cat": "enonce"
+    },
+    "cd072c795671244c": {
+      "text": "Il saute partout et montre sa médaille à tout le monde.",
+      "ms": 3920,
+      "cat": "enonce"
+    },
+    "495a8fa86ad19042": {
+      "text": "Il serre les bras contre son corps et ses dents claquent.",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "0a0c5d5cb43c953a": {
+      "text": "Il sème aux prés les perce-neiges Et les violettes aux bois.",
+      "ms": 4480,
+      "cat": "enonce"
+    },
+    "e407c805feb42f6c": {
+      "text": "Il va sûrement se marier aujourd'hui.",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "ac2ad554e06eef46": {
+      "text": "Il y a plusieurs chiens. Le groupe les chiens est au pluriel.",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "166a468afd2f13fd": {
+      "text": "Il y a un seul tapis. Le mot tapis finit par s, mais le petit mot le montre qu'il est au singulier.",
+      "ms": 7520,
+      "cat": "enonce"
+    },
+    "885e301e7f6554f3": {
+      "text": "Il y en avait de fantastiques qui faisaient travailler mon imagination.",
+      "ms": 4000,
+      "cat": "enonce"
+    },
+    "dda41f34c276a381": {
+      "text": "Il y saute, regarde, et d'abord pense voir Un de ses frères qui le guette.",
+      "ms": 5440,
+      "cat": "enonce"
+    },
+    "2633a532ae6d50e9": {
+      "text": "Il était frais et fort, quoiqu'un peu boiteux, très joli de visage et rose comme une pomme.",
+      "ms": 6400,
+      "cat": "enonce"
+    },
+    "fd075e0d5f789453": {
+      "text": "Ils arrivèrent au moment où l'on finissait de traire les vaches.",
+      "ms": 4480,
+      "cat": "enonce"
+    },
+    "4fd261b6ad2de851": {
+      "text": "Ils les mettaient dans une petite boîte en papier que leur avait faite leur papa.",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "ff81e6c68a1522f1": {
+      "text": "Ils mettent les mouches dans une petite boîte en papier faite par leur papa.",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "fc3fbc28bd22fe67": {
+      "text": "Ils ne sauraient tenir en place et les voyages ne les forment point.",
+      "ms": 4480,
+      "cat": "enonce"
+    },
+    "48902344ca9ca938": {
+      "text": "Ils reviennent des chaumes où, depuis ce matin, ils paissaient.",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "368eb1ad948858ad": {
+      "text": "Ils s'assoient, cueillent des fleurs et trouvent des fraises : une promenade très agréable et joyeuse.",
+      "ms": 7920,
+      "cat": "enonce"
+    },
+    "02e83986fb99bc39": {
+      "text": "Ils sont bien au chaud et émerveillés par la flamme. Ils restent là, tranquilles et heureux.",
+      "ms": 7280,
+      "cat": "enonce"
+    },
+    "ec9ec00df6219639": {
+      "text": "Immobile veut dire qui ne bouge pas du tout. L'homme reste sans bouger, comme un mur.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "8c837925a4487868": {
+      "text": "Jacques est doux et gentil, sans bâton. L'âne a confiance et se met en marche. La douceur marche mieux que la force !",
+      "ms": 9280,
+      "cat": "enonce"
+    },
+    "6e251d0cac1d6466": {
+      "text": "Jacques est rouge de joie, les yeux brillants de bonheur. Le mot bonheur dit comme il est heureux.",
+      "ms": 7040,
+      "cat": "enonce"
+    },
+    "ca0db40a1bbaeed3": {
+      "text": "Jacques s'approcha de mon oreille et me dit tout bas : Marche, mon petit Cadichon ; je t'en prie, marche.",
+      "ms": 7520,
+      "cat": "enonce"
+    },
+    "3888a398e1521e30": {
+      "text": "Jacques s'approcha de mon oreille et me dit tout bas : Marche, mon petit Cadichon.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "3d53941d7aa47ec3": {
+      "text": "Jade demande sans cesse si c'est à elle, trouve le temps trop long et a très envie que le rideau s'ouvre : elle est impatiente, même si le mot impatiente n'est pas écrit.",
+      "ms": 10800,
+      "cat": "enonce"
+    },
+    "c308589101f943b3": {
+      "text": "Jamais on n'entendait une discussion entre Camille et Madeleine. Tantôt l'une, tantôt l'autre cédait au désir de sa sœur.",
+      "ms": 8400,
+      "cat": "enonce"
+    },
+    "214fcb6642ea0ac5": {
+      "text": "Je fus transportée dans un immense jardin au milieu duquel s'élevait un palais enchanté, et une dame resplendissante de jeunesse et de beauté m'attendait dans de magnifiques habits de fête.",
+      "ms": 11520,
+      "cat": "enonce"
+    },
+    "6a1719a8fa514ac8": {
+      "text": "Je n'ai presque rien dit. Arriverons-nous bientôt ?",
+      "ms": 3440,
+      "cat": "enonce"
+    },
+    "02fce483a546c58a": {
+      "text": "Je ne respirais plus, tout fier d'être pris pour un arbre par un martin-pêcheur.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "690a4ead41f59d82": {
+      "text": "Julie est un prénom. Un prénom prend toujours une majuscule.",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "d602a85d06822f62": {
+      "text": "L'abeille a déjà puisé dans quatre roses.",
+      "ms": 2480,
+      "cat": "enonce"
+    },
+    "a8160102dc76f915": {
+      "text": "L'abeille vit dans une ruche avec beaucoup d'autres abeilles : c'est faux.",
+      "ms": 4160,
+      "cat": "enonce"
+    },
+    "3025420bf2d90594": {
+      "text": "L'adjectif décrit la girafe. Ici, l'adjectif est grande.",
+      "ms": 4640,
+      "cat": "enonce"
+    },
+    "5d972267edde740f": {
+      "text": "L'adjectif décrit la maison. Ici, l'adjectif est jolie.",
+      "ms": 4000,
+      "cat": "enonce"
+    },
+    "2c4bf5850746d537": {
+      "text": "L'adjectif décrit le chat. Ici, l'adjectif est petit.",
+      "ms": 4400,
+      "cat": "enonce"
+    },
+    "84e802a364ca388c": {
+      "text": "L'adjectif décrit le château. Ici, l'adjectif est beau.",
+      "ms": 4000,
+      "cat": "enonce"
+    },
+    "44a270765399a459": {
+      "text": "L'adjectif décrit le voyage. Ici, l'adjectif est long.",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "8f24373a6151d880": {
+      "text": "L'adjectif décrit le vélo. Ici, l'adjectif est rouge.",
+      "ms": 4400,
+      "cat": "enonce"
+    },
+    "d32f1f73fc035f69": {
+      "text": "L'aigrette est le bouquet de plumes dressé sur la tête de l'oiseau.",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "ac13f6b6d8e5b0ed": {
+      "text": "L'armoire est un meuble, on range les habits dedans.",
+      "ms": 3360,
+      "cat": "enonce"
+    },
+    "e73ac8154591a012": {
+      "text": "L'avare est la proie de son or.",
+      "ms": 2320,
+      "cat": "enonce"
+    },
+    "2f9f6c6a3fd65634": {
+      "text": "L'étang reflète, Profond miroir, La silhouette Du saule noir",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "0464d58496dc88e3": {
+      "text": "La carotte, la tomate et le poireau sont des légumes. La poire est un fruit, c'est l'intrus.",
+      "ms": 6240,
+      "cat": "enonce"
+    },
+    "388c553414022bb6": {
+      "text": "La carotte, le poireau et la tomate sont des légumes.",
+      "ms": 4000,
+      "cat": "enonce"
+    },
+    "2a83e5a6e4147583": {
+      "text": "La chenille mange beaucoup de feuilles.",
+      "ms": 2480,
+      "cat": "enonce"
+    },
+    "80ddbcfe0f164f02": {
+      "text": "La chenille mange, puis elle devient chrysalide, puis elle devient un papillon.",
+      "ms": 4960,
+      "cat": "enonce"
+    },
+    "aa3949855d5046bf": {
+      "text": "La cigogne au long bec n'en put attraper miette ; Et le drôle eut lapé le tout en un moment.",
+      "ms": 6240,
+      "cat": "enonce"
+    },
+    "c05d2357f3a4cd95": {
+      "text": "La cigogne se promenait sur ses longues jambes rouges, en bavardant de l'égyptien.",
+      "ms": 4960,
+      "cat": "enonce"
+    },
+    "37d165e3eab73418": {
+      "text": "La cigogne sert dans un vase à long col. Son bec y entre, mais pas le museau du renard. Bien joué, la cigogne !",
+      "ms": 8000,
+      "cat": "enonce"
+    },
+    "ca17be91d2b28d8b": {
+      "text": "La cuisinière et la femme de chambre traduisent Kamaralzaman par Moumou.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "764d3cdf59862a60": {
+      "text": "La faim le prit : il fut tout heureux de rencontrer un limaçon.",
+      "ms": 4000,
+      "cat": "enonce"
+    },
+    "46b0d9133fb488f9": {
+      "text": "La famille de chant parle de chanter. chanteur est de la même famille.",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "b9fb2f3f43121edc": {
+      "text": "La famille de cuisine donne cuisinier.",
+      "ms": 2720,
+      "cat": "enonce"
+    },
+    "5b9d6688c2f0b838": {
+      "text": "La famille de dent donne dentiste.",
+      "ms": 2720,
+      "cat": "enonce"
+    },
+    "76280579ec3ca8f8": {
+      "text": "La famille de dent parle des dents. dentiste est de la même famille, c'est la personne qui soigne les dents.",
+      "ms": 6800,
+      "cat": "enonce"
+    },
+    "84547949a26dd5a8": {
+      "text": "La famille de fleur donne fleuriste.",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "f3830c9994270158": {
+      "text": "La famille de fleur parle des fleurs. fleuriste est de la même famille, c'est la personne qui vend des fleurs.",
+      "ms": 6880,
+      "cat": "enonce"
+    },
+    "b3d49973b1cfbb15": {
+      "text": "La famille de fort parle de la force. fortement est de la même famille.",
+      "ms": 5120,
+      "cat": "enonce"
+    },
+    "5c7d79bbc5d3b3c3": {
+      "text": "La famille de glace parle de la glace. glacier est de la même famille.",
+      "ms": 4880,
+      "cat": "enonce"
+    },
+    "5810239d10f0e10f": {
+      "text": "La famille de jardin donne jardinier.",
+      "ms": 2720,
+      "cat": "enonce"
+    },
+    "ddcbdff99067eee4": {
+      "text": "La famille de jardin parle du jardin. jardinier est de la même famille, c'est la personne qui s'occupe du jardin.",
+      "ms": 7120,
+      "cat": "enonce"
+    },
+    "5d340e71019b1a28": {
+      "text": "La famille de lait parle du lait. laitier est de la même famille.",
+      "ms": 5040,
+      "cat": "enonce"
+    },
+    "4d77ba9e4fd96919": {
+      "text": "La famille de lent parle d'aller doucement. lentement est de la même famille.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "a2310202230218a9": {
+      "text": "La famille de mer donne marin.",
+      "ms": 2240,
+      "cat": "enonce"
+    },
+    "c67189f201c4fb20": {
+      "text": "La famille de mer parle de la mer. marin est de la même famille, c'est celui qui travaille sur la mer.",
+      "ms": 7280,
+      "cat": "enonce"
+    },
+    "580a02b0336ac164": {
+      "text": "La famille de terre parle de la terre. terrain est de la même famille.",
+      "ms": 4960,
+      "cat": "enonce"
+    },
+    "47c00451c4a3c8b6": {
+      "text": "La fleur pousse à la fin de l'histoire : c'est le dernier moment.",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "423497a7c5859c0a": {
+      "text": "La lune blanche Luit dans les bois ;",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "2edbe377afdb1efe": {
+      "text": "La marraine demande une citrouille, un gros légume rond et orange. On la trouve dans le jardin.",
+      "ms": 6480,
+      "cat": "enonce"
+    },
+    "3809f6499f6fcdf9": {
+      "text": "La poire est un fruit. La carotte est un légume.",
+      "ms": 4000,
+      "cat": "enonce"
+    },
+    "51c4c716b73c2e76": {
+      "text": "La pomme, la banane et la cerise sont des fruits.",
+      "ms": 3520,
+      "cat": "enonce"
+    },
+    "25d8fcd3b9125423": {
+      "text": "La pomme, la banane et la poire sont des fruits. La carotte est un légume, c'est l'intrus.",
+      "ms": 7200,
+      "cat": "enonce"
+    },
+    "5e7895b3dcba5fb2": {
+      "text": "La pomme, la poire et la fraise sont des fruits.",
+      "ms": 3920,
+      "cat": "enonce"
+    },
+    "417477e89187e700": {
+      "text": "La rose, la tulipe et le lilas sont des fleurs.",
+      "ms": 3760,
+      "cat": "enonce"
+    },
+    "2285f9fe1276a71e": {
+      "text": "La route était glissante à cause du verglas.",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "10e0a13235df92a1": {
+      "text": "La sorcière lui donna un grain d'orge.",
+      "ms": 2240,
+      "cat": "enonce"
+    },
+    "3eeba84996217500": {
+      "text": "Le bus, le train et l'avion sont des véhicules.",
+      "ms": 3760,
+      "cat": "enonce"
+    },
+    "bf869cd84e68ae48": {
+      "text": "Le caméléon change de couleur pour se fondre dans le décor : ses ennemis ont du mal à le voir, donc c'est faux.",
+      "ms": 7120,
+      "cat": "enonce"
+    },
+    "e246b9b00e012108": {
+      "text": "Le chat aperçoit un miroir sur la table de toilette.",
+      "ms": 3680,
+      "cat": "enonce"
+    },
+    "36194f3e9d80f9ea": {
+      "text": "Le chat croit voir un autre chat, comme un frère. En vrai, c'est son reflet dans le miroir.",
+      "ms": 5840,
+      "cat": "enonce"
+    },
+    "80d7180cb3f74560": {
+      "text": "Le chat guette la souris sans bouger une oreille.",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "ef2058b22bffb12d": {
+      "text": "Le chat regarde la souris sans bouger pour l'attraper : guetter, c'est surveiller avec attention.",
+      "ms": 6240,
+      "cat": "enonce"
+    },
+    "a469c1a2e2700360": {
+      "text": "Le chien court vers la porte quand son maître rentre : il est content de le revoir.",
+      "ms": 6080,
+      "cat": "enonce"
+    },
+    "770178a0c6030ee5": {
+      "text": "Le chien, le chat et le lapin sont des animaux. La table est l'intrus.",
+      "ms": 5600,
+      "cat": "enonce"
+    },
+    "0de82b396405e06e": {
+      "text": "Le chien, le chat et le lapin sont tous des animaux. Animaux est le mot général.",
+      "ms": 5440,
+      "cat": "enonce"
+    },
+    "716ac4f47ce099aa": {
+      "text": "Le contraire d'ouvrir est fermer.",
+      "ms": 2160,
+      "cat": "enonce"
+    },
+    "654af351fb2182f6": {
+      "text": "Le contraire de chaud est froid.",
+      "ms": 1920,
+      "cat": "enonce"
+    },
+    "6b8f0d018570d2de": {
+      "text": "Le contraire de content est triste.",
+      "ms": 2320,
+      "cat": "enonce"
+    },
+    "6523fb10d674680e": {
+      "text": "Le contraire de grand est petit.",
+      "ms": 1840,
+      "cat": "enonce"
+    },
+    "b35b275e61f41777": {
+      "text": "Le contraire de jour est nuit.",
+      "ms": 2000,
+      "cat": "enonce"
+    },
+    "2d9a11e8deb6a28f": {
+      "text": "Le contraire de monter est descendre.",
+      "ms": 2400,
+      "cat": "enonce"
+    },
+    "d5c818e54f049f78": {
+      "text": "Le contraire de rapide est lent.",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "2ec1188ffd458068": {
+      "text": "Le déterminant est devant le nom. Ici, c'est ces, devant oiseaux.",
+      "ms": 5200,
+      "cat": "enonce"
+    },
+    "fb6f8b2383ea7084": {
+      "text": "Le déterminant est devant le nom. Ici, c'est le mot le, devant garçon.",
+      "ms": 5600,
+      "cat": "enonce"
+    },
+    "641264fffc1d74fa": {
+      "text": "Le déterminant est devant le nom. Ici, c'est le mot les.",
+      "ms": 4480,
+      "cat": "enonce"
+    },
+    "9c0d87082d09ff38": {
+      "text": "Le déterminant est devant le nom. Ici, c'est le mot mon, devant frère.",
+      "ms": 5360,
+      "cat": "enonce"
+    },
+    "ab0b8c488a6ba09d": {
+      "text": "Le déterminant est le petit mot placé devant le nom. Ici, c'est ton, devant vélo.",
+      "ms": 6240,
+      "cat": "enonce"
+    },
+    "65b24d5ae9a2c57f": {
+      "text": "Le déterminant est un petit mot placé devant le nom. Le mot le est un déterminant, comme dans le chat.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "4de76a9fb4aa900d": {
+      "text": "Le fils s'appelait Gribouille, la mère s'appelait Brigoule et le père Bredouille.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "a15a18af01508d1e": {
+      "text": "Le groupe parle d'un livre. Les mots de Paul disent à qui il est. Paul complète le nom livre.",
+      "ms": 6000,
+      "cat": "enonce"
+    },
+    "b0b14e72c835827e": {
+      "text": "Le groupe parle d'un vélo. Les mots de Léo disent à qui il est. Le nom le plus important est vélo.",
+      "ms": 6800,
+      "cat": "enonce"
+    },
+    "fcc2d5b15dea0610": {
+      "text": "Le groupe parle d'une boîte. Les mots de chocolats disent ce qu'il y a dedans. Le nom le plus important est boîte.",
+      "ms": 8080,
+      "cat": "enonce"
+    },
+    "915c210172b20b51": {
+      "text": "Le héron au long bec emmanché d'un long cou côtoyait une rivière.",
+      "ms": 4400,
+      "cat": "enonce"
+    },
+    "64d2afaadbd7b7b0": {
+      "text": "Le héron longe une rivière. Côtoyer veut dire marcher le long de quelque chose.",
+      "ms": 6320,
+      "cat": "enonce"
+    },
+    "87479819a6486c94": {
+      "text": "Le lion, le tigre et l'ours sont des animaux.",
+      "ms": 3040,
+      "cat": "enonce"
+    },
+    "bb5cb6bfb8cd59a8": {
+      "text": "Le lièvre broute, se repose et s'amuse au lieu de courir : il ne part pas tout de suite, donc c'est faux.",
+      "ms": 7840,
+      "cat": "enonce"
+    },
+    "8c7b85422bced4c4": {
+      "text": "Le manteau est un vêtement, on le met pour avoir chaud.",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "e362da802554d084": {
+      "text": "Le manteau, le pantalon et le pull sont des vêtements. L'armoire est un meuble, c'est l'intrus.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "4be6d541fee6036e": {
+      "text": "Le martin-pêcheur est l'oiseau bleu qui s'est posé sur la perche du pêcheur.",
+      "ms": 4960,
+      "cat": "enonce"
+    },
+    "4fa65789d7a9b16c": {
+      "text": "Le mot attachement montre que les sœurs s'aiment beaucoup, avec tendresse.",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "c986e03c014a347e": {
+      "text": "Le mot glace a plusieurs sens. Ici, on la mange à la fraise : c'est le dessert froid. Sur le lac en hiver, la glace est l'eau qui a gelé.",
+      "ms": 9360,
+      "cat": "enonce"
+    },
+    "2b49d2a67712c256": {
+      "text": "Le mot souris a deux sens. Ici, elle court dans le jardin : c'est le petit animal. Devant l'ordinateur, la souris est l'objet qu'on bouge avec la main.",
+      "ms": 10320,
+      "cat": "enonce"
+    },
+    "9388775cf5cf43bb": {
+      "text": "Le mot tempête montre que le vent soufflait très fort.",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "b32118e6afa3e44b": {
+      "text": "Le nom désigne l'animal. Ici, le nom est chien.",
+      "ms": 4160,
+      "cat": "enonce"
+    },
+    "f931b2f425050d18": {
+      "text": "Le nom désigne la chose. Dans une belle histoire, le nom est histoire.",
+      "ms": 5120,
+      "cat": "enonce"
+    },
+    "8a4cdfc5b9a427b7": {
+      "text": "Le nom désigne la chose. Ici, le nom est arbre.",
+      "ms": 3680,
+      "cat": "enonce"
+    },
+    "881266c3b734359a": {
+      "text": "Le nom désigne une chose. Ici, le nom est bateau.",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "58320dbf6e43919c": {
+      "text": "Le nom désigne une chose. Ici, le nom est télévision.",
+      "ms": 3760,
+      "cat": "enonce"
+    },
+    "675022d274c1070b": {
+      "text": "Le paon crie Léon pour appeler sa fiancée. Mais personne ne vient aujourd'hui.",
+      "ms": 5360,
+      "cat": "enonce"
+    },
+    "ecd69f4662697031": {
+      "text": "Le paon croit qu'il va se marier. Il s'est fait tout beau pour l'occasion.",
+      "ms": 4320,
+      "cat": "enonce"
+    },
+    "9103d8214dc5b67d": {
+      "text": "Le petit bout ette est à la fin de maisonnette. une maisonnette est une petite maison.",
+      "ms": 5040,
+      "cat": "enonce"
+    },
+    "b4650e5494f9a688": {
+      "text": "Le petit bout ette veut dire petit. une clochette est une petite cloche.",
+      "ms": 5120,
+      "cat": "enonce"
+    },
+    "709cebbd219707e0": {
+      "text": "Le petit bout ette à la fin veut dire petit. une maisonnette est une petite maison.",
+      "ms": 5200,
+      "cat": "enonce"
+    },
+    "6aeaaf649185f004": {
+      "text": "Le petit bout ette à la fin veut dire petit. une tartelette est une petite tarte.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "6fc03f2ef04d4a9c": {
+      "text": "Le petit bout eur est à la fin de chanteur. C'est celui qui chante.",
+      "ms": 4320,
+      "cat": "enonce"
+    },
+    "a2b9d14b71f09e90": {
+      "text": "Le petit bout eur montre la personne qui fait l'action. un danseur, c'est celui qui danse.",
+      "ms": 5440,
+      "cat": "enonce"
+    },
+    "d8ae4c17c000ca8b": {
+      "text": "Le petit bout eur montre la personne qui fait l'action. un joueur, c'est celui qui joue.",
+      "ms": 5440,
+      "cat": "enonce"
+    },
+    "d1d5df16c2aee023": {
+      "text": "Le petit bout eur à la fin montre la personne qui fait l'action. un chanteur, c'est celui qui chante.",
+      "ms": 6480,
+      "cat": "enonce"
+    },
+    "e2560eb025088eed": {
+      "text": "Le petit mot le remplace le chien : Camille voudrait garder le chien, comme on garde un animal trouvé.",
+      "ms": 6800,
+      "cat": "enonce"
+    },
+    "371bc7d94c4c4196": {
+      "text": "Le petit mot re devant faire veut dire encore. refaire, c'est faire une deuxième fois.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "9325b0c0c77a6d49": {
+      "text": "Le petit mot re devant lire veut dire encore. relire, c'est lire une deuxième fois.",
+      "ms": 6240,
+      "cat": "enonce"
+    },
+    "7b528c315c79f44c": {
+      "text": "Le petit ruisseau coule entre les cailloux.",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "b1cda12417537d7c": {
+      "text": "Le petit âne s'appelle Cadichon. Jacques lui parle tout doucement.",
+      "ms": 4320,
+      "cat": "enonce"
+    },
+    "d95ede6c68e054f2": {
+      "text": "Le poireau est un légume.",
+      "ms": 1840,
+      "cat": "enonce"
+    },
+    "515b828c50e55f8a": {
+      "text": "Le poème le dit : il sème les perce-neiges dans les prés. Ce sont de petites fleurs blanches du début du printemps.",
+      "ms": 6880,
+      "cat": "enonce"
+    },
+    "dbdca243f9a572f9": {
+      "text": "Le poème le dit dès le début : la lune est blanche.",
+      "ms": 3760,
+      "cat": "enonce"
+    },
+    "4c29768a3740b17e": {
+      "text": "Le pronom remplace un nom. Ici, elles remplace des personnes, comme les filles.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "93157b0e7be193cd": {
+      "text": "Le pronom remplace un nom. Ici, ils remplace des personnes, comme les garçons.",
+      "ms": 5440,
+      "cat": "enonce"
+    },
+    "28581419fdd4a2c1": {
+      "text": "Le pronom remplace une personne. Ici, c'est le mot elle.",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "3645d9cbd8fb6152": {
+      "text": "Le préfixe dé est au début de défaire. Il dit le contraire de faire.",
+      "ms": 4800,
+      "cat": "enonce"
+    },
+    "bf3f489f920f0eb1": {
+      "text": "Le préfixe dé est au début de défaire. Il dit le contraire.",
+      "ms": 4000,
+      "cat": "enonce"
+    },
+    "df072aae0c6389ab": {
+      "text": "Le préfixe im est au début de impossible. Il dit le contraire de possible.",
+      "ms": 5360,
+      "cat": "enonce"
+    },
+    "d1f31557f2815b23": {
+      "text": "Le préfixe re est au début de refaire. Il veut dire encore.",
+      "ms": 4320,
+      "cat": "enonce"
+    },
+    "e8bc7d8d5b6db7c5": {
+      "text": "Le préfixe re veut dire encore. recolorier, c'est colorier une deuxième fois.",
+      "ms": 5920,
+      "cat": "enonce"
+    },
+    "de13cb31fa260b78": {
+      "text": "Le père Bredouille était garde-chasse du roi de ce pays-là.",
+      "ms": 3680,
+      "cat": "enonce"
+    },
+    "a8450fedea71faf4": {
+      "text": "Le père et la mère avaient six autres enfants, ce qui faisait sept, en comptant Gribouille qui était le plus petit.",
+      "ms": 7440,
+      "cat": "enonce"
+    },
+    "d412262bcea2eaec": {
+      "text": "Le pêcheur reste si immobile que l'oiseau le prend pour un arbre et se pose sur sa perche. On devine le mot arbre.",
+      "ms": 7360,
+      "cat": "enonce"
+    },
+    "2c40c8b191c65116": {
+      "text": "Le renard est un animal.",
+      "ms": 1760,
+      "cat": "enonce"
+    },
+    "fa04bc0a4ffa4f86": {
+      "text": "Le renard flatte le corbeau, le corbeau ouvre le bec pour chanter, et le fromage tombe : le renard l'attrape.",
+      "ms": 7120,
+      "cat": "enonce"
+    },
+    "a377a7ba99da967b": {
+      "text": "Le rouge, le bleu et le vert sont des couleurs.",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "54168462610aa0fb": {
+      "text": "Le rouge, le jaune et le bleu sont des couleurs.",
+      "ms": 3600,
+      "cat": "enonce"
+    },
+    "ab05a76a24ac9b45": {
+      "text": "Le ruisseau coule avec de l'eau entre les cailloux : c'est un petit cours d'eau.",
+      "ms": 4800,
+      "cat": "enonce"
+    },
+    "e1798cc999bf0e08": {
+      "text": "Le régal fut fort honnête ; Rien ne manquait au festin.",
+      "ms": 4160,
+      "cat": "enonce"
+    },
+    "37b050c113d43c9d": {
+      "text": "Le texte commence par papa casse les œufs : c'est la première chose.",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "18760e76706096af": {
+      "text": "Le texte dit qu'elle a allumé le premier feu de la saison dans la cheminée. Il commence à faire frais.",
+      "ms": 6560,
+      "cat": "enonce"
+    },
+    "a7296eb765763e5f": {
+      "text": "Le texte dit qu'elle a trois petits renards.",
+      "ms": 2720,
+      "cat": "enonce"
+    },
+    "40501e80814e8072": {
+      "text": "Le texte dit qu'elle voit très bien dans le noir : elle n'a donc aucun mal à chasser la nuit, c'est faux.",
+      "ms": 5680,
+      "cat": "enonce"
+    },
+    "0dcd11c48db85536": {
+      "text": "Le texte dit qu'il pleut très fort : c'est pour cela qu'elle reste dedans.",
+      "ms": 4480,
+      "cat": "enonce"
+    },
+    "94b1207cb00659a1": {
+      "text": "Le texte dit que Catherine garde trois brebis. Une brebis est la maman du mouton.",
+      "ms": 5360,
+      "cat": "enonce"
+    },
+    "0925ea88943c726e": {
+      "text": "Le texte dit que Florine a quinze ans à ce moment-là.",
+      "ms": 3520,
+      "cat": "enonce"
+    },
+    "f1e5a3b05e6484d1": {
+      "text": "Le texte dit que cela faisait sept enfants en tout. Gribouille est le septième, le plus petit.",
+      "ms": 6720,
+      "cat": "enonce"
+    },
+    "80c50e5dcb1f7eb7": {
+      "text": "Le texte dit que l'oiseau vient se poser sur la perche de la ligne que le pêcheur tenait.",
+      "ms": 4800,
+      "cat": "enonce"
+    },
+    "8d50d1242b291e47": {
+      "text": "Le texte dit que la cuisinière traduit Kamaralzaman par Moumou : elle l'appelle Moumou.",
+      "ms": 6560,
+      "cat": "enonce"
+    },
+    "5a342e3d5c177371": {
+      "text": "Le texte dit que le dauphin n'est pas un poisson mais un mammifère : c'est faux.",
+      "ms": 5600,
+      "cat": "enonce"
+    },
+    "e32e0397b52bd496": {
+      "text": "Le texte dit que le fils s'appelle Gribouille. C'est le plus petit de la famille.",
+      "ms": 4800,
+      "cat": "enonce"
+    },
+    "7c7e13ef50c3893e": {
+      "text": "Le texte dit que le gardien partage sa maison avec un chat appelé Biscuit. Il fallait bien chercher dans tout le texte.",
+      "ms": 6800,
+      "cat": "enonce"
+    },
+    "4a47797a2ae054e6": {
+      "text": "Le texte dit que le manchot ne sait pas voler : c'est faux.",
+      "ms": 3760,
+      "cat": "enonce"
+    },
+    "54dd3587b9b2dbcf": {
+      "text": "Le texte dit que le soleil donne de la chaleur : c'est vrai.",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "de75a92a3e21313d": {
+      "text": "Le texte dit que les tomates deviennent rouges : c'est vrai.",
+      "ms": 3600,
+      "cat": "enonce"
+    },
+    "544ff6021d6da61e": {
+      "text": "Le texte dit que sa queue touffue l'aide à garder l'équilibre.",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "85443676be6608a9": {
+      "text": "Le texte le dit : il s'est diverti à courir par toute la maison.",
+      "ms": 4480,
+      "cat": "enonce"
+    },
+    "39b9fd6f2daa2c42": {
+      "text": "Le train, le vélo et la voiture servent à se déplacer : ce sont des véhicules.",
+      "ms": 5520,
+      "cat": "enonce"
+    },
+    "bccdb577d83c2378": {
+      "text": "Le verbe dit l'action. Ici, l'action est a mangé. C'est un verbe au passé, il se dit en deux mots.",
+      "ms": 7200,
+      "cat": "enonce"
+    },
+    "a2ab14ac612ea460": {
+      "text": "Le verbe dit l'action. Ici, l'action est aboie.",
+      "ms": 3920,
+      "cat": "enonce"
+    },
+    "92181de64c401108": {
+      "text": "Le verbe dit l'action. Ici, l'action est chante.",
+      "ms": 4000,
+      "cat": "enonce"
+    },
+    "22bc76a787e13a72": {
+      "text": "Le verbe dit l'action. Ici, l'action est dort.",
+      "ms": 3520,
+      "cat": "enonce"
+    },
+    "0c037473d639592f": {
+      "text": "Le verbe dit l'action. Ici, l'action est joue.",
+      "ms": 3760,
+      "cat": "enonce"
+    },
+    "2accd1be3b9f5bc3": {
+      "text": "Le verbe dit l'action. Ici, l'action est partiront.",
+      "ms": 3920,
+      "cat": "enonce"
+    },
+    "fdda07c1578b2956": {
+      "text": "Le verbe dit l'action. Ici, l'action est sont partis. C'est un verbe au passé, écrit en deux mots.",
+      "ms": 6880,
+      "cat": "enonce"
+    },
+    "d754f16111682c2c": {
+      "text": "Le verbe dit l'action. Ici, l'action est volent.",
+      "ms": 4000,
+      "cat": "enonce"
+    },
+    "3b3c95689803ce3b": {
+      "text": "Le verbe dit l'action. Ici, l'action est écoutent.",
+      "ms": 4000,
+      "cat": "enonce"
+    },
+    "822d84681e13daf6": {
+      "text": "Le vieux coffre était rempli de pièces d'or.",
+      "ms": 3040,
+      "cat": "enonce"
+    },
+    "52a6d88b1e576335": {
+      "text": "Les deux petites filles avaient l'une pour l'autre le plus tendre attachement.",
+      "ms": 4160,
+      "cat": "enonce"
+    },
+    "e54a58d73155ec8a": {
+      "text": "Les deux sœurs s'entendent très bien et ne se disputent jamais. Chacune laisse parfois faire l'autre.",
+      "ms": 6960,
+      "cat": "enonce"
+    },
+    "e49a91082eb8015f": {
+      "text": "Les enfants se régalèrent : ce mot montre que le repas était délicieux, c'est-à-dire très bon.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "ea2ac167785e208b": {
+      "text": "Les enfants se régalèrent et vidèrent toute leur assiette.",
+      "ms": 4000,
+      "cat": "enonce"
+    },
+    "ff51c7fe6c9d91e2": {
+      "text": "Les feuilles étaient si hautes que les enfants tenaient dessous. La bardane a de très grandes feuilles.",
+      "ms": 6560,
+      "cat": "enonce"
+    },
+    "42cf2b96c634c131": {
+      "text": "Les fourmis se préviennent et creusent ensemble : elles travaillent en équipe, donc c'est faux.",
+      "ms": 6320,
+      "cat": "enonce"
+    },
+    "ba63736fae245e7d": {
+      "text": "Les hirondelles s'assemblent par centaines pour préparer leur grand départ.",
+      "ms": 4400,
+      "cat": "enonce"
+    },
+    "bdcaa14666516bd4": {
+      "text": "Les images le faisaient imaginer plein de choses. Par exemple, en voyant un dragon dessiné, il inventait une histoire.",
+      "ms": 7280,
+      "cat": "enonce"
+    },
+    "678738d988607dbd": {
+      "text": "Les mots ne et pas entourent le verbe : la phrase est à la forme négative.",
+      "ms": 5520,
+      "cat": "enonce"
+    },
+    "019487a3d1e58c79": {
+      "text": "Les mots ne et plus entourent le verbe. La phrase dit non, elle est à la forme négative.",
+      "ms": 7120,
+      "cat": "enonce"
+    },
+    "6805894769ea4087": {
+      "text": "Les mots ne et rien entourent le verbe. La phrase dit non, elle est à la forme négative.",
+      "ms": 6640,
+      "cat": "enonce"
+    },
+    "ed133cddbed9522f": {
+      "text": "Les moutons blancs qui montent vers le soleil font penser à des nuages dans le ciel. C'est une jolie image.",
+      "ms": 6400,
+      "cat": "enonce"
+    },
+    "5ea480d7d1e77806": {
+      "text": "Les moutons montent, légers, vers le soleil. Ils s'en approchent et se couchent à distance.",
+      "ms": 7520,
+      "cat": "enonce"
+    },
+    "0d0551b733ba691a": {
+      "text": "Les pigeons ne tiennent pas en place : ils bougent tout le temps, d'un endroit à l'autre.",
+      "ms": 5360,
+      "cat": "enonce"
+    },
+    "e25659941db434c5": {
+      "text": "Les tomates deviennent rouges et bien mûres.",
+      "ms": 2720,
+      "cat": "enonce"
+    },
+    "a58819a43ab939ec": {
+      "text": "Leste allumeur de l'automne, il passe et repasse sous les feuilles la petite torche de sa queue.",
+      "ms": 6320,
+      "cat": "enonce"
+    },
+    "a58182e4bf33ebfb": {
+      "text": "Leste veut dire vif et rapide. L'écureuil bouge sans arrêt sous les feuilles, avec sa belle queue rousse.",
+      "ms": 7680,
+      "cat": "enonce"
+    },
+    "b0c37e6184b4dec4": {
+      "text": "Lucas n'a rien mangé et attend le repas : il a faim.",
+      "ms": 3520,
+      "cat": "enonce"
+    },
+    "3b15461f0e7f2e7c": {
+      "text": "Luisant veut dire qui brille. Le ver luisant fait de la lumière dans la nuit.",
+      "ms": 5120,
+      "cat": "enonce"
+    },
+    "09fcd519559f42dc": {
+      "text": "Léo alluma vite sa lampe pour y voir quelque chose.",
+      "ms": 3520,
+      "cat": "enonce"
+    },
+    "6fe89b52dbb1cc48": {
+      "text": "Léo allume une lampe parce qu'il fait sombre : la lampe montre que sombre veut dire sans lumière.",
+      "ms": 7680,
+      "cat": "enonce"
+    },
+    "e80defc6ea816e80": {
+      "text": "Maël saute partout après avoir gagné : il est content.",
+      "ms": 4160,
+      "cat": "enonce"
+    },
+    "2fdf90426c152377": {
+      "text": "Nina met ses jouets dans le coffre. Le mot coffre dit où elle les range.",
+      "ms": 5520,
+      "cat": "enonce"
+    },
+    "d4adec6c8fb06020": {
+      "text": "Noé était dans la neige, ses dents claquaient et il court vers le radiateur : il avait froid. Le mot froid n'est pas écrit, on le devine.",
+      "ms": 10640,
+      "cat": "enonce"
+    },
+    "fde81b42bf6b0485": {
+      "text": "On ajoute dé devant faire pour dire le contraire : défaire.",
+      "ms": 4800,
+      "cat": "enonce"
+    },
+    "e99d902a0601c1e4": {
+      "text": "On ajoute dé devant plier pour dire le contraire : déplier.",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "68a1e54662fb60d3": {
+      "text": "On ajoute dé devant ranger pour dire le contraire : déranger.",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "68632b96f3fb3b36": {
+      "text": "On ajoute ette à maison : maisonnette.",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "0b4e56efb72aa26c": {
+      "text": "On ajoute eur à chant : chanteur.",
+      "ms": 2480,
+      "cat": "enonce"
+    },
+    "2dc1603927a29b46": {
+      "text": "On ajoute im devant possible pour dire le contraire : impossible.",
+      "ms": 4320,
+      "cat": "enonce"
+    },
+    "06d22dd980e0d323": {
+      "text": "On ajoute mal devant heureux pour dire le contraire : malheureux.",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "0d87ea9c7c4a804e": {
+      "text": "On avait caché les fauteuils sous des draps, emmailloté les lampes, roulé les tapis ; tout était blanc, changé, angoissant, avec une funèbre odeur de camphre.",
+      "ms": 10480,
+      "cat": "enonce"
+    },
+    "1ad9f141e84ddad4": {
+      "text": "On cherche qui bouge. Ce sont les grands arbres, donc le sujet est tout le groupe les grands arbres.",
+      "ms": 6560,
+      "cat": "enonce"
+    },
+    "2aab3b69f589c763": {
+      "text": "On cherche qui brille. C'est l'étoile qui brille, donc le sujet est étoile, placé après le verbe.",
+      "ms": 7280,
+      "cat": "enonce"
+    },
+    "34c1bf7c9b851315": {
+      "text": "On cherche qui chante. C'est vous qui chantez, donc le sujet est vous.",
+      "ms": 5680,
+      "cat": "enonce"
+    },
+    "5a969ddfd429bf95": {
+      "text": "On cherche qui fait l'action. C'est Lucie qui plante, donc le sujet est Lucie.",
+      "ms": 5680,
+      "cat": "enonce"
+    },
+    "3ae73887b652467c": {
+      "text": "On cherche qui fait l'action. C'est Paul qui mange, donc le sujet est Paul.",
+      "ms": 5520,
+      "cat": "enonce"
+    },
+    "06c315cea3a97d77": {
+      "text": "On cherche qui fait l'action. C'est elle qui danse, donc le sujet est elle.",
+      "ms": 5040,
+      "cat": "enonce"
+    },
+    "18af032fd5cc2fa4": {
+      "text": "On cherche qui fait l'action. C'est la fille qui court, donc le sujet est la fille.",
+      "ms": 5920,
+      "cat": "enonce"
+    },
+    "280d0f22d2ddcb53": {
+      "text": "On cherche qui fait l'action. C'est nous qui chantons, donc le sujet est nous.",
+      "ms": 5520,
+      "cat": "enonce"
+    },
+    "a694c069851f745f": {
+      "text": "On cherche qui vole. C'est l'oiseau qui vole, donc le sujet est oiseau, même s'il est placé après le verbe.",
+      "ms": 7120,
+      "cat": "enonce"
+    },
+    "b1d06ae9bb120ed1": {
+      "text": "On coupe l'orange d'abord, puis on presse chaque moitié.",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "8e8e5806d03ee543": {
+      "text": "On dit la fille. Le groupe la petite fille est féminin.",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "6465c2a8f3e2cffb": {
+      "text": "On dit le garçon. Le groupe un petit garçon est masculin.",
+      "ms": 4160,
+      "cat": "enonce"
+    },
+    "7709dfbde1be5029": {
+      "text": "On l'appelle ainsi parce que ses cheveux sont plus fins et plus blonds que l'or.",
+      "ms": 4560,
+      "cat": "enonce"
+    },
+    "36b87194f991cecc": {
+      "text": "On la nommait la Belle aux cheveux d'or, car ses cheveux étaient plus fins que de l'or, et blonds par merveille.",
+      "ms": 7120,
+      "cat": "enonce"
+    },
+    "1388aae4b864b466": {
+      "text": "On m'a éveillé de bonne heure, et je me suis diverti à courir par toute la maison.",
+      "ms": 4640,
+      "cat": "enonce"
+    },
+    "28c82860e52f8e2a": {
+      "text": "On met dé devant faire : défaire.",
+      "ms": 2720,
+      "cat": "enonce"
+    },
+    "3b9da373eb52db60": {
+      "text": "On met re devant faire : refaire.",
+      "ms": 2400,
+      "cat": "enonce"
+    },
+    "048a116c3ca2fc95": {
+      "text": "On pose le coton, puis on met les graines, et enfin les pousses sortent.",
+      "ms": 5120,
+      "cat": "enonce"
+    },
+    "6b9d6524704cac71": {
+      "text": "On range et on couvre tout : la famille prépare un départ, un grand voyage.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "ba425fb14fc5821d": {
+      "text": "On servit, pour l'embarrasser, En un vase à long col et d'étroite embouchure.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "d55065274787b5be": {
+      "text": "On écrit Autrefois, il parlait doucement..",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "4cdebd8c7e6e6d4f": {
+      "text": "On écrit Autrefois, ils aimaient les animaux..",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "64c708dee71fee2a": {
+      "text": "On écrit Autrefois, ils avaient faim..",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "6c75f70daf292760": {
+      "text": "On écrit Autrefois, ils donnaient un cadeau..",
+      "ms": 2880,
+      "cat": "enonce"
+    },
+    "0369ca9b334e7f9d": {
+      "text": "On écrit Autrefois, ils finissaient le jeu..",
+      "ms": 3680,
+      "cat": "enonce"
+    },
+    "b68571e0631007d7": {
+      "text": "On écrit Autrefois, ils plaçaient les pions..",
+      "ms": 3440,
+      "cat": "enonce"
+    },
+    "70a0c9cd0b75fd29": {
+      "text": "On écrit Autrefois, ils trouvaient un trésor..",
+      "ms": 3520,
+      "cat": "enonce"
+    },
+    "5d4520add3a81d65": {
+      "text": "On écrit Autrefois, je donnais un cadeau..",
+      "ms": 3440,
+      "cat": "enonce"
+    },
+    "074e4f015c99a569": {
+      "text": "On écrit Autrefois, je pouvais courir vite..",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "916da7d8c3d5d100": {
+      "text": "On écrit Autrefois, je trouvais un trésor..",
+      "ms": 3520,
+      "cat": "enonce"
+    },
+    "bf31dbba62eff8db": {
+      "text": "On écrit Autrefois, la fille faisait un gâteau..",
+      "ms": 3440,
+      "cat": "enonce"
+    },
+    "8ae9848d9116da73": {
+      "text": "On écrit Autrefois, la fille plaçait les pions..",
+      "ms": 3600,
+      "cat": "enonce"
+    },
+    "e99ad2b9553e04c5": {
+      "text": "On écrit Autrefois, la fille trouvait un trésor..",
+      "ms": 3680,
+      "cat": "enonce"
+    },
+    "926dbd4ca3b59dbf": {
+      "text": "On écrit Autrefois, le garçon avait faim..",
+      "ms": 2880,
+      "cat": "enonce"
+    },
+    "abe171bbe415a8fc": {
+      "text": "On écrit Autrefois, le garçon venait avec nous..",
+      "ms": 3440,
+      "cat": "enonce"
+    },
+    "e1d6d05233853e2f": {
+      "text": "On écrit Autrefois, les enfants trouvaient un trésor..",
+      "ms": 3360,
+      "cat": "enonce"
+    },
+    "12e0634a3311074f": {
+      "text": "On écrit Autrefois, les oiseaux mangeaient une pomme..",
+      "ms": 3760,
+      "cat": "enonce"
+    },
+    "ec9aa07a44080406": {
+      "text": "On écrit Autrefois, les oiseaux regardaient les étoiles..",
+      "ms": 3680,
+      "cat": "enonce"
+    },
+    "33a1db51bb3c5c8a": {
+      "text": "On écrit Autrefois, nous chantions une chanson..",
+      "ms": 3440,
+      "cat": "enonce"
+    },
+    "be3d45c90cbf0652": {
+      "text": "On écrit Autrefois, nous jouions au ballon..",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "d859212e5b343b0b": {
+      "text": "On écrit Autrefois, nous trouvions un trésor..",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "524d31c0f789f476": {
+      "text": "On écrit Autrefois, tu mangeais une pomme..",
+      "ms": 3280,
+      "cat": "enonce"
+    },
+    "3fc6ddfae76ab851": {
+      "text": "On écrit Autrefois, tu parlais doucement..",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "e70f2172a1cc740f": {
+      "text": "On écrit Autrefois, vous aviez faim..",
+      "ms": 2640,
+      "cat": "enonce"
+    },
+    "3342f975edf2606d": {
+      "text": "On écrit Autrefois, vous chantiez une chanson..",
+      "ms": 3840,
+      "cat": "enonce"
+    },
+    "e70422e16f27a042": {
+      "text": "On écrit Autrefois, vous jouiez au ballon..",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "6054b88934b4cb55": {
+      "text": "On écrit Autrefois, vous parliez doucement..",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "07c451465186ead6": {
+      "text": "On écrit Autrefois, vous regardiez les étoiles..",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "075f02a6d730c9c1": {
+      "text": "On écrit Demain, il parlera doucement..",
+      "ms": 2720,
+      "cat": "enonce"
+    },
+    "16bee753d3346dd6": {
+      "text": "On écrit Demain, ils aimeront les animaux..",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "059abd2a1f6ac82b": {
+      "text": "On écrit Demain, ils auront faim..",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "b39025d9eff558d3": {
+      "text": "On écrit Demain, ils donneront un cadeau..",
+      "ms": 2880,
+      "cat": "enonce"
+    },
+    "6f3ae1e5c26ebcd8": {
+      "text": "On écrit Demain, ils finiront le jeu..",
+      "ms": 2720,
+      "cat": "enonce"
+    },
+    "21db22de8fd190b5": {
+      "text": "On écrit Demain, ils placeront les pions..",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "cefb948af777671d": {
+      "text": "On écrit Demain, ils trouveront un trésor..",
+      "ms": 3520,
+      "cat": "enonce"
+    },
+    "99e75a46d7c60cc2": {
+      "text": "On écrit Demain, je donnerai un cadeau..",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "5245a91f6c117eb8": {
+      "text": "On écrit Demain, je pourrai courir vite..",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "55c3c9a15c00209b": {
+      "text": "On écrit Demain, je trouverai un trésor..",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "d20f71c4d625473c": {
+      "text": "On écrit Demain, la fille fera un gâteau..",
+      "ms": 2960,
+      "cat": "enonce"
+    },
+    "5588a0577c71323e": {
+      "text": "On écrit Demain, la fille placera les pions..",
+      "ms": 3200,
+      "cat": "enonce"
     }
   },
   "keys": {
@@ -26021,6 +27781,358 @@
     "txt:700aabd7ac1fe9ce": "700aabd7ac1fe9ce",
     "txt:87c9056624ed4507": "87c9056624ed4507",
     "txt:a077b253f782697e": "a077b253f782697e",
-    "txt:82788d30e6430d2f": "82788d30e6430d2f"
+    "txt:82788d30e6430d2f": "82788d30e6430d2f",
+    "txt:6e6704b482bdf89b": "6e6704b482bdf89b",
+    "txt:f277d095cc959b81": "f277d095cc959b81",
+    "txt:a78c943b654fc5e6": "a78c943b654fc5e6",
+    "txt:505ba36d4d8ab317": "505ba36d4d8ab317",
+    "txt:03ae0a961c4dddd7": "03ae0a961c4dddd7",
+    "txt:e923645d2a2fafcf": "e923645d2a2fafcf",
+    "txt:7e8c4610a158e7e3": "7e8c4610a158e7e3",
+    "txt:64af889002da3ae9": "64af889002da3ae9",
+    "txt:a301caccb84665ce": "a301caccb84665ce",
+    "txt:847a6e8762c86fc7": "847a6e8762c86fc7",
+    "txt:c0b0ac93f86203c9": "c0b0ac93f86203c9",
+    "txt:1b8778405dbba965": "1b8778405dbba965",
+    "txt:0934e4a66eaeb3e0": "0934e4a66eaeb3e0",
+    "txt:9b6547297f0441c6": "9b6547297f0441c6",
+    "txt:d39e9bd9d8201851": "d39e9bd9d8201851",
+    "txt:d191465b522ee651": "d191465b522ee651",
+    "txt:c9a14eb3ce720de0": "c9a14eb3ce720de0",
+    "txt:6b23c52a134f1e48": "6b23c52a134f1e48",
+    "txt:1119a550ba8030a2": "1119a550ba8030a2",
+    "txt:b291b91d8b94ee62": "b291b91d8b94ee62",
+    "txt:50056e2e8bd282eb": "50056e2e8bd282eb",
+    "txt:aa95af4b6f13e7ab": "aa95af4b6f13e7ab",
+    "txt:bf7e2878c7a02cf2": "bf7e2878c7a02cf2",
+    "txt:9d5fecfdd36498fd": "9d5fecfdd36498fd",
+    "txt:16be97f5871f92ab": "16be97f5871f92ab",
+    "txt:9f2a3e9d53f076fd": "9f2a3e9d53f076fd",
+    "txt:ca16e948f45bcbe8": "ca16e948f45bcbe8",
+    "txt:3c944d21a6ec12e5": "3c944d21a6ec12e5",
+    "txt:0e3bf3775d7a1527": "0e3bf3775d7a1527",
+    "txt:77715c63533969e7": "77715c63533969e7",
+    "txt:fad573a79a34d260": "fad573a79a34d260",
+    "txt:55a677c233bba051": "55a677c233bba051",
+    "txt:280ee6d2f02b166c": "280ee6d2f02b166c",
+    "txt:08f532003689113b": "08f532003689113b",
+    "txt:9c621a99826ab423": "9c621a99826ab423",
+    "txt:9f3781cef6b7e7e7": "9f3781cef6b7e7e7",
+    "txt:1170616da3b19dec": "1170616da3b19dec",
+    "txt:ad2d371ce559dadd": "ad2d371ce559dadd",
+    "txt:ca7aee9f50071767": "ca7aee9f50071767",
+    "txt:6f5ea493a7449bf3": "6f5ea493a7449bf3",
+    "txt:9cbeba582c41276b": "9cbeba582c41276b",
+    "txt:2ff18aa4e4601cc4": "2ff18aa4e4601cc4",
+    "txt:947533c406f4ff08": "947533c406f4ff08",
+    "txt:5527ed03a8d9664a": "5527ed03a8d9664a",
+    "txt:5eb9dbd9e4baeb7e": "5eb9dbd9e4baeb7e",
+    "txt:daf00d54b860b420": "daf00d54b860b420",
+    "txt:61bbd250d2e53355": "61bbd250d2e53355",
+    "txt:484a7c97eefc7561": "484a7c97eefc7561",
+    "txt:c17ce251efac2e65": "c17ce251efac2e65",
+    "txt:6b5f7921c3f284b3": "6b5f7921c3f284b3",
+    "txt:94dbc4b5c116f4fe": "94dbc4b5c116f4fe",
+    "txt:f345dd2b94fb9e02": "f345dd2b94fb9e02",
+    "txt:b996ff3a68729afd": "b996ff3a68729afd",
+    "txt:a18ea61db6b4eafd": "a18ea61db6b4eafd",
+    "txt:178aba5815a33a69": "178aba5815a33a69",
+    "txt:03945e3d1c5a2e66": "03945e3d1c5a2e66",
+    "txt:a0b7af3097219508": "a0b7af3097219508",
+    "txt:4271927bd5d35a25": "4271927bd5d35a25",
+    "txt:d8b5f7c4b03fca40": "d8b5f7c4b03fca40",
+    "txt:dad9de336e21b128": "dad9de336e21b128",
+    "txt:31c861896c20ecd3": "31c861896c20ecd3",
+    "txt:b7b2f6adf2fb45c1": "b7b2f6adf2fb45c1",
+    "txt:bb8025c42e979dc6": "bb8025c42e979dc6",
+    "txt:ec8cc314c92956fe": "ec8cc314c92956fe",
+    "txt:53c054f566406b91": "53c054f566406b91",
+    "txt:7f1845ef13eaaa61": "7f1845ef13eaaa61",
+    "txt:1e54ca65954275fd": "1e54ca65954275fd",
+    "txt:f914d887817384ca": "f914d887817384ca",
+    "txt:b2b0f8a5147b574a": "b2b0f8a5147b574a",
+    "txt:116f8ec2c1acf162": "116f8ec2c1acf162",
+    "txt:124074801b4fecd5": "124074801b4fecd5",
+    "txt:eaa14e5eafef9a5e": "eaa14e5eafef9a5e",
+    "txt:df1f633a0c8ff3ed": "df1f633a0c8ff3ed",
+    "txt:833e07874c9475ea": "833e07874c9475ea",
+    "txt:20431b9320f314bd": "20431b9320f314bd",
+    "txt:46bc8d8adf04fcbd": "46bc8d8adf04fcbd",
+    "txt:2dd7dc53b345f552": "2dd7dc53b345f552",
+    "txt:65986177c1dd7020": "65986177c1dd7020",
+    "txt:c7a1ab565888e9f4": "c7a1ab565888e9f4",
+    "txt:c77655c54103ac25": "c77655c54103ac25",
+    "txt:1f26a61f025ead67": "1f26a61f025ead67",
+    "txt:cd072c795671244c": "cd072c795671244c",
+    "txt:495a8fa86ad19042": "495a8fa86ad19042",
+    "txt:0a0c5d5cb43c953a": "0a0c5d5cb43c953a",
+    "txt:e407c805feb42f6c": "e407c805feb42f6c",
+    "txt:ac2ad554e06eef46": "ac2ad554e06eef46",
+    "txt:166a468afd2f13fd": "166a468afd2f13fd",
+    "txt:885e301e7f6554f3": "885e301e7f6554f3",
+    "txt:dda41f34c276a381": "dda41f34c276a381",
+    "txt:2633a532ae6d50e9": "2633a532ae6d50e9",
+    "txt:fd075e0d5f789453": "fd075e0d5f789453",
+    "txt:4fd261b6ad2de851": "4fd261b6ad2de851",
+    "txt:ff81e6c68a1522f1": "ff81e6c68a1522f1",
+    "txt:fc3fbc28bd22fe67": "fc3fbc28bd22fe67",
+    "txt:48902344ca9ca938": "48902344ca9ca938",
+    "txt:368eb1ad948858ad": "368eb1ad948858ad",
+    "txt:02e83986fb99bc39": "02e83986fb99bc39",
+    "txt:ec9ec00df6219639": "ec9ec00df6219639",
+    "txt:8c837925a4487868": "8c837925a4487868",
+    "txt:6e251d0cac1d6466": "6e251d0cac1d6466",
+    "txt:ca0db40a1bbaeed3": "ca0db40a1bbaeed3",
+    "txt:3888a398e1521e30": "3888a398e1521e30",
+    "txt:3d53941d7aa47ec3": "3d53941d7aa47ec3",
+    "txt:c308589101f943b3": "c308589101f943b3",
+    "txt:214fcb6642ea0ac5": "214fcb6642ea0ac5",
+    "txt:6a1719a8fa514ac8": "6a1719a8fa514ac8",
+    "txt:02fce483a546c58a": "02fce483a546c58a",
+    "txt:690a4ead41f59d82": "690a4ead41f59d82",
+    "txt:d602a85d06822f62": "d602a85d06822f62",
+    "txt:a8160102dc76f915": "a8160102dc76f915",
+    "txt:3025420bf2d90594": "3025420bf2d90594",
+    "txt:5d972267edde740f": "5d972267edde740f",
+    "txt:2c4bf5850746d537": "2c4bf5850746d537",
+    "txt:84e802a364ca388c": "84e802a364ca388c",
+    "txt:44a270765399a459": "44a270765399a459",
+    "txt:8f24373a6151d880": "8f24373a6151d880",
+    "txt:d32f1f73fc035f69": "d32f1f73fc035f69",
+    "txt:ac13f6b6d8e5b0ed": "ac13f6b6d8e5b0ed",
+    "txt:e73ac8154591a012": "e73ac8154591a012",
+    "txt:2f9f6c6a3fd65634": "2f9f6c6a3fd65634",
+    "txt:0464d58496dc88e3": "0464d58496dc88e3",
+    "txt:388c553414022bb6": "388c553414022bb6",
+    "txt:2a83e5a6e4147583": "2a83e5a6e4147583",
+    "txt:80ddbcfe0f164f02": "80ddbcfe0f164f02",
+    "txt:aa3949855d5046bf": "aa3949855d5046bf",
+    "txt:c05d2357f3a4cd95": "c05d2357f3a4cd95",
+    "txt:37d165e3eab73418": "37d165e3eab73418",
+    "txt:ca17be91d2b28d8b": "ca17be91d2b28d8b",
+    "txt:764d3cdf59862a60": "764d3cdf59862a60",
+    "txt:46b0d9133fb488f9": "46b0d9133fb488f9",
+    "txt:b9fb2f3f43121edc": "b9fb2f3f43121edc",
+    "txt:5b9d6688c2f0b838": "5b9d6688c2f0b838",
+    "txt:76280579ec3ca8f8": "76280579ec3ca8f8",
+    "txt:84547949a26dd5a8": "84547949a26dd5a8",
+    "txt:f3830c9994270158": "f3830c9994270158",
+    "txt:b3d49973b1cfbb15": "b3d49973b1cfbb15",
+    "txt:5c7d79bbc5d3b3c3": "5c7d79bbc5d3b3c3",
+    "txt:5810239d10f0e10f": "5810239d10f0e10f",
+    "txt:ddcbdff99067eee4": "ddcbdff99067eee4",
+    "txt:5d340e71019b1a28": "5d340e71019b1a28",
+    "txt:4d77ba9e4fd96919": "4d77ba9e4fd96919",
+    "txt:a2310202230218a9": "a2310202230218a9",
+    "txt:c67189f201c4fb20": "c67189f201c4fb20",
+    "txt:580a02b0336ac164": "580a02b0336ac164",
+    "txt:47c00451c4a3c8b6": "47c00451c4a3c8b6",
+    "txt:423497a7c5859c0a": "423497a7c5859c0a",
+    "txt:2edbe377afdb1efe": "2edbe377afdb1efe",
+    "txt:3809f6499f6fcdf9": "3809f6499f6fcdf9",
+    "txt:51c4c716b73c2e76": "51c4c716b73c2e76",
+    "txt:25d8fcd3b9125423": "25d8fcd3b9125423",
+    "txt:5e7895b3dcba5fb2": "5e7895b3dcba5fb2",
+    "txt:417477e89187e700": "417477e89187e700",
+    "txt:2285f9fe1276a71e": "2285f9fe1276a71e",
+    "txt:10e0a13235df92a1": "10e0a13235df92a1",
+    "txt:3eeba84996217500": "3eeba84996217500",
+    "txt:bf869cd84e68ae48": "bf869cd84e68ae48",
+    "txt:e246b9b00e012108": "e246b9b00e012108",
+    "txt:36194f3e9d80f9ea": "36194f3e9d80f9ea",
+    "txt:80d7180cb3f74560": "80d7180cb3f74560",
+    "txt:ef2058b22bffb12d": "ef2058b22bffb12d",
+    "txt:a469c1a2e2700360": "a469c1a2e2700360",
+    "txt:770178a0c6030ee5": "770178a0c6030ee5",
+    "txt:0de82b396405e06e": "0de82b396405e06e",
+    "txt:716ac4f47ce099aa": "716ac4f47ce099aa",
+    "txt:654af351fb2182f6": "654af351fb2182f6",
+    "txt:6b8f0d018570d2de": "6b8f0d018570d2de",
+    "txt:6523fb10d674680e": "6523fb10d674680e",
+    "txt:b35b275e61f41777": "b35b275e61f41777",
+    "txt:2d9a11e8deb6a28f": "2d9a11e8deb6a28f",
+    "txt:d5c818e54f049f78": "d5c818e54f049f78",
+    "txt:2ec1188ffd458068": "2ec1188ffd458068",
+    "txt:fb6f8b2383ea7084": "fb6f8b2383ea7084",
+    "txt:641264fffc1d74fa": "641264fffc1d74fa",
+    "txt:9c0d87082d09ff38": "9c0d87082d09ff38",
+    "txt:ab0b8c488a6ba09d": "ab0b8c488a6ba09d",
+    "txt:65b24d5ae9a2c57f": "65b24d5ae9a2c57f",
+    "txt:4de76a9fb4aa900d": "4de76a9fb4aa900d",
+    "txt:a15a18af01508d1e": "a15a18af01508d1e",
+    "txt:b0b14e72c835827e": "b0b14e72c835827e",
+    "txt:fcc2d5b15dea0610": "fcc2d5b15dea0610",
+    "txt:915c210172b20b51": "915c210172b20b51",
+    "txt:64d2afaadbd7b7b0": "64d2afaadbd7b7b0",
+    "txt:87479819a6486c94": "87479819a6486c94",
+    "txt:bb5cb6bfb8cd59a8": "bb5cb6bfb8cd59a8",
+    "txt:8c7b85422bced4c4": "8c7b85422bced4c4",
+    "txt:e362da802554d084": "e362da802554d084",
+    "txt:4be6d541fee6036e": "4be6d541fee6036e",
+    "txt:4fa65789d7a9b16c": "4fa65789d7a9b16c",
+    "txt:c986e03c014a347e": "c986e03c014a347e",
+    "txt:2b49d2a67712c256": "2b49d2a67712c256",
+    "txt:9388775cf5cf43bb": "9388775cf5cf43bb",
+    "txt:b32118e6afa3e44b": "b32118e6afa3e44b",
+    "txt:f931b2f425050d18": "f931b2f425050d18",
+    "txt:8a4cdfc5b9a427b7": "8a4cdfc5b9a427b7",
+    "txt:881266c3b734359a": "881266c3b734359a",
+    "txt:58320dbf6e43919c": "58320dbf6e43919c",
+    "txt:675022d274c1070b": "675022d274c1070b",
+    "txt:ecd69f4662697031": "ecd69f4662697031",
+    "txt:9103d8214dc5b67d": "9103d8214dc5b67d",
+    "txt:b4650e5494f9a688": "b4650e5494f9a688",
+    "txt:709cebbd219707e0": "709cebbd219707e0",
+    "txt:6aeaaf649185f004": "6aeaaf649185f004",
+    "txt:6fc03f2ef04d4a9c": "6fc03f2ef04d4a9c",
+    "txt:a2b9d14b71f09e90": "a2b9d14b71f09e90",
+    "txt:d8ae4c17c000ca8b": "d8ae4c17c000ca8b",
+    "txt:d1d5df16c2aee023": "d1d5df16c2aee023",
+    "txt:e2560eb025088eed": "e2560eb025088eed",
+    "txt:371bc7d94c4c4196": "371bc7d94c4c4196",
+    "txt:9325b0c0c77a6d49": "9325b0c0c77a6d49",
+    "txt:7b528c315c79f44c": "7b528c315c79f44c",
+    "txt:b1cda12417537d7c": "b1cda12417537d7c",
+    "txt:d95ede6c68e054f2": "d95ede6c68e054f2",
+    "txt:515b828c50e55f8a": "515b828c50e55f8a",
+    "txt:dbdca243f9a572f9": "dbdca243f9a572f9",
+    "txt:4c29768a3740b17e": "4c29768a3740b17e",
+    "txt:93157b0e7be193cd": "93157b0e7be193cd",
+    "txt:28581419fdd4a2c1": "28581419fdd4a2c1",
+    "txt:3645d9cbd8fb6152": "3645d9cbd8fb6152",
+    "txt:bf3f489f920f0eb1": "bf3f489f920f0eb1",
+    "txt:df072aae0c6389ab": "df072aae0c6389ab",
+    "txt:d1f31557f2815b23": "d1f31557f2815b23",
+    "txt:e8bc7d8d5b6db7c5": "e8bc7d8d5b6db7c5",
+    "txt:de13cb31fa260b78": "de13cb31fa260b78",
+    "txt:a8450fedea71faf4": "a8450fedea71faf4",
+    "txt:d412262bcea2eaec": "d412262bcea2eaec",
+    "txt:2c40c8b191c65116": "2c40c8b191c65116",
+    "txt:fa04bc0a4ffa4f86": "fa04bc0a4ffa4f86",
+    "txt:a377a7ba99da967b": "a377a7ba99da967b",
+    "txt:54168462610aa0fb": "54168462610aa0fb",
+    "txt:ab05a76a24ac9b45": "ab05a76a24ac9b45",
+    "txt:e1798cc999bf0e08": "e1798cc999bf0e08",
+    "txt:37b050c113d43c9d": "37b050c113d43c9d",
+    "txt:18760e76706096af": "18760e76706096af",
+    "txt:a7296eb765763e5f": "a7296eb765763e5f",
+    "txt:40501e80814e8072": "40501e80814e8072",
+    "txt:0dcd11c48db85536": "0dcd11c48db85536",
+    "txt:94b1207cb00659a1": "94b1207cb00659a1",
+    "txt:0925ea88943c726e": "0925ea88943c726e",
+    "txt:f1e5a3b05e6484d1": "f1e5a3b05e6484d1",
+    "txt:80c50e5dcb1f7eb7": "80c50e5dcb1f7eb7",
+    "txt:8d50d1242b291e47": "8d50d1242b291e47",
+    "txt:5a342e3d5c177371": "5a342e3d5c177371",
+    "txt:e32e0397b52bd496": "e32e0397b52bd496",
+    "txt:7c7e13ef50c3893e": "7c7e13ef50c3893e",
+    "txt:4a47797a2ae054e6": "4a47797a2ae054e6",
+    "txt:54dd3587b9b2dbcf": "54dd3587b9b2dbcf",
+    "txt:de75a92a3e21313d": "de75a92a3e21313d",
+    "txt:544ff6021d6da61e": "544ff6021d6da61e",
+    "txt:85443676be6608a9": "85443676be6608a9",
+    "txt:39b9fd6f2daa2c42": "39b9fd6f2daa2c42",
+    "txt:bccdb577d83c2378": "bccdb577d83c2378",
+    "txt:a2ab14ac612ea460": "a2ab14ac612ea460",
+    "txt:92181de64c401108": "92181de64c401108",
+    "txt:22bc76a787e13a72": "22bc76a787e13a72",
+    "txt:0c037473d639592f": "0c037473d639592f",
+    "txt:2accd1be3b9f5bc3": "2accd1be3b9f5bc3",
+    "txt:fdda07c1578b2956": "fdda07c1578b2956",
+    "txt:d754f16111682c2c": "d754f16111682c2c",
+    "txt:3b3c95689803ce3b": "3b3c95689803ce3b",
+    "txt:822d84681e13daf6": "822d84681e13daf6",
+    "txt:52a6d88b1e576335": "52a6d88b1e576335",
+    "txt:e54a58d73155ec8a": "e54a58d73155ec8a",
+    "txt:e49a91082eb8015f": "e49a91082eb8015f",
+    "txt:ea2ac167785e208b": "ea2ac167785e208b",
+    "txt:ff51c7fe6c9d91e2": "ff51c7fe6c9d91e2",
+    "txt:42cf2b96c634c131": "42cf2b96c634c131",
+    "txt:ba63736fae245e7d": "ba63736fae245e7d",
+    "txt:bdcaa14666516bd4": "bdcaa14666516bd4",
+    "txt:678738d988607dbd": "678738d988607dbd",
+    "txt:019487a3d1e58c79": "019487a3d1e58c79",
+    "txt:6805894769ea4087": "6805894769ea4087",
+    "txt:ed133cddbed9522f": "ed133cddbed9522f",
+    "txt:5ea480d7d1e77806": "5ea480d7d1e77806",
+    "txt:0d0551b733ba691a": "0d0551b733ba691a",
+    "txt:e25659941db434c5": "e25659941db434c5",
+    "txt:a58819a43ab939ec": "a58819a43ab939ec",
+    "txt:a58182e4bf33ebfb": "a58182e4bf33ebfb",
+    "txt:b0c37e6184b4dec4": "b0c37e6184b4dec4",
+    "txt:3b15461f0e7f2e7c": "3b15461f0e7f2e7c",
+    "txt:09fcd519559f42dc": "09fcd519559f42dc",
+    "txt:6fe89b52dbb1cc48": "6fe89b52dbb1cc48",
+    "txt:e80defc6ea816e80": "e80defc6ea816e80",
+    "txt:2fdf90426c152377": "2fdf90426c152377",
+    "txt:d4adec6c8fb06020": "d4adec6c8fb06020",
+    "txt:fde81b42bf6b0485": "fde81b42bf6b0485",
+    "txt:e99d902a0601c1e4": "e99d902a0601c1e4",
+    "txt:68a1e54662fb60d3": "68a1e54662fb60d3",
+    "txt:68632b96f3fb3b36": "68632b96f3fb3b36",
+    "txt:0b4e56efb72aa26c": "0b4e56efb72aa26c",
+    "txt:2dc1603927a29b46": "2dc1603927a29b46",
+    "txt:06d22dd980e0d323": "06d22dd980e0d323",
+    "txt:0d87ea9c7c4a804e": "0d87ea9c7c4a804e",
+    "txt:1ad9f141e84ddad4": "1ad9f141e84ddad4",
+    "txt:2aab3b69f589c763": "2aab3b69f589c763",
+    "txt:34c1bf7c9b851315": "34c1bf7c9b851315",
+    "txt:5a969ddfd429bf95": "5a969ddfd429bf95",
+    "txt:3ae73887b652467c": "3ae73887b652467c",
+    "txt:06c315cea3a97d77": "06c315cea3a97d77",
+    "txt:18af032fd5cc2fa4": "18af032fd5cc2fa4",
+    "txt:280d0f22d2ddcb53": "280d0f22d2ddcb53",
+    "txt:a694c069851f745f": "a694c069851f745f",
+    "txt:b1d06ae9bb120ed1": "b1d06ae9bb120ed1",
+    "txt:8e8e5806d03ee543": "8e8e5806d03ee543",
+    "txt:6465c2a8f3e2cffb": "6465c2a8f3e2cffb",
+    "txt:7709dfbde1be5029": "7709dfbde1be5029",
+    "txt:36b87194f991cecc": "36b87194f991cecc",
+    "txt:1388aae4b864b466": "1388aae4b864b466",
+    "txt:28c82860e52f8e2a": "28c82860e52f8e2a",
+    "txt:3b9da373eb52db60": "3b9da373eb52db60",
+    "txt:048a116c3ca2fc95": "048a116c3ca2fc95",
+    "txt:6b9d6524704cac71": "6b9d6524704cac71",
+    "txt:ba425fb14fc5821d": "ba425fb14fc5821d",
+    "txt:d55065274787b5be": "d55065274787b5be",
+    "txt:4cdebd8c7e6e6d4f": "4cdebd8c7e6e6d4f",
+    "txt:64c708dee71fee2a": "64c708dee71fee2a",
+    "txt:6c75f70daf292760": "6c75f70daf292760",
+    "txt:0369ca9b334e7f9d": "0369ca9b334e7f9d",
+    "txt:b68571e0631007d7": "b68571e0631007d7",
+    "txt:70a0c9cd0b75fd29": "70a0c9cd0b75fd29",
+    "txt:5d4520add3a81d65": "5d4520add3a81d65",
+    "txt:074e4f015c99a569": "074e4f015c99a569",
+    "txt:916da7d8c3d5d100": "916da7d8c3d5d100",
+    "txt:bf31dbba62eff8db": "bf31dbba62eff8db",
+    "txt:8ae9848d9116da73": "8ae9848d9116da73",
+    "txt:e99ad2b9553e04c5": "e99ad2b9553e04c5",
+    "txt:926dbd4ca3b59dbf": "926dbd4ca3b59dbf",
+    "txt:abe171bbe415a8fc": "abe171bbe415a8fc",
+    "txt:e1d6d05233853e2f": "e1d6d05233853e2f",
+    "txt:12e0634a3311074f": "12e0634a3311074f",
+    "txt:ec9aa07a44080406": "ec9aa07a44080406",
+    "txt:33a1db51bb3c5c8a": "33a1db51bb3c5c8a",
+    "txt:be3d45c90cbf0652": "be3d45c90cbf0652",
+    "txt:d859212e5b343b0b": "d859212e5b343b0b",
+    "txt:524d31c0f789f476": "524d31c0f789f476",
+    "txt:3fc6ddfae76ab851": "3fc6ddfae76ab851",
+    "txt:e70f2172a1cc740f": "e70f2172a1cc740f",
+    "txt:3342f975edf2606d": "3342f975edf2606d",
+    "txt:e70422e16f27a042": "e70422e16f27a042",
+    "txt:6054b88934b4cb55": "6054b88934b4cb55",
+    "txt:07c451465186ead6": "07c451465186ead6",
+    "txt:075f02a6d730c9c1": "075f02a6d730c9c1",
+    "txt:16bee753d3346dd6": "16bee753d3346dd6",
+    "txt:059abd2a1f6ac82b": "059abd2a1f6ac82b",
+    "txt:b39025d9eff558d3": "b39025d9eff558d3",
+    "txt:6f3ae1e5c26ebcd8": "6f3ae1e5c26ebcd8",
+    "txt:21db22de8fd190b5": "21db22de8fd190b5",
+    "txt:cefb948af777671d": "cefb948af777671d",
+    "txt:99e75a46d7c60cc2": "99e75a46d7c60cc2",
+    "txt:5245a91f6c117eb8": "5245a91f6c117eb8",
+    "txt:55c3c9a15c00209b": "55c3c9a15c00209b",
+    "txt:d20f71c4d625473c": "d20f71c4d625473c",
+    "txt:5588a0577c71323e": "5588a0577c71323e"
   }
 }
