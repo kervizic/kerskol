@@ -72,6 +72,24 @@ def construire(pilot: bool = False) -> list[dict]:
                 key = "txt:" + clip_id(nettoyer(texte))
                 clips.append({"key": key, "text": texte, "cat": e.get("cat", "enonce")})
 
+        # 2ter) FRAGMENTS de phrase : briques reutilisables pour lire les
+        # corrections de maths par assemblage (frag:<slug> + num:* + op:*), sans
+        # un clip entier par calcul. La cle (slug) est calculee cote front
+        # (verbalize.slugFragment) et emise par la mesure de couverture ; on ne la
+        # recalcule PAS ici (seule source de verite : voix-fragments.json).
+        # Les unites abregees sont prononcees en toutes lettres.
+        frag_spoken = {
+            "frag:h": "heures", "frag:min": "minutes", "frag:cm": "centimetres",
+            "frag:mm": "millimetres", "frag:km": "kilometres", "frag:kg": "kilos",
+            "frag:g": "grammes", "frag:l": "litres", "frag:m": "metres",
+        }
+        frag_path = _DATA.parent / "voix-fragments.json"
+        if frag_path.exists():
+            for e in json.loads(frag_path.read_text(encoding="utf-8")):
+                key = e["cle"]
+                clips.append({"key": key, "text": frag_spoken.get(key, e["texte"]),
+                              "cat": "fragment"})
+
     # 3) dictees (version CORRIGEE, une phrase = un clip)
     dictees = charger_dictees()
     if pilot:

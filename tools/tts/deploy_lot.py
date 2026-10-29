@@ -38,7 +38,10 @@ REPO = Path(__file__).resolve().parents[2]
 MANIFEST = REPO / "frontend/public/voix/manifest.json"
 VOICE = "c1s33-v1"
 WIN = "manu-win"
-WIN_OUT = r"C:\kerskol-tts\sortie_c1s33"
+# Dossier de sortie de generation sur manu-win. Surchargable (WIN_OUT) pour
+# deployer un lot genere a part, ex. les fragments de correction (sortie_frags),
+# sans entrer en course avec le manifest de gen_full (sortie_c1s33).
+WIN_OUT = os.environ.get("WIN_OUT", r"C:\kerskol-tts\sortie_c1s33")
 WIN_OPTS = ["-o", "BatchMode=yes", "-o", "ConnectTimeout=12"]
 KEY = os.path.expanduser("~/.ssh/dict_project")
 VPS_OPTS = ["-i", KEY, "-o", "IdentitiesOnly=yes", "-o", "BatchMode=yes",
@@ -88,11 +91,12 @@ def main() -> int:
         return 1
     gen = json.loads(win_mf.read_text(encoding="utf-8"))
 
-    # nouveaux clips = cles txt: du manifest de gen, cid absent du manifest committe
+    # nouveaux clips = cles de prose (txt:) OU de fragments de correction (frag:)
+    # du manifest de gen, dont le cid est absent du manifest committe.
     old_cids = set(committed["clips"].keys())
     new = {}  # key -> cid
     for k, cid in gen["keys"].items():
-        if k.startswith("txt:") and cid not in old_cids:
+        if k.startswith(("txt:", "frag:")) and cid not in old_cids:
             new[k] = cid
     new_cids = sorted(set(new.values()))
     log(f"clips committes : {len(old_cids)} ; nouveaux a traiter : {len(new_cids)}")
@@ -229,7 +233,7 @@ def asr_controle(cids: list[str], new: dict, tmp: Path) -> set:
         return set()
     # lire relecture.json (scp pour conserver l'UTF-8, pas de Get-Content cp1252)
     rjf = tmp / "relecture.json"
-    run(["scp", *WIN_OPTS, f"{WIN}:C:/kerskol-tts/sortie_c1s33/relecture.json", str(rjf)])
+    run(["scp", *WIN_OPTS, f"{WIN}:{WIN_OUT.replace(chr(92), '/')}/relecture.json", str(rjf)])
     exclus = set()
     try:
         rep = json.loads(rjf.read_text(encoding="utf-8"))
@@ -253,8 +257,9 @@ def pull_mp3(cids: list[str], tmp: Path):
     lst = tmp / "cids.txt"
     lst.write_text("\n".join(cids), encoding="utf-8")
     run(["scp", *WIN_OPTS, str(lst), f"{WIN}:C:/kerskol-tts/deploy_cids.txt"])
+    mp3_dir = f"{WIN_OUT}\\{VOICE}"  # dossier des mp3 (sortie_c1s33 ou sortie_frags)
     ps = (r'$cids=Get-Content C:\kerskol-tts\deploy_cids.txt; '
-          r'$f=$cids|%{"C:\kerskol-tts\sortie_c1s33\c1s33-v1\$_.mp3"}|?{Test-Path $_}; '
+          r'$f=$cids|%{"' + mp3_dir + r'\$_.mp3"}|?{Test-Path $_}; '
           r'Remove-Item C:\kerskol-tts\deploy_lot.zip -ErrorAction SilentlyContinue; '
           r'Compress-Archive -Path $f -DestinationPath C:\kerskol-tts\deploy_lot.zip -Force')
     ssh_win(ps)
