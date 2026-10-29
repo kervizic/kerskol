@@ -38,6 +38,7 @@ describe("Couverture voix CE2 (mesure)", () => {
     L.push(`clips prose a generer (digit-free, dedup) : ${res.aGenerer.length}`);
     L.push(`prose AVEC chiffres (lot ulterieur) : ${res.proseAvecChiffres.length}`);
     L.push(`briques manquantes : ${res.briquesManquantes.length} ${JSON.stringify(res.briquesManquantes.slice(0, 20))}`);
+    L.push(`fragments de phrase a generer (corrections en briques) : ${res.fragmentsAGenerer.length}`);
     // eslint-disable-next-line no-console
     console.log(L.join("\n"));
 
@@ -49,8 +50,24 @@ describe("Couverture voix CE2 (mesure)", () => {
       writeFileSync(url("./__fixtures__/voix-rapport.json"),
         JSON.stringify({ parMatiere: res.parMatiere, parKind: res.parKind, global: res.global,
           proseAvecChiffres: res.proseAvecChiffres, briquesManquantes: res.briquesManquantes }, null, 2), "utf8");
+      // Fragments de phrase a generer (frag:<slug>) pour lire les corrections de
+      // maths par assemblage de briques (voix C1_s33, graine 1234). Consomme par
+      // tools/tts/catalogue.py.
+      writeFileSync(url("./__fixtures__/voix-fragments.json"),
+        JSON.stringify(res.fragmentsAGenerer, null, 2), "utf8");
     }
     expect(res.aGenerer.length).toBeGreaterThanOrEqual(0);
+  });
+
+  it("garde-fou : la couverture maths ne regresse pas (objectif >= 90% avec fragments)", () => {
+    // Plancher de NON-REGRESSION mesure contre le manifest prod. Les corrections
+    // de maths se lisent par assemblage de briques (fragments frag:* + nombres) :
+    // au fur et a mesure que les fragments sont generes et deployes, ce plancher
+    // doit MONTER vers l'objectif de 90%. Ne jamais l'abaisser.
+    const ma = res.parMatiere["MA"];
+    expect(ma, "matiere MA absente du referentiel").toBeTruthy();
+    expect(pct(ma)).toBeGreaterThanOrEqual(60);
+    expect(pct(res.global)).toBeGreaterThanOrEqual(80);
   });
 
   it("aucune brique manquante n'est due a un operateur isole de prose", () => {

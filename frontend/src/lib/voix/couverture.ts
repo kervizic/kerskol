@@ -5,7 +5,7 @@
 // (couverture >= seuil). Pur et deterministe (graines fixes).
 
 import { generateExercise, type ExCalcul, type Forme, type Support } from "../../domain/calcul/generator";
-import { enonceEnCles } from "./verbalize";
+import { correctionEnCles, enonceEnCles, fragmentsDeCorrection } from "./verbalize";
 import { sequenceJouable, type VoixManifest } from "./manifest";
 import { nettoyer } from "./nettoyage";
 import { textesLus, MESSAGES_STATIQUES, type ChampKind } from "./textesExercice";
@@ -99,7 +99,14 @@ export function lisibiliteTexte(
     const cles = enonceEnCles(texte);
     if (sequenceJouable(manifest, cles)) return { lisible: true, voie: "brique", cleTexte: cle };
   }
+  // prose entiere (lecture la plus naturelle) : prioritaire des qu'elle existe.
   if (textIndex.has(cle)) return { lisible: true, voie: "prose", cleTexte: cle };
+  // correction / phrase (lecon) : a defaut de clip entier, assemblage de briques
+  // (fragments + nombres + operateurs). Tout-ou-rien : jamais de lecture partielle.
+  if (kind === "correction" || kind === "phrase") {
+    const cles = correctionEnCles(texte);
+    if (sequenceJouable(manifest, cles)) return { lisible: true, voie: "brique", cleTexte: cle };
+  }
   return { lisible: false, voie: "aucune", cleTexte: cle };
 }
 
@@ -122,6 +129,10 @@ export interface CouvertureResult {
   proseAvecChiffres: string[];
   // Cles de briques manquantes (num:/op:), dedupees.
   briquesManquantes: string[];
+  // Fragments de phrase (frag:*) a generer pour lire les corrections par briques,
+  // dedupes par cle, avec le texte a prononcer. Ne contient QUE les fragments qui
+  // debloquent reellement une correction (aucun autre element manquant).
+  fragmentsAGenerer: { cle: string; texte: string }[];
 }
 
 function bump(b: BucketStat, champ: keyof BucketStat) { b[champ]++; }
@@ -164,6 +175,7 @@ export function mesurerCouverture(
   const aGenerer = new Map<string, { texte: string; cat: string; matiere: string; kind: ChampKind; chiffres: boolean; exemples: Set<string> }>();
   const proseAvecChiffres = new Set<string>();
   const briquesManquantes = new Set<string>();
+  const fragmentsAGenerer = new Map<string, string>(); // frag:cle -> texte
   let nbExercices = 0;
 
   const traiter = (matiere: string, kind: ChampKind, texte: string) => {
@@ -194,6 +206,18 @@ export function mesurerCouverture(
     if (chiffres) {
       bump(mat, "manquants_chiffres"); bump(kd, "manquants_chiffres"); bump(global, "manquants_chiffres");
       proseAvecChiffres.add(cle);
+      // Correction/phrase avec nombres : si elle deviendrait JOUABLE en briques
+      // une fois quelques fragments generes (aucun autre element manquant :
+      // nombre hors catalogue, decimale, comparateur), on liste ces fragments.
+      if (kind === "correction" || kind === "phrase") {
+        const clesBr = correctionEnCles(texte);
+        const bloqueHorsFrag = clesBr.some((k) => !k.startsWith("frag:") && !manifest.keys[k]);
+        const fragsManquants = clesBr.some((k) => k.startsWith("frag:") && !manifest.keys[k]);
+        if (!bloqueHorsFrag && fragsManquants) {
+          for (const f of fragmentsDeCorrection(texte))
+            if (!manifest.keys[f.cle]) fragmentsAGenerer.set(f.cle, f.texte);
+        }
+      }
     } else {
       bump(mat, "manquants_prose"); bump(kd, "manquants_prose"); bump(global, "manquants_prose");
     }
@@ -226,6 +250,7 @@ export function mesurerCouverture(
     aGenerer: [...aGenerer.values()].map((g) => ({ texte: g.texte, cat: g.cat, matiere: g.matiere, kind: g.kind, chiffres: g.chiffres, exemples: [...g.exemples] })),
     proseAvecChiffres: [...proseAvecChiffres].sort(),
     briquesManquantes: [...briquesManquantes].sort(),
+    fragmentsAGenerer: [...fragmentsAGenerer.entries()].sort().map(([cle, texte]) => ({ cle, texte })),
   };
 }
 

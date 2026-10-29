@@ -96,3 +96,113 @@ export function enonceEnCles(prompt: string): string[] {
   }
   return cles;
 }
+
+// --- Lecture des CORRECTIONS par ASSEMBLAGE de briques --------------------
+// Une correction de maths ("Je pars du plus grand, 7, et j'ajoute 2, ca fait
+// 9.") se lit en assemblant des briques : fragments de phrase REUTILISABLES
+// (frag:*), nombres (num:*) et operateurs (op:*). On evite ainsi d'attendre un
+// clip entier par calcul : seuls les quelques fragments fixes sont a generer,
+// les nombres 0..10000 existant deja.
+//
+// Regle d'or identique au reste de la voix : la sequence n'est JOUABLE que si
+// TOUTES ses briques existent (cf. sequenceJouable) -> sinon repli sur le clip
+// prose entier, sinon rien. JAMAIS de lecture partielle. Pour la garantir, tout
+// element non restituable par des briques (decimale « 2,5 », nombre > 10000,
+// comparateur « < » « > » « ≈ » sans brique) pousse une cle VOLONTAIREMENT
+// absente du manifest, ce qui rend la phrase entiere non jouable en briques.
+
+const FRAG_BORDS = /^[\s.,;:!?()«»"“”„'’\-–—…]+|[\s.,;:!?()«»"“”„'’\-–—…]+$/g;
+
+// Nettoie un fragment de phrase : retire la ponctuation/espaces de BORD (la
+// ponctuation interne, apostrophes et traits d'union de mots sont conserves).
+export function nettoyerFragment(raw: string): string {
+  return raw.replace(FRAG_BORDS, "").replace(/\s+/g, " ").trim();
+}
+
+// Cle logique stable d'un fragment : minuscule, sans accent, non-alphanum -> "-".
+// Identique des deux cotes (mesure de couverture + lecteur runtime) : c'est le
+// SEUL contrat avec la generation, qui range le clip sous cette meme cle.
+export function slugFragment(f: string): string {
+  return f
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+// glyphes arithmetiques rencontres dans les corrections (sur-ensemble des
+// operateurs d'enonce : ajoute les comparateurs, qui n'ont pas de brique).
+const CORR_GLYPHS = /[+\-−×÷*/=<>]|≈/;
+
+interface ScanCorrection {
+  cles: string[];
+  frags: { cle: string; texte: string }[];
+}
+
+function scanCorrection(texte: string): ScanCorrection {
+  const cles: string[] = [];
+  const frags: { cle: string; texte: string }[] = [];
+  if (!texte) return { cles, frags };
+  // nombres (milliers « 1 234 » / decimales « 2,5 » / entiers) puis glyphes.
+  const re = /\d{1,3}(?:[   ]\d{3})+|\d+[.,]\d+|\d+|[+\-−×÷*/=<>]|≈/g;
+  const SEP = /[   ]/;
+  const estChiffre = (c: string | undefined) => !!c && c >= "0" && c <= "9";
+  const chiffreVoisin = (s: string, from: number, dir: 1 | -1): boolean => {
+    let i = from;
+    while (i >= 0 && i < s.length && SEP.test(s[i])) i += dir;
+    return estChiffre(s[i]);
+  };
+  const pousserFrag = (raw: string) => {
+    const f = nettoyerFragment(raw);
+    if (!f) return; // ponctuation pure : aucun son, aucune brique necessaire
+    const slug = slugFragment(f);
+    if (!slug) {
+      cles.push("frag:_symbole"); // symbole sans mot (« € », « % ») : pas de brique -> non jouable
+      return;
+    }
+    const cle = `frag:${slug}`;
+    cles.push(cle);
+    frags.push({ cle, texte: f });
+  };
+  let last = 0;
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(texte)) !== null) {
+    const j = m[0];
+    if (/^\d/.test(j)) {
+      pousserFrag(texte.slice(last, m.index));
+      last = re.lastIndex;
+      if (/[.,]/.test(j)) {
+        cles.push("num:_decimal"); // decimale : aucune brique -> phrase non jouable
+      } else {
+        const n = parseInt(j.replace(/[   ]/g, ""), 10);
+        const sous = nombreEnCles(n);
+        cles.push(...(sous.length ? sous : [`num:${n}`])); // > MAX_NOMBRE -> cle absente
+      }
+    } else if (CORR_GLYPHS.test(j)) {
+      // Un glyphe n'est arithmetique que s'il touche un chiffre ; sinon c'est un
+      // trait d'union de mot ou de la ponctuation : on le LAISSE dans le fragment
+      // (bug prod du 27/10 : « fais-tu » lu « moins »).
+      if (!(chiffreVoisin(texte, m.index - 1, -1) || chiffreVoisin(texte, re.lastIndex, 1))) {
+        continue;
+      }
+      pousserFrag(texte.slice(last, m.index));
+      last = re.lastIndex;
+      cles.push(OP_GLYPHS[j] ?? "op:_sans_brique"); // < > ≈ : pas de brique -> non jouable
+    }
+  }
+  pousserFrag(texte.slice(last));
+  return { cles, frags };
+}
+
+// Sequence de briques pour lire une CORRECTION (ou une phrase de lecon avec des
+// nombres). Jouable seulement si toutes les briques existent (cf. ci-dessus).
+export function correctionEnCles(texte: string): string[] {
+  return scanCorrection(texte).cles;
+}
+
+// Fragments de phrase (frag:*) d'une correction, avec leur texte a generer, dans
+// l'ordre de lecture. Sert a lister les briques de phrase a produire.
+export function fragmentsDeCorrection(texte: string): { cle: string; texte: string }[] {
+  return scanCorrection(texte).frags;
+}

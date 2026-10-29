@@ -1478,7 +1478,12 @@ export function Session({
   useEffect(() => {
     if (!voix.disponible) return;
     if (phase === "correct") voix.direTexte("Bravo, c'est juste !", { auto: true });
-    else if (phase === "wrong") voix.direTexte("Ce n'est pas ca, voici comment trouver", { auto: true });
+    else if (phase === "wrong") {
+      // Lire la CORRECTION (prose entiere si dispo, sinon assemblage de briques).
+      // A defaut (pas encore de clip/briques), le message generique d'encouragement.
+      const lue = ex?.correction ? voix.direCorrection(ex.correction, { auto: true }) : false;
+      if (!lue) voix.direTexte("Ce n'est pas ca, voici comment trouver", { auto: true });
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phase, voix.disponible]);
 

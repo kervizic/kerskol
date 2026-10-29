@@ -16,7 +16,7 @@ import {
   type Alignement,
   type VoixManifest,
 } from "./manifest";
-import { enonceEnCles } from "./verbalize";
+import { correctionEnCles, enonceEnCles } from "./verbalize";
 import { signalerBriquesManquantes } from "./journal";
 import { lectureAutoDeProfil, shouldAutoPlay, shouldPlayManual } from "./autoplay";
 import { effectiveLectureAuto, getStoredLectureAuto, setStoredLectureAuto } from "./lectureAutoLocale";
@@ -47,6 +47,12 @@ export interface Voix {
   // prose entier : consigne, indice, phrase, message...). Ne joue RIEN si aucun
   // audio ne correspond (jamais de faux son).
   direTexte: (texte: string, opts?: { auto?: boolean }) => void;
+  // Lit une CORRECTION de maths : clip prose entier s'il existe (le plus naturel),
+  // sinon assemblage de briques (fragments + nombres + operateurs), sinon RIEN.
+  // Jamais de lecture partielle. Retourne true si quelque chose a ete lu.
+  direCorrection: (texte: string, opts?: { auto?: boolean }) => boolean;
+  // true si une correction est lisible (prose entiere OU briques completes).
+  correctionJouable: (texte: string) => boolean;
   // true si l'enonce peut etre lu EN ENTIER (toutes ses briques existent) ; sert
   // a griser le bouton audio plutot que de jouer une phrase incomplete.
   enonceJouable: (prompt: string) => boolean;
@@ -168,6 +174,31 @@ export function useVoix(profil: { id?: string; lecture_auto?: boolean | null } |
     [direTexte]
   );
 
+  // Correction : prose entiere d'abord (lecture naturelle), sinon assemblage de
+  // briques (frag:/num:/op:) SI toutes presentes, sinon rien (jamais de partiel).
+  const direCorrection = useCallback(
+    (texte: string, opts?: { auto?: boolean }): boolean => {
+      const url = urlPourTexte(manifest, texte);
+      if (url) {
+        jouerUrls([url], { auto: opts?.auto, brique: false });
+        return true;
+      }
+      const cles = correctionEnCles(texte);
+      if (sequenceJouable(manifest, cles)) {
+        jouerUrls(urlsPourCles(manifest, cles), { auto: opts?.auto, gapMs: GAP_NOMBRE, brique: true });
+        return true;
+      }
+      return false;
+    },
+    [manifest, jouerUrls]
+  );
+
+  const correctionJouable = useCallback(
+    (texte: string) =>
+      texteProseJouable(manifest, texte) || sequenceJouable(manifest, correctionEnCles(texte)),
+    [manifest]
+  );
+
   // Jouable si toutes les briques de calcul existent, OU si un clip prose au meme
   // texte existe (sinon bouton grise, jamais de lecture partielle).
   const texteJouable = useCallback(
@@ -249,7 +280,7 @@ export function useVoix(profil: { id?: string; lecture_auto?: boolean | null } |
   }, [manifest]);
 
   return useMemo(
-    () => ({ disponible, lectureAutoActive: lectureAuto, basculerLectureAuto, activer, couper, direCles, direEnonce, direTexte, enonceJouable, texteJouable, direDictee }),
-    [disponible, lectureAuto, basculerLectureAuto, activer, couper, direCles, direEnonce, direTexte, enonceJouable, texteJouable, direDictee]
+    () => ({ disponible, lectureAutoActive: lectureAuto, basculerLectureAuto, activer, couper, direCles, direEnonce, direTexte, direCorrection, correctionJouable, enonceJouable, texteJouable, direDictee }),
+    [disponible, lectureAuto, basculerLectureAuto, activer, couper, direCles, direEnonce, direTexte, direCorrection, correctionJouable, enonceJouable, texteJouable, direDictee]
   );
 }
