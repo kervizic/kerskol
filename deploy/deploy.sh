@@ -141,13 +141,34 @@ else
   bash "${DEPLOY_DIR}/build-front.sh" "${FRONTEND_DIR}" "${APP_VERSION}"
 fi
 
-echo "==> 6/6 nginx : test puis reload"
+echo "==> 6/7 nginx : test puis reload"
 if sudo nginx -t; then
   sudo systemctl reload nginx
   echo "    nginx recharge."
 else
   echo "Erreur : 'nginx -t' a echoue. Nginx N'A PAS ete recharge." >&2
   exit 1
+fi
+
+echo "==> 7/7 integrite audio : chaque clip du manifest servi a-t-il son mp3 ?"
+# Garde-fou anti-voix-muette (incident du 29/10 : /opt/kerskol/audio efface par
+# un git clean, manifest complet mais mp3 absents -> 404 silencieux). Si un seul
+# clip du manifest servi n'a pas de fichier audio, on ECHOUE BRUYAMMENT : le
+# deploiement ne peut pas se declarer OK avec une voix cassee.
+AUDIO_DIR="${KERSKOL_AUDIO_DIR:-/opt/kerskol/audio}"
+SERVED_MANIFEST="${DIST_DIR}/voix/manifest.json"
+if [ -f "$SERVED_MANIFEST" ]; then
+  if python3 "${KERSKOL_DIR}/tools/tts/verif_fichiers.py" \
+       --manifest "$SERVED_MANIFEST" --audio-dir "$AUDIO_DIR"; then
+    echo "    integrite audio OK."
+  else
+    echo "ERREUR : des clips du manifest n'ont pas de fichier audio sur le VPS." >&2
+    echo "         La voix serait muette. Restaurez les mp3 (tools/tts, sauvegarde" >&2
+    echo "         /opt/kerskol/backups/audio) avant de considerer ce deploy comme OK." >&2
+    exit 1
+  fi
+else
+  echo "    NB : pas de manifest voix servi ($SERVED_MANIFEST absent) : verif ignoree."
 fi
 
 echo "Deploiement termine."

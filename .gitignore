@@ -33,6 +33,14 @@ data/
 *.dump
 *.sql.gz
 
+# Audio TTS et sauvegardes : vivent dans l'arbre /opt/kerskol sur le VPS mais ne
+# doivent JAMAIS etre touches par git. Les lister ici les protege d'un
+# `git clean -fd` (incident du 29/10 : /opt/kerskol/audio, untracked, a ete
+# efface par un git clean, rendant la voix muette). Ils sont deposes/sauvegardes
+# hors de tout commit.
+audio/
+backups/
+
 # Éditeurs
 .vscode/
 .idea/

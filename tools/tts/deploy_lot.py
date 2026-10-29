@@ -135,11 +135,24 @@ def main() -> int:
                     log("ERREUR : copie mp3 vers le VPS a echoue.")
                     return 1
                 log(f"mp3 copies sur le VPS : {len(mp3s)}")
-            # d. fusion manifest committe (uniquement les cids retenus)
+            # d. fusion manifest committe (en memoire d'abord, uniquement les
+            # cids retenus)
             for k, cid in new.items():
                 if cid in retenus:
                     committed["keys"][k] = cid
                     committed["clips"][cid] = gen["clips"][cid]
+            # GARDE-FOU : avant de publier le manifest, verifier que CHAQUE clip
+            # du manifest (anciens + nouveaux) a bien son mp3 sur le VPS. Si un
+            # seul manque, on NE commit pas, NE pousse pas et NE sert pas le
+            # manifest (sinon 404 silencieux cote appli, voix muette).
+            manquants = verifier_fichiers_vps(vps, sorted(committed["clips"].keys()), tmp)
+            if manquants:
+                log(f"ECHEC : {len(manquants)} clip(s) du manifest sans mp3 valide sur "
+                    f"le VPS (ex. {manquants[:5]}).")
+                log("Manifest NON publie (ni commit, ni push, ni dist). Restaurez les "
+                    "mp3 manquants (sauvegarde /opt/kerskol/backups/audio, "
+                    "sources manu-win) puis relancez deploy_lot.")
+                return 1
             MANIFEST.write_text(json.dumps(committed, ensure_ascii=False, indent=2),
                                 encoding="utf-8")
             if not os.environ.get("NO_COMMIT"):
@@ -267,6 +280,37 @@ def pull_mp3(cids: list[str], tmp: Path):
     run(["scp", *WIN_OPTS, f"{WIN}:C:/kerskol-tts/deploy_lot.zip", str(zipp)])
     if zipp.exists():
         run(["unzip", "-q", "-o", str(zipp), "-d", str(tmp / "mp3")])
+
+
+def verifier_fichiers_vps(vps: str, cids: list[str], tmp: Path) -> list[str]:
+    """Garde-fou anti-voix-muette : retourne la liste des cid du manifest dont le
+    mp3 manque (ou est vide) sur le VPS, dans AUDIO_DIR.
+
+    Incident du 29/10 : le dossier audio (untracked) a ete efface par un
+    git clean, laissant un manifest complet mais des mp3 absents (404 silencieux,
+    voix muette). On refuse desormais de publier un manifest dont un seul fichier
+    manque."""
+    lst = tmp / "verif_cids.txt"
+    lst.write_text("\n".join(cids), encoding="utf-8")
+    rc = run(["scp", *VPS_OPTS, str(lst), f"{vps}:/tmp/kerskol_verif_cids.txt"])
+    if rc.returncode != 0:
+        log("NB : impossible d'envoyer la liste de verification au VPS ; "
+            "verification fichiers IGNOREE.")
+        return []
+    pyc = (
+        "import os;"
+        f"ad='{AUDIO_DIR}';"
+        "cids=open('/tmp/kerskol_verif_cids.txt').read().split();"
+        "miss=[c for c in cids if (not os.path.isfile(os.path.join(ad,c+'.mp3'))) "
+        "or os.path.getsize(os.path.join(ad,c+'.mp3'))==0];"
+        "print('\\n'.join(miss))"
+    )
+    r = ssh_vps(vps, f"python3 -c \"{pyc}\"")
+    if r.returncode != 0:
+        log(f"NB : verification fichiers distante en erreur ({r.stderr.strip()[:120]}) ; "
+            "verification IGNOREE.")
+        return []
+    return [c for c in r.stdout.split() if c]
 
 
 def commit_push(n: int):

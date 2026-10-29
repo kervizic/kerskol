@@ -46,3 +46,29 @@ echo "OK : sauvegarde ${OUT} ($(du -h "$OUT" | cut -f1))."
 # Rotation : suppression des sauvegardes de plus de RETENTION_DAYS jours.
 find "$BACKUP_DIR" -name 'kerskol-*.sql.gz' -type f -mtime +"$RETENTION_DAYS" -delete
 echo "Rotation : sauvegardes de plus de ${RETENTION_DAYS} jours supprimees."
+
+# --- Sauvegarde des fichiers audio (voix TTS) -------------------------------
+# Les mp3 vivent dans /opt/kerskol/audio, HORS git (deposes sur le VPS, jamais
+# committes). Ils ne sont donc PAS couverts par le dump SQL ci-dessus. Incident
+# du 29/10 : ce dossier a ete efface (git clean sur un dossier untracked), voix
+# muette, et AUCUNE sauvegarde n'existait pour le restaurer. On corrige :
+#   1. un miroir rsync TOUJOURS a jour (restauration instantanee), SANS --delete
+#      -> un effacement de la source ne detruit JAMAIS la sauvegarde ;
+#   2. un instantane tar.gz date (recuperation a une date donnee), avec rotation.
+AUDIO_SRC="${KERSKOL_AUDIO_DIR:-/opt/kerskol/audio}"
+AUDIO_MIRROR="${BACKUP_DIR}/audio"
+NB_MP3="$(find "$AUDIO_SRC" -type f -name '*.mp3' 2>/dev/null | wc -l | tr -d ' ')"
+if [ "${NB_MP3:-0}" -gt 0 ]; then
+  mkdir -p "$AUDIO_MIRROR"
+  # Pas de --delete : la sauvegarde ne perd jamais un fichier meme si la source
+  # est videe entre deux passages.
+  rsync -a "$AUDIO_SRC/" "$AUDIO_MIRROR/"
+  AUDIO_TAR="${BACKUP_DIR}/audio-${TS}.tar.gz"
+  tar -czf "$AUDIO_TAR" -C "$AUDIO_SRC" .
+  chmod 600 "$AUDIO_TAR"
+  echo "OK : audio sauvegarde (${NB_MP3} mp3) -> miroir ${AUDIO_MIRROR} + ${AUDIO_TAR} ($(du -h "$AUDIO_TAR" | cut -f1))."
+  find "$BACKUP_DIR" -name 'audio-*.tar.gz' -type f -mtime +"$RETENTION_DAYS" -delete
+else
+  # Source vide/absente : surtout NE PAS ecraser une sauvegarde saine existante.
+  echo "ATTENTION : ${AUDIO_SRC} vide ou absent (${NB_MP3:-0} mp3). Sauvegarde audio ignoree (miroir precedent conserve intact)." >&2
+fi
