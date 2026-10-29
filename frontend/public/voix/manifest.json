@@ -27238,6 +27238,1866 @@
       "text": "3990 − 100 = 3890.",
       "ms": 4080,
       "cat": "enonce"
+    },
+    "6a410496faa16f8b": {
+      "text": "A",
+      "ms": 560,
+      "cat": "fragment"
+    },
+    "20a325bb294860e4": {
+      "text": "à ajouter, puis",
+      "ms": 1760,
+      "cat": "fragment"
+    },
+    "8232079279c69afb": {
+      "text": "à B",
+      "ms": 1200,
+      "cat": "fragment"
+    },
+    "9b5f48b1297b6c59": {
+      "text": "à C",
+      "ms": 880,
+      "cat": "fragment"
+    },
+    "1ef95adaf723f3e1": {
+      "text": "à la ligne",
+      "ms": 1040,
+      "cat": "fragment"
+    },
+    "f806c32ac8ea3057": {
+      "text": "a poser a gauche. Total",
+      "ms": 2560,
+      "cat": "fragment"
+    },
+    "46d2861c0d1693e0": {
+      "text": "animaux. Les lapins sont les plus nombreux",
+      "ms": 3360,
+      "cat": "fragment"
+    },
+    "1daf4019a8cc6e9c": {
+      "text": "animaux. Les poules ont",
+      "ms": 1840,
+      "cat": "fragment"
+    },
+    "4e62ba4ca54bc2f5": {
+      "text": "au début = reste + donné",
+      "ms": 3200,
+      "cat": "fragment"
+    },
+    "bd7a695ebaabc77a": {
+      "text": "autocollants. Léa a",
+      "ms": 4240,
+      "cat": "fragment"
+    },
+    "15a29815e8936052": {
+      "text": "autocollants. Tom en a le plus",
+      "ms": 4080,
+      "cat": "fragment"
+    },
+    "46dab20037bb63b4": {
+      "text": "avant",
+      "ms": 800,
+      "cat": "fragment"
+    },
+    "0438447c799b4535": {
+      "text": "B",
+      "ms": 560,
+      "cat": "fragment"
+    },
+    "24f1c9cd4dfdbfb0": {
+      "text": "ballons",
+      "ms": 640,
+      "cat": "fragment"
+    },
+    "0f673fe3cfbd1e3d": {
+      "text": "billes",
+      "ms": 880,
+      "cat": "fragment"
+    },
+    "cd12c17c5447c7e8": {
+      "text": "billes de plus",
+      "ms": 1200,
+      "cat": "fragment"
+    },
+    "bec41fe282bda595": {
+      "text": "billes en tout",
+      "ms": 1200,
+      "cat": "fragment"
+    },
+    "ca3cd329728f2d18": {
+      "text": "billes, Léa en a",
+      "ms": 1840,
+      "cat": "fragment"
+    },
+    "931c02b4beb3f81c": {
+      "text": "billes rouges",
+      "ms": 1200,
+      "cat": "fragment"
+    },
+    "6a45f20ab5789315": {
+      "text": "bonbons verts",
+      "ms": 1360,
+      "cat": "fragment"
+    },
+    "17b3647d8bec4b0c": {
+      "text": "C",
+      "ms": 960,
+      "cat": "fragment"
+    },
+    "7ffeda8c939500a8": {
+      "text": "c, donc",
+      "ms": 1360,
+      "cat": "fragment"
+    },
+    "a49056cf3e754b2a": {
+      "text": "c'est",
+      "ms": 800,
+      "cat": "fragment"
+    },
+    "117c6764f85021ac": {
+      "text": "c'est B",
+      "ms": 1040,
+      "cat": "fragment"
+    },
+    "b5a90be0f4094756": {
+      "text": "c'est la case B",
+      "ms": 1440,
+      "cat": "fragment"
+    },
+    "4737c4282b34b123": {
+      "text": "c'est la moitie de",
+      "ms": 1360,
+      "cat": "fragment"
+    },
+    "67fe352e9f2cc9bf": {
+      "text": "c'est la plus basse",
+      "ms": 1440,
+      "cat": "fragment"
+    },
+    "94b5586209e9fd0d": {
+      "text": "c'est la plus haute",
+      "ms": 1520,
+      "cat": "fragment"
+    },
+    "902b80af41a54c17": {
+      "text": "c'est le double du double",
+      "ms": 1840,
+      "cat": "fragment"
+    },
+    "68e2c73f343f3ae5": {
+      "text": "c'est le nœud B",
+      "ms": 1040,
+      "cat": "fragment"
+    },
+    "58ceb86c979df854": {
+      "text": "c'est presque un double",
+      "ms": 1680,
+      "cat": "fragment"
+    },
+    "562b861a05896ab2": {
+      "text": "c'est un double",
+      "ms": 1200,
+      "cat": "fragment"
+    },
+    "5a2896d614be188c": {
+      "text": "c. Puis",
+      "ms": 1200,
+      "cat": "fragment"
+    },
+    "68725e81f4657563": {
+      "text": "ça fait",
+      "ms": 1120,
+      "cat": "fragment"
+    },
+    "3a7d717266ecd826": {
+      "text": "carrés en tout",
+      "ms": 1200,
+      "cat": "fragment"
+    },
+    "1665851a01a525e6": {
+      "text": "ce qui donne",
+      "ms": 1200,
+      "cat": "fragment"
+    },
+    "5e8767b5973f5764": {
+      "text": "ce sont des dizaines entieres",
+      "ms": 2400,
+      "cat": "fragment"
+    },
+    "b3dcec0b4fc06df2": {
+      "text": "celle du vélo vaut",
+      "ms": 1360,
+      "cat": "fragment"
+    },
+    "dd0f8dad2a18d806": {
+      "text": "cent quatre-vingt-six s'ecrit",
+      "ms": 2000,
+      "cat": "fragment"
+    },
+    "770245c4d48bf771": {
+      "text": "centaines",
+      "ms": 1200,
+      "cat": "fragment"
+    },
+    "a0612b9fefe4b0ed": {
+      "text": "centaines entieres",
+      "ms": 1840,
+      "cat": "fragment"
+    },
+    "80277ce9753212ed": {
+      "text": "centimètres",
+      "ms": 1200,
+      "cat": "fragment"
+    },
+    "427afee6eb485447": {
+      "text": "centimètres du centre jusqu'au bord",
+      "ms": 2480,
+      "cat": "fragment"
+    },
+    "82f4542e16ee3826": {
+      "text": "centimètres entre les deux bouts. Par exemple de",
+      "ms": 3600,
+      "cat": "fragment"
+    },
+    "bac9a0a6348381d7": {
+      "text": "centimètres : il est à la même distance de",
+      "ms": 3360,
+      "cat": "fragment"
+    },
+    "25c9957ed2f8422a": {
+      "text": "centimètres. Par exemple de",
+      "ms": 1920,
+      "cat": "fragment"
+    },
+    "9470e7cc3cadda17": {
+      "text": "centimètres. Pour lire la règle, on regarde où commence et où finit le trait",
+      "ms": 5520,
+      "cat": "fragment"
+    },
+    "1a2c39c9c2c41886": {
+      "text": "centimètres, puis on tourne : tout le bord est à",
+      "ms": 3920,
+      "cat": "fragment"
+    },
+    "26d47f3a6eb390bb": {
+      "text": "centimètres. Tout le bord du cercle est alors à",
+      "ms": 3360,
+      "cat": "fragment"
+    },
+    "8d05e685cd66a65b": {
+      "text": "Chaque case coloriée à gauche a sa jumelle à droite, à la même distance du trait : D",
+      "ms": 6400,
+      "cat": "fragment"
+    },
+    "c4c3c071795c601b": {
+      "text": "Chaque case coloriée à gauche a sa jumelle à droite, à la même distance du trait. On colorie C",
+      "ms": 6480,
+      "cat": "fragment"
+    },
+    "9ce4277675ea4e45": {
+      "text": "Chaque image, c'est",
+      "ms": 2320,
+      "cat": "fragment"
+    },
+    "d823ffd7484457ff": {
+      "text": "Chaque image est une étoile. On compte les images : il y en a",
+      "ms": 4640,
+      "cat": "fragment"
+    },
+    "482320996a0ad2c2": {
+      "text": "Chaque image est une pomme. On compte les images : il y en a",
+      "ms": 4880,
+      "cat": "fragment"
+    },
+    "27c6c46382e1de4e": {
+      "text": "chats",
+      "ms": 1200,
+      "cat": "fragment"
+    },
+    "47b3d42a519e3cee": {
+      "text": "chiens de plus",
+      "ms": 1760,
+      "cat": "fragment"
+    },
+    "fb1ddbb62eefcc6a": {
+      "text": "chiens et",
+      "ms": 1440,
+      "cat": "fragment"
+    },
+    "1dbae249dff07ae1": {
+      "text": "cinq cent six s'ecrit",
+      "ms": 1520,
+      "cat": "fragment"
+    },
+    "0590a10e3ba6352c": {
+      "text": "cinq mille deux cent soixante-neuf s'ecrit",
+      "ms": 2880,
+      "cat": "fragment"
+    },
+    "4907b47ed66f5014": {
+      "text": "cinq mille sept cent vingt-trois s'ecrit",
+      "ms": 2800,
+      "cat": "fragment"
+    },
+    "2b0d09030750a786": {
+      "text": "cinq mille soixante-six s'ecrit",
+      "ms": 1920,
+      "cat": "fragment"
+    },
+    "136be1cf9aff1461": {
+      "text": "cinq mille trente-cinq s'ecrit",
+      "ms": 2320,
+      "cat": "fragment"
+    },
+    "99c5a4849653c81b": {
+      "text": "centimetres",
+      "ms": 1280,
+      "cat": "fragment"
+    },
+    "20f281f73c512ffc": {
+      "text": "cm de O",
+      "ms": 2000,
+      "cat": "fragment"
+    },
+    "aa71f26c4667e246": {
+      "text": "cm du centre",
+      "ms": 1680,
+      "cat": "fragment"
+    },
+    "21638802d3fdda2f": {
+      "text": "cm et on reporte cette longueur à partir de O : le nouveau point est à",
+      "ms": 5680,
+      "cat": "fragment"
+    },
+    "06cf790cd142564e": {
+      "text": "Colonne A, ligne",
+      "ms": 1840,
+      "cat": "fragment"
+    },
+    "314fc80ddbda0ab6": {
+      "text": "Colonne C, ligne",
+      "ms": 1920,
+      "cat": "fragment"
+    },
+    "ca2eae939e84bb60": {
+      "text": "Colonne D, ligne",
+      "ms": 1760,
+      "cat": "fragment"
+    },
+    "9e1448fbcf88edbb": {
+      "text": "Compter jusqu'à",
+      "ms": 1120,
+      "cat": "fragment"
+    },
+    "6aef4d7191ec3217": {
+      "text": "crayons",
+      "ms": 880,
+      "cat": "fragment"
+    },
+    "daf91cdb8a3ffa83": {
+      "text": "D",
+      "ms": 560,
+      "cat": "fragment"
+    },
+    "76508b60a57294ef": {
+      "text": "D'abord",
+      "ms": 720,
+      "cat": "fragment"
+    },
+    "cda0c48919fd27df": {
+      "text": "D'abord le prix",
+      "ms": 1200,
+      "cat": "fragment"
+    },
+    "071dbfa4e7da92ab": {
+      "text": "D'abord le total dépensé",
+      "ms": 1760,
+      "cat": "fragment"
+    },
+    "3518742b4fa910ab": {
+      "text": "dans la case des BD",
+      "ms": 1440,
+      "cat": "fragment"
+    },
+    "4711438a9a298296": {
+      "text": "dans la case des chats",
+      "ms": 1360,
+      "cat": "fragment"
+    },
+    "5587afd3bfac71a3": {
+      "text": "dans la case des garçons",
+      "ms": 1440,
+      "cat": "fragment"
+    },
+    "14a8ed6a3ba36768": {
+      "text": "dans la case des poires",
+      "ms": 1440,
+      "cat": "fragment"
+    },
+    "9be846da8014a4d6": {
+      "text": "dans le tableau : c'est la ligne de Zoé, qui a lu",
+      "ms": 3440,
+      "cat": "fragment"
+    },
+    "f7a905c61c9b04ff": {
+      "text": "de",
+      "ms": 480,
+      "cat": "fragment"
+    },
+    "8171fb066324ddf4": {
+      "text": "de moins",
+      "ms": 720,
+      "cat": "fragment"
+    },
+    "450f8b4e5e82c949": {
+      "text": "de plus pour arriver à",
+      "ms": 1600,
+      "cat": "fragment"
+    },
+    "204e77e303febc2b": {
+      "text": "Deux cases vers la droite : de A à C. On arrive en C",
+      "ms": 4640,
+      "cat": "fragment"
+    },
+    "cc7747f469a71bd0": {
+      "text": "Deux cases vers la droite : de B à D. Trois cases vers le haut : de la ligne",
+      "ms": 5360,
+      "cat": "fragment"
+    },
+    "24fb0663c259fe8f": {
+      "text": "Deux cases vers le bas : de la ligne",
+      "ms": 2720,
+      "cat": "fragment"
+    },
+    "d1bf6c28e66207bf": {
+      "text": "deux cent cinquante-trois s'ecrit",
+      "ms": 2000,
+      "cat": "fragment"
+    },
+    "b1f778d79a9517ab": {
+      "text": "deux cent quatre-vingt-cinq s'ecrit",
+      "ms": 2160,
+      "cat": "fragment"
+    },
+    "7df9745b2849e4ce": {
+      "text": "deux cent quatre-vingt-treize s'ecrit",
+      "ms": 2160,
+      "cat": "fragment"
+    },
+    "794e778dccaaea4b": {
+      "text": "deux cent soixante-huit s'ecrit",
+      "ms": 2080,
+      "cat": "fragment"
+    },
+    "af67c51beb417127": {
+      "text": "deux mille deux cent quatre-vingt-six s'ecrit",
+      "ms": 2640,
+      "cat": "fragment"
+    },
+    "923102c193178580": {
+      "text": "dizaines",
+      "ms": 880,
+      "cat": "fragment"
+    },
+    "e0613ad9e707e8a1": {
+      "text": "dizaines à",
+      "ms": 1120,
+      "cat": "fragment"
+    },
+    "28ece564df8ce01e": {
+      "text": "dizaines entieres",
+      "ms": 1520,
+      "cat": "fragment"
+    },
+    "556de32201b21004": {
+      "text": "donc",
+      "ms": 640,
+      "cat": "fragment"
+    },
+    "2bd11b2bf1f667e5": {
+      "text": "donc avant",
+      "ms": 1040,
+      "cat": "fragment"
+    },
+    "8ff91af09ad07d29": {
+      "text": "donc il y a",
+      "ms": 1200,
+      "cat": "fragment"
+    },
+    "97fce94475f6bc01": {
+      "text": "donc on arrive en D",
+      "ms": 1360,
+      "cat": "fragment"
+    },
+    "b25b92ef42d4a1c9": {
+      "text": "E",
+      "ms": 1200,
+      "cat": "fragment"
+    },
+    "9c82ef9b1876e71b": {
+      "text": "elle vaut",
+      "ms": 1040,
+      "cat": "fragment"
+    },
+    "a86552a041180f96": {
+      "text": "en",
+      "ms": 560,
+      "cat": "fragment"
+    },
+    "182af4a43c0f6d70": {
+      "text": "Ensuite",
+      "ms": 880,
+      "cat": "fragment"
+    },
+    "ad018e9acf34b6d7": {
+      "text": "Entre",
+      "ms": 720,
+      "cat": "fragment"
+    },
+    "3e974f4fdc9dd64d": {
+      "text": "Entre le début et la fin, il faut",
+      "ms": 2640,
+      "cat": "fragment"
+    },
+    "f44314d284e1d97c": {
+      "text": "er : une semaine entière plus tard, donc encore un lundi",
+      "ms": 4640,
+      "cat": "fragment"
+    },
+    "7f21399f9556db45": {
+      "text": "est au croisement de la colonne A et de la ligne",
+      "ms": 3120,
+      "cat": "fragment"
+    },
+    "e490d2c3d640eec1": {
+      "text": "est coloriée : c'est",
+      "ms": 2320,
+      "cat": "fragment"
+    },
+    "22ef166a3a6727e0": {
+      "text": "est entre",
+      "ms": 1120,
+      "cat": "fragment"
+    },
+    "8477ab93e221c473": {
+      "text": "est plus grand que",
+      "ms": 1200,
+      "cat": "fragment"
+    },
+    "26a65adb1467b6d1": {
+      "text": "est tout en bas à droite",
+      "ms": 1920,
+      "cat": "fragment"
+    },
+    "23a502547745956c": {
+      "text": "est un nombre de dizaines : on ajoute",
+      "ms": 2560,
+      "cat": "fragment"
+    },
+    "85cc6fb256e61783": {
+      "text": "est un nombre de dizaines : on enlève",
+      "ms": 2880,
+      "cat": "fragment"
+    },
+    "233e7fb7052d77ff": {
+      "text": "et",
+      "ms": 720,
+      "cat": "fragment"
+    },
+    "bbf45156bfbc7d00": {
+      "text": "et D",
+      "ms": 1120,
+      "cat": "fragment"
+    },
+    "4e098e06cddc971f": {
+      "text": "et de",
+      "ms": 720,
+      "cat": "fragment"
+    },
+    "d48ae431eed63e2b": {
+      "text": "et E",
+      "ms": 1120,
+      "cat": "fragment"
+    },
+    "92b8ba5e953f24aa": {
+      "text": "et F",
+      "ms": 1280,
+      "cat": "fragment"
+    },
+    "d51469ac030ffeab": {
+      "text": "et j'ajoute",
+      "ms": 960,
+      "cat": "fragment"
+    },
+    "f00ba8c77c0bf141": {
+      "text": "et la grande indique",
+      "ms": 1280,
+      "cat": "fragment"
+    },
+    "7d7854c4ddf58dd6": {
+      "text": "fois plus que",
+      "ms": 1440,
+      "cat": "fragment"
+    },
+    "088f454a712b00c1": {
+      "text": "grammes",
+      "ms": 640,
+      "cat": "fragment"
+    },
+    "f8f601bf067ef4de": {
+      "text": "g, donc",
+      "ms": 880,
+      "cat": "fragment"
+    },
+    "4662450cfdfba51b": {
+      "text": "glaces",
+      "ms": 720,
+      "cat": "fragment"
+    },
+    "7ca6b2bdbb469c46": {
+      "text": "groupes de",
+      "ms": 880,
+      "cat": "fragment"
+    },
+    "d712cbc4d8c2d66a": {
+      "text": "heures",
+      "ms": 880,
+      "cat": "fragment"
+    },
+    "5e911026dc13386e": {
+      "text": "h, c'est",
+      "ms": 1840,
+      "cat": "fragment"
+    },
+    "7a5e04420f7546a1": {
+      "text": "h de l'après-midi",
+      "ms": 1120,
+      "cat": "fragment"
+    },
+    "4ec5034c46173104": {
+      "text": "h, il s'écoule",
+      "ms": 1360,
+      "cat": "fragment"
+    },
+    "dee6badc9cbc605d": {
+      "text": "huit cent soixante-treize s'ecrit",
+      "ms": 2720,
+      "cat": "fragment"
+    },
+    "0fa8062b6a06a075": {
+      "text": "huit mille cent dix-sept s'ecrit",
+      "ms": 2640,
+      "cat": "fragment"
+    },
+    "f35ddca9379c5f57": {
+      "text": "Il arrive sur la case B",
+      "ms": 1840,
+      "cat": "fragment"
+    },
+    "7d350ae6fb69a379": {
+      "text": "Il arrive sur la case C",
+      "ms": 1760,
+      "cat": "fragment"
+    },
+    "e223feb021a243a1": {
+      "text": "Il avance deux fois vers la droite, A",
+      "ms": 2960,
+      "cat": "fragment"
+    },
+    "81d83ef813d32ef0": {
+      "text": "Il avance deux fois vers le haut, A",
+      "ms": 2800,
+      "cat": "fragment"
+    },
+    "99444eb7a5bc03c9": {
+      "text": "Il faut",
+      "ms": 1200,
+      "cat": "fragment"
+    },
+    "9b6ccba6664578b9": {
+      "text": "Il faut composer exactement",
+      "ms": 2240,
+      "cat": "fragment"
+    },
+    "4fcb24585af1fed0": {
+      "text": "il mesure",
+      "ms": 1280,
+      "cat": "fragment"
+    },
+    "c3168031234278bc": {
+      "text": "il reste",
+      "ms": 1200,
+      "cat": "fragment"
+    },
+    "48683134f0b9d4a4": {
+      "text": "il s'écoule",
+      "ms": 1440,
+      "cat": "fragment"
+    },
+    "0c71b76bfde7b625": {
+      "text": "il y a",
+      "ms": 1440,
+      "cat": "fragment"
+    },
+    "35ca778a2b71a85b": {
+      "text": "il y a le plus de poires",
+      "ms": 1680,
+      "cat": "fragment"
+    },
+    "2d06a57b770dcaa6": {
+      "text": "images font",
+      "ms": 1520,
+      "cat": "fragment"
+    },
+    "b4b59957c3b281c6": {
+      "text": "images, soit",
+      "ms": 1520,
+      "cat": "fragment"
+    },
+    "766ebb02c7529548": {
+      "text": "J'ajoute",
+      "ms": 1200,
+      "cat": "fragment"
+    },
+    "e2b27ae7da6206ff": {
+      "text": "Je cherche combien de paquets de",
+      "ms": 2400,
+      "cat": "fragment"
+    },
+    "50ee811828952907": {
+      "text": "Je multiplie",
+      "ms": 1920,
+      "cat": "fragment"
+    },
+    "47db6d32d1c75246": {
+      "text": "Je pars du plus grand",
+      "ms": 1440,
+      "cat": "fragment"
+    },
+    "3611d0021fbaa80b": {
+      "text": "Je partage",
+      "ms": 1840,
+      "cat": "fragment"
+    },
+    "5573d378d1516ff1": {
+      "text": "je pose",
+      "ms": 1680,
+      "cat": "fragment"
+    },
+    "2c431256ba316073": {
+      "text": "je pose la retenue",
+      "ms": 1680,
+      "cat": "fragment"
+    },
+    "b000c8a5986eaea9": {
+      "text": "je retiens",
+      "ms": 1040,
+      "cat": "fragment"
+    },
+    "64c69365e0ce475b": {
+      "text": "Je retire",
+      "ms": 1760,
+      "cat": "fragment"
+    },
+    "68c5c7515d59ff22": {
+      "text": "Je réunis les deux quantités",
+      "ms": 2080,
+      "cat": "fragment"
+    },
+    "e736814982aa276a": {
+      "text": "Je soustrais colonne par colonne en partant des unites, avec emprunt si le chiffre du haut est plus petit",
+      "ms": 6400,
+      "cat": "fragment"
+    },
+    "57d33588cfc07c70": {
+      "text": "jours après le",
+      "ms": 1920,
+      "cat": "fragment"
+    },
+    "8e8e94e463dd611e": {
+      "text": "jours, de lundi à dimanche",
+      "ms": 2160,
+      "cat": "fragment"
+    },
+    "596f19a328821b7e": {
+      "text": "juillet est la fête nationale. Il y a souvent un défilé et des feux d'artifice",
+      "ms": 5680,
+      "cat": "fragment"
+    },
+    "51843e62edd893ef": {
+      "text": "Juste apres",
+      "ms": 1760,
+      "cat": "fragment"
+    },
+    "0f3a942b45dcae14": {
+      "text": "Juste avant",
+      "ms": 1920,
+      "cat": "fragment"
+    },
+    "dd583cf0819bf7a3": {
+      "text": "kilos",
+      "ms": 960,
+      "cat": "fragment"
+    },
+    "3d40bb36af996adb": {
+      "text": "kg est plus lourd que",
+      "ms": 1680,
+      "cat": "fragment"
+    },
+    "8609cf6069eb45b5": {
+      "text": "kg : le côté gauche descend",
+      "ms": 2480,
+      "cat": "fragment"
+    },
+    "11bd789e47709130": {
+      "text": "kilometres",
+      "ms": 1200,
+      "cat": "fragment"
+    },
+    "f4f5225344edbc74": {
+      "text": "litres",
+      "ms": 960,
+      "cat": "fragment"
+    },
+    "b2100c138e9dc02f": {
+      "text": "L'aiguille pointe sur",
+      "ms": 1520,
+      "cat": "fragment"
+    },
+    "cae8fa04bf9f22e9": {
+      "text": "L'après-midi, on enlève",
+      "ms": 1840,
+      "cat": "fragment"
+    },
+    "adae07cd7423c2cf": {
+      "text": "L'epaisseur d'un cahier se mesure en mm. Rappel",
+      "ms": 3760,
+      "cat": "fragment"
+    },
+    "71ae16286a9132ce": {
+      "text": "l'objet pèse",
+      "ms": 2240,
+      "cat": "fragment"
+    },
+    "6a60e7ad59335c36": {
+      "text": "l'ordre ne change pas le resultat",
+      "ms": 2560,
+      "cat": "fragment"
+    },
+    "7c1c0db7258078ae": {
+      "text": "La barre bleue monte le plus haut, jusqu'au trait",
+      "ms": 4080,
+      "cat": "fragment"
+    },
+    "4dafeda8b6b67a1a": {
+      "text": "La barre des bananes monte jusqu'au trait",
+      "ms": 2720,
+      "cat": "fragment"
+    },
+    "7352e74578fa8fa6": {
+      "text": "La barre des lapins monte jusqu'au trait",
+      "ms": 2880,
+      "cat": "fragment"
+    },
+    "c4e0a2119baf4357": {
+      "text": "La barre des livres monte jusqu'au trait",
+      "ms": 2720,
+      "cat": "fragment"
+    },
+    "10f7ef0a83f135c9": {
+      "text": "La barre des tomates monte jusqu'au trait",
+      "ms": 2560,
+      "cat": "fragment"
+    },
+    "d2952f409cecbdec": {
+      "text": "La barre du foot vaut",
+      "ms": 1680,
+      "cat": "fragment"
+    },
+    "d0b5c786c8725a99": {
+      "text": "La barre du vélo s'arrête le plus bas, au trait",
+      "ms": 3360,
+      "cat": "fragment"
+    },
+    "8bfd083f50d1221a": {
+      "text": "La barre rouge vaut",
+      "ms": 1520,
+      "cat": "fragment"
+    },
+    "7b641eca21747e9d": {
+      "text": "la bleue a",
+      "ms": 1440,
+      "cat": "fragment"
+    },
+    "2ac49c85ce3baa46": {
+      "text": "la bleue vaut",
+      "ms": 1280,
+      "cat": "fragment"
+    },
+    "1530bf0af463bd24": {
+      "text": "la case coloriée est C",
+      "ms": 2960,
+      "cat": "fragment"
+    },
+    "2e49505bea907893": {
+      "text": "la case D",
+      "ms": 1360,
+      "cat": "fragment"
+    },
+    "5fbceced84524218": {
+      "text": "la centaine juste au-dessus de",
+      "ms": 2160,
+      "cat": "fragment"
+    },
+    "febde8ae5c471a20": {
+      "text": "La centaine juste en dessous est",
+      "ms": 2160,
+      "cat": "fragment"
+    },
+    "fd94d7a14b59f4bc": {
+      "text": "La distance d'un marathon se mesure en km. Rappel",
+      "ms": 3920,
+      "cat": "fragment"
+    },
+    "6ba4a1e02702998a": {
+      "text": "La distance entre deux villes se mesure en km. Rappel",
+      "ms": 4400,
+      "cat": "fragment"
+    },
+    "374b2ea7950071e0": {
+      "text": "la dizaine juste au-dessus de",
+      "ms": 2000,
+      "cat": "fragment"
+    },
+    "6cecdfd7c9e00737": {
+      "text": "La figure est partagée en",
+      "ms": 2080,
+      "cat": "fragment"
+    },
+    "5df48844d8c9e0be": {
+      "text": "La fleche est a",
+      "ms": 1520,
+      "cat": "fragment"
+    },
+    "17d8ca0dd4395149": {
+      "text": "La hauteur d'une porte se mesure en m. Rappel",
+      "ms": 3440,
+      "cat": "fragment"
+    },
+    "0aaf3b5acce3e3fa": {
+      "text": "La largeur d'un timbre se mesure en cm. Rappel",
+      "ms": 4000,
+      "cat": "fragment"
+    },
+    "98f08c50cc7b0a51": {
+      "text": "La largeur d'une piscine se mesure en m. Rappel",
+      "ms": 3600,
+      "cat": "fragment"
+    },
+    "d4b707d0366506b9": {
+      "text": "La longueur d'un crayon se mesure en cm. Rappel",
+      "ms": 3760,
+      "cat": "fragment"
+    },
+    "152935d3b7ba016a": {
+      "text": "La longueur d'une fourmi se mesure en mm. Rappel",
+      "ms": 3920,
+      "cat": "fragment"
+    },
+    "fbfa8f7396dc9a2d": {
+      "text": "La longueur d'une gomme se mesure en cm. Rappel",
+      "ms": 3920,
+      "cat": "fragment"
+    },
+    "fa2d0acace23c4c6": {
+      "text": "La longueur d'une voiture se mesure en m. Rappel",
+      "ms": 3440,
+      "cat": "fragment"
+    },
+    "6052fd04c8db951d": {
+      "text": "la moitié de",
+      "ms": 2240,
+      "cat": "fragment"
+    },
+    "5e36c049cd132a88": {
+      "text": "La petite aiguille est sur",
+      "ms": 2160,
+      "cat": "fragment"
+    },
+    "f37f045e29d8d2e4": {
+      "text": "laisse le temps à la colère de descendre",
+      "ms": 2560,
+      "cat": "fragment"
+    },
+    "6c744346c9980780": {
+      "text": "Le",
+      "ms": 640,
+      "cat": "fragment"
+    },
+    "74d6200678eae7fd": {
+      "text": "Le chiffre des centaines est",
+      "ms": 2000,
+      "cat": "fragment"
+    },
+    "08af47f2d92b0e93": {
+      "text": "Le chiffre des dizaines est",
+      "ms": 2240,
+      "cat": "fragment"
+    },
+    "70540606721b1452": {
+      "text": "Le chiffre des milliers est",
+      "ms": 2080,
+      "cat": "fragment"
+    },
+    "73c1566c2c6e3a57": {
+      "text": "Le chiffre des unites est",
+      "ms": 1680,
+      "cat": "fragment"
+    },
+    "ccfdbb62b5c751d7": {
+      "text": "le cinquième de",
+      "ms": 1120,
+      "cat": "fragment"
+    },
+    "7ba0e28420114c71": {
+      "text": "le dixième de",
+      "ms": 1520,
+      "cat": "fragment"
+    },
+    "2b3daf0b8b680704": {
+      "text": "le milieu est à",
+      "ms": 1360,
+      "cat": "fragment"
+    },
+    "6a09bd20f98176e8": {
+      "text": "Le milieu est à la même distance des deux bouts. Entre",
+      "ms": 3920,
+      "cat": "fragment"
+    },
+    "9aec6a78ed5a5676": {
+      "text": "le millier juste au-dessus de",
+      "ms": 1920,
+      "cat": "fragment"
+    },
+    "7d60405008fef7ed": {
+      "text": "Le nœud A",
+      "ms": 1200,
+      "cat": "fragment"
+    },
+    "5ca4dd989207aa1c": {
+      "text": "Le niveau atteint",
+      "ms": 1360,
+      "cat": "fragment"
+    },
+    "ff709ccd4f94fc37": {
+      "text": "le plus grand est",
+      "ms": 1280,
+      "cat": "fragment"
+    },
+    "15dce2e93a1f5fcd": {
+      "text": "Le plus grand multiple de",
+      "ms": 1760,
+      "cat": "fragment"
+    },
+    "24f1c6bf92e4db5c": {
+      "text": "le quart de",
+      "ms": 880,
+      "cat": "fragment"
+    },
+    "1e8d9bde7aa10363": {
+      "text": "Le rayon, c'est l'écartement du compas : ici",
+      "ms": 3440,
+      "cat": "fragment"
+    },
+    "72c2e53ecc3fd41f": {
+      "text": "Le robot avance de trois cases vers le haut : de C",
+      "ms": 3520,
+      "cat": "fragment"
+    },
+    "6ec0691fc0c08746": {
+      "text": "Le robot regarde vers le haut. Il avance de deux cases : de B",
+      "ms": 4480,
+      "cat": "fragment"
+    },
+    "21129f065a4ba3be": {
+      "text": "le tiers de",
+      "ms": 1840,
+      "cat": "fragment"
+    },
+    "3e6780a799651dbe": {
+      "text": "Le trait va de",
+      "ms": 1360,
+      "cat": "fragment"
+    },
+    "a084282ff7e9b83a": {
+      "text": "le vélo a",
+      "ms": 2000,
+      "cat": "fragment"
+    },
+    "31022495f81ce189": {
+      "text": "Les lapins ont",
+      "ms": 1920,
+      "cat": "fragment"
+    },
+    "78c19c26bf554240": {
+      "text": "livres",
+      "ms": 880,
+      "cat": "fragment"
+    },
+    "01b9112532506bf6": {
+      "text": "livres de plus",
+      "ms": 1360,
+      "cat": "fragment"
+    },
+    "c700683767e92371": {
+      "text": "livres, Emma en a lu",
+      "ms": 2880,
+      "cat": "fragment"
+    },
+    "fefd566566c276cf": {
+      "text": "metres",
+      "ms": 800,
+      "cat": "fragment"
+    },
+    "e3d875949e8d42e3": {
+      "text": "mille cinq cent soixante-quinze s'ecrit",
+      "ms": 2880,
+      "cat": "fragment"
+    },
+    "9716f5756cd152c3": {
+      "text": "milliers",
+      "ms": 800,
+      "cat": "fragment"
+    },
+    "1ed62a50e1c7a5eb": {
+      "text": "minutes",
+      "ms": 800,
+      "cat": "fragment"
+    },
+    "6a702b89ae980ac6": {
+      "text": "minute : il est",
+      "ms": 1520,
+      "cat": "fragment"
+    },
+    "be7a5c1167acc5b2": {
+      "text": "minutes : il est",
+      "ms": 1520,
+      "cat": "fragment"
+    },
+    "53f1ccc9343fc14c": {
+      "text": "millimetres",
+      "ms": 1120,
+      "cat": "fragment"
+    },
+    "5bd9d305876bc4fa": {
+      "text": "mm. Donc",
+      "ms": 2160,
+      "cat": "fragment"
+    },
+    "963d086c8190bd6d": {
+      "text": "moins une fois",
+      "ms": 1200,
+      "cat": "fragment"
+    },
+    "561f8897db2e7313": {
+      "text": "mois, de janvier à décembre",
+      "ms": 1920,
+      "cat": "fragment"
+    },
+    "56682400c4b1db07": {
+      "text": "moutons",
+      "ms": 880,
+      "cat": "fragment"
+    },
+    "5022e2bba96ac843": {
+      "text": "neuf cent quatre-vingt-quinze s'ecrit",
+      "ms": 2880,
+      "cat": "fragment"
+    },
+    "4c18c36b743d35e3": {
+      "text": "neuf mille deux cent vingt s'ecrit",
+      "ms": 2400,
+      "cat": "fragment"
+    },
+    "0dc178de80b56fa9": {
+      "text": "neuf mille quatre-vingt-neuf s'ecrit",
+      "ms": 2240,
+      "cat": "fragment"
+    },
+    "938b843d2dd07e8a": {
+      "text": "On additionne la colonne de Nadia",
+      "ms": 2240,
+      "cat": "fragment"
+    },
+    "48d6b24dc1e95244": {
+      "text": "On additionne la ligne des carrés",
+      "ms": 2240,
+      "cat": "fragment"
+    },
+    "48a178239200846f": {
+      "text": "On additionne la ligne des crayons",
+      "ms": 2160,
+      "cat": "fragment"
+    },
+    "892f22db7bd456a8": {
+      "text": "on ajoute deux zéros, ça fait",
+      "ms": 1920,
+      "cat": "fragment"
+    },
+    "381f88089a7c8deb": {
+      "text": "on ajoute un zéro, ça fait",
+      "ms": 2160,
+      "cat": "fragment"
+    },
+    "6051b792a8754968": {
+      "text": "On arrive en B",
+      "ms": 1360,
+      "cat": "fragment"
+    },
+    "ff4eaf3e90501694": {
+      "text": "On arrive en C",
+      "ms": 1440,
+      "cat": "fragment"
+    },
+    "cdc6895dc16d1c8c": {
+      "text": "On arrive en D",
+      "ms": 1440,
+      "cat": "fragment"
+    },
+    "d9018d9236ec4170": {
+      "text": "On cherche ce qu'il faut ajouter a",
+      "ms": 2800,
+      "cat": "fragment"
+    },
+    "92e187c91f6e06f9": {
+      "text": "On cherche la colonne B, puis on monte à la ligne",
+      "ms": 3840,
+      "cat": "fragment"
+    },
+    "bfba292b15480c3f": {
+      "text": "On cherche la ligne des bananes et on lit le nombre à côté",
+      "ms": 4000,
+      "cat": "fragment"
+    },
+    "ff26a0c45466fa8e": {
+      "text": "On cherche le nombre",
+      "ms": 1520,
+      "cat": "fragment"
+    },
+    "b33b8c4a1f5dcc31": {
+      "text": "on complete a",
+      "ms": 1200,
+      "cat": "fragment"
+    },
+    "415a3324e4dfc247": {
+      "text": "on complete d'abord a la dizaine, puis a",
+      "ms": 2640,
+      "cat": "fragment"
+    },
+    "5b426ecf9498dc23": {
+      "text": "On croise la ligne des billes rouges et la colonne de Léa : elle a",
+      "ms": 5040,
+      "cat": "fragment"
+    },
+    "70b634e4a827a554": {
+      "text": "On croise la ligne des poires et la colonne de Sacha : il a",
+      "ms": 4720,
+      "cat": "fragment"
+    },
+    "12882e3bd7e6b59d": {
+      "text": "On écarte le compas de",
+      "ms": 1760,
+      "cat": "fragment"
+    },
+    "4e9927ffa4bcc1d3": {
+      "text": "on écrit",
+      "ms": 1360,
+      "cat": "fragment"
+    },
+    "2fb850030791177a": {
+      "text": "on écrit A",
+      "ms": 1520,
+      "cat": "fragment"
+    },
+    "5896259ff5282e79": {
+      "text": "on écrit C",
+      "ms": 1520,
+      "cat": "fragment"
+    },
+    "c6369575526e7e23": {
+      "text": "On exprime l'eau d'une baignoire en L. Rappel",
+      "ms": 3200,
+      "cat": "fragment"
+    },
+    "3acde18146de49e2": {
+      "text": "On exprime la masse d'un enfant en kg. Rappel",
+      "ms": 3440,
+      "cat": "fragment"
+    },
+    "d9e2d2cae8cb17dd": {
+      "text": "On exprime la masse d'un sac de sucre en kg. Rappel",
+      "ms": 4320,
+      "cat": "fragment"
+    },
+    "2460eab4baf31c92": {
+      "text": "On exprime la masse d'un stylo en g. Rappel",
+      "ms": 3600,
+      "cat": "fragment"
+    },
+    "503ace0f034babb2": {
+      "text": "On exprime la masse d'une pomme en g. Rappel",
+      "ms": 3680,
+      "cat": "fragment"
+    },
+    "c3a6232dc568f7a9": {
+      "text": "On exprime la quantité d'eau dans un verre en cL. Rappel",
+      "ms": 4400,
+      "cat": "fragment"
+    },
+    "3c01ea9a5d0229fe": {
+      "text": "On exprime la quantité d'eau dans une bouteille en L. Rappel",
+      "ms": 4080,
+      "cat": "fragment"
+    },
+    "b7a0c9566a666008": {
+      "text": "On exprime une cuillère de sirop en mL. Rappel",
+      "ms": 3360,
+      "cat": "fragment"
+    },
+    "442194a3b63ca74a": {
+      "text": "On fait",
+      "ms": 1200,
+      "cat": "fragment"
+    },
+    "3476b444ca0a1fe2": {
+      "text": "On fait monter la barre des billes bleues jusqu'au trait",
+      "ms": 2800,
+      "cat": "fragment"
+    },
+    "8317c2ff6e0d107d": {
+      "text": "On fait monter la barre des cartes jusqu'au trait",
+      "ms": 2880,
+      "cat": "fragment"
+    },
+    "631da09ede6ca901": {
+      "text": "On garde l'écartement de",
+      "ms": 1760,
+      "cat": "fragment"
+    },
+    "32d04b32e4c9466d": {
+      "text": "On lit d'abord la lettre de la colonne, puis le numéro de la ligne. La case coloriée est dans la colonne B, à la ligne",
+      "ms": 7840,
+      "cat": "fragment"
+    },
+    "3692606201d6f0c5": {
+      "text": "On lit la ligne des moutons : il y a",
+      "ms": 2960,
+      "cat": "fragment"
+    },
+    "dba2d84240a182f2": {
+      "text": "On paie",
+      "ms": 1200,
+      "cat": "fragment"
+    },
+    "34a7a933a27624b9": {
+      "text": "on passe à",
+      "ms": 1200,
+      "cat": "fragment"
+    },
+    "868dcafe1e7a44d9": {
+      "text": "On passe par",
+      "ms": 1200,
+      "cat": "fragment"
+    },
+    "613ea83aac21f69d": {
+      "text": "On plie sur le trait du milieu : chaque case du bas a sa jumelle en haut, à la même distance. On colorie A",
+      "ms": 8560,
+      "cat": "fragment"
+    },
+    "201b1a36ed7db846": {
+      "text": "On plie sur le trait du milieu : chaque case du bas a sa jumelle en haut. On colorie A",
+      "ms": 6240,
+      "cat": "fragment"
+    },
+    "e397484521bb73dc": {
+      "text": "€. On rend",
+      "ms": 1520,
+      "cat": "fragment"
+    },
+    "1ff65444d4a2feb3": {
+      "text": "On reste dans la colonne C, donc on arrive en C",
+      "ms": 3520,
+      "cat": "fragment"
+    },
+    "860f7a165479f054": {
+      "text": "On vise",
+      "ms": 1120,
+      "cat": "fragment"
+    },
+    "d39f4304ec4e673a": {
+      "text": "ou de",
+      "ms": 720,
+      "cat": "fragment"
+    },
+    "3bbe4dd1451eaa85": {
+      "text": "paquets",
+      "ms": 800,
+      "cat": "fragment"
+    },
+    "5be3d63575a434fc": {
+      "text": "Par exemple",
+      "ms": 1440,
+      "cat": "fragment"
+    },
+    "0362995d81d2069b": {
+      "text": "Parmi",
+      "ms": 1520,
+      "cat": "fragment"
+    },
+    "5f080ba9b833e8f9": {
+      "text": "partage en deux",
+      "ms": 1200,
+      "cat": "fragment"
+    },
+    "567e9bffb4e72bae": {
+      "text": "parties perdues",
+      "ms": 1120,
+      "cat": "fragment"
+    },
+    "659b03b2146e3157": {
+      "text": "parts égales",
+      "ms": 1200,
+      "cat": "fragment"
+    },
+    "3245faf1e1f06c95": {
+      "text": "pas de",
+      "ms": 720,
+      "cat": "fragment"
+    },
+    "05e412212d9f0fc2": {
+      "text": "plus",
+      "ms": 640,
+      "cat": "fragment"
+    },
+    "f15b08617db7b901": {
+      "text": "poires",
+      "ms": 1040,
+      "cat": "fragment"
+    },
+    "c2af517192773cb5": {
+      "text": "poires de moins",
+      "ms": 1200,
+      "cat": "fragment"
+    },
+    "fca1c02c9ec5687b": {
+      "text": "poires et",
+      "ms": 1200,
+      "cat": "fragment"
+    },
+    "fdb7f9422dceb4e0": {
+      "text": "pommes",
+      "ms": 720,
+      "cat": "fragment"
+    },
+    "7c7969a08b9f1022": {
+      "text": "pommes et",
+      "ms": 1280,
+      "cat": "fragment"
+    },
+    "e98f9f049b058f96": {
+      "text": "€ pour",
+      "ms": 1520,
+      "cat": "fragment"
+    },
+    "300cd531afbb2d38": {
+      "text": "pour aller a",
+      "ms": 1120,
+      "cat": "fragment"
+    },
+    "798603a1b2eb86f1": {
+      "text": "Pour équilibrer, il faut le même poids des deux côtés",
+      "ms": 3680,
+      "cat": "fragment"
+    },
+    "6c6124bcb4d3e9d5": {
+      "text": "pour faire",
+      "ms": 720,
+      "cat": "fragment"
+    },
+    "849b1fd993ae8d80": {
+      "text": "puis",
+      "ms": 720,
+      "cat": "fragment"
+    },
+    "02420ad733e0b8d5": {
+      "text": "puis à",
+      "ms": 1120,
+      "cat": "fragment"
+    },
+    "618298d9241726ac": {
+      "text": "puis à B",
+      "ms": 1520,
+      "cat": "fragment"
+    },
+    "4e692705c415ef54": {
+      "text": "puis C",
+      "ms": 1200,
+      "cat": "fragment"
+    },
+    "776366c203aa45de": {
+      "text": "Puis les dizaines. Total",
+      "ms": 2880,
+      "cat": "fragment"
+    },
+    "f14fd4cbf8d12371": {
+      "text": "puis tourne à droite : il regarde maintenant vers la droite. Il avance d'une case et arrive en B",
+      "ms": 6640,
+      "cat": "fragment"
+    },
+    "69b29f631c102299": {
+      "text": "puis tourne à gauche : il regarde vers le haut. Il avance d'une case et arrive en C",
+      "ms": 6880,
+      "cat": "fragment"
+    },
+    "5ccf2edd2a3f53ed": {
+      "text": "Quand il y a de moins, je retire",
+      "ms": 2320,
+      "cat": "fragment"
+    },
+    "219440c8e6759d1d": {
+      "text": "Quand il y a de plus, j'ajoute",
+      "ms": 2080,
+      "cat": "fragment"
+    },
+    "9166c1b913376c51": {
+      "text": "quatre cent dix s'ecrit",
+      "ms": 1840,
+      "cat": "fragment"
+    },
+    "87c79ceadf25bb5f": {
+      "text": "quatre cent quatre-vingt-douze s'ecrit",
+      "ms": 2800,
+      "cat": "fragment"
+    },
+    "3e5344b722976334": {
+      "text": "quatre-vingt-neuf s'ecrit",
+      "ms": 1920,
+      "cat": "fragment"
+    },
+    "e0844941028f0703": {
+      "text": "Resultat",
+      "ms": 1040,
+      "cat": "fragment"
+    },
+    "da101640ecb45bb3": {
+      "text": "retenue",
+      "ms": 960,
+      "cat": "fragment"
+    },
+    "de61e0dd0ab8de57": {
+      "text": "s'écrit cinq mille deux cent quatre-vingt-trois",
+      "ms": 2880,
+      "cat": "fragment"
+    },
+    "14586dc002dd9df2": {
+      "text": "s'écrit huit mille cinq cent trente-huit",
+      "ms": 2960,
+      "cat": "fragment"
+    },
+    "1e5c1c38fb376609": {
+      "text": "s'écrit huit mille six cent dix-huit",
+      "ms": 2560,
+      "cat": "fragment"
+    },
+    "342910e3f3511a12": {
+      "text": "s'écrit quatre mille neuf cent vingt",
+      "ms": 2400,
+      "cat": "fragment"
+    },
+    "296b6dd3bcded6e2": {
+      "text": "s'écrit sept cent soixante-huit",
+      "ms": 2400,
+      "cat": "fragment"
+    },
+    "53993e695f5cb3c5": {
+      "text": "s'écrit sept mille cent dix",
+      "ms": 1920,
+      "cat": "fragment"
+    },
+    "344f66fea4d80508": {
+      "text": "s'écrit sept mille sept cent soixante-trois",
+      "ms": 3520,
+      "cat": "fragment"
+    },
+    "3ef5f10e3be9cf38": {
+      "text": "s'écrit trois mille neuf cent soixante-dix",
+      "ms": 2640,
+      "cat": "fragment"
+    },
+    "e992ce9fa3cbc0ba": {
+      "text": "sa valeur est",
+      "ms": 1520,
+      "cat": "fragment"
+    },
+    "27e8f2749990d058": {
+      "text": "Sacha a lu",
+      "ms": 1920,
+      "cat": "fragment"
+    },
+    "cf04d90323f6e73f": {
+      "text": "se lit cinquante-deux",
+      "ms": 1680,
+      "cat": "fragment"
+    },
+    "e14d6d19baac5031": {
+      "text": "se lit cinquante-huit",
+      "ms": 1360,
+      "cat": "fragment"
+    },
+    "4634cfeb98fdf8d4": {
+      "text": "se lit quarante",
+      "ms": 1200,
+      "cat": "fragment"
+    },
+    "d598955cb252fbc7": {
+      "text": "se lit quatre-vingt-dix-huit",
+      "ms": 1760,
+      "cat": "fragment"
+    },
+    "fe0240a4cc55eaaa": {
+      "text": "se lit quatre-vingt-quatre",
+      "ms": 1760,
+      "cat": "fragment"
+    },
+    "cbe6695a786fa4b8": {
+      "text": "se lit quatre-vingt-seize",
+      "ms": 2080,
+      "cat": "fragment"
+    },
+    "2f46a3a581017192": {
+      "text": "se lit quatre-vingt-six",
+      "ms": 1840,
+      "cat": "fragment"
+    },
+    "56a00b6892a3cb38": {
+      "text": "se lit quatre-vingt-trois",
+      "ms": 1840,
+      "cat": "fragment"
+    },
+    "10c01476578e0d0d": {
+      "text": "se lit soixante",
+      "ms": 1680,
+      "cat": "fragment"
+    },
+    "0373e2674bb83360": {
+      "text": "se lit soixante-dix",
+      "ms": 1840,
+      "cat": "fragment"
+    },
+    "cf82e1658d555636": {
+      "text": "se lit soixante-dix-huit",
+      "ms": 1440,
+      "cat": "fragment"
+    },
+    "8e31379d3ad657cb": {
+      "text": "se lit trente-quatre",
+      "ms": 1600,
+      "cat": "fragment"
+    },
+    "3254d1e688f6946b": {
+      "text": "sept cent trente-cinq s'ecrit",
+      "ms": 2080,
+      "cat": "fragment"
+    },
+    "8ea506453b415f42": {
+      "text": "sept cent trente-neuf s'ecrit",
+      "ms": 2320,
+      "cat": "fragment"
+    },
+    "43811b196678cb8d": {
+      "text": "sept mille cent dix-huit s'ecrit",
+      "ms": 1920,
+      "cat": "fragment"
+    },
+    "ed90732d665e72ac": {
+      "text": "sept mille cent quatorze s'ecrit",
+      "ms": 2560,
+      "cat": "fragment"
+    },
+    "bf6a7dc08301d217": {
+      "text": "six cent cinquante-huit s'ecrit",
+      "ms": 1920,
+      "cat": "fragment"
+    },
+    "fd9e8aef5105f29f": {
+      "text": "six cent soixante-quatre s'ecrit",
+      "ms": 2320,
+      "cat": "fragment"
+    },
+    "47c21aaeefe4679b": {
+      "text": "six mille deux cent quarante-neuf s'ecrit",
+      "ms": 2960,
+      "cat": "fragment"
+    },
+    "efcd716ba4ba38dc": {
+      "text": "six mille huit cent trente s'ecrit",
+      "ms": 2400,
+      "cat": "fragment"
+    },
+    "ec1ed347e788dd13": {
+      "text": "sont coloriées : c'est",
+      "ms": 1680,
+      "cat": "fragment"
+    },
+    "a8ad53da6aafeba7": {
+      "text": "sous",
+      "ms": 960,
+      "cat": "fragment"
+    },
+    "562e38ba8c6d28ff": {
+      "text": "Sur l'horloge",
+      "ms": 1280,
+      "cat": "fragment"
+    },
+    "8271de9bc314c20e": {
+      "text": "Tom a",
+      "ms": 1040,
+      "cat": "fragment"
+    },
+    "de28e24fe4a6ef91": {
+      "text": "Tom en a le plus",
+      "ms": 1440,
+      "cat": "fragment"
+    },
+    "161192a775ce2ab6": {
+      "text": "Total",
+      "ms": 960,
+      "cat": "fragment"
+    },
+    "c33ee02493375a40": {
+      "text": "tourne à droite, puis avance, avance pour arriver en C",
+      "ms": 3920,
+      "cat": "fragment"
+    },
+    "c74e7a7787e452b1": {
+      "text": "tourne à droite, puis avance jusqu'en E",
+      "ms": 3040,
+      "cat": "fragment"
+    },
+    "2ee7405b15361cb9": {
+      "text": "tourne à droite, puis longe le haut jusqu'en E",
+      "ms": 3600,
+      "cat": "fragment"
+    },
+    "b7931531a3735d82": {
+      "text": "tourne à gauche, puis avance une fois pour arriver en D",
+      "ms": 3840,
+      "cat": "fragment"
+    },
+    "b16e4ea0a3a9969a": {
+      "text": "trois cent quatre-vingt-dix s'ecrit",
+      "ms": 2720,
+      "cat": "fragment"
+    },
+    "66a7ae873f1e7ae9": {
+      "text": "trois mille trois cent quatre-vingt-huit s'ecrit",
+      "ms": 2800,
+      "cat": "fragment"
+    },
+    "d82e9845cfeb8e97": {
+      "text": "trois mille vingt-six s'ecrit",
+      "ms": 2080,
+      "cat": "fragment"
+    },
+    "69ddfb37918045cc": {
+      "text": "Tu passes au-dessus des cases grises",
+      "ms": 2240,
+      "cat": "fragment"
+    },
+    "7b0ac2fdeba18fef": {
+      "text": "Tu passes loin des cases grises",
+      "ms": 2320,
+      "cat": "fragment"
+    },
+    "b9e4718a6cee37fe": {
+      "text": "Un jour et une nuit durent ensemble",
+      "ms": 2560,
+      "cat": "fragment"
+    },
+    "d8acc4a81b86c35f": {
+      "text": "Un nœud, c'est un point de croisement des traits. On prend la colonne B et la ligne",
+      "ms": 4720,
+      "cat": "fragment"
+    },
+    "50e824f3b56b2142": {
+      "text": "Une année a",
+      "ms": 1440,
+      "cat": "fragment"
+    },
+    "5f61cfe4ec978322": {
+      "text": "Une case vers la droite : de A à B. Puis deux cases vers le haut : de la ligne",
+      "ms": 6240,
+      "cat": "fragment"
+    },
+    "4ed93bff7ec81dc5": {
+      "text": "Une case vers la droite : de B à C. Une case vers le haut : de la ligne",
+      "ms": 5760,
+      "cat": "fragment"
+    },
+    "1c2395361edb3d05": {
+      "text": "Une case vers la gauche : de D à C. Deux cases vers le bas : de la ligne",
+      "ms": 5840,
+      "cat": "fragment"
+    },
+    "6be124fd9200f0de": {
+      "text": "Une case vers la gauche : de D à C. On arrive en C",
+      "ms": 4160,
+      "cat": "fragment"
+    },
+    "5434171e04316d56": {
+      "text": "Une semaine a",
+      "ms": 1520,
+      "cat": "fragment"
+    },
+    "b7d7b3cbe0794932": {
+      "text": "Une solution : avance, avance, jusqu'en A",
+      "ms": 4400,
+      "cat": "fragment"
+    },
+    "48122ec002e97d75": {
+      "text": "Une solution : avance deux fois, jusqu'en A",
+      "ms": 3600,
+      "cat": "fragment"
+    },
+    "33734cee3c289787": {
+      "text": "Une solution : avance trois fois, jusqu'en D",
+      "ms": 3280,
+      "cat": "fragment"
+    },
+    "4d153a92e9c69f1f": {
+      "text": "Une solution : monte tout en haut, jusqu'en A",
+      "ms": 3520,
+      "cat": "fragment"
+    },
+    "fe080622e93dfe65": {
+      "text": "unites",
+      "ms": 1040,
+      "cat": "fragment"
+    },
+    "4694693eb10f5827": {
+      "text": "Vers la droite, on change de colonne : de B on passe à C puis à D. On reste à la ligne",
+      "ms": 7200,
+      "cat": "fragment"
+    },
+    "7ab96e7afc234d8c": {
+      "text": "Vers le haut, on change de ligne : de la ligne",
+      "ms": 3440,
+      "cat": "fragment"
+    },
+    "3e6d148f0d1d84da": {
+      "text": "vingt-et-un s'ecrit",
+      "ms": 1520,
+      "cat": "fragment"
     }
   },
   "keys": {
@@ -32687,6 +34547,379 @@
     "txt:77aeaca268606221": "77aeaca268606221",
     "txt:cb4fd2d9c8bd8c30": "cb4fd2d9c8bd8c30",
     "txt:1b50e133e32a2eb5": "1b50e133e32a2eb5",
-    "txt:da1e0e00b57db4e1": "da1e0e00b57db4e1"
+    "txt:da1e0e00b57db4e1": "da1e0e00b57db4e1",
+    "frag:a": "6a410496faa16f8b",
+    "frag:a-ajouter-puis": "20a325bb294860e4",
+    "frag:a-b": "8232079279c69afb",
+    "frag:a-c": "9b5f48b1297b6c59",
+    "frag:a-la-ligne": "1ef95adaf723f3e1",
+    "frag:a-poser-a-gauche-total": "f806c32ac8ea3057",
+    "frag:animaux-les-lapins-sont-les-plus-nombreux": "46d2861c0d1693e0",
+    "frag:animaux-les-poules-ont": "1daf4019a8cc6e9c",
+    "frag:au-debut-reste-donne": "4e62ba4ca54bc2f5",
+    "frag:autocollants-lea-a": "bd7a695ebaabc77a",
+    "frag:autocollants-tom-en-a-le-plus": "15a29815e8936052",
+    "frag:avant": "46dab20037bb63b4",
+    "frag:b": "0438447c799b4535",
+    "frag:ballons": "24f1c9cd4dfdbfb0",
+    "frag:billes": "0f673fe3cfbd1e3d",
+    "frag:billes-de-plus": "cd12c17c5447c7e8",
+    "frag:billes-en-tout": "bec41fe282bda595",
+    "frag:billes-lea-en-a": "ca3cd329728f2d18",
+    "frag:billes-rouges": "931c02b4beb3f81c",
+    "frag:bonbons-verts": "6a45f20ab5789315",
+    "frag:c": "17b3647d8bec4b0c",
+    "frag:c-donc": "7ffeda8c939500a8",
+    "frag:c-est": "a49056cf3e754b2a",
+    "frag:c-est-b": "117c6764f85021ac",
+    "frag:c-est-la-case-b": "b5a90be0f4094756",
+    "frag:c-est-la-moitie-de": "4737c4282b34b123",
+    "frag:c-est-la-plus-basse": "67fe352e9f2cc9bf",
+    "frag:c-est-la-plus-haute": "94b5586209e9fd0d",
+    "frag:c-est-le-double-du-double": "902b80af41a54c17",
+    "frag:c-est-le-n-ud-b": "68e2c73f343f3ae5",
+    "frag:c-est-presque-un-double": "58ceb86c979df854",
+    "frag:c-est-un-double": "562b861a05896ab2",
+    "frag:c-puis": "5a2896d614be188c",
+    "frag:ca-fait": "68725e81f4657563",
+    "frag:carres-en-tout": "3a7d717266ecd826",
+    "frag:ce-qui-donne": "1665851a01a525e6",
+    "frag:ce-sont-des-dizaines-entieres": "5e8767b5973f5764",
+    "frag:celle-du-velo-vaut": "b3dcec0b4fc06df2",
+    "frag:cent-quatre-vingt-six-s-ecrit": "dd0f8dad2a18d806",
+    "frag:centaines": "770245c4d48bf771",
+    "frag:centaines-entieres": "a0612b9fefe4b0ed",
+    "frag:centimetres": "80277ce9753212ed",
+    "frag:centimetres-du-centre-jusqu-au-bord": "427afee6eb485447",
+    "frag:centimetres-entre-les-deux-bouts-par-exemple-de": "82f4542e16ee3826",
+    "frag:centimetres-il-est-a-la-meme-distance-de": "bac9a0a6348381d7",
+    "frag:centimetres-par-exemple-de": "25c9957ed2f8422a",
+    "frag:centimetres-pour-lire-la-regle-on-regarde-ou-commence-et-ou-finit-le-trait": "9470e7cc3cadda17",
+    "frag:centimetres-puis-on-tourne-tout-le-bord-est-a": "1a2c39c9c2c41886",
+    "frag:centimetres-tout-le-bord-du-cercle-est-alors-a": "26d47f3a6eb390bb",
+    "frag:chaque-case-coloriee-a-gauche-a-sa-jumelle-a-droite-a-la-meme-distance-du-trait-d": "8d05e685cd66a65b",
+    "frag:chaque-case-coloriee-a-gauche-a-sa-jumelle-a-droite-a-la-meme-distance-du-trait-on-colorie-c": "c4c3c071795c601b",
+    "frag:chaque-image-c-est": "9ce4277675ea4e45",
+    "frag:chaque-image-est-une-etoile-on-compte-les-images-il-y-en-a": "d823ffd7484457ff",
+    "frag:chaque-image-est-une-pomme-on-compte-les-images-il-y-en-a": "482320996a0ad2c2",
+    "frag:chats": "27c6c46382e1de4e",
+    "frag:chiens-de-plus": "47b3d42a519e3cee",
+    "frag:chiens-et": "fb1ddbb62eefcc6a",
+    "frag:cinq-cent-six-s-ecrit": "1dbae249dff07ae1",
+    "frag:cinq-mille-deux-cent-soixante-neuf-s-ecrit": "0590a10e3ba6352c",
+    "frag:cinq-mille-sept-cent-vingt-trois-s-ecrit": "4907b47ed66f5014",
+    "frag:cinq-mille-soixante-six-s-ecrit": "2b0d09030750a786",
+    "frag:cinq-mille-trente-cinq-s-ecrit": "136be1cf9aff1461",
+    "frag:cm": "99c5a4849653c81b",
+    "frag:cm-de-o": "20f281f73c512ffc",
+    "frag:cm-du-centre": "aa71f26c4667e246",
+    "frag:cm-et-on-reporte-cette-longueur-a-partir-de-o-le-nouveau-point-est-a": "21638802d3fdda2f",
+    "frag:colonne-a-ligne": "06cf790cd142564e",
+    "frag:colonne-c-ligne": "314fc80ddbda0ab6",
+    "frag:colonne-d-ligne": "ca2eae939e84bb60",
+    "frag:compter-jusqu-a": "9e1448fbcf88edbb",
+    "frag:crayons": "6aef4d7191ec3217",
+    "frag:d": "daf91cdb8a3ffa83",
+    "frag:d-abord": "76508b60a57294ef",
+    "frag:d-abord-le-prix": "cda0c48919fd27df",
+    "frag:d-abord-le-total-depense": "071dbfa4e7da92ab",
+    "frag:dans-la-case-des-bd": "3518742b4fa910ab",
+    "frag:dans-la-case-des-chats": "4711438a9a298296",
+    "frag:dans-la-case-des-garcons": "5587afd3bfac71a3",
+    "frag:dans-la-case-des-poires": "14a8ed6a3ba36768",
+    "frag:dans-le-tableau-c-est-la-ligne-de-zoe-qui-a-lu": "9be846da8014a4d6",
+    "frag:de": "f7a905c61c9b04ff",
+    "frag:de-moins": "8171fb066324ddf4",
+    "frag:de-plus-pour-arriver-a": "450f8b4e5e82c949",
+    "frag:deux-cases-vers-la-droite-de-a-a-c-on-arrive-en-c": "204e77e303febc2b",
+    "frag:deux-cases-vers-la-droite-de-b-a-d-trois-cases-vers-le-haut-de-la-ligne": "cc7747f469a71bd0",
+    "frag:deux-cases-vers-le-bas-de-la-ligne": "24fb0663c259fe8f",
+    "frag:deux-cent-cinquante-trois-s-ecrit": "d1bf6c28e66207bf",
+    "frag:deux-cent-quatre-vingt-cinq-s-ecrit": "b1f778d79a9517ab",
+    "frag:deux-cent-quatre-vingt-treize-s-ecrit": "7df9745b2849e4ce",
+    "frag:deux-cent-soixante-huit-s-ecrit": "794e778dccaaea4b",
+    "frag:deux-mille-deux-cent-quatre-vingt-six-s-ecrit": "af67c51beb417127",
+    "frag:dizaines": "923102c193178580",
+    "frag:dizaines-a": "e0613ad9e707e8a1",
+    "frag:dizaines-entieres": "28ece564df8ce01e",
+    "frag:donc": "556de32201b21004",
+    "frag:donc-avant": "2bd11b2bf1f667e5",
+    "frag:donc-il-y-a": "8ff91af09ad07d29",
+    "frag:donc-on-arrive-en-d": "97fce94475f6bc01",
+    "frag:e": "b25b92ef42d4a1c9",
+    "frag:elle-vaut": "9c82ef9b1876e71b",
+    "frag:en": "a86552a041180f96",
+    "frag:ensuite": "182af4a43c0f6d70",
+    "frag:entre": "ad018e9acf34b6d7",
+    "frag:entre-le-debut-et-la-fin-il-faut": "3e974f4fdc9dd64d",
+    "frag:er-une-semaine-entiere-plus-tard-donc-encore-un-lundi": "f44314d284e1d97c",
+    "frag:est-au-croisement-de-la-colonne-a-et-de-la-ligne": "7f21399f9556db45",
+    "frag:est-coloriee-c-est": "e490d2c3d640eec1",
+    "frag:est-entre": "22ef166a3a6727e0",
+    "frag:est-plus-grand-que": "8477ab93e221c473",
+    "frag:est-tout-en-bas-a-droite": "26a65adb1467b6d1",
+    "frag:est-un-nombre-de-dizaines-on-ajoute": "23a502547745956c",
+    "frag:est-un-nombre-de-dizaines-on-enleve": "85cc6fb256e61783",
+    "frag:et": "233e7fb7052d77ff",
+    "frag:et-d": "bbf45156bfbc7d00",
+    "frag:et-de": "4e098e06cddc971f",
+    "frag:et-e": "d48ae431eed63e2b",
+    "frag:et-f": "92b8ba5e953f24aa",
+    "frag:et-j-ajoute": "d51469ac030ffeab",
+    "frag:et-la-grande-indique": "f00ba8c77c0bf141",
+    "frag:fois-plus-que": "7d7854c4ddf58dd6",
+    "frag:g": "088f454a712b00c1",
+    "frag:g-donc": "f8f601bf067ef4de",
+    "frag:glaces": "4662450cfdfba51b",
+    "frag:groupes-de": "7ca6b2bdbb469c46",
+    "frag:h": "d712cbc4d8c2d66a",
+    "frag:h-c-est": "5e911026dc13386e",
+    "frag:h-de-l-apres-midi": "7a5e04420f7546a1",
+    "frag:h-il-s-ecoule": "4ec5034c46173104",
+    "frag:heures": "d712cbc4d8c2d66a",
+    "frag:huit-cent-soixante-treize-s-ecrit": "dee6badc9cbc605d",
+    "frag:huit-mille-cent-dix-sept-s-ecrit": "0fa8062b6a06a075",
+    "frag:il-arrive-sur-la-case-b": "f35ddca9379c5f57",
+    "frag:il-arrive-sur-la-case-c": "7d350ae6fb69a379",
+    "frag:il-avance-deux-fois-vers-la-droite-a": "e223feb021a243a1",
+    "frag:il-avance-deux-fois-vers-le-haut-a": "81d83ef813d32ef0",
+    "frag:il-faut": "99444eb7a5bc03c9",
+    "frag:il-faut-composer-exactement": "9b6ccba6664578b9",
+    "frag:il-mesure": "4fcb24585af1fed0",
+    "frag:il-reste": "c3168031234278bc",
+    "frag:il-s-ecoule": "48683134f0b9d4a4",
+    "frag:il-y-a": "0c71b76bfde7b625",
+    "frag:il-y-a-le-plus-de-poires": "35ca778a2b71a85b",
+    "frag:images-font": "2d06a57b770dcaa6",
+    "frag:images-soit": "b4b59957c3b281c6",
+    "frag:j-ajoute": "766ebb02c7529548",
+    "frag:je-cherche-combien-de-paquets-de": "e2b27ae7da6206ff",
+    "frag:je-multiplie": "50ee811828952907",
+    "frag:je-pars-du-plus-grand": "47db6d32d1c75246",
+    "frag:je-partage": "3611d0021fbaa80b",
+    "frag:je-pose": "5573d378d1516ff1",
+    "frag:je-pose-la-retenue": "2c431256ba316073",
+    "frag:je-retiens": "b000c8a5986eaea9",
+    "frag:je-retire": "64c69365e0ce475b",
+    "frag:je-reunis-les-deux-quantites": "68c5c7515d59ff22",
+    "frag:je-soustrais-colonne-par-colonne-en-partant-des-unites-avec-emprunt-si-le-chiffre-du-haut-est-plus-petit": "e736814982aa276a",
+    "frag:jours-apres-le": "57d33588cfc07c70",
+    "frag:jours-de-lundi-a-dimanche": "8e8e94e463dd611e",
+    "frag:juillet-est-la-fete-nationale-il-y-a-souvent-un-defile-et-des-feux-d-artifice": "596f19a328821b7e",
+    "frag:juste-apres": "51843e62edd893ef",
+    "frag:juste-avant": "0f3a942b45dcae14",
+    "frag:kg": "dd583cf0819bf7a3",
+    "frag:kg-est-plus-lourd-que": "3d40bb36af996adb",
+    "frag:kg-le-cote-gauche-descend": "8609cf6069eb45b5",
+    "frag:km": "11bd789e47709130",
+    "frag:l": "f4f5225344edbc74",
+    "frag:l-aiguille-pointe-sur": "b2100c138e9dc02f",
+    "frag:l-apres-midi-on-enleve": "cae8fa04bf9f22e9",
+    "frag:l-epaisseur-d-un-cahier-se-mesure-en-mm-rappel": "adae07cd7423c2cf",
+    "frag:l-objet-pese": "71ae16286a9132ce",
+    "frag:l-ordre-ne-change-pas-le-resultat": "6a60e7ad59335c36",
+    "frag:la-barre-bleue-monte-le-plus-haut-jusqu-au-trait": "7c1c0db7258078ae",
+    "frag:la-barre-des-bananes-monte-jusqu-au-trait": "4dafeda8b6b67a1a",
+    "frag:la-barre-des-lapins-monte-jusqu-au-trait": "7352e74578fa8fa6",
+    "frag:la-barre-des-livres-monte-jusqu-au-trait": "c4e0a2119baf4357",
+    "frag:la-barre-des-tomates-monte-jusqu-au-trait": "10f7ef0a83f135c9",
+    "frag:la-barre-du-foot-vaut": "d2952f409cecbdec",
+    "frag:la-barre-du-velo-s-arrete-le-plus-bas-au-trait": "d0b5c786c8725a99",
+    "frag:la-barre-rouge-vaut": "8bfd083f50d1221a",
+    "frag:la-bleue-a": "7b641eca21747e9d",
+    "frag:la-bleue-vaut": "2ac49c85ce3baa46",
+    "frag:la-case-coloriee-est-c": "1530bf0af463bd24",
+    "frag:la-case-d": "2e49505bea907893",
+    "frag:la-centaine-juste-au-dessus-de": "5fbceced84524218",
+    "frag:la-centaine-juste-en-dessous-est": "febde8ae5c471a20",
+    "frag:la-distance-d-un-marathon-se-mesure-en-km-rappel": "fd94d7a14b59f4bc",
+    "frag:la-distance-entre-deux-villes-se-mesure-en-km-rappel": "6ba4a1e02702998a",
+    "frag:la-dizaine-juste-au-dessus-de": "374b2ea7950071e0",
+    "frag:la-figure-est-partagee-en": "6cecdfd7c9e00737",
+    "frag:la-fleche-est-a": "5df48844d8c9e0be",
+    "frag:la-hauteur-d-une-porte-se-mesure-en-m-rappel": "17d8ca0dd4395149",
+    "frag:la-largeur-d-un-timbre-se-mesure-en-cm-rappel": "0aaf3b5acce3e3fa",
+    "frag:la-largeur-d-une-piscine-se-mesure-en-m-rappel": "98f08c50cc7b0a51",
+    "frag:la-longueur-d-un-crayon-se-mesure-en-cm-rappel": "d4b707d0366506b9",
+    "frag:la-longueur-d-une-fourmi-se-mesure-en-mm-rappel": "152935d3b7ba016a",
+    "frag:la-longueur-d-une-gomme-se-mesure-en-cm-rappel": "fbfa8f7396dc9a2d",
+    "frag:la-longueur-d-une-voiture-se-mesure-en-m-rappel": "fa2d0acace23c4c6",
+    "frag:la-moitie-de": "6052fd04c8db951d",
+    "frag:la-petite-aiguille-est-sur": "5e36c049cd132a88",
+    "frag:laisse-le-temps-a-la-colere-de-descendre": "f37f045e29d8d2e4",
+    "frag:le": "6c744346c9980780",
+    "frag:le-chiffre-des-centaines-est": "74d6200678eae7fd",
+    "frag:le-chiffre-des-dizaines-est": "08af47f2d92b0e93",
+    "frag:le-chiffre-des-milliers-est": "70540606721b1452",
+    "frag:le-chiffre-des-unites-est": "73c1566c2c6e3a57",
+    "frag:le-cinquieme-de": "ccfdbb62b5c751d7",
+    "frag:le-dixieme-de": "7ba0e28420114c71",
+    "frag:le-milieu-est-a": "2b3daf0b8b680704",
+    "frag:le-milieu-est-a-la-meme-distance-des-deux-bouts-entre": "6a09bd20f98176e8",
+    "frag:le-millier-juste-au-dessus-de": "9aec6a78ed5a5676",
+    "frag:le-n-ud-a": "7d60405008fef7ed",
+    "frag:le-niveau-atteint": "5ca4dd989207aa1c",
+    "frag:le-plus-grand-est": "ff709ccd4f94fc37",
+    "frag:le-plus-grand-multiple-de": "15dce2e93a1f5fcd",
+    "frag:le-quart-de": "24f1c6bf92e4db5c",
+    "frag:le-rayon-c-est-l-ecartement-du-compas-ici": "1e8d9bde7aa10363",
+    "frag:le-robot-avance-de-trois-cases-vers-le-haut-de-c": "72c2e53ecc3fd41f",
+    "frag:le-robot-regarde-vers-le-haut-il-avance-de-deux-cases-de-b": "6ec0691fc0c08746",
+    "frag:le-tiers-de": "21129f065a4ba3be",
+    "frag:le-trait-va-de": "3e6780a799651dbe",
+    "frag:le-velo-a": "a084282ff7e9b83a",
+    "frag:les-lapins-ont": "31022495f81ce189",
+    "frag:livres": "78c19c26bf554240",
+    "frag:livres-de-plus": "01b9112532506bf6",
+    "frag:livres-emma-en-a-lu": "c700683767e92371",
+    "frag:m": "fefd566566c276cf",
+    "frag:mille-cinq-cent-soixante-quinze-s-ecrit": "e3d875949e8d42e3",
+    "frag:milliers": "9716f5756cd152c3",
+    "frag:min": "1ed62a50e1c7a5eb",
+    "frag:minute-il-est": "6a702b89ae980ac6",
+    "frag:minutes-il-est": "be7a5c1167acc5b2",
+    "frag:mm": "53f1ccc9343fc14c",
+    "frag:mm-donc": "5bd9d305876bc4fa",
+    "frag:moins-une-fois": "963d086c8190bd6d",
+    "frag:mois-de-janvier-a-decembre": "561f8897db2e7313",
+    "frag:moutons": "56682400c4b1db07",
+    "frag:neuf-cent-quatre-vingt-quinze-s-ecrit": "5022e2bba96ac843",
+    "frag:neuf-mille-deux-cent-vingt-s-ecrit": "4c18c36b743d35e3",
+    "frag:neuf-mille-quatre-vingt-neuf-s-ecrit": "0dc178de80b56fa9",
+    "frag:on-additionne-la-colonne-de-nadia": "938b843d2dd07e8a",
+    "frag:on-additionne-la-ligne-des-carres": "48d6b24dc1e95244",
+    "frag:on-additionne-la-ligne-des-crayons": "48a178239200846f",
+    "frag:on-ajoute-deux-zeros-ca-fait": "892f22db7bd456a8",
+    "frag:on-ajoute-un-zero-ca-fait": "381f88089a7c8deb",
+    "frag:on-arrive-en-b": "6051b792a8754968",
+    "frag:on-arrive-en-c": "ff4eaf3e90501694",
+    "frag:on-arrive-en-d": "cdc6895dc16d1c8c",
+    "frag:on-cherche-ce-qu-il-faut-ajouter-a": "d9018d9236ec4170",
+    "frag:on-cherche-la-colonne-b-puis-on-monte-a-la-ligne": "92e187c91f6e06f9",
+    "frag:on-cherche-la-ligne-des-bananes-et-on-lit-le-nombre-a-cote": "bfba292b15480c3f",
+    "frag:on-cherche-le-nombre": "ff26a0c45466fa8e",
+    "frag:on-complete-a": "b33b8c4a1f5dcc31",
+    "frag:on-complete-d-abord-a-la-dizaine-puis-a": "415a3324e4dfc247",
+    "frag:on-croise-la-ligne-des-billes-rouges-et-la-colonne-de-lea-elle-a": "5b426ecf9498dc23",
+    "frag:on-croise-la-ligne-des-poires-et-la-colonne-de-sacha-il-a": "70b634e4a827a554",
+    "frag:on-ecarte-le-compas-de": "12882e3bd7e6b59d",
+    "frag:on-ecrit": "4e9927ffa4bcc1d3",
+    "frag:on-ecrit-a": "2fb850030791177a",
+    "frag:on-ecrit-c": "5896259ff5282e79",
+    "frag:on-exprime-l-eau-d-une-baignoire-en-l-rappel": "c6369575526e7e23",
+    "frag:on-exprime-la-masse-d-un-enfant-en-kg-rappel": "3acde18146de49e2",
+    "frag:on-exprime-la-masse-d-un-sac-de-sucre-en-kg-rappel": "d9e2d2cae8cb17dd",
+    "frag:on-exprime-la-masse-d-un-stylo-en-g-rappel": "2460eab4baf31c92",
+    "frag:on-exprime-la-masse-d-une-pomme-en-g-rappel": "503ace0f034babb2",
+    "frag:on-exprime-la-quantite-d-eau-dans-un-verre-en-cl-rappel": "c3a6232dc568f7a9",
+    "frag:on-exprime-la-quantite-d-eau-dans-une-bouteille-en-l-rappel": "3c01ea9a5d0229fe",
+    "frag:on-exprime-une-cuillere-de-sirop-en-ml-rappel": "b7a0c9566a666008",
+    "frag:on-fait": "442194a3b63ca74a",
+    "frag:on-fait-monter-la-barre-des-billes-bleues-jusqu-au-trait": "3476b444ca0a1fe2",
+    "frag:on-fait-monter-la-barre-des-cartes-jusqu-au-trait": "8317c2ff6e0d107d",
+    "frag:on-garde-l-ecartement-de": "631da09ede6ca901",
+    "frag:on-lit-d-abord-la-lettre-de-la-colonne-puis-le-numero-de-la-ligne-la-case-coloriee-est-dans-la-colonne-b-a-la-ligne": "32d04b32e4c9466d",
+    "frag:on-lit-la-ligne-des-moutons-il-y-a": "3692606201d6f0c5",
+    "frag:on-paie": "dba2d84240a182f2",
+    "frag:on-passe-a": "34a7a933a27624b9",
+    "frag:on-passe-par": "868dcafe1e7a44d9",
+    "frag:on-plie-sur-le-trait-du-milieu-chaque-case-du-bas-a-sa-jumelle-en-haut-a-la-meme-distance-on-colorie-a": "613ea83aac21f69d",
+    "frag:on-plie-sur-le-trait-du-milieu-chaque-case-du-bas-a-sa-jumelle-en-haut-on-colorie-a": "201b1a36ed7db846",
+    "frag:on-rend": "e397484521bb73dc",
+    "frag:on-reste-dans-la-colonne-c-donc-on-arrive-en-c": "1ff65444d4a2feb3",
+    "frag:on-vise": "860f7a165479f054",
+    "frag:ou-de": "d39f4304ec4e673a",
+    "frag:paquets": "3bbe4dd1451eaa85",
+    "frag:par-exemple": "5be3d63575a434fc",
+    "frag:parmi": "0362995d81d2069b",
+    "frag:partage-en-deux": "5f080ba9b833e8f9",
+    "frag:parties-perdues": "567e9bffb4e72bae",
+    "frag:parts-egales": "659b03b2146e3157",
+    "frag:pas-de": "3245faf1e1f06c95",
+    "frag:plus": "05e412212d9f0fc2",
+    "frag:poires": "f15b08617db7b901",
+    "frag:poires-de-moins": "c2af517192773cb5",
+    "frag:poires-et": "fca1c02c9ec5687b",
+    "frag:pommes": "fdb7f9422dceb4e0",
+    "frag:pommes-et": "7c7969a08b9f1022",
+    "frag:pour": "e98f9f049b058f96",
+    "frag:pour-aller-a": "300cd531afbb2d38",
+    "frag:pour-equilibrer-il-faut-le-meme-poids-des-deux-cotes": "798603a1b2eb86f1",
+    "frag:pour-faire": "6c6124bcb4d3e9d5",
+    "frag:puis": "849b1fd993ae8d80",
+    "frag:puis-a": "02420ad733e0b8d5",
+    "frag:puis-a-b": "618298d9241726ac",
+    "frag:puis-c": "4e692705c415ef54",
+    "frag:puis-les-dizaines-total": "776366c203aa45de",
+    "frag:puis-tourne-a-droite-il-regarde-maintenant-vers-la-droite-il-avance-d-une-case-et-arrive-en-b": "f14fd4cbf8d12371",
+    "frag:puis-tourne-a-gauche-il-regarde-vers-le-haut-il-avance-d-une-case-et-arrive-en-c": "69b29f631c102299",
+    "frag:quand-il-y-a-de-moins-je-retire": "5ccf2edd2a3f53ed",
+    "frag:quand-il-y-a-de-plus-j-ajoute": "219440c8e6759d1d",
+    "frag:quatre-cent-dix-s-ecrit": "9166c1b913376c51",
+    "frag:quatre-cent-quatre-vingt-douze-s-ecrit": "87c79ceadf25bb5f",
+    "frag:quatre-vingt-neuf-s-ecrit": "3e5344b722976334",
+    "frag:resultat": "e0844941028f0703",
+    "frag:retenue": "da101640ecb45bb3",
+    "frag:s-ecrit-cinq-mille-deux-cent-quatre-vingt-trois": "de61e0dd0ab8de57",
+    "frag:s-ecrit-huit-mille-cinq-cent-trente-huit": "14586dc002dd9df2",
+    "frag:s-ecrit-huit-mille-six-cent-dix-huit": "1e5c1c38fb376609",
+    "frag:s-ecrit-quatre-mille-neuf-cent-vingt": "342910e3f3511a12",
+    "frag:s-ecrit-sept-cent-soixante-huit": "296b6dd3bcded6e2",
+    "frag:s-ecrit-sept-mille-cent-dix": "53993e695f5cb3c5",
+    "frag:s-ecrit-sept-mille-sept-cent-soixante-trois": "344f66fea4d80508",
+    "frag:s-ecrit-trois-mille-neuf-cent-soixante-dix": "3ef5f10e3be9cf38",
+    "frag:sa-valeur-est": "e992ce9fa3cbc0ba",
+    "frag:sacha-a-lu": "27e8f2749990d058",
+    "frag:se-lit-cinquante-deux": "cf04d90323f6e73f",
+    "frag:se-lit-cinquante-huit": "e14d6d19baac5031",
+    "frag:se-lit-quarante": "4634cfeb98fdf8d4",
+    "frag:se-lit-quatre-vingt-dix-huit": "d598955cb252fbc7",
+    "frag:se-lit-quatre-vingt-quatre": "fe0240a4cc55eaaa",
+    "frag:se-lit-quatre-vingt-seize": "cbe6695a786fa4b8",
+    "frag:se-lit-quatre-vingt-six": "2f46a3a581017192",
+    "frag:se-lit-quatre-vingt-trois": "56a00b6892a3cb38",
+    "frag:se-lit-soixante": "10c01476578e0d0d",
+    "frag:se-lit-soixante-dix": "0373e2674bb83360",
+    "frag:se-lit-soixante-dix-huit": "cf82e1658d555636",
+    "frag:se-lit-trente-quatre": "8e31379d3ad657cb",
+    "frag:sept-cent-trente-cinq-s-ecrit": "3254d1e688f6946b",
+    "frag:sept-cent-trente-neuf-s-ecrit": "8ea506453b415f42",
+    "frag:sept-mille-cent-dix-huit-s-ecrit": "43811b196678cb8d",
+    "frag:sept-mille-cent-quatorze-s-ecrit": "ed90732d665e72ac",
+    "frag:six-cent-cinquante-huit-s-ecrit": "bf6a7dc08301d217",
+    "frag:six-cent-soixante-quatre-s-ecrit": "fd9e8aef5105f29f",
+    "frag:six-mille-deux-cent-quarante-neuf-s-ecrit": "47c21aaeefe4679b",
+    "frag:six-mille-huit-cent-trente-s-ecrit": "efcd716ba4ba38dc",
+    "frag:sont-coloriees-c-est": "ec1ed347e788dd13",
+    "frag:sous": "a8ad53da6aafeba7",
+    "frag:sur-l-horloge": "562e38ba8c6d28ff",
+    "frag:tom-a": "8271de9bc314c20e",
+    "frag:tom-en-a-le-plus": "de28e24fe4a6ef91",
+    "frag:total": "161192a775ce2ab6",
+    "frag:tourne-a-droite-puis-avance-avance-pour-arriver-en-c": "c33ee02493375a40",
+    "frag:tourne-a-droite-puis-avance-jusqu-en-e": "c74e7a7787e452b1",
+    "frag:tourne-a-droite-puis-longe-le-haut-jusqu-en-e": "2ee7405b15361cb9",
+    "frag:tourne-a-gauche-puis-avance-une-fois-pour-arriver-en-d": "b7931531a3735d82",
+    "frag:trois-cent-quatre-vingt-dix-s-ecrit": "b16e4ea0a3a9969a",
+    "frag:trois-mille-trois-cent-quatre-vingt-huit-s-ecrit": "66a7ae873f1e7ae9",
+    "frag:trois-mille-vingt-six-s-ecrit": "d82e9845cfeb8e97",
+    "frag:tu-passes-au-dessus-des-cases-grises": "69ddfb37918045cc",
+    "frag:tu-passes-loin-des-cases-grises": "7b0ac2fdeba18fef",
+    "frag:un-jour-et-une-nuit-durent-ensemble": "b9e4718a6cee37fe",
+    "frag:un-n-ud-c-est-un-point-de-croisement-des-traits-on-prend-la-colonne-b-et-la-ligne": "d8acc4a81b86c35f",
+    "frag:une-annee-a": "50e824f3b56b2142",
+    "frag:une-case-vers-la-droite-de-a-a-b-puis-deux-cases-vers-le-haut-de-la-ligne": "5f61cfe4ec978322",
+    "frag:une-case-vers-la-droite-de-b-a-c-une-case-vers-le-haut-de-la-ligne": "4ed93bff7ec81dc5",
+    "frag:une-case-vers-la-gauche-de-d-a-c-deux-cases-vers-le-bas-de-la-ligne": "1c2395361edb3d05",
+    "frag:une-case-vers-la-gauche-de-d-a-c-on-arrive-en-c": "6be124fd9200f0de",
+    "frag:une-semaine-a": "5434171e04316d56",
+    "frag:une-solution-avance-avance-jusqu-en-a": "b7d7b3cbe0794932",
+    "frag:une-solution-avance-deux-fois-jusqu-en-a": "48122ec002e97d75",
+    "frag:une-solution-avance-trois-fois-jusqu-en-d": "33734cee3c289787",
+    "frag:une-solution-monte-tout-en-haut-jusqu-en-a": "4d153a92e9c69f1f",
+    "frag:unites": "fe080622e93dfe65",
+    "frag:vers-la-droite-on-change-de-colonne-de-b-on-passe-a-c-puis-a-d-on-reste-a-la-ligne": "4694693eb10f5827",
+    "frag:vers-le-haut-on-change-de-ligne-de-la-ligne": "7ab96e7afc234d8c",
+    "frag:vingt-et-un-s-ecrit": "3e6d148f0d1d84da"
   }
 }
