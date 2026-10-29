@@ -121,7 +121,7 @@ def _encoder_mp3(wav: Path, mp3: Path, core) -> None:
 
 def generer(out_dir: Path, pilot: bool, only: set[str] | None, force: bool = False,
             ref_json: str | None = None, voice: str | None = None,
-            wait_gpu: bool = False) -> dict:
+            wait_gpu: bool = False, frags_only: bool = False) -> dict:
     import core
     from voix import VoixEngine
 
@@ -143,6 +143,8 @@ def generer(out_dir: Path, pilot: bool, only: set[str] | None, force: bool = Fal
     clips = construire(pilot=pilot)
     if only:
         clips = [c for c in clips if c["key"] in only]
+    if frags_only:  # ne generer QUE les fragments de correction (frag:<slug>)
+        clips = [c for c in clips if c["cat"] == "fragment"]
     _log(f"catalogue : {len(clips)} cles ({'pilote' if pilot else 'complet'})")
 
     engine = VoixEngine(ref_json=ref_json) if ref_json else VoixEngine()  # modele + empreinte a la 1re gen
@@ -243,10 +245,12 @@ def main(argv=None) -> int:
                     help="version de voix (sous-dossier + manifest.voice). Defaut : VOICE_VERSION")
     ap.add_argument("--wait-gpu", action="store_true",
                     help="attendre que le GPU soit libre avant chaque clip (ne tue jamais)")
+    ap.add_argument("--frags-only", action="store_true",
+                    help="ne generer que les fragments de correction (cat=fragment)")
     a = ap.parse_args(argv)
     only = set(x.strip() for x in a.only.split(",") if x.strip()) if a.only else None
     generer(Path(a.out), a.pilot, only, force=a.force, ref_json=a.ref, voice=a.voice,
-            wait_gpu=a.wait_gpu)
+            wait_gpu=a.wait_gpu, frags_only=a.frags_only)
     return 0
 
 
