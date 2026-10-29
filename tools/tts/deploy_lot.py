@@ -66,8 +66,8 @@ def resolve_vps() -> str:
     sys.exit(1)
 
 
-def ssh_win(ps: str):
-    return run(["ssh", *WIN_OPTS, WIN, ps])
+def ssh_win(ps: str, timeout: float | None = None):
+    return run(["ssh", *WIN_OPTS, WIN, ps], timeout=timeout)
 
 
 def ssh_vps(vps: str, sh: str):
@@ -161,12 +161,19 @@ ASR_CACHE = r"C:\kerskol-tts\models_asr"  # cache modeles whisper (jamais C:\Aud
 
 
 def asr_controle(cids: list[str], new: dict, tmp: Path) -> set:
-    """ASR whisper SMALL sur GPU si libre (meme garde-fou que la generation :
-    util <= 25%), sinon CPU avec beam=1, UNIQUEMENT sur les nouveaux. Le modele
-    est mis en cache dans ASR_CACHE (telecharge une seule fois si absent) ; repli
-    sur BASE si small est indisponible (pas de reseau, etc.).
-    Retourne l'ensemble des cid a ECARTER (muet / tronque / accent anglais)."""
-    keys = [k for k, c in new.items() if c in set(cids)]
+    """ASR whisper SMALL en controle QUALITE PAR SONDAGE, JAMAIS bloquant.
+
+    Regles (correctif du blocage CPU) :
+      - GPU libre (util <= 25%, meme garde-fou que la generation) -> on sonde TOUT ;
+        sinon CPU (lent) -> on ne sonde qu'un ECHANTILLON regulierement espace
+        (ASR_SAMPLE, defaut 30) pour borner le temps ;
+      - chaque appel ASR est borne par ASR_BUDGET secondes (defaut 420) ; si l'ASR
+        depasse ce budget, on l'ABANDONNE et on deploie par la seule duree non nulle
+        (le controle ASR n'est qu'un garde-fou qualite, il ne doit jamais empecher
+        les mp3 valides de partir) ;
+      - on n'ECARTE que des clips REELLEMENT sondes (muet / tronque / accent anglais),
+        jamais pour une simple faute d'orthographe de l'ASR.
+    Retourne l'ensemble des cid a ECARTER."""
     # GPU libre ? (util <= 25, meme garde-fou que _wait_for_gpu de la generation)
     u = ssh_win("nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits")
     try:
@@ -174,44 +181,67 @@ def asr_controle(cids: list[str], new: dict, tmp: Path) -> set:
     except Exception:
         gpu_free = False
     device = "cuda" if gpu_free else "cpu"
+
+    # echantillon : tout sur GPU (rapide) ; sous-ensemble borne sur CPU (lent).
+    env_sample = os.environ.get("ASR_SAMPLE")
+    default_sample = 0 if device == "cuda" else 30  # 0 = tout
+    try:
+        want = int(env_sample) if env_sample is not None else default_sample
+    except ValueError:
+        want = default_sample
+    sample = cids
+    if 0 < want < len(cids):
+        step = len(cids) / want
+        sample = [cids[int(i * step)] for i in range(want)]  # regulierement espace
+    sample_set = set(sample)
+    keys = [k for k, c in new.items() if c in sample_set]
     keycsv = ",".join(keys)
+
+    try:
+        budget = float(os.environ.get("ASR_BUDGET", "420"))
+    except ValueError:
+        budget = 420.0
 
     def run_asr(model: str, dev: str):
         ps = (f'cd C:\\kerskol-tts; '
               f'& C:\\Audiobooks\\venv_asr\\Scripts\\python.exe -u relecture.py '
               f'--out {WIN_OUT} --keys "{keycsv}" --model {model} '
               f'--download-root {ASR_CACHE} --device {dev} --beam 1')
-        return ssh_win(ps)
+        try:
+            return ssh_win(ps, timeout=budget)
+        except subprocess.TimeoutExpired:
+            return None  # trop lent : signale l'abandon
 
     model = "small"
-    log(f"ASR : {len(keys)} nouveaux clips, device={device}, model={model}")
+    log(f"ASR : sondage {len(sample)}/{len(cids)} clips, device={device}, "
+        f"model={model}, budget={int(budget)}s")
     r = run_asr(model, device)
-    if device == "cuda" and r.returncode != 0:
+    if r is not None and device == "cuda" and r.returncode != 0:
         log("ASR GPU indisponible, repli CPU.")
         device = "cpu"
         r = run_asr(model, device)
-    if r.returncode != 0:
+    if r is not None and r.returncode != 0:
         log("ASR modele small indisponible (telechargement ?), repli base.")
         model = "base"
         r = run_asr(model, device)
+    if r is None:
+        log(f"ASR trop lent (> {int(budget)}s) : abandonne, deploiement par duree seule.")
+        return set()
     # lire relecture.json (scp pour conserver l'UTF-8, pas de Get-Content cp1252)
     rjf = tmp / "relecture.json"
     run(["scp", *WIN_OPTS, f"{WIN}:C:/kerskol-tts/sortie_c1s33/relecture.json", str(rjf)])
     exclus = set()
     try:
         rep = json.loads(rjf.read_text(encoding="utf-8"))
-        cid_de = {}
+        key_to_cid = {k: c for k, c in new.items()}
         for row in rep.get("rapport", []):
-            cid_de[row["key"]] = row
             niv = row.get("niveau", "")
             classe = row.get("classe", "")
-            lang = row.get("lang", "fr")
-            accent_en = lang == "en"
+            accent_en = row.get("lang", "fr") == "en"
             if niv in ("MUET", "QUASI_MUET") or classe == "TRONQUE" or accent_en:
-                # retrouver le cid
-                for k, c in new.items():
-                    if k == row["key"]:
-                        exclus.add(c)
+                c = key_to_cid.get(row["key"])
+                if c is not None:
+                    exclus.add(c)
     except Exception as e:
         log(f"NB : relecture.json illisible ({e}) ; aucun clip ecarte par ASR.")
     return exclus
