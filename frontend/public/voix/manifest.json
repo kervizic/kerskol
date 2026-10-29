@@ -25773,6 +25773,491 @@
       "text": "1 kg = 1 000 g, donc 6 kg = 6 × 1 000 = 6 000 g.",
       "ms": 6880,
       "cat": "enonce"
+    },
+    "c175879ffa805428": {
+      "text": "1 kg = 1 000 g, donc 9 kg = 9 × 1 000 = 9 000 g.",
+      "ms": 8480,
+      "cat": "enonce"
+    },
+    "fd745b22a0761ead": {
+      "text": "1 kg = 1000 g, donc 4 kg = 4 × 1000 = 4000 g.",
+      "ms": 6880,
+      "cat": "enonce"
+    },
+    "bea7dcd60775c99a": {
+      "text": "1 kg = 1000 g, donc 5 kg = 5 × 1000 = 5000 g.",
+      "ms": 7680,
+      "cat": "enonce"
+    },
+    "daa86dd234bda308": {
+      "text": "1 km = 1 000 m, donc 3 km = 3 000 m. Puis 3 000 − 208 = 2 792 m.",
+      "ms": 9040,
+      "cat": "enonce"
+    },
+    "5a1e430efbd3681b": {
+      "text": "1 km = 1 000 m, donc 3 km = 3 000 m. Puis 3 000 − 857 = 2 143 m.",
+      "ms": 8720,
+      "cat": "enonce"
+    },
+    "306aae290ec3a245": {
+      "text": "1 km = 1 000 m, donc 3 km = 3 × 1 000 = 3 000 m.",
+      "ms": 6720,
+      "cat": "enonce"
+    },
+    "18a326d0eb3e31e8": {
+      "text": "1 km = 1 000 m, donc 4 km = 4 000 m. Puis 4 000 + 209 = 4 209 m.",
+      "ms": 9040,
+      "cat": "enonce"
+    },
+    "a1eb870844120146": {
+      "text": "1 km = 1 000 m, donc 4 km = 4 000 m. Puis 4 000 − 57 = 3 943 m.",
+      "ms": 11120,
+      "cat": "enonce"
+    },
+    "06f4d406147ada7e": {
+      "text": "1 km = 1 000 m, donc 5 km = 5 × 1 000 = 5 000 m.",
+      "ms": 7600,
+      "cat": "enonce"
+    },
+    "a01d36ba6289e9bc": {
+      "text": "1 km = 1 000 m, donc 8 km = 8 × 1 000 = 8 000 m.",
+      "ms": 6240,
+      "cat": "enonce"
+    },
+    "7388cdfb662aacf6": {
+      "text": "1 km = 1000 m, donc 2 km = 2 × 1000 = 2000 m.",
+      "ms": 5520,
+      "cat": "enonce"
+    },
+    "926b41d0def298f3": {
+      "text": "1 km = 1000 m, donc 4 km = 4 × 1000 = 4000 m.",
+      "ms": 6560,
+      "cat": "enonce"
+    },
+    "9c0c804782c0530c": {
+      "text": "1 km = 1000 m, donc 5 km = 5 × 1000 = 5000 m.",
+      "ms": 5200,
+      "cat": "enonce"
+    },
+    "cf09e04f6e7d1df6": {
+      "text": "1 km = 1000 m, donc 6 km = 6 × 1000 = 6000 m.",
+      "ms": 6400,
+      "cat": "enonce"
+    },
+    "f12b021e22a7ab81": {
+      "text": "1 km = 1000 m, donc 8 km = 8 × 1000 = 8000 m.",
+      "ms": 7600,
+      "cat": "enonce"
+    },
+    "cc9a0706a9216729": {
+      "text": "1 km = 1000 m, donc 9 km = 9 × 1000 = 9000 m.",
+      "ms": 4640,
+      "cat": "enonce"
+    },
+    "9ea8243f2a30c8dc": {
+      "text": "1 m = 100 cm, donc 1 m = 1 × 100 = 100 cm.",
+      "ms": 6800,
+      "cat": "enonce"
+    },
+    "ca2f0a06145f97d5": {
+      "text": "1 m = 100 cm, donc 18 m = 18 × 100 = 1800 cm.",
+      "ms": 7360,
+      "cat": "enonce"
+    },
+    "43fc30e48d70ca20": {
+      "text": "1 m = 100 cm, donc 2 m = 200 cm. Puis 200 + 42 = 242 cm.",
+      "ms": 9760,
+      "cat": "enonce"
+    },
+    "69cc18bccc662906": {
+      "text": "1 m = 100 cm, donc 20 m = 20 × 100 = 2000 cm.",
+      "ms": 5200,
+      "cat": "enonce"
+    },
+    "78d52ecee08bb852": {
+      "text": "1 m = 100 cm, donc 3 m = 300 cm. Puis 300 + 86 = 386 cm.",
+      "ms": 7920,
+      "cat": "enonce"
+    },
+    "29277e3654004223": {
+      "text": "1 m = 100 cm, donc 4 m = 4 × 100 = 400 cm.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "c978bd6b213c129e": {
+      "text": "1 m = 100 cm, donc 8 m = 8 × 100 = 800 cm.",
+      "ms": 6800,
+      "cat": "enonce"
+    },
+    "49144ed823fbc8cb": {
+      "text": "1 m = 100 cm. Donc 1 m < 461 cm.",
+      "ms": 5600,
+      "cat": "enonce"
+    },
+    "46758bd0b3af0f46": {
+      "text": "1 semaine = 7 jours, donc 28 ÷ 7 = 4 semaines.",
+      "ms": 5600,
+      "cat": "enonce"
+    },
+    "2ed285d2e55f4259": {
+      "text": "1 semaine = 7 jours, donc 3 semaines = 3 × 7 = 21 jours.",
+      "ms": 6000,
+      "cat": "enonce"
+    },
+    "a29fbd7ef56a4a10": {
+      "text": "1 semaine = 7 jours, donc 42 ÷ 7 = 6 semaines.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "20f0875f7230a83f": {
+      "text": "1 semaine = 7 jours, donc 6 semaines = 6 × 7 = 42 jours.",
+      "ms": 6560,
+      "cat": "enonce"
+    },
+    "913773d99dd325d6": {
+      "text": "1 semaine = 7 jours, donc 7 ÷ 7 = 1 semaine.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "5d5e781b7d9c02cf": {
+      "text": "1 € = 100 c, donc 2 € = 2 × 100 = 200 c.",
+      "ms": 6880,
+      "cat": "enonce"
+    },
+    "e80b2907cc97b1f6": {
+      "text": "1 € = 100 c, donc 2 € = 200 c. Puis 200 − 76 = 124 c.",
+      "ms": 8480,
+      "cat": "enonce"
+    },
+    "9a6bddebb75dafc5": {
+      "text": "1 € = 100 c, donc 3 € = 300 c. Puis 300 − 78 = 222 c.",
+      "ms": 9040,
+      "cat": "enonce"
+    },
+    "678be20fe880604a": {
+      "text": "1 € = 100 c, donc 4 € = 4 × 100 = 400 c.",
+      "ms": 6560,
+      "cat": "enonce"
+    },
+    "3e0741d43e993355": {
+      "text": "1 € = 100 c, donc 4 € = 400 c. Puis 400 − 44 = 356 c.",
+      "ms": 9600,
+      "cat": "enonce"
+    },
+    "99e01f1a0b2f254d": {
+      "text": "1 € = 100 c, donc 4 € = 400 c. Puis 400 − 61 = 339 c.",
+      "ms": 9440,
+      "cat": "enonce"
+    },
+    "db95606a9da25a53": {
+      "text": "1/2 : on colorie 1 part sur 2.",
+      "ms": 3360,
+      "cat": "enonce"
+    },
+    "57508333ade75aa0": {
+      "text": "1/3 : on colorie 1 part sur 3.",
+      "ms": 3680,
+      "cat": "enonce"
+    },
+    "5b83b8e5118d7704": {
+      "text": "1/4 : on colorie 1 part sur 4.",
+      "ms": 3920,
+      "cat": "enonce"
+    },
+    "5c2d38390422e809": {
+      "text": "10 + 11, c'est presque un double : 10 + 10 = 20, puis + 1 = 21.",
+      "ms": 4800,
+      "cat": "enonce"
+    },
+    "2cfa5c7dfbabb7b2": {
+      "text": "10 dL = 1 L, donc 30 ÷ 10 = 3 L.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "723e4dc9ae7c593e": {
+      "text": "10 dL = 1 L, donc 50 ÷ 10 = 5 L.",
+      "ms": 6000,
+      "cat": "enonce"
+    },
+    "0c351f4aa4032503": {
+      "text": "10 dL = 1 L, donc 60 ÷ 10 = 6 L.",
+      "ms": 5680,
+      "cat": "enonce"
+    },
+    "1ca971d4606cbe5e": {
+      "text": "10 dL = 1 L, donc 80 ÷ 10 = 8 L.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "e9cfac3a1cd39ff3": {
+      "text": "10 dL = 1 L, donc 90 ÷ 10 = 9 L.",
+      "ms": 5840,
+      "cat": "enonce"
+    },
+    "58d4e8a5e102c35a": {
+      "text": "10 est un nombre de dizaines : on ajoute 1 dizaines à 87, ça fait 97.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "07c900724c6888c8": {
+      "text": "10 est un nombre de dizaines : on enlève 1 dizaines à 32, ça fait 22.",
+      "ms": 5360,
+      "cat": "enonce"
+    },
+    "76484bc21295574c": {
+      "text": "10 est un nombre de dizaines : on enlève 1 dizaines à 74, ça fait 64.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "154c283b5b2c5616": {
+      "text": "10 groupes de 2, c'est 10 × 2 = 20.",
+      "ms": 3280,
+      "cat": "enonce"
+    },
+    "2bb205ba7228c10a": {
+      "text": "10 groupes de 3, c'est 10 × 3 = 30.",
+      "ms": 3440,
+      "cat": "enonce"
+    },
+    "4d75bd4247a6ccac": {
+      "text": "10 groupes de 4, c'est 10 × 4 = 40.",
+      "ms": 3520,
+      "cat": "enonce"
+    },
+    "3ebc2275c97f9b3e": {
+      "text": "10 groupes de 7, c'est 10 × 7 = 70.",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "640461cbc794e494": {
+      "text": "10 mm = 1 cm, donc 250 ÷ 10 = 25 cm.",
+      "ms": 6240,
+      "cat": "enonce"
+    },
+    "ddbe11130ab02781": {
+      "text": "10 mm = 1 cm, donc 290 ÷ 10 = 29 cm.",
+      "ms": 5680,
+      "cat": "enonce"
+    },
+    "9b878e0f8dc253bf": {
+      "text": "10 × 100 : on ajoute deux zéros, ça fait 1000.",
+      "ms": 3600,
+      "cat": "enonce"
+    },
+    "3ed3f90969fb4cc6": {
+      "text": "100 + 900 = 1000 : on complete a 1000.",
+      "ms": 3360,
+      "cat": "enonce"
+    },
+    "2e95ff58aefeb722": {
+      "text": "100 cL = 1 L, donc 100 ÷ 100 = 1 L.",
+      "ms": 5840,
+      "cat": "enonce"
+    },
+    "0fe31e8b7e3c9cbc": {
+      "text": "100 cL = 1 L, donc 200 ÷ 100 = 2 L.",
+      "ms": 6320,
+      "cat": "enonce"
+    },
+    "8ff83dd0810970c9": {
+      "text": "100 cL = 1 L, donc 300 ÷ 100 = 3 L.",
+      "ms": 6400,
+      "cat": "enonce"
+    },
+    "c5de61742fd45e90": {
+      "text": "100 cL = 1 L, donc 600 ÷ 100 = 6 L.",
+      "ms": 6400,
+      "cat": "enonce"
+    },
+    "5fa0c3f95f505b7a": {
+      "text": "100 cL = 1 L, donc 700 ÷ 100 = 7 L.",
+      "ms": 6480,
+      "cat": "enonce"
+    },
+    "4c333ce9cb906022": {
+      "text": "100 cm = 1 m, donc 1000 ÷ 100 = 10 m.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "01aad76194c95d7d": {
+      "text": "100 cm = 1 m, donc 1700 ÷ 100 = 17 m.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "59b9768d7e7d314d": {
+      "text": "100 cm = 1 m, donc 300 ÷ 100 = 3 m.",
+      "ms": 5680,
+      "cat": "enonce"
+    },
+    "42b2f0c4623a8153": {
+      "text": "100 cm = 1 m, donc 3000 ÷ 100 = 30 m.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "162c8ccc15aa88a1": {
+      "text": "100 cm = 1 m, donc 3700 ÷ 100 = 37 m.",
+      "ms": 6560,
+      "cat": "enonce"
+    },
+    "a3c40332ca54e510": {
+      "text": "1000 g = 1 kg, donc 8000 ÷ 1000 = 8 kg.",
+      "ms": 7200,
+      "cat": "enonce"
+    },
+    "d6572e03c918429c": {
+      "text": "1000 g = 1 kg, donc 9000 ÷ 1000 = 9 kg.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "69c08514a7efe7be": {
+      "text": "1000 m = 1 km, donc 3000 ÷ 1000 = 3 km.",
+      "ms": 5520,
+      "cat": "enonce"
+    },
+    "4b5ba3abf302cae6": {
+      "text": "1000 m = 1 km, donc 5000 ÷ 1000 = 5 km.",
+      "ms": 5840,
+      "cat": "enonce"
+    },
+    "f2a5b116b9363cd1": {
+      "text": "1000 m = 1 km, donc 6000 ÷ 1000 = 6 km.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "c4f7661992e94632": {
+      "text": "1000 m = 1 km, donc 8000 ÷ 1000 = 8 km.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "54d066388ad6c1bc": {
+      "text": "1000 m = 1 km, donc 9000 ÷ 1000 = 9 km.",
+      "ms": 6240,
+      "cat": "enonce"
+    },
+    "64bb5d298e2a5afd": {
+      "text": "11 − 9 = 11 − 10 + 1 = 1 + 1 = 2.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "7e77e48906e3645e": {
+      "text": "110 + 890 = 1000 : on complete a 1000.",
+      "ms": 5120,
+      "cat": "enonce"
+    },
+    "cc82ad3bc00dbfcf": {
+      "text": "1126 s'écrit mille cent vingt-six.",
+      "ms": 2720,
+      "cat": "enonce"
+    },
+    "03dabec83cc49f76": {
+      "text": "1186 = 1 milliers, 1 centaines, 8 dizaines, 6 unites.",
+      "ms": 6000,
+      "cat": "enonce"
+    },
+    "c10cd7b5fc1842df": {
+      "text": "1238 ÷ 100 = 12, il y a 12 centaines entieres.",
+      "ms": 5840,
+      "cat": "enonce"
+    },
+    "664063769ed4d8a8": {
+      "text": "130 + 870 = 1000 : on complete a 1000.",
+      "ms": 5520,
+      "cat": "enonce"
+    },
+    "d1c9f4324127b7a4": {
+      "text": "1321 s'écrit mille trois cent vingt et un.",
+      "ms": 3360,
+      "cat": "enonce"
+    },
+    "ed290c4b79b0201c": {
+      "text": "14 € = 14 €.",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "5b3d010408e34e30": {
+      "text": "15 € < 86 €.",
+      "ms": 2480,
+      "cat": "enonce"
+    },
+    "19863ea4b82c453c": {
+      "text": "16 < 21.",
+      "ms": 1520,
+      "cat": "enonce"
+    },
+    "e750be59f016c74e": {
+      "text": "160 ≈ 160 et 55 ≈ 60. 160 + 60 = 220.",
+      "ms": 6240,
+      "cat": "enonce"
+    },
+    "6d3034e4ea494294": {
+      "text": "1659 est entre 1600 et 1700. La centaine juste en dessous est 1600.",
+      "ms": 7120,
+      "cat": "enonce"
+    },
+    "5d34ff0d29cf642d": {
+      "text": "17 + 19 = 17 + 20 − 1 = 37 − 1 = 36.",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "d8158aff4b734bb6": {
+      "text": "17 × 100 : on ajoute deux zéros, ça fait 1700.",
+      "ms": 4880,
+      "cat": "enonce"
+    },
+    "59947de0eff7b10d": {
+      "text": "18 = 18.",
+      "ms": 1680,
+      "cat": "enonce"
+    },
+    "238b1f3423dc7706": {
+      "text": "18 × 10 : on ajoute un zéro, ça fait 180.",
+      "ms": 3680,
+      "cat": "enonce"
+    },
+    "d22b9254ae14fa84": {
+      "text": "18 × 20 = 18 × 10 × 2 = 180 × 2 = 360.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "c9d9f60f4428a7f1": {
+      "text": "1800 = 1 milliers, 8 centaines, 0 dizaines, 0 unites.",
+      "ms": 5360,
+      "cat": "enonce"
+    },
+    "73a2c46aca45a605": {
+      "text": "1806 + 10 = 1816.",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "8b2bba16d8870c01": {
+      "text": "1850 > 1849.",
+      "ms": 2880,
+      "cat": "enonce"
+    },
+    "8e62a5c2c82c434e": {
+      "text": "188 + 10 = 198.",
+      "ms": 3920,
+      "cat": "enonce"
+    },
+    "daafe5553d2a3498": {
+      "text": "19 + 81 = 100 : on complete d'abord a la dizaine, puis a 100.",
+      "ms": 5680,
+      "cat": "enonce"
+    },
+    "7c6f325998f9e58a": {
+      "text": "1906 s'écrit mille neuf cent six.",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "14047dcf25eb3be3": {
+      "text": "193 ≈ 190 et 73 ≈ 70. 190 − 70 = 120.",
+      "ms": 7600,
+      "cat": "enonce"
+    },
+    "c4d6170d11af217a": {
+      "text": "2 + 2, c'est un double : 4.",
+      "ms": 2560,
+      "cat": "enonce"
     }
   },
   "keys": {
@@ -30929,6 +31414,103 @@
     "txt:18d6ff3649d3958a": "18d6ff3649d3958a",
     "txt:02405cd6bc9b5af6": "02405cd6bc9b5af6",
     "txt:80e68eaad172749c": "80e68eaad172749c",
-    "txt:465e3b6adff9ce22": "465e3b6adff9ce22"
+    "txt:465e3b6adff9ce22": "465e3b6adff9ce22",
+    "txt:c175879ffa805428": "c175879ffa805428",
+    "txt:fd745b22a0761ead": "fd745b22a0761ead",
+    "txt:bea7dcd60775c99a": "bea7dcd60775c99a",
+    "txt:daa86dd234bda308": "daa86dd234bda308",
+    "txt:5a1e430efbd3681b": "5a1e430efbd3681b",
+    "txt:306aae290ec3a245": "306aae290ec3a245",
+    "txt:18a326d0eb3e31e8": "18a326d0eb3e31e8",
+    "txt:a1eb870844120146": "a1eb870844120146",
+    "txt:06f4d406147ada7e": "06f4d406147ada7e",
+    "txt:a01d36ba6289e9bc": "a01d36ba6289e9bc",
+    "txt:7388cdfb662aacf6": "7388cdfb662aacf6",
+    "txt:926b41d0def298f3": "926b41d0def298f3",
+    "txt:9c0c804782c0530c": "9c0c804782c0530c",
+    "txt:cf09e04f6e7d1df6": "cf09e04f6e7d1df6",
+    "txt:f12b021e22a7ab81": "f12b021e22a7ab81",
+    "txt:cc9a0706a9216729": "cc9a0706a9216729",
+    "txt:9ea8243f2a30c8dc": "9ea8243f2a30c8dc",
+    "txt:ca2f0a06145f97d5": "ca2f0a06145f97d5",
+    "txt:43fc30e48d70ca20": "43fc30e48d70ca20",
+    "txt:69cc18bccc662906": "69cc18bccc662906",
+    "txt:78d52ecee08bb852": "78d52ecee08bb852",
+    "txt:29277e3654004223": "29277e3654004223",
+    "txt:c978bd6b213c129e": "c978bd6b213c129e",
+    "txt:49144ed823fbc8cb": "49144ed823fbc8cb",
+    "txt:46758bd0b3af0f46": "46758bd0b3af0f46",
+    "txt:2ed285d2e55f4259": "2ed285d2e55f4259",
+    "txt:a29fbd7ef56a4a10": "a29fbd7ef56a4a10",
+    "txt:20f0875f7230a83f": "20f0875f7230a83f",
+    "txt:913773d99dd325d6": "913773d99dd325d6",
+    "txt:5d5e781b7d9c02cf": "5d5e781b7d9c02cf",
+    "txt:e80b2907cc97b1f6": "e80b2907cc97b1f6",
+    "txt:9a6bddebb75dafc5": "9a6bddebb75dafc5",
+    "txt:678be20fe880604a": "678be20fe880604a",
+    "txt:3e0741d43e993355": "3e0741d43e993355",
+    "txt:99e01f1a0b2f254d": "99e01f1a0b2f254d",
+    "txt:db95606a9da25a53": "db95606a9da25a53",
+    "txt:57508333ade75aa0": "57508333ade75aa0",
+    "txt:5b83b8e5118d7704": "5b83b8e5118d7704",
+    "txt:5c2d38390422e809": "5c2d38390422e809",
+    "txt:2cfa5c7dfbabb7b2": "2cfa5c7dfbabb7b2",
+    "txt:723e4dc9ae7c593e": "723e4dc9ae7c593e",
+    "txt:0c351f4aa4032503": "0c351f4aa4032503",
+    "txt:1ca971d4606cbe5e": "1ca971d4606cbe5e",
+    "txt:e9cfac3a1cd39ff3": "e9cfac3a1cd39ff3",
+    "txt:58d4e8a5e102c35a": "58d4e8a5e102c35a",
+    "txt:07c900724c6888c8": "07c900724c6888c8",
+    "txt:76484bc21295574c": "76484bc21295574c",
+    "txt:154c283b5b2c5616": "154c283b5b2c5616",
+    "txt:2bb205ba7228c10a": "2bb205ba7228c10a",
+    "txt:4d75bd4247a6ccac": "4d75bd4247a6ccac",
+    "txt:3ebc2275c97f9b3e": "3ebc2275c97f9b3e",
+    "txt:640461cbc794e494": "640461cbc794e494",
+    "txt:ddbe11130ab02781": "ddbe11130ab02781",
+    "txt:9b878e0f8dc253bf": "9b878e0f8dc253bf",
+    "txt:3ed3f90969fb4cc6": "3ed3f90969fb4cc6",
+    "txt:2e95ff58aefeb722": "2e95ff58aefeb722",
+    "txt:0fe31e8b7e3c9cbc": "0fe31e8b7e3c9cbc",
+    "txt:8ff83dd0810970c9": "8ff83dd0810970c9",
+    "txt:c5de61742fd45e90": "c5de61742fd45e90",
+    "txt:5fa0c3f95f505b7a": "5fa0c3f95f505b7a",
+    "txt:4c333ce9cb906022": "4c333ce9cb906022",
+    "txt:01aad76194c95d7d": "01aad76194c95d7d",
+    "txt:59b9768d7e7d314d": "59b9768d7e7d314d",
+    "txt:42b2f0c4623a8153": "42b2f0c4623a8153",
+    "txt:162c8ccc15aa88a1": "162c8ccc15aa88a1",
+    "txt:a3c40332ca54e510": "a3c40332ca54e510",
+    "txt:d6572e03c918429c": "d6572e03c918429c",
+    "txt:69c08514a7efe7be": "69c08514a7efe7be",
+    "txt:4b5ba3abf302cae6": "4b5ba3abf302cae6",
+    "txt:f2a5b116b9363cd1": "f2a5b116b9363cd1",
+    "txt:c4f7661992e94632": "c4f7661992e94632",
+    "txt:54d066388ad6c1bc": "54d066388ad6c1bc",
+    "txt:64bb5d298e2a5afd": "64bb5d298e2a5afd",
+    "txt:7e77e48906e3645e": "7e77e48906e3645e",
+    "txt:cc82ad3bc00dbfcf": "cc82ad3bc00dbfcf",
+    "txt:03dabec83cc49f76": "03dabec83cc49f76",
+    "txt:c10cd7b5fc1842df": "c10cd7b5fc1842df",
+    "txt:664063769ed4d8a8": "664063769ed4d8a8",
+    "txt:d1c9f4324127b7a4": "d1c9f4324127b7a4",
+    "txt:ed290c4b79b0201c": "ed290c4b79b0201c",
+    "txt:5b3d010408e34e30": "5b3d010408e34e30",
+    "txt:19863ea4b82c453c": "19863ea4b82c453c",
+    "txt:e750be59f016c74e": "e750be59f016c74e",
+    "txt:6d3034e4ea494294": "6d3034e4ea494294",
+    "txt:5d34ff0d29cf642d": "5d34ff0d29cf642d",
+    "txt:d8158aff4b734bb6": "d8158aff4b734bb6",
+    "txt:59947de0eff7b10d": "59947de0eff7b10d",
+    "txt:238b1f3423dc7706": "238b1f3423dc7706",
+    "txt:d22b9254ae14fa84": "d22b9254ae14fa84",
+    "txt:c9d9f60f4428a7f1": "c9d9f60f4428a7f1",
+    "txt:73a2c46aca45a605": "73a2c46aca45a605",
+    "txt:8b2bba16d8870c01": "8b2bba16d8870c01",
+    "txt:8e62a5c2c82c434e": "8e62a5c2c82c434e",
+    "txt:daafe5553d2a3498": "daafe5553d2a3498",
+    "txt:7c6f325998f9e58a": "7c6f325998f9e58a",
+    "txt:14047dcf25eb3be3": "14047dcf25eb3be3",
+    "txt:c4d6170d11af217a": "c4d6170d11af217a"
   }
 }
