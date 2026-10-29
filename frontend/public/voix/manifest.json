@@ -23443,6 +23443,1646 @@
       "text": "On écrit Demain, la fille placera les pions..",
       "ms": 3200,
       "cat": "enonce"
+    },
+    "444b1b3a291f4856": {
+      "text": "On écrit Demain, la fille trouvera un trésor..",
+      "ms": 3600,
+      "cat": "enonce"
+    },
+    "b2759d4a76412a61": {
+      "text": "On écrit Demain, le garçon aura faim..",
+      "ms": 2880,
+      "cat": "enonce"
+    },
+    "91663bd28da1937e": {
+      "text": "On écrit Demain, le garçon viendra avec nous..",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "2e23757d0684b27c": {
+      "text": "On écrit Demain, les enfants trouveront un trésor..",
+      "ms": 3520,
+      "cat": "enonce"
+    },
+    "dcaf32b5a15da1cd": {
+      "text": "On écrit Demain, les oiseaux mangeront une pomme..",
+      "ms": 3600,
+      "cat": "enonce"
+    },
+    "94b15a55fc7ca1e5": {
+      "text": "On écrit Demain, les oiseaux regarderont les étoiles..",
+      "ms": 3760,
+      "cat": "enonce"
+    },
+    "8927134e99310084": {
+      "text": "On écrit Demain, nous chanterons une chanson..",
+      "ms": 2880,
+      "cat": "enonce"
+    },
+    "2bb63e6609453f9e": {
+      "text": "On écrit Demain, nous jouerons au ballon..",
+      "ms": 3040,
+      "cat": "enonce"
+    },
+    "8b2945292d385f99": {
+      "text": "On écrit Demain, nous trouverons un trésor..",
+      "ms": 2880,
+      "cat": "enonce"
+    },
+    "cf5c4a61b7911521": {
+      "text": "On écrit Demain, tu mangeras une pomme..",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "6b5702493bc7cde4": {
+      "text": "On écrit Demain, tu parleras doucement..",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "ee768c458c8fef11": {
+      "text": "On écrit Demain, vous aurez faim..",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "bc2cfb68756284f2": {
+      "text": "On écrit Demain, vous chanterez une chanson..",
+      "ms": 3040,
+      "cat": "enonce"
+    },
+    "867f57741f5d4268": {
+      "text": "On écrit Demain, vous jouerez au ballon..",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "9058779839624646": {
+      "text": "On écrit Demain, vous parlerez doucement..",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "3a4b2f14cc99629f": {
+      "text": "On écrit Demain, vous regarderez les étoiles..",
+      "ms": 3040,
+      "cat": "enonce"
+    },
+    "79847b7e4253020e": {
+      "text": "On écrit Elle est allée à l'école..",
+      "ms": 2720,
+      "cat": "enonce"
+    },
+    "362a14d064e69f71": {
+      "text": "On écrit Elles sont allées à l'école..",
+      "ms": 2480,
+      "cat": "enonce"
+    },
+    "c3077f6bc5ef9a56": {
+      "text": "On écrit Elles sont venues avec nous..",
+      "ms": 2720,
+      "cat": "enonce"
+    },
+    "83972274fbce8744": {
+      "text": "On écrit En ce moment, il parle doucement..",
+      "ms": 3040,
+      "cat": "enonce"
+    },
+    "d48c0c98071cdb1a": {
+      "text": "On écrit En ce moment, ils aiment les animaux..",
+      "ms": 3600,
+      "cat": "enonce"
+    },
+    "29d1886fde8fa668": {
+      "text": "On écrit En ce moment, ils donnent un cadeau..",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "7351dfcb012ebf36": {
+      "text": "On écrit En ce moment, ils finissent le jeu..",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "33f4ed79fcd6ca5b": {
+      "text": "On écrit En ce moment, ils ont faim..",
+      "ms": 3040,
+      "cat": "enonce"
+    },
+    "5f269fd9661ad6d7": {
+      "text": "On écrit En ce moment, ils placent les pions..",
+      "ms": 2720,
+      "cat": "enonce"
+    },
+    "18807b68723449ba": {
+      "text": "On écrit En ce moment, ils trouvent un trésor..",
+      "ms": 3600,
+      "cat": "enonce"
+    },
+    "f7b14694c91c3d36": {
+      "text": "On écrit En ce moment, je donne un cadeau..",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "e5e96bd187591313": {
+      "text": "On écrit En ce moment, je peux courir vite..",
+      "ms": 3360,
+      "cat": "enonce"
+    },
+    "2efd86d03a7b01de": {
+      "text": "On écrit En ce moment, je trouve un trésor..",
+      "ms": 2960,
+      "cat": "enonce"
+    },
+    "faadd35eb74f79f2": {
+      "text": "On écrit En ce moment, la fille fait un gâteau..",
+      "ms": 3840,
+      "cat": "enonce"
+    },
+    "f70a437b152b38bd": {
+      "text": "On écrit En ce moment, la fille place les pions..",
+      "ms": 3920,
+      "cat": "enonce"
+    },
+    "46324cad72d4970c": {
+      "text": "On écrit En ce moment, la fille trouve un trésor..",
+      "ms": 3920,
+      "cat": "enonce"
+    },
+    "6246f27c84afc04c": {
+      "text": "On écrit En ce moment, le garçon a faim..",
+      "ms": 3280,
+      "cat": "enonce"
+    },
+    "9d72d0409eeaca6f": {
+      "text": "On écrit En ce moment, le garçon vient avec nous..",
+      "ms": 3520,
+      "cat": "enonce"
+    },
+    "18440c935eba4fef": {
+      "text": "On écrit En ce moment, les enfants trouvent un trésor..",
+      "ms": 3840,
+      "cat": "enonce"
+    },
+    "0049564eb3d918ec": {
+      "text": "On écrit En ce moment, les oiseaux mangent une pomme..",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "a7ea455907acf753": {
+      "text": "On écrit En ce moment, les oiseaux regardent les étoiles..",
+      "ms": 4320,
+      "cat": "enonce"
+    },
+    "dcd54638182e5082": {
+      "text": "On écrit En ce moment, nous chantons une chanson..",
+      "ms": 3600,
+      "cat": "enonce"
+    },
+    "91f7cb6968805c7f": {
+      "text": "On écrit En ce moment, nous jouons au ballon..",
+      "ms": 3600,
+      "cat": "enonce"
+    },
+    "f0c9d3ae1d48166d": {
+      "text": "On écrit En ce moment, nous trouvons un trésor..",
+      "ms": 3680,
+      "cat": "enonce"
+    },
+    "75762c0265263db4": {
+      "text": "On écrit En ce moment, tu manges une pomme..",
+      "ms": 3600,
+      "cat": "enonce"
+    },
+    "694634497cce9210": {
+      "text": "On écrit En ce moment, tu parles doucement..",
+      "ms": 3600,
+      "cat": "enonce"
+    },
+    "1245936a109e0e5a": {
+      "text": "On écrit En ce moment, vous avez faim..",
+      "ms": 3040,
+      "cat": "enonce"
+    },
+    "4b6ce9bddd8ff24b": {
+      "text": "On écrit En ce moment, vous chantez une chanson..",
+      "ms": 3680,
+      "cat": "enonce"
+    },
+    "edce493b40580d53": {
+      "text": "On écrit En ce moment, vous jouez au ballon..",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "95290e1dc7c38a05": {
+      "text": "On écrit En ce moment, vous parlez doucement..",
+      "ms": 3360,
+      "cat": "enonce"
+    },
+    "6dd7cd38fdb5a9e5": {
+      "text": "On écrit En ce moment, vous regardez les étoiles..",
+      "ms": 3840,
+      "cat": "enonce"
+    },
+    "e7424570289fb423": {
+      "text": "On écrit Hier, elle est venue avec nous..",
+      "ms": 2960,
+      "cat": "enonce"
+    },
+    "2ae2c8e130c09b7b": {
+      "text": "On écrit Hier, elles sont allées à l'école..",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "24a4aa448840a9ed": {
+      "text": "On écrit Hier, ils ont aimé les animaux..",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "b79120586ddefe9c": {
+      "text": "On écrit Hier, ils ont fait un gâteau..",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "1133d6157d4bbccf": {
+      "text": "On écrit Hier, ils ont mangé une pomme..",
+      "ms": 3280,
+      "cat": "enonce"
+    },
+    "c76380fafba11e93": {
+      "text": "On écrit Hier, ils ont placé les pions..",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "034ae4958b8a0225": {
+      "text": "On écrit Hier, ils ont trouvé un trésor..",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "1e63cfb30003cff0": {
+      "text": "On écrit Hier, j'ai donné un cadeau..",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "67a7c5cf81b32dbb": {
+      "text": "On écrit Hier, j'ai mangé une pomme..",
+      "ms": 2720,
+      "cat": "enonce"
+    },
+    "4602d1ed6e414679": {
+      "text": "On écrit Hier, j'ai vu la mer..",
+      "ms": 2160,
+      "cat": "enonce"
+    },
+    "c3b56ada6096a3d7": {
+      "text": "On écrit Hier, le chat a eu faim..",
+      "ms": 2720,
+      "cat": "enonce"
+    },
+    "a398b121e7c188df": {
+      "text": "On écrit Hier, le chat a parlé doucement..",
+      "ms": 3360,
+      "cat": "enonce"
+    },
+    "242ab85e05724dac": {
+      "text": "On écrit Hier, le garçon a fini le jeu..",
+      "ms": 3280,
+      "cat": "enonce"
+    },
+    "05438666ff91e5ae": {
+      "text": "On écrit Hier, le garçon a regardé les étoiles..",
+      "ms": 3760,
+      "cat": "enonce"
+    },
+    "0884212b3a847a90": {
+      "text": "On écrit Hier, le garçon a vu la mer..",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "c6db99a8c79af4fe": {
+      "text": "On écrit Hier, les amis ont dit la vérité..",
+      "ms": 3360,
+      "cat": "enonce"
+    },
+    "fc7e07f622d8c3f4": {
+      "text": "On écrit Hier, les amis ont pris le train..",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "ef95f68d46210ef8": {
+      "text": "On écrit Hier, les garçons ont vu la mer..",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "a60d3fbb39f5d592": {
+      "text": "On écrit Hier, nous avons regardé les étoiles..",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "25b813f7678cf7d9": {
+      "text": "On écrit Hier, nous avons vu la mer..",
+      "ms": 2880,
+      "cat": "enonce"
+    },
+    "2c258493e67872bc": {
+      "text": "On écrit Hier, nous sommes allés à l'école..",
+      "ms": 3280,
+      "cat": "enonce"
+    },
+    "128434308fee23d9": {
+      "text": "On écrit Hier, nous sommes venus avec nous..",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "2d8d4c4a06e6a358": {
+      "text": "On écrit Hier, tu as eu faim..",
+      "ms": 2160,
+      "cat": "enonce"
+    },
+    "122470fe10957ecc": {
+      "text": "On écrit Hier, tu es venu avec nous..",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "c720e21909346392": {
+      "text": "On écrit Hier, vous avez dit la vérité..",
+      "ms": 2880,
+      "cat": "enonce"
+    },
+    "de4a4e562ecdfe1c": {
+      "text": "On écrit Hier, vous avez donné un cadeau..",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "ac25fb1f28ebafd3": {
+      "text": "On écrit Hier, vous avez joué au ballon..",
+      "ms": 3360,
+      "cat": "enonce"
+    },
+    "daf7c7e0fd877251": {
+      "text": "On écrit Hier, vous êtes allés à l'école..",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "c286276d3b6ae7b6": {
+      "text": "On écrit Hier, vous êtes venus avec nous..",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "e0a55eee23fe6ff8": {
+      "text": "On écrit Il a aimé les animaux..",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "174b7a567ee048f5": {
+      "text": "On écrit Il a chanté une chanson..",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "70dede88db713487": {
+      "text": "On écrit Il a donné un cadeau..",
+      "ms": 2320,
+      "cat": "enonce"
+    },
+    "643aeb9a1956d5d2": {
+      "text": "On écrit Il a eu faim..",
+      "ms": 1920,
+      "cat": "enonce"
+    },
+    "2ba6fb2ca3ded12b": {
+      "text": "On écrit Il a faim..",
+      "ms": 1440,
+      "cat": "enonce"
+    },
+    "be428f44b730e756": {
+      "text": "On écrit Il a joué au ballon..",
+      "ms": 2320,
+      "cat": "enonce"
+    },
+    "d0421789fc3ba583": {
+      "text": "On écrit Il a trouvé un trésor..",
+      "ms": 2480,
+      "cat": "enonce"
+    },
+    "5d4280cb8ac8dda2": {
+      "text": "On écrit Il aima les animaux..",
+      "ms": 2320,
+      "cat": "enonce"
+    },
+    "6ae63ad56c1a028c": {
+      "text": "On écrit Il aimait les animaux..",
+      "ms": 2000,
+      "cat": "enonce"
+    },
+    "645044a633a1e9b4": {
+      "text": "On écrit Il aime les animaux..",
+      "ms": 1920,
+      "cat": "enonce"
+    },
+    "ceb314bd852cbf0a": {
+      "text": "On écrit Il aimera les animaux..",
+      "ms": 2480,
+      "cat": "enonce"
+    },
+    "c101b45eee5fd320": {
+      "text": "On écrit Il alla à l'école..",
+      "ms": 1840,
+      "cat": "enonce"
+    },
+    "0f3a7eadef629c65": {
+      "text": "On écrit Il aura faim..",
+      "ms": 1920,
+      "cat": "enonce"
+    },
+    "d498ad6efa15707c": {
+      "text": "On écrit Il avait faim..",
+      "ms": 1920,
+      "cat": "enonce"
+    },
+    "3ab1c50ea9cbf380": {
+      "text": "On écrit Il chantait une chanson..",
+      "ms": 2160,
+      "cat": "enonce"
+    },
+    "e18d62ee402d3520": {
+      "text": "On écrit Il chante une chanson..",
+      "ms": 2640,
+      "cat": "enonce"
+    },
+    "619e226075c2d7ab": {
+      "text": "On écrit Il chantera une chanson..",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "4c490e9d076b98a1": {
+      "text": "On écrit Il donna un cadeau..",
+      "ms": 2240,
+      "cat": "enonce"
+    },
+    "b67870fbf2107960": {
+      "text": "On écrit Il est allé à l'école..",
+      "ms": 2080,
+      "cat": "enonce"
+    },
+    "d240a829a9088b49": {
+      "text": "On écrit Il est à la maison..",
+      "ms": 2240,
+      "cat": "enonce"
+    },
+    "88f80e8e43271f5e": {
+      "text": "On écrit Il joua au ballon..",
+      "ms": 2160,
+      "cat": "enonce"
+    },
+    "e089230b04271c54": {
+      "text": "On écrit Il jouait au ballon..",
+      "ms": 2240,
+      "cat": "enonce"
+    },
+    "5c58f648c2ebaedc": {
+      "text": "On écrit Il joue au ballon..",
+      "ms": 1920,
+      "cat": "enonce"
+    },
+    "6db8b8ff6321efd4": {
+      "text": "On écrit Il jouera au ballon..",
+      "ms": 2240,
+      "cat": "enonce"
+    },
+    "b88de929eab99a6f": {
+      "text": "On écrit Il parla doucement..",
+      "ms": 2320,
+      "cat": "enonce"
+    },
+    "39bdb218ff27f224": {
+      "text": "On écrit Il parlait doucement..",
+      "ms": 2320,
+      "cat": "enonce"
+    },
+    "1724266cf18144fd": {
+      "text": "On écrit Il parle doucement..",
+      "ms": 2320,
+      "cat": "enonce"
+    },
+    "3ac81c6cf42d77fe": {
+      "text": "On écrit Il parlera doucement..",
+      "ms": 2400,
+      "cat": "enonce"
+    },
+    "2a6ca71a8aa76b20": {
+      "text": "On écrit Il plaça les pions..",
+      "ms": 2160,
+      "cat": "enonce"
+    },
+    "b81dc318d4f8ff60": {
+      "text": "On écrit Il regarda les étoiles..",
+      "ms": 2400,
+      "cat": "enonce"
+    },
+    "15ff602b7cf1c8b7": {
+      "text": "On écrit Il sera à la maison..",
+      "ms": 2160,
+      "cat": "enonce"
+    },
+    "311ce75a0a0af3ee": {
+      "text": "On écrit Il trouva un trésor..",
+      "ms": 2320,
+      "cat": "enonce"
+    },
+    "f286ec8ff0c8465f": {
+      "text": "On écrit Il trouvait un trésor..",
+      "ms": 2160,
+      "cat": "enonce"
+    },
+    "95afe693606acce7": {
+      "text": "On écrit Il trouve un trésor..",
+      "ms": 2240,
+      "cat": "enonce"
+    },
+    "65c12a8d4d1bc31d": {
+      "text": "On écrit Il trouvera un trésor..",
+      "ms": 2480,
+      "cat": "enonce"
+    },
+    "b059e98a92248564": {
+      "text": "On écrit Il y a longtemps, il alla à l'école..",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "4272626cf4fca440": {
+      "text": "On écrit Il y a longtemps, il fut à la maison..",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "4def3dc43c15cbed": {
+      "text": "On écrit Il y a longtemps, il mangea une pomme..",
+      "ms": 3600,
+      "cat": "enonce"
+    },
+    "1ceb79f0ee7754e3": {
+      "text": "On écrit Il y a longtemps, ils aimèrent les animaux..",
+      "ms": 4320,
+      "cat": "enonce"
+    },
+    "3012ede47d80988b": {
+      "text": "On écrit Il y a longtemps, ils donnèrent un cadeau..",
+      "ms": 3840,
+      "cat": "enonce"
+    },
+    "baa165e740ad1e0a": {
+      "text": "On écrit Il y a longtemps, ils firent un gâteau..",
+      "ms": 3440,
+      "cat": "enonce"
+    },
+    "56bc08cb8f62b0bd": {
+      "text": "On écrit Il y a longtemps, ils furent à la maison..",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "055ed4479b033ddb": {
+      "text": "On écrit Il y a longtemps, ils jouèrent au ballon..",
+      "ms": 3760,
+      "cat": "enonce"
+    },
+    "19c9cdae6a3d0b65": {
+      "text": "On écrit Il y a longtemps, ils mangèrent une pomme..",
+      "ms": 4160,
+      "cat": "enonce"
+    },
+    "a3d30372355aa810": {
+      "text": "On écrit Il y a longtemps, ils placèrent les pions..",
+      "ms": 3680,
+      "cat": "enonce"
+    },
+    "1e5f3e354bee22e0": {
+      "text": "On écrit Il y a longtemps, ils regardèrent les étoiles..",
+      "ms": 4000,
+      "cat": "enonce"
+    },
+    "6abf93826c8fa923": {
+      "text": "On écrit Il y a longtemps, la fille fit un gâteau..",
+      "ms": 4160,
+      "cat": "enonce"
+    },
+    "ffb647ea24dd1f53": {
+      "text": "On écrit Il y a longtemps, la fille parla doucement..",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "972b64f6f15ea39c": {
+      "text": "On écrit Il y a longtemps, la fille plaça les pions..",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "f9b2bd922a34c58d": {
+      "text": "On écrit Il y a longtemps, le chat dit la vérité..",
+      "ms": 3360,
+      "cat": "enonce"
+    },
+    "0e014274d47d9c9b": {
+      "text": "On écrit Il y a longtemps, le chat parla doucement..",
+      "ms": 4160,
+      "cat": "enonce"
+    },
+    "7032ef144a71aa91": {
+      "text": "On écrit Il y a longtemps, le garçon joua au ballon..",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "f441cc3cbd9b4317": {
+      "text": "On écrit Il y a longtemps, le garçon vint avec nous..",
+      "ms": 4000,
+      "cat": "enonce"
+    },
+    "6c50a6b040bd0bac": {
+      "text": "On écrit Il y a longtemps, les enfants parlèrent doucement..",
+      "ms": 4320,
+      "cat": "enonce"
+    },
+    "bdbcfcecec64aaa0": {
+      "text": "On écrit Il y a longtemps, les enfants regardèrent les étoiles..",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "55364b991b8a63be": {
+      "text": "On écrit Il y a longtemps, les oiseaux aimèrent les animaux..",
+      "ms": 4320,
+      "cat": "enonce"
+    },
+    "0714d340b65fe60d": {
+      "text": "On écrit Il y a longtemps, les oiseaux donnèrent un cadeau..",
+      "ms": 4320,
+      "cat": "enonce"
+    },
+    "c7f5037bd1d65eef": {
+      "text": "On écrit Il y a longtemps, les oiseaux parlèrent doucement..",
+      "ms": 4560,
+      "cat": "enonce"
+    },
+    "8c9e2645ebd8e0ca": {
+      "text": "On écrit Il y a longtemps, les oiseaux placèrent les pions..",
+      "ms": 4480,
+      "cat": "enonce"
+    },
+    "a4c840cd5b00e865": {
+      "text": "On écrit Il y a longtemps, les oiseaux trouvèrent un trésor..",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "a0ec60803a5ed7a7": {
+      "text": "On écrit Il y a longtemps, mes amis jouèrent au ballon..",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "612f2fc75809afcc": {
+      "text": "On écrit Il était à la maison..",
+      "ms": 2240,
+      "cat": "enonce"
+    },
+    "207e4b436a3a5052": {
+      "text": "On écrit Ils aimèrent les animaux..",
+      "ms": 2480,
+      "cat": "enonce"
+    },
+    "926c57499b59d70f": {
+      "text": "On écrit Ils chantaient une chanson..",
+      "ms": 3040,
+      "cat": "enonce"
+    },
+    "e543127604c6f85a": {
+      "text": "On écrit Ils chantent une chanson..",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "bf6cb709b7ee9d1f": {
+      "text": "On écrit Ils chanteront une chanson..",
+      "ms": 2320,
+      "cat": "enonce"
+    },
+    "dc1a41cec87c2c18": {
+      "text": "On écrit Ils chantèrent une chanson..",
+      "ms": 3040,
+      "cat": "enonce"
+    },
+    "60752736f04498a7": {
+      "text": "On écrit Ils donnaient un cadeau..",
+      "ms": 2320,
+      "cat": "enonce"
+    },
+    "939d166bfd08f2a0": {
+      "text": "On écrit Ils donnent un cadeau..",
+      "ms": 2080,
+      "cat": "enonce"
+    },
+    "465347132807c4ce": {
+      "text": "On écrit Ils donneront un cadeau..",
+      "ms": 2320,
+      "cat": "enonce"
+    },
+    "8fb5632a3ac32380": {
+      "text": "On écrit Ils mangèrent une pomme..",
+      "ms": 2640,
+      "cat": "enonce"
+    },
+    "90237d98f6192b8d": {
+      "text": "On écrit Ils ont regardé les étoiles..",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "87ed96454592fa9f": {
+      "text": "On écrit Ils parlèrent doucement..",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "0b4b28f300b37607": {
+      "text": "On écrit Ils placèrent les pions..",
+      "ms": 2320,
+      "cat": "enonce"
+    },
+    "1e191becfd4f3cbe": {
+      "text": "On écrit Ils regardaient les étoiles..",
+      "ms": 2960,
+      "cat": "enonce"
+    },
+    "261b29d482a07a7a": {
+      "text": "On écrit Ils regardent les étoiles..",
+      "ms": 2240,
+      "cat": "enonce"
+    },
+    "a639797682afb5f6": {
+      "text": "On écrit Ils regarderont les étoiles..",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "5cacc5e96cb156e2": {
+      "text": "On écrit Ils regardèrent les étoiles..",
+      "ms": 3040,
+      "cat": "enonce"
+    },
+    "370d299cfabc0a7a": {
+      "text": "On écrit J'ai donné un cadeau..",
+      "ms": 2240,
+      "cat": "enonce"
+    },
+    "36b1243a27543f67": {
+      "text": "On écrit J'ai faim..",
+      "ms": 1360,
+      "cat": "enonce"
+    },
+    "6a13f51fdc1d46e9": {
+      "text": "On écrit J'ai joué au ballon..",
+      "ms": 2240,
+      "cat": "enonce"
+    },
+    "322c92cb17809791": {
+      "text": "On écrit J'aurai faim..",
+      "ms": 1760,
+      "cat": "enonce"
+    },
+    "66c6708f81263949": {
+      "text": "On écrit J'avais faim..",
+      "ms": 1520,
+      "cat": "enonce"
+    },
+    "52db3c993f307ad6": {
+      "text": "On écrit Je donnais un cadeau..",
+      "ms": 2080,
+      "cat": "enonce"
+    },
+    "a00e5fe44fd73ff6": {
+      "text": "On écrit Je donne un cadeau..",
+      "ms": 2160,
+      "cat": "enonce"
+    },
+    "3e7c0dbdb375f4b8": {
+      "text": "On écrit Je donnerai un cadeau..",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "e3d33b10282313a0": {
+      "text": "On écrit Je jouais au ballon..",
+      "ms": 2080,
+      "cat": "enonce"
+    },
+    "8d72d552314abdfa": {
+      "text": "On écrit Je joue au ballon..",
+      "ms": 2080,
+      "cat": "enonce"
+    },
+    "0aa300f6ef9b7f4c": {
+      "text": "On écrit Je jouerai au ballon..",
+      "ms": 2240,
+      "cat": "enonce"
+    },
+    "c7e2ac2c6329fe56": {
+      "text": "On écrit Je parlais doucement..",
+      "ms": 2320,
+      "cat": "enonce"
+    },
+    "e15c94cddcbd09ae": {
+      "text": "On écrit Je parle doucement..",
+      "ms": 2240,
+      "cat": "enonce"
+    },
+    "d75e5a472b4b9ee9": {
+      "text": "On écrit Je parlerai doucement..",
+      "ms": 2640,
+      "cat": "enonce"
+    },
+    "d66812e9a4a91348": {
+      "text": "On écrit Je suis allé à l'école..",
+      "ms": 2240,
+      "cat": "enonce"
+    },
+    "7b62865d0f1740ac": {
+      "text": "On écrit Je suis venu avec nous..",
+      "ms": 2240,
+      "cat": "enonce"
+    },
+    "58f909db3dca84cf": {
+      "text": "On écrit Je trouvais un trésor..",
+      "ms": 2240,
+      "cat": "enonce"
+    },
+    "b382597c4753df98": {
+      "text": "On écrit Je trouve un trésor..",
+      "ms": 2240,
+      "cat": "enonce"
+    },
+    "2283de48df8d199b": {
+      "text": "On écrit Je trouverai un trésor..",
+      "ms": 2720,
+      "cat": "enonce"
+    },
+    "038b8ebca2d20774": {
+      "text": "On écrit Nous aimerons les animaux..",
+      "ms": 2880,
+      "cat": "enonce"
+    },
+    "448721f4bcfbb43e": {
+      "text": "On écrit Nous aimions les animaux..",
+      "ms": 2720,
+      "cat": "enonce"
+    },
+    "87ebea0170777843": {
+      "text": "On écrit Nous aimons les animaux..",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "f30f0960003e7161": {
+      "text": "On écrit Nous aurons faim..",
+      "ms": 1840,
+      "cat": "enonce"
+    },
+    "97befed5d83e72ef": {
+      "text": "On écrit Nous avions faim..",
+      "ms": 2160,
+      "cat": "enonce"
+    },
+    "bb5b4a6a27e1805e": {
+      "text": "On écrit Nous avons aimé les animaux..",
+      "ms": 2720,
+      "cat": "enonce"
+    },
+    "37647df5879c2d4c": {
+      "text": "On écrit Nous avons faim..",
+      "ms": 1840,
+      "cat": "enonce"
+    },
+    "bf8fbaa3780d9b99": {
+      "text": "On écrit Nous avons regardé les étoiles..",
+      "ms": 3280,
+      "cat": "enonce"
+    },
+    "97fed0a688725dbd": {
+      "text": "On écrit Nous avons trouvé un trésor..",
+      "ms": 2720,
+      "cat": "enonce"
+    },
+    "97e019acce2303e9": {
+      "text": "On écrit Nous chanterons une chanson..",
+      "ms": 2640,
+      "cat": "enonce"
+    },
+    "e39b76e2d5dc84a2": {
+      "text": "On écrit Nous chantions une chanson..",
+      "ms": 3040,
+      "cat": "enonce"
+    },
+    "1e9f155625ff3561": {
+      "text": "On écrit Nous chantons une chanson..",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "96eec7dd9b0871d2": {
+      "text": "On écrit Tu aimais les animaux..",
+      "ms": 2480,
+      "cat": "enonce"
+    },
+    "a405b557508849a4": {
+      "text": "On écrit Tu aimeras les animaux..",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "44939aec32dcbbe8": {
+      "text": "On écrit Tu aimes les animaux..",
+      "ms": 2240,
+      "cat": "enonce"
+    },
+    "0ece3df7d625af44": {
+      "text": "On écrit Tu as aimé les animaux..",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "1e1062e2b4fb0a22": {
+      "text": "On écrit Tu as donné un cadeau..",
+      "ms": 2160,
+      "cat": "enonce"
+    },
+    "e7b209ce8a660cba": {
+      "text": "On écrit Tu as faim..",
+      "ms": 1600,
+      "cat": "enonce"
+    },
+    "1b548fd56f7b3032": {
+      "text": "On écrit Tu as joué au ballon..",
+      "ms": 2160,
+      "cat": "enonce"
+    },
+    "1f3e7b390f7a0b1d": {
+      "text": "On écrit Tu as regardé les étoiles..",
+      "ms": 2480,
+      "cat": "enonce"
+    },
+    "e94a8c847e4fad46": {
+      "text": "On écrit Tu auras faim..",
+      "ms": 2000,
+      "cat": "enonce"
+    },
+    "be82aa6afa255f46": {
+      "text": "On écrit Tu avais faim..",
+      "ms": 1920,
+      "cat": "enonce"
+    },
+    "c9871877fab643b7": {
+      "text": "On écrit Tu donnais un cadeau..",
+      "ms": 2080,
+      "cat": "enonce"
+    },
+    "aa0777ecee5ba54c": {
+      "text": "On écrit Tu donneras un cadeau..",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "0860b6dfe7dbfbb7": {
+      "text": "On écrit Tu donnes un cadeau..",
+      "ms": 2480,
+      "cat": "enonce"
+    },
+    "123b9a80556562c7": {
+      "text": "On écrit Tu es allé à l'école..",
+      "ms": 2320,
+      "cat": "enonce"
+    },
+    "3d35254cbd538d28": {
+      "text": "On écrit Tu jouais au ballon..",
+      "ms": 2240,
+      "cat": "enonce"
+    },
+    "14c2fd413534b3b8": {
+      "text": "On écrit Tu joueras au ballon..",
+      "ms": 2400,
+      "cat": "enonce"
+    },
+    "4a913df1d7ae3057": {
+      "text": "On écrit Tu joues au ballon..",
+      "ms": 2400,
+      "cat": "enonce"
+    },
+    "9f50ec289ea955a2": {
+      "text": "On écrit Tu regardais les étoiles..",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "663ca5b9f2a46899": {
+      "text": "On écrit Tu regarderas les étoiles..",
+      "ms": 2960,
+      "cat": "enonce"
+    },
+    "5acd88eebc2adc10": {
+      "text": "On écrit Tu regardes les étoiles..",
+      "ms": 2400,
+      "cat": "enonce"
+    },
+    "d67d437a27cf82e9": {
+      "text": "On écrit Tu trouvais un trésor..",
+      "ms": 2480,
+      "cat": "enonce"
+    },
+    "153abfd8ba81daed": {
+      "text": "On écrit Tu trouveras un trésor..",
+      "ms": 2160,
+      "cat": "enonce"
+    },
+    "21f885514052539a": {
+      "text": "On écrit Tu trouves un trésor..",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "5e391bb57c992f28": {
+      "text": "On écrit Vous avez chanté une chanson..",
+      "ms": 2880,
+      "cat": "enonce"
+    },
+    "1c5f147ecb2e2fb7": {
+      "text": "On écrit Vous regarderez les étoiles..",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "659930ece987a1f0": {
+      "text": "On écrit Vous regardez les étoiles..",
+      "ms": 2960,
+      "cat": "enonce"
+    },
+    "3a8b947384b7a7af": {
+      "text": "On écrit Vous regardiez les étoiles..",
+      "ms": 2880,
+      "cat": "enonce"
+    },
+    "4723074061b506b7": {
+      "text": "On écrit Vous serez à la maison..",
+      "ms": 2640,
+      "cat": "enonce"
+    },
+    "93d295768b4a23a7": {
+      "text": "On écrit Vous étiez à la maison..",
+      "ms": 2080,
+      "cat": "enonce"
+    },
+    "cf1f72dff6d31522": {
+      "text": "On écrit Vous êtes allés à l'école..",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "a43c969afd3fb800": {
+      "text": "On écrit Vous êtes à la maison..",
+      "ms": 2320,
+      "cat": "enonce"
+    },
+    "601e2ec3c400336c": {
+      "text": "On écrit, nous, aimons les animaux !.",
+      "ms": 2640,
+      "cat": "enonce"
+    },
+    "cbb6e3f461f9df80": {
+      "text": "On écrit, nous, allons à l'école !.",
+      "ms": 2400,
+      "cat": "enonce"
+    },
+    "6642d1b84ae993aa": {
+      "text": "On écrit, nous, disons la vérité !.",
+      "ms": 2880,
+      "cat": "enonce"
+    },
+    "1a8321e5888f6b9d": {
+      "text": "On écrit, nous, faisons un gâteau !.",
+      "ms": 2960,
+      "cat": "enonce"
+    },
+    "76d0a5798653de5a": {
+      "text": "On écrit, nous, finissons le jeu !.",
+      "ms": 2400,
+      "cat": "enonce"
+    },
+    "ac2c64d96ee4d6a4": {
+      "text": "On écrit, nous, jouons au ballon !.",
+      "ms": 2880,
+      "cat": "enonce"
+    },
+    "6030ddcf744b82a1": {
+      "text": "On écrit, nous, parlons doucement !.",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "b10b4f9bcfca3e28": {
+      "text": "On écrit, nous, regardons les étoiles !.",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "c40b2760b29a8e49": {
+      "text": "On écrit, nous, trouvons un trésor !.",
+      "ms": 2720,
+      "cat": "enonce"
+    },
+    "26593bfea6699519": {
+      "text": "On écrit, nous, voyons la mer !.",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "40826439204b1e96": {
+      "text": "On écrit, tu, aime les animaux !.",
+      "ms": 2720,
+      "cat": "enonce"
+    },
+    "8b22bf08f60e1507": {
+      "text": "On écrit, tu, dis la vérité !.",
+      "ms": 2400,
+      "cat": "enonce"
+    },
+    "23776cadc9fa2777": {
+      "text": "On écrit, tu, donne un cadeau !.",
+      "ms": 2240,
+      "cat": "enonce"
+    },
+    "3500975816777f52": {
+      "text": "On écrit, tu, finis le jeu !.",
+      "ms": 2400,
+      "cat": "enonce"
+    },
+    "7fb46fdb04169ea8": {
+      "text": "On écrit, tu, joue au ballon !.",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "851811417be600f0": {
+      "text": "On écrit, tu, mange une pomme !.",
+      "ms": 2640,
+      "cat": "enonce"
+    },
+    "a194ed68513f4a8c": {
+      "text": "On écrit, tu, parle doucement !.",
+      "ms": 2400,
+      "cat": "enonce"
+    },
+    "3ebdeb72cb2c20ba": {
+      "text": "On écrit, tu, place les pions !.",
+      "ms": 2400,
+      "cat": "enonce"
+    },
+    "837f8f107829c24d": {
+      "text": "On écrit, tu, regarde les étoiles !.",
+      "ms": 2960,
+      "cat": "enonce"
+    },
+    "de76039d3531abfe": {
+      "text": "On écrit, tu, trouve un trésor !.",
+      "ms": 3360,
+      "cat": "enonce"
+    },
+    "ce1a0c36ecdb6aa7": {
+      "text": "On écrit, tu, viens avec nous !.",
+      "ms": 2320,
+      "cat": "enonce"
+    },
+    "b05539ff7ef30ed6": {
+      "text": "On écrit, vous, aimez les animaux !.",
+      "ms": 2960,
+      "cat": "enonce"
+    },
+    "716036a653c397e9": {
+      "text": "On écrit, vous, allez à l'école !.",
+      "ms": 2400,
+      "cat": "enonce"
+    },
+    "3c414d3b4cf9ba4b": {
+      "text": "On écrit, vous, chantez une chanson !.",
+      "ms": 2960,
+      "cat": "enonce"
+    },
+    "17e4c7bdcecfb696": {
+      "text": "On écrit, vous, donnez un cadeau !.",
+      "ms": 2400,
+      "cat": "enonce"
+    },
+    "e915b1efd54480af": {
+      "text": "On écrit, vous, finissez le jeu !.",
+      "ms": 2160,
+      "cat": "enonce"
+    },
+    "3fbd2d151d2a6605": {
+      "text": "On écrit, vous, jouez au ballon !.",
+      "ms": 2720,
+      "cat": "enonce"
+    },
+    "acd291afedb8fd8e": {
+      "text": "On écrit, vous, mangez une pomme !.",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "f42d4643c6e29f84": {
+      "text": "On écrit, vous, parlez doucement !.",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "95374191a3b0e432": {
+      "text": "On écrit, vous, placez les pions !.",
+      "ms": 2880,
+      "cat": "enonce"
+    },
+    "ae7c7e5d2edaa8fb": {
+      "text": "On écrit, vous, prenez le train !.",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "21fa6b391ebda8ea": {
+      "text": "On écrit, vous, regardez les étoiles !.",
+      "ms": 2960,
+      "cat": "enonce"
+    },
+    "76c6a6fed7a72661": {
+      "text": "On écrit, vous, trouvez un trésor !.",
+      "ms": 2880,
+      "cat": "enonce"
+    },
+    "f6aac217a87a623a": {
+      "text": "Papa casse les œufs dans un bol.",
+      "ms": 2320,
+      "cat": "enonce"
+    },
+    "d509435fce75586e": {
+      "text": "Paris est le nom d'une ville. Un nom de ville prend toujours une majuscule.",
+      "ms": 5200,
+      "cat": "enonce"
+    },
+    "e6df4295ebbc8ee7": {
+      "text": "Petit Ours part, puis il rencontre le renard, et enfin ils trouvent le miel.",
+      "ms": 6080,
+      "cat": "enonce"
+    },
+    "c3c40b08315ba8b0": {
+      "text": "Plus tard, une petite fleur pousse.",
+      "ms": 2720,
+      "cat": "enonce"
+    },
+    "176099f8be69a0d4": {
+      "text": "Pour faire pousser des lentilles, pose du coton au fond d'un pot.",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "3d723eb12f3e0005": {
+      "text": "Pour préparer un jus d'orange, tu coupes l'orange en deux.",
+      "ms": 4000,
+      "cat": "enonce"
+    },
+    "8db4998150122bd2": {
+      "text": "Près de la maison coule un ruisseau, un tout petit cours d'eau. Le mot ruisseau le montre.",
+      "ms": 6240,
+      "cat": "enonce"
+    },
+    "18cbca57411286db": {
+      "text": "Quand l'une trouve de la nourriture, elle prévient les autres.",
+      "ms": 3440,
+      "cat": "enonce"
+    },
+    "2d6a4690e73442c3": {
+      "text": "Que se passe-t-il ? Il y a encore de la lumière chez lui.",
+      "ms": 4320,
+      "cat": "enonce"
+    },
+    "6daf4c878cd2cadc": {
+      "text": "Rien ne vaut la rue pour faire comprendre à un enfant la machine sociale.",
+      "ms": 4480,
+      "cat": "enonce"
+    },
+    "de800e5459719375": {
+      "text": "Rouge, bleu et vert sont des couleurs. Banane est l'intrus.",
+      "ms": 4800,
+      "cat": "enonce"
+    },
+    "6835d11e5f5f3198": {
+      "text": "Sa marraine, qui était fée, lui dit : Tu voudrais bien aller au bal, n'est-ce pas ?",
+      "ms": 4960,
+      "cat": "enonce"
+    },
+    "3132c33c5c0c5af6": {
+      "text": "Sa queue touffue l'aide à garder l'équilibre.",
+      "ms": 2880,
+      "cat": "enonce"
+    },
+    "09d32862ecc72b10": {
+      "text": "Ses joues sont roses comme une pomme. Le texte compare Clopinet à ce joli fruit.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "71a13a6feb4bf8a9": {
+      "text": "Ses trois petits restent cachés dans le terrier.",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "364b8b289d2da7a1": {
+      "text": "Sire rat accourut, et fit tant par ses dents Qu'une maille rongée emporta tout l'ouvrage.",
+      "ms": 6320,
+      "cat": "enonce"
+    },
+    "40f4091d12324fac": {
+      "text": "Son aigrette tremble comme une lyre.",
+      "ms": 2480,
+      "cat": "enonce"
+    },
+    "76b77ba476270824": {
+      "text": "Son maître vient de rentrer à la maison.",
+      "ms": 2560,
+      "cat": "enonce"
+    },
+    "2067c8d7d5264a14": {
+      "text": "Super ! Au passé composé : Tu as chanté une chanson. On utilise as et chanté.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "0c0634ac1dd676fc": {
+      "text": "Super ! Majuscule au début, point à la fin : Nina lit un beau livre.",
+      "ms": 5680,
+      "cat": "enonce"
+    },
+    "361ca68078d5f44a": {
+      "text": "Super ! Nina aime les fleurs. Le nom Nina commence la phrase.",
+      "ms": 4800,
+      "cat": "enonce"
+    },
+    "608259a646362b06": {
+      "text": "Super ! Nina plante une fleur dans le jardin. On ne plante pas une brouette ni une pelle.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "98f24228c612755f": {
+      "text": "Super ! Recopier un mot, c'est regarder chaque lettre. Le mot était chat.",
+      "ms": 5600,
+      "cat": "enonce"
+    },
+    "1eb63a4660b0114d": {
+      "text": "Super ! Ta phrase commence par une majuscule et finit par un point. Par exemple : Ce matin, le petit chien court vers son ami.",
+      "ms": 8960,
+      "cat": "enonce"
+    },
+    "3530f41f3f116721": {
+      "text": "Super ! Tu as gardé les trois phrases dans ta tête. Léa lit une belle histoire.",
+      "ms": 5600,
+      "cat": "enonce"
+    },
+    "2540a3b13926e74a": {
+      "text": "Super ! Une belle fleur, chaque mot bien écrit.",
+      "ms": 3760,
+      "cat": "enonce"
+    },
+    "10eb4f36accc1c16": {
+      "text": "Super ! Une petite fleur devient des petites fleurs au pluriel.",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "cb8b817f947cffc3": {
+      "text": "Sur une table de toilette Ce chat aperçut un miroir.",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "e248b13347e7f636": {
+      "text": "Toby répète arriverons-nous bientôt : le mot bientôt montre qu'il est pressé d'arriver.",
+      "ms": 5520,
+      "cat": "enonce"
+    },
+    "b33f41e4ad894368": {
+      "text": "Tout bas veut dire à voix très douce, en chuchotant. Jacques parle gentiment à son âne.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "a0670808ce661ac0": {
+      "text": "Traire, c'est tirer le lait des vaches. C'est pour cela que le lait est tout chaud et tout frais.",
+      "ms": 5600,
+      "cat": "enonce"
+    },
+    "e2c5add43f6e82e0": {
+      "text": "Très bien ! Le mot école prend un accent sur le premier e : é.",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "23ca77dd5b292b23": {
+      "text": "Un adjectif décrit, il dit comment est la chose. Le mot grand dit la taille.",
+      "ms": 5680,
+      "cat": "enonce"
+    },
+    "fba0850e639511a9": {
+      "text": "Un avare est une personne qui aime trop l'argent et ne veut pas le dépenser.",
+      "ms": 4400,
+      "cat": "enonce"
+    },
+    "ac14c90a68d61c5e": {
+      "text": "Un billet doux est une petite lettre d'amour. Le papillon, plié en deux, ressemble à une lettre qui vole vers une fleur.",
+      "ms": 7760,
+      "cat": "enonce"
+    },
+    "721df6c9cdee47ee": {
+      "text": "Un complément du nom précise le nom, après lui. Dans le jus d'orange, les mots d'orange complètent le nom jus.",
+      "ms": 7200,
+      "cat": "enonce"
+    },
+    "87d3a8bc1301518f": {
+      "text": "Un festin est un très bon repas de fête. Les deux rats se régalent ensemble.",
+      "ms": 5120,
+      "cat": "enonce"
+    },
+    "86005035c7729aac": {
+      "text": "Un flatteur dit de belles choses pour tromper. Le renard flatte le corbeau pour lui prendre son fromage.",
+      "ms": 6400,
+      "cat": "enonce"
+    },
+    "0b3a89fa09d6538e": {
+      "text": "Un garde-chasse surveille une forêt et les animaux. Le papa de Gribouille travaille pour le roi.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "b64da960de23bd38": {
+      "text": "Un monceau est un gros tas. Ici, le foin est entassé en gros tas qui sentent bon.",
+      "ms": 5920,
+      "cat": "enonce"
+    },
+    "1a37f928d7a38049": {
+      "text": "Un nom désigne une personne, un animal ou une chose. Le mot chat est un nom, c'est un animal.",
+      "ms": 7120,
+      "cat": "enonce"
+    },
+    "398ed28064ba7baf": {
+      "text": "Un papillon Voltigeant dans la prairie.",
+      "ms": 2480,
+      "cat": "enonce"
+    },
+    "7a206a567a6e80ca": {
+      "text": "Un pronom remplace un nom. Le mot elle remplace une personne, comme la fille.",
+      "ms": 5600,
+      "cat": "enonce"
+    },
+    "d39e3845c387ba09": {
+      "text": "Un verbe dit une action. Le mot joue est un verbe, c'est ce qu'on fait.",
+      "ms": 4640,
+      "cat": "enonce"
+    },
+    "30d1fac3b24f012f": {
+      "text": "Voici que j'ai mis l'éteignoir Sur la chandelle.",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "88eb9adf9bacd001": {
+      "text": "Voltiger, c'est voler légèrement de-ci de-là, comme fait le papillon.",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "be112694786472e5": {
+      "text": "Vous voyez, ma bonne, il me comprend, il m'aime ! s'écria Jacques, rouge de joie, les yeux brillants de bonheur.",
+      "ms": 7920,
+      "cat": "enonce"
+    },
+    "3d2e25ed18590e94": {
+      "text": "Voyez ! j'en ai déjà puisé dans quatre roses.",
+      "ms": 3440,
+      "cat": "enonce"
+    },
+    "925436408a726e42": {
+      "text": "aujourd'hui s'écrit en deux morceaux reliés par une apostrophe : aujourd, puis hui. Il y a un d et un h qu'on n'entend pas.",
+      "ms": 8800,
+      "cat": "enonce"
+    },
+    "e60a0e5e9d3696ce": {
+      "text": "avec se termine par un c. On écrit a, v, e, c.",
+      "ms": 4960,
+      "cat": "enonce"
+    },
+    "b41223637118889b": {
+      "text": "balle, banane et bateau commencent par ba. Ensuite on regarde : l, n, t. l vient avant n et t, donc balle est le premier.",
+      "ms": 9760,
+      "cat": "enonce"
+    },
+    "c69a9a5c7a7356a7": {
+      "text": "bientôt a un accent sur le o, et un t à la fin qu'on n'entend pas.",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "6f99d758e5987d81": {
+      "text": "blanc, bleu et blond commencent par bl. Ensuite : a, e, o. a vient en premier, donc le premier est blanc.",
+      "ms": 8400,
+      "cat": "enonce"
+    },
+    "0afcfcf0340d38a8": {
+      "text": "bouton a plusieurs sens. Sur la chemise, le bouton sert à la fermer. Sur la peau, un bouton est un petit point rouge.",
+      "ms": 7920,
+      "cat": "enonce"
+    },
+    "c1a3f8699328db86": {
+      "text": "c vient avant f et avant o, donc cerise est le premier.",
+      "ms": 3920,
+      "cat": "enonce"
+    },
+    "1d6eeab553bc3431": {
+      "text": "carte a plusieurs sens. Au restaurant, la carte montre les plats qu'on peut choisir. En géographie, une carte montre le pays.",
+      "ms": 9040,
+      "cat": "enonce"
+    },
+    "4ebec579ef8a0961": {
+      "text": "carte a plusieurs sens. Ici, on cherche une ville : c'est la carte qui dessine le pays et les routes.",
+      "ms": 7040,
+      "cat": "enonce"
+    },
+    "eb6639c6e4b408ad": {
+      "text": "cerise, citron et craie commencent par c. Ensuite la deuxième lettre : e, i, r. e vient en premier, donc le premier est cerise.",
+      "ms": 9760,
+      "cat": "enonce"
+    },
+    "6929f4e0838be9d9": {
+      "text": "chat commence par c. banane est un mot en b, dent est un mot en d. c vient entre b et d.",
+      "ms": 6960,
+      "cat": "enonce"
+    },
+    "be519469b2af41a4": {
+      "text": "chat, cheval et chien commencent tous par ch. Ensuite on regarde la lettre d'après : a, e, i. a vient en premier, donc chat est le premier.",
+      "ms": 9760,
+      "cat": "enonce"
+    },
+    "bcffc279147c75ba": {
+      "text": "content et heureux veulent dire la même chose. Quand on est content, on est heureux.",
+      "ms": 5200,
+      "cat": "enonce"
+    },
+    "2f1a04685e59a52e": {
+      "text": "d vient avant g et avant r, donc dauphin est le premier.",
+      "ms": 4400,
+      "cat": "enonce"
+    },
+    "57bbf1d037237d59": {
+      "text": "dent, dentiste et dentaire parlent des dents. soleil est l'intrus.",
+      "ms": 5120,
+      "cat": "enonce"
+    },
+    "0c4f747ff1dea6ba": {
+      "text": "drôle et amusant veulent dire la même chose. Ce qui est drôle nous fait rire.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "ce51116ec919cdb0": {
+      "text": "déjà a deux accents : un sur le e et un sur le a à la fin.",
+      "ms": 4800,
+      "cat": "enonce"
+    },
+    "100e4b148767b8ea": {
+      "text": "encore commence par e, n, et se termine par un e.",
+      "ms": 3680,
+      "cat": "enonce"
+    },
+    "c80b86b9108e7faa": {
+      "text": "ensuite commence par e, n, et se termine par un e.",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "6dbe8be2b44ef1c5": {
+      "text": "feuille a deux sens. Ici, elle tombe de l'arbre : c'est la feuille verte. Pour écrire, une feuille est un papier.",
+      "ms": 7760,
+      "cat": "enonce"
+    },
+    "a7e1514b7dd8e291": {
+      "text": "fleur, fleuriste et fleurir parlent tous des fleurs. voiture n'a rien à voir, c'est l'intrus.",
+      "ms": 6880,
+      "cat": "enonce"
+    },
+    "fe29d82c6b5f138f": {
+      "text": "fraise commence par f. école est un mot en e, gare est un mot en g. f vient entre e et g.",
+      "ms": 7280,
+      "cat": "enonce"
+    },
+    "0c6e032aca101b30": {
+      "text": "fraise, fromage et fruit commencent par fr. Ensuite : a, o, u. a vient en premier, donc le premier est fraise.",
+      "ms": 8880,
+      "cat": "enonce"
+    },
+    "03f5c7d76bc7d8ac": {
+      "text": "gentil et aimable veulent dire la même chose.",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "fe9a0fdc55190fe4": {
+      "text": "jardin, jardinier et jardinage parlent du jardin. tigre est l'intrus.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "a0bafe822083bc13": {
+      "text": "joli et beau veulent dire la même chose.",
+      "ms": 2960,
+      "cat": "enonce"
+    },
+    "c398284514dddd80": {
+      "text": "l vient avant m et avant n, donc lune est le premier.",
+      "ms": 4320,
+      "cat": "enonce"
+    },
+    "3a96ee8e40e201e1": {
+      "text": "lait, laitier et laitage parlent du lait. montagne est l'intrus.",
+      "ms": 5120,
+      "cat": "enonce"
+    },
+    "a7cf469e23bab032": {
+      "text": "lampe, lapin et lavabo commencent par la. Ensuite : m, p, v. m vient en premier, donc le premier est lampe.",
+      "ms": 8640,
+      "cat": "enonce"
+    },
+    "3eceee47eb2098b8": {
+      "text": "lune commence par l. livre est un mot en l, mardi est un mot en m. l vient entre livre et mardi.",
+      "ms": 7920,
+      "cat": "enonce"
+    },
+    "4c4c9e38eccd7d19": {
+      "text": "maison, manteau et marin commencent par ma. Ensuite : i, n, r. i vient en premier, donc maison est le premier.",
+      "ms": 8800,
+      "cat": "enonce"
     }
   },
   "keys": {
@@ -28133,6 +29773,334 @@
     "txt:5245a91f6c117eb8": "5245a91f6c117eb8",
     "txt:55c3c9a15c00209b": "55c3c9a15c00209b",
     "txt:d20f71c4d625473c": "d20f71c4d625473c",
-    "txt:5588a0577c71323e": "5588a0577c71323e"
+    "txt:5588a0577c71323e": "5588a0577c71323e",
+    "txt:444b1b3a291f4856": "444b1b3a291f4856",
+    "txt:b2759d4a76412a61": "b2759d4a76412a61",
+    "txt:91663bd28da1937e": "91663bd28da1937e",
+    "txt:2e23757d0684b27c": "2e23757d0684b27c",
+    "txt:dcaf32b5a15da1cd": "dcaf32b5a15da1cd",
+    "txt:94b15a55fc7ca1e5": "94b15a55fc7ca1e5",
+    "txt:8927134e99310084": "8927134e99310084",
+    "txt:2bb63e6609453f9e": "2bb63e6609453f9e",
+    "txt:8b2945292d385f99": "8b2945292d385f99",
+    "txt:cf5c4a61b7911521": "cf5c4a61b7911521",
+    "txt:6b5702493bc7cde4": "6b5702493bc7cde4",
+    "txt:ee768c458c8fef11": "ee768c458c8fef11",
+    "txt:bc2cfb68756284f2": "bc2cfb68756284f2",
+    "txt:867f57741f5d4268": "867f57741f5d4268",
+    "txt:9058779839624646": "9058779839624646",
+    "txt:3a4b2f14cc99629f": "3a4b2f14cc99629f",
+    "txt:79847b7e4253020e": "79847b7e4253020e",
+    "txt:362a14d064e69f71": "362a14d064e69f71",
+    "txt:c3077f6bc5ef9a56": "c3077f6bc5ef9a56",
+    "txt:83972274fbce8744": "83972274fbce8744",
+    "txt:d48c0c98071cdb1a": "d48c0c98071cdb1a",
+    "txt:29d1886fde8fa668": "29d1886fde8fa668",
+    "txt:7351dfcb012ebf36": "7351dfcb012ebf36",
+    "txt:33f4ed79fcd6ca5b": "33f4ed79fcd6ca5b",
+    "txt:5f269fd9661ad6d7": "5f269fd9661ad6d7",
+    "txt:18807b68723449ba": "18807b68723449ba",
+    "txt:f7b14694c91c3d36": "f7b14694c91c3d36",
+    "txt:e5e96bd187591313": "e5e96bd187591313",
+    "txt:2efd86d03a7b01de": "2efd86d03a7b01de",
+    "txt:faadd35eb74f79f2": "faadd35eb74f79f2",
+    "txt:f70a437b152b38bd": "f70a437b152b38bd",
+    "txt:46324cad72d4970c": "46324cad72d4970c",
+    "txt:6246f27c84afc04c": "6246f27c84afc04c",
+    "txt:9d72d0409eeaca6f": "9d72d0409eeaca6f",
+    "txt:18440c935eba4fef": "18440c935eba4fef",
+    "txt:0049564eb3d918ec": "0049564eb3d918ec",
+    "txt:a7ea455907acf753": "a7ea455907acf753",
+    "txt:dcd54638182e5082": "dcd54638182e5082",
+    "txt:91f7cb6968805c7f": "91f7cb6968805c7f",
+    "txt:f0c9d3ae1d48166d": "f0c9d3ae1d48166d",
+    "txt:75762c0265263db4": "75762c0265263db4",
+    "txt:694634497cce9210": "694634497cce9210",
+    "txt:1245936a109e0e5a": "1245936a109e0e5a",
+    "txt:4b6ce9bddd8ff24b": "4b6ce9bddd8ff24b",
+    "txt:edce493b40580d53": "edce493b40580d53",
+    "txt:95290e1dc7c38a05": "95290e1dc7c38a05",
+    "txt:6dd7cd38fdb5a9e5": "6dd7cd38fdb5a9e5",
+    "txt:e7424570289fb423": "e7424570289fb423",
+    "txt:2ae2c8e130c09b7b": "2ae2c8e130c09b7b",
+    "txt:24a4aa448840a9ed": "24a4aa448840a9ed",
+    "txt:b79120586ddefe9c": "b79120586ddefe9c",
+    "txt:1133d6157d4bbccf": "1133d6157d4bbccf",
+    "txt:c76380fafba11e93": "c76380fafba11e93",
+    "txt:034ae4958b8a0225": "034ae4958b8a0225",
+    "txt:1e63cfb30003cff0": "1e63cfb30003cff0",
+    "txt:67a7c5cf81b32dbb": "67a7c5cf81b32dbb",
+    "txt:4602d1ed6e414679": "4602d1ed6e414679",
+    "txt:c3b56ada6096a3d7": "c3b56ada6096a3d7",
+    "txt:a398b121e7c188df": "a398b121e7c188df",
+    "txt:242ab85e05724dac": "242ab85e05724dac",
+    "txt:05438666ff91e5ae": "05438666ff91e5ae",
+    "txt:0884212b3a847a90": "0884212b3a847a90",
+    "txt:c6db99a8c79af4fe": "c6db99a8c79af4fe",
+    "txt:fc7e07f622d8c3f4": "fc7e07f622d8c3f4",
+    "txt:ef95f68d46210ef8": "ef95f68d46210ef8",
+    "txt:a60d3fbb39f5d592": "a60d3fbb39f5d592",
+    "txt:25b813f7678cf7d9": "25b813f7678cf7d9",
+    "txt:2c258493e67872bc": "2c258493e67872bc",
+    "txt:128434308fee23d9": "128434308fee23d9",
+    "txt:2d8d4c4a06e6a358": "2d8d4c4a06e6a358",
+    "txt:122470fe10957ecc": "122470fe10957ecc",
+    "txt:c720e21909346392": "c720e21909346392",
+    "txt:de4a4e562ecdfe1c": "de4a4e562ecdfe1c",
+    "txt:ac25fb1f28ebafd3": "ac25fb1f28ebafd3",
+    "txt:daf7c7e0fd877251": "daf7c7e0fd877251",
+    "txt:c286276d3b6ae7b6": "c286276d3b6ae7b6",
+    "txt:e0a55eee23fe6ff8": "e0a55eee23fe6ff8",
+    "txt:174b7a567ee048f5": "174b7a567ee048f5",
+    "txt:70dede88db713487": "70dede88db713487",
+    "txt:643aeb9a1956d5d2": "643aeb9a1956d5d2",
+    "txt:2ba6fb2ca3ded12b": "2ba6fb2ca3ded12b",
+    "txt:be428f44b730e756": "be428f44b730e756",
+    "txt:d0421789fc3ba583": "d0421789fc3ba583",
+    "txt:5d4280cb8ac8dda2": "5d4280cb8ac8dda2",
+    "txt:6ae63ad56c1a028c": "6ae63ad56c1a028c",
+    "txt:645044a633a1e9b4": "645044a633a1e9b4",
+    "txt:ceb314bd852cbf0a": "ceb314bd852cbf0a",
+    "txt:c101b45eee5fd320": "c101b45eee5fd320",
+    "txt:0f3a7eadef629c65": "0f3a7eadef629c65",
+    "txt:d498ad6efa15707c": "d498ad6efa15707c",
+    "txt:3ab1c50ea9cbf380": "3ab1c50ea9cbf380",
+    "txt:e18d62ee402d3520": "e18d62ee402d3520",
+    "txt:619e226075c2d7ab": "619e226075c2d7ab",
+    "txt:4c490e9d076b98a1": "4c490e9d076b98a1",
+    "txt:b67870fbf2107960": "b67870fbf2107960",
+    "txt:d240a829a9088b49": "d240a829a9088b49",
+    "txt:88f80e8e43271f5e": "88f80e8e43271f5e",
+    "txt:e089230b04271c54": "e089230b04271c54",
+    "txt:5c58f648c2ebaedc": "5c58f648c2ebaedc",
+    "txt:6db8b8ff6321efd4": "6db8b8ff6321efd4",
+    "txt:b88de929eab99a6f": "b88de929eab99a6f",
+    "txt:39bdb218ff27f224": "39bdb218ff27f224",
+    "txt:1724266cf18144fd": "1724266cf18144fd",
+    "txt:3ac81c6cf42d77fe": "3ac81c6cf42d77fe",
+    "txt:2a6ca71a8aa76b20": "2a6ca71a8aa76b20",
+    "txt:b81dc318d4f8ff60": "b81dc318d4f8ff60",
+    "txt:15ff602b7cf1c8b7": "15ff602b7cf1c8b7",
+    "txt:311ce75a0a0af3ee": "311ce75a0a0af3ee",
+    "txt:f286ec8ff0c8465f": "f286ec8ff0c8465f",
+    "txt:95afe693606acce7": "95afe693606acce7",
+    "txt:65c12a8d4d1bc31d": "65c12a8d4d1bc31d",
+    "txt:b059e98a92248564": "b059e98a92248564",
+    "txt:4272626cf4fca440": "4272626cf4fca440",
+    "txt:4def3dc43c15cbed": "4def3dc43c15cbed",
+    "txt:1ceb79f0ee7754e3": "1ceb79f0ee7754e3",
+    "txt:3012ede47d80988b": "3012ede47d80988b",
+    "txt:baa165e740ad1e0a": "baa165e740ad1e0a",
+    "txt:56bc08cb8f62b0bd": "56bc08cb8f62b0bd",
+    "txt:055ed4479b033ddb": "055ed4479b033ddb",
+    "txt:19c9cdae6a3d0b65": "19c9cdae6a3d0b65",
+    "txt:a3d30372355aa810": "a3d30372355aa810",
+    "txt:1e5f3e354bee22e0": "1e5f3e354bee22e0",
+    "txt:6abf93826c8fa923": "6abf93826c8fa923",
+    "txt:ffb647ea24dd1f53": "ffb647ea24dd1f53",
+    "txt:972b64f6f15ea39c": "972b64f6f15ea39c",
+    "txt:f9b2bd922a34c58d": "f9b2bd922a34c58d",
+    "txt:0e014274d47d9c9b": "0e014274d47d9c9b",
+    "txt:7032ef144a71aa91": "7032ef144a71aa91",
+    "txt:f441cc3cbd9b4317": "f441cc3cbd9b4317",
+    "txt:6c50a6b040bd0bac": "6c50a6b040bd0bac",
+    "txt:bdbcfcecec64aaa0": "bdbcfcecec64aaa0",
+    "txt:55364b991b8a63be": "55364b991b8a63be",
+    "txt:0714d340b65fe60d": "0714d340b65fe60d",
+    "txt:c7f5037bd1d65eef": "c7f5037bd1d65eef",
+    "txt:8c9e2645ebd8e0ca": "8c9e2645ebd8e0ca",
+    "txt:a4c840cd5b00e865": "a4c840cd5b00e865",
+    "txt:a0ec60803a5ed7a7": "a0ec60803a5ed7a7",
+    "txt:612f2fc75809afcc": "612f2fc75809afcc",
+    "txt:207e4b436a3a5052": "207e4b436a3a5052",
+    "txt:926c57499b59d70f": "926c57499b59d70f",
+    "txt:e543127604c6f85a": "e543127604c6f85a",
+    "txt:bf6cb709b7ee9d1f": "bf6cb709b7ee9d1f",
+    "txt:dc1a41cec87c2c18": "dc1a41cec87c2c18",
+    "txt:60752736f04498a7": "60752736f04498a7",
+    "txt:939d166bfd08f2a0": "939d166bfd08f2a0",
+    "txt:465347132807c4ce": "465347132807c4ce",
+    "txt:8fb5632a3ac32380": "8fb5632a3ac32380",
+    "txt:90237d98f6192b8d": "90237d98f6192b8d",
+    "txt:87ed96454592fa9f": "87ed96454592fa9f",
+    "txt:0b4b28f300b37607": "0b4b28f300b37607",
+    "txt:1e191becfd4f3cbe": "1e191becfd4f3cbe",
+    "txt:261b29d482a07a7a": "261b29d482a07a7a",
+    "txt:a639797682afb5f6": "a639797682afb5f6",
+    "txt:5cacc5e96cb156e2": "5cacc5e96cb156e2",
+    "txt:370d299cfabc0a7a": "370d299cfabc0a7a",
+    "txt:36b1243a27543f67": "36b1243a27543f67",
+    "txt:6a13f51fdc1d46e9": "6a13f51fdc1d46e9",
+    "txt:322c92cb17809791": "322c92cb17809791",
+    "txt:66c6708f81263949": "66c6708f81263949",
+    "txt:52db3c993f307ad6": "52db3c993f307ad6",
+    "txt:a00e5fe44fd73ff6": "a00e5fe44fd73ff6",
+    "txt:3e7c0dbdb375f4b8": "3e7c0dbdb375f4b8",
+    "txt:e3d33b10282313a0": "e3d33b10282313a0",
+    "txt:8d72d552314abdfa": "8d72d552314abdfa",
+    "txt:0aa300f6ef9b7f4c": "0aa300f6ef9b7f4c",
+    "txt:c7e2ac2c6329fe56": "c7e2ac2c6329fe56",
+    "txt:e15c94cddcbd09ae": "e15c94cddcbd09ae",
+    "txt:d75e5a472b4b9ee9": "d75e5a472b4b9ee9",
+    "txt:d66812e9a4a91348": "d66812e9a4a91348",
+    "txt:7b62865d0f1740ac": "7b62865d0f1740ac",
+    "txt:58f909db3dca84cf": "58f909db3dca84cf",
+    "txt:b382597c4753df98": "b382597c4753df98",
+    "txt:2283de48df8d199b": "2283de48df8d199b",
+    "txt:038b8ebca2d20774": "038b8ebca2d20774",
+    "txt:448721f4bcfbb43e": "448721f4bcfbb43e",
+    "txt:87ebea0170777843": "87ebea0170777843",
+    "txt:f30f0960003e7161": "f30f0960003e7161",
+    "txt:97befed5d83e72ef": "97befed5d83e72ef",
+    "txt:bb5b4a6a27e1805e": "bb5b4a6a27e1805e",
+    "txt:37647df5879c2d4c": "37647df5879c2d4c",
+    "txt:bf8fbaa3780d9b99": "bf8fbaa3780d9b99",
+    "txt:97fed0a688725dbd": "97fed0a688725dbd",
+    "txt:97e019acce2303e9": "97e019acce2303e9",
+    "txt:e39b76e2d5dc84a2": "e39b76e2d5dc84a2",
+    "txt:1e9f155625ff3561": "1e9f155625ff3561",
+    "txt:96eec7dd9b0871d2": "96eec7dd9b0871d2",
+    "txt:a405b557508849a4": "a405b557508849a4",
+    "txt:44939aec32dcbbe8": "44939aec32dcbbe8",
+    "txt:0ece3df7d625af44": "0ece3df7d625af44",
+    "txt:1e1062e2b4fb0a22": "1e1062e2b4fb0a22",
+    "txt:e7b209ce8a660cba": "e7b209ce8a660cba",
+    "txt:1b548fd56f7b3032": "1b548fd56f7b3032",
+    "txt:1f3e7b390f7a0b1d": "1f3e7b390f7a0b1d",
+    "txt:e94a8c847e4fad46": "e94a8c847e4fad46",
+    "txt:be82aa6afa255f46": "be82aa6afa255f46",
+    "txt:c9871877fab643b7": "c9871877fab643b7",
+    "txt:aa0777ecee5ba54c": "aa0777ecee5ba54c",
+    "txt:0860b6dfe7dbfbb7": "0860b6dfe7dbfbb7",
+    "txt:123b9a80556562c7": "123b9a80556562c7",
+    "txt:3d35254cbd538d28": "3d35254cbd538d28",
+    "txt:14c2fd413534b3b8": "14c2fd413534b3b8",
+    "txt:4a913df1d7ae3057": "4a913df1d7ae3057",
+    "txt:9f50ec289ea955a2": "9f50ec289ea955a2",
+    "txt:663ca5b9f2a46899": "663ca5b9f2a46899",
+    "txt:5acd88eebc2adc10": "5acd88eebc2adc10",
+    "txt:d67d437a27cf82e9": "d67d437a27cf82e9",
+    "txt:153abfd8ba81daed": "153abfd8ba81daed",
+    "txt:21f885514052539a": "21f885514052539a",
+    "txt:5e391bb57c992f28": "5e391bb57c992f28",
+    "txt:1c5f147ecb2e2fb7": "1c5f147ecb2e2fb7",
+    "txt:659930ece987a1f0": "659930ece987a1f0",
+    "txt:3a8b947384b7a7af": "3a8b947384b7a7af",
+    "txt:4723074061b506b7": "4723074061b506b7",
+    "txt:93d295768b4a23a7": "93d295768b4a23a7",
+    "txt:cf1f72dff6d31522": "cf1f72dff6d31522",
+    "txt:a43c969afd3fb800": "a43c969afd3fb800",
+    "txt:601e2ec3c400336c": "601e2ec3c400336c",
+    "txt:cbb6e3f461f9df80": "cbb6e3f461f9df80",
+    "txt:6642d1b84ae993aa": "6642d1b84ae993aa",
+    "txt:1a8321e5888f6b9d": "1a8321e5888f6b9d",
+    "txt:76d0a5798653de5a": "76d0a5798653de5a",
+    "txt:ac2c64d96ee4d6a4": "ac2c64d96ee4d6a4",
+    "txt:6030ddcf744b82a1": "6030ddcf744b82a1",
+    "txt:b10b4f9bcfca3e28": "b10b4f9bcfca3e28",
+    "txt:c40b2760b29a8e49": "c40b2760b29a8e49",
+    "txt:26593bfea6699519": "26593bfea6699519",
+    "txt:40826439204b1e96": "40826439204b1e96",
+    "txt:8b22bf08f60e1507": "8b22bf08f60e1507",
+    "txt:23776cadc9fa2777": "23776cadc9fa2777",
+    "txt:3500975816777f52": "3500975816777f52",
+    "txt:7fb46fdb04169ea8": "7fb46fdb04169ea8",
+    "txt:851811417be600f0": "851811417be600f0",
+    "txt:a194ed68513f4a8c": "a194ed68513f4a8c",
+    "txt:3ebdeb72cb2c20ba": "3ebdeb72cb2c20ba",
+    "txt:837f8f107829c24d": "837f8f107829c24d",
+    "txt:de76039d3531abfe": "de76039d3531abfe",
+    "txt:ce1a0c36ecdb6aa7": "ce1a0c36ecdb6aa7",
+    "txt:b05539ff7ef30ed6": "b05539ff7ef30ed6",
+    "txt:716036a653c397e9": "716036a653c397e9",
+    "txt:3c414d3b4cf9ba4b": "3c414d3b4cf9ba4b",
+    "txt:17e4c7bdcecfb696": "17e4c7bdcecfb696",
+    "txt:e915b1efd54480af": "e915b1efd54480af",
+    "txt:3fbd2d151d2a6605": "3fbd2d151d2a6605",
+    "txt:acd291afedb8fd8e": "acd291afedb8fd8e",
+    "txt:f42d4643c6e29f84": "f42d4643c6e29f84",
+    "txt:95374191a3b0e432": "95374191a3b0e432",
+    "txt:ae7c7e5d2edaa8fb": "ae7c7e5d2edaa8fb",
+    "txt:21fa6b391ebda8ea": "21fa6b391ebda8ea",
+    "txt:76c6a6fed7a72661": "76c6a6fed7a72661",
+    "txt:f6aac217a87a623a": "f6aac217a87a623a",
+    "txt:d509435fce75586e": "d509435fce75586e",
+    "txt:e6df4295ebbc8ee7": "e6df4295ebbc8ee7",
+    "txt:c3c40b08315ba8b0": "c3c40b08315ba8b0",
+    "txt:176099f8be69a0d4": "176099f8be69a0d4",
+    "txt:3d723eb12f3e0005": "3d723eb12f3e0005",
+    "txt:8db4998150122bd2": "8db4998150122bd2",
+    "txt:18cbca57411286db": "18cbca57411286db",
+    "txt:2d6a4690e73442c3": "2d6a4690e73442c3",
+    "txt:6daf4c878cd2cadc": "6daf4c878cd2cadc",
+    "txt:de800e5459719375": "de800e5459719375",
+    "txt:6835d11e5f5f3198": "6835d11e5f5f3198",
+    "txt:3132c33c5c0c5af6": "3132c33c5c0c5af6",
+    "txt:09d32862ecc72b10": "09d32862ecc72b10",
+    "txt:71a13a6feb4bf8a9": "71a13a6feb4bf8a9",
+    "txt:364b8b289d2da7a1": "364b8b289d2da7a1",
+    "txt:40f4091d12324fac": "40f4091d12324fac",
+    "txt:76b77ba476270824": "76b77ba476270824",
+    "txt:2067c8d7d5264a14": "2067c8d7d5264a14",
+    "txt:0c0634ac1dd676fc": "0c0634ac1dd676fc",
+    "txt:361ca68078d5f44a": "361ca68078d5f44a",
+    "txt:608259a646362b06": "608259a646362b06",
+    "txt:98f24228c612755f": "98f24228c612755f",
+    "txt:1eb63a4660b0114d": "1eb63a4660b0114d",
+    "txt:3530f41f3f116721": "3530f41f3f116721",
+    "txt:2540a3b13926e74a": "2540a3b13926e74a",
+    "txt:10eb4f36accc1c16": "10eb4f36accc1c16",
+    "txt:cb8b817f947cffc3": "cb8b817f947cffc3",
+    "txt:e248b13347e7f636": "e248b13347e7f636",
+    "txt:b33f41e4ad894368": "b33f41e4ad894368",
+    "txt:a0670808ce661ac0": "a0670808ce661ac0",
+    "txt:e2c5add43f6e82e0": "e2c5add43f6e82e0",
+    "txt:23ca77dd5b292b23": "23ca77dd5b292b23",
+    "txt:fba0850e639511a9": "fba0850e639511a9",
+    "txt:ac14c90a68d61c5e": "ac14c90a68d61c5e",
+    "txt:721df6c9cdee47ee": "721df6c9cdee47ee",
+    "txt:87d3a8bc1301518f": "87d3a8bc1301518f",
+    "txt:86005035c7729aac": "86005035c7729aac",
+    "txt:0b3a89fa09d6538e": "0b3a89fa09d6538e",
+    "txt:b64da960de23bd38": "b64da960de23bd38",
+    "txt:1a37f928d7a38049": "1a37f928d7a38049",
+    "txt:398ed28064ba7baf": "398ed28064ba7baf",
+    "txt:7a206a567a6e80ca": "7a206a567a6e80ca",
+    "txt:d39e3845c387ba09": "d39e3845c387ba09",
+    "txt:30d1fac3b24f012f": "30d1fac3b24f012f",
+    "txt:88eb9adf9bacd001": "88eb9adf9bacd001",
+    "txt:be112694786472e5": "be112694786472e5",
+    "txt:3d2e25ed18590e94": "3d2e25ed18590e94",
+    "txt:925436408a726e42": "925436408a726e42",
+    "txt:e60a0e5e9d3696ce": "e60a0e5e9d3696ce",
+    "txt:b41223637118889b": "b41223637118889b",
+    "txt:c69a9a5c7a7356a7": "c69a9a5c7a7356a7",
+    "txt:6f99d758e5987d81": "6f99d758e5987d81",
+    "txt:0afcfcf0340d38a8": "0afcfcf0340d38a8",
+    "txt:c1a3f8699328db86": "c1a3f8699328db86",
+    "txt:1d6eeab553bc3431": "1d6eeab553bc3431",
+    "txt:4ebec579ef8a0961": "4ebec579ef8a0961",
+    "txt:eb6639c6e4b408ad": "eb6639c6e4b408ad",
+    "txt:6929f4e0838be9d9": "6929f4e0838be9d9",
+    "txt:be519469b2af41a4": "be519469b2af41a4",
+    "txt:bcffc279147c75ba": "bcffc279147c75ba",
+    "txt:2f1a04685e59a52e": "2f1a04685e59a52e",
+    "txt:57bbf1d037237d59": "57bbf1d037237d59",
+    "txt:0c4f747ff1dea6ba": "0c4f747ff1dea6ba",
+    "txt:ce51116ec919cdb0": "ce51116ec919cdb0",
+    "txt:100e4b148767b8ea": "100e4b148767b8ea",
+    "txt:c80b86b9108e7faa": "c80b86b9108e7faa",
+    "txt:6dbe8be2b44ef1c5": "6dbe8be2b44ef1c5",
+    "txt:a7e1514b7dd8e291": "a7e1514b7dd8e291",
+    "txt:fe29d82c6b5f138f": "fe29d82c6b5f138f",
+    "txt:0c6e032aca101b30": "0c6e032aca101b30",
+    "txt:03f5c7d76bc7d8ac": "03f5c7d76bc7d8ac",
+    "txt:fe9a0fdc55190fe4": "fe9a0fdc55190fe4",
+    "txt:a0bafe822083bc13": "a0bafe822083bc13",
+    "txt:c398284514dddd80": "c398284514dddd80",
+    "txt:3a96ee8e40e201e1": "3a96ee8e40e201e1",
+    "txt:a7cf469e23bab032": "a7cf469e23bab032",
+    "txt:3eceee47eb2098b8": "3eceee47eb2098b8",
+    "txt:4c4c9e38eccd7d19": "4c4c9e38eccd7d19"
   }
 }
