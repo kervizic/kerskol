@@ -30343,6 +30343,471 @@
       "text": "7 × 40 = 7 × 4 × 10 = 28 × 10 = 280.",
       "ms": 5680,
       "cat": "enonce"
+    },
+    "7bc9369ef2d592b4": {
+      "text": "5056 > 5055.",
+      "ms": 3440,
+      "cat": "enonce"
+    },
+    "d9e0f4469c1af44d": {
+      "text": "5550 = 5 milliers, 5 centaines, 5 dizaines, 0 unites.",
+      "ms": 6080,
+      "cat": "enonce"
+    },
+    "cf7a9198a9e1b405": {
+      "text": "571 ≈ 570 et 49 ≈ 50. 570 + 50 = 620.",
+      "ms": 7920,
+      "cat": "enonce"
+    },
+    "38ea4a8202a74b20": {
+      "text": "6 × 8 = 48, donc il y a 8 fois 6 dans 48. 6 fois 8 = 2 fois, 3 fois 8 : 3 × 8 = 24, puis 24 + 24 = 48.",
+      "ms": 13280,
+      "cat": "enonce"
+    },
+    "af403a7cf2217dea": {
+      "text": "6523 ÷ 10 = 652, il y a 652 dizaines entieres.",
+      "ms": 5360,
+      "cat": "enonce"
+    },
+    "18350e587a4cbf55": {
+      "text": "6572 < 8123.",
+      "ms": 3520,
+      "cat": "enonce"
+    },
+    "2c651dde2175dab2": {
+      "text": "6624 ÷ 10 = 662, il y a 662 dizaines entieres.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "617adad3e20d922f": {
+      "text": "6630 < 8703.",
+      "ms": 3680,
+      "cat": "enonce"
+    },
+    "dee32e6b2eda8c89": {
+      "text": "68 × 100 : on ajoute deux zéros, ça fait 6800.",
+      "ms": 5040,
+      "cat": "enonce"
+    },
+    "28a81308f8f351ad": {
+      "text": "6861 est entre 6800 et 6900. La centaine juste en dessous est 6800.",
+      "ms": 6880,
+      "cat": "enonce"
+    },
+    "3f5fb4902ccb80d4": {
+      "text": "6905 ÷ 10 = 690, il y a 690 dizaines entieres.",
+      "ms": 4320,
+      "cat": "enonce"
+    },
+    "2720d4ce0accee6e": {
+      "text": "6915 = 6 milliers, 9 centaines, 1 dizaines, 5 unites.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "3f355e981e4eed5e": {
+      "text": "7 fois 8 = 5 fois 8 plus 2 fois 8 : 40 + 16 = 56.",
+      "ms": 7120,
+      "cat": "enonce"
+    },
+    "ca71b0a997b35c1a": {
+      "text": "7 × 2 = 2 × 7 = 14, l'ordre ne change pas le resultat.",
+      "ms": 4160,
+      "cat": "enonce"
+    },
+    "987ce24b39047393": {
+      "text": "7 × 5 = 5 × 7 = 35, l'ordre ne change pas le resultat.",
+      "ms": 5520,
+      "cat": "enonce"
+    },
+    "6c3bacbe7ec6f6ac": {
+      "text": "7 × 5, unites, = 35, je pose 5, je retiens 3 ; 7 × 0, dizaines, + 3 = 3, je pose 3 ; 7 × 3, centaines, = 21, je pose 1, je retiens 2 ; je pose la retenue 2. Resultat : 2135.",
+      "ms": 17280,
+      "cat": "enonce"
+    },
+    "e2043ffd3c0eb7ee": {
+      "text": "7 × 50 = 7 × 100 ÷ 2 = 700 ÷ 2 = 350.",
+      "ms": 6400,
+      "cat": "enonce"
+    },
+    "876747117ef1257b": {
+      "text": "7 × 6 = 42, donc il y a 6 fois 7 dans 42. 7 fois 6 = 5 fois 6 plus 2 fois 6 : 30 + 12 = 42.",
+      "ms": 10480,
+      "cat": "enonce"
+    },
+    "ba2e645b0867b590": {
+      "text": "7 × 6 = 6 × 7 = 42, l'ordre ne change pas le resultat.",
+      "ms": 5600,
+      "cat": "enonce"
+    },
+    "6066fcaf0ac17b2c": {
+      "text": "7 × 6, unites, = 42, je pose 2, je retiens 4 ; 7 × 3, dizaines, + 4 = 25, je pose 5, je retiens 2 ; je pose la retenue 2. Resultat : 252.",
+      "ms": 15760,
+      "cat": "enonce"
+    },
+    "6c0113b236fafc74": {
+      "text": "7 × 7 = 49, donc il y a 7 fois 7 dans 49. 7 fois 7 = 5 fois 7 plus 2 fois 7 : 35 + 14 = 49.",
+      "ms": 11840,
+      "cat": "enonce"
+    },
+    "1e4a4c61eeb164e7": {
+      "text": "7 × 7 = 7 × 7 = 49, l'ordre ne change pas le resultat.",
+      "ms": 6640,
+      "cat": "enonce"
+    },
+    "0dc8f4ecd1cb5f64": {
+      "text": "7 × 7, unites, = 49, je pose 9, je retiens 4 ; 7 × 1, dizaines, + 4 = 11, je pose 1, je retiens 1 ; 7 × 4, centaines, + 1 = 29, je pose 9, je retiens 2 ; je pose la retenue 2. Resultat : 2919.",
+      "ms": 20400,
+      "cat": "enonce"
+    },
+    "d2a5532ddddfc30c": {
+      "text": "7 × 8 = 56, donc il y a 8 fois 7 dans 56. 7 fois 8 = 5 fois 8 plus 2 fois 8 : 40 + 16 = 56.",
+      "ms": 11120,
+      "cat": "enonce"
+    },
+    "8dca9a27e037c3a9": {
+      "text": "7 × 8 = 8 × 7 = 56, l'ordre ne change pas le resultat.",
+      "ms": 7040,
+      "cat": "enonce"
+    },
+    "02d7ff43141a50c5": {
+      "text": "7 × 80 = 7 × 8 × 10 = 56 × 10 = 560.",
+      "ms": 7360,
+      "cat": "enonce"
+    },
+    "b71c098ba654087c": {
+      "text": "7 × 9 = 9 × 7 = 63, l'ordre ne change pas le resultat.",
+      "ms": 5600,
+      "cat": "enonce"
+    },
+    "6d5dd080884156b8": {
+      "text": "7 × 9, unites, = 63, je pose 3, je retiens 6 ; 7 × 6, dizaines, + 6 = 48, je pose 8, je retiens 4 ; 7 × 3, centaines, + 4 = 25, je pose 5, je retiens 2 ; je pose la retenue 2. Resultat : 2583.",
+      "ms": 20080,
+      "cat": "enonce"
+    },
+    "217af17cd60108d6": {
+      "text": "70 + 930 = 1000 : on complete a 1000.",
+      "ms": 5040,
+      "cat": "enonce"
+    },
+    "24b5dd898f0b4785": {
+      "text": "70 < 71.",
+      "ms": 2240,
+      "cat": "enonce"
+    },
+    "cff4c953573867c7": {
+      "text": "70 et 30 font 100, ce sont des dizaines entieres.",
+      "ms": 4800,
+      "cat": "enonce"
+    },
+    "b8219bb0c2dcc4b0": {
+      "text": "70 se lit soixante-dix.",
+      "ms": 2960,
+      "cat": "enonce"
+    },
+    "7fcb6f6d59bc2b0b": {
+      "text": "70 × 1 = 7 × 1 × 10 = 7 × 10 = 70.",
+      "ms": 6400,
+      "cat": "enonce"
+    },
+    "80606da6c586a3bc": {
+      "text": "70 × 4 = 7 × 4 × 10 = 28 × 10 = 280.",
+      "ms": 7280,
+      "cat": "enonce"
+    },
+    "568887b78a9bb95e": {
+      "text": "70 × 6 = 7 × 6 × 10 = 42 × 10 = 420.",
+      "ms": 7360,
+      "cat": "enonce"
+    },
+    "8abd501eaef5f09d": {
+      "text": "70 × 8 = 7 × 8 × 10 = 56 × 10 = 560.",
+      "ms": 8000,
+      "cat": "enonce"
+    },
+    "9e6625664f1012ad": {
+      "text": "70 × 9 = 7 × 9 × 10 = 63 × 10 = 630.",
+      "ms": 7360,
+      "cat": "enonce"
+    },
+    "4d9d9ba07d766fad": {
+      "text": "700 + 300 = 1000 : on complete a 1000.",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "fc839924ac1b6279": {
+      "text": "7004 ÷ 10 = 700, il y a 700 dizaines entieres.",
+      "ms": 5680,
+      "cat": "enonce"
+    },
+    "7c2467e396959a49": {
+      "text": "71 × 100 : on ajoute deux zéros, ça fait 7100.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "792d7ca1b176a5b6": {
+      "text": "710 + 290 = 1000 : on complete a 1000.",
+      "ms": 5360,
+      "cat": "enonce"
+    },
+    "ba84c7fb1a3fe62a": {
+      "text": "7110 s'écrit sept mille cent dix.",
+      "ms": 2720,
+      "cat": "enonce"
+    },
+    "21338c9ff5ef4742": {
+      "text": "7143 est entre 7100 et 7200. La centaine juste en dessous est 7100.",
+      "ms": 7920,
+      "cat": "enonce"
+    },
+    "e0fd7bb8cc7939bc": {
+      "text": "7146 est entre 7100 et 7200. La centaine juste en dessous est 7100.",
+      "ms": 7280,
+      "cat": "enonce"
+    },
+    "859fd2abac619522": {
+      "text": "727 = 7 centaines, 2 dizaines, 7 unites.",
+      "ms": 4640,
+      "cat": "enonce"
+    },
+    "9cfe2dac60ea9a0d": {
+      "text": "73 + 27 = 100 : on complete d'abord a la dizaine, puis a 100.",
+      "ms": 6080,
+      "cat": "enonce"
+    },
+    "c80fbba64d1d1a4a": {
+      "text": "7348 = 7348.",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "3cc4af63b781c064": {
+      "text": "737 ≈ 740 et 43 ≈ 40. 740 + 40 = 780.",
+      "ms": 9040,
+      "cat": "enonce"
+    },
+    "a3d7e35aa689b64c": {
+      "text": "7384 > 5287.",
+      "ms": 4560,
+      "cat": "enonce"
+    },
+    "c691f72d9bfad230": {
+      "text": "74 + 26 = 100 : on complete d'abord a la dizaine, puis a 100.",
+      "ms": 6400,
+      "cat": "enonce"
+    },
+    "d90a0fb709d9ee1c": {
+      "text": "76 × 10 : on ajoute un zéro, ça fait 760.",
+      "ms": 4880,
+      "cat": "enonce"
+    },
+    "2a70f8023c9faf5c": {
+      "text": "7613 = 7 milliers, 6 centaines, 1 dizaines, 3 unites.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "4ccdb05b4ac1d1ca": {
+      "text": "7645 = 7 milliers, 6 centaines, 4 dizaines, 5 unites.",
+      "ms": 6640,
+      "cat": "enonce"
+    },
+    "36971f5cc9ad5f0f": {
+      "text": "768 s'écrit sept cent soixante-huit.",
+      "ms": 2960,
+      "cat": "enonce"
+    },
+    "b2d4b5f7c276769d": {
+      "text": "770 + 230 = 1000 : on complete a 1000.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "0452d77b5773be78": {
+      "text": "7763 s'écrit sept mille sept cent soixante-trois.",
+      "ms": 3840,
+      "cat": "enonce"
+    },
+    "c985a545f2a4f242": {
+      "text": "78 = 78.",
+      "ms": 2880,
+      "cat": "enonce"
+    },
+    "75c1368ac1be5a7d": {
+      "text": "78 se lit soixante-dix-huit.",
+      "ms": 2720,
+      "cat": "enonce"
+    },
+    "6b58eac26bb62fbd": {
+      "text": "78 € > 12 €.",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "85aafc3a71a84232": {
+      "text": "796 ≈ 800 et 21 ≈ 20. 800 − 20 = 780.",
+      "ms": 6000,
+      "cat": "enonce"
+    },
+    "fb9089b24693781b": {
+      "text": "8 + 8, c'est un double : 16.",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "35d8fe124268d1c7": {
+      "text": "8 + 9, c'est presque un double : 8 + 8 = 16, puis + 1 = 17.",
+      "ms": 7520,
+      "cat": "enonce"
+    },
+    "778caf232713e0b9": {
+      "text": "8 et 5 font 13 : on écrit 5 bonbons verts.",
+      "ms": 5200,
+      "cat": "enonce"
+    },
+    "a7fc64938977406a": {
+      "text": "8 fois 1 = 2 fois, 4 fois 1 : 4 × 1 = 4, puis 4 + 4 = 8.",
+      "ms": 8320,
+      "cat": "enonce"
+    },
+    "e449f15439909bda": {
+      "text": "8 fois 10 = 2 fois, 4 fois 10 : 4 × 10 = 40, puis 40 + 40 = 80.",
+      "ms": 9520,
+      "cat": "enonce"
+    },
+    "7952c3f7250efc72": {
+      "text": "8 fois 2 = 2 fois, 4 fois 2 : 4 × 2 = 8, puis 8 + 8 = 16.",
+      "ms": 7120,
+      "cat": "enonce"
+    },
+    "de9081f737a0c692": {
+      "text": "8 fois 3 = 2 fois, 4 fois 3 : 4 × 3 = 12, puis 12 + 12 = 24.",
+      "ms": 8400,
+      "cat": "enonce"
+    },
+    "e129cfb456a2f615": {
+      "text": "8 fois 4 = 2 fois, 4 fois 4 : 4 × 4 = 16, puis 16 + 16 = 32.",
+      "ms": 7920,
+      "cat": "enonce"
+    },
+    "f047bf25c21b224d": {
+      "text": "8 fois 5 = 2 fois, 4 fois 5 : 4 × 5 = 20, puis 20 + 20 = 40.",
+      "ms": 9040,
+      "cat": "enonce"
+    },
+    "fe21880210b8154d": {
+      "text": "8 fois 6 = 2 fois, 4 fois 6 : 4 × 6 = 24, puis 24 + 24 = 48.",
+      "ms": 8800,
+      "cat": "enonce"
+    },
+    "ce7c4a003f373985": {
+      "text": "8 fois 7 = 2 fois, 4 fois 7 : 4 × 7 = 28, puis 28 + 28 = 56.",
+      "ms": 10720,
+      "cat": "enonce"
+    },
+    "f7deff64ac5b4772": {
+      "text": "8 fois 8 = 2 fois, 4 fois 8 : 4 × 8 = 32, puis 32 + 32 = 64.",
+      "ms": 9120,
+      "cat": "enonce"
+    },
+    "675712481dd57927": {
+      "text": "8 fois 9 = 2 fois, 4 fois 9 : 4 × 9 = 36, puis 36 + 36 = 72.",
+      "ms": 10640,
+      "cat": "enonce"
+    },
+    "a4e43cbc4785634f": {
+      "text": "8 fois plus que 3 : 3 × 8 = 24.",
+      "ms": 4960,
+      "cat": "enonce"
+    },
+    "454463329cd8b904": {
+      "text": "8 fois plus que 5 : 5 × 8 = 40.",
+      "ms": 4960,
+      "cat": "enonce"
+    },
+    "191d34e2109e3efb": {
+      "text": "8 groupes de 2, c'est 8 × 2 = 16.",
+      "ms": 4160,
+      "cat": "enonce"
+    },
+    "145ab328abf24870": {
+      "text": "8 groupes de 4, c'est 8 × 4 = 32.",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "30b803d90f39fed0": {
+      "text": "8 groupes de 5, c'est 8 × 5 = 40.",
+      "ms": 4400,
+      "cat": "enonce"
+    },
+    "c4ba6ade434cbab8": {
+      "text": "8 pour aller a 10 : 8 + 2 = 10.",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "153573f7ce8bc113": {
+      "text": "8 × 0, unites, = 0, je pose 0 ; 8 × 7, dizaines, = 56, je pose 6, je retiens 5 ; je pose la retenue 5. Resultat : 560.",
+      "ms": 12640,
+      "cat": "enonce"
+    },
+    "eab28fac287de07d": {
+      "text": "8 × 1 = 8, donc il y a 1 fois 8 dans 8. 8 fois 1 = 2 fois, 4 fois 1 : 4 × 1 = 4, puis 4 + 4 = 8.",
+      "ms": 12720,
+      "cat": "enonce"
+    },
+    "59219a4675fd5d23": {
+      "text": "8 × 10 : on ajoute un zéro, ça fait 80.",
+      "ms": 4640,
+      "cat": "enonce"
+    },
+    "43da3b0211e2665d": {
+      "text": "8 × 10 = 80, donc il y a 10 fois 8 dans 80. 8 fois 10 = 2 fois, 4 fois 10 : 4 × 10 = 40, puis 40 + 40 = 80.",
+      "ms": 11120,
+      "cat": "enonce"
+    },
+    "80f33af9506674c3": {
+      "text": "8 × 2 = 16, donc il y a 2 fois 8 dans 16. 8 fois 2 = 2 fois, 4 fois 2 : 4 × 2 = 8, puis 8 + 8 = 16.",
+      "ms": 11760,
+      "cat": "enonce"
+    },
+    "46edbf08f6ff5b53": {
+      "text": "8 × 2, unites, = 16, je pose 6, je retiens 1 ; 8 × 1, dizaines, + 1 = 9, je pose 9. Resultat : 96.",
+      "ms": 12000,
+      "cat": "enonce"
+    },
+    "07c4b5835c36ec4c": {
+      "text": "8 × 20 = 8 × 10 × 2 = 80 × 2 = 160.",
+      "ms": 6560,
+      "cat": "enonce"
+    },
+    "c198ea444a363f2f": {
+      "text": "8 × 4 = 32, donc il y a 4 fois 8 dans 32. 8 fois 4 = 2 fois, 4 fois 4 : 4 × 4 = 16, puis 16 + 16 = 32.",
+      "ms": 11760,
+      "cat": "enonce"
+    },
+    "278f2f896e6969dc": {
+      "text": "8 × 40 = 8 × 4 × 10 = 32 × 10 = 320.",
+      "ms": 5840,
+      "cat": "enonce"
+    },
+    "a8ffb0bb1b6044ab": {
+      "text": "8 × 5, unites, = 40, je pose 0, je retiens 4 ; 8 × 1, dizaines, + 4 = 12, je pose 2, je retiens 1 ; 8 × 6, centaines, + 1 = 49, je pose 9, je retiens 4 ; je pose la retenue 4. Resultat : 4920.",
+      "ms": 17520,
+      "cat": "enonce"
+    },
+    "0cee51535b4deb2c": {
+      "text": "8 × 5, unites, = 40, je pose 0, je retiens 4 ; 8 × 5, dizaines, + 4 = 44, je pose 4, je retiens 4 ; 8 × 5, centaines, + 4 = 44, je pose 4, je retiens 4 ; je pose la retenue 4. Resultat : 4440.",
+      "ms": 20400,
+      "cat": "enonce"
+    },
+    "b275d40a5fe8c7ec": {
+      "text": "8 × 6 = 48, donc il y a 6 fois 8 dans 48. 8 fois 6 = 2 fois, 4 fois 6 : 4 × 6 = 24, puis 24 + 24 = 48.",
+      "ms": 13760,
+      "cat": "enonce"
+    },
+    "3b2f68873d1d95bd": {
+      "text": "8 × 7 = 56, donc il y a 7 fois 8 dans 56. 8 fois 7 = 2 fois, 4 fois 7 : 4 × 7 = 28, puis 28 + 28 = 56.",
+      "ms": 13360,
+      "cat": "enonce"
+    },
+    "07b0a25a79cf6435": {
+      "text": "8 × 8 = 64, donc il y a 8 fois 8 dans 64. 8 fois 8 = 2 fois, 4 fois 8 : 4 × 8 = 32, puis 32 + 32 = 64.",
+      "ms": 13520,
+      "cat": "enonce"
     }
   },
   "keys": {
@@ -36414,6 +36879,99 @@
     "txt:383ac92e98a3b7fd": "383ac92e98a3b7fd",
     "txt:ef33f182cb50b1ac": "ef33f182cb50b1ac",
     "txt:ea1f24cdd840abb2": "ea1f24cdd840abb2",
-    "txt:da2ab95f3d256f3c": "da2ab95f3d256f3c"
+    "txt:da2ab95f3d256f3c": "da2ab95f3d256f3c",
+    "txt:7bc9369ef2d592b4": "7bc9369ef2d592b4",
+    "txt:d9e0f4469c1af44d": "d9e0f4469c1af44d",
+    "txt:cf7a9198a9e1b405": "cf7a9198a9e1b405",
+    "txt:38ea4a8202a74b20": "38ea4a8202a74b20",
+    "txt:af403a7cf2217dea": "af403a7cf2217dea",
+    "txt:18350e587a4cbf55": "18350e587a4cbf55",
+    "txt:2c651dde2175dab2": "2c651dde2175dab2",
+    "txt:617adad3e20d922f": "617adad3e20d922f",
+    "txt:dee32e6b2eda8c89": "dee32e6b2eda8c89",
+    "txt:28a81308f8f351ad": "28a81308f8f351ad",
+    "txt:3f5fb4902ccb80d4": "3f5fb4902ccb80d4",
+    "txt:2720d4ce0accee6e": "2720d4ce0accee6e",
+    "txt:3f355e981e4eed5e": "3f355e981e4eed5e",
+    "txt:ca71b0a997b35c1a": "ca71b0a997b35c1a",
+    "txt:987ce24b39047393": "987ce24b39047393",
+    "txt:6c3bacbe7ec6f6ac": "6c3bacbe7ec6f6ac",
+    "txt:e2043ffd3c0eb7ee": "e2043ffd3c0eb7ee",
+    "txt:876747117ef1257b": "876747117ef1257b",
+    "txt:ba2e645b0867b590": "ba2e645b0867b590",
+    "txt:6066fcaf0ac17b2c": "6066fcaf0ac17b2c",
+    "txt:6c0113b236fafc74": "6c0113b236fafc74",
+    "txt:1e4a4c61eeb164e7": "1e4a4c61eeb164e7",
+    "txt:0dc8f4ecd1cb5f64": "0dc8f4ecd1cb5f64",
+    "txt:d2a5532ddddfc30c": "d2a5532ddddfc30c",
+    "txt:8dca9a27e037c3a9": "8dca9a27e037c3a9",
+    "txt:02d7ff43141a50c5": "02d7ff43141a50c5",
+    "txt:b71c098ba654087c": "b71c098ba654087c",
+    "txt:6d5dd080884156b8": "6d5dd080884156b8",
+    "txt:217af17cd60108d6": "217af17cd60108d6",
+    "txt:24b5dd898f0b4785": "24b5dd898f0b4785",
+    "txt:cff4c953573867c7": "cff4c953573867c7",
+    "txt:b8219bb0c2dcc4b0": "b8219bb0c2dcc4b0",
+    "txt:7fcb6f6d59bc2b0b": "7fcb6f6d59bc2b0b",
+    "txt:80606da6c586a3bc": "80606da6c586a3bc",
+    "txt:568887b78a9bb95e": "568887b78a9bb95e",
+    "txt:8abd501eaef5f09d": "8abd501eaef5f09d",
+    "txt:9e6625664f1012ad": "9e6625664f1012ad",
+    "txt:4d9d9ba07d766fad": "4d9d9ba07d766fad",
+    "txt:fc839924ac1b6279": "fc839924ac1b6279",
+    "txt:7c2467e396959a49": "7c2467e396959a49",
+    "txt:792d7ca1b176a5b6": "792d7ca1b176a5b6",
+    "txt:ba84c7fb1a3fe62a": "ba84c7fb1a3fe62a",
+    "txt:21338c9ff5ef4742": "21338c9ff5ef4742",
+    "txt:e0fd7bb8cc7939bc": "e0fd7bb8cc7939bc",
+    "txt:859fd2abac619522": "859fd2abac619522",
+    "txt:9cfe2dac60ea9a0d": "9cfe2dac60ea9a0d",
+    "txt:c80fbba64d1d1a4a": "c80fbba64d1d1a4a",
+    "txt:3cc4af63b781c064": "3cc4af63b781c064",
+    "txt:a3d7e35aa689b64c": "a3d7e35aa689b64c",
+    "txt:c691f72d9bfad230": "c691f72d9bfad230",
+    "txt:d90a0fb709d9ee1c": "d90a0fb709d9ee1c",
+    "txt:2a70f8023c9faf5c": "2a70f8023c9faf5c",
+    "txt:4ccdb05b4ac1d1ca": "4ccdb05b4ac1d1ca",
+    "txt:36971f5cc9ad5f0f": "36971f5cc9ad5f0f",
+    "txt:b2d4b5f7c276769d": "b2d4b5f7c276769d",
+    "txt:0452d77b5773be78": "0452d77b5773be78",
+    "txt:c985a545f2a4f242": "c985a545f2a4f242",
+    "txt:75c1368ac1be5a7d": "75c1368ac1be5a7d",
+    "txt:6b58eac26bb62fbd": "6b58eac26bb62fbd",
+    "txt:85aafc3a71a84232": "85aafc3a71a84232",
+    "txt:fb9089b24693781b": "fb9089b24693781b",
+    "txt:35d8fe124268d1c7": "35d8fe124268d1c7",
+    "txt:778caf232713e0b9": "778caf232713e0b9",
+    "txt:a7fc64938977406a": "a7fc64938977406a",
+    "txt:e449f15439909bda": "e449f15439909bda",
+    "txt:7952c3f7250efc72": "7952c3f7250efc72",
+    "txt:de9081f737a0c692": "de9081f737a0c692",
+    "txt:e129cfb456a2f615": "e129cfb456a2f615",
+    "txt:f047bf25c21b224d": "f047bf25c21b224d",
+    "txt:fe21880210b8154d": "fe21880210b8154d",
+    "txt:ce7c4a003f373985": "ce7c4a003f373985",
+    "txt:f7deff64ac5b4772": "f7deff64ac5b4772",
+    "txt:675712481dd57927": "675712481dd57927",
+    "txt:a4e43cbc4785634f": "a4e43cbc4785634f",
+    "txt:454463329cd8b904": "454463329cd8b904",
+    "txt:191d34e2109e3efb": "191d34e2109e3efb",
+    "txt:145ab328abf24870": "145ab328abf24870",
+    "txt:30b803d90f39fed0": "30b803d90f39fed0",
+    "txt:c4ba6ade434cbab8": "c4ba6ade434cbab8",
+    "txt:153573f7ce8bc113": "153573f7ce8bc113",
+    "txt:eab28fac287de07d": "eab28fac287de07d",
+    "txt:59219a4675fd5d23": "59219a4675fd5d23",
+    "txt:43da3b0211e2665d": "43da3b0211e2665d",
+    "txt:80f33af9506674c3": "80f33af9506674c3",
+    "txt:46edbf08f6ff5b53": "46edbf08f6ff5b53",
+    "txt:07c4b5835c36ec4c": "07c4b5835c36ec4c",
+    "txt:c198ea444a363f2f": "c198ea444a363f2f",
+    "txt:278f2f896e6969dc": "278f2f896e6969dc",
+    "txt:a8ffb0bb1b6044ab": "a8ffb0bb1b6044ab",
+    "txt:0cee51535b4deb2c": "0cee51535b4deb2c",
+    "txt:b275d40a5fe8c7ec": "b275d40a5fe8c7ec",
+    "txt:3b2f68873d1d95bd": "3b2f68873d1d95bd",
+    "txt:07b0a25a79cf6435": "07b0a25a79cf6435"
   }
 }
