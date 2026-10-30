@@ -29098,6 +29098,586 @@
       "text": "vingt-et-un s'ecrit",
       "ms": 1520,
       "cat": "fragment"
+    },
+    "8edea47200df2f64": {
+      "text": "à des cailloux",
+      "ms": 1120,
+      "cat": "choix"
+    },
+    "f786e79d2efc1794": {
+      "text": "êtes",
+      "ms": 800,
+      "cat": "choix"
+    },
+    "6ecc7bcbdbbff955": {
+      "text": "mL",
+      "ms": 1040,
+      "cat": "choix"
+    },
+    "db9f65fd7d13691b": {
+      "text": "En extase, Kiki-la-Doucette et Toby-Chien s'éblouissent à contempler la flamme.",
+      "ms": 5520,
+      "cat": "enonce"
+    },
+    "785f12e8d867cbc6": {
+      "text": "1 kg = 1 000 g, donc 8 kg = 8 × 1 000 = 8 000 g.",
+      "ms": 6880,
+      "cat": "enonce"
+    },
+    "bda72ce1b7dcb8e8": {
+      "text": "1 € = 100 c, donc 5 € = 500 c. Puis 500 + 14 = 514 c.",
+      "ms": 5680,
+      "cat": "enonce"
+    },
+    "a713d7dba3dd0768": {
+      "text": "11 × 10 : on ajoute un zéro, ça fait 110.",
+      "ms": 2800,
+      "cat": "enonce"
+    },
+    "10b6e86eda06c270": {
+      "text": "1307 ÷ 10 = 130, il y a 130 dizaines entieres.",
+      "ms": 3360,
+      "cat": "enonce"
+    },
+    "001b25af34974849": {
+      "text": "207 < 2687.",
+      "ms": 2880,
+      "cat": "enonce"
+    },
+    "0cb8e432d273825e": {
+      "text": "2928 < 5688.",
+      "ms": 2960,
+      "cat": "enonce"
+    },
+    "b5ae8c67cf459ac5": {
+      "text": "34 se lit trente-quatre.",
+      "ms": 2080,
+      "cat": "enonce"
+    },
+    "35f1d6793e3ebd4b": {
+      "text": "3970 s'écrit trois mille neuf cent soixante-dix.",
+      "ms": 3360,
+      "cat": "enonce"
+    },
+    "50a2624ab46dd754": {
+      "text": "4 + 5, c'est presque un double : 4 + 4 = 8, puis + 1 = 9.",
+      "ms": 7680,
+      "cat": "enonce"
+    },
+    "1e0dd0b00e28dbcd": {
+      "text": "4 et 3 font 7. Il faut 5 de plus pour arriver à 12 : on écrit 5.",
+      "ms": 6400,
+      "cat": "enonce"
+    },
+    "37c3048dd3e07534": {
+      "text": "4 fois 1, c'est le double du double : 1, puis 2, puis 4.",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "f2e9f52c1fee309f": {
+      "text": "4 fois 10, c'est le double du double : 10, puis 20, puis 40.",
+      "ms": 4640,
+      "cat": "enonce"
+    },
+    "e73e3e0dff04837d": {
+      "text": "4 fois 2, c'est le double du double : 2, puis 4, puis 8.",
+      "ms": 4960,
+      "cat": "enonce"
+    },
+    "e69eb20eb6cb59f3": {
+      "text": "4 fois 3, c'est le double du double : 3, puis 6, puis 12.",
+      "ms": 6000,
+      "cat": "enonce"
+    },
+    "9e646c0625e4b001": {
+      "text": "4 fois 4, c'est le double du double : 4, puis 8, puis 16.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "976b3fa75c4f27aa": {
+      "text": "4 fois 5, c'est le double du double : 5, puis 10, puis 20.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "ea7493475f5a8dd2": {
+      "text": "4 fois 6, c'est le double du double : 6, puis 12, puis 24.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "ed64c63e9b5d8838": {
+      "text": "4 fois 7, c'est le double du double : 7, puis 14, puis 28.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "f37782b00ebfa2d2": {
+      "text": "4 fois 8, c'est le double du double : 8, puis 16, puis 32.",
+      "ms": 5600,
+      "cat": "enonce"
+    },
+    "a015d186f3becfef": {
+      "text": "4 fois 9, c'est le double du double : 9, puis 18, puis 36.",
+      "ms": 6240,
+      "cat": "enonce"
+    },
+    "3bbd8144b0657d07": {
+      "text": "4 groupes de 3, c'est 4 × 3 = 12.",
+      "ms": 4320,
+      "cat": "enonce"
+    },
+    "9c360534aff80e32": {
+      "text": "4 km = 4000 m. Donc 4 km > 1991 m.",
+      "ms": 5840,
+      "cat": "enonce"
+    },
+    "b74c835bf39a74da": {
+      "text": "4 pour aller a 10 : 4 + 6 = 10.",
+      "ms": 4160,
+      "cat": "enonce"
+    },
+    "ba3c5050f8465223": {
+      "text": "4 × 0, unites, = 0, je pose 0 ; 4 × 3, dizaines, = 12, je pose 2, je retiens 1 ; 4 × 8, centaines, + 1 = 33, je pose 3, je retiens 3 ; je pose la retenue 3. Resultat : 3320.",
+      "ms": 17840,
+      "cat": "enonce"
+    },
+    "64f4cef3f6dda563": {
+      "text": "4 × 0, unites, = 0, je pose 0 ; 4 × 4, dizaines, = 16, je pose 6, je retiens 1 ; 4 × 7, centaines, + 1 = 29, je pose 9, je retiens 2 ; je pose la retenue 2. Resultat : 2960.",
+      "ms": 18320,
+      "cat": "enonce"
+    },
+    "3822f4d2d7c6e043": {
+      "text": "4 × 1 = 4, donc il y a 1 fois 4 dans 4. 4 fois 1, c'est le double du double : 1, puis 2, puis 4.",
+      "ms": 9280,
+      "cat": "enonce"
+    },
+    "acc3f87073d7e46d": {
+      "text": "4 × 10 : on ajoute un zéro, ça fait 40.",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "ca0f6026facdb69a": {
+      "text": "4 × 10 = 40, donc il y a 10 fois 4 dans 40. 4 fois 10, c'est le double du double : 10, puis 20, puis 40.",
+      "ms": 10400,
+      "cat": "enonce"
+    },
+    "dd3f345109c48f94": {
+      "text": "4 × 2 = 8, donc il y a 2 fois 4 dans 8. 4 fois 2, c'est le double du double : 2, puis 4, puis 8.",
+      "ms": 9520,
+      "cat": "enonce"
+    },
+    "8d96549c77b30894": {
+      "text": "4 × 4 = 16, donc 16 ÷ 4 = 4.",
+      "ms": 5200,
+      "cat": "enonce"
+    },
+    "16142939736483b1": {
+      "text": "4 × 4 = 16, donc il y a 4 fois 4 dans 16. 4 fois 4, c'est le double du double : 4, puis 8, puis 16.",
+      "ms": 10640,
+      "cat": "enonce"
+    },
+    "75a713f48aca401a": {
+      "text": "4 × 4, unites, = 16, je pose 6, je retiens 1 ; 4 × 1, dizaines, + 1 = 5, je pose 5 ; 4 × 7, centaines, = 28, je pose 8, je retiens 2 ; je pose la retenue 2. Resultat : 2856.",
+      "ms": 18400,
+      "cat": "enonce"
+    },
+    "d4c840b389f12fb5": {
+      "text": "4 × 4, unites, = 16, je pose 6, je retiens 1 ; 4 × 5, dizaines, + 1 = 21, je pose 1, je retiens 2 ; je pose la retenue 2. Resultat : 216.",
+      "ms": 16560,
+      "cat": "enonce"
+    },
+    "f11340831c8ad911": {
+      "text": "4 × 4, unites, = 16, je pose 6, je retiens 1 ; 4 × 8, dizaines, + 1 = 33, je pose 3, je retiens 3 ; je pose la retenue 3. Resultat : 336.",
+      "ms": 16560,
+      "cat": "enonce"
+    },
+    "25a986bf1fcc0633": {
+      "text": "4 × 40 = 4 × 4 × 10 = 16 × 10 = 160.",
+      "ms": 7440,
+      "cat": "enonce"
+    },
+    "a6eb8c309edffecd": {
+      "text": "4 × 5 = 20, donc 20 ÷ 4 = 5.",
+      "ms": 4800,
+      "cat": "enonce"
+    },
+    "59ca137a3323db8b": {
+      "text": "4 × 5, unites, = 20, je pose 0, je retiens 2 ; 4 × 2, dizaines, + 2 = 10, je pose 0, je retiens 1 ; je pose la retenue 1. Resultat : 100.",
+      "ms": 15120,
+      "cat": "enonce"
+    },
+    "29558d7ff5eb6cb5": {
+      "text": "4 × 5, unites, = 20, je pose 0, je retiens 2 ; 4 × 9, dizaines, + 2 = 38, je pose 8, je retiens 3 ; je pose la retenue 3. Resultat : 380.",
+      "ms": 14240,
+      "cat": "enonce"
+    },
+    "c602d5ec88d526d1": {
+      "text": "4 × 6 = 24, donc 24 ÷ 4 = 6.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "88b90e6aa9323a70": {
+      "text": "4 × 6 = 24, donc il y a 6 fois 4 dans 24. 4 fois 6, c'est le double du double : 6, puis 12, puis 24.",
+      "ms": 10800,
+      "cat": "enonce"
+    },
+    "7526dcc8d1be44a1": {
+      "text": "4 × 7 = 28, donc il y a 7 fois 4 dans 28. 4 fois 7, c'est le double du double : 7, puis 14, puis 28.",
+      "ms": 10640,
+      "cat": "enonce"
+    },
+    "c3e05335a61179ff": {
+      "text": "4 × 7, unites, = 28, je pose 8, je retiens 2 ; 4 × 3, dizaines, + 2 = 14, je pose 4, je retiens 1 ; 4 × 7, centaines, + 1 = 29, je pose 9, je retiens 2 ; je pose la retenue 2. Resultat : 2948.",
+      "ms": 20160,
+      "cat": "enonce"
+    },
+    "ed5bf633639a9b0e": {
+      "text": "4 × 7, unites, = 28, je pose 8, je retiens 2 ; 4 × 4, dizaines, + 2 = 18, je pose 8, je retiens 1 ; je pose la retenue 1. Resultat : 188.",
+      "ms": 14400,
+      "cat": "enonce"
+    },
+    "d91efedb1b61a482": {
+      "text": "4 × 7, unites, = 28, je pose 8, je retiens 2 ; 4 × 8, dizaines, + 2 = 34, je pose 4, je retiens 3 ; je pose la retenue 3. Resultat : 348.",
+      "ms": 15280,
+      "cat": "enonce"
+    },
+    "56311e2a112a0f0c": {
+      "text": "4 × 8 = 32, donc il y a 8 fois 4 dans 32. 4 fois 8, c'est le double du double : 8, puis 16, puis 32.",
+      "ms": 11520,
+      "cat": "enonce"
+    },
+    "26b4aaa972480e0d": {
+      "text": "4 × 8, unites, = 32, je pose 2, je retiens 3 ; 4 × 1, dizaines, + 3 = 7, je pose 7. Resultat : 72.",
+      "ms": 11440,
+      "cat": "enonce"
+    },
+    "a6383771d3e5f14a": {
+      "text": "4 × 8, unites, = 32, je pose 2, je retiens 3 ; 4 × 4, dizaines, + 3 = 19, je pose 9, je retiens 1 ; 4 × 4, centaines, + 1 = 17, je pose 7, je retiens 1 ; je pose la retenue 1. Resultat : 1792.",
+      "ms": 20400,
+      "cat": "enonce"
+    },
+    "7f134c999650f3d8": {
+      "text": "4 × 80 = 4 × 8 × 10 = 32 × 10 = 320.",
+      "ms": 5840,
+      "cat": "enonce"
+    },
+    "27df1ce79fd23421": {
+      "text": "40 + 10 = 50.",
+      "ms": 3440,
+      "cat": "enonce"
+    },
+    "1e5afad41598cc7c": {
+      "text": "40 < 75.",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "62f0c15b2d03313c": {
+      "text": "40 est un nombre de dizaines : on ajoute 4 dizaines à 31, ça fait 71.",
+      "ms": 6800,
+      "cat": "enonce"
+    },
+    "6580f4fff7b809f7": {
+      "text": "40 est un nombre de dizaines : on ajoute 4 dizaines à 77, ça fait 117.",
+      "ms": 7280,
+      "cat": "enonce"
+    },
+    "b25cdee634e1372c": {
+      "text": "40 est un nombre de dizaines : on ajoute 4 dizaines à 86, ça fait 126.",
+      "ms": 6560,
+      "cat": "enonce"
+    },
+    "f5270afb014f0499": {
+      "text": "40 est un nombre de dizaines : on enlève 4 dizaines à 79, ça fait 39.",
+      "ms": 5520,
+      "cat": "enonce"
+    },
+    "ad6f6dbe79cddb01": {
+      "text": "40 et 60 font 100, ce sont des dizaines entieres.",
+      "ms": 4000,
+      "cat": "enonce"
+    },
+    "4ddb44890170ef29": {
+      "text": "40 se lit quarante.",
+      "ms": 1920,
+      "cat": "enonce"
+    },
+    "ec5a8e549eade287": {
+      "text": "40 × 1 = 4 × 1 × 10 = 4 × 10 = 40.",
+      "ms": 4320,
+      "cat": "enonce"
+    },
+    "e67207224db9dfab": {
+      "text": "40 × 4 = 4 × 4 × 10 = 16 × 10 = 160.",
+      "ms": 6880,
+      "cat": "enonce"
+    },
+    "735e0284dbcbc016": {
+      "text": "40 × 6 = 4 × 6 × 10 = 24 × 10 = 240.",
+      "ms": 5680,
+      "cat": "enonce"
+    },
+    "e7289c69486ae891": {
+      "text": "40 × 8 = 4 × 8 × 10 = 32 × 10 = 320.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "9625412ae4630b40": {
+      "text": "40 × 9 = 4 × 9 × 10 = 36 × 10 = 360.",
+      "ms": 6480,
+      "cat": "enonce"
+    },
+    "abe757a15d04646d": {
+      "text": "400 + 600 = 1000 : on complete a 1000.",
+      "ms": 4560,
+      "cat": "enonce"
+    },
+    "4766aac22be8bdeb": {
+      "text": "406 = 4 centaines, 0 dizaines, 6 unites.",
+      "ms": 4880,
+      "cat": "enonce"
+    },
+    "5bbe769e43c2a386": {
+      "text": "4098 = 4098.",
+      "ms": 2240,
+      "cat": "enonce"
+    },
+    "baf59be16403e2ec": {
+      "text": "41 + 59 = 100 : on complete d'abord a la dizaine, puis a 100.",
+      "ms": 6240,
+      "cat": "enonce"
+    },
+    "bf8398bd591d6e05": {
+      "text": "41 + 9 = 41 + 10 − 1 = 51 − 1 = 50.",
+      "ms": 5920,
+      "cat": "enonce"
+    },
+    "3cb0c3e04d4abc3a": {
+      "text": "417 ≈ 420 et 70 ≈ 70. 420 − 70 = 350.",
+      "ms": 8400,
+      "cat": "enonce"
+    },
+    "d6756fabd2a1ddd7": {
+      "text": "42 + 9 = 42 + 10 − 1 = 52 − 1 = 51.",
+      "ms": 6880,
+      "cat": "enonce"
+    },
+    "829597f85d4b9560": {
+      "text": "440 ≈ 440 et 89 ≈ 90. 440 + 90 = 530.",
+      "ms": 8800,
+      "cat": "enonce"
+    },
+    "26da991c7bb70fcd": {
+      "text": "4435 ÷ 100 = 44, il y a 44 centaines entieres.",
+      "ms": 6880,
+      "cat": "enonce"
+    },
+    "5fa4597ae7e7759f": {
+      "text": "4459 − 10 = 4449.",
+      "ms": 4320,
+      "cat": "enonce"
+    },
+    "44f37fa9dec3ba11": {
+      "text": "448 ≈ 450 et 41 ≈ 40. 450 + 40 = 490.",
+      "ms": 8880,
+      "cat": "enonce"
+    },
+    "22cd5e30bfc20865": {
+      "text": "45 × 10 : on ajoute un zéro, ça fait 450.",
+      "ms": 4960,
+      "cat": "enonce"
+    },
+    "ee55f66399b6687d": {
+      "text": "45 × 20 = 45 × 10 × 2 = 450 × 2 = 900.",
+      "ms": 6000,
+      "cat": "enonce"
+    },
+    "2e0e32340e68cf4e": {
+      "text": "4501 = 4 milliers, 5 centaines, 0 dizaines, 1 unites.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "99f4fc38a6511a43": {
+      "text": "451 ≈ 450 et 22 ≈ 20. 450 − 20 = 430.",
+      "ms": 8000,
+      "cat": "enonce"
+    },
+    "1460035c364d4d4b": {
+      "text": "46 × 10 : on ajoute un zéro, ça fait 460.",
+      "ms": 4960,
+      "cat": "enonce"
+    },
+    "b102e9df439376f7": {
+      "text": "46 × 20 = 46 × 10 × 2 = 460 × 2 = 920.",
+      "ms": 6640,
+      "cat": "enonce"
+    },
+    "a02880f04f43467f": {
+      "text": "46 € < 93 €.",
+      "ms": 2480,
+      "cat": "enonce"
+    },
+    "4951c5e38879740d": {
+      "text": "464 = 4 centaines, 6 dizaines, 4 unites.",
+      "ms": 4960,
+      "cat": "enonce"
+    },
+    "7fc96feea012890c": {
+      "text": "4688 = 4 milliers, 6 centaines, 8 dizaines, 8 unites.",
+      "ms": 6000,
+      "cat": "enonce"
+    },
+    "57f071b9113f9188": {
+      "text": "4791 ÷ 100 = 47, il y a 47 centaines entieres.",
+      "ms": 5600,
+      "cat": "enonce"
+    },
+    "4c976bd15f30a914": {
+      "text": "48 × 20 = 48 × 10 × 2 = 480 × 2 = 960.",
+      "ms": 6640,
+      "cat": "enonce"
+    },
+    "d8223f1b4600c323": {
+      "text": "49 + 19 = 49 + 20 − 1 = 69 − 1 = 68.",
+      "ms": 5680,
+      "cat": "enonce"
+    },
+    "ac8739e2e4139194": {
+      "text": "49 + 51 = 100 : on complete d'abord a la dizaine, puis a 100.",
+      "ms": 6720,
+      "cat": "enonce"
+    },
+    "d78331476591483a": {
+      "text": "490 + 510 = 1000 : on complete a 1000.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "105261426a1636b1": {
+      "text": "4919 > 4819.",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "27e27cf40eea9c81": {
+      "text": "4920 s'écrit quatre mille neuf cent vingt.",
+      "ms": 3360,
+      "cat": "enonce"
+    },
+    "681a7bb8161e0ce8": {
+      "text": "494 + 10 = 504.",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "cca1b763ffe8fbbd": {
+      "text": "4962 ÷ 10 = 496, il y a 496 dizaines entieres.",
+      "ms": 7600,
+      "cat": "enonce"
+    },
+    "eb3d6d3bb10cd987": {
+      "text": "5 + 6, c'est presque un double : 5 + 5 = 10, puis + 1 = 11.",
+      "ms": 7280,
+      "cat": "enonce"
+    },
+    "57f5308bff074288": {
+      "text": "5 L = 50 dL. Donc 5 L < 66 dL.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "ed9a159455281ae0": {
+      "text": "5 L = 50 dL. Donc 5 L > 20 dL.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "c7e0d2f86b6048c3": {
+      "text": "5 et 3 font 8 : on écrit 3 dans la case des poires.",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "3e8465fce9890af8": {
+      "text": "5 fois 1, c'est la moitie de 10 fois 1 : 10 ÷ 2 = 5.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "4cbfd323afe8564f": {
+      "text": "5 fois 10, c'est la moitie de 10 fois 10 : 100 ÷ 2 = 50.",
+      "ms": 5600,
+      "cat": "enonce"
+    },
+    "9f21e2457e348bc1": {
+      "text": "5 fois 2, c'est la moitie de 10 fois 2 : 20 ÷ 2 = 10.",
+      "ms": 5840,
+      "cat": "enonce"
+    },
+    "a07e02d167bdd30d": {
+      "text": "5 fois 3, c'est la moitie de 10 fois 3 : 30 ÷ 2 = 15.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "6fadb6e7d13f23f5": {
+      "text": "5 fois 4, c'est la moitie de 10 fois 4 : 40 ÷ 2 = 20.",
+      "ms": 4960,
+      "cat": "enonce"
+    },
+    "85b3ab6dd2783994": {
+      "text": "5 fois 5, c'est la moitie de 10 fois 5 : 50 ÷ 2 = 25.",
+      "ms": 6400,
+      "cat": "enonce"
+    },
+    "9a8b601e33ba9043": {
+      "text": "5 fois 6, c'est la moitie de 10 fois 6 : 60 ÷ 2 = 30.",
+      "ms": 6560,
+      "cat": "enonce"
+    },
+    "3ccf427aa629680c": {
+      "text": "5 fois 7, c'est la moitie de 10 fois 7 : 70 ÷ 2 = 35.",
+      "ms": 6800,
+      "cat": "enonce"
+    },
+    "6e2e7b0583b0c563": {
+      "text": "5 fois 8, c'est la moitie de 10 fois 8 : 80 ÷ 2 = 40.",
+      "ms": 5840,
+      "cat": "enonce"
+    },
+    "25d1570d263dc74b": {
+      "text": "5 fois 9, c'est la moitie de 10 fois 9 : 90 ÷ 2 = 45.",
+      "ms": 6400,
+      "cat": "enonce"
+    },
+    "53453945923cd2ed": {
+      "text": "5 fois plus que 7 : 7 × 5 = 35.",
+      "ms": 4960,
+      "cat": "enonce"
+    },
+    "6d8080ae73579ee7": {
+      "text": "5 groupes de 2, c'est 5 × 2 = 10.",
+      "ms": 3600,
+      "cat": "enonce"
+    },
+    "bdc4bba8de832543": {
+      "text": "5 groupes de 4, c'est 5 × 4 = 20.",
+      "ms": 3760,
+      "cat": "enonce"
+    },
+    "854e8f5ab72ca3a5": {
+      "text": "5 groupes de 9, c'est 5 × 9 = 45.",
+      "ms": 4400,
+      "cat": "enonce"
+    },
+    "143283c3877e4624": {
+      "text": "5 kg est plus lourd que 3 kg : le côté gauche descend.",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "f4e905cef71b7132": {
+      "text": "5 pour aller a 10 : 5 + 5 = 10.",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "e5d8bd0742055892": {
+      "text": "5 × 0, unites, = 0, je pose 0 ; 5 × 6, dizaines, = 30, je pose 0, je retiens 3 ; 5 × 1, centaines, + 3 = 8, je pose 8. Resultat : 800.",
+      "ms": 16480,
+      "cat": "enonce"
+    },
+    "13f9fc5799316ba3": {
+      "text": "5 × 1 = 5, donc il y a 1 fois 5 dans 5. 5 fois 1, c'est la moitie de 10 fois 1 : 10 ÷ 2 = 5.",
+      "ms": 10000,
+      "cat": "enonce"
     }
   },
   "keys": {
@@ -34920,6 +35500,122 @@
     "frag:unites": "fe080622e93dfe65",
     "frag:vers-la-droite-on-change-de-colonne-de-b-on-passe-a-c-puis-a-d-on-reste-a-la-ligne": "4694693eb10f5827",
     "frag:vers-le-haut-on-change-de-ligne-de-la-ligne": "7ab96e7afc234d8c",
-    "frag:vingt-et-un-s-ecrit": "3e6d148f0d1d84da"
+    "frag:vingt-et-un-s-ecrit": "3e6d148f0d1d84da",
+    "txt:8edea47200df2f64": "8edea47200df2f64",
+    "txt:f786e79d2efc1794": "f786e79d2efc1794",
+    "txt:6ecc7bcbdbbff955": "6ecc7bcbdbbff955",
+    "txt:db9f65fd7d13691b": "db9f65fd7d13691b",
+    "txt:785f12e8d867cbc6": "785f12e8d867cbc6",
+    "txt:bda72ce1b7dcb8e8": "bda72ce1b7dcb8e8",
+    "txt:a713d7dba3dd0768": "a713d7dba3dd0768",
+    "txt:10b6e86eda06c270": "10b6e86eda06c270",
+    "txt:001b25af34974849": "001b25af34974849",
+    "txt:0cb8e432d273825e": "0cb8e432d273825e",
+    "txt:b5ae8c67cf459ac5": "b5ae8c67cf459ac5",
+    "txt:35f1d6793e3ebd4b": "35f1d6793e3ebd4b",
+    "txt:50a2624ab46dd754": "50a2624ab46dd754",
+    "txt:1e0dd0b00e28dbcd": "1e0dd0b00e28dbcd",
+    "txt:37c3048dd3e07534": "37c3048dd3e07534",
+    "txt:f2e9f52c1fee309f": "f2e9f52c1fee309f",
+    "txt:e73e3e0dff04837d": "e73e3e0dff04837d",
+    "txt:e69eb20eb6cb59f3": "e69eb20eb6cb59f3",
+    "txt:9e646c0625e4b001": "9e646c0625e4b001",
+    "txt:976b3fa75c4f27aa": "976b3fa75c4f27aa",
+    "txt:ea7493475f5a8dd2": "ea7493475f5a8dd2",
+    "txt:ed64c63e9b5d8838": "ed64c63e9b5d8838",
+    "txt:f37782b00ebfa2d2": "f37782b00ebfa2d2",
+    "txt:a015d186f3becfef": "a015d186f3becfef",
+    "txt:3bbd8144b0657d07": "3bbd8144b0657d07",
+    "txt:9c360534aff80e32": "9c360534aff80e32",
+    "txt:b74c835bf39a74da": "b74c835bf39a74da",
+    "txt:ba3c5050f8465223": "ba3c5050f8465223",
+    "txt:64f4cef3f6dda563": "64f4cef3f6dda563",
+    "txt:3822f4d2d7c6e043": "3822f4d2d7c6e043",
+    "txt:acc3f87073d7e46d": "acc3f87073d7e46d",
+    "txt:ca0f6026facdb69a": "ca0f6026facdb69a",
+    "txt:dd3f345109c48f94": "dd3f345109c48f94",
+    "txt:8d96549c77b30894": "8d96549c77b30894",
+    "txt:16142939736483b1": "16142939736483b1",
+    "txt:75a713f48aca401a": "75a713f48aca401a",
+    "txt:d4c840b389f12fb5": "d4c840b389f12fb5",
+    "txt:f11340831c8ad911": "f11340831c8ad911",
+    "txt:25a986bf1fcc0633": "25a986bf1fcc0633",
+    "txt:a6eb8c309edffecd": "a6eb8c309edffecd",
+    "txt:59ca137a3323db8b": "59ca137a3323db8b",
+    "txt:29558d7ff5eb6cb5": "29558d7ff5eb6cb5",
+    "txt:c602d5ec88d526d1": "c602d5ec88d526d1",
+    "txt:88b90e6aa9323a70": "88b90e6aa9323a70",
+    "txt:7526dcc8d1be44a1": "7526dcc8d1be44a1",
+    "txt:c3e05335a61179ff": "c3e05335a61179ff",
+    "txt:ed5bf633639a9b0e": "ed5bf633639a9b0e",
+    "txt:d91efedb1b61a482": "d91efedb1b61a482",
+    "txt:56311e2a112a0f0c": "56311e2a112a0f0c",
+    "txt:26b4aaa972480e0d": "26b4aaa972480e0d",
+    "txt:a6383771d3e5f14a": "a6383771d3e5f14a",
+    "txt:7f134c999650f3d8": "7f134c999650f3d8",
+    "txt:27df1ce79fd23421": "27df1ce79fd23421",
+    "txt:1e5afad41598cc7c": "1e5afad41598cc7c",
+    "txt:62f0c15b2d03313c": "62f0c15b2d03313c",
+    "txt:6580f4fff7b809f7": "6580f4fff7b809f7",
+    "txt:b25cdee634e1372c": "b25cdee634e1372c",
+    "txt:f5270afb014f0499": "f5270afb014f0499",
+    "txt:ad6f6dbe79cddb01": "ad6f6dbe79cddb01",
+    "txt:4ddb44890170ef29": "4ddb44890170ef29",
+    "txt:ec5a8e549eade287": "ec5a8e549eade287",
+    "txt:e67207224db9dfab": "e67207224db9dfab",
+    "txt:735e0284dbcbc016": "735e0284dbcbc016",
+    "txt:e7289c69486ae891": "e7289c69486ae891",
+    "txt:9625412ae4630b40": "9625412ae4630b40",
+    "txt:abe757a15d04646d": "abe757a15d04646d",
+    "txt:4766aac22be8bdeb": "4766aac22be8bdeb",
+    "txt:5bbe769e43c2a386": "5bbe769e43c2a386",
+    "txt:baf59be16403e2ec": "baf59be16403e2ec",
+    "txt:bf8398bd591d6e05": "bf8398bd591d6e05",
+    "txt:3cb0c3e04d4abc3a": "3cb0c3e04d4abc3a",
+    "txt:d6756fabd2a1ddd7": "d6756fabd2a1ddd7",
+    "txt:829597f85d4b9560": "829597f85d4b9560",
+    "txt:26da991c7bb70fcd": "26da991c7bb70fcd",
+    "txt:5fa4597ae7e7759f": "5fa4597ae7e7759f",
+    "txt:44f37fa9dec3ba11": "44f37fa9dec3ba11",
+    "txt:22cd5e30bfc20865": "22cd5e30bfc20865",
+    "txt:ee55f66399b6687d": "ee55f66399b6687d",
+    "txt:2e0e32340e68cf4e": "2e0e32340e68cf4e",
+    "txt:99f4fc38a6511a43": "99f4fc38a6511a43",
+    "txt:1460035c364d4d4b": "1460035c364d4d4b",
+    "txt:b102e9df439376f7": "b102e9df439376f7",
+    "txt:a02880f04f43467f": "a02880f04f43467f",
+    "txt:4951c5e38879740d": "4951c5e38879740d",
+    "txt:7fc96feea012890c": "7fc96feea012890c",
+    "txt:57f071b9113f9188": "57f071b9113f9188",
+    "txt:4c976bd15f30a914": "4c976bd15f30a914",
+    "txt:d8223f1b4600c323": "d8223f1b4600c323",
+    "txt:ac8739e2e4139194": "ac8739e2e4139194",
+    "txt:d78331476591483a": "d78331476591483a",
+    "txt:105261426a1636b1": "105261426a1636b1",
+    "txt:27e27cf40eea9c81": "27e27cf40eea9c81",
+    "txt:681a7bb8161e0ce8": "681a7bb8161e0ce8",
+    "txt:cca1b763ffe8fbbd": "cca1b763ffe8fbbd",
+    "txt:eb3d6d3bb10cd987": "eb3d6d3bb10cd987",
+    "txt:57f5308bff074288": "57f5308bff074288",
+    "txt:ed9a159455281ae0": "ed9a159455281ae0",
+    "txt:c7e0d2f86b6048c3": "c7e0d2f86b6048c3",
+    "txt:3e8465fce9890af8": "3e8465fce9890af8",
+    "txt:4cbfd323afe8564f": "4cbfd323afe8564f",
+    "txt:9f21e2457e348bc1": "9f21e2457e348bc1",
+    "txt:a07e02d167bdd30d": "a07e02d167bdd30d",
+    "txt:6fadb6e7d13f23f5": "6fadb6e7d13f23f5",
+    "txt:85b3ab6dd2783994": "85b3ab6dd2783994",
+    "txt:9a8b601e33ba9043": "9a8b601e33ba9043",
+    "txt:3ccf427aa629680c": "3ccf427aa629680c",
+    "txt:6e2e7b0583b0c563": "6e2e7b0583b0c563",
+    "txt:25d1570d263dc74b": "25d1570d263dc74b",
+    "txt:53453945923cd2ed": "53453945923cd2ed",
+    "txt:6d8080ae73579ee7": "6d8080ae73579ee7",
+    "txt:bdc4bba8de832543": "bdc4bba8de832543",
+    "txt:854e8f5ab72ca3a5": "854e8f5ab72ca3a5",
+    "txt:143283c3877e4624": "143283c3877e4624",
+    "txt:f4e905cef71b7132": "f4e905cef71b7132",
+    "txt:e5d8bd0742055892": "e5d8bd0742055892",
+    "txt:13f9fc5799316ba3": "13f9fc5799316ba3"
   }
 }
