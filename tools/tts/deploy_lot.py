@@ -32,10 +32,12 @@ import os
 import subprocess
 import sys
 import tempfile
+from datetime import datetime
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
 MANIFEST = REPO / "frontend/public/voix/manifest.json"
+LOG_FILE = REPO / "tools/tts/data/deploy_lot.log"
 VOICE = "c1s33-v1"
 WIN = "manu-win"
 # Dossier de sortie de generation sur manu-win. Surchargable (WIN_OUT) pour
@@ -58,6 +60,14 @@ def run(cmd, **kw):
 
 def log(m):
     print(m, flush=True)
+    # journal persistant en AJOUT (jamais ecrase), horodate par ligne : permet
+    # de retracer les lots successifs (ex. incident du 29/10 : repo VPS jamais
+    # resynchronise -> manifest servi figE plusieurs lots en arriere).
+    try:
+        with open(LOG_FILE, "a", encoding="utf-8") as f:
+            f.write(f"{datetime.now():%Y-%m-%d %H:%M:%S} {m}\n")
+    except OSError:
+        pass
 
 
 def resolve_vps() -> str:
@@ -156,7 +166,7 @@ def main() -> int:
             MANIFEST.write_text(json.dumps(committed, ensure_ascii=False, indent=2),
                                 encoding="utf-8")
             if not os.environ.get("NO_COMMIT"):
-                commit_push(len(retenus))
+                commit_push(len(retenus), vps)
             # service immediat : copie du manifest dans dist (pas de rebuild appli)
             r = run(["scp", *VPS_OPTS, str(MANIFEST),
                      f"{vps}:/opt/kerskol/frontend/dist/voix/manifest.json"])
@@ -313,7 +323,7 @@ def verifier_fichiers_vps(vps: str, cids: list[str], tmp: Path) -> list[str]:
     return [c for c in r.stdout.split() if c]
 
 
-def commit_push(n: int):
+def commit_push(n: int, vps: str):
     subprocess.run(["git", "-C", str(REPO), "add", "frontend/public/voix/manifest.json"])
     msg = (f"feat(voix): lot de {n} clips prose deployes (manifest +{n})\n\n"
            "Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>")
@@ -321,6 +331,19 @@ def commit_push(n: int):
     subprocess.run(["git", "-C", str(REPO), "pull", "--rebase"])
     subprocess.run(["git", "-C", str(REPO), "push", "origin", "main"])
     log(f"manifest committe + pousse (+{n} clips).")
+    # Resynchroniser le checkout git du VPS avec origin/main. Sans ca, le depot
+    # VPS reste figE sur un vieux commit (incident du 29/10 : manifest.json du
+    # checkout reste a 5819 clips alors que la prod en sert 6068 via la copie
+    # dist). Un prochain deploy.sh RECONSTRUIRAIT dist depuis ce vieux manifest
+    # -> regression. Echec = erreur visible, JAMAIS de pull --ff-only force.
+    r = ssh_vps(vps, "git -C /opt/kerskol pull --ff-only")
+    if r.returncode != 0:
+        log("ERREUR : 'git pull --ff-only' a echoue sur le VPS (modifs locales "
+            "ou divergence) ; le checkout VPS N'EST PAS synchronise avec "
+            "origin/main, un prochain deploy.sh risque de regresser le manifest. "
+            f"A resoudre a la main sur le VPS : {r.stderr.strip()[:300]}")
+    else:
+        log("checkout git du VPS resynchronise (git pull --ff-only).")
 
 
 def verif_http(cids: list[str]):
