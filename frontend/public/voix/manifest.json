@@ -29678,6 +29678,371 @@
       "text": "5 × 1 = 5, donc il y a 1 fois 5 dans 5. 5 fois 1, c'est la moitie de 10 fois 1 : 10 ÷ 2 = 5.",
       "ms": 10000,
       "cat": "enonce"
+    },
+    "8eb61a138c186e92": {
+      "text": "5 × 1, unites, = 5, je pose 5 ; 5 × 7, dizaines, = 35, je pose 5, je retiens 3 ; 5 × 5, centaines, + 3 = 28, je pose 8, je retiens 2 ; je pose la retenue 2. Resultat : 2855.",
+      "ms": 18160,
+      "cat": "enonce"
+    },
+    "24e8eb530bbe17ad": {
+      "text": "5 × 10 : on ajoute un zéro, ça fait 50.",
+      "ms": 3600,
+      "cat": "enonce"
+    },
+    "37d38c890e691e16": {
+      "text": "5 × 10 = 50, donc 50 ÷ 5 = 10.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "3e533807a0395b60": {
+      "text": "5 × 10 = 50, donc il y a 10 fois 5 dans 50. 5 fois 10, c'est la moitie de 10 fois 10 : 100 ÷ 2 = 50.",
+      "ms": 10240,
+      "cat": "enonce"
+    },
+    "810b834136929544": {
+      "text": "5 × 2 = 10, donc 10 ÷ 5 = 2.",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "8e40449aa1bf49f8": {
+      "text": "5 × 2 = 10, donc il y a 2 fois 5 dans 10. 5 fois 2, c'est la moitie de 10 fois 2 : 20 ÷ 2 = 10.",
+      "ms": 8400,
+      "cat": "enonce"
+    },
+    "eda94d7e3d563f44": {
+      "text": "5 × 3, unites, = 15, je pose 5, je retiens 1 ; 5 × 3, dizaines, + 1 = 16, je pose 6, je retiens 1 ; je pose la retenue 1. Resultat : 165.",
+      "ms": 16160,
+      "cat": "enonce"
+    },
+    "fd73c161aa759f70": {
+      "text": "5 × 4 = 20, donc il y a 4 fois 5 dans 20. 5 fois 4, c'est la moitie de 10 fois 4 : 40 ÷ 2 = 20.",
+      "ms": 9600,
+      "cat": "enonce"
+    },
+    "2b9f4d4b812abe43": {
+      "text": "5 × 4, unites, = 20, je pose 0, je retiens 2 ; 5 × 3, dizaines, + 2 = 17, je pose 7, je retiens 1 ; je pose la retenue 1. Resultat : 170.",
+      "ms": 15520,
+      "cat": "enonce"
+    },
+    "b8fb1b5483745900": {
+      "text": "5 × 4, unites, = 20, je pose 0, je retiens 2 ; 5 × 7, dizaines, + 2 = 37, je pose 7, je retiens 3 ; 5 × 8, centaines, + 3 = 43, je pose 3, je retiens 4 ; je pose la retenue 4. Resultat : 4370.",
+      "ms": 20400,
+      "cat": "enonce"
+    },
+    "8f4a0c57293bcbff": {
+      "text": "5 × 40 = 5 × 4 × 10 = 20 × 10 = 200.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "e44faa7193b73e30": {
+      "text": "5 × 5 = 25, donc 25 ÷ 5 = 5.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "91038bae8e73174b": {
+      "text": "5 × 6 = 30, donc il y a 6 fois 5 dans 30. 5 fois 6, c'est la moitie de 10 fois 6 : 60 ÷ 2 = 30.",
+      "ms": 11200,
+      "cat": "enonce"
+    },
+    "df2c8598d5621114": {
+      "text": "5 × 7 = 35, donc 35 ÷ 5 = 7.",
+      "ms": 5200,
+      "cat": "enonce"
+    },
+    "6e3165d6c63dba37": {
+      "text": "5 × 7 = 35, donc il y a 7 fois 5 dans 35. 5 fois 7, c'est la moitie de 10 fois 7 : 70 ÷ 2 = 35.",
+      "ms": 11280,
+      "cat": "enonce"
+    },
+    "bd399565cde82fd8": {
+      "text": "5 × 7, unites, = 35, je pose 5, je retiens 3 ; 5 × 6, dizaines, + 3 = 33, je pose 3, je retiens 3 ; 5 × 8, centaines, + 3 = 43, je pose 3, je retiens 4 ; je pose la retenue 4. Resultat : 4335.",
+      "ms": 20400,
+      "cat": "enonce"
+    },
+    "6f091e3ae0e189c8": {
+      "text": "5 × 8 = 40, donc il y a 8 fois 5 dans 40. 5 fois 8, c'est la moitie de 10 fois 8 : 80 ÷ 2 = 40.",
+      "ms": 9600,
+      "cat": "enonce"
+    },
+    "93830b03a0893969": {
+      "text": "5 × 80 = 5 × 8 × 10 = 40 × 10 = 400.",
+      "ms": 4960,
+      "cat": "enonce"
+    },
+    "c720659196c630b4": {
+      "text": "5 × 9, unites, = 45, je pose 5, je retiens 4 ; 5 × 9, dizaines, + 4 = 49, je pose 9, je retiens 4 ; je pose la retenue 4. Resultat : 495.",
+      "ms": 15760,
+      "cat": "enonce"
+    },
+    "645a2daf125b84d9": {
+      "text": "50 + 19 = 50 + 20 − 1 = 70 − 1 = 69.",
+      "ms": 5680,
+      "cat": "enonce"
+    },
+    "c570ab72cdef7bbd": {
+      "text": "50 et 50 font 100, ce sont des dizaines entieres.",
+      "ms": 4000,
+      "cat": "enonce"
+    },
+    "cb268a1b265438ca": {
+      "text": "50 × 1 = 5 × 1 × 10 = 5 × 10 = 50.",
+      "ms": 6480,
+      "cat": "enonce"
+    },
+    "f1f441928be4291b": {
+      "text": "50 × 4 = 5 × 4 × 10 = 20 × 10 = 200.",
+      "ms": 6800,
+      "cat": "enonce"
+    },
+    "afa79041fe08152a": {
+      "text": "50 × 6 = 5 × 6 × 10 = 30 × 10 = 300.",
+      "ms": 6640,
+      "cat": "enonce"
+    },
+    "4a70ea68233781a3": {
+      "text": "50 × 8 = 5 × 8 × 10 = 40 × 10 = 400.",
+      "ms": 5920,
+      "cat": "enonce"
+    },
+    "694222e415faed06": {
+      "text": "50 × 9 = 5 × 9 × 10 = 45 × 10 = 450.",
+      "ms": 7920,
+      "cat": "enonce"
+    },
+    "6e3f90a13b0aa0fe": {
+      "text": "50 € < 52 €.",
+      "ms": 2960,
+      "cat": "enonce"
+    },
+    "2f94b59dfce1118c": {
+      "text": "50 € < 90 €.",
+      "ms": 2400,
+      "cat": "enonce"
+    },
+    "89a7034593a4f16a": {
+      "text": "500 + 500 = 1000 : on complete a 1000.",
+      "ms": 4400,
+      "cat": "enonce"
+    },
+    "0cfc623ee0c6866b": {
+      "text": "5085 est entre 5000 et 5100. La centaine juste en dessous est 5000.",
+      "ms": 7440,
+      "cat": "enonce"
+    },
+    "8b3829fa0c44450e": {
+      "text": "51 + 49 = 100 : on complete d'abord a la dizaine, puis a 100.",
+      "ms": 6240,
+      "cat": "enonce"
+    },
+    "ecfc2ef4dde72c14": {
+      "text": "51 × 100 : on ajoute deux zéros, ça fait 5100.",
+      "ms": 4320,
+      "cat": "enonce"
+    },
+    "d556e2dfad4e82a8": {
+      "text": "5115 est entre 5100 et 5200. La centaine juste en dessous est 5100.",
+      "ms": 7760,
+      "cat": "enonce"
+    },
+    "5c161ca8ef4eccf1": {
+      "text": "52 > 42.",
+      "ms": 1840,
+      "cat": "enonce"
+    },
+    "4127a046bfbf0164": {
+      "text": "52 se lit cinquante-deux.",
+      "ms": 2080,
+      "cat": "enonce"
+    },
+    "90748f03611a1ce7": {
+      "text": "520 + 480 = 1000 : on complete a 1000.",
+      "ms": 5680,
+      "cat": "enonce"
+    },
+    "d9418d596b27633c": {
+      "text": "5283 s'écrit cinq mille deux cent quatre-vingt-trois.",
+      "ms": 4320,
+      "cat": "enonce"
+    },
+    "2cf0221976fce509": {
+      "text": "5287 − 100 = 5187.",
+      "ms": 4960,
+      "cat": "enonce"
+    },
+    "2b001ecc5b43a5bb": {
+      "text": "53 × 100 : on ajoute deux zéros, ça fait 5300.",
+      "ms": 5360,
+      "cat": "enonce"
+    },
+    "8ef4225ce39a69d3": {
+      "text": "5316 est entre 5300 et 5400. La centaine juste en dessous est 5300.",
+      "ms": 7440,
+      "cat": "enonce"
+    },
+    "b96c0576d4e60ae4": {
+      "text": "538 ≈ 540 et 91 ≈ 90. 540 − 90 = 450.",
+      "ms": 9520,
+      "cat": "enonce"
+    },
+    "e73b7ab3d6939868": {
+      "text": "54 × 10 : on ajoute un zéro, ça fait 540.",
+      "ms": 4480,
+      "cat": "enonce"
+    },
+    "4df316a3238be3be": {
+      "text": "5427 = 5 milliers, 4 centaines, 2 dizaines, 7 unites.",
+      "ms": 6800,
+      "cat": "enonce"
+    },
+    "8f2a328a15fb3486": {
+      "text": "55 × 10 : on ajoute un zéro, ça fait 550.",
+      "ms": 5200,
+      "cat": "enonce"
+    },
+    "4fd37dac10138289": {
+      "text": "55 € > 9 €.",
+      "ms": 2400,
+      "cat": "enonce"
+    },
+    "be23e7407219a9d3": {
+      "text": "565 = 5 centaines, 6 dizaines, 5 unites.",
+      "ms": 4480,
+      "cat": "enonce"
+    },
+    "5a16cf1bc00ff00c": {
+      "text": "5688 − 10 = 5678.",
+      "ms": 4960,
+      "cat": "enonce"
+    },
+    "bcc94b64929dd883": {
+      "text": "5766 est entre 5700 et 5800. La centaine juste en dessous est 5700.",
+      "ms": 8560,
+      "cat": "enonce"
+    },
+    "45306582d54e6627": {
+      "text": "58 > 57.",
+      "ms": 2320,
+      "cat": "enonce"
+    },
+    "9816f28bc58cb5c4": {
+      "text": "58 se lit cinquante-huit.",
+      "ms": 2080,
+      "cat": "enonce"
+    },
+    "dedeb662f154a05c": {
+      "text": "58 × 100 : on ajoute deux zéros, ça fait 5800.",
+      "ms": 5120,
+      "cat": "enonce"
+    },
+    "6828403c62e10920": {
+      "text": "5948 + 10 = 5958.",
+      "ms": 4640,
+      "cat": "enonce"
+    },
+    "4d3214e820f4e9d5": {
+      "text": "598 − 10 = 588.",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "dfac3ef3cfc8e158": {
+      "text": "6 + 6, c'est un double : 12.",
+      "ms": 3280,
+      "cat": "enonce"
+    },
+    "71f0ac9ef1efc0ac": {
+      "text": "6 cm = 60 mm. Donc 6 cm = 60 mm.",
+      "ms": 5680,
+      "cat": "enonce"
+    },
+    "f4caa7a3a8a967f7": {
+      "text": "6 et 4 font 10 : on écrit 4 dans la case des garçons.",
+      "ms": 4320,
+      "cat": "enonce"
+    },
+    "ecb19b7b7c66b9e1": {
+      "text": "6 et 5 font 11. Il faut 3 de plus pour arriver à 14 : on écrit 3.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "4fdd4bb71e1b52bd": {
+      "text": "6 fois 1 = 2 fois, 3 fois 1 : 3 × 1 = 3, puis 3 + 3 = 6.",
+      "ms": 7840,
+      "cat": "enonce"
+    },
+    "0b4221c6d8214965": {
+      "text": "6 fois 10 = 2 fois, 3 fois 10 : 3 × 10 = 30, puis 30 + 30 = 60.",
+      "ms": 8560,
+      "cat": "enonce"
+    },
+    "9fa9dca69f35a16b": {
+      "text": "6 fois 2 = 2 fois, 3 fois 2 : 3 × 2 = 6, puis 6 + 6 = 12.",
+      "ms": 7280,
+      "cat": "enonce"
+    },
+    "a768f5a7d9980c35": {
+      "text": "6 fois 3 = 2 fois, 3 fois 3 : 3 × 3 = 9, puis 9 + 9 = 18.",
+      "ms": 7920,
+      "cat": "enonce"
+    },
+    "121eea8c9b81782e": {
+      "text": "6 fois 4 = 2 fois, 3 fois 4 : 3 × 4 = 12, puis 12 + 12 = 24.",
+      "ms": 8320,
+      "cat": "enonce"
+    },
+    "92a064899a7094b9": {
+      "text": "6 fois 5 = 2 fois, 3 fois 5 : 3 × 5 = 15, puis 15 + 15 = 30.",
+      "ms": 8240,
+      "cat": "enonce"
+    },
+    "f005fe263a8a12c1": {
+      "text": "6 fois 6 = 2 fois, 3 fois 6 : 3 × 6 = 18, puis 18 + 18 = 36.",
+      "ms": 9600,
+      "cat": "enonce"
+    },
+    "c3e7e034a67a8578": {
+      "text": "6 fois 7 = 2 fois, 3 fois 7 : 3 × 7 = 21, puis 21 + 21 = 42.",
+      "ms": 8800,
+      "cat": "enonce"
+    },
+    "1607779703532c75": {
+      "text": "6 fois 8 = 2 fois, 3 fois 8 : 3 × 8 = 24, puis 24 + 24 = 48.",
+      "ms": 8000,
+      "cat": "enonce"
+    },
+    "1fd1e48fe662fad7": {
+      "text": "6 fois 9 = 2 fois, 3 fois 9 : 3 × 9 = 27, puis 27 + 27 = 54.",
+      "ms": 9200,
+      "cat": "enonce"
+    },
+    "f476bf19780b6f26": {
+      "text": "6 groupes de 3, c'est 6 × 3 = 18.",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "136bc050e637beb2": {
+      "text": "6 pour aller a 10 : 6 + 4 = 10.",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "b019fa8f45d3eccd": {
+      "text": "6 × 1 = 6, donc il y a 1 fois 6 dans 6. 6 fois 1 = 2 fois, 3 fois 1 : 3 × 1 = 3, puis 3 + 3 = 6.",
+      "ms": 12080,
+      "cat": "enonce"
+    },
+    "bdeb64f8fb601bd7": {
+      "text": "6 × 10 : on ajoute un zéro, ça fait 60.",
+      "ms": 3840,
+      "cat": "enonce"
+    },
+    "dfb514d40a9e3f3b": {
+      "text": "6 × 10 = 60, donc il y a 10 fois 6 dans 60. 6 fois 10 = 2 fois, 3 fois 10 : 3 × 10 = 30, puis 30 + 30 = 60.",
+      "ms": 12480,
+      "cat": "enonce"
+    },
+    "3eb5ede02770f828": {
+      "text": "6 × 2 = 12, donc il y a 2 fois 6 dans 12. 6 fois 2 = 2 fois, 3 fois 2 : 3 × 2 = 6, puis 6 + 6 = 12.",
+      "ms": 10960,
+      "cat": "enonce"
     }
   },
   "keys": {
@@ -35616,6 +35981,79 @@
     "txt:143283c3877e4624": "143283c3877e4624",
     "txt:f4e905cef71b7132": "f4e905cef71b7132",
     "txt:e5d8bd0742055892": "e5d8bd0742055892",
-    "txt:13f9fc5799316ba3": "13f9fc5799316ba3"
+    "txt:13f9fc5799316ba3": "13f9fc5799316ba3",
+    "txt:8eb61a138c186e92": "8eb61a138c186e92",
+    "txt:24e8eb530bbe17ad": "24e8eb530bbe17ad",
+    "txt:37d38c890e691e16": "37d38c890e691e16",
+    "txt:3e533807a0395b60": "3e533807a0395b60",
+    "txt:810b834136929544": "810b834136929544",
+    "txt:8e40449aa1bf49f8": "8e40449aa1bf49f8",
+    "txt:eda94d7e3d563f44": "eda94d7e3d563f44",
+    "txt:fd73c161aa759f70": "fd73c161aa759f70",
+    "txt:2b9f4d4b812abe43": "2b9f4d4b812abe43",
+    "txt:b8fb1b5483745900": "b8fb1b5483745900",
+    "txt:8f4a0c57293bcbff": "8f4a0c57293bcbff",
+    "txt:e44faa7193b73e30": "e44faa7193b73e30",
+    "txt:91038bae8e73174b": "91038bae8e73174b",
+    "txt:df2c8598d5621114": "df2c8598d5621114",
+    "txt:6e3165d6c63dba37": "6e3165d6c63dba37",
+    "txt:bd399565cde82fd8": "bd399565cde82fd8",
+    "txt:6f091e3ae0e189c8": "6f091e3ae0e189c8",
+    "txt:93830b03a0893969": "93830b03a0893969",
+    "txt:c720659196c630b4": "c720659196c630b4",
+    "txt:645a2daf125b84d9": "645a2daf125b84d9",
+    "txt:c570ab72cdef7bbd": "c570ab72cdef7bbd",
+    "txt:cb268a1b265438ca": "cb268a1b265438ca",
+    "txt:f1f441928be4291b": "f1f441928be4291b",
+    "txt:afa79041fe08152a": "afa79041fe08152a",
+    "txt:4a70ea68233781a3": "4a70ea68233781a3",
+    "txt:694222e415faed06": "694222e415faed06",
+    "txt:6e3f90a13b0aa0fe": "6e3f90a13b0aa0fe",
+    "txt:2f94b59dfce1118c": "2f94b59dfce1118c",
+    "txt:89a7034593a4f16a": "89a7034593a4f16a",
+    "txt:0cfc623ee0c6866b": "0cfc623ee0c6866b",
+    "txt:8b3829fa0c44450e": "8b3829fa0c44450e",
+    "txt:ecfc2ef4dde72c14": "ecfc2ef4dde72c14",
+    "txt:d556e2dfad4e82a8": "d556e2dfad4e82a8",
+    "txt:5c161ca8ef4eccf1": "5c161ca8ef4eccf1",
+    "txt:4127a046bfbf0164": "4127a046bfbf0164",
+    "txt:90748f03611a1ce7": "90748f03611a1ce7",
+    "txt:d9418d596b27633c": "d9418d596b27633c",
+    "txt:2cf0221976fce509": "2cf0221976fce509",
+    "txt:2b001ecc5b43a5bb": "2b001ecc5b43a5bb",
+    "txt:8ef4225ce39a69d3": "8ef4225ce39a69d3",
+    "txt:b96c0576d4e60ae4": "b96c0576d4e60ae4",
+    "txt:e73b7ab3d6939868": "e73b7ab3d6939868",
+    "txt:4df316a3238be3be": "4df316a3238be3be",
+    "txt:8f2a328a15fb3486": "8f2a328a15fb3486",
+    "txt:4fd37dac10138289": "4fd37dac10138289",
+    "txt:be23e7407219a9d3": "be23e7407219a9d3",
+    "txt:5a16cf1bc00ff00c": "5a16cf1bc00ff00c",
+    "txt:bcc94b64929dd883": "bcc94b64929dd883",
+    "txt:45306582d54e6627": "45306582d54e6627",
+    "txt:9816f28bc58cb5c4": "9816f28bc58cb5c4",
+    "txt:dedeb662f154a05c": "dedeb662f154a05c",
+    "txt:6828403c62e10920": "6828403c62e10920",
+    "txt:4d3214e820f4e9d5": "4d3214e820f4e9d5",
+    "txt:dfac3ef3cfc8e158": "dfac3ef3cfc8e158",
+    "txt:71f0ac9ef1efc0ac": "71f0ac9ef1efc0ac",
+    "txt:f4caa7a3a8a967f7": "f4caa7a3a8a967f7",
+    "txt:ecb19b7b7c66b9e1": "ecb19b7b7c66b9e1",
+    "txt:4fdd4bb71e1b52bd": "4fdd4bb71e1b52bd",
+    "txt:0b4221c6d8214965": "0b4221c6d8214965",
+    "txt:9fa9dca69f35a16b": "9fa9dca69f35a16b",
+    "txt:a768f5a7d9980c35": "a768f5a7d9980c35",
+    "txt:121eea8c9b81782e": "121eea8c9b81782e",
+    "txt:92a064899a7094b9": "92a064899a7094b9",
+    "txt:f005fe263a8a12c1": "f005fe263a8a12c1",
+    "txt:c3e7e034a67a8578": "c3e7e034a67a8578",
+    "txt:1607779703532c75": "1607779703532c75",
+    "txt:1fd1e48fe662fad7": "1fd1e48fe662fad7",
+    "txt:f476bf19780b6f26": "f476bf19780b6f26",
+    "txt:136bc050e637beb2": "136bc050e637beb2",
+    "txt:b019fa8f45d3eccd": "b019fa8f45d3eccd",
+    "txt:bdeb64f8fb601bd7": "bdeb64f8fb601bd7",
+    "txt:dfb514d40a9e3f3b": "dfb514d40a9e3f3b",
+    "txt:3eb5ede02770f828": "3eb5ede02770f828"
   }
 }
