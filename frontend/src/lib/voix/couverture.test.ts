@@ -64,9 +64,11 @@ describe("Couverture voix CE2 (mesure)", () => {
     // de maths se lisent par assemblage de briques (fragments frag:* + nombres) :
     // au fur et a mesure que les fragments sont generes et deployes, ce plancher
     // doit MONTER vers l'objectif de 90%. Ne jamais l'abaisser.
+    // Objectif de 90% atteint (lot du 30/10, manifest a 6068 clips) : plancher
+    // releve de 60 a 90.
     const ma = res.parMatiere["MA"];
     expect(ma, "matiere MA absente du referentiel").toBeTruthy();
-    expect(pct(ma)).toBeGreaterThanOrEqual(60);
+    expect(pct(ma)).toBeGreaterThanOrEqual(90);
     expect(pct(res.global)).toBeGreaterThanOrEqual(80);
   });
 
