@@ -32103,6 +32103,506 @@
       "text": "Je cherche combien de paquets de 3 dans 24 : 24 ÷ 3 = 8 paquets.",
       "ms": 20400,
       "cat": "enonce"
+    },
+    "cfae4d59c4555f9f": {
+      "text": "Je cherche combien de paquets de 3 dans 30 : 30 ÷ 3 = 10 paquets.",
+      "ms": 6800,
+      "cat": "enonce"
+    },
+    "8a41d4924fa6ce5e": {
+      "text": "Je cherche combien de paquets de 4 dans 20 : 20 ÷ 4 = 5 paquets.",
+      "ms": 6800,
+      "cat": "enonce"
+    },
+    "06f4019136aed9fe": {
+      "text": "Je cherche combien de paquets de 4 dans 32 : 32 ÷ 4 = 8 paquets.",
+      "ms": 6560,
+      "cat": "enonce"
+    },
+    "7e25e3b4d0f56e82": {
+      "text": "Je cherche combien de paquets de 6 dans 42 : 42 ÷ 6 = 7 paquets.",
+      "ms": 7120,
+      "cat": "enonce"
+    },
+    "791de88dd2028159": {
+      "text": "Je cherche combien de paquets de 7 dans 14 : 14 ÷ 7 = 2 paquets.",
+      "ms": 6720,
+      "cat": "enonce"
+    },
+    "f5c8f1210fbde7dd": {
+      "text": "Je cherche combien de paquets de 7 dans 49 : 49 ÷ 7 = 7 paquets.",
+      "ms": 6880,
+      "cat": "enonce"
+    },
+    "8e4ffc00dfe21996": {
+      "text": "Je cherche combien de paquets de 7 dans 63 : 63 ÷ 7 = 9 paquets.",
+      "ms": 7360,
+      "cat": "enonce"
+    },
+    "c0940292ef35cde5": {
+      "text": "Je cherche combien de paquets de 8 dans 48 : 48 ÷ 8 = 6 paquets.",
+      "ms": 6560,
+      "cat": "enonce"
+    },
+    "9b88fe0c00a730c5": {
+      "text": "Je cherche combien de paquets de 8 dans 56 : 56 ÷ 8 = 7 paquets.",
+      "ms": 7280,
+      "cat": "enonce"
+    },
+    "d3297fc459a52ebb": {
+      "text": "Je multiplie : 2 × 4 = 8 m.",
+      "ms": 4960,
+      "cat": "enonce"
+    },
+    "9bd42e5664db21b3": {
+      "text": "Je multiplie : 3 × 2 = 6 cm.",
+      "ms": 4480,
+      "cat": "enonce"
+    },
+    "13efd987d1fa0480": {
+      "text": "Je multiplie : 4 × 4 = 16 cm.",
+      "ms": 3920,
+      "cat": "enonce"
+    },
+    "c14c4ce278be1e28": {
+      "text": "Je multiplie : 4 × 7 = 28 g.",
+      "ms": 5040,
+      "cat": "enonce"
+    },
+    "b5cc353ef76bd5b6": {
+      "text": "Je multiplie : 5 × 7 = 35 g.",
+      "ms": 4400,
+      "cat": "enonce"
+    },
+    "5e5839e11c86c85c": {
+      "text": "Je pars du plus grand, 2, et j'ajoute 1, ça fait 3.",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "35148ae79c42724d": {
+      "text": "Je pars du plus grand, 4, et j'ajoute 2, ça fait 6.",
+      "ms": 5040,
+      "cat": "enonce"
+    },
+    "26673f9ad7465901": {
+      "text": "Je pars du plus grand, 5, et j'ajoute 3, ça fait 8.",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "e13e8d111739b3f1": {
+      "text": "Je pars du plus grand, 5, et j'ajoute 4, ça fait 9.",
+      "ms": 5120,
+      "cat": "enonce"
+    },
+    "54db7a10faea6202": {
+      "text": "Je pars du plus grand, 6, et j'ajoute 1, ça fait 7.",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "513975151350a4e1": {
+      "text": "Je pars du plus grand, 6, et j'ajoute 2, ça fait 8.",
+      "ms": 4000,
+      "cat": "enonce"
+    },
+    "6c464f6deb2e9e83": {
+      "text": "Je pars du plus grand, 6, et j'ajoute 3, ça fait 9.",
+      "ms": 5680,
+      "cat": "enonce"
+    },
+    "b0cc934c0a783554": {
+      "text": "Je pars du plus grand, 7, et j'ajoute 2, ça fait 9.",
+      "ms": 4960,
+      "cat": "enonce"
+    },
+    "1539d9c61b339862": {
+      "text": "Je pars du plus grand, 8, et j'ajoute 1, ça fait 9.",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "a6cc56915b25a63f": {
+      "text": "Je partage 10 en 5 parts égales : 10 ÷ 5 = 2.",
+      "ms": 5520,
+      "cat": "enonce"
+    },
+    "b7e3ebbfd76ad655": {
+      "text": "Je partage 12 en 2 parts égales : 12 ÷ 2 = 6.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "7baf9b8738e8d455": {
+      "text": "Je partage 15 en 3 parts égales : 15 ÷ 3 = 5.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "3bef361b020430a6": {
+      "text": "Je partage 15 en 5 parts égales : 15 ÷ 5 = 3.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "4cee123607876425": {
+      "text": "Je partage 16 en 2 parts égales : 16 ÷ 2 = 8.",
+      "ms": 7280,
+      "cat": "enonce"
+    },
+    "22072edb5e8f3699": {
+      "text": "Je partage 16 en 4 parts égales : 16 ÷ 4 = 4.",
+      "ms": 5680,
+      "cat": "enonce"
+    },
+    "e504a41579929f0c": {
+      "text": "Je partage 18 en 2 parts égales : 18 ÷ 2 = 9.",
+      "ms": 5440,
+      "cat": "enonce"
+    },
+    "47392397cdf2af69": {
+      "text": "Je partage 18 en 3 parts égales : 18 ÷ 3 = 6.",
+      "ms": 6320,
+      "cat": "enonce"
+    },
+    "ca91e8a4eba17286": {
+      "text": "Je partage 20 en 4 parts égales : 20 ÷ 4 = 5.",
+      "ms": 6560,
+      "cat": "enonce"
+    },
+    "6de129e8d483bcb4": {
+      "text": "Je partage 21 en 3 parts égales : 21 ÷ 3 = 7.",
+      "ms": 6560,
+      "cat": "enonce"
+    },
+    "23cbd9f7a2539098": {
+      "text": "Je partage 27 en 3 parts égales : 27 ÷ 3 = 9.",
+      "ms": 6400,
+      "cat": "enonce"
+    },
+    "62914d788569d1d6": {
+      "text": "Je partage 28 en 4 parts égales : 28 ÷ 4 = 7.",
+      "ms": 6640,
+      "cat": "enonce"
+    },
+    "59f717df19148320": {
+      "text": "Je partage 30 en 5 parts égales : 30 ÷ 5 = 6.",
+      "ms": 6480,
+      "cat": "enonce"
+    },
+    "93105befdac99d65": {
+      "text": "Je partage 32 en 8 parts égales : 32 ÷ 8 = 4.",
+      "ms": 6880,
+      "cat": "enonce"
+    },
+    "dd6902ba5bd5bbb8": {
+      "text": "Je partage 35 en 5 parts égales : 35 ÷ 5 = 7.",
+      "ms": 6000,
+      "cat": "enonce"
+    },
+    "0631156862783191": {
+      "text": "Je partage 36 en 4 parts égales : 36 ÷ 4 = 9.",
+      "ms": 6800,
+      "cat": "enonce"
+    },
+    "4797cd399423779d": {
+      "text": "Je partage 40 en 4 parts égales : 40 ÷ 4 = 10.",
+      "ms": 6720,
+      "cat": "enonce"
+    },
+    "3349c184e05e67c8": {
+      "text": "Je partage 45 en 5 parts égales : 45 ÷ 5 = 9.",
+      "ms": 6560,
+      "cat": "enonce"
+    },
+    "f06e41dfc297687c": {
+      "text": "Je partage 8 en 4 parts égales : 8 ÷ 4 = 2.",
+      "ms": 5920,
+      "cat": "enonce"
+    },
+    "0a5262355ad9cf0b": {
+      "text": "Je partage 9 en 3 parts égales : 9 ÷ 3 = 3.",
+      "ms": 5360,
+      "cat": "enonce"
+    },
+    "aab6eca6ce5b1fae": {
+      "text": "Je retire : 10 − 5 = 5.",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "a7e3459a01e8b40c": {
+      "text": "Je retire : 11 − 2 = 9.",
+      "ms": 3760,
+      "cat": "enonce"
+    },
+    "d286e9765e1be618": {
+      "text": "Je retire : 12 − 7 = 5.",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "915f8cd8990431ad": {
+      "text": "Je retire : 13 − 6 = 7.",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "b39b38b557cb9d51": {
+      "text": "Je retire : 14 − 12 = 2.",
+      "ms": 4000,
+      "cat": "enonce"
+    },
+    "12cf86fbf962bc7d": {
+      "text": "Je retire : 16 − 14 = 2.",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "e48c2fba1652d8ce": {
+      "text": "Je retire : 16 − 5 = 11.",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "ebeed590824f06f1": {
+      "text": "Je retire : 19 − 15 = 4.",
+      "ms": 3760,
+      "cat": "enonce"
+    },
+    "8b56a611f9db7974": {
+      "text": "Je retire : 421 − 185 = 236.",
+      "ms": 4640,
+      "cat": "enonce"
+    },
+    "5011831dd67f7e4a": {
+      "text": "Je retire : 65 − 46 = 19.",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "2e20bea345f3baa2": {
+      "text": "Je retire : 716 − 149 = 567.",
+      "ms": 5920,
+      "cat": "enonce"
+    },
+    "6ac8447d2df9c0ad": {
+      "text": "Je retire : 797 − 519 = 278.",
+      "ms": 5920,
+      "cat": "enonce"
+    },
+    "57b19300877dc323": {
+      "text": "Je retire : 976 − 175 = 801.",
+      "ms": 5680,
+      "cat": "enonce"
+    },
+    "522355393204a37c": {
+      "text": "Je réunis les deux quantités : 12 + 1 = 13.",
+      "ms": 6000,
+      "cat": "enonce"
+    },
+    "7bad56eb4536fe12": {
+      "text": "Je réunis les deux quantités : 221 + 377 = 598.",
+      "ms": 7200,
+      "cat": "enonce"
+    },
+    "9621f6d45cd2c558": {
+      "text": "Je réunis les deux quantités : 23 + 37 = 60.",
+      "ms": 5840,
+      "cat": "enonce"
+    },
+    "42a3c2b070a578d2": {
+      "text": "Je réunis les deux quantités : 282 + 444 = 726.",
+      "ms": 7440,
+      "cat": "enonce"
+    },
+    "ef29ce1ee15ffbeb": {
+      "text": "Je réunis les deux quantités : 37 + 19 = 56.",
+      "ms": 5840,
+      "cat": "enonce"
+    },
+    "3c0c261db58eccbe": {
+      "text": "Je réunis les deux quantités : 39 + 24 = 63.",
+      "ms": 6000,
+      "cat": "enonce"
+    },
+    "fa4ea69b3a059855": {
+      "text": "Je réunis les deux quantités : 4 + 1 = 5.",
+      "ms": 5120,
+      "cat": "enonce"
+    },
+    "fc1b52d2647b4e38": {
+      "text": "Je réunis les deux quantités : 4 + 4 = 8.",
+      "ms": 5520,
+      "cat": "enonce"
+    },
+    "2c0b9045261e4446": {
+      "text": "Je réunis les deux quantités : 44 + 38 = 82.",
+      "ms": 6080,
+      "cat": "enonce"
+    },
+    "8213c444672dd5e9": {
+      "text": "Je réunis les deux quantités : 55 + 33 = 88.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "24b5e8c68bcb20dc": {
+      "text": "Je soustrais colonne par colonne en partant des unites, avec emprunt si le chiffre du haut est plus petit. 26 − 10 = 16.",
+      "ms": 8560,
+      "cat": "enonce"
+    },
+    "cd5bc0aeb5ea614d": {
+      "text": "Je soustrais colonne par colonne en partant des unites, avec emprunt si le chiffre du haut est plus petit. 340 − 107 = 233.",
+      "ms": 9040,
+      "cat": "enonce"
+    },
+    "68e61dc34d12e6d4": {
+      "text": "Je soustrais colonne par colonne en partant des unites, avec emprunt si le chiffre du haut est plus petit. 401 − 206 = 195.",
+      "ms": 9600,
+      "cat": "enonce"
+    },
+    "ef5d72a0b30ec0f3": {
+      "text": "Je soustrais colonne par colonne en partant des unites, avec emprunt si le chiffre du haut est plus petit. 421 − 15 = 406.",
+      "ms": 8880,
+      "cat": "enonce"
+    },
+    "35fa666d19d0698d": {
+      "text": "Je soustrais colonne par colonne en partant des unites, avec emprunt si le chiffre du haut est plus petit. 4489 − 3489 = 1000.",
+      "ms": 9920,
+      "cat": "enonce"
+    },
+    "3f31d5c3ff02c7a4": {
+      "text": "Je soustrais colonne par colonne en partant des unites, avec emprunt si le chiffre du haut est plus petit. 4517 − 1385 = 3132.",
+      "ms": 9840,
+      "cat": "enonce"
+    },
+    "c8854ba752816fce": {
+      "text": "Je soustrais colonne par colonne en partant des unites, avec emprunt si le chiffre du haut est plus petit. 469 − 266 = 203.",
+      "ms": 10240,
+      "cat": "enonce"
+    },
+    "89efd795d2301c7c": {
+      "text": "Je soustrais colonne par colonne en partant des unites, avec emprunt si le chiffre du haut est plus petit. 498 − 281 = 217.",
+      "ms": 10000,
+      "cat": "enonce"
+    },
+    "f6613ad615d09b5e": {
+      "text": "Je soustrais colonne par colonne en partant des unites, avec emprunt si le chiffre du haut est plus petit. 5007 − 1607 = 3400.",
+      "ms": 10320,
+      "cat": "enonce"
+    },
+    "2815130f1cd73562": {
+      "text": "Je soustrais colonne par colonne en partant des unites, avec emprunt si le chiffre du haut est plus petit. 502 − 345 = 157.",
+      "ms": 9760,
+      "cat": "enonce"
+    },
+    "d541434a2fce7fcc": {
+      "text": "Je soustrais colonne par colonne en partant des unites, avec emprunt si le chiffre du haut est plus petit. 51 − 21 = 30.",
+      "ms": 9120,
+      "cat": "enonce"
+    },
+    "114fc2aabb9b070b": {
+      "text": "Je soustrais colonne par colonne en partant des unites, avec emprunt si le chiffre du haut est plus petit. 5316 − 1392 = 3924.",
+      "ms": 10480,
+      "cat": "enonce"
+    },
+    "f04a5ebeb7b437cf": {
+      "text": "Je soustrais colonne par colonne en partant des unites, avec emprunt si le chiffre du haut est plus petit. 534 − 201 = 333.",
+      "ms": 10160,
+      "cat": "enonce"
+    },
+    "b578613b72fc0c4a": {
+      "text": "Je soustrais colonne par colonne en partant des unites, avec emprunt si le chiffre du haut est plus petit. 56 − 40 = 16.",
+      "ms": 9040,
+      "cat": "enonce"
+    },
+    "5bffb529880fe7bf": {
+      "text": "Je soustrais colonne par colonne en partant des unites, avec emprunt si le chiffre du haut est plus petit. 56 − 42 = 14.",
+      "ms": 9440,
+      "cat": "enonce"
+    },
+    "17a2bb90ae9ae3de": {
+      "text": "Je soustrais colonne par colonne en partant des unites, avec emprunt si le chiffre du haut est plus petit. 5711 − 4435 = 1276.",
+      "ms": 10320,
+      "cat": "enonce"
+    },
+    "a400e1c3d1d69f71": {
+      "text": "Je soustrais colonne par colonne en partant des unites, avec emprunt si le chiffre du haut est plus petit. 595 − 515 = 80.",
+      "ms": 10080,
+      "cat": "enonce"
+    },
+    "f5cb5f28e7a023d2": {
+      "text": "Je soustrais colonne par colonne en partant des unites, avec emprunt si le chiffre du haut est plus petit. 62 − 41 = 21.",
+      "ms": 9440,
+      "cat": "enonce"
+    },
+    "dc020447794d3f32": {
+      "text": "Je soustrais colonne par colonne en partant des unites, avec emprunt si le chiffre du haut est plus petit. 63 − 52 = 11.",
+      "ms": 9360,
+      "cat": "enonce"
+    },
+    "a9098b80f50db007": {
+      "text": "Je soustrais colonne par colonne en partant des unites, avec emprunt si le chiffre du haut est plus petit. 6443 − 2362 = 4081.",
+      "ms": 11040,
+      "cat": "enonce"
+    },
+    "1cb850d154de8e94": {
+      "text": "Je soustrais colonne par colonne en partant des unites, avec emprunt si le chiffre du haut est plus petit. 6554 − 2110 = 4444.",
+      "ms": 10960,
+      "cat": "enonce"
+    },
+    "8fd2bf286ac625a7": {
+      "text": "Je soustrais colonne par colonne en partant des unites, avec emprunt si le chiffre du haut est plus petit. 662 − 298 = 364.",
+      "ms": 9680,
+      "cat": "enonce"
+    },
+    "fa0740ccac990a71": {
+      "text": "Je soustrais colonne par colonne en partant des unites, avec emprunt si le chiffre du haut est plus petit. 6654 − 2641 = 4013.",
+      "ms": 12640,
+      "cat": "enonce"
+    },
+    "53107b0908fee26e": {
+      "text": "Je soustrais colonne par colonne en partant des unites, avec emprunt si le chiffre du haut est plus petit. 6676 − 4176 = 2500.",
+      "ms": 11120,
+      "cat": "enonce"
+    },
+    "feb7b688f819935e": {
+      "text": "Je soustrais colonne par colonne en partant des unites, avec emprunt si le chiffre du haut est plus petit. 6861 − 3609 = 3252.",
+      "ms": 9760,
+      "cat": "enonce"
+    },
+    "0d089cf25aa1fd7e": {
+      "text": "Je soustrais colonne par colonne en partant des unites, avec emprunt si le chiffre du haut est plus petit. 6933 − 3695 = 3238.",
+      "ms": 11120,
+      "cat": "enonce"
+    },
+    "53a328dec6b7f955": {
+      "text": "Je soustrais colonne par colonne en partant des unites, avec emprunt si le chiffre du haut est plus petit. 70 − 40 = 30.",
+      "ms": 8960,
+      "cat": "enonce"
+    },
+    "91fd8d64faec99af": {
+      "text": "Je soustrais colonne par colonne en partant des unites, avec emprunt si le chiffre du haut est plus petit. 7031 − 1932 = 5099.",
+      "ms": 10320,
+      "cat": "enonce"
+    },
+    "3c5ee79da00012dc": {
+      "text": "Je soustrais colonne par colonne en partant des unites, avec emprunt si le chiffre du haut est plus petit. 7044 − 3095 = 3949.",
+      "ms": 10480,
+      "cat": "enonce"
+    },
+    "8da4acfc1a0dd8b6": {
+      "text": "Je soustrais colonne par colonne en partant des unites, avec emprunt si le chiffre du haut est plus petit. 7143 − 2700 = 4443.",
+      "ms": 9840,
+      "cat": "enonce"
+    },
+    "7305dc4b272fe683": {
+      "text": "Je soustrais colonne par colonne en partant des unites, avec emprunt si le chiffre du haut est plus petit. 72 − 51 = 21.",
+      "ms": 9280,
+      "cat": "enonce"
+    },
+    "c199803cbbde9a4e": {
+      "text": "Je soustrais colonne par colonne en partant des unites, avec emprunt si le chiffre du haut est plus petit. 7226 − 7146 = 80.",
+      "ms": 10240,
+      "cat": "enonce"
+    },
+    "f0fee272cb490d08": {
+      "text": "Je soustrais colonne par colonne en partant des unites, avec emprunt si le chiffre du haut est plus petit. 7372 − 3748 = 3624.",
+      "ms": 11520,
+      "cat": "enonce"
+    },
+    "16a7efba779e08e9": {
+      "text": "Je soustrais colonne par colonne en partant des unites, avec emprunt si le chiffre du haut est plus petit. 740 − 118 = 622.",
+      "ms": 9680,
+      "cat": "enonce"
     }
   },
   "keys": {
@@ -38526,6 +39026,106 @@
     "txt:d9a4652250a27c24": "d9a4652250a27c24",
     "txt:89c6ee7fe0c39466": "89c6ee7fe0c39466",
     "txt:976fd0ce411de7c4": "976fd0ce411de7c4",
-    "txt:daa31d79c644c293": "daa31d79c644c293"
+    "txt:daa31d79c644c293": "daa31d79c644c293",
+    "txt:cfae4d59c4555f9f": "cfae4d59c4555f9f",
+    "txt:8a41d4924fa6ce5e": "8a41d4924fa6ce5e",
+    "txt:06f4019136aed9fe": "06f4019136aed9fe",
+    "txt:7e25e3b4d0f56e82": "7e25e3b4d0f56e82",
+    "txt:791de88dd2028159": "791de88dd2028159",
+    "txt:f5c8f1210fbde7dd": "f5c8f1210fbde7dd",
+    "txt:8e4ffc00dfe21996": "8e4ffc00dfe21996",
+    "txt:c0940292ef35cde5": "c0940292ef35cde5",
+    "txt:9b88fe0c00a730c5": "9b88fe0c00a730c5",
+    "txt:d3297fc459a52ebb": "d3297fc459a52ebb",
+    "txt:9bd42e5664db21b3": "9bd42e5664db21b3",
+    "txt:13efd987d1fa0480": "13efd987d1fa0480",
+    "txt:c14c4ce278be1e28": "c14c4ce278be1e28",
+    "txt:b5cc353ef76bd5b6": "b5cc353ef76bd5b6",
+    "txt:5e5839e11c86c85c": "5e5839e11c86c85c",
+    "txt:35148ae79c42724d": "35148ae79c42724d",
+    "txt:26673f9ad7465901": "26673f9ad7465901",
+    "txt:e13e8d111739b3f1": "e13e8d111739b3f1",
+    "txt:54db7a10faea6202": "54db7a10faea6202",
+    "txt:513975151350a4e1": "513975151350a4e1",
+    "txt:6c464f6deb2e9e83": "6c464f6deb2e9e83",
+    "txt:b0cc934c0a783554": "b0cc934c0a783554",
+    "txt:1539d9c61b339862": "1539d9c61b339862",
+    "txt:a6cc56915b25a63f": "a6cc56915b25a63f",
+    "txt:b7e3ebbfd76ad655": "b7e3ebbfd76ad655",
+    "txt:7baf9b8738e8d455": "7baf9b8738e8d455",
+    "txt:3bef361b020430a6": "3bef361b020430a6",
+    "txt:4cee123607876425": "4cee123607876425",
+    "txt:22072edb5e8f3699": "22072edb5e8f3699",
+    "txt:e504a41579929f0c": "e504a41579929f0c",
+    "txt:47392397cdf2af69": "47392397cdf2af69",
+    "txt:ca91e8a4eba17286": "ca91e8a4eba17286",
+    "txt:6de129e8d483bcb4": "6de129e8d483bcb4",
+    "txt:23cbd9f7a2539098": "23cbd9f7a2539098",
+    "txt:62914d788569d1d6": "62914d788569d1d6",
+    "txt:59f717df19148320": "59f717df19148320",
+    "txt:93105befdac99d65": "93105befdac99d65",
+    "txt:dd6902ba5bd5bbb8": "dd6902ba5bd5bbb8",
+    "txt:0631156862783191": "0631156862783191",
+    "txt:4797cd399423779d": "4797cd399423779d",
+    "txt:3349c184e05e67c8": "3349c184e05e67c8",
+    "txt:f06e41dfc297687c": "f06e41dfc297687c",
+    "txt:0a5262355ad9cf0b": "0a5262355ad9cf0b",
+    "txt:aab6eca6ce5b1fae": "aab6eca6ce5b1fae",
+    "txt:a7e3459a01e8b40c": "a7e3459a01e8b40c",
+    "txt:d286e9765e1be618": "d286e9765e1be618",
+    "txt:915f8cd8990431ad": "915f8cd8990431ad",
+    "txt:b39b38b557cb9d51": "b39b38b557cb9d51",
+    "txt:12cf86fbf962bc7d": "12cf86fbf962bc7d",
+    "txt:e48c2fba1652d8ce": "e48c2fba1652d8ce",
+    "txt:ebeed590824f06f1": "ebeed590824f06f1",
+    "txt:8b56a611f9db7974": "8b56a611f9db7974",
+    "txt:5011831dd67f7e4a": "5011831dd67f7e4a",
+    "txt:2e20bea345f3baa2": "2e20bea345f3baa2",
+    "txt:6ac8447d2df9c0ad": "6ac8447d2df9c0ad",
+    "txt:57b19300877dc323": "57b19300877dc323",
+    "txt:522355393204a37c": "522355393204a37c",
+    "txt:7bad56eb4536fe12": "7bad56eb4536fe12",
+    "txt:9621f6d45cd2c558": "9621f6d45cd2c558",
+    "txt:42a3c2b070a578d2": "42a3c2b070a578d2",
+    "txt:ef29ce1ee15ffbeb": "ef29ce1ee15ffbeb",
+    "txt:3c0c261db58eccbe": "3c0c261db58eccbe",
+    "txt:fa4ea69b3a059855": "fa4ea69b3a059855",
+    "txt:fc1b52d2647b4e38": "fc1b52d2647b4e38",
+    "txt:2c0b9045261e4446": "2c0b9045261e4446",
+    "txt:8213c444672dd5e9": "8213c444672dd5e9",
+    "txt:24b5e8c68bcb20dc": "24b5e8c68bcb20dc",
+    "txt:cd5bc0aeb5ea614d": "cd5bc0aeb5ea614d",
+    "txt:68e61dc34d12e6d4": "68e61dc34d12e6d4",
+    "txt:ef5d72a0b30ec0f3": "ef5d72a0b30ec0f3",
+    "txt:35fa666d19d0698d": "35fa666d19d0698d",
+    "txt:3f31d5c3ff02c7a4": "3f31d5c3ff02c7a4",
+    "txt:c8854ba752816fce": "c8854ba752816fce",
+    "txt:89efd795d2301c7c": "89efd795d2301c7c",
+    "txt:f6613ad615d09b5e": "f6613ad615d09b5e",
+    "txt:2815130f1cd73562": "2815130f1cd73562",
+    "txt:d541434a2fce7fcc": "d541434a2fce7fcc",
+    "txt:114fc2aabb9b070b": "114fc2aabb9b070b",
+    "txt:f04a5ebeb7b437cf": "f04a5ebeb7b437cf",
+    "txt:b578613b72fc0c4a": "b578613b72fc0c4a",
+    "txt:5bffb529880fe7bf": "5bffb529880fe7bf",
+    "txt:17a2bb90ae9ae3de": "17a2bb90ae9ae3de",
+    "txt:a400e1c3d1d69f71": "a400e1c3d1d69f71",
+    "txt:f5cb5f28e7a023d2": "f5cb5f28e7a023d2",
+    "txt:dc020447794d3f32": "dc020447794d3f32",
+    "txt:a9098b80f50db007": "a9098b80f50db007",
+    "txt:1cb850d154de8e94": "1cb850d154de8e94",
+    "txt:8fd2bf286ac625a7": "8fd2bf286ac625a7",
+    "txt:fa0740ccac990a71": "fa0740ccac990a71",
+    "txt:53107b0908fee26e": "53107b0908fee26e",
+    "txt:feb7b688f819935e": "feb7b688f819935e",
+    "txt:0d089cf25aa1fd7e": "0d089cf25aa1fd7e",
+    "txt:53a328dec6b7f955": "53a328dec6b7f955",
+    "txt:91fd8d64faec99af": "91fd8d64faec99af",
+    "txt:3c5ee79da00012dc": "3c5ee79da00012dc",
+    "txt:8da4acfc1a0dd8b6": "8da4acfc1a0dd8b6",
+    "txt:7305dc4b272fe683": "7305dc4b272fe683",
+    "txt:c199803cbbde9a4e": "c199803cbbde9a4e",
+    "txt:f0fee272cb490d08": "f0fee272cb490d08",
+    "txt:16a7efba779e08e9": "16a7efba779e08e9"
   }
 }
