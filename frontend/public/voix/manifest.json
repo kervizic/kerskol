@@ -33108,6 +33108,651 @@
       "text": "La moitie de 10, c'est 10 partage en deux : 5 + 5 = 10.",
       "ms": 5120,
       "cat": "enonce"
+    },
+    "1d23ce9607f07856": {
+      "text": "La moitie de 100, c'est 100 partage en deux : 50 + 50 = 100.",
+      "ms": 6000,
+      "cat": "enonce"
+    },
+    "493b2c0af91eaa24": {
+      "text": "La moitie de 12, c'est 12 partage en deux : 6 + 6 = 12.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "094918b14d9770b0": {
+      "text": "La moitie de 14, c'est 14 partage en deux : 7 + 7 = 14.",
+      "ms": 6400,
+      "cat": "enonce"
+    },
+    "dcc0d722a291c3ad": {
+      "text": "La moitie de 16, c'est 16 partage en deux : 8 + 8 = 16.",
+      "ms": 5200,
+      "cat": "enonce"
+    },
+    "0358a2dda2d44013": {
+      "text": "La moitie de 18, c'est 18 partage en deux : 9 + 9 = 18.",
+      "ms": 5840,
+      "cat": "enonce"
+    },
+    "59ef6086251c45b6": {
+      "text": "La moitie de 20, c'est 20 partage en deux : 10 + 10 = 20.",
+      "ms": 5120,
+      "cat": "enonce"
+    },
+    "e2c3278c1e2fd70c": {
+      "text": "La moitie de 22, c'est 22 partage en deux : 11 + 11 = 22.",
+      "ms": 5520,
+      "cat": "enonce"
+    },
+    "7c2d8564b213f1e7": {
+      "text": "La moitie de 24, c'est 24 partage en deux : 12 + 12 = 24.",
+      "ms": 6320,
+      "cat": "enonce"
+    },
+    "00df5948e57490b7": {
+      "text": "La moitie de 26, c'est 26 partage en deux : 13 + 13 = 26.",
+      "ms": 6000,
+      "cat": "enonce"
+    },
+    "1cc327237e10424b": {
+      "text": "La moitie de 28, c'est 28 partage en deux : 14 + 14 = 28.",
+      "ms": 6400,
+      "cat": "enonce"
+    },
+    "0d03174cecfeee9a": {
+      "text": "La moitie de 30, c'est 30 partage en deux : 15 + 15 = 30.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "e8dc60e368970752": {
+      "text": "La moitie de 32, c'est 32 partage en deux : 16 + 16 = 32.",
+      "ms": 5920,
+      "cat": "enonce"
+    },
+    "9bc56b8d3e892960": {
+      "text": "La moitie de 34, c'est 34 partage en deux : 17 + 17 = 34.",
+      "ms": 6400,
+      "cat": "enonce"
+    },
+    "29574444ee4b2be4": {
+      "text": "La moitie de 36, c'est 36 partage en deux : 18 + 18 = 36.",
+      "ms": 6800,
+      "cat": "enonce"
+    },
+    "8c680bc717329900": {
+      "text": "La moitie de 38, c'est 38 partage en deux : 19 + 19 = 38.",
+      "ms": 6400,
+      "cat": "enonce"
+    },
+    "a654c1b3d5db8984": {
+      "text": "La moitie de 40, c'est 40 partage en deux : 20 + 20 = 40.",
+      "ms": 5840,
+      "cat": "enonce"
+    },
+    "68121f826ce9f02e": {
+      "text": "La moitie de 50, c'est 50 partage en deux : 25 + 25 = 50.",
+      "ms": 7040,
+      "cat": "enonce"
+    },
+    "de502ab088860adf": {
+      "text": "La moitie de 6, c'est 6 partage en deux : 3 + 3 = 6.",
+      "ms": 5920,
+      "cat": "enonce"
+    },
+    "ee1c51e479cf46e7": {
+      "text": "La moitie de 60, c'est 60 partage en deux : 30 + 30 = 60.",
+      "ms": 6240,
+      "cat": "enonce"
+    },
+    "e5adaa4053aef8cf": {
+      "text": "La moitie de 8, c'est 8 partage en deux : 4 + 4 = 8.",
+      "ms": 5600,
+      "cat": "enonce"
+    },
+    "de496f6aed4fde1e": {
+      "text": "La nuit, un enfant de 8 ans a besoin de beaucoup de... pour grandir. Écris le mot.",
+      "ms": 6400,
+      "cat": "consigne"
+    },
+    "0d3fb07b60eba182": {
+      "text": "La petite aiguille est sur 1 et la grande indique 0 minute : il est 1 h.",
+      "ms": 5520,
+      "cat": "enonce"
+    },
+    "6f0e88d840701ec4": {
+      "text": "La petite aiguille est sur 1 et la grande indique 30 minutes : il est 1 h 30.",
+      "ms": 5840,
+      "cat": "enonce"
+    },
+    "e6cd730277559da2": {
+      "text": "La petite aiguille est sur 10 et la grande indique 0 minute : il est 10 h.",
+      "ms": 5840,
+      "cat": "enonce"
+    },
+    "530d19a8231136fc": {
+      "text": "La petite aiguille est sur 10 et la grande indique 15 minutes : il est 10 h 15.",
+      "ms": 6080,
+      "cat": "enonce"
+    },
+    "7e6fabd55d2bc14f": {
+      "text": "La petite aiguille est sur 10 et la grande indique 45 minutes : il est 10 h 45.",
+      "ms": 6480,
+      "cat": "enonce"
+    },
+    "93018b5b80e0c4c9": {
+      "text": "La petite aiguille est sur 11 et la grande indique 10 minutes : il est 11 h 10.",
+      "ms": 6240,
+      "cat": "enonce"
+    },
+    "eef8aecaa52f844c": {
+      "text": "La petite aiguille est sur 11 et la grande indique 15 minutes : il est 11 h 15.",
+      "ms": 6400,
+      "cat": "enonce"
+    },
+    "9f7be47b6b09d13b": {
+      "text": "La petite aiguille est sur 11 et la grande indique 25 minutes : il est 11 h 25.",
+      "ms": 6320,
+      "cat": "enonce"
+    },
+    "edf12036834f76bd": {
+      "text": "La petite aiguille est sur 11 et la grande indique 30 minutes : il est 11 h 30.",
+      "ms": 5920,
+      "cat": "enonce"
+    },
+    "2224572a575c82be": {
+      "text": "La petite aiguille est sur 11 et la grande indique 32 minutes : il est 11 h 32.",
+      "ms": 6320,
+      "cat": "enonce"
+    },
+    "81076de0ad2efc14": {
+      "text": "La petite aiguille est sur 11 et la grande indique 45 minutes : il est 11 h 45.",
+      "ms": 6480,
+      "cat": "enonce"
+    },
+    "d8359c593cca65fe": {
+      "text": "La petite aiguille est sur 11 et la grande indique 5 minutes : il est 11 h 05.",
+      "ms": 6320,
+      "cat": "enonce"
+    },
+    "d78bdd87e1358898": {
+      "text": "La petite aiguille est sur 11 et la grande indique 55 minutes : il est 11 h 55.",
+      "ms": 6400,
+      "cat": "enonce"
+    },
+    "67bb0a08b133a7ab": {
+      "text": "La petite aiguille est sur 12 et la grande indique 0 minute : il est 12 h.",
+      "ms": 5680,
+      "cat": "enonce"
+    },
+    "c39f12090605f6e3": {
+      "text": "La petite aiguille est sur 12 et la grande indique 21 minutes : il est 12 h 21.",
+      "ms": 6240,
+      "cat": "enonce"
+    },
+    "8e7c55bda7a3da49": {
+      "text": "La petite aiguille est sur 12 et la grande indique 30 minutes : il est 12 h 30.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "2af17d7007e681e3": {
+      "text": "La petite aiguille est sur 12 et la grande indique 35 minutes : il est 12 h 35.",
+      "ms": 6400,
+      "cat": "enonce"
+    },
+    "f412c8308a376841": {
+      "text": "La petite aiguille est sur 12 et la grande indique 50 minutes : il est 12 h 50.",
+      "ms": 6080,
+      "cat": "enonce"
+    },
+    "b0fffce39a844bb7": {
+      "text": "La petite aiguille est sur 2 et la grande indique 0 minute : il est 2 h.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "8e14bb31accc5bdb": {
+      "text": "La petite aiguille est sur 2 et la grande indique 25 minutes : il est 2 h 25.",
+      "ms": 6000,
+      "cat": "enonce"
+    },
+    "1c824f0c9c5660d0": {
+      "text": "La petite aiguille est sur 2 et la grande indique 34 minutes : il est 2 h 34.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "3d009b5301ace37d": {
+      "text": "La petite aiguille est sur 2 et la grande indique 45 minutes : il est 2 h 45.",
+      "ms": 6400,
+      "cat": "enonce"
+    },
+    "d3c6760aee559bd6": {
+      "text": "La petite aiguille est sur 3 et la grande indique 0 minute : il est 3 h.",
+      "ms": 5920,
+      "cat": "enonce"
+    },
+    "f03ba5bfe496059f": {
+      "text": "La petite aiguille est sur 3 et la grande indique 30 minutes : il est 3 h 30.",
+      "ms": 6000,
+      "cat": "enonce"
+    },
+    "20f9b19bb1a19ba0": {
+      "text": "La petite aiguille est sur 4 et la grande indique 20 minutes : il est 4 h 20.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "92d52769e82ab36d": {
+      "text": "La petite aiguille est sur 4 et la grande indique 45 minutes : il est 4 h 45.",
+      "ms": 6240,
+      "cat": "enonce"
+    },
+    "d68327b917260195": {
+      "text": "La petite aiguille est sur 5 et la grande indique 0 minute : il est 5 h.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "2ef422b5898c3023": {
+      "text": "La petite aiguille est sur 5 et la grande indique 30 minutes : il est 5 h 30.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "401a0a6b039129d7": {
+      "text": "La petite aiguille est sur 5 et la grande indique 40 minutes : il est 5 h 40.",
+      "ms": 6320,
+      "cat": "enonce"
+    },
+    "90a38c237e3a24c1": {
+      "text": "La petite aiguille est sur 5 et la grande indique 9 minutes : il est 5 h 09.",
+      "ms": 5920,
+      "cat": "enonce"
+    },
+    "57821086b266023a": {
+      "text": "La petite aiguille est sur 6 et la grande indique 0 minute : il est 6 h.",
+      "ms": 5840,
+      "cat": "enonce"
+    },
+    "c11b9e47fd67e980": {
+      "text": "La petite aiguille est sur 6 et la grande indique 15 minutes : il est 6 h 15.",
+      "ms": 6240,
+      "cat": "enonce"
+    },
+    "99606d5d6e3a98b2": {
+      "text": "La petite aiguille est sur 6 et la grande indique 16 minutes : il est 6 h 16.",
+      "ms": 6080,
+      "cat": "enonce"
+    },
+    "3d84f3b405791e0a": {
+      "text": "La petite aiguille est sur 6 et la grande indique 30 minutes : il est 6 h 30.",
+      "ms": 6320,
+      "cat": "enonce"
+    },
+    "9dd55c5e9c4c754f": {
+      "text": "La petite aiguille est sur 7 et la grande indique 15 minutes : il est 7 h 15.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "7a2bed42c24886cc": {
+      "text": "La petite aiguille est sur 7 et la grande indique 30 minutes : il est 7 h 30.",
+      "ms": 5840,
+      "cat": "enonce"
+    },
+    "9f00d706306542b4": {
+      "text": "La petite aiguille est sur 8 et la grande indique 0 minute : il est 8 h.",
+      "ms": 5840,
+      "cat": "enonce"
+    },
+    "087b2d319ae1f73c": {
+      "text": "La petite aiguille est sur 8 et la grande indique 15 minutes : il est 8 h 15.",
+      "ms": 5520,
+      "cat": "enonce"
+    },
+    "efb6c02d0ae6fb8a": {
+      "text": "La petite aiguille est sur 8 et la grande indique 25 minutes : il est 8 h 25.",
+      "ms": 6320,
+      "cat": "enonce"
+    },
+    "007769970fbd87ba": {
+      "text": "La petite aiguille est sur 8 et la grande indique 28 minutes : il est 8 h 28.",
+      "ms": 6320,
+      "cat": "enonce"
+    },
+    "f82dc7abe494ae1f": {
+      "text": "La petite aiguille est sur 8 et la grande indique 30 minutes : il est 8 h 30.",
+      "ms": 6000,
+      "cat": "enonce"
+    },
+    "8b00067a10cb77f2": {
+      "text": "La petite aiguille est sur 8 et la grande indique 37 minutes : il est 8 h 37.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "20dc7d8c66339813": {
+      "text": "La petite aiguille est sur 8 et la grande indique 7 minutes : il est 8 h 07.",
+      "ms": 6320,
+      "cat": "enonce"
+    },
+    "7a177a88e78d4c52": {
+      "text": "La petite aiguille est sur 9 et la grande indique 25 minutes : il est 9 h 25.",
+      "ms": 6080,
+      "cat": "enonce"
+    },
+    "81fe460ba3b25989": {
+      "text": "La petite aiguille est sur 9 et la grande indique 30 minutes : il est 9 h 30.",
+      "ms": 6000,
+      "cat": "enonce"
+    },
+    "02209d51be318fa8": {
+      "text": "La petite aiguille est sur 9 et la grande indique 37 minutes : il est 9 h 37.",
+      "ms": 6400,
+      "cat": "enonce"
+    },
+    "86581673875cec87": {
+      "text": "La petite aiguille est sur 9 et la grande indique 42 minutes : il est 9 h 42.",
+      "ms": 6400,
+      "cat": "enonce"
+    },
+    "519fbbba06a073a0": {
+      "text": "Le 14 juillet est la fête nationale. Il y a souvent un défilé et des feux d'artifice.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "4ca32a094aa7710d": {
+      "text": "Le 1er du mois est un lundi. Quel jour sera le 8 ?",
+      "ms": 4080,
+      "cat": "consigne"
+    },
+    "93fdafa3c6cedebd": {
+      "text": "Le 8, c'est 7 jours après le 1er : une semaine entière plus tard, donc encore un lundi.",
+      "ms": 6560,
+      "cat": "enonce"
+    },
+    "6df5387bfba27919": {
+      "text": "Le chiffre des centaines est 1 : sa valeur est 1 × 100 = 100.",
+      "ms": 4960,
+      "cat": "enonce"
+    },
+    "356df77249eac05c": {
+      "text": "Le chiffre des centaines est 3 : sa valeur est 3 × 100 = 300.",
+      "ms": 6640,
+      "cat": "enonce"
+    },
+    "fa385a0454e7786a": {
+      "text": "Le chiffre des centaines est 4 : sa valeur est 4 × 100 = 400.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "85975812220480a1": {
+      "text": "Le chiffre des dizaines est 0 : sa valeur est 0 × 10 = 0.",
+      "ms": 5920,
+      "cat": "enonce"
+    },
+    "25a52de974891c45": {
+      "text": "Le chiffre des dizaines est 2 : sa valeur est 2 × 10 = 20.",
+      "ms": 5520,
+      "cat": "enonce"
+    },
+    "492fc3e39983bac1": {
+      "text": "Le chiffre des dizaines est 5 : sa valeur est 5 × 10 = 50.",
+      "ms": 5600,
+      "cat": "enonce"
+    },
+    "ec86fc86f4c235a7": {
+      "text": "Le chiffre des milliers est 5 : sa valeur est 5 × 1000 = 5000.",
+      "ms": 5680,
+      "cat": "enonce"
+    },
+    "6a02c35b976446de": {
+      "text": "Le chiffre des unites est 0 : sa valeur est 0 × 1 = 0.",
+      "ms": 5600,
+      "cat": "enonce"
+    },
+    "c3c96d8266cfc539": {
+      "text": "Le chiffre des unites est 1 : sa valeur est 1 × 1 = 1.",
+      "ms": 4960,
+      "cat": "enonce"
+    },
+    "25cf7ab7a9ef81ce": {
+      "text": "Le chiffre des unites est 4 : sa valeur est 4 × 1 = 4.",
+      "ms": 5120,
+      "cat": "enonce"
+    },
+    "33211263f37230d2": {
+      "text": "Le chiffre des unites est 5 : sa valeur est 5 × 1 = 5.",
+      "ms": 5200,
+      "cat": "enonce"
+    },
+    "b9c693174e138325": {
+      "text": "Le chiffre des unites est 7 : sa valeur est 7 × 1 = 7.",
+      "ms": 5360,
+      "cat": "enonce"
+    },
+    "2f7b66fae34a52c3": {
+      "text": "Le chiffre des unites est 8 : sa valeur est 8 × 1 = 8.",
+      "ms": 5920,
+      "cat": "enonce"
+    },
+    "2d6f9b80ddc642bf": {
+      "text": "Le chiffre des unites est 9 : sa valeur est 9 × 1 = 9.",
+      "ms": 4880,
+      "cat": "enonce"
+    },
+    "e8426a94ee7361f9": {
+      "text": "Le double de 1, c'est 1 + 1 = 2.",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "1021be17494bc278": {
+      "text": "Le double de 10, c'est 10 + 10 = 20.",
+      "ms": 3360,
+      "cat": "enonce"
+    },
+    "f52b261aeab18aa7": {
+      "text": "Le double de 100, c'est 100 + 100 = 200.",
+      "ms": 4000,
+      "cat": "enonce"
+    },
+    "51f500ad4eb8bcd5": {
+      "text": "Le double de 11, c'est 11 + 11 = 22.",
+      "ms": 4400,
+      "cat": "enonce"
+    },
+    "8f5da8ce0d5ed9f0": {
+      "text": "Le double de 12, c'est 12 + 12 = 24.",
+      "ms": 3840,
+      "cat": "enonce"
+    },
+    "a81be985b9fe0370": {
+      "text": "Le double de 13, c'est 13 + 13 = 26.",
+      "ms": 3840,
+      "cat": "enonce"
+    },
+    "46b7821a6c1f8b4e": {
+      "text": "Le double de 14, c'est 14 + 14 = 28.",
+      "ms": 4640,
+      "cat": "enonce"
+    },
+    "fd30061ca7280819": {
+      "text": "Le double de 15, c'est 15 + 15 = 30.",
+      "ms": 3920,
+      "cat": "enonce"
+    },
+    "a38cb67a95daa36a": {
+      "text": "Le double de 16, c'est 16 + 16 = 32.",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "673a205342ee4a81": {
+      "text": "Le double de 17, c'est 17 + 17 = 34.",
+      "ms": 4400,
+      "cat": "enonce"
+    },
+    "a511b702d4e16692": {
+      "text": "Le double de 18, c'est 18 + 18 = 36.",
+      "ms": 3840,
+      "cat": "enonce"
+    },
+    "5d8aeec47d9aac6e": {
+      "text": "Le double de 19, c'est 19 + 19 = 38.",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "ec779dd73a3f46a7": {
+      "text": "Le double de 2, c'est 2 + 2 = 4.",
+      "ms": 3760,
+      "cat": "enonce"
+    },
+    "c0fa89fe02591dd0": {
+      "text": "Le double de 20, c'est 20 + 20 = 40.",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "8716fcecc8b37956": {
+      "text": "Le double de 25, c'est 25 + 25 = 50.",
+      "ms": 5200,
+      "cat": "enonce"
+    },
+    "282e3f4f64c2a6c8": {
+      "text": "Le double de 3, c'est 3 + 3 = 6.",
+      "ms": 3840,
+      "cat": "enonce"
+    },
+    "5cdb317543913f65": {
+      "text": "Le double de 30, c'est 30 + 30 = 60.",
+      "ms": 4320,
+      "cat": "enonce"
+    },
+    "02e51899bdda5ebc": {
+      "text": "Le double de 4, c'est 4 + 4 = 8.",
+      "ms": 3520,
+      "cat": "enonce"
+    },
+    "2331e5ae42b05acb": {
+      "text": "Le double de 40, c'est 40 + 40 = 80.",
+      "ms": 4640,
+      "cat": "enonce"
+    },
+    "0d4c967304e09bb7": {
+      "text": "Le double de 5, c'est 5 + 5 = 10.",
+      "ms": 3920,
+      "cat": "enonce"
+    },
+    "73be22f65f66d564": {
+      "text": "Le double de 50, c'est 50 + 50 = 100.",
+      "ms": 5040,
+      "cat": "enonce"
+    },
+    "378df2a1c022dacf": {
+      "text": "Le double de 6, c'est 6 + 6 = 12.",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "c91951bb90aedb6f": {
+      "text": "Le double de 60, c'est 60 + 60 = 120.",
+      "ms": 4320,
+      "cat": "enonce"
+    },
+    "16e0dc7c23edb862": {
+      "text": "Le double de 7, c'est 7 + 7 = 14.",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "6c3036a42324dfad": {
+      "text": "Le double de 8, c'est 8 + 8 = 16.",
+      "ms": 3920,
+      "cat": "enonce"
+    },
+    "bad85df9da2e90c1": {
+      "text": "Le double de 9, c'est 9 + 9 = 18.",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "d21851ebe653863f": {
+      "text": "Le milieu est à la même distance des deux bouts. Entre 0 et 6, le milieu est à 3 centimètres.",
+      "ms": 6880,
+      "cat": "enonce"
+    },
+    "c22f9f8b5c706480": {
+      "text": "Le niveau atteint 10 : il y a 10 cL.",
+      "ms": 3600,
+      "cat": "enonce"
+    },
+    "10a97c3f6988a94d": {
+      "text": "Le niveau atteint 20 : il y a 20 cL.",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "2f9d2c97e752e079": {
+      "text": "Le niveau atteint 40 : il y a 40 cL.",
+      "ms": 3520,
+      "cat": "enonce"
+    },
+    "3280526d56b21044": {
+      "text": "Le niveau atteint 50 : il y a 50 cL.",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "730e25b5d39d7f7a": {
+      "text": "Le niveau atteint 60 : il y a 60 cL.",
+      "ms": 3760,
+      "cat": "enonce"
+    },
+    "987e56dd9acb3164": {
+      "text": "Le niveau atteint 70 : il y a 70 cL.",
+      "ms": 3680,
+      "cat": "enonce"
+    },
+    "c1aeb57a513857ec": {
+      "text": "Le nœud A2 est au croisement de la colonne A et de la ligne 2.",
+      "ms": 4480,
+      "cat": "enonce"
+    },
+    "f9597c2a9446e953": {
+      "text": "Le plus grand multiple de 10 sous 49 est 40, 10 × 4. Il reste 49 − 40 = 9.",
+      "ms": 7760,
+      "cat": "enonce"
+    },
+    "9483669a6bc55b1c": {
+      "text": "Le plus grand multiple de 10 sous 62 est 60, 10 × 6. Il reste 62 − 60 = 2.",
+      "ms": 7280,
+      "cat": "enonce"
+    },
+    "e9ef7567eaba39a9": {
+      "text": "Le plus grand multiple de 10 sous 645 est 640, 10 × 64. Il reste 645 − 640 = 5.",
+      "ms": 9760,
+      "cat": "enonce"
+    },
+    "ec73507c753901da": {
+      "text": "Le plus grand multiple de 10 sous 66 est 60, 10 × 6. Il reste 66 − 60 = 6.",
+      "ms": 7600,
+      "cat": "enonce"
+    },
+    "e6375808f8b1fb08": {
+      "text": "Le plus grand multiple de 10 sous 817 est 810, 10 × 81. Il reste 817 − 810 = 7.",
+      "ms": 9360,
+      "cat": "enonce"
+    },
+    "8265e6b8f9bfca2a": {
+      "text": "Le plus grand multiple de 10 sous 977 est 970, 10 × 97. Il reste 977 − 970 = 7.",
+      "ms": 10960,
+      "cat": "enonce"
+    },
+    "de41f7391a2b912e": {
+      "text": "Le plus grand multiple de 100 sous 19 est 0, 100 × 0. Il reste 19 − 0 = 19.",
+      "ms": 8320,
+      "cat": "enonce"
+    },
+    "bd2010e93f95822f": {
+      "text": "Le plus grand multiple de 100 sous 311 est 300, 100 × 3. Il reste 311 − 300 = 11.",
+      "ms": 8160,
+      "cat": "enonce"
+    },
+    "ad405cdde22b3bd5": {
+      "text": "Le plus grand multiple de 100 sous 40 est 0, 100 × 0. Il reste 40 − 0 = 40.",
+      "ms": 7920,
+      "cat": "enonce"
+    },
+    "201d26ed3f40b07d": {
+      "text": "Le plus grand multiple de 100 sous 47 est 0, 100 × 0. Il reste 47 − 0 = 47.",
+      "ms": 7840,
+      "cat": "enonce"
     }
   },
   "keys": {
@@ -39732,6 +40377,135 @@
     "txt:1f438c606fa8cfa0": "1f438c606fa8cfa0",
     "txt:7850bd3c76ffa89b": "7850bd3c76ffa89b",
     "txt:f6ab07975083174c": "f6ab07975083174c",
-    "txt:0ed9967f605bd19d": "0ed9967f605bd19d"
+    "txt:0ed9967f605bd19d": "0ed9967f605bd19d",
+    "txt:1d23ce9607f07856": "1d23ce9607f07856",
+    "txt:493b2c0af91eaa24": "493b2c0af91eaa24",
+    "txt:094918b14d9770b0": "094918b14d9770b0",
+    "txt:dcc0d722a291c3ad": "dcc0d722a291c3ad",
+    "txt:0358a2dda2d44013": "0358a2dda2d44013",
+    "txt:59ef6086251c45b6": "59ef6086251c45b6",
+    "txt:e2c3278c1e2fd70c": "e2c3278c1e2fd70c",
+    "txt:7c2d8564b213f1e7": "7c2d8564b213f1e7",
+    "txt:00df5948e57490b7": "00df5948e57490b7",
+    "txt:1cc327237e10424b": "1cc327237e10424b",
+    "txt:0d03174cecfeee9a": "0d03174cecfeee9a",
+    "txt:e8dc60e368970752": "e8dc60e368970752",
+    "txt:9bc56b8d3e892960": "9bc56b8d3e892960",
+    "txt:29574444ee4b2be4": "29574444ee4b2be4",
+    "txt:8c680bc717329900": "8c680bc717329900",
+    "txt:a654c1b3d5db8984": "a654c1b3d5db8984",
+    "txt:68121f826ce9f02e": "68121f826ce9f02e",
+    "txt:de502ab088860adf": "de502ab088860adf",
+    "txt:ee1c51e479cf46e7": "ee1c51e479cf46e7",
+    "txt:e5adaa4053aef8cf": "e5adaa4053aef8cf",
+    "txt:de496f6aed4fde1e": "de496f6aed4fde1e",
+    "txt:0d3fb07b60eba182": "0d3fb07b60eba182",
+    "txt:6f0e88d840701ec4": "6f0e88d840701ec4",
+    "txt:e6cd730277559da2": "e6cd730277559da2",
+    "txt:530d19a8231136fc": "530d19a8231136fc",
+    "txt:7e6fabd55d2bc14f": "7e6fabd55d2bc14f",
+    "txt:93018b5b80e0c4c9": "93018b5b80e0c4c9",
+    "txt:eef8aecaa52f844c": "eef8aecaa52f844c",
+    "txt:9f7be47b6b09d13b": "9f7be47b6b09d13b",
+    "txt:edf12036834f76bd": "edf12036834f76bd",
+    "txt:2224572a575c82be": "2224572a575c82be",
+    "txt:81076de0ad2efc14": "81076de0ad2efc14",
+    "txt:d8359c593cca65fe": "d8359c593cca65fe",
+    "txt:d78bdd87e1358898": "d78bdd87e1358898",
+    "txt:67bb0a08b133a7ab": "67bb0a08b133a7ab",
+    "txt:c39f12090605f6e3": "c39f12090605f6e3",
+    "txt:8e7c55bda7a3da49": "8e7c55bda7a3da49",
+    "txt:2af17d7007e681e3": "2af17d7007e681e3",
+    "txt:f412c8308a376841": "f412c8308a376841",
+    "txt:b0fffce39a844bb7": "b0fffce39a844bb7",
+    "txt:8e14bb31accc5bdb": "8e14bb31accc5bdb",
+    "txt:1c824f0c9c5660d0": "1c824f0c9c5660d0",
+    "txt:3d009b5301ace37d": "3d009b5301ace37d",
+    "txt:d3c6760aee559bd6": "d3c6760aee559bd6",
+    "txt:f03ba5bfe496059f": "f03ba5bfe496059f",
+    "txt:20f9b19bb1a19ba0": "20f9b19bb1a19ba0",
+    "txt:92d52769e82ab36d": "92d52769e82ab36d",
+    "txt:d68327b917260195": "d68327b917260195",
+    "txt:2ef422b5898c3023": "2ef422b5898c3023",
+    "txt:401a0a6b039129d7": "401a0a6b039129d7",
+    "txt:90a38c237e3a24c1": "90a38c237e3a24c1",
+    "txt:57821086b266023a": "57821086b266023a",
+    "txt:c11b9e47fd67e980": "c11b9e47fd67e980",
+    "txt:99606d5d6e3a98b2": "99606d5d6e3a98b2",
+    "txt:3d84f3b405791e0a": "3d84f3b405791e0a",
+    "txt:9dd55c5e9c4c754f": "9dd55c5e9c4c754f",
+    "txt:7a2bed42c24886cc": "7a2bed42c24886cc",
+    "txt:9f00d706306542b4": "9f00d706306542b4",
+    "txt:087b2d319ae1f73c": "087b2d319ae1f73c",
+    "txt:efb6c02d0ae6fb8a": "efb6c02d0ae6fb8a",
+    "txt:007769970fbd87ba": "007769970fbd87ba",
+    "txt:f82dc7abe494ae1f": "f82dc7abe494ae1f",
+    "txt:8b00067a10cb77f2": "8b00067a10cb77f2",
+    "txt:20dc7d8c66339813": "20dc7d8c66339813",
+    "txt:7a177a88e78d4c52": "7a177a88e78d4c52",
+    "txt:81fe460ba3b25989": "81fe460ba3b25989",
+    "txt:02209d51be318fa8": "02209d51be318fa8",
+    "txt:86581673875cec87": "86581673875cec87",
+    "txt:519fbbba06a073a0": "519fbbba06a073a0",
+    "txt:4ca32a094aa7710d": "4ca32a094aa7710d",
+    "txt:93fdafa3c6cedebd": "93fdafa3c6cedebd",
+    "txt:6df5387bfba27919": "6df5387bfba27919",
+    "txt:356df77249eac05c": "356df77249eac05c",
+    "txt:fa385a0454e7786a": "fa385a0454e7786a",
+    "txt:85975812220480a1": "85975812220480a1",
+    "txt:25a52de974891c45": "25a52de974891c45",
+    "txt:492fc3e39983bac1": "492fc3e39983bac1",
+    "txt:ec86fc86f4c235a7": "ec86fc86f4c235a7",
+    "txt:6a02c35b976446de": "6a02c35b976446de",
+    "txt:c3c96d8266cfc539": "c3c96d8266cfc539",
+    "txt:25cf7ab7a9ef81ce": "25cf7ab7a9ef81ce",
+    "txt:33211263f37230d2": "33211263f37230d2",
+    "txt:b9c693174e138325": "b9c693174e138325",
+    "txt:2f7b66fae34a52c3": "2f7b66fae34a52c3",
+    "txt:2d6f9b80ddc642bf": "2d6f9b80ddc642bf",
+    "txt:e8426a94ee7361f9": "e8426a94ee7361f9",
+    "txt:1021be17494bc278": "1021be17494bc278",
+    "txt:f52b261aeab18aa7": "f52b261aeab18aa7",
+    "txt:51f500ad4eb8bcd5": "51f500ad4eb8bcd5",
+    "txt:8f5da8ce0d5ed9f0": "8f5da8ce0d5ed9f0",
+    "txt:a81be985b9fe0370": "a81be985b9fe0370",
+    "txt:46b7821a6c1f8b4e": "46b7821a6c1f8b4e",
+    "txt:fd30061ca7280819": "fd30061ca7280819",
+    "txt:a38cb67a95daa36a": "a38cb67a95daa36a",
+    "txt:673a205342ee4a81": "673a205342ee4a81",
+    "txt:a511b702d4e16692": "a511b702d4e16692",
+    "txt:5d8aeec47d9aac6e": "5d8aeec47d9aac6e",
+    "txt:ec779dd73a3f46a7": "ec779dd73a3f46a7",
+    "txt:c0fa89fe02591dd0": "c0fa89fe02591dd0",
+    "txt:8716fcecc8b37956": "8716fcecc8b37956",
+    "txt:282e3f4f64c2a6c8": "282e3f4f64c2a6c8",
+    "txt:5cdb317543913f65": "5cdb317543913f65",
+    "txt:02e51899bdda5ebc": "02e51899bdda5ebc",
+    "txt:2331e5ae42b05acb": "2331e5ae42b05acb",
+    "txt:0d4c967304e09bb7": "0d4c967304e09bb7",
+    "txt:73be22f65f66d564": "73be22f65f66d564",
+    "txt:378df2a1c022dacf": "378df2a1c022dacf",
+    "txt:c91951bb90aedb6f": "c91951bb90aedb6f",
+    "txt:16e0dc7c23edb862": "16e0dc7c23edb862",
+    "txt:6c3036a42324dfad": "6c3036a42324dfad",
+    "txt:bad85df9da2e90c1": "bad85df9da2e90c1",
+    "txt:d21851ebe653863f": "d21851ebe653863f",
+    "txt:c22f9f8b5c706480": "c22f9f8b5c706480",
+    "txt:10a97c3f6988a94d": "10a97c3f6988a94d",
+    "txt:2f9d2c97e752e079": "2f9d2c97e752e079",
+    "txt:3280526d56b21044": "3280526d56b21044",
+    "txt:730e25b5d39d7f7a": "730e25b5d39d7f7a",
+    "txt:987e56dd9acb3164": "987e56dd9acb3164",
+    "txt:c1aeb57a513857ec": "c1aeb57a513857ec",
+    "txt:f9597c2a9446e953": "f9597c2a9446e953",
+    "txt:9483669a6bc55b1c": "9483669a6bc55b1c",
+    "txt:e9ef7567eaba39a9": "e9ef7567eaba39a9",
+    "txt:ec73507c753901da": "ec73507c753901da",
+    "txt:e6375808f8b1fb08": "e6375808f8b1fb08",
+    "txt:8265e6b8f9bfca2a": "8265e6b8f9bfca2a",
+    "txt:de41f7391a2b912e": "de41f7391a2b912e",
+    "txt:bd2010e93f95822f": "bd2010e93f95822f",
+    "txt:ad405cdde22b3bd5": "ad405cdde22b3bd5",
+    "txt:201d26ed3f40b07d": "201d26ed3f40b07d"
   }
 }
