@@ -33753,6 +33753,2016 @@
       "text": "Le plus grand multiple de 100 sous 47 est 0, 100 × 0. Il reste 47 − 0 = 47.",
       "ms": 7840,
       "cat": "enonce"
+    },
+    "93198ddd97ae8d97": {
+      "text": "Le plus grand multiple de 100 sous 910 est 900, 100 × 9. Il reste 910 − 900 = 10.",
+      "ms": 8080,
+      "cat": "enonce"
+    },
+    "42665a115d22bbc9": {
+      "text": "Le plus grand multiple de 100 sous 931 est 900, 100 × 9. Il reste 931 − 900 = 31.",
+      "ms": 8640,
+      "cat": "enonce"
+    },
+    "0c32b07e969d904c": {
+      "text": "Le plus grand multiple de 2 sous 31 est 30, 2 × 15. Il reste 31 − 30 = 1.",
+      "ms": 7440,
+      "cat": "enonce"
+    },
+    "8027dc545d9ad89d": {
+      "text": "Le plus grand multiple de 2 sous 57 est 56, 2 × 28. Il reste 57 − 56 = 1.",
+      "ms": 8880,
+      "cat": "enonce"
+    },
+    "77c0aa70f9a33cdf": {
+      "text": "Le plus grand multiple de 25 sous 20 est 0, 25 × 0. Il reste 20 − 0 = 20.",
+      "ms": 7120,
+      "cat": "enonce"
+    },
+    "805163beac5ff783": {
+      "text": "Le plus grand multiple de 25 sous 37 est 25, 25 × 1. Il reste 37 − 25 = 12.",
+      "ms": 8480,
+      "cat": "enonce"
+    },
+    "a110da05a84b45c2": {
+      "text": "Le plus grand multiple de 25 sous 63 est 50, 25 × 2. Il reste 63 − 50 = 13.",
+      "ms": 8720,
+      "cat": "enonce"
+    },
+    "cafe2ba9b1b7a199": {
+      "text": "Le plus grand multiple de 25 sous 65 est 50, 25 × 2. Il reste 65 − 50 = 15.",
+      "ms": 8560,
+      "cat": "enonce"
+    },
+    "d074fcfa5bd9dab7": {
+      "text": "Le plus grand multiple de 25 sous 704 est 700, 25 × 28. Il reste 704 − 700 = 4.",
+      "ms": 9280,
+      "cat": "enonce"
+    },
+    "eb85d03a5ce1abf5": {
+      "text": "Le plus grand multiple de 25 sous 80 est 75, 25 × 3. Il reste 80 − 75 = 5.",
+      "ms": 7920,
+      "cat": "enonce"
+    },
+    "ee9767daaafbff54": {
+      "text": "Le plus grand multiple de 25 sous 82 est 75, 25 × 3. Il reste 82 − 75 = 7.",
+      "ms": 8160,
+      "cat": "enonce"
+    },
+    "474714840759eeb1": {
+      "text": "Le plus grand multiple de 25 sous 86 est 75, 25 × 3. Il reste 86 − 75 = 11.",
+      "ms": 9040,
+      "cat": "enonce"
+    },
+    "8af1972549940e5d": {
+      "text": "Le plus grand multiple de 25 sous 874 est 850, 25 × 34. Il reste 874 − 850 = 24.",
+      "ms": 11040,
+      "cat": "enonce"
+    },
+    "670b74923eca1e4a": {
+      "text": "Le plus grand multiple de 3 sous 52 est 51, 3 × 17. Il reste 52 − 51 = 1.",
+      "ms": 8560,
+      "cat": "enonce"
+    },
+    "a70a12436a12424e": {
+      "text": "Le plus grand multiple de 4 sous 47 est 44, 4 × 11. Il reste 47 − 44 = 3.",
+      "ms": 8960,
+      "cat": "enonce"
+    },
+    "a0dc015695d9db9f": {
+      "text": "Le plus grand multiple de 4 sous 49 est 48, 4 × 12. Il reste 49 − 48 = 1.",
+      "ms": 8080,
+      "cat": "enonce"
+    },
+    "ff92079d0b1a304c": {
+      "text": "Le plus grand multiple de 4 sous 55 est 52, 4 × 13. Il reste 55 − 52 = 3.",
+      "ms": 8400,
+      "cat": "enonce"
+    },
+    "12bac133557783c2": {
+      "text": "Le plus grand multiple de 4 sous 62 est 60, 4 × 15. Il reste 62 − 60 = 2.",
+      "ms": 8720,
+      "cat": "enonce"
+    },
+    "e43a73d2a140154e": {
+      "text": "Le plus grand multiple de 5 sous 11 est 10, 5 × 2. Il reste 11 − 10 = 1.",
+      "ms": 7120,
+      "cat": "enonce"
+    },
+    "90d373bacf947f73": {
+      "text": "Le plus grand multiple de 5 sous 13 est 10, 5 × 2. Il reste 13 − 10 = 3.",
+      "ms": 6880,
+      "cat": "enonce"
+    },
+    "4c708871d92eda7a": {
+      "text": "Le plus grand multiple de 5 sous 37 est 35, 5 × 7. Il reste 37 − 35 = 2.",
+      "ms": 7840,
+      "cat": "enonce"
+    },
+    "71def400e5727ebb": {
+      "text": "Le plus grand multiple de 50 sous 155 est 150, 50 × 3. Il reste 155 − 150 = 5.",
+      "ms": 8320,
+      "cat": "enonce"
+    },
+    "f5b99ea2298ee243": {
+      "text": "Le plus grand multiple de 50 sous 282 est 250, 50 × 5. Il reste 282 − 250 = 32.",
+      "ms": 10320,
+      "cat": "enonce"
+    },
+    "4c8f0ccbefb9e311": {
+      "text": "Le plus grand multiple de 50 sous 370 est 350, 50 × 7. Il reste 370 − 350 = 20.",
+      "ms": 9040,
+      "cat": "enonce"
+    },
+    "a2e519efffaa8949": {
+      "text": "Le plus grand multiple de 50 sous 39 est 0, 50 × 0. Il reste 39 − 0 = 39.",
+      "ms": 7520,
+      "cat": "enonce"
+    },
+    "fd6487ba3a006497": {
+      "text": "Le plus grand multiple de 50 sous 45 est 0, 50 × 0. Il reste 45 − 0 = 45.",
+      "ms": 8480,
+      "cat": "enonce"
+    },
+    "4c48de084de99c6b": {
+      "text": "Le plus grand multiple de 50 sous 721 est 700, 50 × 14. Il reste 721 − 700 = 21.",
+      "ms": 8480,
+      "cat": "enonce"
+    },
+    "ec0d34ca7207367a": {
+      "text": "Le plus grand multiple de 50 sous 835 est 800, 50 × 16. Il reste 835 − 800 = 35.",
+      "ms": 9280,
+      "cat": "enonce"
+    },
+    "bede9f4d4da3632a": {
+      "text": "Le plus grand multiple de 50 sous 838 est 800, 50 × 16. Il reste 838 − 800 = 38.",
+      "ms": 9680,
+      "cat": "enonce"
+    },
+    "adba0f8d86358521": {
+      "text": "Le plus grand multiple de 50 sous 909 est 900, 50 × 18. Il reste 909 − 900 = 9.",
+      "ms": 8640,
+      "cat": "enonce"
+    },
+    "7761a3e2fcd04b7b": {
+      "text": "Le plus grand multiple de 50 sous 961 est 950, 50 × 19. Il reste 961 − 950 = 11.",
+      "ms": 9680,
+      "cat": "enonce"
+    },
+    "15d5767c4ab0913d": {
+      "text": "Le plus grand multiple de 6 sous 57 est 54, 6 × 9. Il reste 57 − 54 = 3.",
+      "ms": 7920,
+      "cat": "enonce"
+    },
+    "f34ebea240097def": {
+      "text": "Le plus grand multiple de 7 sous 18 est 14, 7 × 2. Il reste 18 − 14 = 4.",
+      "ms": 7120,
+      "cat": "enonce"
+    },
+    "788c89c35e92f50e": {
+      "text": "Le plus grand multiple de 7 sous 72 est 70, 7 × 10. Il reste 72 − 70 = 2.",
+      "ms": 7920,
+      "cat": "enonce"
+    },
+    "3d464b33bc099788": {
+      "text": "Le plus grand multiple de 7 sous 81 est 77, 7 × 11. Il reste 81 − 77 = 4.",
+      "ms": 9280,
+      "cat": "enonce"
+    },
+    "ac8d1e588199ea1d": {
+      "text": "Le plus grand multiple de 9 sous 48 est 45, 9 × 5. Il reste 48 − 45 = 3.",
+      "ms": 7920,
+      "cat": "enonce"
+    },
+    "2b7b2fe4b4475d8b": {
+      "text": "Le rayon, c'est l'écartement du compas : ici 3 centimètres du centre jusqu'au bord.",
+      "ms": 6560,
+      "cat": "enonce"
+    },
+    "d5d31a60636b19cb": {
+      "text": "Le robot avance de trois cases vers le haut : de C1 à C2, C3, puis C4. Il arrive sur la case C4.",
+      "ms": 8000,
+      "cat": "enonce"
+    },
+    "0f9d5fdeeacc26b5": {
+      "text": "Le robot est sur la case A1 et il regarde vers la droite. Assemble un programme pour l'amener jusqu'à la case verte.",
+      "ms": 7600,
+      "cat": "consigne"
+    },
+    "a93b7e5763ead6fc": {
+      "text": "Le robot est sur la case A1 et il regarde vers la droite. Il suit son programme. Clique sur la case où il arrive.",
+      "ms": 8880,
+      "cat": "consigne"
+    },
+    "f74872400f59e68a": {
+      "text": "Le robot est sur la case A1 et il regarde vers le haut. Assemble un programme pour atteindre la case verte en évitant les cases grises.",
+      "ms": 9600,
+      "cat": "consigne"
+    },
+    "c7e0c03248be149a": {
+      "text": "Le robot est sur la case A1 et il regarde vers le haut. Assemble un programme pour l'amener jusqu'à la case verte.",
+      "ms": 6960,
+      "cat": "consigne"
+    },
+    "fd38f819ec667e22": {
+      "text": "Le robot est sur la case A1 et il regarde vers le haut. Il suit son programme. Clique sur la case où il arrive.",
+      "ms": 7120,
+      "cat": "consigne"
+    },
+    "e8f62f3efecfb6be": {
+      "text": "Le robot est sur la case B1 et il regarde vers le haut. Il suit son programme. Clique sur la case où il arrive.",
+      "ms": 7280,
+      "cat": "consigne"
+    },
+    "ce45f69bc95742e1": {
+      "text": "Le robot est sur la case C1 et il regarde vers le haut. Il suit son programme. Clique sur la case où il arrive.",
+      "ms": 7840,
+      "cat": "consigne"
+    },
+    "000a45685cad7a3c": {
+      "text": "Le robot regarde vers le haut. Il avance de deux cases : de B1 à B2, puis à B3. Il arrive sur la case B3.",
+      "ms": 8480,
+      "cat": "enonce"
+    },
+    "1d94d4c38bb5e05a": {
+      "text": "Le trait va de 0 à 10 : il mesure 10 cm.",
+      "ms": 3520,
+      "cat": "enonce"
+    },
+    "16e0633ec4f8f671": {
+      "text": "Le trait va de 0 à 13 : il mesure 13 cm.",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "ffd834e4eeed844a": {
+      "text": "Le trait va de 0 à 14 : il mesure 14 cm.",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "ffb976c7affb2418": {
+      "text": "Le trait va de 0 à 17 : il mesure 17 cm.",
+      "ms": 4480,
+      "cat": "enonce"
+    },
+    "62068457479a8d09": {
+      "text": "Le trait va de 0 à 18 : il mesure 18 cm.",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "d550b6053f1ba35a": {
+      "text": "Le trait va de 0 à 19 : il mesure 19 cm.",
+      "ms": 4880,
+      "cat": "enonce"
+    },
+    "eb25a1c4d23c9e37": {
+      "text": "Le trait va de 0 à 4 : il mesure 4 centimètres.",
+      "ms": 3760,
+      "cat": "enonce"
+    },
+    "85659b234b87b361": {
+      "text": "Le trait va de 0 à 4 : il mesure 4 cm.",
+      "ms": 4960,
+      "cat": "enonce"
+    },
+    "09ed86454a470edc": {
+      "text": "Le trait va de 0 à 6 : il mesure 6 centimètres. Pour lire la règle, on regarde où commence et où finit le trait.",
+      "ms": 7840,
+      "cat": "enonce"
+    },
+    "1f1630b5b63e196d": {
+      "text": "Le trait va de 0 à 8 : il mesure 8 cm.",
+      "ms": 4400,
+      "cat": "enonce"
+    },
+    "d0774e5409a7c79b": {
+      "text": "Le trait va de 2 à 9. On fait 9 moins 2, ce qui donne 7 : il mesure 7 centimètres.",
+      "ms": 7120,
+      "cat": "enonce"
+    },
+    "9d9fb04204bfe338": {
+      "text": "Les lapins ont 4 images, soit 8 animaux. Les poules ont 2 images, soit 4 animaux. Les lapins sont les plus nombreux.",
+      "ms": 8960,
+      "cat": "enonce"
+    },
+    "9ae1013646e0aafa": {
+      "text": "On additionne la colonne de Nadia : 40 et 50 font 90 billes en tout.",
+      "ms": 5680,
+      "cat": "enonce"
+    },
+    "9eb828fe21fa2ad4": {
+      "text": "On additionne la ligne des carrés : 30 et 80 font 110 carrés en tout.",
+      "ms": 5680,
+      "cat": "enonce"
+    },
+    "fb4e8038a1e98608": {
+      "text": "On additionne la ligne des crayons : 80 et 50 font 130 crayons.",
+      "ms": 5040,
+      "cat": "enonce"
+    },
+    "31d35b7c5ea43be3": {
+      "text": "On cherche ce qu'il faut ajouter a 2 pour faire 17 : 17 − 2 = 15.",
+      "ms": 5360,
+      "cat": "enonce"
+    },
+    "ba380ac1e94299c0": {
+      "text": "On cherche ce qu'il faut ajouter a 3 pour faire 14 : 14 − 3 = 11.",
+      "ms": 5360,
+      "cat": "enonce"
+    },
+    "cfc39a1ef707c394": {
+      "text": "On cherche ce qu'il faut ajouter a 4 pour faire 14 : 14 − 4 = 10.",
+      "ms": 6880,
+      "cat": "enonce"
+    },
+    "9ee16206fa2d64b7": {
+      "text": "On cherche ce qu'il faut ajouter a 4 pour faire 16 : 16 − 4 = 12.",
+      "ms": 5440,
+      "cat": "enonce"
+    },
+    "ca314e204a84128e": {
+      "text": "On cherche ce qu'il faut ajouter a 5 pour faire 11 : 11 − 5 = 6.",
+      "ms": 5200,
+      "cat": "enonce"
+    },
+    "8df45b2ccf7523bf": {
+      "text": "On cherche ce qu'il faut ajouter a 5 pour faire 15 : 15 − 5 = 10.",
+      "ms": 5840,
+      "cat": "enonce"
+    },
+    "75d9ede92236c9cc": {
+      "text": "On cherche ce qu'il faut ajouter a 5 pour faire 17 : 17 − 5 = 12.",
+      "ms": 6560,
+      "cat": "enonce"
+    },
+    "675323803994e4c8": {
+      "text": "On cherche ce qu'il faut ajouter a 7 pour faire 11 : 11 − 7 = 4.",
+      "ms": 5040,
+      "cat": "enonce"
+    },
+    "3366a9b720fd0376": {
+      "text": "On cherche ce qu'il faut ajouter a 7 pour faire 12 : 12 − 7 = 5.",
+      "ms": 5200,
+      "cat": "enonce"
+    },
+    "16c3686839e32c19": {
+      "text": "On cherche ce qu'il faut ajouter a 7 pour faire 13 : 13 − 7 = 6.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "99ca7d20acf70615": {
+      "text": "On cherche ce qu'il faut ajouter a 9 pour faire 13 : 13 − 9 = 4.",
+      "ms": 5520,
+      "cat": "enonce"
+    },
+    "89c54f3025ed2667": {
+      "text": "On cherche ce qu'il faut ajouter a 9 pour faire 14 : 14 − 9 = 5.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "f4db0b4e619c0c9f": {
+      "text": "On cherche la colonne B, puis on monte à la ligne 3 : c'est la case B3.",
+      "ms": 5360,
+      "cat": "enonce"
+    },
+    "d932431b0a4d79fb": {
+      "text": "On cherche la ligne des bananes et on lit le nombre à côté : 3 enfants.",
+      "ms": 4800,
+      "cat": "enonce"
+    },
+    "458b94bda4b5242d": {
+      "text": "On cherche le nombre 5 dans le tableau : c'est la ligne de Zoé, qui a lu 5 livres.",
+      "ms": 6560,
+      "cat": "enonce"
+    },
+    "076eccd6ec276b03": {
+      "text": "On croise la ligne des billes rouges et la colonne de Léa : elle a 3 billes rouges.",
+      "ms": 5040,
+      "cat": "enonce"
+    },
+    "48241e896e15d587": {
+      "text": "On croise la ligne des poires et la colonne de Sacha : il a 2 poires.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "81b5cdecd2217dcf": {
+      "text": "On exprime l'eau d'une baignoire en L. Rappel : 1 kg = 1000 g ; 1 L = 10 dL = 100 cL.",
+      "ms": 8720,
+      "cat": "enonce"
+    },
+    "2d8d36ae53127d3c": {
+      "text": "On exprime la masse d'un enfant en kg. Rappel : 1 kg = 1000 g ; 1 L = 10 dL = 100 cL.",
+      "ms": 9440,
+      "cat": "enonce"
+    },
+    "9c75140d30e17515": {
+      "text": "On exprime la masse d'un sac de sucre en kg. Rappel : 1 kg = 1000 g ; 1 L = 10 dL = 100 cL.",
+      "ms": 9760,
+      "cat": "enonce"
+    },
+    "6a17cb46e3bcdb26": {
+      "text": "On exprime la masse d'un stylo en g. Rappel : 1 kg = 1000 g ; 1 L = 10 dL = 100 cL.",
+      "ms": 9040,
+      "cat": "enonce"
+    },
+    "392770574202422e": {
+      "text": "On exprime la masse d'une pomme en g. Rappel : 1 kg = 1000 g ; 1 L = 10 dL = 100 cL.",
+      "ms": 8160,
+      "cat": "enonce"
+    },
+    "3d01fabec97a6baf": {
+      "text": "On exprime la quantité d'eau dans un verre en cL. Rappel : 1 kg = 1000 g ; 1 L = 10 dL = 100 cL.",
+      "ms": 10320,
+      "cat": "enonce"
+    },
+    "6251fbc5750dd3a9": {
+      "text": "On exprime la quantité d'eau dans une bouteille en L. Rappel : 1 kg = 1000 g ; 1 L = 10 dL = 100 cL.",
+      "ms": 10080,
+      "cat": "enonce"
+    },
+    "8010d3a928d10e8d": {
+      "text": "On exprime une cuillère de sirop en mL. Rappel : 1 kg = 1000 g ; 1 L = 10 dL = 100 cL.",
+      "ms": 10160,
+      "cat": "enonce"
+    },
+    "532c5c3807f2cabd": {
+      "text": "On fait monter la barre des billes bleues jusqu'au trait 7 : elle vaut 7.",
+      "ms": 4640,
+      "cat": "enonce"
+    },
+    "048e55a3e2d47ebe": {
+      "text": "On fait monter la barre des cartes jusqu'au trait 5 : elle vaut 5.",
+      "ms": 4640,
+      "cat": "enonce"
+    },
+    "5de2c8255c578409": {
+      "text": "On garde l'écartement de 4 cm et on reporte cette longueur à partir de O : le nouveau point est à 4 cm de O.",
+      "ms": 9040,
+      "cat": "enonce"
+    },
+    "3674f66efcb9397c": {
+      "text": "On lit d'abord la lettre de la colonne, puis le numéro de la ligne. La case coloriée est dans la colonne B, à la ligne 3 : c'est B3.",
+      "ms": 8880,
+      "cat": "enonce"
+    },
+    "01fea8eed63410fa": {
+      "text": "On lit la ligne des moutons : il y a 7 moutons.",
+      "ms": 3600,
+      "cat": "enonce"
+    },
+    "f7b1afa35c494ab0": {
+      "text": "On paie 10 € pour 8 €. On rend 10 − 8 = 2 €.",
+      "ms": 5600,
+      "cat": "enonce"
+    },
+    "84b4cf1770ec5bc9": {
+      "text": "On paie 100 € pour 66 €. On rend 100 − 66 = 34 €.",
+      "ms": 6400,
+      "cat": "enonce"
+    },
+    "b292f419de31044c": {
+      "text": "On paie 100 € pour 71 €. On rend 100 − 71 = 29 €.",
+      "ms": 6400,
+      "cat": "enonce"
+    },
+    "6343029e2973fbf7": {
+      "text": "On paie 100 € pour 79 €. On rend 100 − 79 = 21 €.",
+      "ms": 6720,
+      "cat": "enonce"
+    },
+    "375daeb185754b6f": {
+      "text": "On paie 100 € pour 81 €. On rend 100 − 81 = 19 €.",
+      "ms": 6000,
+      "cat": "enonce"
+    },
+    "037450720ec4e9d4": {
+      "text": "On paie 100 € pour 82 €. On rend 100 − 82 = 18 €.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "84758e4d27b32d0e": {
+      "text": "On paie 100 € pour 85 €. On rend 100 − 85 = 15 €.",
+      "ms": 6800,
+      "cat": "enonce"
+    },
+    "eb512036899a5db3": {
+      "text": "On paie 100 € pour 86 €. On rend 100 − 86 = 14 €.",
+      "ms": 6560,
+      "cat": "enonce"
+    },
+    "fbbf2727909b18f1": {
+      "text": "On paie 100 € pour 88 €. On rend 100 − 88 = 12 €.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "1aad523c9ef74b15": {
+      "text": "On paie 100 € pour 94 €. On rend 100 − 94 = 6 €.",
+      "ms": 6240,
+      "cat": "enonce"
+    },
+    "062a9c34f5b5c104": {
+      "text": "On paie 20 € pour 14 €. On rend 20 − 14 = 6 €.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "a02dcd2a54c8731a": {
+      "text": "On paie 20 € pour 15 €. On rend 20 − 15 = 5 €.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "a3d0e43288bafd79": {
+      "text": "On paie 20 € pour 16 €. On rend 20 − 16 = 4 €.",
+      "ms": 6880,
+      "cat": "enonce"
+    },
+    "074c900b84638c17": {
+      "text": "On paie 20 € pour 19 €. On rend 20 − 19 = 1 €.",
+      "ms": 5680,
+      "cat": "enonce"
+    },
+    "a6edba84ddd65108": {
+      "text": "On paie 50 € pour 33 €. On rend 50 − 33 = 17 €.",
+      "ms": 5600,
+      "cat": "enonce"
+    },
+    "acce8102bf5f2c8e": {
+      "text": "On paie 50 € pour 35 €. On rend 50 − 35 = 15 €.",
+      "ms": 6240,
+      "cat": "enonce"
+    },
+    "aeb85c2381f25536": {
+      "text": "On paie 50 € pour 44 €. On rend 50 − 44 = 6 €.",
+      "ms": 5600,
+      "cat": "enonce"
+    },
+    "db82d513cf330ae4": {
+      "text": "On passe par 10 : 6 + 4 = 10, il reste 3 à ajouter, puis 10 + 3 = 13.",
+      "ms": 8000,
+      "cat": "enonce"
+    },
+    "4b6bf69d6dee84eb": {
+      "text": "On passe par 10 : 6 + 4 = 10, il reste 4 à ajouter, puis 10 + 4 = 14.",
+      "ms": 7840,
+      "cat": "enonce"
+    },
+    "6a358e6c663b2072": {
+      "text": "On passe par 10 : 6 + 4 = 10, il reste 5 à ajouter, puis 10 + 5 = 15.",
+      "ms": 7840,
+      "cat": "enonce"
+    },
+    "1d00bf616cd6fd5a": {
+      "text": "On passe par 10 : 7 + 3 = 10, il reste 4 à ajouter, puis 10 + 4 = 14.",
+      "ms": 7760,
+      "cat": "enonce"
+    },
+    "6cb32a5d57a47da0": {
+      "text": "On passe par 10 : 7 + 3 = 10, il reste 6 à ajouter, puis 10 + 6 = 16.",
+      "ms": 7840,
+      "cat": "enonce"
+    },
+    "21c813bae3b42b69": {
+      "text": "On passe par 10 : 8 + 2 = 10, il reste 1 à ajouter, puis 10 + 1 = 11.",
+      "ms": 9040,
+      "cat": "enonce"
+    },
+    "78647765e8343b60": {
+      "text": "On passe par 10 : 8 + 2 = 10, il reste 2 à ajouter, puis 10 + 2 = 12.",
+      "ms": 7520,
+      "cat": "enonce"
+    },
+    "5f3faae7bc5b2350": {
+      "text": "On passe par 10 : 8 + 2 = 10, il reste 3 à ajouter, puis 10 + 3 = 13.",
+      "ms": 6640,
+      "cat": "enonce"
+    },
+    "08109929acf3666c": {
+      "text": "On passe par 10 : 8 + 2 = 10, il reste 6 à ajouter, puis 10 + 6 = 16.",
+      "ms": 8000,
+      "cat": "enonce"
+    },
+    "28aa927292096805": {
+      "text": "On passe par 10 : 8 + 2 = 10, il reste 7 à ajouter, puis 10 + 7 = 17.",
+      "ms": 7840,
+      "cat": "enonce"
+    },
+    "096e35e3e293f60e": {
+      "text": "On passe par 10 : 9 + 1 = 10, il reste 4 à ajouter, puis 10 + 4 = 14.",
+      "ms": 8160,
+      "cat": "enonce"
+    },
+    "5e2962b2c01b47c4": {
+      "text": "On passe par 10 : 9 + 1 = 10, il reste 8 à ajouter, puis 10 + 8 = 18.",
+      "ms": 8240,
+      "cat": "enonce"
+    },
+    "9cadb37c8a63e1e2": {
+      "text": "On plie sur le trait du milieu : chaque case du bas a sa jumelle en haut, à la même distance. On colorie A4, B5, C6, D5 et E4.",
+      "ms": 10480,
+      "cat": "enonce"
+    },
+    "bf3c7d12697190df": {
+      "text": "On plie sur le trait du milieu : chaque case du bas a sa jumelle en haut, à la même distance. On colorie A5, B6, C5, D6 et E5.",
+      "ms": 10320,
+      "cat": "enonce"
+    },
+    "dd04bda6af56d38a": {
+      "text": "On plie sur le trait du milieu : chaque case du bas a sa jumelle en haut. On colorie A3, B3, C4 et D4.",
+      "ms": 8240,
+      "cat": "enonce"
+    },
+    "38969770e00aaf95": {
+      "text": "On vise 100, la dizaine juste au-dessus de 98. 100 − 98 = 2.",
+      "ms": 6720,
+      "cat": "enonce"
+    },
+    "599261b9fc18e5d3": {
+      "text": "On vise 1000, la centaine juste au-dessus de 938. 1000 − 938 = 62.",
+      "ms": 7120,
+      "cat": "enonce"
+    },
+    "0d5474549fba215e": {
+      "text": "On vise 1000, la centaine juste au-dessus de 945. 1000 − 945 = 55.",
+      "ms": 7600,
+      "cat": "enonce"
+    },
+    "7d6a8f0d9a7c11c5": {
+      "text": "On vise 10000, le millier juste au-dessus de 9044. 10000 − 9044 = 956.",
+      "ms": 8480,
+      "cat": "enonce"
+    },
+    "05f199d1ded2a0bf": {
+      "text": "On vise 10000, le millier juste au-dessus de 9091. 10000 − 9091 = 909.",
+      "ms": 8160,
+      "cat": "enonce"
+    },
+    "982b9ee7df7ac83c": {
+      "text": "On vise 50, la dizaine juste au-dessus de 42. 50 − 42 = 8.",
+      "ms": 6640,
+      "cat": "enonce"
+    },
+    "3015eaff26b1191d": {
+      "text": "On vise 50, la dizaine juste au-dessus de 46. 50 − 46 = 4.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "c087f46da217c19c": {
+      "text": "On vise 500, la centaine juste au-dessus de 460. 500 − 460 = 40.",
+      "ms": 8160,
+      "cat": "enonce"
+    },
+    "ec89d1355509b389": {
+      "text": "On vise 5000, le millier juste au-dessus de 4491. 5000 − 4491 = 509.",
+      "ms": 8400,
+      "cat": "enonce"
+    },
+    "c9ca407eef6c761b": {
+      "text": "On vise 5000, le millier juste au-dessus de 4701. 5000 − 4701 = 299.",
+      "ms": 9600,
+      "cat": "enonce"
+    },
+    "ab98a42edd610a19": {
+      "text": "On vise 5000, le millier juste au-dessus de 4815. 5000 − 4815 = 185.",
+      "ms": 9200,
+      "cat": "enonce"
+    },
+    "8c8e979208f69571": {
+      "text": "On vise 60, la dizaine juste au-dessus de 51. 60 − 51 = 9.",
+      "ms": 6880,
+      "cat": "enonce"
+    },
+    "683a49658e01606c": {
+      "text": "On vise 60, la dizaine juste au-dessus de 55. 60 − 55 = 5.",
+      "ms": 7280,
+      "cat": "enonce"
+    },
+    "d5dfe0d7aec192f3": {
+      "text": "On vise 60, la dizaine juste au-dessus de 56. 60 − 56 = 4.",
+      "ms": 6880,
+      "cat": "enonce"
+    },
+    "2f0e0d17386fd6fd": {
+      "text": "On vise 60, la dizaine juste au-dessus de 57. 60 − 57 = 3.",
+      "ms": 6560,
+      "cat": "enonce"
+    },
+    "17a6906171e18ce6": {
+      "text": "On vise 600, la centaine juste au-dessus de 501. 600 − 501 = 99.",
+      "ms": 7440,
+      "cat": "enonce"
+    },
+    "ecfab4372fcdc024": {
+      "text": "On vise 600, la centaine juste au-dessus de 542. 600 − 542 = 58.",
+      "ms": 8000,
+      "cat": "enonce"
+    },
+    "3dc2f7e1c90682da": {
+      "text": "On vise 600, la centaine juste au-dessus de 585. 600 − 585 = 15.",
+      "ms": 7200,
+      "cat": "enonce"
+    },
+    "3cd58502df032e20": {
+      "text": "On vise 6000, le millier juste au-dessus de 5158. 6000 − 5158 = 842.",
+      "ms": 8000,
+      "cat": "enonce"
+    },
+    "e8ffcc4a4188447c": {
+      "text": "On vise 6000, le millier juste au-dessus de 5607. 6000 − 5607 = 393.",
+      "ms": 8480,
+      "cat": "enonce"
+    },
+    "a4e33a9c6df0e65d": {
+      "text": "On vise 6000, le millier juste au-dessus de 5837. 6000 − 5837 = 163.",
+      "ms": 9200,
+      "cat": "enonce"
+    },
+    "e6fdbcc661a85483": {
+      "text": "On vise 70, la dizaine juste au-dessus de 63. 70 − 63 = 7.",
+      "ms": 6640,
+      "cat": "enonce"
+    },
+    "ba331ab1d3da7187": {
+      "text": "On vise 70, la dizaine juste au-dessus de 64. 70 − 64 = 6.",
+      "ms": 7600,
+      "cat": "enonce"
+    },
+    "5f7e0622d00455dd": {
+      "text": "On vise 70, la dizaine juste au-dessus de 69. 70 − 69 = 1.",
+      "ms": 6800,
+      "cat": "enonce"
+    },
+    "5d0b6d26f382455e": {
+      "text": "On vise 700, la centaine juste au-dessus de 606. 700 − 606 = 94.",
+      "ms": 7600,
+      "cat": "enonce"
+    },
+    "994812a6f1c35ee5": {
+      "text": "On vise 7000, le millier juste au-dessus de 6147. 7000 − 6147 = 853.",
+      "ms": 9280,
+      "cat": "enonce"
+    },
+    "a5f0e39e5b49deb4": {
+      "text": "On vise 7000, le millier juste au-dessus de 6295. 7000 − 6295 = 705.",
+      "ms": 9360,
+      "cat": "enonce"
+    },
+    "badbcf5cb900b170": {
+      "text": "On vise 7000, le millier juste au-dessus de 6349. 7000 − 6349 = 651.",
+      "ms": 9040,
+      "cat": "enonce"
+    },
+    "7409ca613f34f757": {
+      "text": "On vise 7000, le millier juste au-dessus de 6367. 7000 − 6367 = 633.",
+      "ms": 9280,
+      "cat": "enonce"
+    },
+    "ff4efc02ee6b4096": {
+      "text": "On vise 7000, le millier juste au-dessus de 6924. 7000 − 6924 = 76.",
+      "ms": 8960,
+      "cat": "enonce"
+    },
+    "2af503ff1ed723fc": {
+      "text": "On vise 80, la dizaine juste au-dessus de 70. 80 − 70 = 10.",
+      "ms": 6400,
+      "cat": "enonce"
+    },
+    "34f258f6784cef59": {
+      "text": "On vise 80, la dizaine juste au-dessus de 79. 80 − 79 = 1.",
+      "ms": 6800,
+      "cat": "enonce"
+    },
+    "d68160c5e30bb46c": {
+      "text": "On vise 800, la centaine juste au-dessus de 702. 800 − 702 = 98.",
+      "ms": 7360,
+      "cat": "enonce"
+    },
+    "4379c4adfdf9be22": {
+      "text": "On vise 800, la centaine juste au-dessus de 704. 800 − 704 = 96.",
+      "ms": 7840,
+      "cat": "enonce"
+    },
+    "54bb886cfa7d52b0": {
+      "text": "On vise 800, la centaine juste au-dessus de 716. 800 − 716 = 84.",
+      "ms": 7440,
+      "cat": "enonce"
+    },
+    "85e95066a97d92c6": {
+      "text": "On vise 800, la centaine juste au-dessus de 742. 800 − 742 = 58.",
+      "ms": 8400,
+      "cat": "enonce"
+    },
+    "70181f955c3e90b9": {
+      "text": "On vise 800, la centaine juste au-dessus de 773. 800 − 773 = 27.",
+      "ms": 7200,
+      "cat": "enonce"
+    },
+    "b0d3b6013a8e1f21": {
+      "text": "On vise 8000, le millier juste au-dessus de 7136. 8000 − 7136 = 864.",
+      "ms": 8240,
+      "cat": "enonce"
+    },
+    "ef47ded044233c69": {
+      "text": "On vise 90, la dizaine juste au-dessus de 83. 90 − 83 = 7.",
+      "ms": 7600,
+      "cat": "enonce"
+    },
+    "b6da036c16a17302": {
+      "text": "On vise 900, la centaine juste au-dessus de 806. 900 − 806 = 94.",
+      "ms": 8320,
+      "cat": "enonce"
+    },
+    "4a121297b4728efd": {
+      "text": "On vise 900, la centaine juste au-dessus de 823. 900 − 823 = 77.",
+      "ms": 6720,
+      "cat": "enonce"
+    },
+    "b64e9b463a7ae99f": {
+      "text": "On vise 900, la centaine juste au-dessus de 881. 900 − 881 = 19.",
+      "ms": 7040,
+      "cat": "enonce"
+    },
+    "5ede55ec8d64d03b": {
+      "text": "On vise 9000, le millier juste au-dessus de 8207. 9000 − 8207 = 793.",
+      "ms": 10000,
+      "cat": "enonce"
+    },
+    "1529476cd292df59": {
+      "text": "On vise 9000, le millier juste au-dessus de 8590. 9000 − 8590 = 410.",
+      "ms": 9040,
+      "cat": "enonce"
+    },
+    "9e6517f8c2d8f160": {
+      "text": "On écarte le compas de 2 centimètres, puis on tourne : tout le bord est à 2 cm du centre.",
+      "ms": 6400,
+      "cat": "enonce"
+    },
+    "13cadadecda27c76": {
+      "text": "On écarte le compas de 5 centimètres. Tout le bord du cercle est alors à 5 cm du centre.",
+      "ms": 6480,
+      "cat": "enonce"
+    },
+    "dd061814f335bf22": {
+      "text": "Parmi 1774, 8985, 4405, le plus grand est 8985.",
+      "ms": 7920,
+      "cat": "enonce"
+    },
+    "7854b4ce216ff51a": {
+      "text": "Parmi 2095, 2641, 6958, le plus grand est 6958.",
+      "ms": 7920,
+      "cat": "enonce"
+    },
+    "e686e62461194e33": {
+      "text": "Parmi 2169, 4517, 6174, le plus grand est 6174.",
+      "ms": 8400,
+      "cat": "enonce"
+    },
+    "90a9120b0ef5e711": {
+      "text": "Parmi 2384, 4081, 4489, le plus grand est 4489.",
+      "ms": 8400,
+      "cat": "enonce"
+    },
+    "e24ec310f5b6a44d": {
+      "text": "Parmi 3241, 4941, 5711, le plus grand est 5711.",
+      "ms": 7920,
+      "cat": "enonce"
+    },
+    "a05a1bffd54aaa71": {
+      "text": "Parmi 3695, 7212, 6562, le plus grand est 7212.",
+      "ms": 8160,
+      "cat": "enonce"
+    },
+    "edf2c217a9c8a326": {
+      "text": "Parmi 4266, 3339, 9619, le plus grand est 9619.",
+      "ms": 8400,
+      "cat": "enonce"
+    },
+    "8c5e222684353c8e": {
+      "text": "Parmi 5264, 4661, 8743, le plus grand est 8743.",
+      "ms": 9040,
+      "cat": "enonce"
+    },
+    "7e33f94b103ecdee": {
+      "text": "Parmi 5381, 5801, 9119, le plus grand est 9119.",
+      "ms": 7120,
+      "cat": "enonce"
+    },
+    "1c76c771b85735c9": {
+      "text": "Parmi 5461, 1607, 3431, le plus grand est 5461.",
+      "ms": 8400,
+      "cat": "enonce"
+    },
+    "f0d3dec1a49f7da7": {
+      "text": "Parmi 6834, 2035, 7966, le plus grand est 7966.",
+      "ms": 7600,
+      "cat": "enonce"
+    },
+    "227050a05bdaa4c1": {
+      "text": "Parmi 6867, 5294, 2110, le plus grand est 6867.",
+      "ms": 7440,
+      "cat": "enonce"
+    },
+    "03cf1d40f69e1cc8": {
+      "text": "Parmi 6978, 6636, 4176, le plus grand est 6978.",
+      "ms": 7440,
+      "cat": "enonce"
+    },
+    "0b164319cddcb131": {
+      "text": "Parmi 7322, 1932, 7301, le plus grand est 7322.",
+      "ms": 6800,
+      "cat": "enonce"
+    },
+    "3af81c10875fc80d": {
+      "text": "Parmi 7372, 2098, 4316, le plus grand est 7372.",
+      "ms": 7360,
+      "cat": "enonce"
+    },
+    "28e2a64cf88de08c": {
+      "text": "Parmi 8670, 4448, 4835, le plus grand est 8670.",
+      "ms": 8320,
+      "cat": "enonce"
+    },
+    "e8050b2dd71555f8": {
+      "text": "Pars de B1. Avance de deux cases vers la droite, puis monte de trois cases. Écris le code de la case d'arrivée.",
+      "ms": 7920,
+      "cat": "consigne"
+    },
+    "af95c99a050ba875": {
+      "text": "Pars de D3. Va d'une case vers la gauche, puis descends de deux cases. Écris le code de la case d'arrivée.",
+      "ms": 7600,
+      "cat": "consigne"
+    },
+    "adcce9748df51e41": {
+      "text": "Pars de la case A4, descends de deux cases puis avance de deux cases vers la droite. Clique sur la case d'arrivée.",
+      "ms": 7600,
+      "cat": "consigne"
+    },
+    "f3932d9d5268db17": {
+      "text": "Pars de la case B2, avance d'une case vers la droite puis monte d'une case. Clique sur la case d'arrivée.",
+      "ms": 7760,
+      "cat": "consigne"
+    },
+    "c0c5956d2f559af0": {
+      "text": "Place un point sur le nœud A2.",
+      "ms": 2160,
+      "cat": "consigne"
+    },
+    "888e9bdf4ffb4dba": {
+      "text": "Place un point sur le nœud B3.",
+      "ms": 2560,
+      "cat": "consigne"
+    },
+    "b4f41ebfde4dcdce": {
+      "text": "Pour équilibrer une balance qui a 5 kg à gauche, il faut à droite...",
+      "ms": 4720,
+      "cat": "consigne"
+    },
+    "d028d4993965199f": {
+      "text": "Pour équilibrer, il faut le même poids des deux côtés : 5 kg.",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "a5ab8800572125dd": {
+      "text": "Quand il y a de moins, je retire. 41 − 10 = 31.",
+      "ms": 5360,
+      "cat": "enonce"
+    },
+    "69fd7beaba44ef9a": {
+      "text": "Quand il y a de moins, je retire. 462 − 80 = 382.",
+      "ms": 5520,
+      "cat": "enonce"
+    },
+    "8b734c358e39b7d0": {
+      "text": "Quand il y a de moins, je retire. 58 − 25 = 33.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "7a7636bdc1655ac9": {
+      "text": "Quand il y a de moins, je retire. 616 − 430 = 186.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "e260c665b484347b": {
+      "text": "Quand il y a de moins, je retire. 651 − 483 = 168.",
+      "ms": 7280,
+      "cat": "enonce"
+    },
+    "532348141b9654d6": {
+      "text": "Quand il y a de moins, je retire. 72 − 42 = 30.",
+      "ms": 5120,
+      "cat": "enonce"
+    },
+    "622f7ba5d906587a": {
+      "text": "Quand il y a de moins, je retire. 74 − 19 = 55.",
+      "ms": 5360,
+      "cat": "enonce"
+    },
+    "1feb9790bb9ff46f": {
+      "text": "Quand il y a de moins, je retire. 759 − 191 = 568.",
+      "ms": 6800,
+      "cat": "enonce"
+    },
+    "fb6bc53fe0c93a8f": {
+      "text": "Quand il y a de moins, je retire. 851 − 137 = 714.",
+      "ms": 6400,
+      "cat": "enonce"
+    },
+    "63a2120f3348f7a2": {
+      "text": "Quand il y a de moins, je retire. 865 − 317 = 548.",
+      "ms": 7360,
+      "cat": "enonce"
+    },
+    "b3b6251e26e840d5": {
+      "text": "Quand il y a de moins, je retire. 95 − 26 = 69.",
+      "ms": 5440,
+      "cat": "enonce"
+    },
+    "fbc782ef81c522b5": {
+      "text": "Quand il y a de moins, je retire. 95 − 27 = 68.",
+      "ms": 5680,
+      "cat": "enonce"
+    },
+    "a6fd426a12b0931a": {
+      "text": "Quand il y a de moins, je retire. 99 − 4 = 95.",
+      "ms": 5040,
+      "cat": "enonce"
+    },
+    "80ff243fb53e5a7d": {
+      "text": "Quand il y a de plus, j'ajoute. 208 + 337 = 545.",
+      "ms": 6800,
+      "cat": "enonce"
+    },
+    "5fabba5f93b2af89": {
+      "text": "Quand il y a de plus, j'ajoute. 297 + 436 = 733.",
+      "ms": 7200,
+      "cat": "enonce"
+    },
+    "de1beaa63e247337": {
+      "text": "Quand il y a de plus, j'ajoute. 36 + 39 = 75.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "53bf2831b2b97291": {
+      "text": "Quand il y a de plus, j'ajoute. 486 + 51 = 537.",
+      "ms": 6800,
+      "cat": "enonce"
+    },
+    "dc7baebfe80b6971": {
+      "text": "Quand il y a de plus, j'ajoute. 52 + 35 = 87.",
+      "ms": 5520,
+      "cat": "enonce"
+    },
+    "d493629eefefabdc": {
+      "text": "Quand il y a de plus, j'ajoute. 804 + 37 = 841.",
+      "ms": 6480,
+      "cat": "enonce"
+    },
+    "454675edbcbac360": {
+      "text": "Quand il y a de plus, j'ajoute. 807 + 222 = 1 029.",
+      "ms": 6400,
+      "cat": "enonce"
+    },
+    "a19412767e4025e9": {
+      "text": "Quand il y a de plus, j'ajoute. 89 + 28 = 117.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "b7696c532682a6bd": {
+      "text": "Quand il y a de plus, j'ajoute. 965 + 355 = 1 320.",
+      "ms": 6560,
+      "cat": "enonce"
+    },
+    "fa446a22e44e5e8b": {
+      "text": "Règle la barre des billes bleues sur 7. Touche la hauteur 7 au-dessus des billes bleues.",
+      "ms": 6320,
+      "cat": "consigne"
+    },
+    "f42c99f065ffa9ce": {
+      "text": "Règle la barre des cartes sur 5. Touche la hauteur 5 au-dessus des cartes.",
+      "ms": 5440,
+      "cat": "consigne"
+    },
+    "a360268d25a56b1d": {
+      "text": "Sacha a lu 10 livres, Emma en a lu 7. 10 moins 7 font 3 : Sacha a lu 3 livres de plus.",
+      "ms": 7200,
+      "cat": "enonce"
+    },
+    "8be40a74a62c848d": {
+      "text": "Sur l'horloge : 1 h 15 + 2 h 5 min = 3 h 20.",
+      "ms": 5520,
+      "cat": "enonce"
+    },
+    "dd965d15562ac5d6": {
+      "text": "Sur l'horloge : 10 h 45 + 2 h = 12 h 45.",
+      "ms": 5840,
+      "cat": "enonce"
+    },
+    "b765a6f9844c718f": {
+      "text": "Sur l'horloge : 11 h 15 + 1 h 30 min = 12 h 45.",
+      "ms": 6240,
+      "cat": "enonce"
+    },
+    "ae8975a602b82411": {
+      "text": "Sur l'horloge : 11 h 30 + 2 h 30 min = 2 h.",
+      "ms": 5520,
+      "cat": "enonce"
+    },
+    "0e9cc4b91bd2e963": {
+      "text": "Sur l'horloge : 4 h 05 + 1 h 10 min = 5 h 15.",
+      "ms": 6000,
+      "cat": "enonce"
+    },
+    "d29c4f65e56e0b12": {
+      "text": "Sur l'horloge : 4 h 25 + 10 min = 4 h 35.",
+      "ms": 5680,
+      "cat": "enonce"
+    },
+    "4e6331153cda096d": {
+      "text": "Sur l'horloge : 4 h 35 + 2 h 5 min = 6 h 40.",
+      "ms": 5920,
+      "cat": "enonce"
+    },
+    "a517f71e45a65e8c": {
+      "text": "Sur l'horloge : 4 h 40 + 1 h 40 min = 6 h 20.",
+      "ms": 5600,
+      "cat": "enonce"
+    },
+    "da10a0d84169537f": {
+      "text": "Sur l'horloge : 5 h 15 + 45 min = 6 h.",
+      "ms": 5440,
+      "cat": "enonce"
+    },
+    "a153d51c54c7ff72": {
+      "text": "Sur l'horloge : 6 h + 1 h 15 min = 7 h 15.",
+      "ms": 5520,
+      "cat": "enonce"
+    },
+    "eeeb99270419b74a": {
+      "text": "Sur l'horloge : 6 h 45 + 1 h 45 min = 8 h 30.",
+      "ms": 6560,
+      "cat": "enonce"
+    },
+    "7293bb6f12ff839c": {
+      "text": "Sur l'horloge : 7 h 15 + 30 min = 7 h 45.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "cd808bbad1cf5e66": {
+      "text": "Sur l'horloge : 7 h 45 + 3 h = 10 h 45.",
+      "ms": 5760,
+      "cat": "enonce"
+    },
+    "180dca7c015d5416": {
+      "text": "Sur l'horloge : 8 h 15 + 1 h 15 min = 9 h 30.",
+      "ms": 5520,
+      "cat": "enonce"
+    },
+    "83d66756305cb5af": {
+      "text": "Sur l'horloge : 8 h 20 + 2 h = 10 h 20.",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "1e9320b4cdbc20ec": {
+      "text": "Sur l'horloge : 8 h 30 + 1 h 15 min = 9 h 45.",
+      "ms": 5600,
+      "cat": "enonce"
+    },
+    "2e85add675e6610a": {
+      "text": "Sur l'horloge : 8 h 45 + 1 h = 9 h 45.",
+      "ms": 5120,
+      "cat": "enonce"
+    },
+    "618d95c09e841382": {
+      "text": "Sur une balance, 5 kg à gauche et 3 kg à droite. Que fait le côté gauche ?",
+      "ms": 5520,
+      "cat": "consigne"
+    },
+    "8d428bd7ec043b2e": {
+      "text": "Tom a 3 images, soit 15 autocollants. Léa a 2 images, soit 10 autocollants. Tom en a le plus.",
+      "ms": 8000,
+      "cat": "enonce"
+    },
+    "f7585295cb0907f7": {
+      "text": "Tom a 8 billes, Léa en a 5. 8 est plus grand que 5 : Tom en a le plus.",
+      "ms": 7120,
+      "cat": "enonce"
+    },
+    "cbd2b5fce9e8c2bd": {
+      "text": "Tom a 9 billes, Léa en a 6. 9 moins 6 font 3 : Tom a 3 billes de plus.",
+      "ms": 7280,
+      "cat": "enonce"
+    },
+    "0bcf94d53992563a": {
+      "text": "Touche deux nœuds pour tracer un trait droit de 3 carreaux de long.",
+      "ms": 3600,
+      "cat": "consigne"
+    },
+    "e5d5e4f7c6f11dc9": {
+      "text": "Touche deux nœuds pour tracer un trait droit de 4 carreaux de long.",
+      "ms": 3760,
+      "cat": "consigne"
+    },
+    "a2e60d3a74f6016a": {
+      "text": "Trace un cercle de rayon 2 centimètres. Pose d'abord la pointe, puis écarte le compas de 2 cm.",
+      "ms": 6640,
+      "cat": "consigne"
+    },
+    "30d3484bfb9218ad": {
+      "text": "Trace un cercle de rayon 3 centimètres. Pose d'abord la pointe, puis écarte le compas de 3 cm.",
+      "ms": 7200,
+      "cat": "consigne"
+    },
+    "2fa29ce823ea42ef": {
+      "text": "Trace un cercle de rayon 5 centimètres. Pose la pointe, puis écarte le compas de 5 cm.",
+      "ms": 6640,
+      "cat": "consigne"
+    },
+    "382356aa6f6ca8d8": {
+      "text": "Trace un trait de 5 centimètres. Touche le début puis la fin de ton trait sur la règle.",
+      "ms": 5840,
+      "cat": "consigne"
+    },
+    "371438c8d545faa1": {
+      "text": "Trace un trait de 7 centimètres. Touche le début puis la fin de ton trait sur la règle.",
+      "ms": 6480,
+      "cat": "consigne"
+    },
+    "045e3563acb7ebd9": {
+      "text": "Tu pars de A1. Tu avances d'une case vers la droite, puis tu montes de deux cases. Sur quelle case arrives-tu ?",
+      "ms": 7520,
+      "cat": "consigne"
+    },
+    "561199f68ebb4f8b": {
+      "text": "Tu pars de D4. Tu descends de deux cases, puis tu vas d'une case vers la gauche. Sur quelle case arrives-tu ?",
+      "ms": 7680,
+      "cat": "consigne"
+    },
+    "d44b2af0e3478c70": {
+      "text": "Tu pars de la case B2 et tu avances de deux cases vers la droite. Sur quelle case arrives-tu ?",
+      "ms": 6080,
+      "cat": "consigne"
+    },
+    "4168b1ea0aeba09d": {
+      "text": "Tu pars de la case C1 et tu montes de deux cases vers le haut. Sur quelle case arrives-tu ?",
+      "ms": 5840,
+      "cat": "consigne"
+    },
+    "254eeabf369d2a32": {
+      "text": "Un jour et une nuit durent ensemble 24 heures.",
+      "ms": 3600,
+      "cat": "enonce"
+    },
+    "056f9de6bdcb5d95": {
+      "text": "Un nœud, c'est un point de croisement des traits. On prend la colonne B et la ligne 3 : c'est le nœud B3.",
+      "ms": 7280,
+      "cat": "enonce"
+    },
+    "f749e28d49bf8489": {
+      "text": "Une année a 12 mois, de janvier à décembre.",
+      "ms": 3600,
+      "cat": "enonce"
+    },
+    "006d0caf32dff475": {
+      "text": "Une case vers la droite : de A à B. Puis deux cases vers le haut : de la ligne 1 à la ligne 3. On arrive en B3.",
+      "ms": 9600,
+      "cat": "enonce"
+    },
+    "2f6ba5f255b35fc0": {
+      "text": "Une case vers la droite : de B à C. Une case vers le haut : de la ligne 2 à la ligne 3. On arrive en C3.",
+      "ms": 7760,
+      "cat": "enonce"
+    },
+    "8a59ab9a0635232f": {
+      "text": "Une case vers la gauche : de D à C. Deux cases vers le bas : de la ligne 3 à la ligne 1. On arrive en C1.",
+      "ms": 8320,
+      "cat": "enonce"
+    },
+    "cbfc07a802ece3e3": {
+      "text": "Une semaine a 7 jours, de lundi à dimanche.",
+      "ms": 3600,
+      "cat": "enonce"
+    },
+    "da6add78a4ec7b46": {
+      "text": "Une semaine a 7 jours, une année a 12 mois. Après lundi vient mardi. Le même jour revient chaque 7 jours.",
+      "ms": 8320,
+      "cat": "indice"
+    },
+    "fa923fb3ca7b1360": {
+      "text": "Une solution : avance deux fois, jusqu'en A3, tourne à droite, puis avance jusqu'en E3. Tu passes au-dessus des cases grises.",
+      "ms": 9360,
+      "cat": "enonce"
+    },
+    "924cebfbe27775ca": {
+      "text": "Une solution : avance trois fois, jusqu'en D1, tourne à gauche, puis avance une fois pour arriver en D2.",
+      "ms": 8400,
+      "cat": "enonce"
+    },
+    "12e9448b77f00916": {
+      "text": "Une solution : avance, avance, jusqu'en A3, tourne à droite, puis avance, avance pour arriver en C3.",
+      "ms": 8240,
+      "cat": "enonce"
+    },
+    "135cedbb2bf4a821": {
+      "text": "Une solution : monte tout en haut, jusqu'en A5, tourne à droite, puis longe le haut jusqu'en E5. Tu passes loin des cases grises.",
+      "ms": 9920,
+      "cat": "enonce"
+    },
+    "afde8ec05a0d130e": {
+      "text": "Unites : 0 + 7 = 7, je pose 7, je retiens 1. Puis les dizaines. Total : 77.",
+      "ms": 9040,
+      "cat": "enonce"
+    },
+    "274a6fe981ea9ec6": {
+      "text": "Unites : 1 + 9 = 10, je pose 0, je retiens 1. Puis les dizaines. Total : 110.",
+      "ms": 8240,
+      "cat": "enonce"
+    },
+    "30793fab8bce004d": {
+      "text": "Unites : 1 + 9 = 10, je pose 0, je retiens 1. Puis les dizaines. Total : 150.",
+      "ms": 8560,
+      "cat": "enonce"
+    },
+    "02c333d64f59d68c": {
+      "text": "Unites : 2 + 6 = 8, je pose 8, je retiens 1. Puis les dizaines. Total : 78.",
+      "ms": 8160,
+      "cat": "enonce"
+    },
+    "76608bda09243e3a": {
+      "text": "Unites : 2 + 9 = 11, je pose 1, je retiens 1. Puis les dizaines. Total : 161.",
+      "ms": 9280,
+      "cat": "enonce"
+    },
+    "899223e88233107e": {
+      "text": "Unites : 3 + 9 = 12, je pose 2, je retiens 1. Puis les dizaines. Total : 102.",
+      "ms": 8720,
+      "cat": "enonce"
+    },
+    "f3c55d49f4e72021": {
+      "text": "Unites : 3 + 9 = 12, je pose 2, je retiens 1. Puis les dizaines. Total : 142.",
+      "ms": 9040,
+      "cat": "enonce"
+    },
+    "be56b0c199fc61e3": {
+      "text": "Unites : 5 + 5 = 10, je pose 0, je retiens 1. Puis les dizaines. Total : 110.",
+      "ms": 9040,
+      "cat": "enonce"
+    },
+    "4c6561ffa639d54b": {
+      "text": "Unites : 5 + 8 = 13, je pose 3, je retiens 1. Puis les dizaines. Total : 113.",
+      "ms": 9040,
+      "cat": "enonce"
+    },
+    "4cd6828714364a30": {
+      "text": "Unites : 5 + 8 = 13, je pose 3, je retiens 1. Puis les dizaines. Total : 133.",
+      "ms": 8560,
+      "cat": "enonce"
+    },
+    "68618a43a9fdce66": {
+      "text": "Unites : 6 + 7 = 13, je pose 3, je retiens 1. Puis les dizaines. Total : 103.",
+      "ms": 9200,
+      "cat": "enonce"
+    },
+    "0c44edc8662ef4cc": {
+      "text": "Unites : 7 + 3 = 10, je pose 0, je retiens 1. Puis les dizaines. Total : 100.",
+      "ms": 9040,
+      "cat": "enonce"
+    },
+    "2c5f1acd6fecf4df": {
+      "text": "Unites : 7 + 7 = 14, je pose 4, je retiens 1. Puis les dizaines. Total : 134.",
+      "ms": 9120,
+      "cat": "enonce"
+    },
+    "3e5fb1b83550194c": {
+      "text": "Unites : 7 + 8 = 15, je pose 5, je retiens 1. Puis les dizaines. Total : 135.",
+      "ms": 9200,
+      "cat": "enonce"
+    },
+    "2526a03e4eca0ade": {
+      "text": "Unites : 9 + 4 = 13, je pose 3, je retiens 1. Puis les dizaines. Total : 73.",
+      "ms": 8800,
+      "cat": "enonce"
+    },
+    "f64ca009629f7949": {
+      "text": "Unites : 9 + 6 = 15, je pose 5, je retiens 1. Puis les dizaines. Total : 95.",
+      "ms": 9040,
+      "cat": "enonce"
+    },
+    "d3f0ceaa716824d2": {
+      "text": "Vers la droite, on change de colonne : de B on passe à C puis à D. On reste à la ligne 2, donc on arrive en D2.",
+      "ms": 8000,
+      "cat": "enonce"
+    },
+    "0822476952a99259": {
+      "text": "Vers le haut, on change de ligne : de la ligne 1 on passe à 2 puis à 3. On reste dans la colonne C, donc on arrive en C3.",
+      "ms": 9600,
+      "cat": "enonce"
+    },
+    "b51d6f72acffc8ff": {
+      "text": "Voici le point O. Reporte une longueur de 4 centimètres à partir de O : pose la pointe sur O et place un point à 4 cm.",
+      "ms": 8720,
+      "cat": "consigne"
+    },
+    "0f21544736485215": {
+      "text": "Voici un trait de 0 à 6. Touche la graduation qui est juste au milieu.",
+      "ms": 4960,
+      "cat": "consigne"
+    },
+    "d336da3e79b7f6f2": {
+      "text": "Voici un trait de 2 à 8. Touche la graduation qui est juste au milieu.",
+      "ms": 5040,
+      "cat": "consigne"
+    },
+    "dcb54ad697b95ae3": {
+      "text": "au début = reste + donné : 331 + 280 = 611.",
+      "ms": 7280,
+      "cat": "enonce"
+    },
+    "828702ea6fca56f8": {
+      "text": "au début = reste + donné : 381 + 413 = 794.",
+      "ms": 7440,
+      "cat": "enonce"
+    },
+    "c23e897412c50eb5": {
+      "text": "au début = reste + donné : 397 + 48 = 445.",
+      "ms": 7120,
+      "cat": "enonce"
+    },
+    "d8febc7ef5aa08e5": {
+      "text": "au début = reste + donné : 446 + 310 = 756.",
+      "ms": 7360,
+      "cat": "enonce"
+    },
+    "19a8a51dc177c328": {
+      "text": "au début = reste + donné : 475 + 238 = 713.",
+      "ms": 7280,
+      "cat": "enonce"
+    },
+    "99a0d8f875e65726": {
+      "text": "au début = reste + donné : 486 + 316 = 802.",
+      "ms": 7520,
+      "cat": "enonce"
+    },
+    "f6f547dc039d4c4b": {
+      "text": "au début = reste + donné : 80 + 243 = 323.",
+      "ms": 4720,
+      "cat": "enonce"
+    },
+    "f6beac0812226ca0": {
+      "text": "avant + 252 = 929, donc avant = 929 − 252 = 677.",
+      "ms": 8320,
+      "cat": "enonce"
+    },
+    "636b6ea73d1d1a62": {
+      "text": "avant + 414 = 652, donc avant = 652 − 414 = 238.",
+      "ms": 7760,
+      "cat": "enonce"
+    },
+    "9baed3a330603c2e": {
+      "text": "avant + 417 = 629, donc avant = 629 − 417 = 212.",
+      "ms": 8800,
+      "cat": "enonce"
+    },
+    "e884403d433a6775": {
+      "text": "avant + 430 = 539, donc avant = 539 − 430 = 109.",
+      "ms": 7920,
+      "cat": "enonce"
+    },
+    "41fa4ede02c1d03b": {
+      "text": "cent quatre-vingt-six s'ecrit 186.",
+      "ms": 3520,
+      "cat": "enonce"
+    },
+    "afc0f0254e59e3f1": {
+      "text": "cinq cent six s'ecrit 506.",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "8393f35ef8229f3b": {
+      "text": "cinq mille deux cent soixante-neuf s'ecrit 5269.",
+      "ms": 3920,
+      "cat": "enonce"
+    },
+    "fad442ce68d83553": {
+      "text": "cinq mille sept cent vingt-trois s'ecrit 5723.",
+      "ms": 3680,
+      "cat": "enonce"
+    },
+    "4ee7d7e9194e03ce": {
+      "text": "cinq mille soixante-six s'ecrit 5066.",
+      "ms": 4160,
+      "cat": "enonce"
+    },
+    "0c73e5271fa79963": {
+      "text": "cinq mille trente-cinq s'ecrit 5035.",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "176a333f2bec00c6": {
+      "text": "deux cent cinquante-trois s'ecrit 253.",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "0af5e60662d30d6d": {
+      "text": "deux cent quatre-vingt-cinq s'ecrit 285.",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "28cd70dbe8753282": {
+      "text": "deux cent quatre-vingt-treize s'ecrit 293.",
+      "ms": 3360,
+      "cat": "enonce"
+    },
+    "cf880770d6a61e26": {
+      "text": "deux cent soixante-huit s'ecrit 268.",
+      "ms": 2960,
+      "cat": "enonce"
+    },
+    "e5b616b2dd4bf2ea": {
+      "text": "deux mille deux cent quatre-vingt-six s'ecrit 2286.",
+      "ms": 4080,
+      "cat": "enonce"
+    },
+    "1e2236ff234ba776": {
+      "text": "huit cent soixante-treize s'ecrit 873.",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "2d0d9c894387ad03": {
+      "text": "huit mille cent dix-sept s'ecrit 8117.",
+      "ms": 3040,
+      "cat": "enonce"
+    },
+    "034b90d0d97f7837": {
+      "text": "la moitié de 14, c'est 14 ÷ 2 = 7.",
+      "ms": 4160,
+      "cat": "enonce"
+    },
+    "bb42935f0c69ad38": {
+      "text": "le cinquième de 15, c'est 15 ÷ 5 = 3.",
+      "ms": 3840,
+      "cat": "enonce"
+    },
+    "731c9bcbc1a37695": {
+      "text": "le cinquième de 30, c'est 30 ÷ 5 = 6.",
+      "ms": 5280,
+      "cat": "enonce"
+    },
+    "34603f2b64c881f9": {
+      "text": "le cinquième de 35, c'est 35 ÷ 5 = 7.",
+      "ms": 4960,
+      "cat": "enonce"
+    },
+    "240fba0a31555803": {
+      "text": "le cinquième de 40, c'est 40 ÷ 5 = 8.",
+      "ms": 4960,
+      "cat": "enonce"
+    },
+    "72a185a5d38c3110": {
+      "text": "le dixième de 20, c'est 20 ÷ 10 = 2.",
+      "ms": 2880,
+      "cat": "enonce"
+    },
+    "dfb69e1385cf51f1": {
+      "text": "le dixième de 50, c'est 50 ÷ 10 = 5.",
+      "ms": 3520,
+      "cat": "enonce"
+    },
+    "c954b9c0f1ad3acb": {
+      "text": "le dixième de 60, c'est 60 ÷ 10 = 6.",
+      "ms": 4640,
+      "cat": "enonce"
+    },
+    "f472b5240c231612": {
+      "text": "le quart de 16, c'est 16 ÷ 4 = 4.",
+      "ms": 4400,
+      "cat": "enonce"
+    },
+    "4d7f6243abd4ed46": {
+      "text": "le quart de 20, c'est 20 ÷ 4 = 5.",
+      "ms": 4320,
+      "cat": "enonce"
+    },
+    "0474bb034c0482f3": {
+      "text": "le tiers de 15, c'est 15 ÷ 3 = 5.",
+      "ms": 4640,
+      "cat": "enonce"
+    },
+    "40dc3bd85bce02e6": {
+      "text": "le tiers de 9, c'est 9 ÷ 3 = 3.",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "f9161072bf494bb8": {
+      "text": "mille cinq cent soixante-quinze s'ecrit 1575.",
+      "ms": 4320,
+      "cat": "enonce"
+    },
+    "95fc420e617f5d2a": {
+      "text": "neuf cent quatre-vingt-quinze s'ecrit 995.",
+      "ms": 3840,
+      "cat": "enonce"
+    },
+    "5183459d08ee261f": {
+      "text": "neuf mille deux cent vingt s'ecrit 9220.",
+      "ms": 3120,
+      "cat": "enonce"
+    },
+    "dc21a35aeeb54349": {
+      "text": "neuf mille quatre-vingt-neuf s'ecrit 9089.",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "4ed0999e0cc0c8a7": {
+      "text": "quatre cent dix s'ecrit 410.",
+      "ms": 2960,
+      "cat": "enonce"
+    },
+    "b0064e6888f3aba6": {
+      "text": "quatre cent quatre-vingt-douze s'ecrit 492.",
+      "ms": 3360,
+      "cat": "enonce"
+    },
+    "9da477877fbf1751": {
+      "text": "quatre-vingt-neuf s'ecrit 89.",
+      "ms": 2400,
+      "cat": "enonce"
+    },
+    "4205fc38920d35fe": {
+      "text": "sept cent trente-cinq s'ecrit 735.",
+      "ms": 3600,
+      "cat": "enonce"
+    },
+    "70764c89046b13bc": {
+      "text": "sept cent trente-neuf s'ecrit 739.",
+      "ms": 3520,
+      "cat": "enonce"
+    },
+    "2ff999c38a5123db": {
+      "text": "sept mille cent dix-huit s'ecrit 7118.",
+      "ms": 3680,
+      "cat": "enonce"
+    },
+    "afae1f045bac9bea": {
+      "text": "sept mille cent quatorze s'ecrit 7114.",
+      "ms": 3920,
+      "cat": "enonce"
+    },
+    "e85634cff5d9c741": {
+      "text": "six cent cinquante-huit s'ecrit 658.",
+      "ms": 2640,
+      "cat": "enonce"
+    },
+    "506579f56f5aa461": {
+      "text": "six cent soixante-quatre s'ecrit 664.",
+      "ms": 2880,
+      "cat": "enonce"
+    },
+    "904bbf55927476d9": {
+      "text": "six mille deux cent quarante-neuf s'ecrit 6249.",
+      "ms": 3920,
+      "cat": "enonce"
+    },
+    "4c6fddf3860b3466": {
+      "text": "six mille huit cent trente s'ecrit 6830.",
+      "ms": 3200,
+      "cat": "enonce"
+    },
+    "5cec7a66bb7b20f9": {
+      "text": "trois cent quatre-vingt-dix s'ecrit 390.",
+      "ms": 3360,
+      "cat": "enonce"
+    },
+    "43e4a45f1bbff9e1": {
+      "text": "trois mille trois cent quatre-vingt-huit s'ecrit 3388.",
+      "ms": 4240,
+      "cat": "enonce"
+    },
+    "d34f265037729700": {
+      "text": "trois mille vingt-six s'ecrit 3026.",
+      "ms": 2720,
+      "cat": "enonce"
+    },
+    "1d6d71e4361f70c6": {
+      "text": "unites : 0 + 0 = 0, je pose 0 ; dizaines : 3 + 1 = 4, je pose 4. Total : 40.",
+      "ms": 6160,
+      "cat": "enonce"
+    },
+    "cb9d56bce2ef86d1": {
+      "text": "unites : 0 + 0 = 0, je pose 0 ; dizaines : 6 + 0 = 6, je pose 6 ; centaines : 6 + 9 = 15, je pose 5, je retiens 1 ; il reste 1 a poser a gauche. Total : 1560.",
+      "ms": 17360,
+      "cat": "enonce"
+    },
+    "51078b915db31968": {
+      "text": "unites : 0 + 5 + 0 = 5, je pose 5 ; dizaines : 9 + 6 + 3 = 18, je pose 8, je retiens 1 ; centaines : 1 + 6 + 1, + 1 retenue, = 9, je pose 9. Total : 985.",
+      "ms": 17840,
+      "cat": "enonce"
+    },
+    "238fbff2c4b780e3": {
+      "text": "unites : 0 + 5 = 5, je pose 5 ; dizaines : 1 + 9 = 10, je pose 0, je retiens 1 ; centaines : 5 + 5, + 1 retenue, = 11, je pose 1, je retiens 1 ; il reste 1 a poser a gauche. Total : 1105.",
+      "ms": 20400,
+      "cat": "enonce"
+    },
+    "a3b6af3796f14363": {
+      "text": "unites : 0 + 7 = 7, je pose 7 ; dizaines : 3 + 2 = 5, je pose 5 ; centaines : 0 + 8 = 8, je pose 8. Total : 857.",
+      "ms": 15280,
+      "cat": "enonce"
+    },
+    "eb8a05a9c6c3458a": {
+      "text": "unites : 0 + 8 = 8, je pose 8 ; dizaines : 1 + 2 = 3, je pose 3. Total : 38.",
+      "ms": 10640,
+      "cat": "enonce"
+    },
+    "32b04dcbc8aa4507": {
+      "text": "unites : 1 + 2 = 3, je pose 3 ; dizaines : 9 + 6 = 15, je pose 5, je retiens 1 ; centaines : 2 + 6, + 1 retenue, = 9, je pose 9. Total : 953.",
+      "ms": 17040,
+      "cat": "enonce"
+    },
+    "9522d9c6e25b7502": {
+      "text": "unites : 1 + 3 + 8 = 12, je pose 2, je retiens 1 ; dizaines : 9 + 0 + 3, + 1 retenue, = 13, je pose 3, je retiens 1 ; centaines : 4 + 9 + 5, + 1 retenue, = 19, je pose 9, je retiens 1 ; il reste 1 a poser a gauche. Total : 1932.",
+      "ms": 21040,
+      "cat": "enonce"
+    },
+    "9f7e8a29a3ccd8b1": {
+      "text": "unites : 1 + 4 + 0 = 5, je pose 5 ; dizaines : 1 + 7 + 3 = 11, je pose 1, je retiens 1 ; centaines : 7 + 3 + 1, + 1 retenue, = 12, je pose 2, je retiens 1 ; il reste 1 a poser a gauche. Total : 1215.",
+      "ms": 19840,
+      "cat": "enonce"
+    },
+    "817c2234740d1e3b": {
+      "text": "unites : 1 + 4 = 5, je pose 5 ; dizaines : 3 + 4 = 7, je pose 7. Total : 75.",
+      "ms": 10080,
+      "cat": "enonce"
+    },
+    "c0d552f8735d8cc6": {
+      "text": "unites : 1 + 4 = 5, je pose 5 ; dizaines : 4 + 4 = 8, je pose 8. Total : 85.",
+      "ms": 10640,
+      "cat": "enonce"
+    },
+    "798207b4adb444e4": {
+      "text": "unites : 1 + 8 = 9, je pose 9 ; dizaines : 4 + 9 = 13, je pose 3, je retiens 1 ; centaines : 7 + 8, + 1 retenue, = 16, je pose 6, je retiens 1 ; il reste 1 a poser a gauche. Total : 1639.",
+      "ms": 18000,
+      "cat": "enonce"
+    },
+    "53e9b8c4e4b5eb7c": {
+      "text": "unites : 1 + 9 + 2 = 12, je pose 2, je retiens 1 ; dizaines : 6 + 7 + 1, + 1 retenue, = 15, je pose 5, je retiens 1 ; centaines : 8 + 4 + 4, + 1 retenue, = 17, je pose 7, je retiens 1 ; il reste 1 a poser a gauche. Total : 1752.",
+      "ms": 22640,
+      "cat": "enonce"
+    },
+    "a4ba3d422280252a": {
+      "text": "unites : 1 + 9 = 10, je pose 0, je retiens 1 ; dizaines : 6 + 0, + 1 retenue, = 7, je pose 7 ; centaines : 8 + 6 = 14, je pose 4, je retiens 1 ; milliers : 6 + 3, + 1 retenue, = 10, je pose 0, je retiens 1 ; il reste 1 a poser a gauche. Total : 10470.",
+      "ms": 24160,
+      "cat": "enonce"
+    },
+    "db76276fef375401": {
+      "text": "unites : 2 + 2 = 4, je pose 4 ; dizaines : 2 + 6 = 8, je pose 8. Total : 84.",
+      "ms": 9760,
+      "cat": "enonce"
+    },
+    "0dece1ca82cb5431": {
+      "text": "unites : 2 + 3 + 5 = 10, je pose 0, je retiens 1 ; dizaines : 1 + 0 + 0, + 1 retenue, = 2, je pose 2 ; centaines : 1 + 7 + 7 = 15, je pose 5, je retiens 1 ; il reste 1 a poser a gauche. Total : 1520.",
+      "ms": 20640,
+      "cat": "enonce"
+    },
+    "4e0d9b8f6354b17c": {
+      "text": "unites : 2 + 3 = 5, je pose 5 ; dizaines : 1 + 4 = 5, je pose 5. Total : 55.",
+      "ms": 9600,
+      "cat": "enonce"
+    },
+    "f62277e39464f272": {
+      "text": "unites : 2 + 3 = 5, je pose 5 ; dizaines : 2 + 6 = 8, je pose 8. Total : 85.",
+      "ms": 10000,
+      "cat": "enonce"
+    },
+    "e33cfb002288b92b": {
+      "text": "unites : 2 + 3 = 5, je pose 5 ; dizaines : 6 + 4 = 10, je pose 0, je retiens 1 ; centaines : 3 + 4, + 1 retenue, = 8, je pose 8 ; milliers : 2 + 6 = 8, je pose 8. Total : 8805.",
+      "ms": 19520,
+      "cat": "enonce"
+    },
+    "73d3d3e60dac44e7": {
+      "text": "unites : 2 + 5 + 2 = 9, je pose 9 ; dizaines : 3 + 5 + 8 = 16, je pose 6, je retiens 1 ; centaines : 1 + 6 + 4, + 1 retenue, = 12, je pose 2, je retiens 1 ; il reste 1 a poser a gauche. Total : 1269.",
+      "ms": 20720,
+      "cat": "enonce"
+    },
+    "a450c06a1f8c65d3": {
+      "text": "unites : 2 + 5 = 7, je pose 7 ; dizaines : 4 + 5 = 9, je pose 9. Total : 97.",
+      "ms": 10160,
+      "cat": "enonce"
+    },
+    "3bb32c148944c186": {
+      "text": "unites : 3 + 0 = 3, je pose 3 ; dizaines : 4 + 0 = 4, je pose 4 ; centaines : 1 + 7 = 8, je pose 8 ; milliers : 7 + 2 = 9, je pose 9. Total : 9843.",
+      "ms": 14560,
+      "cat": "enonce"
+    },
+    "5a41ec3812e569f3": {
+      "text": "unites : 3 + 1 = 4, je pose 4 ; dizaines : 3 + 3 = 6, je pose 6. Total : 64.",
+      "ms": 10400,
+      "cat": "enonce"
+    },
+    "72354bd9c02b0d9c": {
+      "text": "unites : 3 + 3 = 6, je pose 6 ; dizaines : 3 + 3 = 6, je pose 6. Total : 66.",
+      "ms": 10640,
+      "cat": "enonce"
+    },
+    "e3c85e9916096ca3": {
+      "text": "unites : 3 + 4 = 7, je pose 7 ; dizaines : 9 + 3 = 12, je pose 2, je retiens 1 ; centaines : 1 + 5, + 1 retenue, = 7, je pose 7. Total : 727.",
+      "ms": 16160,
+      "cat": "enonce"
+    },
+    "3518bf254c709528": {
+      "text": "unites : 3 + 6 = 9, je pose 9 ; dizaines : 6 + 1 = 7, je pose 7 ; centaines : 9 + 2 = 11, je pose 1, je retiens 1 ; milliers : 0 + 8, + 1 retenue, = 9, je pose 9. Total : 9179.",
+      "ms": 19040,
+      "cat": "enonce"
+    },
+    "768bc28f1892a67c": {
+      "text": "unites : 3 + 8 + 2 = 13, je pose 3, je retiens 1 ; dizaines : 9 + 4 + 6, + 1 retenue, = 20, je pose 0, je retiens 2 ; centaines : 3 + 3 + 1, + 2 retenue, = 9, je pose 9. Total : 903.",
+      "ms": 20400,
+      "cat": "enonce"
+    },
+    "6954f0293fa15df5": {
+      "text": "unites : 3 + 9 + 1 = 13, je pose 3, je retiens 1 ; dizaines : 5 + 8 + 3, + 1 retenue, = 17, je pose 7, je retiens 1 ; centaines : 8 + 3 + 4, + 1 retenue, = 16, je pose 6, je retiens 1 ; il reste 1 a poser a gauche. Total : 1673.",
+      "ms": 22640,
+      "cat": "enonce"
+    },
+    "103216a98800854b": {
+      "text": "unites : 4 + 0 = 4, je pose 4 ; dizaines : 2 + 5 = 7, je pose 7. Total : 74.",
+      "ms": 10640,
+      "cat": "enonce"
+    },
+    "33f00a8042008e00": {
+      "text": "unites : 4 + 0 = 4, je pose 4 ; dizaines : 5 + 0 = 5, je pose 5 ; centaines : 4 + 8 = 12, je pose 2, je retiens 1 ; milliers : 3 + 8, + 1 retenue, = 12, je pose 2, je retiens 1 ; il reste 1 a poser a gauche. Total : 12254.",
+      "ms": 21920,
+      "cat": "enonce"
+    },
+    "0b362bfbad90e03c": {
+      "text": "unites : 4 + 2 = 6, je pose 6 ; dizaines : 1 + 6 = 7, je pose 7. Total : 76.",
+      "ms": 10640,
+      "cat": "enonce"
+    },
+    "67e3f58d25b8e6e5": {
+      "text": "unites : 4 + 3 = 7, je pose 7 ; dizaines : 3 + 2 = 5, je pose 5. Total : 57.",
+      "ms": 9600,
+      "cat": "enonce"
+    },
+    "4be6a222ad797674": {
+      "text": "unites : 4 + 5 = 9, je pose 9 ; dizaines : 1 + 6 = 7, je pose 7. Total : 79.",
+      "ms": 10320,
+      "cat": "enonce"
+    },
+    "d98f215d798fe5ad": {
+      "text": "unites : 4 + 5 = 9, je pose 9 ; dizaines : 2 + 6 = 8, je pose 8. Total : 89.",
+      "ms": 8960,
+      "cat": "enonce"
+    },
+    "340b5383cf9c3bd3": {
+      "text": "unites : 4 + 5 = 9, je pose 9 ; dizaines : 3 + 6 = 9, je pose 9. Total : 99.",
+      "ms": 10320,
+      "cat": "enonce"
+    },
+    "f4f38afee35e9350": {
+      "text": "unites : 4 + 7 = 11, je pose 1, je retiens 1 ; dizaines : 8 + 9, + 1 retenue, = 18, je pose 8, je retiens 1 ; centaines : 0 + 6, + 1 retenue, = 7, je pose 7 ; milliers : 5 + 9 = 14, je pose 4, je retiens 1 ; il reste 1 a poser a gauche. Total : 14781.",
+      "ms": 23520,
+      "cat": "enonce"
+    },
+    "f068e31affa01b55": {
+      "text": "unites : 4 + 7 = 11, je pose 1, je retiens 1 ; dizaines : 9 + 8, + 1 retenue, = 18, je pose 8, je retiens 1 ; centaines : 9 + 4, + 1 retenue, = 14, je pose 4, je retiens 1 ; il reste 1 a poser a gauche. Total : 1481.",
+      "ms": 21840,
+      "cat": "enonce"
+    },
+    "dfd507be89c45f82": {
+      "text": "unites : 4 + 8 + 5 = 17, je pose 7, je retiens 1 ; dizaines : 8 + 8 + 9, + 1 retenue, = 26, je pose 6, je retiens 2 ; centaines : 3 + 8 + 0, + 2 retenue, = 13, je pose 3, je retiens 1 ; il reste 1 a poser a gauche. Total : 1367.",
+      "ms": 22640,
+      "cat": "enonce"
+    },
+    "a927cb9085712281": {
+      "text": "unites : 4 + 8 = 12, je pose 2, je retiens 1 ; dizaines : 7 + 9, + 1 retenue, = 17, je pose 7, je retiens 1 ; centaines : 2 + 4, + 1 retenue, = 7, je pose 7. Total : 772.",
+      "ms": 18480,
+      "cat": "enonce"
+    },
+    "eb6b9a9d6b2ee6fd": {
+      "text": "unites : 5 + 4 = 9, je pose 9 ; dizaines : 9 + 4 = 13, je pose 3, je retiens 1 ; centaines : 0 + 0, + 1 retenue, = 1, je pose 1 ; milliers : 3 + 7 = 10, je pose 0, je retiens 1 ; il reste 1 a poser a gauche. Total : 10139.",
+      "ms": 22080,
+      "cat": "enonce"
+    },
+    "59f6b6477c76ed5b": {
+      "text": "unites : 5 + 5 = 10, je pose 0, je retiens 1 ; dizaines : 1 + 1, + 1 retenue, = 3, je pose 3 ; centaines : 4 + 0 = 4, je pose 4. Total : 430.",
+      "ms": 15680,
+      "cat": "enonce"
+    },
+    "c666f54f5d4f5dc2": {
+      "text": "unites : 5 + 6 = 11, je pose 1, je retiens 1 ; dizaines : 9 + 0, + 1 retenue, = 10, je pose 0, je retiens 1 ; centaines : 3 + 2, + 1 retenue, = 6, je pose 6. Total : 601.",
+      "ms": 18720,
+      "cat": "enonce"
+    },
+    "64c56a564e5afeca": {
+      "text": "unites : 5 + 8 = 13, je pose 3, je retiens 1 ; dizaines : 1 + 2, + 1 retenue, = 4, je pose 4 ; centaines : 1 + 4 = 5, je pose 5 ; milliers : 5 + 8 = 13, je pose 3, je retiens 1 ; il reste 1 a poser a gauche. Total : 13543.",
+      "ms": 22240,
+      "cat": "enonce"
+    },
+    "a3e52c2e29b62238": {
+      "text": "unites : 5 + 8 = 13, je pose 3, je retiens 1 ; dizaines : 3 + 9, + 1 retenue, = 13, je pose 3, je retiens 1 ; centaines : 1 + 9, + 1 retenue, = 11, je pose 1, je retiens 1 ; milliers : 8 + 2, + 1 retenue, = 11, je pose 1, je retiens 1 ; il reste 1 a poser a gauche. Total : 11133.",
+      "ms": 26080,
+      "cat": "enonce"
+    },
+    "5fb8c0de1f586dca": {
+      "text": "unites : 5 + 8 = 13, je pose 3, je retiens 1 ; dizaines : 6 + 9, + 1 retenue, = 16, je pose 6, je retiens 1 ; centaines : 7 + 3, + 1 retenue, = 11, je pose 1, je retiens 1 ; milliers : 5 + 8, + 1 retenue, = 14, je pose 4, je retiens 1 ; il reste 1 a poser a gauche. Total : 14163.",
+      "ms": 25760,
+      "cat": "enonce"
+    },
+    "53cf5458c8557e77": {
+      "text": "unites : 6 + 0 + 7 = 13, je pose 3, je retiens 1 ; dizaines : 7 + 0 + 7, + 1 retenue, = 15, je pose 5, je retiens 1 ; centaines : 0 + 5 + 2, + 1 retenue, = 8, je pose 8. Total : 853.",
+      "ms": 20400,
+      "cat": "enonce"
+    },
+    "3c9905a639c0d0cc": {
+      "text": "unites : 6 + 2 = 8, je pose 8 ; dizaines : 1 + 9 = 10, je pose 0, je retiens 1 ; centaines : 3 + 3, + 1 retenue, = 7, je pose 7 ; milliers : 5 + 1 = 6, je pose 6. Total : 6708.",
+      "ms": 20000,
+      "cat": "enonce"
+    },
+    "408a6d6094ef24ab": {
+      "text": "unites : 6 + 3 + 1 = 10, je pose 0, je retiens 1 ; dizaines : 0 + 9 + 2, + 1 retenue, = 12, je pose 2, je retiens 1 ; centaines : 3 + 6 + 6, + 1 retenue, = 16, je pose 6, je retiens 1 ; il reste 1 a poser a gauche. Total : 1620.",
+      "ms": 22640,
+      "cat": "enonce"
+    },
+    "009361c4292f74c4": {
+      "text": "unites : 6 + 3 + 1 = 10, je pose 0, je retiens 1 ; dizaines : 7 + 2 + 5, + 1 retenue, = 15, je pose 5, je retiens 1 ; centaines : 7 + 1 + 6, + 1 retenue, = 15, je pose 5, je retiens 1 ; il reste 1 a poser a gauche. Total : 1550.",
+      "ms": 22640,
+      "cat": "enonce"
+    },
+    "0730744a02764bfa": {
+      "text": "unites : 6 + 6 = 12, je pose 2, je retiens 1 ; dizaines : 4 + 2, + 1 retenue, = 7, je pose 7 ; centaines : 1 + 2 = 3, je pose 3 ; milliers : 7 + 7 = 14, je pose 4, je retiens 1 ; il reste 1 a poser a gauche. Total : 14372.",
+      "ms": 21840,
+      "cat": "enonce"
+    },
+    "e716c2d7c0b18cd7": {
+      "text": "unites : 6 + 7 = 13, je pose 3, je retiens 1 ; dizaines : 6 + 8, + 1 retenue, = 15, je pose 5, je retiens 1 ; centaines : 6 + 7, + 1 retenue, = 14, je pose 4, je retiens 1 ; il reste 1 a poser a gauche. Total : 1453.",
+      "ms": 21840,
+      "cat": "enonce"
+    },
+    "eb3855169d36690f": {
+      "text": "unites : 6 + 8 + 9 = 23, je pose 3, je retiens 2 ; dizaines : 9 + 3 + 7, + 2 retenue, = 21, je pose 1, je retiens 2 ; centaines : 3 + 1 + 5, + 2 retenue, = 11, je pose 1, je retiens 1 ; il reste 1 a poser a gauche. Total : 1113.",
+      "ms": 22640,
+      "cat": "enonce"
+    },
+    "7a9693c54e032c20": {
+      "text": "unites : 6 + 8 = 14, je pose 4, je retiens 1 ; dizaines : 8 + 5, + 1 retenue, = 14, je pose 4, je retiens 1 ; centaines : 2 + 1, + 1 retenue, = 4, je pose 4 ; milliers : 6 + 9 = 15, je pose 5, je retiens 1 ; il reste 1 a poser a gauche. Total : 15444.",
+      "ms": 24160,
+      "cat": "enonce"
+    },
+    "c8f79e15318dd914": {
+      "text": "unites : 7 + 5 = 12, je pose 2, je retiens 1 ; dizaines : 9 + 4, + 1 retenue, = 14, je pose 4, je retiens 1 ; centaines : 4 + 3, + 1 retenue, = 8, je pose 8. Total : 842.",
+      "ms": 20080,
+      "cat": "enonce"
+    },
+    "39d7e56e602b4eb6": {
+      "text": "unites : 7 + 8 + 9 = 24, je pose 4, je retiens 2 ; dizaines : 6 + 5 + 6, + 2 retenue, = 19, je pose 9, je retiens 1 ; centaines : 2 + 9 + 3, + 1 retenue, = 15, je pose 5, je retiens 1 ; il reste 1 a poser a gauche. Total : 1594.",
+      "ms": 22640,
+      "cat": "enonce"
+    },
+    "5fa37923a4f68952": {
+      "text": "unites : 7 + 8 = 15, je pose 5, je retiens 1 ; dizaines : 3 + 1, + 1 retenue, = 5, je pose 5 ; centaines : 7 + 1 = 8, je pose 8. Total : 855.",
+      "ms": 15600,
+      "cat": "enonce"
+    },
+    "e47fb16e4bb8ad14": {
+      "text": "unites : 8 + 0 = 8, je pose 8 ; dizaines : 9 + 4 = 13, je pose 3, je retiens 1 ; centaines : 0 + 3, + 1 retenue, = 4, je pose 4. Total : 438.",
+      "ms": 17440,
+      "cat": "enonce"
+    },
+    "eaf62a6f1c82ad33": {
+      "text": "unites : 8 + 3 + 6 = 17, je pose 7, je retiens 1 ; dizaines : 2 + 4 + 5, + 1 retenue, = 12, je pose 2, je retiens 1 ; centaines : 5 + 4 + 2, + 1 retenue, = 12, je pose 2, je retiens 1 ; il reste 1 a poser a gauche. Total : 1227.",
+      "ms": 22080,
+      "cat": "enonce"
+    },
+    "e5765c02be2a3c23": {
+      "text": "unites : 8 + 4 = 12, je pose 2, je retiens 1 ; dizaines : 9 + 8, + 1 retenue, = 18, je pose 8, je retiens 1 ; centaines : 0 + 3, + 1 retenue, = 4, je pose 4 ; milliers : 9 + 9 = 18, je pose 8, je retiens 1 ; il reste 1 a poser a gauche. Total : 18482.",
+      "ms": 24160,
+      "cat": "enonce"
+    },
+    "fffdf140feaf67f3": {
+      "text": "unites : 8 + 5 = 13, je pose 3, je retiens 1 ; dizaines : 2 + 6, + 1 retenue, = 9, je pose 9 ; centaines : 2 + 1 = 3, je pose 3 ; milliers : 9 + 9 = 18, je pose 8, je retiens 1 ; il reste 1 a poser a gauche. Total : 18393.",
+      "ms": 22240,
+      "cat": "enonce"
+    },
+    "a76b74bccde874eb": {
+      "text": "unites : 8 + 8 = 16, je pose 6, je retiens 1 ; dizaines : 5 + 5, + 1 retenue, = 11, je pose 1, je retiens 1 ; centaines : 6 + 8, + 1 retenue, = 15, je pose 5, je retiens 1 ; milliers : 1 + 9, + 1 retenue, = 11, je pose 1, je retiens 1 ; il reste 1 a poser a gauche. Total : 11516.",
+      "ms": 26080,
+      "cat": "enonce"
+    },
+    "5bc8855cbd234d25": {
+      "text": "unites : 9 + 6 = 15, je pose 5, je retiens 1 ; dizaines : 9 + 8, + 1 retenue, = 18, je pose 8, je retiens 1 ; centaines : 2 + 9, + 1 retenue, = 12, je pose 2, je retiens 1 ; il reste 1 a poser a gauche. Total : 1285.",
+      "ms": 21760,
+      "cat": "enonce"
+    },
+    "0c0e3afd358d1b9c": {
+      "text": "unites : 9 + 7 + 9 = 25, je pose 5, je retiens 2 ; dizaines : 5 + 6 + 2, + 2 retenue, = 15, je pose 5, je retiens 1 ; centaines : 3 + 6 + 6, + 1 retenue, = 16, je pose 6, je retiens 1 ; il reste 1 a poser a gauche. Total : 1655.",
+      "ms": 22640,
+      "cat": "enonce"
+    },
+    "d879424bf750ab23": {
+      "text": "unites : 9 + 9 = 18, je pose 8, je retiens 1 ; dizaines : 5 + 6, + 1 retenue, = 12, je pose 2, je retiens 1 ; centaines : 2 + 4, + 1 retenue, = 7, je pose 7. Total : 728.",
+      "ms": 17760,
+      "cat": "enonce"
+    },
+    "a3a1f28da65fb238": {
+      "text": "vingt-et-un s'ecrit 21.",
+      "ms": 1920,
+      "cat": "enonce"
     }
   },
   "keys": {
@@ -40506,6 +42516,408 @@
     "txt:de41f7391a2b912e": "de41f7391a2b912e",
     "txt:bd2010e93f95822f": "bd2010e93f95822f",
     "txt:ad405cdde22b3bd5": "ad405cdde22b3bd5",
-    "txt:201d26ed3f40b07d": "201d26ed3f40b07d"
+    "txt:201d26ed3f40b07d": "201d26ed3f40b07d",
+    "txt:93198ddd97ae8d97": "93198ddd97ae8d97",
+    "txt:42665a115d22bbc9": "42665a115d22bbc9",
+    "txt:0c32b07e969d904c": "0c32b07e969d904c",
+    "txt:8027dc545d9ad89d": "8027dc545d9ad89d",
+    "txt:77c0aa70f9a33cdf": "77c0aa70f9a33cdf",
+    "txt:805163beac5ff783": "805163beac5ff783",
+    "txt:a110da05a84b45c2": "a110da05a84b45c2",
+    "txt:cafe2ba9b1b7a199": "cafe2ba9b1b7a199",
+    "txt:d074fcfa5bd9dab7": "d074fcfa5bd9dab7",
+    "txt:eb85d03a5ce1abf5": "eb85d03a5ce1abf5",
+    "txt:ee9767daaafbff54": "ee9767daaafbff54",
+    "txt:474714840759eeb1": "474714840759eeb1",
+    "txt:8af1972549940e5d": "8af1972549940e5d",
+    "txt:670b74923eca1e4a": "670b74923eca1e4a",
+    "txt:a70a12436a12424e": "a70a12436a12424e",
+    "txt:a0dc015695d9db9f": "a0dc015695d9db9f",
+    "txt:ff92079d0b1a304c": "ff92079d0b1a304c",
+    "txt:12bac133557783c2": "12bac133557783c2",
+    "txt:e43a73d2a140154e": "e43a73d2a140154e",
+    "txt:90d373bacf947f73": "90d373bacf947f73",
+    "txt:4c708871d92eda7a": "4c708871d92eda7a",
+    "txt:71def400e5727ebb": "71def400e5727ebb",
+    "txt:f5b99ea2298ee243": "f5b99ea2298ee243",
+    "txt:4c8f0ccbefb9e311": "4c8f0ccbefb9e311",
+    "txt:a2e519efffaa8949": "a2e519efffaa8949",
+    "txt:fd6487ba3a006497": "fd6487ba3a006497",
+    "txt:4c48de084de99c6b": "4c48de084de99c6b",
+    "txt:ec0d34ca7207367a": "ec0d34ca7207367a",
+    "txt:bede9f4d4da3632a": "bede9f4d4da3632a",
+    "txt:adba0f8d86358521": "adba0f8d86358521",
+    "txt:7761a3e2fcd04b7b": "7761a3e2fcd04b7b",
+    "txt:15d5767c4ab0913d": "15d5767c4ab0913d",
+    "txt:f34ebea240097def": "f34ebea240097def",
+    "txt:788c89c35e92f50e": "788c89c35e92f50e",
+    "txt:3d464b33bc099788": "3d464b33bc099788",
+    "txt:ac8d1e588199ea1d": "ac8d1e588199ea1d",
+    "txt:2b7b2fe4b4475d8b": "2b7b2fe4b4475d8b",
+    "txt:d5d31a60636b19cb": "d5d31a60636b19cb",
+    "txt:0f9d5fdeeacc26b5": "0f9d5fdeeacc26b5",
+    "txt:a93b7e5763ead6fc": "a93b7e5763ead6fc",
+    "txt:f74872400f59e68a": "f74872400f59e68a",
+    "txt:c7e0c03248be149a": "c7e0c03248be149a",
+    "txt:fd38f819ec667e22": "fd38f819ec667e22",
+    "txt:e8f62f3efecfb6be": "e8f62f3efecfb6be",
+    "txt:ce45f69bc95742e1": "ce45f69bc95742e1",
+    "txt:000a45685cad7a3c": "000a45685cad7a3c",
+    "txt:1d94d4c38bb5e05a": "1d94d4c38bb5e05a",
+    "txt:16e0633ec4f8f671": "16e0633ec4f8f671",
+    "txt:ffd834e4eeed844a": "ffd834e4eeed844a",
+    "txt:ffb976c7affb2418": "ffb976c7affb2418",
+    "txt:62068457479a8d09": "62068457479a8d09",
+    "txt:d550b6053f1ba35a": "d550b6053f1ba35a",
+    "txt:eb25a1c4d23c9e37": "eb25a1c4d23c9e37",
+    "txt:85659b234b87b361": "85659b234b87b361",
+    "txt:09ed86454a470edc": "09ed86454a470edc",
+    "txt:1f1630b5b63e196d": "1f1630b5b63e196d",
+    "txt:d0774e5409a7c79b": "d0774e5409a7c79b",
+    "txt:9d9fb04204bfe338": "9d9fb04204bfe338",
+    "txt:9ae1013646e0aafa": "9ae1013646e0aafa",
+    "txt:9eb828fe21fa2ad4": "9eb828fe21fa2ad4",
+    "txt:fb4e8038a1e98608": "fb4e8038a1e98608",
+    "txt:31d35b7c5ea43be3": "31d35b7c5ea43be3",
+    "txt:ba380ac1e94299c0": "ba380ac1e94299c0",
+    "txt:cfc39a1ef707c394": "cfc39a1ef707c394",
+    "txt:9ee16206fa2d64b7": "9ee16206fa2d64b7",
+    "txt:ca314e204a84128e": "ca314e204a84128e",
+    "txt:8df45b2ccf7523bf": "8df45b2ccf7523bf",
+    "txt:75d9ede92236c9cc": "75d9ede92236c9cc",
+    "txt:675323803994e4c8": "675323803994e4c8",
+    "txt:3366a9b720fd0376": "3366a9b720fd0376",
+    "txt:16c3686839e32c19": "16c3686839e32c19",
+    "txt:99ca7d20acf70615": "99ca7d20acf70615",
+    "txt:89c54f3025ed2667": "89c54f3025ed2667",
+    "txt:f4db0b4e619c0c9f": "f4db0b4e619c0c9f",
+    "txt:d932431b0a4d79fb": "d932431b0a4d79fb",
+    "txt:458b94bda4b5242d": "458b94bda4b5242d",
+    "txt:076eccd6ec276b03": "076eccd6ec276b03",
+    "txt:48241e896e15d587": "48241e896e15d587",
+    "txt:81b5cdecd2217dcf": "81b5cdecd2217dcf",
+    "txt:2d8d36ae53127d3c": "2d8d36ae53127d3c",
+    "txt:9c75140d30e17515": "9c75140d30e17515",
+    "txt:6a17cb46e3bcdb26": "6a17cb46e3bcdb26",
+    "txt:392770574202422e": "392770574202422e",
+    "txt:3d01fabec97a6baf": "3d01fabec97a6baf",
+    "txt:6251fbc5750dd3a9": "6251fbc5750dd3a9",
+    "txt:8010d3a928d10e8d": "8010d3a928d10e8d",
+    "txt:532c5c3807f2cabd": "532c5c3807f2cabd",
+    "txt:048e55a3e2d47ebe": "048e55a3e2d47ebe",
+    "txt:5de2c8255c578409": "5de2c8255c578409",
+    "txt:3674f66efcb9397c": "3674f66efcb9397c",
+    "txt:01fea8eed63410fa": "01fea8eed63410fa",
+    "txt:f7b1afa35c494ab0": "f7b1afa35c494ab0",
+    "txt:84b4cf1770ec5bc9": "84b4cf1770ec5bc9",
+    "txt:b292f419de31044c": "b292f419de31044c",
+    "txt:6343029e2973fbf7": "6343029e2973fbf7",
+    "txt:375daeb185754b6f": "375daeb185754b6f",
+    "txt:037450720ec4e9d4": "037450720ec4e9d4",
+    "txt:84758e4d27b32d0e": "84758e4d27b32d0e",
+    "txt:eb512036899a5db3": "eb512036899a5db3",
+    "txt:fbbf2727909b18f1": "fbbf2727909b18f1",
+    "txt:1aad523c9ef74b15": "1aad523c9ef74b15",
+    "txt:062a9c34f5b5c104": "062a9c34f5b5c104",
+    "txt:a02dcd2a54c8731a": "a02dcd2a54c8731a",
+    "txt:a3d0e43288bafd79": "a3d0e43288bafd79",
+    "txt:074c900b84638c17": "074c900b84638c17",
+    "txt:a6edba84ddd65108": "a6edba84ddd65108",
+    "txt:acce8102bf5f2c8e": "acce8102bf5f2c8e",
+    "txt:aeb85c2381f25536": "aeb85c2381f25536",
+    "txt:db82d513cf330ae4": "db82d513cf330ae4",
+    "txt:4b6bf69d6dee84eb": "4b6bf69d6dee84eb",
+    "txt:6a358e6c663b2072": "6a358e6c663b2072",
+    "txt:1d00bf616cd6fd5a": "1d00bf616cd6fd5a",
+    "txt:6cb32a5d57a47da0": "6cb32a5d57a47da0",
+    "txt:21c813bae3b42b69": "21c813bae3b42b69",
+    "txt:78647765e8343b60": "78647765e8343b60",
+    "txt:5f3faae7bc5b2350": "5f3faae7bc5b2350",
+    "txt:08109929acf3666c": "08109929acf3666c",
+    "txt:28aa927292096805": "28aa927292096805",
+    "txt:096e35e3e293f60e": "096e35e3e293f60e",
+    "txt:5e2962b2c01b47c4": "5e2962b2c01b47c4",
+    "txt:9cadb37c8a63e1e2": "9cadb37c8a63e1e2",
+    "txt:bf3c7d12697190df": "bf3c7d12697190df",
+    "txt:dd04bda6af56d38a": "dd04bda6af56d38a",
+    "txt:38969770e00aaf95": "38969770e00aaf95",
+    "txt:599261b9fc18e5d3": "599261b9fc18e5d3",
+    "txt:0d5474549fba215e": "0d5474549fba215e",
+    "txt:7d6a8f0d9a7c11c5": "7d6a8f0d9a7c11c5",
+    "txt:05f199d1ded2a0bf": "05f199d1ded2a0bf",
+    "txt:982b9ee7df7ac83c": "982b9ee7df7ac83c",
+    "txt:3015eaff26b1191d": "3015eaff26b1191d",
+    "txt:c087f46da217c19c": "c087f46da217c19c",
+    "txt:ec89d1355509b389": "ec89d1355509b389",
+    "txt:c9ca407eef6c761b": "c9ca407eef6c761b",
+    "txt:ab98a42edd610a19": "ab98a42edd610a19",
+    "txt:8c8e979208f69571": "8c8e979208f69571",
+    "txt:683a49658e01606c": "683a49658e01606c",
+    "txt:d5dfe0d7aec192f3": "d5dfe0d7aec192f3",
+    "txt:2f0e0d17386fd6fd": "2f0e0d17386fd6fd",
+    "txt:17a6906171e18ce6": "17a6906171e18ce6",
+    "txt:ecfab4372fcdc024": "ecfab4372fcdc024",
+    "txt:3dc2f7e1c90682da": "3dc2f7e1c90682da",
+    "txt:3cd58502df032e20": "3cd58502df032e20",
+    "txt:e8ffcc4a4188447c": "e8ffcc4a4188447c",
+    "txt:a4e33a9c6df0e65d": "a4e33a9c6df0e65d",
+    "txt:e6fdbcc661a85483": "e6fdbcc661a85483",
+    "txt:ba331ab1d3da7187": "ba331ab1d3da7187",
+    "txt:5f7e0622d00455dd": "5f7e0622d00455dd",
+    "txt:5d0b6d26f382455e": "5d0b6d26f382455e",
+    "txt:994812a6f1c35ee5": "994812a6f1c35ee5",
+    "txt:a5f0e39e5b49deb4": "a5f0e39e5b49deb4",
+    "txt:badbcf5cb900b170": "badbcf5cb900b170",
+    "txt:7409ca613f34f757": "7409ca613f34f757",
+    "txt:ff4efc02ee6b4096": "ff4efc02ee6b4096",
+    "txt:2af503ff1ed723fc": "2af503ff1ed723fc",
+    "txt:34f258f6784cef59": "34f258f6784cef59",
+    "txt:d68160c5e30bb46c": "d68160c5e30bb46c",
+    "txt:4379c4adfdf9be22": "4379c4adfdf9be22",
+    "txt:54bb886cfa7d52b0": "54bb886cfa7d52b0",
+    "txt:85e95066a97d92c6": "85e95066a97d92c6",
+    "txt:70181f955c3e90b9": "70181f955c3e90b9",
+    "txt:b0d3b6013a8e1f21": "b0d3b6013a8e1f21",
+    "txt:ef47ded044233c69": "ef47ded044233c69",
+    "txt:b6da036c16a17302": "b6da036c16a17302",
+    "txt:4a121297b4728efd": "4a121297b4728efd",
+    "txt:b64e9b463a7ae99f": "b64e9b463a7ae99f",
+    "txt:5ede55ec8d64d03b": "5ede55ec8d64d03b",
+    "txt:1529476cd292df59": "1529476cd292df59",
+    "txt:9e6517f8c2d8f160": "9e6517f8c2d8f160",
+    "txt:13cadadecda27c76": "13cadadecda27c76",
+    "txt:dd061814f335bf22": "dd061814f335bf22",
+    "txt:7854b4ce216ff51a": "7854b4ce216ff51a",
+    "txt:e686e62461194e33": "e686e62461194e33",
+    "txt:90a9120b0ef5e711": "90a9120b0ef5e711",
+    "txt:e24ec310f5b6a44d": "e24ec310f5b6a44d",
+    "txt:a05a1bffd54aaa71": "a05a1bffd54aaa71",
+    "txt:edf2c217a9c8a326": "edf2c217a9c8a326",
+    "txt:8c5e222684353c8e": "8c5e222684353c8e",
+    "txt:7e33f94b103ecdee": "7e33f94b103ecdee",
+    "txt:1c76c771b85735c9": "1c76c771b85735c9",
+    "txt:f0d3dec1a49f7da7": "f0d3dec1a49f7da7",
+    "txt:227050a05bdaa4c1": "227050a05bdaa4c1",
+    "txt:03cf1d40f69e1cc8": "03cf1d40f69e1cc8",
+    "txt:0b164319cddcb131": "0b164319cddcb131",
+    "txt:3af81c10875fc80d": "3af81c10875fc80d",
+    "txt:28e2a64cf88de08c": "28e2a64cf88de08c",
+    "txt:e8050b2dd71555f8": "e8050b2dd71555f8",
+    "txt:af95c99a050ba875": "af95c99a050ba875",
+    "txt:adcce9748df51e41": "adcce9748df51e41",
+    "txt:f3932d9d5268db17": "f3932d9d5268db17",
+    "txt:c0c5956d2f559af0": "c0c5956d2f559af0",
+    "txt:888e9bdf4ffb4dba": "888e9bdf4ffb4dba",
+    "txt:b4f41ebfde4dcdce": "b4f41ebfde4dcdce",
+    "txt:d028d4993965199f": "d028d4993965199f",
+    "txt:a5ab8800572125dd": "a5ab8800572125dd",
+    "txt:69fd7beaba44ef9a": "69fd7beaba44ef9a",
+    "txt:8b734c358e39b7d0": "8b734c358e39b7d0",
+    "txt:7a7636bdc1655ac9": "7a7636bdc1655ac9",
+    "txt:e260c665b484347b": "e260c665b484347b",
+    "txt:532348141b9654d6": "532348141b9654d6",
+    "txt:622f7ba5d906587a": "622f7ba5d906587a",
+    "txt:1feb9790bb9ff46f": "1feb9790bb9ff46f",
+    "txt:fb6bc53fe0c93a8f": "fb6bc53fe0c93a8f",
+    "txt:63a2120f3348f7a2": "63a2120f3348f7a2",
+    "txt:b3b6251e26e840d5": "b3b6251e26e840d5",
+    "txt:fbc782ef81c522b5": "fbc782ef81c522b5",
+    "txt:a6fd426a12b0931a": "a6fd426a12b0931a",
+    "txt:80ff243fb53e5a7d": "80ff243fb53e5a7d",
+    "txt:5fabba5f93b2af89": "5fabba5f93b2af89",
+    "txt:de1beaa63e247337": "de1beaa63e247337",
+    "txt:53bf2831b2b97291": "53bf2831b2b97291",
+    "txt:dc7baebfe80b6971": "dc7baebfe80b6971",
+    "txt:d493629eefefabdc": "d493629eefefabdc",
+    "txt:454675edbcbac360": "454675edbcbac360",
+    "txt:a19412767e4025e9": "a19412767e4025e9",
+    "txt:b7696c532682a6bd": "b7696c532682a6bd",
+    "txt:fa446a22e44e5e8b": "fa446a22e44e5e8b",
+    "txt:f42c99f065ffa9ce": "f42c99f065ffa9ce",
+    "txt:a360268d25a56b1d": "a360268d25a56b1d",
+    "txt:8be40a74a62c848d": "8be40a74a62c848d",
+    "txt:dd965d15562ac5d6": "dd965d15562ac5d6",
+    "txt:b765a6f9844c718f": "b765a6f9844c718f",
+    "txt:ae8975a602b82411": "ae8975a602b82411",
+    "txt:0e9cc4b91bd2e963": "0e9cc4b91bd2e963",
+    "txt:d29c4f65e56e0b12": "d29c4f65e56e0b12",
+    "txt:4e6331153cda096d": "4e6331153cda096d",
+    "txt:a517f71e45a65e8c": "a517f71e45a65e8c",
+    "txt:da10a0d84169537f": "da10a0d84169537f",
+    "txt:a153d51c54c7ff72": "a153d51c54c7ff72",
+    "txt:eeeb99270419b74a": "eeeb99270419b74a",
+    "txt:7293bb6f12ff839c": "7293bb6f12ff839c",
+    "txt:cd808bbad1cf5e66": "cd808bbad1cf5e66",
+    "txt:180dca7c015d5416": "180dca7c015d5416",
+    "txt:83d66756305cb5af": "83d66756305cb5af",
+    "txt:1e9320b4cdbc20ec": "1e9320b4cdbc20ec",
+    "txt:2e85add675e6610a": "2e85add675e6610a",
+    "txt:618d95c09e841382": "618d95c09e841382",
+    "txt:8d428bd7ec043b2e": "8d428bd7ec043b2e",
+    "txt:f7585295cb0907f7": "f7585295cb0907f7",
+    "txt:cbd2b5fce9e8c2bd": "cbd2b5fce9e8c2bd",
+    "txt:0bcf94d53992563a": "0bcf94d53992563a",
+    "txt:e5d5e4f7c6f11dc9": "e5d5e4f7c6f11dc9",
+    "txt:a2e60d3a74f6016a": "a2e60d3a74f6016a",
+    "txt:30d3484bfb9218ad": "30d3484bfb9218ad",
+    "txt:2fa29ce823ea42ef": "2fa29ce823ea42ef",
+    "txt:382356aa6f6ca8d8": "382356aa6f6ca8d8",
+    "txt:371438c8d545faa1": "371438c8d545faa1",
+    "txt:045e3563acb7ebd9": "045e3563acb7ebd9",
+    "txt:561199f68ebb4f8b": "561199f68ebb4f8b",
+    "txt:d44b2af0e3478c70": "d44b2af0e3478c70",
+    "txt:4168b1ea0aeba09d": "4168b1ea0aeba09d",
+    "txt:254eeabf369d2a32": "254eeabf369d2a32",
+    "txt:056f9de6bdcb5d95": "056f9de6bdcb5d95",
+    "txt:f749e28d49bf8489": "f749e28d49bf8489",
+    "txt:006d0caf32dff475": "006d0caf32dff475",
+    "txt:2f6ba5f255b35fc0": "2f6ba5f255b35fc0",
+    "txt:8a59ab9a0635232f": "8a59ab9a0635232f",
+    "txt:cbfc07a802ece3e3": "cbfc07a802ece3e3",
+    "txt:da6add78a4ec7b46": "da6add78a4ec7b46",
+    "txt:fa923fb3ca7b1360": "fa923fb3ca7b1360",
+    "txt:924cebfbe27775ca": "924cebfbe27775ca",
+    "txt:12e9448b77f00916": "12e9448b77f00916",
+    "txt:135cedbb2bf4a821": "135cedbb2bf4a821",
+    "txt:afde8ec05a0d130e": "afde8ec05a0d130e",
+    "txt:274a6fe981ea9ec6": "274a6fe981ea9ec6",
+    "txt:30793fab8bce004d": "30793fab8bce004d",
+    "txt:02c333d64f59d68c": "02c333d64f59d68c",
+    "txt:76608bda09243e3a": "76608bda09243e3a",
+    "txt:899223e88233107e": "899223e88233107e",
+    "txt:f3c55d49f4e72021": "f3c55d49f4e72021",
+    "txt:be56b0c199fc61e3": "be56b0c199fc61e3",
+    "txt:4c6561ffa639d54b": "4c6561ffa639d54b",
+    "txt:4cd6828714364a30": "4cd6828714364a30",
+    "txt:68618a43a9fdce66": "68618a43a9fdce66",
+    "txt:0c44edc8662ef4cc": "0c44edc8662ef4cc",
+    "txt:2c5f1acd6fecf4df": "2c5f1acd6fecf4df",
+    "txt:3e5fb1b83550194c": "3e5fb1b83550194c",
+    "txt:2526a03e4eca0ade": "2526a03e4eca0ade",
+    "txt:f64ca009629f7949": "f64ca009629f7949",
+    "txt:d3f0ceaa716824d2": "d3f0ceaa716824d2",
+    "txt:0822476952a99259": "0822476952a99259",
+    "txt:b51d6f72acffc8ff": "b51d6f72acffc8ff",
+    "txt:0f21544736485215": "0f21544736485215",
+    "txt:d336da3e79b7f6f2": "d336da3e79b7f6f2",
+    "txt:dcb54ad697b95ae3": "dcb54ad697b95ae3",
+    "txt:828702ea6fca56f8": "828702ea6fca56f8",
+    "txt:c23e897412c50eb5": "c23e897412c50eb5",
+    "txt:d8febc7ef5aa08e5": "d8febc7ef5aa08e5",
+    "txt:19a8a51dc177c328": "19a8a51dc177c328",
+    "txt:99a0d8f875e65726": "99a0d8f875e65726",
+    "txt:f6f547dc039d4c4b": "f6f547dc039d4c4b",
+    "txt:f6beac0812226ca0": "f6beac0812226ca0",
+    "txt:636b6ea73d1d1a62": "636b6ea73d1d1a62",
+    "txt:9baed3a330603c2e": "9baed3a330603c2e",
+    "txt:e884403d433a6775": "e884403d433a6775",
+    "txt:41fa4ede02c1d03b": "41fa4ede02c1d03b",
+    "txt:afc0f0254e59e3f1": "afc0f0254e59e3f1",
+    "txt:8393f35ef8229f3b": "8393f35ef8229f3b",
+    "txt:fad442ce68d83553": "fad442ce68d83553",
+    "txt:4ee7d7e9194e03ce": "4ee7d7e9194e03ce",
+    "txt:0c73e5271fa79963": "0c73e5271fa79963",
+    "txt:176a333f2bec00c6": "176a333f2bec00c6",
+    "txt:0af5e60662d30d6d": "0af5e60662d30d6d",
+    "txt:28cd70dbe8753282": "28cd70dbe8753282",
+    "txt:cf880770d6a61e26": "cf880770d6a61e26",
+    "txt:e5b616b2dd4bf2ea": "e5b616b2dd4bf2ea",
+    "txt:1e2236ff234ba776": "1e2236ff234ba776",
+    "txt:2d0d9c894387ad03": "2d0d9c894387ad03",
+    "txt:034b90d0d97f7837": "034b90d0d97f7837",
+    "txt:bb42935f0c69ad38": "bb42935f0c69ad38",
+    "txt:731c9bcbc1a37695": "731c9bcbc1a37695",
+    "txt:34603f2b64c881f9": "34603f2b64c881f9",
+    "txt:240fba0a31555803": "240fba0a31555803",
+    "txt:72a185a5d38c3110": "72a185a5d38c3110",
+    "txt:dfb69e1385cf51f1": "dfb69e1385cf51f1",
+    "txt:c954b9c0f1ad3acb": "c954b9c0f1ad3acb",
+    "txt:f472b5240c231612": "f472b5240c231612",
+    "txt:4d7f6243abd4ed46": "4d7f6243abd4ed46",
+    "txt:0474bb034c0482f3": "0474bb034c0482f3",
+    "txt:40dc3bd85bce02e6": "40dc3bd85bce02e6",
+    "txt:f9161072bf494bb8": "f9161072bf494bb8",
+    "txt:95fc420e617f5d2a": "95fc420e617f5d2a",
+    "txt:5183459d08ee261f": "5183459d08ee261f",
+    "txt:dc21a35aeeb54349": "dc21a35aeeb54349",
+    "txt:4ed0999e0cc0c8a7": "4ed0999e0cc0c8a7",
+    "txt:b0064e6888f3aba6": "b0064e6888f3aba6",
+    "txt:9da477877fbf1751": "9da477877fbf1751",
+    "txt:4205fc38920d35fe": "4205fc38920d35fe",
+    "txt:70764c89046b13bc": "70764c89046b13bc",
+    "txt:2ff999c38a5123db": "2ff999c38a5123db",
+    "txt:afae1f045bac9bea": "afae1f045bac9bea",
+    "txt:e85634cff5d9c741": "e85634cff5d9c741",
+    "txt:506579f56f5aa461": "506579f56f5aa461",
+    "txt:904bbf55927476d9": "904bbf55927476d9",
+    "txt:4c6fddf3860b3466": "4c6fddf3860b3466",
+    "txt:5cec7a66bb7b20f9": "5cec7a66bb7b20f9",
+    "txt:43e4a45f1bbff9e1": "43e4a45f1bbff9e1",
+    "txt:d34f265037729700": "d34f265037729700",
+    "txt:1d6d71e4361f70c6": "1d6d71e4361f70c6",
+    "txt:cb9d56bce2ef86d1": "cb9d56bce2ef86d1",
+    "txt:51078b915db31968": "51078b915db31968",
+    "txt:238fbff2c4b780e3": "238fbff2c4b780e3",
+    "txt:a3b6af3796f14363": "a3b6af3796f14363",
+    "txt:eb8a05a9c6c3458a": "eb8a05a9c6c3458a",
+    "txt:32b04dcbc8aa4507": "32b04dcbc8aa4507",
+    "txt:9522d9c6e25b7502": "9522d9c6e25b7502",
+    "txt:9f7e8a29a3ccd8b1": "9f7e8a29a3ccd8b1",
+    "txt:817c2234740d1e3b": "817c2234740d1e3b",
+    "txt:c0d552f8735d8cc6": "c0d552f8735d8cc6",
+    "txt:798207b4adb444e4": "798207b4adb444e4",
+    "txt:53e9b8c4e4b5eb7c": "53e9b8c4e4b5eb7c",
+    "txt:a4ba3d422280252a": "a4ba3d422280252a",
+    "txt:db76276fef375401": "db76276fef375401",
+    "txt:0dece1ca82cb5431": "0dece1ca82cb5431",
+    "txt:4e0d9b8f6354b17c": "4e0d9b8f6354b17c",
+    "txt:f62277e39464f272": "f62277e39464f272",
+    "txt:e33cfb002288b92b": "e33cfb002288b92b",
+    "txt:73d3d3e60dac44e7": "73d3d3e60dac44e7",
+    "txt:a450c06a1f8c65d3": "a450c06a1f8c65d3",
+    "txt:3bb32c148944c186": "3bb32c148944c186",
+    "txt:5a41ec3812e569f3": "5a41ec3812e569f3",
+    "txt:72354bd9c02b0d9c": "72354bd9c02b0d9c",
+    "txt:e3c85e9916096ca3": "e3c85e9916096ca3",
+    "txt:3518bf254c709528": "3518bf254c709528",
+    "txt:768bc28f1892a67c": "768bc28f1892a67c",
+    "txt:6954f0293fa15df5": "6954f0293fa15df5",
+    "txt:103216a98800854b": "103216a98800854b",
+    "txt:33f00a8042008e00": "33f00a8042008e00",
+    "txt:0b362bfbad90e03c": "0b362bfbad90e03c",
+    "txt:67e3f58d25b8e6e5": "67e3f58d25b8e6e5",
+    "txt:4be6a222ad797674": "4be6a222ad797674",
+    "txt:d98f215d798fe5ad": "d98f215d798fe5ad",
+    "txt:340b5383cf9c3bd3": "340b5383cf9c3bd3",
+    "txt:f4f38afee35e9350": "f4f38afee35e9350",
+    "txt:f068e31affa01b55": "f068e31affa01b55",
+    "txt:dfd507be89c45f82": "dfd507be89c45f82",
+    "txt:a927cb9085712281": "a927cb9085712281",
+    "txt:eb6b9a9d6b2ee6fd": "eb6b9a9d6b2ee6fd",
+    "txt:59f6b6477c76ed5b": "59f6b6477c76ed5b",
+    "txt:c666f54f5d4f5dc2": "c666f54f5d4f5dc2",
+    "txt:64c56a564e5afeca": "64c56a564e5afeca",
+    "txt:a3e52c2e29b62238": "a3e52c2e29b62238",
+    "txt:5fb8c0de1f586dca": "5fb8c0de1f586dca",
+    "txt:53cf5458c8557e77": "53cf5458c8557e77",
+    "txt:3c9905a639c0d0cc": "3c9905a639c0d0cc",
+    "txt:408a6d6094ef24ab": "408a6d6094ef24ab",
+    "txt:009361c4292f74c4": "009361c4292f74c4",
+    "txt:0730744a02764bfa": "0730744a02764bfa",
+    "txt:e716c2d7c0b18cd7": "e716c2d7c0b18cd7",
+    "txt:eb3855169d36690f": "eb3855169d36690f",
+    "txt:7a9693c54e032c20": "7a9693c54e032c20",
+    "txt:c8f79e15318dd914": "c8f79e15318dd914",
+    "txt:39d7e56e602b4eb6": "39d7e56e602b4eb6",
+    "txt:5fa37923a4f68952": "5fa37923a4f68952",
+    "txt:e47fb16e4bb8ad14": "e47fb16e4bb8ad14",
+    "txt:eaf62a6f1c82ad33": "eaf62a6f1c82ad33",
+    "txt:e5765c02be2a3c23": "e5765c02be2a3c23",
+    "txt:fffdf140feaf67f3": "fffdf140feaf67f3",
+    "txt:a76b74bccde874eb": "a76b74bccde874eb",
+    "txt:5bc8855cbd234d25": "5bc8855cbd234d25",
+    "txt:0c0e3afd358d1b9c": "0c0e3afd358d1b9c",
+    "txt:d879424bf750ab23": "d879424bf750ab23",
+    "txt:a3a1f28da65fb238": "a3a1f28da65fb238"
   }
 }
